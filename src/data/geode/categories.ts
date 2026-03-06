@@ -107,7 +107,7 @@ export const geodeCategories: CategoryData[] = [
     id: "automation",
     icon: "🔄",
     title: "L4.5 Automation",
-    postsCount: 3,
+    postsCount: 4,
     statusKo: "Trigger Manager + Feedback Loop + Expert Panel",
     statusEn: "Trigger Manager + Feedback Loop + Expert Panel",
     techBadges: ["4 Trigger Types", "FeedbackLoop", "RLAIF", "NDC25 Expert"],
@@ -117,6 +117,7 @@ export const geodeCategories: CategoryData[] = [
       "4 trigger types (Manual CLI, Scheduled CronTimer, Event Hook, Webhook POST) with 10 pre-defined automation templates. FeedbackLoop 5-stage (T+0→T+30/90/180d→CORREL→TUNE→RLAIF) tracks prediction-outcome gap. NDC25-based Expert Panel (Tier 3: Score≥0.85, ρ≥0.50) validates LLM judgments.",
     achievements: [
       { icon: "📊", titleKo: "Trigger Manager 4종 트리거 + 10 자동화 템플릿", titleEn: "Trigger Manager 4 trigger types + 10 automation templates", modalId: "modal-geode-cusum" },
+      { icon: "🎯", titleKo: "Outcome Tracking T+30/90/180d 예측 vs 실제 Delta 추적", titleEn: "Outcome Tracking T+30/90/180d prediction vs actual Delta tracking", modalId: "modal-geode-outcome-tracking" },
       { icon: "🔁", titleKo: "FeedbackLoop T+0→T+30/90/180d→CORREL→TUNE→RLAIF 5단계", titleEn: "FeedbackLoop T+0→T+30/90/180d→CORREL→TUNE→RLAIF 5-stage", modalId: "modal-geode-feedback" },
       { icon: "👨‍🏫", titleKo: "Expert Panel NDC25 기반 Tier 3 검증 전문가 (Score≥0.85)", titleEn: "Expert Panel NDC25-based Tier 3 verified expert (Score≥0.85)", modalId: "modal-geode-expert-panel" },
     ],

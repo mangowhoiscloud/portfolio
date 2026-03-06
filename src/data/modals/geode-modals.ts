@@ -780,6 +780,80 @@ def fan_out_analysts(state: GeodeState) -> list[Send]:
 
   // ─── Automation ───
   {
+    id: "modal-geode-outcome-tracking",
+    category: "geode",
+    titleKo: "Outcome Tracking Pipeline",
+    titleEn: "Outcome Tracking Pipeline",
+    icon: "🎯",
+    maxWidth: 1100,
+    content: [
+      {
+        type: "explanation",
+        titleKo: "예측 vs 실제 성과 비교 — T+30/90/180d Delta 추적",
+        titleEn: "Prediction vs Actual — T+30/90/180d Delta Tracking",
+        contentKo:
+          "Outcome Tracking Pipeline은 FeedbackLoop Phase 2로서, 예측 시점(T+0) 스냅샷과 실제 성과(T+30/90/180d)를 비교합니다. Revenue Delta, DAU Delta, Review Delta 3개 지표를 수집하고, Market Events(리마스터, 대형마케팅, 시즌출시)를 Confounding Factor로 식별합니다. SLA: 1시간 내 완료, 최대 3회 재시도(Exponential Backoff: 1분→5분→15분).",
+        contentEn:
+          "Outcome Tracking Pipeline is FeedbackLoop Phase 2: compares prediction snapshot (T+0) with actual performance (T+30/90/180d). Collects 3 metrics: Revenue Delta, DAU Delta, Review Delta. Identifies Market Events (remaster, marketing campaigns, seasonal launches) as confounding factors. SLA: 1hr completion, max 3 retries (Exponential Backoff: 1→5→15 min).",
+        highlight: true,
+        borderColor: "#A78BFA",
+      },
+      {
+        type: "table",
+        titleKo: "Delta 수집 지표 (SOT §13.13.5)",
+        titleEn: "Delta Collection Metrics (SOT §13.13.5)",
+        headers: ["Metric", "Formula", "Source"],
+        rows: [
+          { cells: ["Revenue Delta %", "(current_30d − baseline_30d) / baseline × 100", "FACT_PERFORMANCE"] },
+          { cells: ["DAU Delta %", "(current_avg − baseline_avg) / baseline × 100", "FACT_PERFORMANCE"] },
+          { cells: ["Review Delta", "current_score − baseline_score", "FACT_REVIEW"] },
+          { cells: ["Market Events", "리마스터, 대형마케팅, 시즌출시", "DIM_MARKET_EVENTS"] },
+        ],
+      },
+      {
+        type: "grid",
+        columns: 3,
+        cards: [
+          {
+            title: "T+30d",
+            color: "#34D399",
+            items: ["단기 성과 확인", "초기 반응 검증", "마케팅 효과"],
+          },
+          {
+            title: "T+90d",
+            color: "#818CF8",
+            items: ["중기 트렌드", "리텐션 검증", "수익 안정성"],
+          },
+          {
+            title: "T+180d",
+            color: "#F472B6",
+            items: ["장기 성과 확정", "LTV 검증", "최종 정확도 판정"],
+          },
+        ],
+      },
+      {
+        type: "code",
+        titleKo: "SLA & Retry Policy",
+        titleEn: "SLA & Retry Policy",
+        language: "python",
+        content: `class JobStatus(Enum):
+    PENDING = "pending"
+    RUNNING = "running"
+    SUCCESS = "success"
+    FAILED  = "failed"
+    SLA_MISS = "sla_miss"
+    RETRYING = "retrying"
+
+# SLA: 1시간 내 완료
+sla_minutes = 60
+
+# Retry: Exponential Backoff
+backoff = [1, 5, 15]  # 분
+max_retries = 3`,
+      },
+    ],
+  },
+  {
     id: "modal-geode-cusum",
     category: "geode",
     titleKo: "Trigger Manager",
