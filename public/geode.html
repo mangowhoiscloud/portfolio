@@ -3877,75 +3877,213 @@
         </div>
     </div>
 
-    <!-- Automation Cards Grid (2x2) -->
+    <!-- 4-Trigger Runtime Architecture (OpenClaw pattern) -->
+    <div style="margin-top: 2.5rem;">
+        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.1rem;">
+            <span class="lang-ko">🔄 4-Trigger Runtime Architecture</span>
+            <span class="lang-en">🔄 4-Trigger Runtime Architecture</span>
+        </h3>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            <span class="lang-ko">항상 실행 중인 런타임 — 모든 트리거가 Dispatch Layer로 수렴하여 Agent Loop 실행</span>
+            <span class="lang-en">Always-on runtime — All triggers converge to Dispatch Layer for Agent Loop execution</span>
+        </div>
+
+        <!-- 4-Trigger → Dispatch → Agent Loop diagram -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; cursor: pointer;" data-modal="modal-geode-triggers" onclick="openModal('modal-geode-triggers')">
+            <!-- 4 Trigger boxes in a row -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.4rem;">👤</div>
+                    <div style="font-weight: 700; font-size: 0.8rem; color: #EF4444;">F1: Manual</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; font-family: 'Fira Code', monospace;">
+                        <span class="lang-ko">CLI / Portal</span>
+                        <span class="lang-en">CLI / Portal</span>
+                    </div>
+                </div>
+                <div style="background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.25); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.4rem;">⏰</div>
+                    <div style="font-weight: 700; font-size: 0.8rem; color: #FBBF24;">F2: Scheduled</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; font-family: 'Fira Code', monospace;">at / every / cron</div>
+                </div>
+                <div style="background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.25); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.4rem;">🔔</div>
+                    <div style="font-weight: 700; font-size: 0.8rem; color: #818CF8;">F3: Event</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; font-family: 'Fira Code', monospace;">pipeline:complete</div>
+                </div>
+                <div style="background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.25); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.4rem;">🌐</div>
+                    <div style="font-weight: 700; font-size: 0.8rem; color: #34D399;">F4: Webhook</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; font-family: 'Fira Code', monospace;">POST /hooks</div>
+                </div>
+            </div>
+
+            <!-- Arrow down -->
+            <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin: 0.5rem 0;">&#x25BC; &#x25BC; &#x25BC; &#x25BC;</div>
+
+            <!-- Dispatch Layer -->
+            <div style="background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.3); border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <div style="font-weight: 700; font-size: 0.85rem; color: #818CF8;">DISPATCH LAYER</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            <span class="lang-ko">Automation 매칭 &rarr; Planner 라우팅 &rarr; Snapshot 캡처</span>
+                            <span class="lang-en">Automation matching &rarr; Planner routing &rarr; Snapshot capture</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <span style="font-size: 0.65rem; padding: 0.2rem 0.5rem; background: rgba(129,140,248,0.15); border-radius: 4px; color: #A5B4FC; font-family: 'Fira Code', monospace;">Queue(max=20)</span>
+                        <span style="font-size: 0.65rem; padding: 0.2rem 0.5rem; background: rgba(129,140,248,0.15); border-radius: 4px; color: #A5B4FC; font-family: 'Fira Code', monospace;">Coalesce(250ms)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arrow down -->
+            <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem; margin: 0.5rem 0;">&#x25BC;</div>
+
+            <!-- Agent Loop -->
+            <div style="background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.3); border-radius: 12px; padding: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <div style="font-weight: 700; font-size: 0.85rem; color: #FBBF24;">L3: AGENTIC CORE (Agent Loop)</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+                        <span class="lang-ko">Gather &rarr; Action &rarr; Verify &rarr; Synthesize</span>
+                        <span class="lang-en">Gather &rarr; Action &rarr; Verify &rarr; Synthesize</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <span style="font-size: 0.65rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.15); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace;">Snapshot(Peekaboo)</span>
+                    <span style="font-size: 0.65rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.15); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace;">TTL=10min</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pre-defined Automations Table (10 Built-in Templates) -->
+    <div style="margin-top: 2.5rem;">
+        <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.1rem;">
+            <span class="lang-ko">📋 Pre-defined Automations (10 Built-in)</span>
+            <span class="lang-en">📋 Pre-defined Automations (10 Built-in)</span>
+        </h3>
+        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">
+            <span class="lang-ko">스케줄/이벤트 기반 자동화 템플릿 — 별도 설정 없이 즉시 사용 가능</span>
+            <span class="lang-en">Schedule/event-driven automation templates — ready to use without configuration</span>
+        </div>
+        <div style="overflow-x: auto;">
+            <table class="rubric-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">ID</th>
+                        <th style="width: 12%;">Trigger</th>
+                        <th style="width: 18%;"><span class="lang-ko">스케줄</span><span class="lang-en">Schedule</span></th>
+                        <th style="width: 48%;"><span class="lang-ko">설명</span><span class="lang-en">Description</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>weekly_discovery_scan</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">월 09:00</span><span class="lang-en">Mon 09:00</span></td>
+                        <td><span class="lang-ko">주간 IP 발굴 스캔</span><span class="lang-en">Weekly IP discovery scan</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>pending_analysis_worker</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">30분마다</span><span class="lang-en">Every 30min</span></td>
+                        <td><span class="lang-ko">대기 분석 자동 처리</span><span class="lang-en">Process pending analyses</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>calibration_drift_scan</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">매일 06:00</span><span class="lang-en">Daily 06:00</span></td>
+                        <td><span class="lang-ko">CUSUM 기반 Drift 감지</span><span class="lang-en">CUSUM-based drift detection</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>data_quality_scan</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">매일 05:00</span><span class="lang-en">Daily 05:00</span></td>
+                        <td><span class="lang-ko">데이터 품질 점검</span><span class="lang-en">Data quality check</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>anomaly_detector</code></td>
+                        <td><span style="color: #818CF8;">F3</span></td>
+                        <td>pipeline:complete</td>
+                        <td><span class="lang-ko">점수 이상 패턴 감지</span><span class="lang-en">Score anomaly pattern detection</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>outcome_tracker</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">매월 1일</span><span class="lang-en">Monthly 1st</span></td>
+                        <td><span class="lang-ko">T+30/90/180d 성과 추적</span><span class="lang-en">T+30/90/180d outcome tracking</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>auto_generate_report</code></td>
+                        <td><span style="color: #818CF8;">F3</span></td>
+                        <td>pipeline:complete</td>
+                        <td><span class="lang-ko">분석 완료 시 자동 리포트</span><span class="lang-en">Auto-generate report on completion</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>weekly_s_tier_report</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">금 10:00</span><span class="lang-en">Fri 10:00</span></td>
+                        <td><span class="lang-ko">주간 S-Tier IP 리포트</span><span class="lang-en">Weekly S-Tier IP report</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>weekly_discovery_summary</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">월 09:00</span><span class="lang-en">Mon 09:00</span></td>
+                        <td><span class="lang-ko">주간 발굴 요약</span><span class="lang-en">Weekly discovery summary</span></td>
+                    </tr>
+                    <tr>
+                        <td><code>failed_evaluation_summary</code></td>
+                        <td><span style="color: #FBBF24;">F2</span></td>
+                        <td><span class="lang-ko">매일 08:00</span><span class="lang-en">Daily 08:00</span></td>
+                        <td><span class="lang-ko">실패 평가 요약</span><span class="lang-en">Failed evaluation summary</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Runtime Components (Model Registry + Snapshot) -->
     <div style="margin-top: 2.5rem;">
         <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem;">
-            <span class="lang-ko">🤖 Automation Components</span>
-            <span class="lang-en">🤖 Automation Components</span>
+            <span class="lang-ko">🛠 Runtime Components</span>
+            <span class="lang-en">🛠 Runtime Components</span>
         </h3>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #FBBF24; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-drift-monitor" onclick="openModal('modal-geode-drift-monitor')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-                    <span style="font-size: 1.5rem;">📊</span>
-                    <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
-                        <span class="lang-ko">Drift Scan</span>
-                        <span class="lang-en">Drift Scan</span>
-                    </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #C084FC; border-radius: 12px; padding: 1.25rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-model-registry" onclick="openModal('modal-geode-model-registry')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦</div>
+                <div style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);">Model Registry</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
+                    <span class="lang-ko">staging &rarr; canary &rarr; production</span>
+                    <span class="lang-en">staging &rarr; canary &rarr; production</span>
                 </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                    <span class="lang-ko">매일 06:00, CUSUM 모니터링</span>
-                    <span class="lang-en">Daily 06:00, CUSUM monitoring</span>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; color: #FBBF24;">cron: 0 6 * * *</span>
+                <div style="margin-top: 0.75rem; display: flex; gap: 0.3rem;">
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 4px; color: #C084FC;">semver</span>
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 4px; color: #C084FC;">rollback</span>
                 </div>
             </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #34D399; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-                    <span style="font-size: 1.5rem;">🎯</span>
-                    <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
-                        <span class="lang-ko">Outcome Tracking</span>
-                        <span class="lang-en">Outcome Tracking</span>
-                    </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #FBBF24; border-radius: 12px; padding: 1.25rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-drift-monitor" onclick="openModal('modal-geode-drift-monitor')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📊</div>
+                <div style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);">Drift Monitor</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
+                    <span class="lang-ko">CUSUM k=0.5, h=4.0 임계</span>
+                    <span class="lang-en">CUSUM k=0.5, h=4.0 threshold</span>
                 </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                    <span class="lang-ko">예측 vs 실제 비교</span>
-                    <span class="lang-en">Prediction vs actual comparison</span>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399;">feedback-loop</span>
+                <div style="margin-top: 0.75rem; display: flex; gap: 0.3rem;">
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 4px; color: #FBBF24;">CUSUM</span>
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 4px; color: #FBBF24;">alert</span>
                 </div>
             </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #C084FC; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-model-registry" onclick="openModal('modal-geode-model-registry')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-                    <span style="font-size: 1.5rem;">📦</span>
-                    <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
-                        <span class="lang-ko">Model Registry</span>
-                        <span class="lang-en">Model Registry</span>
-                    </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #34D399; border-radius: 12px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📸</div>
+                <div style="font-weight: 700; font-size: 0.85rem; color: var(--text-primary);">Snapshot Manager</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
+                    <span class="lang-ko">Peekaboo 패턴, TTL 자동 만료</span>
+                    <span class="lang-en">Peekaboo pattern, TTL auto-expiry</span>
                 </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                    <span class="lang-ko">버전 관리, A/B 테스트</span>
-                    <span class="lang-en">Version control, A/B testing</span>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 6px; color: #C084FC;">semver</span>
-                </div>
-            </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #FBBF24; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-triggers" onclick="openModal('modal-geode-triggers')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
-                    <span style="font-size: 1.5rem;">⚡</span>
-                    <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
-                        <span class="lang-ko">Trigger Manager</span>
-                        <span class="lang-en">Trigger Manager</span>
-                    </div>
-                </div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                    <span class="lang-ko">이벤트 기반 자동 재분석</span>
-                    <span class="lang-en">Event-driven automatic re-analysis</span>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; color: #FBBF24;">event-driven</span>
+                <div style="margin-top: 0.75rem; display: flex; gap: 0.3rem;">
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 4px; color: #34D399;">in-memory</span>
+                    <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 4px; color: #34D399;">max=100</span>
                 </div>
             </div>
         </div>
