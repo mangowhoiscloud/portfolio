@@ -2418,6 +2418,7 @@
     <div class="nav-logo">GEODE</div>
     <ul class="nav-links">
         <li><a href="#overview">Overview</a></li>
+        <li><a href="#agentic">Agentic</a></li>
         <li><a href="#pipeline">Reasoning</a></li>
         <li><a href="#architecture">Architecture</a></li>
         <li><a href="#scoring">Scoring</a></li>
@@ -2479,6 +2480,160 @@
                 <span class="lang-en">PSM Axes</span>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Agentic Engineering — Featured Section -->
+<section class="section" id="agentic" style="padding-top: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(129,140,248,0.08);">
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; background: rgba(244,114,182,0.08); border: 1px solid rgba(244,114,182,0.2); border-radius: 20px; font-size: 0.75rem; color: #F472B6; font-family: 'Fira Code', monospace; margin-bottom: 1.25rem;">
+            <span class="lang-ko">Core Agent Capabilities</span>
+            <span class="lang-en">Core Agent Capabilities</span>
+        </div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 0.75rem;">Agentic Engineering</h2>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.7;">
+            <span class="lang-ko">GEODE를 자율 에이전트로 만드는 6가지 핵심 엔지니어링 원칙</span>
+            <span class="lang-en">6 core engineering principles that make GEODE an autonomous agent</span>
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto;">
+        <!-- 1. Autonomous Reasoning -->
+        <a href="#pipeline" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(244,114,182,0.3)'; this.style.boxShadow='0 12px 40px rgba(244,114,182,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(244,114,182,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔄</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Autonomous Reasoning</span>
+                        <span class="lang-en">Autonomous Reasoning</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #F472B6; font-family: 'Fira Code', monospace;">while(tool_use)</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">LLM이 도구 선택을 자율 결정. 최대 10라운드 반복하며 21개 도구 중 최적 도구를 선택·실행·평가</span>
+                <span class="lang-en">LLM autonomously decides tool selection. Up to 10 rounds iterating across 21 tools — select, execute, evaluate</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); border-radius: 4px; color: #F472B6; font-family: 'Fira Code', monospace;">21 tools</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); border-radius: 4px; color: #F472B6; font-family: 'Fira Code', monospace;">max 10 rounds</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); border-radius: 4px; color: #F472B6; font-family: 'Fira Code', monospace;">LLM-decided</span>
+            </div>
+        </a>
+
+        <!-- 2. Goal-Driven Planning -->
+        <a href="#orchestration" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(129,140,248,0.3)'; this.style.boxShadow='0 12px 40px rgba(129,140,248,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(129,140,248,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🗺️</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Goal-Driven Planning</span>
+                        <span class="lang-en">Goal-Driven Planning</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #818CF8; font-family: 'Fira Code', monospace;">Plan Mode FSM</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">에이전트가 목표를 분석하고 실행 계획을 수립. HITL 승인 게이트를 거쳐 Sub-Agent로 병렬 실행</span>
+                <span class="lang-en">Agent analyzes goals and formulates execution plans. HITL approval gates before parallel sub-agent execution</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; color: #818CF8; font-family: 'Fira Code', monospace;">5 states</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; color: #818CF8; font-family: 'Fira Code', monospace;">HITL gate</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.2); border-radius: 4px; color: #818CF8; font-family: 'Fira Code', monospace;">TaskGraph DAG</span>
+            </div>
+        </a>
+
+        <!-- 3. Self-Correction -->
+        <a href="#verification" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(52,211,153,0.3)'; this.style.boxShadow='0 12px 40px rgba(52,211,153,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(52,211,153,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🛡️</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Self-Correction</span>
+                        <span class="lang-en">Self-Correction</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #34D399; font-family: 'Fira Code', monospace;">confidence &ge; 0.7</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">신뢰도 0.7 미만이면 자율 재분석. Guardrails G1-G4와 BiasBuster가 결과를 자동 검증</span>
+                <span class="lang-en">Auto re-analysis when confidence &lt; 0.7. Guardrails G1-G4 and BiasBuster automatically verify results</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); border-radius: 4px; color: #34D399; font-family: 'Fira Code', monospace;">G1-G4</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); border-radius: 4px; color: #34D399; font-family: 'Fira Code', monospace;">BiasBuster</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.2); border-radius: 4px; color: #34D399; font-family: 'Fira Code', monospace;">max 5 retries</span>
+            </div>
+        </a>
+
+        <!-- 4. Multi-Agent Coordination -->
+        <a href="#orchestration" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(192,132,252,0.3)'; this.style.boxShadow='0 12px 40px rgba(192,132,252,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(192,132,252,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔀</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Multi-Agent Coordination</span>
+                        <span class="lang-en">Multi-Agent Coordination</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #C084FC; font-family: 'Fira Code', monospace;">MAX_CONCURRENT=5</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">SubAgentManager가 작업을 DAG로 분해하고 병렬 실행. CoalescingQueue로 효율적 디스패치</span>
+                <span class="lang-en">SubAgentManager decomposes tasks into DAG for parallel execution. CoalescingQueue for efficient dispatch</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.2); border-radius: 4px; color: #C084FC; font-family: 'Fira Code', monospace;">SubAgentManager</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.2); border-radius: 4px; color: #C084FC; font-family: 'Fira Code', monospace;">IsolatedRunner</span>
+            </div>
+        </a>
+
+        <!-- 5. Memory-Augmented -->
+        <a href="#orchestration" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(96,165,250,0.3)'; this.style.boxShadow='0 12px 40px rgba(96,165,250,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(96,165,250,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🧠</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Memory-Augmented</span>
+                        <span class="lang-en">Memory-Augmented</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #60A5FA; font-family: 'Fira Code', monospace;">3-Tier Hierarchy</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">Organization → Project → Session 3계층 메모리. 과거 분석을 학습하고 컨텍스트를 유지</span>
+                <span class="lang-en">Organization → Project → Session 3-tier memory. Learns from past analyses and maintains context</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); border-radius: 4px; color: #60A5FA; font-family: 'Fira Code', monospace;">persistent</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); border-radius: 4px; color: #60A5FA; font-family: 'Fira Code', monospace;">TTL session</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); border-radius: 4px; color: #60A5FA; font-family: 'Fira Code', monospace;">ContextVar</span>
+            </div>
+        </a>
+
+        <!-- 6. Self-Improvement -->
+        <a href="#automation" style="text-decoration: none; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.75rem; transition: all 0.3s; display: block;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(251,191,36,0.3)'; this.style.boxShadow='0 12px 40px rgba(251,191,36,0.08)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(251,191,36,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📈</div>
+                <div>
+                    <div style="font-weight: 700; color: var(--text-primary); font-size: 0.95rem;">
+                        <span class="lang-ko">Self-Improvement</span>
+                        <span class="lang-en">Self-Improvement</span>
+                    </div>
+                    <div style="font-size: 0.7rem; color: #FBBF24; font-family: 'Fira Code', monospace;">RLAIF + CUSUM</div>
+                </div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7;">
+                <span class="lang-ko">예측→실제 성과 비교로 자가 개선. CUSUM drift 감지 시 자동 재보정 트리거</span>
+                <span class="lang-en">Self-improves by comparing predictions to actual outcomes. CUSUM drift triggers automatic recalibration</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace;">5-Phase</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace;">T+30/90/180d</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.2); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace;">Graceful Degrade</span>
+            </div>
+        </a>
     </div>
 </section>
 
