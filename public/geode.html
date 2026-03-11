@@ -2442,6 +2442,48 @@
 
 <!-- Hero Section -->
 <section class="hero" id="overview">
+    <!-- Axolotl mascot — "The Regenerating Agent" -->
+    <div style="margin-bottom: 2rem;">
+        <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" style="width: 160px; height: auto; opacity: 0.9; animation: fadeInUp 1s ease-out both;">
+            <!-- Body -->
+            <ellipse cx="100" cy="70" rx="42" ry="22" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+            <!-- Head -->
+            <ellipse cx="55" cy="58" rx="24" ry="18" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.35)" stroke-width="1.5"/>
+            <!-- Eyes -->
+            <circle cx="48" cy="54" r="3" fill="#F472B6" opacity="0.8"/>
+            <circle cx="48" cy="54" r="1.2" fill="#0A0A10"/>
+            <circle cx="62" cy="54" r="3" fill="#F472B6" opacity="0.8"/>
+            <circle cx="62" cy="54" r="1.2" fill="#0A0A10"/>
+            <!-- Smile -->
+            <path d="M48,62 Q55,67 62,62" fill="none" stroke="#F472B6" stroke-width="1" opacity="0.6"/>
+            <!-- External gills (left) — data sensors -->
+            <path d="M38,42 Q28,28 22,18" fill="none" stroke="#34D399" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <path d="M35,44 Q22,34 14,26" fill="none" stroke="#60A5FA" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <path d="M33,48 Q18,42 10,38" fill="none" stroke="#818CF8" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <!-- External gills (right) -->
+            <path d="M72,42 Q82,28 88,18" fill="none" stroke="#FBBF24" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <path d="M75,44 Q88,34 96,26" fill="none" stroke="#C084FC" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <path d="M77,48 Q92,42 100,38" fill="none" stroke="#F472B6" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+            <!-- Gill tip dots (data particles) -->
+            <circle cx="22" cy="18" r="2" fill="#34D399" opacity="0.7"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="14" cy="26" r="2" fill="#60A5FA" opacity="0.7"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="10" cy="38" r="2" fill="#818CF8" opacity="0.7"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="88" cy="18" r="2" fill="#FBBF24" opacity="0.7"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="96" cy="26" r="2" fill="#C084FC" opacity="0.7"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="100" cy="38" r="2" fill="#F472B6" opacity="0.7"><animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/></circle>
+            <!-- Front legs -->
+            <path d="M72,80 Q78,95 85,98" fill="none" stroke="rgba(244,114,182,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M82,78 Q88,93 95,96" fill="none" stroke="rgba(244,114,182,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Tail -->
+            <path d="M142,70 Q160,65 172,55 Q180,48 185,52 Q178,58 170,65 Q160,74 145,75" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5"/>
+            <!-- Dorsal ridge dots -->
+            <circle cx="85" cy="48" r="1.5" fill="rgba(244,114,182,0.3)"/>
+            <circle cx="95" cy="47" r="1.5" fill="rgba(244,114,182,0.25)"/>
+            <circle cx="105" cy="47" r="1.5" fill="rgba(244,114,182,0.2)"/>
+            <circle cx="115" cy="48" r="1.5" fill="rgba(244,114,182,0.15)"/>
+        </svg>
+    </div>
+
     <div class="hero-badge">
         <span class="lang-ko">Autonomous IP Discovery Agent</span>
         <span class="lang-en">Autonomous IP Discovery Agent</span>
@@ -4964,91 +5006,58 @@
 
     <div class="timeline">
         <div class="timeline-item viewed">
-            <div class="timeline-date">2025.03</div>
+            <div class="timeline-date">2026.03.10</div>
             <div class="timeline-title">
-                <span class="lang-ko">🏗️ v1.0 Prototype</span>
-                <span class="lang-en">🏗️ v1.0 Prototype</span>
+                <span class="lang-ko">🚀 v0.6.0 — Initial Release</span>
+                <span class="lang-en">🚀 v0.6.0 — Initial Release</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">기본 PSM 파이프라인 설계</span>
-                <span class="lang-en">Initial PSM pipeline design</span>
+                <span class="lang-ko">7-node LangGraph pipeline, Agentic Loop(17 tools), 3-Tier Memory, 1,879 tests</span>
+                <span class="lang-en">7-node LangGraph pipeline, Agentic Loop (17 tools), 3-Tier Memory, 1,879 tests</span>
             </div>
         </div>
         <div class="timeline-item viewed">
-            <div class="timeline-date">2025.04</div>
+            <div class="timeline-date">2026.03.10</div>
             <div class="timeline-title">
-                <span class="lang-ko">👥 v2.0 Multi-Agent</span>
-                <span class="lang-en">👥 v2.0 Multi-Agent</span>
+                <span class="lang-ko">📦 v0.6.1 — Content/Code Separation</span>
+                <span class="lang-en">📦 v0.6.1 — Content/Code Separation</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">4-Analyst Expert Panel 도입</span>
-                <span class="lang-en">Introduced 4-Analyst Expert Panel</span>
+                <span class="lang-ko">src/geode/ &rarr; core/ 패키지 리팩토링, 프롬프트 .md 분리, pre-commit hooks</span>
+                <span class="lang-en">Package rename src/geode/ &rarr; core/, prompt .md templates, pre-commit hooks</span>
             </div>
         </div>
         <div class="timeline-item viewed">
-            <div class="timeline-date">2025.05</div>
+            <div class="timeline-date">2026.03.11</div>
             <div class="timeline-title">
-                <span class="lang-ko">📊 v3.0 Evaluation</span>
-                <span class="lang-en">📊 v3.0 Evaluation</span>
+                <span class="lang-ko">🔧 v0.7.0 — Flexibility & Observability</span>
+                <span class="lang-en">🔧 v0.7.0 — Flexibility & Observability</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">3-Evaluator 체계 + 14축 PSM</span>
-                <span class="lang-en">Added 3-Evaluator system + 14-axis PSM</span>
-            </div>
-        </div>
-        <div class="timeline-item viewed">
-            <div class="timeline-date">2025.06</div>
-            <div class="timeline-title">
-                <span class="lang-ko">🛡️ v4.0 Verification</span>
-                <span class="lang-en">🛡️ v4.0 Verification</span>
-            </div>
-            <div class="timeline-desc">
-                <span class="lang-ko">Guardrails G1-G4 + BiasBuster</span>
-                <span class="lang-en">Built G1-G4 Guardrails + BiasBuster</span>
-            </div>
-        </div>
-        <div class="timeline-item viewed">
-            <div class="timeline-date">2025.07</div>
-            <div class="timeline-title">
-                <span class="lang-ko">🔗 v5.0 Orchestration</span>
-                <span class="lang-en">🔗 v5.0 Orchestration</span>
-            </div>
-            <div class="timeline-desc">
-                <span class="lang-ko">Hook System + 3-Tier Memory</span>
-                <span class="lang-en">Added Hook System + 3-Tier Memory</span>
-            </div>
-        </div>
-        <div class="timeline-item viewed">
-            <div class="timeline-date">2025.08</div>
-            <div class="timeline-title">
-                <span class="lang-ko">📈 v5.5 Automation</span>
-                <span class="lang-en">📈 v5.5 Automation</span>
-            </div>
-            <div class="timeline-desc">
-                <span class="lang-ko">CUSUM Drift Detection + Trigger Manager</span>
-                <span class="lang-en">CUSUM Drift Detection + Triggers</span>
+                <span class="lang-ko">C2-C5 유연성, LangSmith 트레이싱, 17-tool audit, SubAgentManager 통합</span>
+                <span class="lang-en">C2-C5 flexibility, LangSmith tracing, 17-tool audit, SubAgentManager integration</span>
             </div>
         </div>
         <div class="timeline-item current">
-            <div class="timeline-date">2025.09</div>
+            <div class="timeline-date">2026.03.11</div>
             <div class="timeline-title">
-                <span class="lang-ko">🔄 v6.0 Integration</span>
-                <span class="lang-en">🔄 v6.0 Integration</span>
+                <span class="lang-ko">🤖 v0.8.0 — Plan/Sub-agent NL</span>
+                <span class="lang-en">🤖 v0.8.0 — Plan/Sub-agent NL</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">Clean Context Isolation + Adaptive Feedback Loop</span>
-                <span class="lang-en">Clean Context Isolation + Adaptive Feedback Loop</span>
+                <span class="lang-ko">Plan Mode NL 통합, Claude Code-style UI, Verification 트레이싱, 2,000+ tests</span>
+                <span class="lang-en">Plan Mode NL integration, Claude Code-style UI, verification tracing, 2,000+ tests</span>
             </div>
         </div>
         <div class="timeline-item next">
-            <div class="timeline-date">2025.10</div>
+            <div class="timeline-date">Next</div>
             <div class="timeline-title">
-                <span class="lang-ko">✨ v6.0 Polish</span>
-                <span class="lang-en">✨ v6.0 Polish</span>
+                <span class="lang-ko">🔮 v0.9.0 — Outcome Tracking</span>
+                <span class="lang-en">🔮 v0.9.0 — Outcome Tracking</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">2,000+ Tests, CLI UX 개선, Documentation 정비</span>
-                <span class="lang-en">2,000+ Tests, CLI UX refinement, Documentation</span>
+                <span class="lang-ko">T+30/90/180d 실제 성과 추적, Production 배포, RLAIF 완전 통합</span>
+                <span class="lang-en">T+30/90/180d outcome tracking, production deployment, full RLAIF integration</span>
             </div>
         </div>
     </div>
@@ -5058,54 +5067,125 @@
 
 <!-- Modal: Pipeline Router -->
 <div class="modal-overlay" id="modal-geode-router">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-router')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🔀 Pipeline Router</span>
-            <span class="lang-en">🔀 Pipeline Router</span>
+            <span class="lang-ko">🔀 Agent Router</span>
+            <span class="lang-en">🔀 Agent Router</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #818CF8;">
-                <span class="lang-ko">IP 유형과 분석 모드에 따라 파이프라인 경로를 결정합니다. full_pipeline, cortex_only, evaluation, scoring 4가지 모드를 지원합니다.</span>
-                <span class="lang-en">Determines pipeline path based on IP type and analysis mode. Supports 4 modes: full_pipeline, cortex_only, evaluation, scoring.</span>
+                <span class="lang-ko">에이전트가 자연어 명령을 해석하고 6개 실행 경로 중 최적 경로를 자율적으로 선택합니다. NL Router가 1차 분류를 수행하고, 오프라인 regex fallback이 3단계 강등 체계를 통해 복원력을 보장합니다.</span>
+                <span class="lang-en">The agent autonomously interprets natural language commands and selects the optimal route from 6 execution paths. The NL Router handles primary classification, with offline regex fallback guaranteeing resilience via a 3-stage degradation chain.</span>
+            </div>
+        </div>
+        <div class="modal-metrics">
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">6</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">실행 경로</span>
+                    <span class="lang-en">Execution Routes</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">21</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">등록 도구</span>
+                    <span class="lang-en">Registered Tools</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">3-stage</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">Fallback 체계</span>
+                    <span class="lang-en">Fallback Chain</span>
+                </div>
             </div>
         </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">라우터 구현</span>
-                <span class="lang-en">Router Implementation</span>
+                <span class="lang-ko">6개 라우팅 경로</span>
+                <span class="lang-en">6 Routing Paths</span>
             </h4>
-            <div class="modal-code"><pre><code>def router(state: PipelineState) -> dict:
-    mode = state.get("pipeline_mode", "full_pipeline")
-    routes = {
-        "full_pipeline": "cortex",
-        "cortex_only": "cortex",
-        "evaluation": "evaluator",
-        "scoring": "scoring",
-    }
-    return {"route": routes[mode]}</code></pre></div>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th><span class="lang-ko">경로</span><span class="lang-en">Route</span></th>
+                        <th><span class="lang-ko">목적지 노드</span><span class="lang-en">Target Node</span></th>
+                        <th><span class="lang-ko">용도</span><span class="lang-en">Use Case</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #818CF8; font-family: 'Fira Code', monospace; font-weight: 600;">full_pipeline</td>
+                        <td style="font-family: 'Fira Code', monospace;">cortex</td>
+                        <td><span class="lang-ko">전체 분석 실행</span><span class="lang-en">Full analysis run</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #60A5FA; font-family: 'Fira Code', monospace; font-weight: 600;">cortex_only</td>
+                        <td style="font-family: 'Fira Code', monospace;">cortex</td>
+                        <td><span class="lang-ko">데이터 수집만 수행</span><span class="lang-en">Data collection only</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #34D399; font-family: 'Fira Code', monospace; font-weight: 600;">evaluation</td>
+                        <td style="font-family: 'Fira Code', monospace;">evaluator</td>
+                        <td><span class="lang-ko">품질 평가만 수행</span><span class="lang-en">Quality evaluation only</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 600;">scoring</td>
+                        <td style="font-family: 'Fira Code', monospace;">scoring</td>
+                        <td><span class="lang-ko">점수 산출만 수행</span><span class="lang-en">Score calculation only</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #F472B6; font-family: 'Fira Code', monospace; font-weight: 600;">plan_mode</td>
+                        <td style="font-family: 'Fira Code', monospace;">planner</td>
+                        <td><span class="lang-ko">분석 계획 수립 후 HITL 승인</span><span class="lang-en">Build plan → HITL approval</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #C084FC; font-family: 'Fira Code', monospace; font-weight: 600;">delegate</td>
+                        <td style="font-family: 'Fira Code', monospace;">sub_agent_manager</td>
+                        <td><span class="lang-ko">서브에이전트 병렬 위임</span><span class="lang-en">Parallel sub-agent delegation</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="modal-metrics">
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">4</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">라우팅 모드</span>
-                    <span class="lang-en">Routing Modes</span>
-                </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">O(1)</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">결정 시간</span>
-                    <span class="lang-en">Decision Time</span>
-                </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">Dict</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">출력 타입</span>
-                    <span class="lang-en">Output Type</span>
-                </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">NL Router + 3단계 Fallback</span>
+                <span class="lang-en">NL Router + 3-Stage Fallback</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># router.py — NL-first routing with offline fallback</span>
+<span class="keyword">async def</span> <span class="function">nl_router</span>(state: PipelineState) -> <span class="keyword">str</span>:
+    <span class="comment"># Stage 1: LLM tool-use classification</span>
+    <span class="keyword">try</span>:
+        route = <span class="keyword">await</span> llm.classify_route(state[<span class="string">"user_input"</span>])
+        <span class="keyword">return</span> route  <span class="comment"># "full_pipeline" | "plan_mode" | "delegate" | ...</span>
+    <span class="keyword">except</span> LLMError:
+        <span class="keyword">pass</span>
+
+    <span class="comment"># Stage 2: Offline regex fallback</span>
+    patterns = {
+        <span class="string">r"계획|plan"</span>: <span class="string">"plan_mode"</span>,
+        <span class="string">r"병렬|parallel|delegate"</span>: <span class="string">"delegate"</span>,
+        <span class="string">r"평가|eval"</span>: <span class="string">"evaluation"</span>,
+    }
+    <span class="keyword">for</span> pat, route <span class="keyword">in</span> patterns.items():
+        <span class="keyword">if</span> re.search(pat, state[<span class="string">"user_input"</span>], re.I):
+            <span class="keyword">return</span> route
+
+    <span class="comment"># Stage 3: help fallback</span>
+    <span class="keyword">return</span> <span class="string">"full_pipeline"</span>  <span class="comment"># safe default</span></code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">관련 기능</span>
+                <span class="lang-en">Related Features</span>
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                <span style="font-size: 0.75rem; padding: 0.25rem 0.6rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 6px; color: #818CF8;">NL Router</span>
+                <span style="font-size: 0.75rem; padding: 0.25rem 0.6rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">Plan Mode</span>
+                <span style="font-size: 0.75rem; padding: 0.25rem 0.6rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 6px; color: #C084FC;">Sub-Agent Delegation</span>
+                <span style="font-size: 0.75rem; padding: 0.25rem 0.6rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399;">Offline Fallback</span>
             </div>
         </div>
     </div>
@@ -6040,61 +6120,130 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
 
 <!-- Modal: Adaptive Feedback Loop -->
 <div class="modal-overlay" id="modal-geode-adaptive-loop">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-adaptive-loop')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🔄 Adaptive Feedback Loop</span>
-            <span class="lang-en">🔄 Adaptive Feedback Loop</span>
+            <span class="lang-ko">🔄 에이전틱 루프 — 다중 라운드 자율 실행</span>
+            <span class="lang-en">🔄 Agentic Loop — Multi-Round Autonomous Execution</span>
         </h3>
         <div class="modal-section">
-            <div class="modal-explanation highlight" style="border-color: #F472B6;">
-                <span class="lang-ko">Confidence 임계값과 Bounded Iteration을 활용한 적응형 피드백 루프입니다. 신뢰도가 기준 이하일 경우 취약 점수에 집중하여 재분석을 수행하며, 무한 루프를 방지하기 위해 최대 반복 횟수를 제한합니다.</span>
-                <span class="lang-en">Adaptive feedback loop using confidence threshold and bounded iteration. When confidence is below threshold, re-analysis focuses on weak subscores. Maximum iteration count prevents infinite loops.</span>
+            <div class="modal-explanation highlight" style="border-color: #34D399;">
+                <span class="lang-ko">에이전트가 while(tool_use) 루프로 도구 호출과 관찰을 반복하며 자율적으로 분석을 심화합니다. max_rounds=10 제한과 20-턴 슬라이딩 컨텍스트 윈도우로 안정성을 보장하며, LLM 실패 시 3단계 강등 체계로 자동 복구합니다.</span>
+                <span class="lang-en">The agent deepens analysis autonomously via a while(tool_use) loop of tool calls and observations. Stability is ensured by max_rounds=10 and a 20-turn sliding context window; a 3-stage degradation chain handles LLM failure with automatic recovery.</span>
+            </div>
+        </div>
+        <div class="modal-metrics">
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">10</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">max_rounds</span>
+                    <span class="lang-en">max_rounds</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">20-turn</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">슬라이딩 컨텍스트</span>
+                    <span class="lang-en">Sliding Context</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">3-stage</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">강등 체계</span>
+                    <span class="lang-en">Degradation Chain</span>
+                </div>
             </div>
         </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">루프 제어 로직</span>
-                <span class="lang-en">Loop Control Logic</span>
+                <span class="lang-ko">에이전틱 루프 구조</span>
+                <span class="lang-en">Agentic Loop Structure</span>
             </h4>
-            <div class="modal-code"><pre><code>CONFIDENCE_THRESHOLD = 0.7
-DEFAULT_MAX_ITERATIONS = 5
-
-def should_continue(state: PipelineState) -> str:
-    confidence = state.get("analyst_confidence", 0.0)
-    iteration = state.get("iteration", 1)
-    max_iter = state.get("max_iterations", DEFAULT_MAX_ITERATIONS)
-
-    conf_normalized = confidence / 100.0 if confidence > 1.0 else confidence
-
-    if conf_normalized >= CONFIDENCE_THRESHOLD:
-        return "synthesizer"
-    if iteration >= max_iter:
-        return "synthesizer"
-    return "gather"  # Loop back — focus on weak subscores</code></pre></div>
+            <div class="modal-diagram" style="font-family: 'Fira Code', monospace; font-size: 0.82rem;">
+while round &lt; max_rounds(10):
+    │
+    ▼
+  [LLM 호출] ──▶ tool_choice?
+                    │           │
+                   YES          NO (stop_reason = end_turn)
+                    │           │
+                    ▼           ▼
+             [도구 실행]    [루프 종료]
+                    │
+                    ▼
+             [결과 관찰]
+                    │
+                    ▼
+    ConversationContext(20-turn sliding window)
+                    │
+               round += 1
+                    │
+                 ◀──┘ (continue)</div>
         </div>
-        <div class="modal-metrics">
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">0.7</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">임계값</span>
-                    <span class="lang-en">Threshold</span>
-                </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">5</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">최대 반복</span>
-                    <span class="lang-en">Max Iterations</span>
-                </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">Bounded</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">루프 유형</span>
-                    <span class="lang-en">Loop Type</span>
-                </div>
-            </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">실제 루프 구현 코드</span>
+                <span class="lang-en">Actual Loop Implementation</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># agent_loop.py — multi-round agentic execution</span>
+MAX_ROUNDS = <span class="string">10</span>
+CONTEXT_WINDOW = <span class="string">20</span>  <span class="comment"># sliding turns</span>
+
+<span class="keyword">async def</span> <span class="function">run_agentic_loop</span>(state: PipelineState) -> PipelineState:
+    context = ConversationContext(max_turns=CONTEXT_WINDOW)
+    round_count = <span class="string">0</span>
+
+    <span class="keyword">while</span> round_count &lt; MAX_ROUNDS:
+        response = <span class="keyword">await</span> llm.messages(
+            messages=context.get_messages(),
+            tools=REGISTERED_TOOLS,  <span class="comment"># 21 tools</span>
+        )
+        <span class="keyword">if</span> response.stop_reason == <span class="string">"end_turn"</span>:
+            <span class="keyword">break</span>  <span class="comment"># agent decided it's done</span>
+
+        <span class="comment"># Execute tool calls and observe results</span>
+        tool_results = <span class="keyword">await</span> execute_tools(response.content)
+        context.append(response, tool_results)
+        round_count += <span class="string">1</span>
+
+    <span class="keyword">return</span> state.update(result=context.get_final_state())</code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">3단계 강등 체계</span>
+                <span class="lang-en">3-Stage Degradation Chain</span>
+            </h4>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th><span class="lang-ko">단계</span><span class="lang-en">Stage</span></th>
+                        <th><span class="lang-ko">메커니즘</span><span class="lang-en">Mechanism</span></th>
+                        <th><span class="lang-ko">트리거 조건</span><span class="lang-en">Trigger</span></th>
+                        <th><span class="lang-ko">결과</span><span class="lang-en">Outcome</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #34D399; font-family: 'Fira Code', monospace; font-weight: 700;">1</td>
+                        <td><span class="lang-ko">LLM Tool Use</span><span class="lang-en">LLM Tool Use</span></td>
+                        <td><span class="lang-ko">정상 실행</span><span class="lang-en">Normal operation</span></td>
+                        <td><span class="lang-ko">전체 기능</span><span class="lang-en">Full capability</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 700;">2</td>
+                        <td><span class="lang-ko">Offline Regex</span><span class="lang-en">Offline Regex</span></td>
+                        <td><span class="lang-ko">LLM API 실패</span><span class="lang-en">LLM API failure</span></td>
+                        <td><span class="lang-ko">패턴 매칭 라우팅</span><span class="lang-en">Pattern-match routing</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #EF4444; font-family: 'Fira Code', monospace; font-weight: 700;">3</td>
+                        <td><span class="lang-ko">Help Fallback</span><span class="lang-en">Help Fallback</span></td>
+                        <td><span class="lang-ko">Regex도 실패</span><span class="lang-en">Regex also fails</span></td>
+                        <td><span class="lang-ko">안전 기본값 + 도움말</span><span class="lang-en">Safe default + help text</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -6103,90 +6252,140 @@ def should_continue(state: PipelineState) -> str:
 
 <!-- Modal: PSM Scoring Engine -->
 <div class="modal-overlay" id="modal-geode-scoring">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-scoring')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🎯 PSM Scoring Engine</span>
+            <span class="lang-ko">🎯 PSM 점수 엔진</span>
             <span class="lang-en">🎯 PSM Scoring Engine</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #FBBF24;">
-                <span class="lang-ko">PSM(Potential Score Model) 6가지 가중치 복합 점수를 산출합니다. 14축 원시 점수를 6개 카테고리로 집계하고, Confidence 보정을 적용하여 최종 점수를 결정합니다.</span>
-                <span class="lang-en">Calculates PSM (Potential Score Model) 6-weighted composite score. Aggregates 14-axis raw scores into 6 categories and applies confidence correction for the final score.</span>
+                <span class="lang-ko">에이전트가 6개 가중 요소를 자율적으로 집계하여 최종 IP 잠재력 점수를 산출합니다. Confidence 배율은 분석 신뢰도를 직접 반영하며, 낮은 신뢰도는 점수를 최대 30% 하향 보정합니다. S/A/B/C 4티어로 IP를 자동 분류합니다.</span>
+                <span class="lang-en">The agent autonomously aggregates 6 weighted factors to produce the final IP potential score. The confidence multiplier directly reflects analysis reliability, with low confidence penalizing scores by up to 30%. IPs are auto-classified into 4 tiers: S/A/B/C.</span>
             </div>
         </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">점수 산출 공식</span>
-                <span class="lang-en">Scoring Formula</span>
+                <span class="lang-ko">완전 공식</span>
+                <span class="lang-en">Full Formula</span>
             </h4>
-            <div class="modal-code"><pre><code>Final = (
-    0.25 x PSM +
-    0.20 x Quality +
-    0.18 x Recovery +
-    0.12 x Growth +
-    0.20 x Momentum +
-    0.05 x Dev
-) x (0.7 + 0.3 x Confidence / 100)
+            <div class="modal-code"><pre><code><span class="comment"># scoring_engine.py — PSM Final Score</span>
+Final = (
+    <span class="string">0.25</span> × PSM      +  <span class="comment"># Potential Score Model (14-axis aggregate)</span>
+    <span class="string">0.20</span> × Quality   +  <span class="comment"># Evaluator quality composite</span>
+    <span class="string">0.18</span> × Recovery  +  <span class="comment"># Hidden Gem / recovery potential</span>
+    <span class="string">0.12</span> × Growth    +  <span class="comment"># Market growth trajectory</span>
+    <span class="string">0.20</span> × Momentum  +  <span class="comment"># Trend momentum signal</span>
+    <span class="string">0.05</span> × Dev          <span class="comment"># Development feasibility</span>
+) × (<span class="string">0.7</span> + <span class="string">0.3</span> × Confidence / <span class="string">100</span>)
 
-# Tier Classification
-S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
+<span class="comment"># Tier Classification</span>
+S ≥ <span class="string">80</span>  │  A ≥ <span class="string">60</span>  │  B ≥ <span class="string">40</span>  │  C &lt; <span class="string">40</span></code></pre></div>
+        </div>
+        <div class="modal-metrics">
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #FBBF24; font-family: 'Fira Code', monospace;">6</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">가중 요소</span>
+                    <span class="lang-en">Weighted Factors</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #FBBF24; font-family: 'Fira Code', monospace;">0.7–1.0</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">신뢰도 배율 범위</span>
+                    <span class="lang-en">Confidence Multiplier</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #FBBF24; font-family: 'Fira Code', monospace;">4</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">IP 티어</span>
+                    <span class="lang-en">IP Tiers</span>
+                </div>
+            </div>
         </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">가중치 분포</span>
-                <span class="lang-en">Weight Distribution</span>
+                <span class="lang-ko">가중치 분포 상세</span>
+                <span class="lang-en">Weight Breakdown</span>
             </h4>
             <table class="modal-table">
                 <thead>
                     <tr>
-                        <th>
-                            <span class="lang-ko">카테고리</span>
-                            <span class="lang-en">Category</span>
-                        </th>
-                        <th>
-                            <span class="lang-ko">가중치</span>
-                            <span class="lang-en">Weight</span>
-                        </th>
-                        <th>
-                            <span class="lang-ko">설명</span>
-                            <span class="lang-en">Description</span>
-                        </th>
+                        <th><span class="lang-ko">요소</span><span class="lang-en">Factor</span></th>
+                        <th><span class="lang-ko">가중치</span><span class="lang-en">Weight</span></th>
+                        <th><span class="lang-ko">원천</span><span class="lang-en">Source</span></th>
+                        <th><span class="lang-ko">설명</span><span class="lang-en">Description</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="font-weight: 600;">PSM</td>
-                        <td style="color: var(--accent-primary);">0.25</td>
-                        <td><span class="lang-ko">잠재력 점수 모델</span><span class="lang-en">Potential Score Model</span></td>
+                        <td style="color: #FBBF24; font-weight: 600; font-family: 'Fira Code', monospace;">PSM</td>
+                        <td style="color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 700;">0.25</td>
+                        <td><span class="lang-ko">14축 원시 점수</span><span class="lang-en">14-axis raw scores</span></td>
+                        <td><span class="lang-ko">IP 잠재력 기본값</span><span class="lang-en">Core IP potential baseline</span></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600;">Quality</td>
-                        <td style="color: var(--accent-primary);">0.20</td>
-                        <td><span class="lang-ko">분석 품질</span><span class="lang-en">Analysis Quality</span></td>
+                        <td style="color: #F472B6; font-weight: 600; font-family: 'Fira Code', monospace;">Quality</td>
+                        <td style="color: #F472B6; font-family: 'Fira Code', monospace; font-weight: 700;">0.20</td>
+                        <td><span class="lang-ko">Quality Evaluator</span><span class="lang-en">Quality Evaluator</span></td>
+                        <td><span class="lang-ko">분석 근거 품질</span><span class="lang-en">Analysis evidence quality</span></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600;">Recovery</td>
-                        <td style="color: var(--accent-primary);">0.18</td>
-                        <td><span class="lang-ko">회복 잠재력</span><span class="lang-en">Recovery Potential</span></td>
+                        <td style="color: #818CF8; font-weight: 600; font-family: 'Fira Code', monospace;">Recovery</td>
+                        <td style="color: #818CF8; font-family: 'Fira Code', monospace; font-weight: 700;">0.18</td>
+                        <td><span class="lang-ko">Hidden Gem Evaluator</span><span class="lang-en">Hidden Gem Evaluator</span></td>
+                        <td><span class="lang-ko">저평가 회복 잠재력</span><span class="lang-en">Undervalued recovery potential</span></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600;">Growth</td>
-                        <td style="color: var(--accent-primary);">0.12</td>
-                        <td><span class="lang-ko">성장 가능성</span><span class="lang-en">Growth Potential</span></td>
+                        <td style="color: #34D399; font-weight: 600; font-family: 'Fira Code', monospace;">Growth</td>
+                        <td style="color: #34D399; font-family: 'Fira Code', monospace; font-weight: 700;">0.12</td>
+                        <td><span class="lang-ko">시장 트렌드 데이터</span><span class="lang-en">Market trend data</span></td>
+                        <td><span class="lang-ko">성장 궤도</span><span class="lang-en">Growth trajectory</span></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600;">Momentum</td>
-                        <td style="color: var(--accent-primary);">0.20</td>
-                        <td><span class="lang-ko">모멘텀 강도</span><span class="lang-en">Momentum Strength</span></td>
+                        <td style="color: #60A5FA; font-weight: 600; font-family: 'Fira Code', monospace;">Momentum</td>
+                        <td style="color: #60A5FA; font-family: 'Fira Code', monospace; font-weight: 700;">0.20</td>
+                        <td><span class="lang-ko">Momentum Evaluator</span><span class="lang-en">Momentum Evaluator</span></td>
+                        <td><span class="lang-ko">트렌드 방향 및 강도</span><span class="lang-en">Trend direction &amp; intensity</span></td>
                     </tr>
                     <tr>
-                        <td style="font-weight: 600;">Dev</td>
-                        <td style="color: var(--accent-primary);">0.05</td>
-                        <td><span class="lang-ko">개발 가능성</span><span class="lang-en">Development Feasibility</span></td>
+                        <td style="color: #C084FC; font-weight: 600; font-family: 'Fira Code', monospace;">Dev</td>
+                        <td style="color: #C084FC; font-family: 'Fira Code', monospace; font-weight: 700;">0.05</td>
+                        <td><span class="lang-ko">개발 가능성 신호</span><span class="lang-en">Development feasibility signals</span></td>
+                        <td><span class="lang-ko">콘텐츠화 난이도</span><span class="lang-en">Contentization difficulty</span></td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">티어 기준 &amp; 예시</span>
+                <span class="lang-en">Tier Thresholds &amp; Examples</span>
+            </h4>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 100px; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.35); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.4rem; font-weight: 800; color: #FBBF24; font-family: 'Fira Code', monospace;">S</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; font-family: 'Fira Code', monospace;">≥ 80</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem;">Berserk 82.2</div>
+                </div>
+                <div style="flex: 1; min-width: 100px; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.35); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.4rem; font-weight: 800; color: #818CF8; font-family: 'Fira Code', monospace;">A</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; font-family: 'Fira Code', monospace;">≥ 60</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem;">Cowboy Bebop 69.4</div>
+                </div>
+                <div style="flex: 1; min-width: 100px; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.35); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.4rem; font-weight: 800; color: #60A5FA; font-family: 'Fira Code', monospace;">B</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; font-family: 'Fira Code', monospace;">≥ 40</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem;">Ghost in the Shell 54.0</div>
+                </div>
+                <div style="flex: 1; min-width: 100px; background: rgba(244,114,182,0.08); border: 1px solid rgba(244,114,182,0.35); border-radius: 10px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.4rem; font-weight: 800; color: #F472B6; font-family: 'Fira Code', monospace;">C</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; font-family: 'Fira Code', monospace;">&lt; 40</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem;"><span class="lang-ko">저잠재력</span><span class="lang-en">Low potential</span></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -6354,102 +6553,126 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
     <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-guardrails')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🛡️ G1-G4 Guardrails</span>
-            <span class="lang-en">🛡️ G1-G4 Guardrails</span>
+            <span class="lang-ko">🛡️ 자율 자기검증 — G1–G4 가드레일</span>
+            <span class="lang-en">🛡️ Autonomous Self-Check — G1–G4 Guardrails</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #34D399;">
-                <span class="lang-ko">4단계 가드레일로 분석 결과의 구조적 무결성을 보장합니다. Schema 검증부터 내부 일관성 검사까지, 각 단계에서 실패하면 재분석을 트리거합니다.</span>
-                <span class="lang-en">4-stage guardrails ensure structural integrity of analysis results. From schema validation to internal consistency checks, failure at any stage triggers re-analysis.</span>
+                <span class="lang-ko">에이전트가 스스로 분석 결과를 4단계로 자율 검증합니다. 점수 범위 경계(G1), 내부 일관성(G2), 장르 적합성(G3), 데이터 품질(G4) — 어느 단계든 실패하면 에이전트가 자동으로 재분석을 트리거합니다.</span>
+                <span class="lang-en">The agent autonomously validates its own analysis outputs across 4 stages: score bounds (G1), internal consistency (G2), genre-fit validation (G3), data quality (G4). Failure at any stage triggers automatic re-analysis without human intervention.</span>
             </div>
         </div>
-        <div class="modal-grid" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="modal-grid-card" style="border-color: #34D399;">
-                <h4 style="color: #34D399;">
-                    <span class="lang-ko">G1: Schema Validation</span>
-                    <span class="lang-en">G1: Schema Validation</span>
-                </h4>
-                <ul style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
-                    <li><span class="lang-ko">필수 필드 존재 여부 확인</span><span class="lang-en">Required field presence check</span></li>
-                    <li><span class="lang-ko">데이터 타입 검증</span><span class="lang-en">Data type validation</span></li>
-                    <li><span class="lang-ko">Pydantic BaseModel 기반</span><span class="lang-en">Pydantic BaseModel based</span></li>
-                </ul>
+        <div class="modal-metrics">
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">4</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">검증 단계</span>
+                    <span class="lang-en">Check Stages</span>
+                </div>
             </div>
-            <div class="modal-grid-card" style="border-color: #60A5FA;">
-                <h4 style="color: #60A5FA;">
-                    <span class="lang-ko">G2: Range Check</span>
-                    <span class="lang-en">G2: Range Check</span>
-                </h4>
-                <ul style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
-                    <li><span class="lang-ko">점수 범위 0-10 확인</span><span class="lang-en">Score range 0-10 check</span></li>
-                    <li><span class="lang-ko">이상치 탐지</span><span class="lang-en">Outlier detection</span></li>
-                    <li><span class="lang-ko">통계적 범위 검증</span><span class="lang-en">Statistical range validation</span></li>
-                </ul>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">0–100</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">점수 범위 (G1)</span>
+                    <span class="lang-en">Score Bounds (G1)</span>
+                </div>
             </div>
-            <div class="modal-grid-card" style="border-color: #818CF8;">
-                <h4 style="color: #818CF8;">
-                    <span class="lang-ko">G3: Ground Truth</span>
-                    <span class="lang-en">G3: Ground Truth</span>
-                </h4>
-                <ul style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
-                    <li><span class="lang-ko">알려진 사실과 교차 검증</span><span class="lang-en">Cross-verify with known facts</span></li>
-                    <li><span class="lang-ko">공개 데이터 소스 대조</span><span class="lang-en">Public data source comparison</span></li>
-                    <li><span class="lang-ko">Hallucination 탐지</span><span class="lang-en">Hallucination detection</span></li>
-                </ul>
-            </div>
-            <div class="modal-grid-card" style="border-color: #F472B6;">
-                <h4 style="color: #F472B6;">
-                    <span class="lang-ko">G4: Internal Consistency</span>
-                    <span class="lang-en">G4: Internal Consistency</span>
-                </h4>
-                <ul style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
-                    <li><span class="lang-ko">분석가 간 점수 편차 확인</span><span class="lang-en">Score deviation between analysts</span></li>
-                    <li><span class="lang-ko">논리적 모순 탐지</span><span class="lang-en">Logical contradiction detection</span></li>
-                    <li><span class="lang-ko">정성/정량 일치 검증</span><span class="lang-en">Qualitative/quantitative alignment</span></li>
-                </ul>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #34D399; font-family: 'Fira Code', monospace;">Auto</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">실패 시 재분석</span>
+                    <span class="lang-en">Fail → Re-analyze</span>
+                </div>
             </div>
         </div>
-        <!-- Cowboy Bebop Guardrail Results -->
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">4단계 자기검증 상세</span>
+                <span class="lang-en">4-Stage Self-Check Detail</span>
+            </h4>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th><span class="lang-ko">단계</span><span class="lang-en">Stage</span></th>
+                        <th><span class="lang-ko">검증 항목</span><span class="lang-en">Check</span></th>
+                        <th><span class="lang-ko">PASS 기준</span><span class="lang-en">Pass Criteria</span></th>
+                        <th><span class="lang-ko">FAIL 시 조치</span><span class="lang-en">On Fail</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #34D399; font-family: 'Fira Code', monospace; font-weight: 700;">G1</td>
+                        <td><span class="lang-ko">점수 범위 경계</span><span class="lang-en">Score Bounds</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">0 ≤ score ≤ 100</td>
+                        <td><span class="lang-ko">Pydantic ValidationError 발생</span><span class="lang-en">Pydantic ValidationError raised</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #60A5FA; font-family: 'Fira Code', monospace; font-weight: 700;">G2</td>
+                        <td><span class="lang-ko">내부 일관성</span><span class="lang-en">Internal Consistency</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">|quality − detail_avg| &lt; θ</td>
+                        <td><span class="lang-ko">분석가 재호출</span><span class="lang-en">Re-invoke analyst</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #818CF8; font-family: 'Fira Code', monospace; font-weight: 700;">G3</td>
+                        <td><span class="lang-ko">장르 적합성</span><span class="lang-en">Genre-Fit Validation</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">genre_weights ∈ allowed_set</td>
+                        <td><span class="lang-ko">장르 가중치 재보정</span><span class="lang-en">Recalibrate genre weights</span></td>
+                    </tr>
+                    <tr>
+                        <td style="color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 700;">G4</td>
+                        <td><span class="lang-ko">데이터 품질</span><span class="lang-en">Data Quality Check</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">missing_fields == 0</td>
+                        <td><span class="lang-ko">Cortex 재수집 요청</span><span class="lang-en">Request Cortex re-fetch</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">자기검증 구현 코드</span>
+                <span class="lang-en">Self-Check Implementation</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># guardrails.py — autonomous self-check chain</span>
+<span class="keyword">class</span> <span class="function">G1_ScoreBounds</span>(BaseGuardrail):
+    <span class="keyword">def</span> <span class="function">check</span>(self, result: AnalystResult) -> <span class="keyword">bool</span>:
+        <span class="keyword">return</span> <span class="string">0</span> &lt;= result.final_score &lt;= <span class="string">100</span>
+
+<span class="keyword">class</span> <span class="function">G2_Consistency</span>(BaseGuardrail):
+    <span class="keyword">def</span> <span class="function">check</span>(self, result: AnalystResult) -> <span class="keyword">bool</span>:
+        <span class="keyword">return</span> abs(result.quality - result.detail_avg) &lt; THRESHOLD
+
+<span class="keyword">class</span> <span class="function">G3_GenreFit</span>(BaseGuardrail):
+    <span class="keyword">def</span> <span class="function">check</span>(self, result: AnalystResult) -> <span class="keyword">bool</span>:
+        <span class="keyword">return</span> result.genre <span class="keyword">in</span> GENRE_WEIGHT_MAP
+
+<span class="keyword">class</span> <span class="function">G4_DataQuality</span>(BaseGuardrail):
+    <span class="keyword">def</span> <span class="function">check</span>(self, result: AnalystResult) -> <span class="keyword">bool</span>:
+        required = [<span class="string">"psm"</span>, <span class="string">"quality"</span>, <span class="string">"momentum"</span>, <span class="string">"confidence"</span>]
+        <span class="keyword">return</span> all(getattr(result, f) <span class="keyword">is not None</span> <span class="keyword">for</span> f <span class="keyword">in</span> required)</code></pre></div>
+        </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
                 <span class="lang-ko">Fixture 결과: Cowboy Bebop</span>
                 <span class="lang-en">Fixture Result: Cowboy Bebop</span>
             </h4>
-            <div class="modal-metrics">
-                <div class="modal-metric-card">
-                    <div class="modal-metric-value" style="color: #34D399;">PASS</div>
-                    <div class="modal-metric-label">G1: Schema</div>
+            <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                <div style="flex:1; min-width:100px; background: rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.35); border-radius:10px; padding:0.75rem; text-align:center;">
+                    <div style="font-size:1rem; font-weight:700; color:#34D399; font-family:'Fira Code',monospace;">PASS</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">G1: Score Bounds</div>
                 </div>
-                <div class="modal-metric-card">
-                    <div class="modal-metric-value" style="color: #34D399;">PASS</div>
-                    <div class="modal-metric-label">G2: Range</div>
+                <div style="flex:1; min-width:100px; background: rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.35); border-radius:10px; padding:0.75rem; text-align:center;">
+                    <div style="font-size:1rem; font-weight:700; color:#34D399; font-family:'Fira Code',monospace;">PASS</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">G2: Consistency</div>
                 </div>
-                <div class="modal-metric-card">
-                    <div class="modal-metric-value" style="color: #34D399;">PASS</div>
-                    <div class="modal-metric-label">G3: Ground Truth</div>
+                <div style="flex:1; min-width:100px; background: rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.35); border-radius:10px; padding:0.75rem; text-align:center;">
+                    <div style="font-size:1rem; font-weight:700; color:#34D399; font-family:'Fira Code',monospace;">PASS</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">G3: Genre-Fit</div>
                 </div>
-                <div class="modal-metric-card">
-                    <div class="modal-metric-value" style="color: #34D399;">PASS</div>
-                    <div class="modal-metric-label">G4: Consistency</div>
+                <div style="flex:1; min-width:100px; background: rgba(52,211,153,0.08); border:1px solid rgba(52,211,153,0.35); border-radius:10px; padding:0.75rem; text-align:center;">
+                    <div style="font-size:1rem; font-weight:700; color:#34D399; font-family:'Fira Code',monospace;">PASS</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.2rem;">G4: Data Quality</div>
                 </div>
             </div>
-        </div>
-        <!-- Guardrails Code -->
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">구현 코드</span>
-                <span class="lang-en">Implementation Code</span>
-            </h4>
-            <div class="modal-code"><pre><code><span class="comment"># guardrails.py</span>
-<span class="keyword">class</span> <span class="function">G1_Schema</span>(BaseGuardrail):
-    <span class="string">"""Pydantic schema validation"""</span>
-    <span class="keyword">def</span> <span class="function">check</span>(self, result: AnalystResult) -&gt; <span class="keyword">bool</span>:
-        <span class="keyword">return</span> result.model_validate(result.dict())
-
-<span class="keyword">class</span> <span class="function">G4_Consistency</span>(BaseGuardrail):
-    <span class="string">"""Cross-field consistency"""</span>
-    <span class="keyword">def</span> <span class="function">check</span>(self, result) -&gt; <span class="keyword">bool</span>:
-        <span class="keyword">return</span> abs(result.quality - result.detail_avg) &lt; THRESHOLD</code></pre></div>
         </div>
     </div>
 </div>
@@ -6459,130 +6682,132 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
     <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-biasbuster')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🔍 BiasBuster</span>
-            <span class="lang-en">🔍 BiasBuster</span>
+            <span class="lang-ko">🔍 BiasBuster — 에이전트 편향 면역 시스템</span>
+            <span class="lang-en">🔍 BiasBuster — Agent Bias Immune System</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #818CF8;">
-                <span class="lang-ko">LLM 분석에서 흔히 발생하는 6가지 인지 편향을 탐지하고 보정합니다. 각 편향 유형별 탐지 규칙과 보정 전략을 적용하여 분석의 객관성을 보장합니다.</span>
-                <span class="lang-en">Detects and corrects 6 cognitive biases common in LLM analysis. Applies detection rules and correction strategies for each bias type to ensure analysis objectivity.</span>
+                <span class="lang-ko">에이전트가 자신의 분석에서 6가지 인지 편향을 자율적으로 탐지하고 교정합니다. 점수가 임계값을 초과하면 편향 플래그를 발생시키고 패널티를 적용합니다 — 외부 개입 없이 스스로 객관성을 유지합니다.</span>
+                <span class="lang-en">The agent autonomously detects and corrects 6 cognitive biases in its own analysis. When a score exceeds its threshold, a bias flag is raised and a penalty applied — the agent maintains objectivity without external intervention.</span>
             </div>
         </div>
-        <div class="modal-grid three-col" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="modal-grid-card" style="border-color: #F472B6;">
-                <h4 style="color: #F472B6; font-size: 0.9rem;">
-                    <span class="lang-ko">Anchoring</span>
-                    <span class="lang-en">Anchoring</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">초기 정보에 과도하게 의존</span>
-                    <span class="lang-en">Over-reliance on initial information</span>
-                </p>
-            </div>
-            <div class="modal-grid-card" style="border-color: #FBBF24;">
-                <h4 style="color: #FBBF24; font-size: 0.9rem;">
-                    <span class="lang-ko">Recency</span>
-                    <span class="lang-en">Recency</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">최근 데이터 과대평가</span>
-                    <span class="lang-en">Overweighting recent data</span>
-                </p>
-            </div>
-            <div class="modal-grid-card" style="border-color: #34D399;">
-                <h4 style="color: #34D399; font-size: 0.9rem;">
-                    <span class="lang-ko">Survivorship</span>
-                    <span class="lang-en">Survivorship</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">성공 사례만 고려</span>
-                    <span class="lang-en">Only considering success cases</span>
-                </p>
-            </div>
-            <div class="modal-grid-card" style="border-color: #60A5FA;">
-                <h4 style="color: #60A5FA; font-size: 0.9rem;">
-                    <span class="lang-ko">Popularity</span>
-                    <span class="lang-en">Popularity</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">인기도와 품질 혼동</span>
-                    <span class="lang-en">Confusing popularity with quality</span>
-                </p>
-            </div>
-            <div class="modal-grid-card" style="border-color: #C084FC;">
-                <h4 style="color: #C084FC; font-size: 0.9rem;">
-                    <span class="lang-ko">Nostalgia</span>
-                    <span class="lang-en">Nostalgia</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">과거 미화 편향</span>
-                    <span class="lang-en">Rose-tinted past bias</span>
-                </p>
-            </div>
-            <div class="modal-grid-card" style="border-color: #818CF8;">
-                <h4 style="color: #818CF8; font-size: 0.9rem;">
-                    <span class="lang-ko">Confirmation</span>
-                    <span class="lang-en">Confirmation</span>
-                </h4>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                    <span class="lang-ko">기존 가설 확인 편향</span>
-                    <span class="lang-en">Pre-existing hypothesis confirmation</span>
-                </p>
-            </div>
-        </div>
-        <!-- BiasBuster 4-Step Process -->
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">BiasBuster 4-Step Process</span>
-                <span class="lang-en">BiasBuster 4-Step Process</span>
-            </h4>
-            <div class="modal-diagram" style="text-align: center; font-size: 0.9rem;">
-[1. Detect] ──▶ [2. Classify] ──▶ [3. Score-Impact] ──▶ [4. Correct]
-     │               │                    │                    │
-  Scan all      Map to 6           Calculate          Apply zero-shot
-  analyst       bias types         severity &amp;          debiasing
-  outputs                          affected fields     corrections</div>
-        </div>
-        <!-- BiasBuster Code -->
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">구현 코드</span>
-                <span class="lang-en">Implementation Code</span>
-            </h4>
-            <div class="modal-code"><pre><code><span class="comment"># biasbuster.py — Self-Help Debiasing (Zero-shot)</span>
-<span class="keyword">class</span> <span class="function">BiasBusterResult</span>(BaseModel):
-    bias_type: <span class="keyword">str</span>
-    severity: <span class="keyword">float</span>  <span class="comment"># 0-1</span>
-    affected_field: <span class="keyword">str</span>
-    correction: <span class="keyword">str</span>
-
-<span class="comment"># arXiv:2403.00811 — BiasBuster Framework</span>
-BIAS_TYPES = [<span class="string">"confirmation"</span>, <span class="string">"recency"</span>, <span class="string">"anchoring"</span>,
-              <span class="string">"position"</span>, <span class="string">"verbosity"</span>, <span class="string">"self_enhancement"</span>]</code></pre></div>
-        </div>
-        <!-- BiasBuster Metrics -->
         <div class="modal-metrics">
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">6</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">6</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">편향 유형</span>
-                    <span class="lang-en">Bias Types</span>
+                    <span class="lang-ko">탐지 편향 유형</span>
+                    <span class="lang-en">Bias Types Detected</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">Zero-shot</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">Zero-shot</div>
                 <div class="modal-metric-label">
                     <span class="lang-ko">탐지 방식</span>
                     <span class="lang-en">Detection Mode</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">2403.00811</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">2403.00811</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">arXiv 논문</span>
-                    <span class="lang-en">arXiv Paper</span>
+                    <span class="lang-ko">arXiv 논문 기반</span>
+                    <span class="lang-en">arXiv Paper Basis</span>
                 </div>
             </div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">6가지 편향 &amp; 탐지 로직</span>
+                <span class="lang-en">6 Biases &amp; Detection Logic</span>
+            </h4>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th><span class="lang-ko">편향</span><span class="lang-en">Bias</span></th>
+                        <th><span class="lang-ko">설명</span><span class="lang-en">Description</span></th>
+                        <th><span class="lang-ko">탐지 조건</span><span class="lang-en">Trigger Condition</span></th>
+                        <th><span class="lang-ko">패널티</span><span class="lang-en">Penalty</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #F472B6; font-weight: 600; font-family: 'Fira Code', monospace;">anchoring</td>
+                        <td><span class="lang-ko">초기 정보 과의존</span><span class="lang-en">Over-reliance on first data</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">score_delta &gt; 0.3</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">−5%</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #34D399; font-weight: 600; font-family: 'Fira Code', monospace;">genre</td>
+                        <td><span class="lang-ko">장르 선호 편향</span><span class="lang-en">Genre preference skew</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">genre_weight &gt; mean+2σ</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">recalibrate</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #FBBF24; font-weight: 600; font-family: 'Fira Code', monospace;">recency</td>
+                        <td><span class="lang-ko">최근 데이터 과대평가</span><span class="lang-en">Overweighting recent data</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">time_weight &gt; 0.7</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">−3%</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #60A5FA; font-weight: 600; font-family: 'Fira Code', monospace;">popularity</td>
+                        <td><span class="lang-ko">인기도와 품질 혼동</span><span class="lang-en">Conflating popularity &amp; quality</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">pop_corr &gt; 0.85</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">−4%</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #C084FC; font-weight: 600; font-family: 'Fira Code', monospace;">cultural</td>
+                        <td><span class="lang-ko">문화권 편향</span><span class="lang-en">Cultural region skew</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">region_ratio &gt; 0.6</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">normalize</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #818CF8; font-weight: 600; font-family: 'Fira Code', monospace;">survivorship</td>
+                        <td><span class="lang-ko">성공 사례만 고려</span><span class="lang-en">Only seeing success cases</span></td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">failure_ratio &lt; 0.1</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.78rem;">−6%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">탐지 → 플래그 → 패널티 파이프라인</span>
+                <span class="lang-en">Detect → Flag → Penalty Pipeline</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># biasbuster.py — arXiv:2403.00811 framework</span>
+<span class="keyword">class</span> <span class="function">BiasBusterResult</span>(BaseModel):
+    bias_type: <span class="keyword">str</span>    <span class="comment"># one of 6 bias keys</span>
+    severity: <span class="keyword">float</span>  <span class="comment"># 0.0–1.0</span>
+    affected_field: <span class="keyword">str</span>
+    correction: <span class="keyword">str</span>
+
+<span class="keyword">async def</span> <span class="function">run_biasbuster</span>(analyst_output: AnalystResult) -> BiasBusterResult:
+    <span class="comment"># Zero-shot LLM bias detection</span>
+    result = <span class="keyword">await</span> llm.detect_bias(
+        text=analyst_output.reasoning,
+        bias_types=BIAS_TYPES,  <span class="comment"># 6 types</span>
+    )
+    <span class="comment"># score > threshold → flag → apply penalty</span>
+    <span class="keyword">if</span> result.severity > BIAS_THRESHOLD:
+        analyst_output.apply_penalty(result.bias_type, result.severity)
+    <span class="keyword">return</span> result</code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">탐지 흐름</span>
+                <span class="lang-en">Detection Flow</span>
+            </h4>
+            <div class="modal-diagram" style="text-align: center; font-size: 0.85rem;">
+[분석가 출력] ──▶ [Zero-shot 편향 스캔] ──▶ [6-type 분류]
+                                                     │
+                                        severity &gt; threshold?
+                                           │              │
+                                          YES             NO
+                                           │              │
+                                    [플래그 발생]    [출력 통과]
+                                           │
+                                    [패널티 적용]
+                                           │
+                                    [보정된 점수 출력]</div>
         </div>
     </div>
 </div>
@@ -7094,93 +7319,145 @@ Thread-3: ContextVar[SessionCtx] ─── state_C, events_C
     <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-hooks')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🔗 Hook System</span>
-            <span class="lang-en">🔗 Hook System</span>
+            <span class="lang-ko">🔗 라이프사이클 훅 시스템 (23 이벤트)</span>
+            <span class="lang-en">🔗 Lifecycle Hook System (23 Events)</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #818CF8;">
-                <span class="lang-ko">파이프라인 실행 중 주요 이벤트에 리스너를 등록하여 로깅, 모니터링, 상태 관리를 자동화합니다. 총 11개 이벤트를 지원합니다.</span>
-                <span class="lang-en">Registers listeners to key events during pipeline execution to automate logging, monitoring, and state management. Supports 11 events total.</span>
-            </div>
-        </div>
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">핵심 Hook 이벤트</span>
-                <span class="lang-en">Core Hook Events</span>
-            </h4>
-            <div class="modal-grid" style="grid-template-columns: repeat(2, 1fr);">
-                <div class="modal-grid-card" style="border-color: #818CF8;">
-                    <h4 style="color: #818CF8; font-size: 0.9rem;">PIPELINE_START</h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">초기화 로깅</span><span class="lang-en">Init logging</span></li>
-                        <li><span class="lang-ko">타이머 시작</span><span class="lang-en">Timer start</span></li>
-                    </ul>
-                </div>
-                <div class="modal-grid-card" style="border-color: #34D399;">
-                    <h4 style="color: #34D399; font-size: 0.9rem;">PIPELINE_END</h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">결과 저장</span><span class="lang-en">Save results</span></li>
-                        <li><span class="lang-ko">메모리 write-back</span><span class="lang-en">Memory write-back</span></li>
-                    </ul>
-                </div>
-                <div class="modal-grid-card" style="border-color: #60A5FA;">
-                    <h4 style="color: #60A5FA; font-size: 0.9rem;">NODE_ENTER</h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">노드 시작 로깅</span><span class="lang-en">Node start logging</span></li>
-                        <li><span class="lang-ko">Rich 상태 업데이트</span><span class="lang-en">Rich status update</span></li>
-                    </ul>
-                </div>
-                <div class="modal-grid-card" style="border-color: #FBBF24;">
-                    <h4 style="color: #FBBF24; font-size: 0.9rem;">NODE_EXIT</h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">노드 완료</span><span class="lang-en">Node complete</span></li>
-                        <li><span class="lang-ko">결과 검증</span><span class="lang-en">Result validation</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">전체 이벤트 목록 (11개)</span>
-                <span class="lang-en">Full Event List (11 events)</span>
-            </h4>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 6px; color: #818CF8;">PIPELINE_START</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 6px; color: #818CF8;">PIPELINE_END</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; color: #EF4444;">PIPELINE_ERROR</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA;">NODE_BOOTSTRAP</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA;">NODE_ENTER</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA;">NODE_EXIT</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; color: #EF4444;">NODE_ERROR</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399;">ANALYST_COMPLETE</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399;">EVALUATOR_COMPLETE</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399;">SCORING_COMPLETE</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; color: #FBBF24;">VERIFICATION_PASS</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; color: #EF4444;">VERIFICATION_FAIL</span>
-                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; color: #FBBF24;">DRIFT_DETECTED</span>
+                <span class="lang-ko">에이전트 실행의 전 생명주기에 걸쳐 23개 이벤트를 발행합니다. 리스너는 비동기 Pub/Sub 패턴으로 등록되며, 에이전트가 각 단계를 통과할 때 로깅·모니터링·메모리 write-back이 자동 실행됩니다.</span>
+                <span class="lang-en">Emits 23 events across the full agent execution lifecycle. Listeners register via async Pub/Sub pattern — logging, monitoring, and memory write-back fire automatically as the agent traverses each stage.</span>
             </div>
         </div>
         <div class="modal-metrics">
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">11</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">23</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">이벤트 유형</span>
-                    <span class="lang-en">Event Types</span>
+                    <span class="lang-ko">라이프사이클 이벤트</span>
+                    <span class="lang-en">Lifecycle Events</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">Async</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">Async</div>
                 <div class="modal-metric-label">
                     <span class="lang-ko">실행 방식</span>
-                    <span class="lang-en">Execution</span>
+                    <span class="lang-en">Execution Mode</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #818CF8;">Pub/Sub</div>
+                <div class="modal-metric-value" style="color: #818CF8; font-family: 'Fira Code', monospace;">Pub/Sub</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">패턴</span>
-                    <span class="lang-en">Pattern</span>
+                    <span class="lang-ko">등록 패턴</span>
+                    <span class="lang-en">Registration Pattern</span>
                 </div>
+            </div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">7그룹 이벤트 분류</span>
+                <span class="lang-en">7-Group Event Classification</span>
+            </h4>
+            <table class="modal-table">
+                <thead>
+                    <tr>
+                        <th><span class="lang-ko">그룹</span><span class="lang-en">Group</span></th>
+                        <th><span class="lang-ko">수</span><span class="lang-en">Count</span></th>
+                        <th><span class="lang-ko">이벤트</span><span class="lang-en">Events</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: #818CF8; font-weight: 600;">Pipeline</td>
+                        <td style="color: #818CF8; font-family: 'Fira Code', monospace; font-weight: 700;">5</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">START, END, ERROR, CANCEL, RESET</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #60A5FA; font-weight: 600;">Node</td>
+                        <td style="color: #60A5FA; font-family: 'Fira Code', monospace; font-weight: 700;">4</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">BOOTSTRAP, ENTER, EXIT, ERROR</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #34D399; font-weight: 600;">Analysis</td>
+                        <td style="color: #34D399; font-family: 'Fira Code', monospace; font-weight: 700;">4</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">ANALYST_COMPLETE, EVALUATOR_COMPLETE, SCORING_COMPLETE, SYNTHESIS_COMPLETE</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #FBBF24; font-weight: 600;">Verification</td>
+                        <td style="color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 700;">4</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">GUARDRAIL_PASS, GUARDRAIL_FAIL, BIAS_DETECTED, DRIFT_DETECTED</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #F472B6; font-weight: 600;">Memory</td>
+                        <td style="color: #F472B6; font-family: 'Fira Code', monospace; font-weight: 700;">2</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">MEMORY_READ, MEMORY_WRITE</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #C084FC; font-weight: 600;">Prompt</td>
+                        <td style="color: #C084FC; font-family: 'Fira Code', monospace; font-weight: 700;">2</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">PROMPT_BUILT, PROMPT_INJECTED</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #2DD4BF; font-weight: 600;">Session</td>
+                        <td style="color: #2DD4BF; font-family: 'Fira Code', monospace; font-weight: 700;">2</td>
+                        <td style="font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--text-secondary);">SESSION_START, SESSION_END</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">훅 등록 코드</span>
+                <span class="lang-en">Hook Registration Code</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># hook_registry.py — async Pub/Sub hook registration</span>
+<span class="keyword">class</span> <span class="function">HookRegistry</span>:
+    <span class="keyword">def</span> <span class="function">register</span>(self, event: HookEvent, handler: Callable):
+        self._handlers[event].append(handler)
+
+    <span class="keyword">async def</span> <span class="function">emit</span>(self, event: HookEvent, payload: <span class="keyword">dict</span>):
+        <span class="keyword">for</span> handler <span class="keyword">in</span> self._handlers[event]:
+            <span class="keyword">await</span> handler(payload)
+
+<span class="comment"># Usage: register logging on PIPELINE_START</span>
+registry.register(
+    HookEvent.PIPELINE_START,
+    <span class="keyword">lambda</span> p: logger.info(<span class="string">f"Pipeline started: {p['ip_name']}"</span>)
+)
+
+<span class="comment"># Memory write-back on PIPELINE_END</span>
+registry.register(
+    HookEvent.PIPELINE_END,
+    <span class="keyword">lambda</span> p: memory.write_back(p[<span class="string">"result"</span>])
+)</code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">전체 이벤트 배지</span>
+                <span class="lang-en">All Event Badges</span>
+            </h4>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 5px; color: #818CF8; font-family: 'Fira Code', monospace;">PIPELINE_START</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 5px; color: #818CF8; font-family: 'Fira Code', monospace;">PIPELINE_END</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 5px; color: #EF4444; font-family: 'Fira Code', monospace;">PIPELINE_ERROR</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 5px; color: #818CF8; font-family: 'Fira Code', monospace;">PIPELINE_CANCEL</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 5px; color: #818CF8; font-family: 'Fira Code', monospace;">PIPELINE_RESET</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 5px; color: #60A5FA; font-family: 'Fira Code', monospace;">NODE_BOOTSTRAP</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 5px; color: #60A5FA; font-family: 'Fira Code', monospace;">NODE_ENTER</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 5px; color: #60A5FA; font-family: 'Fira Code', monospace;">NODE_EXIT</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 5px; color: #EF4444; font-family: 'Fira Code', monospace;">NODE_ERROR</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 5px; color: #34D399; font-family: 'Fira Code', monospace;">ANALYST_COMPLETE</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 5px; color: #34D399; font-family: 'Fira Code', monospace;">EVALUATOR_COMPLETE</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 5px; color: #34D399; font-family: 'Fira Code', monospace;">SCORING_COMPLETE</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 5px; color: #34D399; font-family: 'Fira Code', monospace;">SYNTHESIS_COMPLETE</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 5px; color: #FBBF24; font-family: 'Fira Code', monospace;">GUARDRAIL_PASS</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 5px; color: #EF4444; font-family: 'Fira Code', monospace;">GUARDRAIL_FAIL</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 5px; color: #FBBF24; font-family: 'Fira Code', monospace;">BIAS_DETECTED</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 5px; color: #FBBF24; font-family: 'Fira Code', monospace;">DRIFT_DETECTED</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 5px; color: #F472B6; font-family: 'Fira Code', monospace;">MEMORY_READ</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 5px; color: #F472B6; font-family: 'Fira Code', monospace;">MEMORY_WRITE</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 5px; color: #C084FC; font-family: 'Fira Code', monospace;">PROMPT_BUILT</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 5px; color: #C084FC; font-family: 'Fira Code', monospace;">PROMPT_INJECTED</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.3); border-radius: 5px; color: #2DD4BF; font-family: 'Fira Code', monospace;">SESSION_START</span>
+                <span style="font-size: 0.68rem; padding: 0.2rem 0.45rem; background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.3); border-radius: 5px; color: #2DD4BF; font-family: 'Fira Code', monospace;">SESSION_END</span>
             </div>
         </div>
     </div>
@@ -7188,60 +7465,109 @@ Thread-3: ContextVar[SessionCtx] ─── state_C, events_C
 
 <!-- Modal: TaskSystem -->
 <div class="modal-overlay" id="modal-geode-task-system">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-task-system')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">📋 TaskSystem</span>
-            <span class="lang-en">📋 TaskSystem</span>
+            <span class="lang-ko">📋 서브에이전트 위임 시스템</span>
+            <span class="lang-en">📋 Sub-Agent Delegation System</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #F472B6;">
-                <span class="lang-ko">분석 작업을 관리하는 중앙 시스템입니다. IP 분석 요청을 큐에 등록하고, 우선순위에 따라 스케줄링하며, 작업 상태를 추적합니다.</span>
-                <span class="lang-en">Central system for managing analysis jobs. Registers IP analysis requests in queue, schedules by priority, and tracks job status.</span>
+                <span class="lang-ko">에이전트가 복잡한 분석을 여러 서브에이전트에 자율적으로 분산시킵니다. SubAgentManager가 TaskGraph DAG를 구성하고, IsolatedRunner가 각 서브에이전트를 격리 실행합니다. 최대 5개 병렬 처리, 250ms CoalescingQueue로 배치 최적화됩니다.</span>
+                <span class="lang-en">The agent autonomously distributes complex analysis across multiple sub-agents. SubAgentManager builds a TaskGraph DAG, and IsolatedRunner executes each sub-agent in isolation. Up to 5 concurrent sub-agents, batch-optimized via a 250ms CoalescingQueue.</span>
+            </div>
+        </div>
+        <div class="modal-metrics">
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">5</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">MAX_CONCURRENT</span>
+                    <span class="lang-en">MAX_CONCURRENT</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">250ms</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">CoalescingQueue</span>
+                    <span class="lang-en">CoalescingQueue</span>
+                </div>
+            </div>
+            <div class="modal-metric-card">
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">DAG</div>
+                <div class="modal-metric-label">
+                    <span class="lang-ko">TaskGraph 구조</span>
+                    <span class="lang-en">TaskGraph Structure</span>
+                </div>
             </div>
         </div>
         <div class="modal-section">
             <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">작업 흐름</span>
-                <span class="lang-en">Task Flow</span>
+                <span class="lang-ko">위임 아키텍처</span>
+                <span class="lang-en">Delegation Architecture</span>
             </h4>
-            <div class="modal-diagram">CLI / REPL Input
-      │
-      v
-[TaskSystem.submit(ip_name)]
-      │
-      v
-[Queue] ─── Priority Sorting
-      │
-      v
-[Scheduler] ─── Concurrency Control
-      │
-      v
-[Pipeline Execution]
-      │
-      v
-[Result Storage] ─── Memory Write-back</div>
+            <div class="modal-diagram" style="font-family: 'Fira Code', monospace; font-size: 0.8rem;">
+에이전트: "3 IP 병렬 분석해줘"
+         │
+         ▼
+[SubAgentManager]
+    │  TaskGraph DAG 구성
+    │  의존성 해결
+    ├──▶ [IsolatedRunner #1] ── Berserk 분석
+    ├──▶ [IsolatedRunner #2] ── Cowboy Bebop 분석
+    └──▶ [IsolatedRunner #3] ── Ghost in the Shell 분석
+              │                       │                    │
+              ▼                       ▼                    ▼
+         [결과 수집] ────── CoalescingQueue(250ms) ───────▶ [병합 &amp; 보고]</div>
         </div>
-        <div class="modal-metrics">
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">FIFO</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">큐 방식</span>
-                    <span class="lang-en">Queue Type</span>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">SubAgentManager 구현</span>
+                <span class="lang-en">SubAgentManager Implementation</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># sub_agent_manager.py</span>
+MAX_CONCURRENT = <span class="string">5</span>
+COALESCING_WINDOW_MS = <span class="string">250</span>
+
+<span class="keyword">class</span> <span class="function">SubAgentManager</span>:
+    <span class="keyword">async def</span> <span class="function">delegate</span>(self, ip_list: list[<span class="keyword">str</span>]) -> list[AnalysisResult]:
+        graph = TaskGraph(ip_list)  <span class="comment"># build DAG</span>
+        runners = [
+            IsolatedRunner(ip, self._build_context(ip))
+            <span class="keyword">for</span> ip <span class="keyword">in</span> graph.resolve_order()
+        ]
+        <span class="comment"># Run up to MAX_CONCURRENT in parallel</span>
+        semaphore = asyncio.Semaphore(MAX_CONCURRENT)
+        results = <span class="keyword">await</span> asyncio.gather(
+            *[self._run_with_sem(r, semaphore) <span class="keyword">for</span> r <span class="keyword">in</span> runners]
+        )
+        <span class="keyword">return</span> CoalescingQueue(COALESCING_WINDOW_MS).flush(results)</code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">핵심 컴포넌트</span>
+                <span class="lang-en">Core Components</span>
+            </h4>
+            <div class="modal-grid three-col" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="modal-grid-card" style="border-color: #F472B6;">
+                    <h4 style="color: #F472B6; font-size: 0.82rem; font-family: 'Fira Code', monospace;">SubAgentManager</h4>
+                    <ul style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; padding-left: 1rem;">
+                        <li><span class="lang-ko">위임 조율</span><span class="lang-en">Delegation coordination</span></li>
+                        <li><span class="lang-ko">결과 병합</span><span class="lang-en">Result merging</span></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">Priority</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">스케줄링</span>
-                    <span class="lang-en">Scheduling</span>
+                <div class="modal-grid-card" style="border-color: #818CF8;">
+                    <h4 style="color: #818CF8; font-size: 0.82rem; font-family: 'Fira Code', monospace;">TaskGraph DAG</h4>
+                    <ul style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; padding-left: 1rem;">
+                        <li><span class="lang-ko">의존성 해결</span><span class="lang-en">Dependency resolution</span></li>
+                        <li><span class="lang-ko">병렬 경로 최적화</span><span class="lang-en">Parallel path optimization</span></li>
+                    </ul>
                 </div>
-            </div>
-            <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">Async</div>
-                <div class="modal-metric-label">
-                    <span class="lang-ko">실행 모드</span>
-                    <span class="lang-en">Execution</span>
+                <div class="modal-grid-card" style="border-color: #34D399;">
+                    <h4 style="color: #34D399; font-size: 0.82rem; font-family: 'Fira Code', monospace;">IsolatedRunner</h4>
+                    <ul style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.4rem; padding-left: 1rem;">
+                        <li><span class="lang-ko">컨텍스트 격리</span><span class="lang-en">Context isolation</span></li>
+                        <li><span class="lang-ko">오류 격리</span><span class="lang-en">Error isolation</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -7303,76 +7629,108 @@ Thread-3: ContextVar[SessionCtx] ─── state_C, events_C
 
 <!-- Modal: Planner -->
 <div class="modal-overlay" id="modal-geode-planner">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 900px;">
         <button class="modal-close" onclick="closeModal('modal-geode-planner')">&#215;</button>
         <h3 class="modal-title">
-            <span class="lang-ko">🗺️ Planner</span>
-            <span class="lang-en">🗺️ Planner</span>
+            <span class="lang-ko">🗺️ Plan Mode — 자율 분석 계획 수립</span>
+            <span class="lang-en">🗺️ Plan Mode — Autonomous Analysis Planning</span>
         </h3>
         <div class="modal-section">
             <div class="modal-explanation highlight" style="border-color: #F472B6;">
-                <span class="lang-ko">IP의 장르, 미디어 유형, 시장 규모에 따라 동적으로 분석 전략을 수립합니다. 분석 깊이, 전문가 배정, 평가 기준을 자동으로 조정합니다.</span>
-                <span class="lang-en">Dynamically establishes analysis strategy based on IP genre, media type, and market size. Automatically adjusts analysis depth, expert assignment, and evaluation criteria.</span>
-            </div>
-        </div>
-        <div class="modal-section">
-            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
-                <span class="lang-ko">전략 수립 요소</span>
-                <span class="lang-en">Strategy Factors</span>
-            </h4>
-            <div class="modal-grid three-col">
-                <div class="modal-grid-card" style="border-color: #F472B6;">
-                    <h4 style="color: #F472B6; font-size: 0.85rem;">
-                        <span class="lang-ko">장르 분석</span>
-                        <span class="lang-en">Genre Analysis</span>
-                    </h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">장르별 가중치</span><span class="lang-en">Genre-specific weights</span></li>
-                        <li><span class="lang-ko">시장 특성 반영</span><span class="lang-en">Market characteristics</span></li>
-                    </ul>
-                </div>
-                <div class="modal-grid-card" style="border-color: #818CF8;">
-                    <h4 style="color: #818CF8; font-size: 0.85rem;">
-                        <span class="lang-ko">미디어 유형</span>
-                        <span class="lang-en">Media Type</span>
-                    </h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">만화/애니/게임/영화</span><span class="lang-en">Manga/Anime/Game/Film</span></li>
-                        <li><span class="lang-ko">크로스미디어 평가</span><span class="lang-en">Cross-media assessment</span></li>
-                    </ul>
-                </div>
-                <div class="modal-grid-card" style="border-color: #FBBF24;">
-                    <h4 style="color: #FBBF24; font-size: 0.85rem;">
-                        <span class="lang-ko">시장 규모</span>
-                        <span class="lang-en">Market Size</span>
-                    </h4>
-                    <ul class="modal-grid-card-items">
-                        <li><span class="lang-ko">LTV 추정</span><span class="lang-en">LTV estimation</span></li>
-                        <li><span class="lang-ko">성장 잠재력</span><span class="lang-en">Growth potential</span></li>
-                    </ul>
-                </div>
+                <span class="lang-ko">에이전트가 자연어 명령("분석 계획 세워줘")을 받으면 create_plan 도구를 자율 호출하여 단계별 분석 플랜을 작성합니다. HITL 게이트에서 인간의 승인을 받은 후에만 실행 단계로 진입합니다.</span>
+                <span class="lang-en">When the agent receives a natural language command ("분석 계획 세워줘"), it autonomously invokes the create_plan tool to draft a step-by-step analysis plan. Execution only begins after passing the HITL gate and receiving human approval.</span>
             </div>
         </div>
         <div class="modal-metrics">
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">Dynamic</div>
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">5</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">전략 유형</span>
-                    <span class="lang-en">Strategy Type</span>
+                    <span class="lang-ko">상태 머신 단계</span>
+                    <span class="lang-en">State Machine Stages</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">5+</div>
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">HITL</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">장르 유형</span>
-                    <span class="lang-en">Genre Types</span>
+                    <span class="lang-ko">승인 게이트</span>
+                    <span class="lang-en">Approval Gate</span>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #F472B6;">Auto</div>
+                <div class="modal-metric-value" style="color: #F472B6; font-family: 'Fira Code', monospace;">NL</div>
                 <div class="modal-metric-label">
-                    <span class="lang-ko">조정 방식</span>
-                    <span class="lang-en">Adjustment</span>
+                    <span class="lang-ko">입력 인터페이스</span>
+                    <span class="lang-en">Input Interface</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">상태 머신: 계획 생명주기</span>
+                <span class="lang-en">State Machine: Plan Lifecycle</span>
+            </h4>
+            <div class="modal-diagram" style="font-family: 'Fira Code', monospace; font-size: 0.82rem;">
+DRAFT ──▶ PRESENTED ──▶ APPROVED ──▶ EXECUTING ──▶ COMPLETED
+  │            │              │            │              │
+에이전트      사용자에게     인간 승인    단계별 실행    결과 저장
+계획 작성     플랜 표시      게이트       (병렬 가능)    &amp; 보고
+                │
+            (수정 요청 시)
+                │
+            ◀──DRAFT</div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">NL 명령 → create_plan 도구 호출</span>
+                <span class="lang-en">NL Command → create_plan Tool Call</span>
+            </h4>
+            <div class="modal-code"><pre><code><span class="comment"># planner.py — NL → plan tool invocation</span>
+<span class="comment"># 사용자: "분석 계획 세워줘"</span>
+<span class="comment"># User:   "set up an analysis plan"</span>
+
+tool_call = {
+    <span class="string">"name"</span>: <span class="string">"create_plan"</span>,
+    <span class="string">"input"</span>: {
+        <span class="string">"ip_name"</span>: state[<span class="string">"ip_name"</span>],
+        <span class="string">"depth"</span>: <span class="string">"full"</span>,        <span class="comment"># full | quick | targeted</span>
+        <span class="string">"analysts"</span>: [<span class="string">"narrative"</span>, <span class="string">"fandom"</span>, <span class="string">"competitive"</span>],
+        <span class="string">"require_approval"</span>: <span class="keyword">True</span>,  <span class="comment"># HITL gate</span>
+    }
+}
+
+<span class="comment"># Plan state transitions</span>
+PlanState = Literal[
+    <span class="string">"DRAFT"</span>, <span class="string">"PRESENTED"</span>, <span class="string">"APPROVED"</span>,
+    <span class="string">"EXECUTING"</span>, <span class="string">"COMPLETED"</span>
+]</code></pre></div>
+        </div>
+        <div class="modal-section">
+            <h4 style="color: var(--text-primary); margin-bottom: 0.75rem;">
+                <span class="lang-ko">HITL 게이트 설명</span>
+                <span class="lang-en">HITL Gate Explanation</span>
+            </h4>
+            <div class="modal-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="modal-grid-card" style="border-color: #F472B6;">
+                    <h4 style="color: #F472B6; font-size: 0.85rem;">
+                        <span class="lang-ko">HITL 진입 조건</span>
+                        <span class="lang-en">HITL Entry Conditions</span>
+                    </h4>
+                    <ul style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
+                        <li><span class="lang-ko">plan_mode 라우팅 시 자동 진입</span><span class="lang-en">Auto-enter on plan_mode routing</span></li>
+                        <li><span class="lang-ko">에이전트가 플랜 초안 작성 완료 후</span><span class="lang-en">After agent completes plan draft</span></li>
+                        <li><span class="lang-ko">사용자 승인 대기 (blocking)</span><span class="lang-en">Awaits user approval (blocking)</span></li>
+                    </ul>
+                </div>
+                <div class="modal-grid-card" style="border-color: #34D399;">
+                    <h4 style="color: #34D399; font-size: 0.85rem;">
+                        <span class="lang-ko">승인 후 실행</span>
+                        <span class="lang-en">Post-Approval Execution</span>
+                    </h4>
+                    <ul style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.5rem; padding-left: 1rem;">
+                        <li><span class="lang-ko">APPROVED → EXECUTING 전환</span><span class="lang-en">Transition APPROVED → EXECUTING</span></li>
+                        <li><span class="lang-ko">독립 단계 병렬 실행 가능</span><span class="lang-en">Independent steps can run in parallel</span></li>
+                        <li><span class="lang-ko">진행 상황 실시간 스트리밍</span><span class="lang-en">Real-time progress streaming</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
