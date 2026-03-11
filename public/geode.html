@@ -3855,6 +3855,88 @@
         </div>
     </div>
 
+    <!-- Sub-Agent Delegation & HITL Safety -->
+    <div style="margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <!-- Sub-Agent Delegation Card -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #C084FC; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-task-system" onclick="openModal('modal-geode-task-system')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <span style="font-size: 1.5rem;">🔀</span>
+                <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
+                    <span class="lang-ko">Sub-Agent Delegation</span>
+                    <span class="lang-en">Sub-Agent Delegation</span>
+                </div>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                <span class="lang-ko">SubAgentManager가 TaskGraph DAG에 따라 병렬 실행</span>
+                <span class="lang-en">SubAgentManager executes parallel tasks via TaskGraph DAG</span>
+            </div>
+            <!-- Mini DAG visualization -->
+            <div style="display: flex; align-items: center; gap: 0.4rem; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--text-muted); flex-wrap: wrap;">
+                <span style="padding: 0.2rem 0.5rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 4px; color: #C084FC;">Cortex</span>
+                <span>&rarr;</span>
+                <div style="display: flex; flex-direction: column; gap: 0.2rem;">
+                    <span style="padding: 0.2rem 0.5rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 4px; color: #60A5FA;">Analyst &#215;4</span>
+                    <span style="padding: 0.2rem 0.5rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 4px; color: #60A5FA;">Signals &#215;N</span>
+                </div>
+                <span>&rarr;</span>
+                <span style="padding: 0.2rem 0.5rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 4px; color: #34D399;">Merge</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 6px; color: #C084FC;">MAX_CONCURRENT=5</span>
+                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 6px; color: #C084FC;">CoalescingQueue</span>
+                <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(192,132,252,0.1); border: 1px solid rgba(192,132,252,0.3); border-radius: 6px; color: #C084FC;">IsolatedRunner</span>
+            </div>
+        </div>
+
+        <!-- HITL & Safety Card -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #EF4444; border-radius: 16px; padding: 1.5rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                <span style="font-size: 1.5rem;">🛑</span>
+                <div style="font-weight: 700; color: var(--text-primary); font-size: 1rem;">
+                    <span class="lang-ko">HITL & Safety</span>
+                    <span class="lang-en">HITL & Safety</span>
+                </div>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+                <span class="lang-ko">Bash 실행 시 9개 차단 패턴 + 사용자 승인 게이트</span>
+                <span class="lang-en">9 blocked patterns + user approval gate for Bash execution</span>
+            </div>
+            <!-- Blocked patterns -->
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                <span class="lang-ko">차단 패턴</span>
+                <span class="lang-en">Blocked Patterns</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem;">
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">rm -rf</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">sudo</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">curl|bash</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">chmod 777</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">git push -f</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">DROP TABLE</span>
+                <span style="font-size: 0.65rem; padding: 0.15rem 0.4rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace;">+3 more</span>
+            </div>
+            <!-- HITL checkpoints -->
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                <span class="lang-ko">승인 게이트</span>
+                <span class="lang-en">Approval Gates</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem;">
+                    <span style="color: #34D399;">&#x2713;</span>
+                    <span style="color: var(--text-secondary);"><span class="lang-ko">Plan 승인 (PRESENTED &rarr; APPROVED)</span><span class="lang-en">Plan approval (PRESENTED &rarr; APPROVED)</span></span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem;">
+                    <span style="color: #34D399;">&#x2713;</span>
+                    <span style="color: var(--text-secondary);"><span class="lang-ko">Bash 실행 승인 (위험 명령)</span><span class="lang-en">Bash execution approval (dangerous commands)</span></span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem;">
+                    <span style="color: #34D399;">&#x2713;</span>
+                    <span style="color: var(--text-secondary);"><span class="lang-ko">외부 API 호출 게이트</span><span class="lang-en">External API call gate</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Plan Mode State Machine SVG -->
     <div style="margin-top: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; overflow: hidden; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('modal-geode-planner')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 60px rgba(129,140,248,0.1)'; this.style.borderColor='rgba(129,140,248,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.06)'">
         <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center;">
@@ -4345,6 +4427,52 @@
             </div>
         </div>
     </div>
+
+    <!-- Graceful Degradation -->
+    <div style="margin-top: 2.5rem;">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem;">
+            <span class="lang-ko">🛡️ Graceful Degradation — 3-Stage Fallback</span>
+            <span class="lang-en">🛡️ Graceful Degradation — 3-Stage Fallback</span>
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <!-- Stage 1: Retry -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #FBBF24; border-radius: 12px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(251,191,36,0.15); border-radius: 4px; color: #FBBF24; font-family: 'Fira Code', monospace; font-weight: 600;">Stage 1</span>
+                    <span style="font-weight: 700; color: #FBBF24; font-size: 0.95rem;">RETRY</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    <span class="lang-ko">Exponential backoff로 재시도<br/>max_retries = 3</span>
+                    <span class="lang-en">Retry with exponential backoff<br/>max_retries = 3</span>
+                </div>
+                <div style="margin-top: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-muted);">1s &rarr; 2s &rarr; 4s</div>
+            </div>
+            <!-- Stage 2: Degrade -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #F97316; border-radius: 12px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(249,115,22,0.15); border-radius: 4px; color: #F97316; font-family: 'Fira Code', monospace; font-weight: 600;">Stage 2</span>
+                    <span style="font-weight: 700; color: #F97316; font-size: 0.95rem;">DEGRADE</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    <span class="lang-ko">단순화 분석 모드 전환<br/>Opus &rarr; Sonnet fallback</span>
+                    <span class="lang-en">Switch to simplified analysis<br/>Opus &rarr; Sonnet fallback</span>
+                </div>
+                <div style="margin-top: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-muted);">fewer axes, cached signals</div>
+            </div>
+            <!-- Stage 3: Safe Mode -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #EF4444; border-radius: 12px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(239,68,68,0.15); border-radius: 4px; color: #EF4444; font-family: 'Fira Code', monospace; font-weight: 600;">Stage 3</span>
+                    <span style="font-weight: 700; color: #EF4444; font-size: 0.95rem;">SAFE MODE</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    <span class="lang-ko">기본 Tier 반환 + 사용자 알림<br/>데이터 손실 방지 보장</span>
+                    <span class="lang-en">Return default tier + notify user<br/>Guarantee no data loss</span>
+                </div>
+                <div style="margin-top: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.65rem; color: var(--text-muted);">confidence: 0.0 (flagged)</div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Section 06: Tech Stack & LLM -->
@@ -4626,6 +4754,39 @@
                     <span class="tech-item">ruff</span>
                     <span class="tech-item">mypy</span>
                     <span class="tech-item">bandit</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tool Registry & MCP -->
+    <div style="margin-top: 2.5rem;">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem;">
+            <span class="lang-ko">🔧 Tool Registry — Runtime Extension</span>
+            <span class="lang-en">🔧 Tool Registry — Runtime Extension</span>
+        </h3>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.5rem;">
+            <!-- Tool categories grid -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="padding: 0.75rem; background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.15); border-radius: 10px;">
+                    <div style="font-size: 0.7rem; color: #60A5FA; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Data Tools</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'Fira Code', monospace; line-height: 1.8;">MonoLake · AniList · MAL<br/>IGDB · RAWG · Steam</div>
+                </div>
+                <div style="padding: 0.75rem; background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.15); border-radius: 10px;">
+                    <div style="font-size: 0.7rem; color: #FBBF24; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Signal Tools</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'Fira Code', monospace; line-height: 1.8;">Reddit · YouTube · Twitter<br/>Google Trends · News API</div>
+                </div>
+                <div style="padding: 0.75rem; background: rgba(244,114,182,0.06); border: 1px solid rgba(244,114,182,0.15); border-radius: 10px;">
+                    <div style="font-size: 0.7rem; color: #F472B6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Analysis Tools</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'Fira Code', monospace; line-height: 1.8;">PSM Engine · BiasBuster<br/>Cortex SQL · Synthesizer</div>
+                </div>
+            </div>
+            <!-- Runtime extension flow -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.15); border-radius: 10px;">
+                <span style="font-size: 0.7rem; color: #818CF8; font-weight: 600;">MCP</span>
+                <div style="font-size: 0.7rem; color: var(--text-muted); font-family: 'Fira Code', monospace;">
+                    define_schema() &rarr; ToolRegistry.register() &rarr;
+                    <span style="color: #34D399;">available in next agent loop</span>
                 </div>
             </div>
         </div>
