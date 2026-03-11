@@ -2418,13 +2418,13 @@
     <div class="nav-logo">GEODE</div>
     <ul class="nav-links">
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#pipeline">Pipeline</a></li>
+        <li><a href="#pipeline">Reasoning</a></li>
         <li><a href="#architecture">Architecture</a></li>
         <li><a href="#scoring">Scoring</a></li>
-        <li><a href="#verification">Verification</a></li>
-        <li><a href="#orchestration">Orchestration</a></li>
-        <li><a href="#automation">Automation</a></li>
-        <li><a href="#tech">Tech Stack</a></li>
+        <li><a href="#verification">Guardrails</a></li>
+        <li><a href="#orchestration">Coordination</a></li>
+        <li><a href="#automation">Self-Improve</a></li>
+        <li><a href="#tech">LLM Ensemble</a></li>
         <li><a href="#timeline">Timeline</a></li>
     </ul>
     <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -2442,29 +2442,35 @@
 <!-- Hero Section -->
 <section class="hero" id="overview">
     <div class="hero-badge">
-        <span class="lang-ko">Undervalued IP Discovery Agent</span>
-        <span class="lang-en">Undervalued IP Discovery Agent</span>
+        <span class="lang-ko">Autonomous IP Discovery Agent</span>
+        <span class="lang-en">Autonomous IP Discovery Agent</span>
     </div>
     <h1 class="hero-title">
         <span class="accent">GEODE</span>
         <span style="font-size: 0.3em; font-weight: 500; color: var(--text-muted); vertical-align: middle; margin-left: 0.3em; letter-spacing: 0; font-family: 'Fira Code', monospace;">v0.8.0</span>
     </h1>
     <p class="hero-subtitle">
-        <span class="lang-ko">6-Layer Agentic Architecture · Expert Panel · Self-Correcting Pipeline</span>
-        <span class="lang-en">6-Layer Agentic Architecture · Expert Panel · Self-Correcting Pipeline</span>
+        <span class="lang-ko">자율 에이전트 · 21 도구 · 신뢰도 게이트 루프 · 자가 개선</span>
+        <span class="lang-en">Autonomous Agent · 21 Tools · Confidence-Gated Loop · Self-Improving</span>
     </p>
     <div class="hero-stats">
         <div class="hero-stat">
-            <div class="hero-stat-value">2,000+</div>
-            <div class="hero-stat-label">Tests</div>
+            <div class="hero-stat-value">21</div>
+            <div class="hero-stat-label">
+                <span class="lang-ko">도구</span>
+                <span class="lang-en">Tools</span>
+            </div>
         </div>
         <div class="hero-stat">
-            <div class="hero-stat-value">118</div>
-            <div class="hero-stat-label">Modules</div>
+            <div class="hero-stat-value">5</div>
+            <div class="hero-stat-label">LLMs</div>
         </div>
         <div class="hero-stat">
-            <div class="hero-stat-value">6</div>
-            <div class="hero-stat-label">Layers</div>
+            <div class="hero-stat-value">10</div>
+            <div class="hero-stat-label">
+                <span class="lang-ko">최대 라운드</span>
+                <span class="lang-en">Max Rounds</span>
+            </div>
         </div>
         <div class="hero-stat">
             <div class="hero-stat-value">14</div>
@@ -2481,12 +2487,12 @@
     <div class="section-header">
         <div class="section-number">// 00</div>
         <h2 class="section-title">
-            <span class="lang-ko">Pipeline Topology</span>
-            <span class="lang-en">Pipeline Topology</span>
+            <span class="lang-ko">Agent Reasoning Flow</span>
+            <span class="lang-en">Agent Reasoning Flow</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">6-Layer Self-Correcting Pipeline의 전체 흐름</span>
-            <span class="lang-en">End-to-end flow of the 6-Layer Self-Correcting Pipeline</span>
+            <span class="lang-ko">자율 에이전트의 추론 흐름과 도구 사용 루프</span>
+            <span class="lang-en">Autonomous agent reasoning flow and tool-use loop</span>
         </p>
     </div>
     <!-- Pipeline Flow Diagram -->
@@ -2726,8 +2732,8 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.5rem; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--border-glow)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
             <div style="font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent-primary);">13</div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
-                <span class="lang-ko">Pipeline Nodes</span>
-                <span class="lang-en">Pipeline Nodes</span>
+                <span class="lang-ko">Agent Nodes</span>
+                <span class="lang-en">Agent Nodes</span>
             </div>
         </div>
         <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.5rem; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--border-glow)'" onmouseout="this.style.borderColor='var(--border-subtle)'">
@@ -2744,6 +2750,87 @@
                 <span class="lang-en">Self-Correction Loop</span>
             </div>
         </div>
+    </div>
+
+    <!-- Agentic Tool-Use Loop SVG -->
+    <div style="margin-top: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; overflow: hidden; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('modal-geode-agent-loop')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 60px rgba(244,114,182,0.1)'; this.style.borderColor='rgba(244,114,182,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.06)'">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center;">
+            <span class="lang-ko">🔄 while(tool_use) — Autonomous Agent Loop</span>
+            <span class="lang-en">🔄 while(tool_use) — Autonomous Agent Loop</span>
+        </h3>
+        <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+            <defs>
+                <filter id="glow-agent-loop"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <marker id="arr-pink" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#F472B6" opacity="0.6"/></marker>
+                <marker id="arr-amber-loop" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#FBBF24" opacity="0.6"/></marker>
+                <marker id="arr-emerald" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#34D399" opacity="0.6"/></marker>
+            </defs>
+
+            <!-- Background subtle grid -->
+            <rect width="800" height="340" fill="none"/>
+
+            <!-- Round counter badge -->
+            <rect x="310" y="8" width="180" height="28" rx="14" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.3)" stroke-width="1"/>
+            <text x="400" y="27" text-anchor="middle" fill="#F472B6" font-family="'Fira Code', monospace" font-size="11" font-weight="600">max_rounds = 10</text>
+
+            <!-- START node -->
+            <rect x="20" y="130" width="90" height="60" rx="12" fill="rgba(129,140,248,0.1)" stroke="rgba(129,140,248,0.4)" stroke-width="1.5"/>
+            <text x="65" y="155" text-anchor="middle" fill="#818CF8" font-family="'Fira Code', monospace" font-size="10" font-weight="600">USER</text>
+            <text x="65" y="172" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="'Fira Code', monospace" font-size="9">query</text>
+
+            <!-- Arrow: START → THINK -->
+            <line x1="110" y1="160" x2="148" y2="160" stroke="#818CF8" stroke-width="1.5" marker-end="url(#arr-purple)" opacity="0.6"/>
+
+            <!-- THINK node -->
+            <rect x="155" y="120" width="120" height="80" rx="14" fill="rgba(96,165,250,0.08)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5" filter="url(#glow-agent-loop)"/>
+            <text x="215" y="148" text-anchor="middle" fill="#60A5FA" font-family="'Inter', sans-serif" font-size="13" font-weight="700">THINK</text>
+            <text x="215" y="168" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="'Fira Code', monospace" font-size="9">LLM reasoning</text>
+            <text x="215" y="182" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="'Fira Code', monospace" font-size="9">tool_choice?</text>
+
+            <!-- Arrow: THINK → SELECT -->
+            <line x1="275" y1="160" x2="313" y2="160" stroke="#F472B6" stroke-width="1.5" marker-end="url(#arr-pink)" opacity="0.6"/>
+            <text x="294" y="152" text-anchor="middle" fill="rgba(244,114,182,0.6)" font-family="'Fira Code', monospace" font-size="8">yes</text>
+
+            <!-- SELECT TOOL node -->
+            <rect x="320" y="120" width="130" height="80" rx="14" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.35)" stroke-width="1.5" filter="url(#glow-agent-loop)"/>
+            <text x="385" y="148" text-anchor="middle" fill="#F472B6" font-family="'Inter', sans-serif" font-size="13" font-weight="700">SELECT TOOL</text>
+            <text x="385" y="168" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="'Fira Code', monospace" font-size="9">from 21 tools</text>
+            <text x="385" y="182" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="'Fira Code', monospace" font-size="9">LLM decides</text>
+
+            <!-- Arrow: SELECT → EXECUTE -->
+            <line x1="450" y1="160" x2="488" y2="160" stroke="#FBBF24" stroke-width="1.5" marker-end="url(#arr-amber-loop)" opacity="0.6"/>
+
+            <!-- EXECUTE node -->
+            <rect x="495" y="120" width="120" height="80" rx="14" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5" filter="url(#glow-agent-loop)"/>
+            <text x="555" y="148" text-anchor="middle" fill="#FBBF24" font-family="'Inter', sans-serif" font-size="13" font-weight="700">EXECUTE</text>
+            <text x="555" y="168" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="'Fira Code', monospace" font-size="9">tool runs</text>
+            <text x="555" y="182" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-family="'Fira Code', monospace" font-size="9">result → LLM</text>
+
+            <!-- Loop-back arrow: EXECUTE → THINK -->
+            <path d="M555,200 L555,260 Q555,280 535,280 L235,280 Q215,280 215,260 L215,200" fill="none" stroke="rgba(244,114,182,0.4)" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arr-pink)"/>
+            <rect x="330" y="268" width="140" height="24" rx="12" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.25)" stroke-width="1"/>
+            <text x="400" y="284" text-anchor="middle" fill="#F472B6" font-family="'Fira Code', monospace" font-size="9" font-weight="600">while(tool_use)</text>
+
+            <!-- Arrow: THINK → DONE (no tool needed) -->
+            <line x1="215" y1="120" x2="215" y2="72" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+            <line x1="215" y1="72" x2="668" y2="72" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+            <line x1="668" y1="72" x2="668" y2="118" stroke="#34D399" stroke-width="1.5" marker-end="url(#arr-emerald)" opacity="0.6"/>
+            <text x="440" y="64" text-anchor="middle" fill="rgba(52,211,153,0.6)" font-family="'Fira Code', monospace" font-size="8">no tool_use → finalize</text>
+
+            <!-- DONE node -->
+            <rect x="628" y="125" width="110" height="70" rx="14" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glow-agent-loop)"/>
+            <text x="683" y="155" text-anchor="middle" fill="#34D399" font-family="'Inter', sans-serif" font-size="13" font-weight="700">FINALIZE</text>
+            <text x="683" y="175" text-anchor="middle" fill="rgba(255,255,255,0.45)" font-family="'Fira Code', monospace" font-size="9">confidence check</text>
+
+            <!-- Arrow: DONE → OUTPUT -->
+            <line x1="738" y1="160" x2="758" y2="160" stroke="#34D399" stroke-width="1.5" marker-end="url(#arr-emerald)" opacity="0.6"/>
+            <text x="775" y="155" text-anchor="middle" fill="#34D399" font-family="'Fira Code', monospace" font-size="11" font-weight="600">&#x2713;</text>
+            <text x="775" y="170" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">result</text>
+
+            <!-- Tool inventory bar at bottom -->
+            <rect x="60" y="308" width="680" height="26" rx="13" fill="rgba(129,140,248,0.06)" stroke="rgba(129,140,248,0.15)" stroke-width="1"/>
+            <text x="400" y="325" text-anchor="middle" fill="rgba(129,140,248,0.6)" font-family="'Fira Code', monospace" font-size="9">MonoLake | AniList | MAL | IGDB | RAWG | Steam | Reddit | YouTube | Cortex | Signals | BiasBuster | PSM | ...</text>
+        </svg>
     </div>
 </section>
 
@@ -3034,12 +3121,12 @@
     <div class="section-header">
         <div class="section-number">// 02</div>
         <h2 class="section-title">
-            <span class="lang-ko">Scoring Engine</span>
-            <span class="lang-en">Scoring Engine</span>
+            <span class="lang-ko">Causal Scoring & Diagnosis</span>
+            <span class="lang-en">Causal Scoring & Diagnosis</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">PSM 14축 평가 엔진과 Expert Panel 합의 메커니즘</span>
-            <span class="lang-en">PSM 14-Axis Scoring Engine and Expert Panel Consensus Mechanism</span>
+            <span class="lang-ko">14축 인과추론 기반 점수 산출과 6-원인 진단</span>
+            <span class="lang-en">14-axis causal inference scoring and 6-cause diagnosis</span>
         </p>
     </div>
 
@@ -3441,12 +3528,12 @@
     <div class="section-header">
         <div class="section-number">// 03</div>
         <h2 class="section-title">
-            <span class="lang-ko">Verification System</span>
-            <span class="lang-en">Verification System</span>
+            <span class="lang-ko">Self-Correction & Guardrails</span>
+            <span class="lang-en">Self-Correction & Guardrails</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">다층 검증 시스템과 Self-Correction 메커니즘</span>
-            <span class="lang-en">Multi-layer Verification System and Self-Correction Mechanism</span>
+            <span class="lang-ko">자율 검증 · 신뢰도 게이트 · BiasBuster 4-Step</span>
+            <span class="lang-en">Autonomous verification · Confidence gate · BiasBuster 4-Step</span>
         </p>
     </div>
     <!-- Swiss Cheese Model: 4 Defense Layers -->
@@ -3585,12 +3672,12 @@
     <div class="section-header">
         <div class="section-number">// 04</div>
         <h2 class="section-title">
-            <span class="lang-ko">Orchestration & Memory</span>
-            <span class="lang-en">Orchestration & Memory</span>
+            <span class="lang-ko">Multi-Agent Coordination</span>
+            <span class="lang-en">Multi-Agent Coordination</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">파이프라인 오케스트레이션과 메모리 관리 시스템</span>
-            <span class="lang-en">Pipeline Orchestration and Memory Management System</span>
+            <span class="lang-ko">Sub-Agent 위임 · 3-Tier 메모리 · Plan Mode 상태 머신</span>
+            <span class="lang-en">Sub-Agent delegation · 3-Tier memory · Plan Mode state machine</span>
         </p>
     </div>
 
@@ -3767,6 +3854,76 @@
             </div>
         </div>
     </div>
+
+    <!-- Plan Mode State Machine SVG -->
+    <div style="margin-top: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; overflow: hidden; cursor: pointer; transition: all 0.4s ease;" onclick="openModal('modal-geode-planner')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 60px rgba(129,140,248,0.1)'; this.style.borderColor='rgba(129,140,248,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.06)'">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center;">
+            <span class="lang-ko">🗺️ Plan Mode — Goal-Driven State Machine</span>
+            <span class="lang-en">🗺️ Plan Mode — Goal-Driven State Machine</span>
+        </h3>
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+            <defs>
+                <filter id="glow-plan"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <marker id="arr-plan" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#818CF8" opacity="0.5"/></marker>
+                <marker id="arr-plan-g" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#34D399" opacity="0.5"/></marker>
+            </defs>
+
+            <!-- DRAFT -->
+            <rect x="20" y="65" width="120" height="70" rx="12" fill="rgba(96,165,250,0.08)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5" filter="url(#glow-plan)"/>
+            <text x="80" y="93" text-anchor="middle" fill="#60A5FA" font-family="'Inter', sans-serif" font-size="12" font-weight="700">DRAFT</text>
+            <text x="80" y="112" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">agent creates plan</text>
+            <text x="80" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="'Fira Code', monospace" font-size="8">goals + steps</text>
+
+            <!-- Arrow: DRAFT → PRESENTED -->
+            <line x1="140" y1="100" x2="178" y2="100" stroke="#818CF8" stroke-width="1.5" marker-end="url(#arr-plan)" opacity="0.5"/>
+
+            <!-- PRESENTED -->
+            <rect x="185" y="65" width="120" height="70" rx="12" fill="rgba(129,140,248,0.08)" stroke="rgba(129,140,248,0.35)" stroke-width="1.5" filter="url(#glow-plan)"/>
+            <text x="245" y="93" text-anchor="middle" fill="#818CF8" font-family="'Inter', sans-serif" font-size="12" font-weight="700">PRESENTED</text>
+            <text x="245" y="112" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">shown to user</text>
+            <text x="245" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="'Fira Code', monospace" font-size="8">HITL gate</text>
+
+            <!-- Arrow: PRESENTED → APPROVED -->
+            <line x1="305" y1="100" x2="343" y2="100" stroke="#818CF8" stroke-width="1.5" marker-end="url(#arr-plan)" opacity="0.5"/>
+            <text x="324" y="92" text-anchor="middle" fill="rgba(52,211,153,0.6)" font-family="'Fira Code', monospace" font-size="8">approve</text>
+
+            <!-- APPROVED -->
+            <rect x="350" y="65" width="120" height="70" rx="12" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.35)" stroke-width="1.5" filter="url(#glow-plan)"/>
+            <text x="410" y="93" text-anchor="middle" fill="#34D399" font-family="'Inter', sans-serif" font-size="12" font-weight="700">APPROVED</text>
+            <text x="410" y="112" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">user confirmed</text>
+            <text x="410" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="'Fira Code', monospace" font-size="8">ready to execute</text>
+
+            <!-- Arrow: APPROVED → EXECUTING -->
+            <line x1="470" y1="100" x2="508" y2="100" stroke="#34D399" stroke-width="1.5" marker-end="url(#arr-plan-g)" opacity="0.5"/>
+
+            <!-- EXECUTING -->
+            <rect x="515" y="65" width="120" height="70" rx="12" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5" filter="url(#glow-plan)"/>
+            <text x="575" y="93" text-anchor="middle" fill="#FBBF24" font-family="'Inter', sans-serif" font-size="12" font-weight="700">EXECUTING</text>
+            <text x="575" y="112" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">sub-agents run</text>
+            <text x="575" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="'Fira Code', monospace" font-size="8">TaskGraph DAG</text>
+
+            <!-- Arrow: EXECUTING → COMPLETED -->
+            <line x1="635" y1="100" x2="673" y2="100" stroke="#34D399" stroke-width="1.5" marker-end="url(#arr-plan-g)" opacity="0.5"/>
+
+            <!-- COMPLETED -->
+            <rect x="680" y="65" width="100" height="70" rx="12" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.5)" stroke-width="2" filter="url(#glow-plan)"/>
+            <text x="730" y="93" text-anchor="middle" fill="#34D399" font-family="'Inter', sans-serif" font-size="12" font-weight="700">COMPLETED</text>
+            <text x="730" y="112" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="'Fira Code', monospace" font-size="8">results merged</text>
+            <text x="730" y="125" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="'Fira Code', monospace" font-size="8">report ready</text>
+
+            <!-- Reject loop: PRESENTED → DRAFT -->
+            <path d="M245,65 L245,35 Q245,20 230,20 L90,20 Q80,20 80,35 L80,65" fill="none" stroke="rgba(239,68,68,0.35)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arr-plan)"/>
+            <text x="165" y="15" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-family="'Fira Code', monospace" font-size="8">reject → revise</text>
+
+            <!-- Fail loop: EXECUTING → DRAFT -->
+            <path d="M575,135 L575,170 Q575,185 560,185 L90,185 Q80,185 80,170 L80,135" fill="none" stroke="rgba(239,68,68,0.25)" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#arr-plan)"/>
+            <text x="330" y="180" text-anchor="middle" fill="rgba(239,68,68,0.4)" font-family="'Fira Code', monospace" font-size="8">fail → re-plan</text>
+
+            <!-- Sub-agent delegation indicator -->
+            <rect x="515" y="148" width="120" height="22" rx="11" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.2)" stroke-width="1"/>
+            <text x="575" y="163" text-anchor="middle" fill="rgba(244,114,182,0.6)" font-family="'Fira Code', monospace" font-size="8">MAX_CONCURRENT = 5</text>
+        </svg>
+    </div>
 </section>
 
 <!-- Section 05: Automation & Monitoring -->
@@ -3774,12 +3931,12 @@
     <div class="section-header">
         <div class="section-number">// 05</div>
         <h2 class="section-title">
-            <span class="lang-ko">Automation & Monitoring</span>
-            <span class="lang-en">Automation & Monitoring</span>
+            <span class="lang-ko">Self-Improvement & Runtime</span>
+            <span class="lang-en">Self-Improvement & Runtime</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">자동화 워크플로우와 모니터링 대시보드</span>
-            <span class="lang-en">Automation Workflows and Monitoring Dashboard</span>
+            <span class="lang-ko">Feedback Loop · CUSUM Drift Detection · RLAIF 자가 개선</span>
+            <span class="lang-en">Feedback Loop · CUSUM Drift Detection · RLAIF self-improvement</span>
         </p>
     </div>
 
@@ -4195,12 +4352,12 @@
     <div class="section-header">
         <div class="section-number">// 06</div>
         <h2 class="section-title">
-            <span class="lang-ko">Tech Stack & LLM</span>
-            <span class="lang-en">Tech Stack & LLM</span>
+            <span class="lang-ko">Multi-LLM Ensemble</span>
+            <span class="lang-en">Multi-LLM Ensemble</span>
         </h2>
         <p class="section-desc">
-            <span class="lang-ko">기술 스택과 LLM 통합 전략</span>
-            <span class="lang-en">Technology Stack and LLM Integration Strategy</span>
+            <span class="lang-ko">5 LLM 앙상블 · Cross-LLM 합의 · Tool Registry</span>
+            <span class="lang-en">5-LLM ensemble · Cross-LLM consensus · Tool Registry</span>
         </p>
     </div>
 
