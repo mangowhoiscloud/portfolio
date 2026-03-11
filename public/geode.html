@@ -2448,11 +2448,11 @@
     </p>
     <div class="hero-stats">
         <div class="hero-stat">
-            <div class="hero-stat-value">416+</div>
+            <div class="hero-stat-value">2,000+</div>
             <div class="hero-stat-label">Tests</div>
         </div>
         <div class="hero-stat">
-            <div class="hero-stat-value">98</div>
+            <div class="hero-stat-value">118</div>
             <div class="hero-stat-label">Modules</div>
         </div>
         <div class="hero-stat">
@@ -2708,7 +2708,7 @@
                 </div>
                 <div style="text-align: center;">
                     <div style="color: #C084FC; font-weight: 600;">RESULT</div>
-                    <div style="color: var(--text-muted); margin-top: 0.25rem;">Tier A, 76.2<br/>undermarketed<br/>1 iteration</div>
+                    <div style="color: var(--text-muted); margin-top: 0.25rem;">Tier A, 69.4<br/>undermarketed<br/>1 iteration</div>
                 </div>
             </div>
         </div>
@@ -2866,6 +2866,91 @@
         </div>
     </div>
 
+    <!-- 6-Layer Connection Diagram (SVG) -->
+    <div style="margin-top: 3rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 2rem; overflow: hidden; cursor: pointer; transition: all 0.4s ease;" data-modal="modal-geode-send-api" onclick="openModal('modal-geode-send-api')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 60px rgba(244,114,182,0.1)'; this.style.borderColor='rgba(244,114,182,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.06)'">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center;">
+            <span class="lang-ko">🔗 Layer Interconnection — L3 Hub Architecture</span>
+            <span class="lang-en">🔗 Layer Interconnection — L3 Hub Architecture</span>
+        </h3>
+        <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+            <defs>
+                <filter id="glow-l1"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="glow-l2"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <filter id="glow-l3"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <marker id="arrow-l3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#F472B6" opacity="0.6"/></marker>
+                <marker id="arrow-l4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#818CF8" opacity="0.6"/></marker>
+                <marker id="arrow-out" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#606080" opacity="0.4"/></marker>
+            </defs>
+
+            <!-- Background grid -->
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+            </pattern>
+            <rect width="800" height="340" fill="url(#grid)"/>
+
+            <!-- Layer bars -->
+            <!-- L5: Extensibility -->
+            <rect x="80" y="16" width="640" height="36" rx="8" fill="rgba(192,132,252,0.08)" stroke="#C084FC" stroke-width="1" stroke-opacity="0.3"/>
+            <text x="100" y="39" fill="#C084FC" font-family="Inter, sans-serif" font-size="11" font-weight="700">L5</text>
+            <text x="134" y="39" fill="#C084FC" font-family="Inter, sans-serif" font-size="10" font-weight="500" opacity="0.7">EXTENSIBILITY</text>
+            <text x="640" y="39" fill="#C084FC" font-family="Fira Code, monospace" font-size="9" opacity="0.5" text-anchor="end">ToolRegistry(21) · PolicyChain · Reports</text>
+
+            <!-- L4.5: Automation -->
+            <rect x="80" y="62" width="640" height="36" rx="8" fill="rgba(251,191,36,0.08)" stroke="#FBBF24" stroke-width="1" stroke-opacity="0.3"/>
+            <text x="100" y="85" fill="#FBBF24" font-family="Inter, sans-serif" font-size="11" font-weight="700">L4.5</text>
+            <text x="142" y="85" fill="#FBBF24" font-family="Inter, sans-serif" font-size="10" font-weight="500" opacity="0.7">AUTOMATION</text>
+            <text x="640" y="85" fill="#FBBF24" font-family="Fira Code, monospace" font-size="9" opacity="0.5" text-anchor="end">Triggers · CUSUM · Snapshots · Scheduling</text>
+
+            <!-- L4: Orchestration -->
+            <rect x="80" y="108" width="640" height="36" rx="8" fill="rgba(129,140,248,0.08)" stroke="#818CF8" stroke-width="1" stroke-opacity="0.3"/>
+            <text x="100" y="131" fill="#818CF8" font-family="Inter, sans-serif" font-size="11" font-weight="700">L4</text>
+            <text x="128" y="131" fill="#818CF8" font-family="Inter, sans-serif" font-size="10" font-weight="500" opacity="0.7">ORCHESTRATION</text>
+            <text x="640" y="131" fill="#818CF8" font-family="Fira Code, monospace" font-size="9" opacity="0.5" text-anchor="end">HookSystem(11) · TaskGraph(DAG) · PlanMode</text>
+
+            <!-- L3: Agentic Core (HIGHLIGHTED — HUB) -->
+            <rect x="60" y="160" width="680" height="52" rx="12" fill="rgba(244,114,182,0.12)" stroke="#F472B6" stroke-width="2" stroke-opacity="0.6" filter="url(#glow-l3)"/>
+            <text x="84" y="191" fill="#F472B6" font-family="Inter, sans-serif" font-size="13" font-weight="800">L3</text>
+            <text x="116" y="191" fill="#F472B6" font-family="Inter, sans-serif" font-size="12" font-weight="700">AGENTIC CORE</text>
+            <!-- Pipeline mini-flow inside L3 -->
+            <text x="280" y="183" fill="#F472B6" font-family="Fira Code, monospace" font-size="9" opacity="0.7">Router → Signals → Analyst×4 → Eval×3 → Score → Verify → Synth</text>
+            <text x="280" y="200" fill="#F472B6" font-family="Fira Code, monospace" font-size="8" opacity="0.4">StateGraph · Send API · while(tool_use) · max_iterations=3</text>
+
+            <!-- L2: Memory -->
+            <rect x="80" y="228" width="640" height="36" rx="8" fill="rgba(96,165,250,0.08)" stroke="#60A5FA" stroke-width="1" stroke-opacity="0.3"/>
+            <text x="100" y="251" fill="#60A5FA" font-family="Inter, sans-serif" font-size="11" font-weight="700">L2</text>
+            <text x="128" y="251" fill="#60A5FA" font-family="Inter, sans-serif" font-size="10" font-weight="500" opacity="0.7">MEMORY</text>
+            <text x="640" y="251" fill="#60A5FA" font-family="Fira Code, monospace" font-size="9" opacity="0.5" text-anchor="end">Org &gt; Project &gt; Session · SqliteSaver</text>
+
+            <!-- L1: Foundation -->
+            <rect x="80" y="274" width="640" height="36" rx="8" fill="rgba(52,211,153,0.08)" stroke="#34D399" stroke-width="1" stroke-opacity="0.3"/>
+            <text x="100" y="297" fill="#34D399" font-family="Inter, sans-serif" font-size="11" font-weight="700">L1</text>
+            <text x="128" y="297" fill="#34D399" font-family="Inter, sans-serif" font-size="10" font-weight="500" opacity="0.7">FOUNDATION</text>
+            <text x="640" y="297" fill="#34D399" font-family="Fira Code, monospace" font-size="9" opacity="0.5" text-anchor="end">Claude×3 · GPT-5.2 · Gemini 3.0 · MCP Adapters</text>
+
+            <!-- Connection lines from L3 hub -->
+            <!-- L3 → L4 -->
+            <line x1="400" y1="160" x2="400" y2="144" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arrow-l3)"/>
+            <!-- L3 → L4.5 -->
+            <path d="M 340 160 Q 340 100 340 98" fill="none" stroke="#F472B6" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="4 3" marker-end="url(#arrow-l3)"/>
+            <!-- L3 → L5 -->
+            <path d="M 280 160 Q 280 52 280 52" fill="none" stroke="#F472B6" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="4 3" marker-end="url(#arrow-l3)"/>
+            <!-- L3 → L2 -->
+            <line x1="400" y1="212" x2="400" y2="228" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arrow-l3)"/>
+            <!-- L3 → L1 -->
+            <line x1="460" y1="212" x2="460" y2="274" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arrow-l3)"/>
+            <!-- L4 → L3 (bidirectional) -->
+            <line x1="500" y1="144" x2="500" y2="160" stroke="#818CF8" stroke-width="1" stroke-opacity="0.3" marker-end="url(#arrow-l4)"/>
+
+            <!-- HUB label -->
+            <text x="40" y="191" fill="#F472B6" font-family="Fira Code, monospace" font-size="8" opacity="0.5" text-anchor="middle" transform="rotate(-90, 40, 191)">HUB</text>
+
+            <!-- Legend -->
+            <text x="80" y="330" fill="#606080" font-family="Fira Code, monospace" font-size="8">━ direct dependency</text>
+            <text x="260" y="330" fill="#606080" font-family="Fira Code, monospace" font-size="8">┄ indirect / event-driven</text>
+            <text x="480" y="330" fill="#F472B6" font-family="Fira Code, monospace" font-size="8" opacity="0.6">L3 = central hub, all data flows through Agentic Core</text>
+        </svg>
+    </div>
+
     <!-- Expert Panel Visualization -->
     <div style="margin-top: 3rem;">
         <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.2rem; text-align: center; cursor: pointer;" data-modal="modal-geode-expert-panel">
@@ -2987,7 +3072,7 @@
                 </svg>
             </div>
             <div class="radar-score-center">
-                <div class="radar-score-value">76.2</div>
+                <div class="radar-score-value">69.4</div>
                 <div class="radar-score-label">
                     <span class="lang-ko">종합 점수</span>
                     <span class="lang-en">Composite Score</span>
@@ -3201,11 +3286,12 @@
         </div>
         <!-- D-E-F Decision Tree mini -->
         <div style="background: rgba(0,0,0,0.25); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--text-secondary); line-height: 1.8;">
-            <span style="color: #F472B6;">if</span> d &#8805; 4 → <span style="color: #FBBF24;">undermarketed</span> &nbsp;|&nbsp;
-            <span style="color: #F472B6;">elif</span> e &#8805; 4 → <span style="color: #FBBF24;">monetization_failure</span> &nbsp;|&nbsp;
-            <span style="color: #F472B6;">elif</span> f &#8805; 4 → <span style="color: #FBBF24;">discovery_failure</span> &nbsp;|&nbsp;
-            <span style="color: #F472B6;">elif</span> d+e+f &#8804; 6 → <span style="color: #34D399;">no_hidden_value</span> &nbsp;|&nbsp;
-            <span style="color: #F472B6;">else</span> → <span style="color: #818CF8;">mixed</span>
+            <span style="color: #F472B6;">if</span> timing_issue &amp; D&#8805;3 → <span style="color: #EF4444;">timing_mismatch</span><br>
+            <span style="color: #F472B6;">elif</span> D&#8805;3 &amp; E&#8805;3 → <span style="color: #FBBF24;">conversion_failure</span><br>
+            <span style="color: #F472B6;">elif</span> D&#8805;3 &amp; E&lt;3 → <span style="color: #FBBF24;">undermarketed</span><br>
+            <span style="color: #F472B6;">elif</span> D&#8804;2 &amp; E&#8805;3 → <span style="color: #818CF8;">monetization_misfit</span><br>
+            <span style="color: #F472B6;">elif</span> D&#8804;2 &amp; E&#8804;2 &amp; F&#8805;3 → <span style="color: #34D399;">niche_gem</span><br>
+            <span style="color: #F472B6;">else</span> → <span style="color: #60A5FA;">discovery_failure</span>
         </div>
     </div>
 
@@ -3312,15 +3398,15 @@
                         <td><span style="color: #FBBF24; font-weight: 700;">S</span></td>
                         <td style="color: var(--accent-primary); font-weight: 700;">82.2</td>
                         <td>
-                            <span class="lang-ko">creator_dependency</span>
-                            <span class="lang-en">creator_dependency</span>
+                            <span class="lang-ko">conversion_failure</span>
+                            <span class="lang-en">conversion_failure</span>
                         </td>
                         <td>0.91</td>
                     </tr>
                     <tr>
                         <td style="font-weight: 600;">Cowboy Bebop</td>
                         <td><span style="color: #818CF8; font-weight: 700;">A</span></td>
-                        <td style="color: var(--accent-primary); font-weight: 700;">76.2</td>
+                        <td style="color: var(--accent-primary); font-weight: 700;">69.4</td>
                         <td>
                             <span class="lang-ko">undermarketed</span>
                             <span class="lang-en">undermarketed</span>
@@ -3330,7 +3416,7 @@
                     <tr>
                         <td style="font-weight: 600;">Ghost in the Shell</td>
                         <td><span style="color: #60A5FA; font-weight: 700;">B</span></td>
-                        <td style="color: var(--accent-primary); font-weight: 700;">58.5</td>
+                        <td style="color: var(--accent-primary); font-weight: 700;">54.0</td>
                         <td>
                             <span class="lang-ko">discovery_failure</span>
                             <span class="lang-en">discovery_failure</span>
@@ -3552,33 +3638,40 @@
             <span class="lang-ko">🔗 Hook System</span>
             <span class="lang-en">🔗 Hook System</span>
         </h3>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; cursor: pointer;" data-modal="modal-geode-hooks" onclick="openModal('modal-geode-hooks')">
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #818CF8; border-radius: 14px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-card-hover)'" onmouseout="this.style.background='var(--bg-card)'">
-                <div style="font-weight: 700; color: #818CF8; font-size: 0.9rem; margin-bottom: 0.5rem;">PIPELINE_START</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                    <span class="lang-ko">초기화 로깅, 타이머 시작</span>
-                    <span class="lang-en">Init logging, timer start</span>
+        <div style="cursor: pointer;" data-modal="modal-geode-hooks" onclick="openModal('modal-geode-hooks')">
+            <!-- Session Lifecycle -->
+            <div style="margin-bottom: 0.75rem;">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Session Lifecycle</div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 6px; color: #818CF8; font-family: 'Fira Code', monospace;">SESSION_START</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 6px; color: #818CF8; font-family: 'Fira Code', monospace;">SESSION_END</span>
                 </div>
             </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #34D399; border-radius: 14px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-card-hover)'" onmouseout="this.style.background='var(--bg-card)'">
-                <div style="font-weight: 700; color: #34D399; font-size: 0.9rem; margin-bottom: 0.5rem;">PIPELINE_END</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                    <span class="lang-ko">결과 저장, 메모리 write-back</span>
-                    <span class="lang-en">Save results, memory write-back</span>
+            <!-- Analysis Hooks -->
+            <div style="margin-bottom: 0.75rem;">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Analysis</div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA; font-family: 'Fira Code', monospace;">PRE_ANALYSIS</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA; font-family: 'Fira Code', monospace;">POST_ANALYSIS</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA; font-family: 'Fira Code', monospace;">PRE_TOOL_USE</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); border-radius: 6px; color: #60A5FA; font-family: 'Fira Code', monospace;">POST_TOOL_USE</span>
                 </div>
             </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #60A5FA; border-radius: 14px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-card-hover)'" onmouseout="this.style.background='var(--bg-card)'">
-                <div style="font-weight: 700; color: #60A5FA; font-size: 0.9rem; margin-bottom: 0.5rem;">NODE_ENTER</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                    <span class="lang-ko">노드 시작 로깅, Rich 상태 업데이트</span>
-                    <span class="lang-en">Node start logging, Rich status update</span>
+            <!-- Task Hooks -->
+            <div style="margin-bottom: 0.75rem;">
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Task</div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399; font-family: 'Fira Code', monospace;">TASK_START</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399; font-family: 'Fira Code', monospace;">TASK_COMPLETE</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); border-radius: 6px; color: #34D399; font-family: 'Fira Code', monospace;">TASK_FAIL</span>
                 </div>
             </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #FBBF24; border-radius: 14px; padding: 1.25rem; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-card-hover)'" onmouseout="this.style.background='var(--bg-card)'">
-                <div style="font-weight: 700; color: #FBBF24; font-size: 0.9rem; margin-bottom: 0.5rem;">NODE_EXIT</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary);">
-                    <span class="lang-ko">노드 완료, 결과 검증</span>
-                    <span class="lang-en">Node complete, result validation</span>
+            <!-- Error Hooks -->
+            <div>
+                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;">Error & Notification</div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 6px; color: #EF4444; font-family: 'Fira Code', monospace;">ON_ERROR</span>
+                    <span style="font-size: 0.75rem; padding: 0.3rem 0.6rem; background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 6px; color: #FBBF24; font-family: 'Fira Code', monospace;">ON_NOTIFICATION</span>
                 </div>
             </div>
         </div>
@@ -3851,24 +3944,24 @@
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
                         <div style="padding: 0.4rem 0.6rem; background: rgba(52,211,153,0.08); border-radius: 6px; border-left: 3px solid #34D399;">
-                            <div style="color: #34D399; font-weight: 600;">TIER 3: Verified Expert</div>
+                            <div style="color: #34D399; font-weight: 600;">TIER 3: Verified Expert (3-5명)</div>
                             <div style="color: var(--text-muted);">
-                                <span class="lang-ko">p&#8804;0.50, 30+ 게임 평가 경험</span>
-                                <span class="lang-en">p&#8804;0.50, 30+ game evaluations</span>
+                                <span class="lang-ko">Score&#8805;0.85, &#961;&#8805;0.50, &#8805;30건</span>
+                                <span class="lang-en">Score&#8805;0.85, &#961;&#8805;0.50, &#8805;30 evals</span>
                             </div>
                         </div>
                         <div style="padding: 0.4rem 0.6rem; background: rgba(251,191,36,0.08); border-radius: 6px; border-left: 3px solid #FBBF24;">
-                            <div style="color: #FBBF24; font-weight: 600;">TIER 2: Provisional</div>
+                            <div style="color: #FBBF24; font-weight: 600;">TIER 2: Provisional (5-10명)</div>
                             <div style="color: var(--text-muted);">
-                                <span class="lang-ko">p&#8804;0.75, 10+ 평가 이력</span>
-                                <span class="lang-en">p&#8804;0.75, 10+ evaluations</span>
+                                <span class="lang-ko">Score&#8805;0.70, &#961;&#8805;0.40, &#8805;10건</span>
+                                <span class="lang-en">Score&#8805;0.70, &#961;&#8805;0.40, &#8805;10 evals</span>
                             </div>
                         </div>
                         <div style="padding: 0.4rem 0.6rem; background: rgba(239,68,68,0.08); border-radius: 6px; border-left: 3px solid #EF4444;">
-                            <div style="color: #EF4444; font-weight: 600;">TIER 1: Baseline</div>
+                            <div style="color: #EF4444; font-weight: 600;">TIER 1: Candidate (무제한)</div>
                             <div style="color: var(--text-muted);">
-                                <span class="lang-ko">기사 테스트 통과 리뷰어</span>
-                                <span class="lang-en">Baseline reviewer, passed test</span>
+                                <span class="lang-ko">Score&#8805;0.50, 경력&#8805;3년</span>
+                                <span class="lang-en">Score&#8805;0.50, &#8805;3yr experience</span>
                             </div>
                         </div>
                     </div>
@@ -4029,8 +4122,8 @@
                     <tr>
                         <td><code>weekly_discovery_summary</code></td>
                         <td><span style="color: #FBBF24;">F2</span></td>
-                        <td><span class="lang-ko">월 09:00</span><span class="lang-en">Mon 09:00</span></td>
-                        <td><span class="lang-ko">주간 발굴 요약</span><span class="lang-en">Weekly discovery summary</span></td>
+                        <td><span class="lang-ko">월 10:00</span><span class="lang-en">Mon 10:00</span></td>
+                        <td><span class="lang-ko">주간 발굴 요약 (scan 후)</span><span class="lang-en">Weekly discovery summary (post-scan)</span></td>
                     </tr>
                     <tr>
                         <td><code>failed_evaluation_summary</code></td>
@@ -4133,13 +4226,13 @@
                     <span class="lang-en">Multi-LLM</span>
                 </div>
                 <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
-                    <span class="lang-ko">Fallback chain: Claude &rarr; GPT-4 &rarr; Gemini</span>
-                    <span class="lang-en">Fallback chain: Claude &rarr; GPT-4 &rarr; Gemini</span>
+                    <span class="lang-ko">Cross-LLM Ensemble: Claude Opus &rarr; GPT-5.2 dual eval</span>
+                    <span class="lang-en">Cross-LLM Ensemble: Claude Opus &rarr; GPT-5.2 dual eval</span>
                 </div>
                 <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">Claude</span>
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">GPT-4o</span>
-                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">Gemini</span>
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">Claude ×3</span>
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">GPT-5.2</span>
+                    <span style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.3); border-radius: 6px; color: #F472B6;">Gemini 3.0</span>
                 </div>
             </div>
             <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #818CF8; border-radius: 16px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" data-modal="modal-geode-prompts" onclick="openModal('modal-geode-prompts')" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -4158,6 +4251,77 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Cross-LLM Ensemble Diagram (SVG) -->
+    <div style="margin-top: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 2rem; overflow: hidden; cursor: pointer; transition: all 0.4s ease;" data-modal="modal-geode-structured-output" onclick="openModal('modal-geode-structured-output')" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 60px rgba(129,140,248,0.1)'; this.style.borderColor='rgba(129,140,248,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.06)'">
+        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.1rem; text-align: center;">
+            <span class="lang-ko">🔄 Cross-LLM Ensemble — Dual Evaluation Consensus</span>
+            <span class="lang-en">🔄 Cross-LLM Ensemble — Dual Evaluation Consensus</span>
+        </h3>
+        <svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+            <defs>
+                <filter id="glow-ensemble"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <marker id="arr-blue" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#60A5FA" opacity="0.5"/></marker>
+                <marker id="arr-green" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#34D399" opacity="0.5"/></marker>
+                <marker id="arr-purple" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5" fill="#818CF8" opacity="0.5"/></marker>
+            </defs>
+
+            <!-- Primary Model Box -->
+            <rect x="20" y="20" width="260" height="160" rx="12" fill="rgba(251,191,36,0.06)" stroke="#FBBF24" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="40" y="46" fill="#FBBF24" font-family="Inter, sans-serif" font-size="12" font-weight="700">PRIMARY — Claude Opus 4.5</text>
+            <text x="40" y="62" fill="#FBBF24" font-family="Fira Code, monospace" font-size="9" opacity="0.5">×8 instances · primary_analysts</text>
+
+            <!-- Primary analysts -->
+            <rect x="40" y="78" width="105" height="38" rx="6" fill="rgba(251,191,36,0.1)" stroke="#FBBF24" stroke-width="0.5" stroke-opacity="0.3"/>
+            <text x="50" y="95" fill="#FBBF24" font-family="Fira Code, monospace" font-size="9">game_mechanics</text>
+            <text x="50" y="108" fill="#FBBF24" font-family="Fira Code, monospace" font-size="8" opacity="0.5">Analyst #1</text>
+
+            <rect x="155" y="78" width="105" height="38" rx="6" fill="rgba(251,191,36,0.1)" stroke="#FBBF24" stroke-width="0.5" stroke-opacity="0.3"/>
+            <text x="165" y="95" fill="#FBBF24" font-family="Fira Code, monospace" font-size="9">growth_potential</text>
+            <text x="165" y="108" fill="#FBBF24" font-family="Fira Code, monospace" font-size="8" opacity="0.5">Analyst #3</text>
+
+            <!-- Evaluators under primary -->
+            <rect x="40" y="126" width="220" height="32" rx="6" fill="rgba(251,191,36,0.05)" stroke="#FBBF24" stroke-width="0.5" stroke-opacity="0.2"/>
+            <text x="54" y="146" fill="#FBBF24" font-family="Fira Code, monospace" font-size="9" opacity="0.6">Evaluator×3 + Scoring + Synthesizer</text>
+
+            <!-- Secondary Model Box -->
+            <rect x="20" y="195" width="260" height="70" rx="12" fill="rgba(52,211,153,0.06)" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="40" y="221" fill="#34D399" font-family="Inter, sans-serif" font-size="12" font-weight="700">SECONDARY — GPT-5.2</text>
+            <text x="40" y="237" fill="#34D399" font-family="Fira Code, monospace" font-size="9" opacity="0.5">secondary_analysts · cross-evaluation mode</text>
+            <rect x="40" y="245" width="105" height="12" rx="3" fill="rgba(52,211,153,0.1)"/>
+            <text x="48" y="254" fill="#34D399" font-family="Fira Code, monospace" font-size="8" opacity="0.6">player_experience</text>
+            <rect x="155" y="245" width="60" height="12" rx="3" fill="rgba(52,211,153,0.1)"/>
+            <text x="161" y="254" fill="#34D399" font-family="Fira Code, monospace" font-size="8" opacity="0.6">discovery</text>
+
+            <!-- Connection lines to merge -->
+            <line x1="280" y1="100" x2="370" y2="130" stroke="#FBBF24" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arr-blue)"/>
+            <line x1="280" y1="230" x2="370" y2="150" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arr-green)"/>
+
+            <!-- Merge Node -->
+            <rect x="370" y="110" width="140" height="60" rx="12" fill="rgba(129,140,248,0.1)" stroke="#818CF8" stroke-width="2" stroke-opacity="0.5" filter="url(#glow-ensemble)"/>
+            <text x="440" y="137" fill="#818CF8" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">Score Merge</text>
+            <text x="440" y="155" fill="#818CF8" font-family="Fira Code, monospace" font-size="9" text-anchor="middle" opacity="0.6">agreement ≥ 0.67</text>
+
+            <!-- Arrow to reliability -->
+            <line x1="510" y1="140" x2="560" y2="140" stroke="#818CF8" stroke-width="1.5" stroke-opacity="0.4" marker-end="url(#arr-purple)"/>
+
+            <!-- Reliability Output -->
+            <rect x="560" y="100" width="180" height="80" rx="12" fill="rgba(192,132,252,0.08)" stroke="#C084FC" stroke-width="1.5" stroke-opacity="0.4"/>
+            <text x="650" y="128" fill="#C084FC" font-family="Inter, sans-serif" font-size="11" font-weight="700" text-anchor="middle">Reliability Check</text>
+            <text x="650" y="148" fill="#C084FC" font-family="Fira Code, monospace" font-size="10" text-anchor="middle" opacity="0.7">Krippendorff's α</text>
+            <text x="650" y="168" fill="#C084FC" font-family="Fira Code, monospace" font-size="9" text-anchor="middle" opacity="0.4">target: α ≥ 0.80</text>
+
+            <!-- Supporting models (bottom right) -->
+            <text x="560" y="210" fill="#606080" font-family="Fira Code, monospace" font-size="8">Supporting roles:</text>
+            <rect x="560" y="218" width="80" height="16" rx="4" fill="rgba(129,140,248,0.08)" stroke="#818CF8" stroke-width="0.5" stroke-opacity="0.2"/>
+            <text x="568" y="230" fill="#818CF8" font-family="Fira Code, monospace" font-size="8" opacity="0.6">Sonnet 4</text>
+            <rect x="648" y="218" width="58" height="16" rx="4" fill="rgba(129,140,248,0.08)" stroke="#818CF8" stroke-width="0.5" stroke-opacity="0.2"/>
+            <text x="656" y="230" fill="#818CF8" font-family="Fira Code, monospace" font-size="8" opacity="0.6">Haiku</text>
+            <rect x="560" y="240" width="96" height="16" rx="4" fill="rgba(52,211,153,0.08)" stroke="#34D399" stroke-width="0.5" stroke-opacity="0.2"/>
+            <text x="568" y="252" fill="#34D399" font-family="Fira Code, monospace" font-size="8" opacity="0.6">Gemini 3.0</text>
+            <text x="560" y="270" fill="#606080" font-family="Fira Code, monospace" font-size="7" opacity="0.4">Judge · Guardrail · Planner</text>
+        </svg>
     </div>
 
     <!-- CLI Showcase -->
@@ -4257,11 +4421,13 @@
                 </div>
             </div>
             <div class="tech-category" style="border-top: 3px solid #F472B6;">
-                <div class="tech-category-title">LLM</div>
+                <div class="tech-category-title">LLM (5 Models)</div>
                 <div class="tech-items">
-                    <span class="tech-item">Claude Opus</span>
-                    <span class="tech-item">GPT-4o</span>
-                    <span class="tech-item">Gemini Pro</span>
+                    <span class="tech-item">Claude Opus 4.5 ×8</span>
+                    <span class="tech-item">Claude Sonnet 4</span>
+                    <span class="tech-item">Claude Haiku</span>
+                    <span class="tech-item">GPT-5.2</span>
+                    <span class="tech-item">Gemini 3.0 Flash</span>
                 </div>
             </div>
             <div class="tech-category" style="border-top: 3px solid #34D399;">
@@ -4401,8 +4567,8 @@
                 <span class="lang-en">✨ v6.0 Polish</span>
             </div>
             <div class="timeline-desc">
-                <span class="lang-ko">416+ Tests, CLI UX 개선, Documentation 정비</span>
-                <span class="lang-en">416+ Tests, CLI UX refinement, Documentation</span>
+                <span class="lang-ko">2,000+ Tests, CLI UX 개선, Documentation 정비</span>
+                <span class="lang-en">2,000+ Tests, CLI UX refinement, Documentation</span>
             </div>
         </div>
     </div>
@@ -4879,12 +5045,12 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                     <tr>
                         <td>Cowboy Bebop</td>
                         <td style="color: #818CF8; font-weight: 700;">A</td>
-                        <td style="color: var(--accent-primary); font-weight: 700;">76.2</td>
+                        <td style="color: var(--accent-primary); font-weight: 700;">69.4</td>
                     </tr>
                     <tr>
                         <td>Ghost in the Shell</td>
                         <td style="color: #60A5FA; font-weight: 700;">B</td>
-                        <td style="color: var(--accent-primary); font-weight: 700;">58.5</td>
+                        <td style="color: var(--accent-primary); font-weight: 700;">54.0</td>
                     </tr>
                 </tbody>
             </table>
@@ -4917,7 +5083,7 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                     |
     +------------------------------+
     |  Final Report                |
-    |  +-- Score: 76.2             |
+    |  +-- Score: 69.4             |
     |  +-- Tier: A                 |
     |  +-- Cause: undermarketed    |
     |  +-- Recovery Strategy       |
@@ -5272,7 +5438,7 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                 </div>
             </div>
             <div class="modal-metric-card">
-                <div class="modal-metric-value" style="color: #A78BFA;">Cohen's K</div>
+                <div class="modal-metric-value" style="color: #A78BFA;">Krippendorff's &#945;</div>
                 <div class="modal-metric-label">
                     <span class="lang-ko">합의 지표</span>
                     <span class="lang-en">Agreement Metric</span>
@@ -5607,7 +5773,7 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                     <tr>
                         <td style="font-weight: 600;">Cowboy Bebop</td>
                         <td style="color: #818CF8; font-weight: 700;">A</td>
-                        <td>76.2</td>
+                        <td>69.4</td>
                         <td>8.5</td>
                         <td>7.2</td>
                         <td>8.0</td>
@@ -5616,7 +5782,7 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                     <tr>
                         <td style="font-weight: 600;">Ghost in the Shell</td>
                         <td style="color: #60A5FA; font-weight: 700;">B</td>
-                        <td>58.5</td>
+                        <td>54.0</td>
                         <td>8.0</td>
                         <td>9.0</td>
                         <td>6.5</td>
@@ -5668,8 +5834,8 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                             <span class="lang-en">Multiplier</span>
                         </th>
                         <th>
-                            <span class="lang-ko">예시 (Raw=76.2)</span>
-                            <span class="lang-en">Example (Raw=76.2)</span>
+                            <span class="lang-ko">예시 (Raw=69.4)</span>
+                            <span class="lang-en">Example (Raw=69.4)</span>
                         </th>
                     </tr>
                 </thead>
@@ -5677,22 +5843,22 @@ S &gt;= 80  |  A &gt;= 60  |  B &gt;= 40  |  C &lt; 40</code></pre></div>
                     <tr>
                         <td>100%</td>
                         <td style="color: var(--l1-color); font-weight: 700;">&#215;1.00</td>
-                        <td>76.2</td>
+                        <td>69.4</td>
                     </tr>
                     <tr>
                         <td>85%</td>
                         <td style="color: var(--accent-primary); font-weight: 700;">&#215;0.955</td>
-                        <td>72.8</td>
+                        <td>66.3</td>
                     </tr>
                     <tr>
                         <td>70%</td>
                         <td style="color: #FBBF24; font-weight: 700;">&#215;0.91</td>
-                        <td>69.3</td>
+                        <td>63.2</td>
                     </tr>
                     <tr>
                         <td>50%</td>
                         <td style="color: #F472B6; font-weight: 700;">&#215;0.85</td>
-                        <td>64.8</td>
+                        <td>59.0</td>
                     </tr>
                 </tbody>
             </table>
