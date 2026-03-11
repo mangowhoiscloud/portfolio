@@ -103,11 +103,58 @@ Axolotl(아홀로틀)은 GEODE의 상징 동물. 핵심 매핑:
 
 ---
 
-## 4. 실행 순서
+## 4. CHANGELOG Gap Analysis — 포트폴리오 미반영 기능
+
+### HIGH Priority (에이전트 정체성 + 사용자 경험)
+
+**G1. Claude Code-style UI** (v0.8.0)
+- `core/ui/agentic_ui.py` — tool call/result/error/token/plan 렌더러
+- Marker system: `▸` tool call, `✓` success, `✗` error, `✢` tokens, `●` plan
+- Section 06 또는 별도 서브섹션에 시각화 필요
+- 현재: modal-geode-cli, modal-geode-rich-display 있지만 마커 시스템 미표시
+
+**G2. LangSmith Observability** (v0.7.0-0.8.0)
+- Full pipeline tracing: router → signals → analysts → evaluators → scoring → verification → synthesizer
+- Token tracking + cost per call (Opus/Sonnet/Haiku/GPT 가격표)
+- `UsageAccumulator` — 세션 비용 집계
+- 현재: 완전 누락. Section 05 또는 06에 카드 추가 필요
+
+**G3. Auto-Learning Loop** (v0.6.0)
+- `PIPELINE_END` hook → insight write-back to `.claude/MEMORY.md`
+- Rule CRUD: create/update/delete/list analysis rules
+- 현재: Feedback Loop 5-Phase는 있지만 per-analysis 자동 학습은 미표시
+- Section 05 (Self-Improvement)에 추가
+
+### MEDIUM Priority (확장성/산출물)
+
+**G4. Pipeline Flexibility C2-C5** (v0.7.0)
+- C2: YAML 기반 동적 Analyst 추가 (add YAML key = add analyst)
+- C3: `interrupt_before` — 노드별 중단점 (HITL)
+- C4: `ToolRegistry` 런타임 도구 추가
+- C5: `offline_mode` — LLM 없이 regex 라우팅
+- Section 01 (Architecture) 또는 Section 00에 카드 추가
+
+**G5. Report Generation** (v0.6.0)
+- 3 formats: HTML, JSON, Markdown
+- 3 templates: Summary, Detailed, Executive
+- Section 06에 카드 추가
+
+### LOW Priority (인프라)
+
+**G6. CI 5-Job Pipeline** (v0.6.0)
+- lint (ruff), typecheck (mypy), test (3.12+3.13), security (bandit), gate
+- Timeline 또는 Tech Stack에 간략 언급
+
+---
+
+## 5. 실행 순서
 
 1. [x] Timeline update (CHANGELOG.md → actual versions)
-2. [ ] Axolotl SVG + Hero integration
-3. [ ] P0 모달 8개 overhaul (에이전트 프레이밍 + 구조 통일)
-4. [ ] P1 모달 10개 overhaul
-5. [ ] P2/P3 모달 25개 overhaul
-6. [ ] 검증 루프 + 커밋
+2. [x] Axolotl SVG + Hero integration
+3. [x] P0 모달 8개 overhaul (에이전트 프레이밍 + 구조 통일)
+4. [x] G1-G3 신규 기능 섹션/카드 추가 (HIGH priority gaps)
+5. [x] P1 모달 10개 overhaul
+6. [x] G4-G5 추가 (MEDIUM priority gaps)
+7. [ ] P2/P3 모달 25개 overhaul
+8. [ ] Design Concept v2 구현 (Deep Sea Discovery)
+9. [ ] 검증 루프 + 커밋
