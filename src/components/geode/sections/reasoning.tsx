@@ -21,6 +21,7 @@ export function ReasoningSection() {
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
             안쪽 루프(L1-L2)는 ReAct로 매 턴마다 관측→추론→행동을 반복하고,
             바깥 레이어(L4)는 Plan-and-Execute로 복잡한 요청을 구조화된 계획으로 분할합니다.
+            v0.32부터 복잡한 요청(3+ 단계, 고비용)은 자동으로 create_plan을 호출하는 Plan-first 패턴을 채택했습니다.
           </p>
         </ScrollReveal>
 

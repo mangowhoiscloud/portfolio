@@ -41,8 +41,9 @@ export function ScoringSection() {
           </h2>
           <p className="text-lg text-white/40 font-semibold mb-4">14축 루브릭 × 3 Evaluator</p>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
-            4명의 Analyst가 14축으로 다면 평가한 점수를 3명의 Evaluator가 교차 집계합니다.
-            6개 가중치로 합산한 뒤, Confidence Multiplier를 적용하여 최종 Tier를 산출합니다.
+            4명의 Analyst가 Send API clean context(이전 분석 결과를 보지 않는 격리 환경)에서 14축을 독립 평가하고,
+            3명의 Evaluator가 교차 집계합니다. 6개 가중치로 합산 후 Confidence Multiplier(0.7 + 0.3 × confidence/100)를 적용하여 Tier를 산출합니다.
+            confidence &lt; 0.7이면 Gather 노드로 loopback하여 최대 5회 반복합니다.
           </p>
         </ScrollReveal>
 
