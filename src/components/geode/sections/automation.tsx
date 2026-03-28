@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { DagRenderer } from "../dag-renderer";
 
 /* ── Schedule Types ── */
 const scheduleTypes = [
@@ -85,51 +86,23 @@ export function AutomationSection() {
 
         {/* ── Architecture SVG: Scheduler ↔ Trigger ↔ Hook ── */}
         <ScrollReveal delay={0.08}>
-          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-            <svg viewBox="0 0 720 210" className="w-full min-w-[540px]" style={{ maxHeight: 240 }}>
-              {/* Top label */}
-              <text x={360} y={18} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">SCHEDULER → QUEUE → LOOP → HOOK → TRIGGER</text>
-
-              {/* ── Main flow row (y=55) ── */}
-              {/* Scheduler */}
-              <rect x={15} y={35} width={120} height={60} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={75} y={58} textAnchor="middle" fill="#818CF8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Scheduler</text>
-              <text x={75} y={75} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">AT · EVERY · CRON</text>
-
-              <path d="M135,65 C155,60 175,60 195,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
-
-              {/* Queue */}
-              <rect x={195} y={40} width={95} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
-              <text x={242} y={62} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Queue</text>
-              <text x={242} y={77} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">action_queue</text>
-
-              <path d="M290,65 C310,60 330,60 350,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
-
-              {/* AgenticLoop */}
-              <rect x={350} y={35} width={110} height={60} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={405} y={58} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
-              <text x={405} y={75} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">실행 + 검증</text>
-
-              <path d="M460,65 C480,60 500,60 520,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
-
-              {/* HookSystem */}
-              <rect x={520} y={35} width={100} height={60} rx={10} fill="#0C1220" stroke="#E87080" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={570} y={58} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
-              <text x={570} y={75} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
-
-              {/* ── Feedback: two arcs with TriggerManager in between ── */}
-              {/* Arc 1: HookSystem → TriggerManager */}
-              <path d="M570,95 C575,125 540,145 475,150" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
-              {/* TriggerManager */}
-              <rect x={345} y={137} width={130} height={30} rx={8} fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.4} />
-              <text x={410} y={156} textAnchor="middle" fill="#C084FC" fillOpacity={0.7} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
-              {/* Arc 2: TriggerManager → Scheduler */}
-              <path d="M345,150 C260,145 160,135 75,120 C60,115 50,105 50,95" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
-
-              {/* Feedback description */}
-              <text x={360} y={185} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석</text>
-            </svg>
-          </div>
+          <DagRenderer
+            nodes={[
+              { id: "scheduler", label: "Scheduler", sub: "AT·EVERY·CRON", color: "#818CF8", column: 0 },
+              { id: "queue", label: "Queue", sub: "action_queue", color: "#F5C542", column: 1 },
+              { id: "loop", label: "AgenticLoop", sub: "실행 + 검증", color: "#4ECDC4", column: 2 },
+              { id: "hooks", label: "HookSystem", sub: "TRIGGER_FIRED", color: "#E87080", column: 3 },
+              { id: "trigger", label: "TriggerMgr", sub: "F1-F4", color: "#C084FC", column: 4 },
+            ]}
+            edges={[
+              { from: "scheduler", to: "queue" },
+              { from: "queue", to: "loop" },
+              { from: "loop", to: "hooks" },
+              { from: "hooks", to: "trigger" },
+            ]}
+            loopback={{ from: "trigger", to: "scheduler", label: "DRIFT_DETECTED → EVENT trigger → 재분석", color: "#C084FC" }}
+            className="mb-8"
+          />
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>

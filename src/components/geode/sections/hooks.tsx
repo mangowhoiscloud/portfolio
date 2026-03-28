@@ -119,11 +119,11 @@ function HookArchitectureDiagram() {
         {/* Event source boxes */}
         {eventSources.map((s) => (
           <g key={s.label}>
-            <rect x={SRC_X - 55} y={s.y} width={110} height={36} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.7} strokeOpacity={0.2} />
+            <rect x={SRC_X - 55} y={s.y} width={110} height={36} rx={8} fill="#0C1220" stroke={s.color} strokeWidth={0.7} strokeOpacity={0.3} />
             <text x={SRC_X} y={s.y + 15} textAnchor="middle" fill={s.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
             <text x={SRC_X} y={s.y + 28} textAnchor="middle" fill={s.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{s.sub}</text>
-            {/* Arrow to hub — bezier curve */}
-            <path d={`M${SRC_X + 55},${s.y + 18} C${SRC_X + 120},${s.y + 18} ${HUB_X - 120},${H / 2} ${HUB_X - 60},${H / 2}`} stroke={s.color} strokeOpacity={0.22} strokeWidth={1} fill="none" />
+            {/* Arrow to hub left edge — stops at hub rect boundary */}
+            <path d={`M${SRC_X + 55},${s.y + 18} C${SRC_X + 100},${s.y + 18} ${HUB_X - 100},${H / 2 - 35 + (s.y / (H - 40)) * 70} ${HUB_X - 55},${H / 2 - 35 + (s.y / (H - 40)) * 70}`} stroke={s.color} strokeOpacity={0.2} strokeWidth={1} fill="none" />
           </g>
         ))}
 
@@ -138,15 +138,15 @@ function HookArchitectureDiagram() {
         <text x={HUB_X} y={H / 2 + 6} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">register()</text>
         <text x={HUB_X} y={H / 2 + 20} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">trigger()</text>
 
-        {/* Hub to handler chain arrows — bezier curves */}
+        {/* Hub right edge to handler chain — enter from hub rect right side */}
         {handlerChain.map((h) => (
-          <path key={h.label} d={`M${HUB_X + 55},${H / 2} C${HUB_X + 120},${H / 2} ${CHAIN_X - 130},${h.y + 14} ${CHAIN_X - 70},${h.y + 14}`} stroke={h.color} strokeOpacity={0.2} strokeWidth={1} fill="none" />
+          <path key={h.label} d={`M${HUB_X + 55},${H / 2 - 35 + (h.y / (H - 40)) * 70} C${HUB_X + 100},${H / 2 - 35 + (h.y / (H - 40)) * 70} ${CHAIN_X - 110},${h.y + 14} ${CHAIN_X - 65},${h.y + 14}`} stroke={h.color} strokeOpacity={0.18} strokeWidth={1} fill="none" />
         ))}
 
         {/* Handler chain (priority sorted) */}
         {handlerChain.map((h, i) => (
           <g key={h.label}>
-            <rect x={CHAIN_X - 65} y={h.y} width={130} height={28} rx={6} fill="#0A0F1A" stroke={h.color} strokeWidth={0.6} strokeOpacity={0.15} />
+            <rect x={CHAIN_X - 65} y={h.y} width={130} height={28} rx={6} fill="#0C1220" stroke={h.color} strokeWidth={0.7} strokeOpacity={0.25} />
             <text x={CHAIN_X - 48} y={h.y + 18} fill={h.color} fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>{h.label}</text>
             <text x={CHAIN_X + 10} y={h.y + 18} fill="white" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">{h.name}</text>
             {/* Maturity indicator */}

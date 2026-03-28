@@ -24,7 +24,7 @@ body {
 <!-- Title -->
 <div style="padding: 0 36pt 4pt;">
   <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Constraints → HOW → Results</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">금지 규칙 → 어떤 메커니즘으로 → 어떤 결과가 나왔는가</p>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">금지 규칙이 어떤 자동화 메커니즘을 통해 결과를 보장하는가 — 각 CANNOT은 수동 검토가 아닌 구조적 차단으로 작동한다</p>
 </div>
 
 <!-- Content: 5 CANNOT → HOW → Result triples -->
@@ -42,7 +42,7 @@ body {
     </div>
     <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
-      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CANNOT 위반 시 Socratic Gate 재통과 강제: 인과관계 1문장 없으면 PR 차단</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">4-Persona Review의 Cherny가 인과관계 1문장 없는 슬라이드를 탐지하면 Socratic Gate 재통과를 강제하므로 PR이 자동으로 차단된다.</p>
     </div>
     <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
       <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
@@ -65,7 +65,7 @@ body {
     </div>
     <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
-      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">구현 전 5-질문 의무화 → 잘못된 전제로 50 rounds 낭비 사전 차단</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CI 5-Job Gate가 구현 파일 변경을 탐지하므로, 5-질문 답변 없는 커밋은 자동으로 실패 처리된다. 잘못된 전제로 50 rounds를 낭비하는 경로가 사전 차단된다.</p>
     </div>
     <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
       <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
@@ -88,7 +88,7 @@ body {
     </div>
     <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
-      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">화살표 + 분기 + 루프백 필수 → 4-Persona Review의 Architect 검사 통과 시에만 머지</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">Beck 페르소나가 화살표·분기·루프백 없는 다이어그램을 탐지하므로, Architect 검사를 통과하지 못한 슬라이드는 머지가 차단된다.</p>
     </div>
     <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
       <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
@@ -111,7 +111,7 @@ body {
     </div>
     <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
-      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CHANGELOG에 "포기한 것 / 얻은 것" 쌍 없으면 기능 커밋 자체가 차단됨</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CHANGELOG 커밋 훅이 "포기한 것 / 얻은 것" 쌍을 검사하므로, 해당 쌍 없이 제출된 기능 커밋은 자동으로 차단된다. 결정의 이유가 코드와 함께 기록된다.</p>
     </div>
     <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
       <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
@@ -126,7 +126,7 @@ body {
   <div style="display: flex; align-items: stretch; gap: 6pt;">
     <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
-      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">카드 6개 초과 금지: 밀도 강제 압축</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">Worktree 무단 공유 금지: 세션 격리</p>
     </div>
     <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
       <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
@@ -134,14 +134,14 @@ body {
     </div>
     <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
-      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">초과 시 슬라이드 분리 강제 → 정보 우선순위 결정이 설계자에게 귀환</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">.owner 파일이 세션 소유권을 관리하므로, 다른 세션이 동일 worktree에 진입하면 자동으로 차단된다. 병렬 에이전트의 상태 충돌이 원천 차단된다.</p>
     </div>
     <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
       <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
     </div>
     <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
       <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
-      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">34장</strong> 슬라이드당 1메시지</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">merge conflict 0건</strong></p>
     </div>
   </div>
 

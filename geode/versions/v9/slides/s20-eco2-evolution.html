@@ -23,133 +23,97 @@ body {
   </div>
 
   <!-- Title -->
-  <div style="padding: 0 36pt 5pt;">
+  <div style="padding: 0 36pt 4pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Eco&#178; &#8594; GEODE &#8594; REODE: 패턴 진화 증거</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">Swiss Cheese &#8594; 5-Layer · LLMClientPort &#8594; Port/Adapter · Event Bus &#8594; HookSystem: 같은 문제를 세 번 더 잘 풀었다</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">Eco&#178;에서 LLM 편향 제어의 핵심을 파악하고, 그 경험이 GEODE 5-Layer Verification으로 진화한다. 단순 복사가 아니라 분화와 재설계다</p>
   </div>
 
-  <!-- Evolution header row -->
-  <div style="padding: 0 36pt 5pt; display: flex; gap: 0; align-items: center;">
-    <div style="flex: 1; background: #161B22; border-radius: 4pt 0 0 4pt; border: 1pt solid #34D399; padding: 7pt 10pt; text-align: center;">
-      <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Eco&#178;</p>
-      <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">원형 패턴</p>
-    </div>
-    <div style="padding: 0 4pt;">
-      <p style="font-size: 10pt; color: #34D399;">&#8594;</p>
-    </div>
-    <div style="flex: 1.2; background: #161B22; border: 1pt solid #F5C542; padding: 7pt 10pt; text-align: center;">
-      <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">GEODE v0.32.0</p>
-      <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">패턴 심화</p>
-    </div>
-    <div style="padding: 0 4pt;">
-      <p style="font-size: 10pt; color: #818CF8;">&#8594;</p>
-    </div>
-    <div style="flex: 1; background: #161B22; border-radius: 0 4pt 4pt 0; border: 1pt solid #818CF8; padding: 7pt 10pt; text-align: center;">
-      <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">REODE</p>
-      <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">실증 적용</p>
+  <!-- Narrative intro strip -->
+  <div style="padding: 0 36pt 4pt;">
+    <div style="background: #1E293B; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Eco&#178;에서 Swiss Cheese 3-Layer 평가를 설계하며 LLM 편향 제어의 핵심을 파악한다. Eco&#178;의 <strong style="color: #34D399;">L1 Code Grader</strong>가 GEODE의 <strong style="color: #F5C542;">G1-G4 Guardrails</strong>로 분화하고, <strong style="color: #34D399;">L2 LLM Judge</strong>가 <strong style="color: #F5C542;">BiasBuster + Cross-LLM</strong>으로 분리된다. 같은 문제를 더 정밀하게 세 번 푼다.</p>
     </div>
   </div>
 
-  <!-- 4 Pattern rows -->
-  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+  <!-- 3 Pattern rows -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
 
-    <!-- Pattern 1: Verification -->
+    <!-- Pattern 1: Verification 분화 -->
     <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
       <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #F5C542; border-radius: 2pt;"></div>
-      <div style="width: 80pt; flex-shrink: 0;">
+      <div style="width: 72pt; flex-shrink: 0;">
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">검증 레이어</p>
       </div>
       <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #8B949E;">Swiss Cheese 3-Layer</p>
-        <p style="font-size: 6pt; color: #8B949E;">단일 LLM 평가 &#8594; 3겹 필터</p>
+        <p style="font-size: 7pt; color: #34D399; font-weight: bold;">Eco&#178;: Swiss Cheese 3-Layer</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">L1 Code Grader + L2 LLM Judge + L3 Human</p>
       </div>
-      <p style="font-size: 8pt; color: #F5C542; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1.2;">
-        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">GEODE 5-Layer Verification</p>
-        <p style="font-size: 6pt; color: #8B949E;">BiasBuster 6종 + Cross-LLM &#945;&#8805;0.67 &#8594; 99.8</p>
+      <p style="font-size: 9pt; color: #F5C542; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.3;">
+        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">GEODE: 5-Layer Verification</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">L1 Guardrails G1-G4로 분화 · BiasBuster 6종 · Cross-LLM &#945;&#8805;0.67</p>
       </div>
-      <p style="font-size: 8pt; color: #818CF8; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">5-Gate Migration Scorecard</p>
-        <p style="font-size: 6pt; color: #8B949E;">마이그레이션 품질 5관문</p>
-      </div>
-    </div>
-
-    <!-- Pattern 2: Port/Adapter -->
-    <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
-      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #818CF8; border-radius: 2pt;"></div>
-      <div style="width: 80pt; flex-shrink: 0;">
-        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">LLM 추상화</p>
-      </div>
-      <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #8B949E;">LLMClientPort</p>
-        <p style="font-size: 6pt; color: #8B949E;">단일 Provider 종속 위험</p>
-      </div>
-      <p style="font-size: 8pt; color: #818CF8; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1.2;">
-        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">Port/Adapter DI + ContextVar</p>
-        <p style="font-size: 6pt; color: #8B949E;">Anthropic·OpenAI·ZhipuAI 3-Provider 추상화</p>
-      </div>
-      <p style="font-size: 8pt; color: #818CF8; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">DomainPort Protocol</p>
-        <p style="font-size: 6pt; color: #8B949E;">코어 수정 0줄로 Java 도메인 교체</p>
+      <p style="font-size: 9pt; color: #818CF8; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 0.9;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">REODE: 5-Gate Scorecard</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">마이그레이션 품질 5관문</p>
       </div>
     </div>
 
-    <!-- Pattern 3: Event Bus / Hook -->
+    <!-- Pattern 2: Event Bus 재설계 -->
     <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
       <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #F97316; border-radius: 2pt;"></div>
-      <div style="width: 80pt; flex-shrink: 0;">
+      <div style="width: 72pt; flex-shrink: 0;">
         <p style="font-size: 7pt; font-weight: bold; color: #F97316;">이벤트 시스템</p>
       </div>
       <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #8B949E;">Event Bus 3-Tier</p>
-        <p style="font-size: 6pt; color: #8B949E;">하드코딩 콜백 확장 불가</p>
+        <p style="font-size: 7pt; color: #34D399; font-weight: bold;">Eco&#178;: Event Bus 동기 처리</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">하드코딩 콜백 · 확장 불가</p>
       </div>
-      <p style="font-size: 8pt; color: #F97316; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1.2;">
-        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">HookSystem 46 Events 8 Categories</p>
-        <p style="font-size: 6pt; color: #8B949E;">Priority 핸들러 · StuckDetector 120s · 에러 격리</p>
+      <p style="font-size: 9pt; color: #F97316; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.3;">
+        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">GEODE: HookSystem 46 Events 비동기</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Eco&#178; Event Bus는 동기 기반이므로 비동기 Hook으로 재설계. Priority 핸들러 · StuckDetector</p>
       </div>
-      <p style="font-size: 8pt; color: #818CF8; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1;">
+      <p style="font-size: 9pt; color: #818CF8; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 0.9;">
         <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">REODE HookSystem 상속</p>
-        <p style="font-size: 6pt; color: #8B949E;">Migration lifecycle 동일 패턴</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Migration lifecycle 동일 패턴</p>
       </div>
     </div>
 
-    <!-- Pattern 4: Circuit Breaker -->
+    <!-- Pattern 3: Port/Adapter -->
     <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
-      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #EF4444; border-radius: 2pt;"></div>
-      <div style="width: 80pt; flex-shrink: 0;">
-        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">장애 복원력</p>
+      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #818CF8; border-radius: 2pt;"></div>
+      <div style="width: 72pt; flex-shrink: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">LLM 추상화</p>
       </div>
       <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #8B949E;">Circuit Breaker + Jitter Backoff</p>
-        <p style="font-size: 6pt; color: #8B949E;">단일 Provider 장애 시 전체 중단</p>
+        <p style="font-size: 7pt; color: #34D399; font-weight: bold;">Eco&#178;: LLMClientPort</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">단일 Provider 종속 위험</p>
       </div>
-      <p style="font-size: 8pt; color: #EF4444; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1.2;">
-        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">3-Provider Failover (CB &#215;3)</p>
-        <p style="font-size: 6pt; color: #8B949E;">5회 실패&#8594;60s OPEN&#8594;Half-Open · Exp. Backoff &#177;25% Jitter</p>
+      <p style="font-size: 9pt; color: #818CF8; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.3;">
+        <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">GEODE: Port/Adapter DI + ContextVar</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Anthropic · OpenAI · ZhipuAI 3-Provider · CB &#215;3</p>
       </div>
-      <p style="font-size: 8pt; color: #818CF8; padding: 0 3pt;">&#10132;</p>
-      <div style="flex: 1;">
-        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">REODE LLM Failover</p>
-        <p style="font-size: 6pt; color: #8B949E;">동일 CB 패턴 마이그레이션 내성</p>
+      <p style="font-size: 9pt; color: #818CF8; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 0.9;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">DomainPort Protocol</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">코어 수정 0줄 Java 교체</p>
       </div>
     </div>
+
   </div>
 
   <!-- Trade-off bar -->
-  <div style="margin: 0 36pt 3pt; background: #1E293B; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
-    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #34D399;">Trade-off: 재사용 비용 vs 재설계 비용</strong> Eco²에서 검증된 4개 패턴을 재사용하면 Eco² 제약(Swiss Cheese 3-Layer 한계, 단일 Provider 종속)도 함께 온다. 그러나 패턴을 버리면 REODE 출시에 수주가 더 필요하다. 검증된 패턴을 확장하는 길을 선택하고, REODE는 GEODE 포크로 <strong style="color: #34D399;">83/83 빌드를 5h 48m 안에 달성</strong>한다.</p>
+  <div style="margin: 0 36pt 3pt; background: #1E293B; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 7pt 10pt;">
+    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #F97316;">Trade-off: 기존 패턴 재사용 vs 도메인 차이 무시 위험</strong> 기존 패턴을 재사용하면 설계 시간을 줄이지만, 도메인 차이를 무시하면 맞지 않는 구조를 강제하게 된다. Eco&#178;의 Event Bus는 동기 처리 기반이므로 GEODE의 비동기 Hook으로 재설계가 필요하다. 재사용과 재설계를 구분하여, REODE는 <strong style="color: #34D399;">83/83 빌드를 5h 48m 안에 달성</strong>한다.</p>
   </div>
 
   <!-- Footer -->
   <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
-    <p style="font-size: 5pt; color: #8B949E;">Swiss Cheese&#8594;5-Layer · LLMClientPort&#8594;Port/Adapter · Event Bus&#8594;HookSystem · Circuit Breaker&#8594;3-Provider Failover</p>
+    <p style="font-size: 5pt; color: #8B949E;">Swiss Cheese&#8594;5-Layer · Event Bus(동기)&#8594;HookSystem(비동기) · LLMClientPort&#8594;Port/Adapter · L1 Code Grader&#8594;G1-G4 Guardrails</p>
     <p style="font-size: 5pt; color: #8B949E;">21 / 35</p>
   </div>
 

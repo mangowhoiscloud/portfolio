@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { DagRenderer } from "../dag-renderer";
 
 /* ── SubAgent System ── */
 const subAgentSpecs = [
@@ -163,56 +164,72 @@ export function AgentsTasksSection() {
           {/* ── TaskGraph Tab — Two separate visualizations ── */}
           {activeTab === "taskgraph" && (
             <div className="space-y-8">
-              {/* 1. Pipeline DAG (Game IP Value Inference) */}
+              {/* 1. Pipeline DAG (Game IP) — DagRenderer */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#818CF8]/10 text-[#818CF8]/80 border border-[#818CF8]/15">PIPELINE</span>
                   <span className="text-sm font-semibold text-white/80">TaskGraph. Game IP 가치추론</span>
                 </div>
-                <div className="overflow-x-auto -mx-4 px-4 pb-2">
-                  <svg viewBox="0 0 740 200" className="w-full min-w-[600px]" style={{ maxHeight: 230 }}>
-                    <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
-                      <path d="M70,100 C95,96 120,96 145,100" fill="none" />
-                      {[40, 80, 120, 160].map((y) => (
-                        <path key={y} d={`M170,100 C200,100 210,${y} 250,${y}`} />
-                      ))}
-                      {[40, 80, 120, 160].map((y) => (
-                        <path key={`e${y}`} d={`M310,${y} C340,${y} 350,100 380,100`} />
-                      ))}
-                      <path d="M440,100 C455,96 480,96 495,100" fill="none" />
-                      <path d="M560,100 C575,96 600,96 615,100" fill="none" />
-                    </g>
-                    {[
-                      { x: 50, y: 100, label: "Router", color: "#4ECDC4" },
-                      { x: 155, y: 100, label: "Signals", color: "#F5C542" },
-                    ].map((n) => (
-                      <g key={n.label}>
-                        <circle cx={n.x} cy={n.y} r={18} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                        <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                      </g>
-                    ))}
-                    {["Mech", "Exp", "Growth", "Disc"].map((l, i) => (
-                      <g key={l}>
-                        <circle cx={280} cy={40 + i * 40} r={16} fill="#0C1220" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.35} />
-                        <text x={280} y={41 + i * 40} textAnchor="middle" dominantBaseline="central" fill="#818CF8" fillOpacity={0.7} fontSize={8} fontFamily="ui-monospace, monospace">{l}</text>
-                      </g>
-                    ))}
-                    {[
-                      { x: 410, y: 100, label: "Eval ×3", color: "#C084FC" },
-                      { x: 530, y: 100, label: "Score", color: "#F5C542" },
-                      { x: 650, y: 100, label: "Verify", color: "#34D399" },
-                    ].map((n) => (
-                      <g key={n.label}>
-                        <circle cx={n.x} cy={n.y} r={18} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                        <text x={n.x} y={n.y + 1} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                      </g>
-                    ))}
-                    <text x={280} y={12} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">fan-out ×4</text>
-                    <text x={410} y={12} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">fan-in</text>
-                  </svg>
-                </div>
+                <DagRenderer
+                  nodes={[
+                    { id: "router", label: "Router", color: "#4ECDC4", column: 0 },
+                    { id: "signals", label: "Signals", color: "#F5C542", column: 1 },
+                    { id: "a0", label: "Market", color: "#818CF8", column: 2, row: -1.5 },
+                    { id: "a1", label: "Creative", color: "#818CF8", column: 2, row: -0.5 },
+                    { id: "a2", label: "Audience", color: "#818CF8", column: 2, row: 0.5 },
+                    { id: "a3", label: "Risk", color: "#818CF8", column: 2, row: 1.5 },
+                    { id: "eval", label: "Eval ×3", color: "#C084FC", column: 3 },
+                    { id: "score", label: "Scoring", color: "#F5C542", column: 4 },
+                    { id: "verify", label: "Verify", color: "#34D399", column: 5 },
+                  ]}
+                  edges={[
+                    { from: "router", to: "signals" },
+                    { from: "signals", to: "a0", label: "Send API" },
+                    { from: "signals", to: "a1" },
+                    { from: "signals", to: "a2" },
+                    { from: "signals", to: "a3" },
+                    { from: "a0", to: "eval" },
+                    { from: "a1", to: "eval" },
+                    { from: "a2", to: "eval" },
+                    { from: "a3", to: "eval" },
+                    { from: "eval", to: "score" },
+                    { from: "score", to: "verify" },
+                  ]}
+                  loopback={{ from: "verify", to: "signals", label: "confidence < 0.7 loopback", color: "#E87080" }}
+                  nodeRadius={24}
+                />
                 <p className="text-sm text-[#8B9CC0] leading-relaxed mt-2">
-                  TaskGraphHookBridge가 LangGraph NODE_ENTER/EXIT/ERROR를 수신하여 ~13개 Task 상태를 자동 갱신합니다. 실패 시 하류 Task를 자동 SKIP합니다.
+                  TaskGraphHookBridge가 NODE_ENTER/EXIT/ERROR를 수신하여 ~13개 Task 상태를 자동 갱신합니다. 실패 시 하류 Task를 자동 SKIP.
+                </p>
+              </div>
+
+              {/* 1.5 REODE Migration Pipeline — DagRenderer */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#34D399]/10 text-[#34D399]/80 border border-[#34D399]/15">REODE</span>
+                  <span className="text-sm font-semibold text-white/80">TaskGraph. Migration Pipeline</span>
+                </div>
+                <DagRenderer
+                  nodes={[
+                    { id: "assess", label: "Assess", color: "#60A5FA", column: 0 },
+                    { id: "plan", label: "Plan", color: "#818CF8", column: 1 },
+                    { id: "transform", label: "Transform", color: "#4ECDC4", column: 2 },
+                    { id: "validate", label: "Validate", color: "#F5C542", column: 3 },
+                    { id: "fix", label: "Fix", color: "#E87080", column: 4 },
+                    { id: "measure", label: "Measure", color: "#34D399", column: 5 },
+                  ]}
+                  edges={[
+                    { from: "assess", to: "plan" },
+                    { from: "plan", to: "transform" },
+                    { from: "transform", to: "validate" },
+                    { from: "validate", to: "fix" },
+                    { from: "validate", to: "measure", color: "#34D399" },
+                  ]}
+                  loopback={{ from: "fix", to: "validate", label: "fix loop (4-class routing)", color: "#E87080" }}
+                  nodeRadius={24}
+                />
+                <p className="text-sm text-[#8B9CC0] leading-relaxed mt-2">
+                  Java 1.8→22 자동 마이그레이션. 4분류 에러 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리.
                 </p>
               </div>
 
