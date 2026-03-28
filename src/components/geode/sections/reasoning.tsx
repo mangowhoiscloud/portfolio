@@ -62,43 +62,44 @@ export function ReasoningSection() {
           {mode === "react" && (
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
-                <svg viewBox="0 0 700 220" className="w-full min-w-[520px]" style={{ maxHeight: 250 }}>
-                  {/* OBSERVE */}
-                  <rect x={40} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
-                  <text x={105} y={83} textAnchor="middle" fill="#60A5FA" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>OBSERVE</text>
-                  <text x={105} y={100} textAnchor="middle" fill="#60A5FA" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">LLM call + context</text>
+                <svg viewBox="0 0 680 250" className="w-full min-w-[520px]" style={{ maxHeight: 280 }}>
+                  {/* ── GoalDecomposer (entry point, top) ── */}
+                  <rect x={220} y={10} width={240} height={42} rx={10} fill="rgba(244,184,200,0.05)" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.35} />
+                  <text x={290} y={35} textAnchor="middle" fill="#F4B8C8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>GoalDecomposer</text>
+                  <text x={420} y={35} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">복합 요청 → sub-goals 분해</text>
+                  {/* Arrow: GoalDecomposer → OBSERVE */}
+                  <path d="M340,52 C340,60 200,65 200,75" stroke="#F4B8C8" strokeOpacity={0.25} strokeWidth={1} fill="none" />
+                  <text x={250} y={65} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">시스템 프롬프트 주입</text>
 
-                  <path d="M170,90 C190,86 210,86 230,90" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
+                  {/* ── ReAct Loop (main row, y=100) ── */}
+                  {/* OBSERVE */}
+                  <rect x={80} y={78} width={140} height={55} rx={10} fill="#0C1220" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={150} y={100} textAnchor="middle" fill="#60A5FA" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>OBSERVE</text>
+                  <text x={150} y={118} textAnchor="middle" fill="#60A5FA" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">LLM call + context</text>
+
+                  <path d="M220,105 C240,100 260,100 280,105" stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
 
                   {/* ACT */}
-                  <rect x={230} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
-                  <text x={295} y={83} textAnchor="middle" fill="#4ECDC4" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>ACT</text>
-                  <text x={295} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">tool execution</text>
+                  <rect x={280} y={78} width={140} height={55} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={350} y={100} textAnchor="middle" fill="#4ECDC4" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>ACT</text>
+                  <text x={350} y={118} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">tool execution</text>
 
-                  <path d="M360,90 C380,86 400,86 420,90" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
+                  <path d="M420,105 C440,100 460,100 480,105" stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
 
                   {/* REFLECT */}
-                  <rect x={420} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
-                  <text x={485} y={83} textAnchor="middle" fill="#C084FC" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>REFLECT</text>
-                  <text x={485} y={100} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
+                  <rect x={480} y={78} width={140} height={55} rx={10} fill="#0C1220" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={550} y={100} textAnchor="middle" fill="#C084FC" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>REFLECT</text>
+                  <text x={550} y={118} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
 
                   {/* Loop-back — smooth U-arc */}
-                  <path d="M485,120 C490,155 440,175 295,175 C150,175 100,155 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.28} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
-                  <text x={295} y={195} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
+                  <path d="M550,133 C555,170 500,185 350,185 C200,185 145,170 150,133" fill="none" stroke="#F5C542" strokeOpacity={0.28} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
+                  <text x={350} y={205} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={10} fontFamily="ui-monospace, monospace">while(tool_use)</text>
 
-                  {/* GoalDecomposer fork */}
-                  <rect x={560} y={40} width={110} height={50} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.7} strokeOpacity={0.2} />
-                  <text x={615} y={60} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>GoalDecomposer</text>
-                  <text x={615} y={75} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청 분해</text>
-                  <path d="M550,90 C555,80 558,70 560,65" stroke="#F4B8C8" strokeOpacity={0.22} strokeWidth={1} fill="none" />
-
-                  {/* Tool tiers */}
-                  <text x={295} y={40} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">
+                  {/* Tool tier labels */}
+                  <text x={350} y={230} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">
                     SAFE(auto) · STANDARD(auto) · WRITE(HITL) · DANGEROUS(gate)
                   </text>
-
-                  {/* Error recovery */}
-                  <text x={295} y={210} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">
+                  <text x={350} y={245} textAnchor="middle" fill="#E87080" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">
                     consecutive failure ≥ 2 → adaptive recovery chain
                   </text>
                 </svg>

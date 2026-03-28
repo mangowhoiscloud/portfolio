@@ -101,6 +101,7 @@ export function AutomationSection() {
               { from: "hooks", to: "trigger" },
             ]}
             loopback={{ from: "trigger", to: "scheduler", label: "DRIFT_DETECTED → EVENT trigger → 재분석", color: "#C084FC" }}
+            nodeRadius={32}
             className="mb-8"
           />
         </ScrollReveal>

@@ -93,7 +93,7 @@ export function ContextTiersSection() {
                       fill={`${t.color}${isActive ? "0C" : "06"}`}
                       stroke={t.color}
                       strokeWidth={isActive ? 1.5 : 0.8}
-                      strokeOpacity={isActive ? 0.6 : 0.2}
+                      strokeOpacity={isActive ? 0.7 : 0.3}
                       style={{ transition: "all 0.3s" }}
                     />
                     {/* Scope badge */}
@@ -108,21 +108,21 @@ export function ContextTiersSection() {
                     </text>
                     {/* Path */}
                     <text x={x + 115} y={78} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.9 : 0.45}
+                      fillOpacity={isActive ? 0.95 : 0.55}
                       fontSize={13} fontFamily="ui-monospace, monospace" fontWeight={700}
                     >
                       {t.label.length > 22 ? t.label.slice(0, 20) + "…" : t.label}
                     </text>
                     {/* Dir count */}
                     <text x={x + 115} y={100} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.6 : 0.3}
+                      fillOpacity={isActive ? 0.7 : 0.4}
                       fontSize={10} fontFamily="ui-monospace, monospace"
                     >
                       {t.dirs.length} entries
                     </text>
                     {/* Data flow */}
                     <text x={x + 115} y={155} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.5 : 0.25}
+                      fillOpacity={isActive ? 0.6 : 0.35}
                       fontSize={9} fontFamily="ui-monospace, monospace"
                     >
                       {t.dataFlow}
