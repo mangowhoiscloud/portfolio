@@ -19,7 +19,7 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑧</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE: 실행 흐름 ⑧</p>
   </div>
 
   <!-- Title -->
@@ -36,11 +36,11 @@ body {
 
       <!-- Before → After -->
       <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; display: flex; flex-direction: column; gap: 5pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">MCP 아키텍처 진화: 3계층 &#8594; 2계층</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">MCP 아키텍처 진화: 3계층에서 2계층으로</p>
 
         <!-- Before -->
         <div style="background: #0D1117; border: 1pt solid #EF444440; border-radius: 4pt; padding: 6pt 9pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">BEFORE — 3계층 (병목)</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">BEFORE: 3계층 (병목)</p>
           <div style="display: flex; gap: 5pt; align-items: center;">
             <div style="background: #1E293B; border: 1pt solid #EF444440; border-radius: 4pt; padding: 4pt 7pt; text-align: center; flex: 1;">
               <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">MCPRegistry</p>
@@ -67,7 +67,7 @@ body {
 
         <!-- After -->
         <div style="background: #0D1117; border: 1pt solid #34D39940; border-radius: 4pt; padding: 6pt 9pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">AFTER — 2계층 (탐색 자유도)</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">AFTER: 2계층 (탐색 자유도)</p>
           <div style="display: flex; gap: 5pt; align-items: center;">
             <div style="background: #1E293B; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 4pt 7pt; text-align: center; flex: 1;">
               <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">Catalog</p>
@@ -106,7 +106,7 @@ body {
       <!-- TokenTracker -->
       <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt;">
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">TokenTracker — 자체 비용 추적</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 5pt;">LangSmith만으로는 모델별 비용 내역·캐시 히트율 추적이 어려워 자체 구축.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 5pt;">LangSmith만으로는 모델별 비용 내역과 캐시 히트율 추적이 어려웠기 때문에 자체 TokenTracker를 구축했다.</p>
         <div style="display: flex; flex-direction: column; gap: 3pt;">
           <div style="background: #0D1117; border-radius: 3pt; padding: 5pt 8pt; border-left: 3pt solid #4ECDC4;">
             <p style="font-size: 7pt; color: #E2E8F0;">ContextVar 싱글톤으로 호출마다 입출력 토큰 + cache_creation/cache_read 기록</p>
@@ -142,7 +142,7 @@ body {
       <!-- MCP-first + fixture -->
       <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 11pt; flex: 1;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">MCP-first + Fixture Fallback</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">5개 signal 도구: 라이브 환경에서는 MCP 직접 호출, 오프라인/CI에서는 fixture 데이터로 자동 전환 — 라이브 수집과 테스트를 동시에 보장.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">5개 signal 도구: 라이브 환경에서는 MCP 직접 호출, 오프라인/CI에서는 fixture 데이터로 자동 전환하여 라이브 수집과 테스트를 동시에 보장한다.</p>
         <div style="margin-top: 5pt; display: flex; gap: 6pt;">
           <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 5pt;">
             <p style="font-size: 16pt; font-weight: bold; color: #4ECDC4; line-height: 1;">45</p>

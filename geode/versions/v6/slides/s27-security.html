@@ -24,7 +24,7 @@ body {
 <!-- Title -->
 <div style="padding: 0 36pt 5pt;">
   <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Security: Bash 3-Layer + Dual Trust Model</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율 에이전트는 신뢰 경계가 없으면 시스템을 파괴한다 — PolicyChain이 실행 전 모든 명령을 검문한다</p>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율 에이전트는 신뢰 경계가 없으면 시스템을 파괴하기 때문에 PolicyChain이 실행 전 모든 명령을 검문한다</p>
 </div>
 
 <!-- Content: diagram + layers + dual trust -->
@@ -61,7 +61,7 @@ body {
 
     <!-- Dual Trust Model -->
     <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model — 두 독립 축</p>
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model: 두 독립 축</p>
       <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 2pt;">에이전트 안전과 파이프라인 검증은 독립 축이다. 에이전트는 입력을 차단(Input Gating), 파이프라인은 출력을 검증(Output Validation). 둘 다 통과해야만 결과가 신뢰된다.</p>
       <div style="display: flex; gap: 6pt;">
         <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
@@ -77,9 +77,8 @@ body {
     </div>
 
     <!-- Trade-off note -->
-    <div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
-      <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">Trade-off: 3-Layer 제어 비용</p>
-      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">L1 정적 분석 + L2 PolicyChain + L3 Seatbelt 모두 통과 시 지연이 있지만, 자율 에이전트가 시스템을 파괴한 사례가 0건인 것이 증거다.</p>
+    <div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 4pt 8pt;">
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #EF4444;">Trade-off: 3-Layer 제어 비용</strong> — L1 정적 분석 + L2 PolicyChain + L3 Seatbelt 모두 통과 시 지연이 있지만, 자율 에이전트가 시스템을 파괴한 사례가 0건인 것이 증거다.</p>
     </div>
 
   </div>

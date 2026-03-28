@@ -179,7 +179,7 @@ export function AgentsTasksSection() {
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#818CF8]/10 text-[#818CF8]/80 border border-[#818CF8]/15">PIPELINE</span>
-                  <span className="text-sm font-semibold text-white/80">TaskGraph — Game IP 가치추론</span>
+                  <span className="text-sm font-semibold text-white/80">TaskGraph. Game IP 가치추론</span>
                 </div>
                 <div className="overflow-x-auto -mx-4 px-4 pb-2">
                   <svg viewBox="0 0 740 200" className="w-full min-w-[600px]" style={{ maxHeight: 230 }}>
@@ -232,7 +232,7 @@ export function AgentsTasksSection() {
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#4ECDC4]/10 text-[#4ECDC4]/80 border border-[#4ECDC4]/15">AGENTIC</span>
-                  <span className="text-sm font-semibold text-white/80">TaskGraph — Agentic Loop Task System</span>
+                  <span className="text-sm font-semibold text-white/80">TaskGraph. Agentic Loop Task System</span>
                 </div>
                 <div className="overflow-x-auto -mx-4 px-4 pb-2">
                   <svg viewBox="0 0 700 180" className="w-full min-w-[540px]" style={{ maxHeight: 210 }}>
@@ -275,7 +275,7 @@ export function AgentsTasksSection() {
 
                     {/* ContextVar label */}
                     <text x={430} y={168} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.30} fontSize={9} fontFamily="ui-monospace, monospace">
-                      세션별 ContextVar — 독립 TaskGraph
+                      세션별 ContextVar. 독립 TaskGraph
                     </text>
 
                     {/* Dependency arrows between tasks */}

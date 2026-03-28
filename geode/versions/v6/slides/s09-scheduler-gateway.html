@@ -38,7 +38,7 @@ body {
     <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
       <div style="display: flex; align-items: center; gap: 6pt;">
         <div style="width: 4pt; height: 12pt; background: #4ECDC4; border-radius: 2pt;"></div>
-        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Scheduler — 시간 기반 자율 실행</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Scheduler: 시간 기반 자율 실행</p>
       </div>
 
       <!-- NL Parser + Types -->
@@ -169,8 +169,7 @@ body {
 
   <!-- Trade-off bar -->
   <div style="padding: 4pt 36pt 0pt;">
-    <div style="background: #1E293B; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 14pt; display: flex; align-items: center; gap: 10pt;">
-      <div style="width: 4pt; height: 24pt; background: #8B949E; border-radius: 2pt; flex-shrink: 0;"></div>
+    <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
       <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> Cron은 격리가 기본 — 메인 대화 오염 방지. 단, systemEvent로 메인 주입도 가능하여 격리와 연계를 선택할 수 있습니다. Gateway는 채널 추가 시 어댑터 1개만 구현하면 됩니다.</p>
     </div>
   </div>

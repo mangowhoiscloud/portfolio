@@ -19,13 +19,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #F97316; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #F97316;">HE-1 DEEP DIVE — 실행 흐름 ②</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #F97316;">HE-1 DEEP DIVE: 실행 흐름 ②</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Hook System: 도구 실행 중 46개 이벤트 발화 &#8594; 리플 패턴</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">하드코딩 콜백으로는 확장 불가 &#8594; Claude Code·Devin·OpenHands 리서치 후 8카테고리 46이벤트로 개편</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">하드코딩 콜백으로는 확장이 불가능했기 때문에 Claude Code·Devin·OpenHands 리서치 후 8카테고리 46이벤트로 개편했다</p>
   </div>
 
   <!-- Main content -->
@@ -39,7 +39,7 @@ body {
         <p style="font-size: 7.5pt; color: #E2E8F0; line-height: 1.45; margin-bottom: 5pt;">
           <strong style="color: #F97316;">문제:</strong> 하드코딩 콜백으로는 확장 불가. 프론티어 3종 리서치 후 <strong>8카테고리 46이벤트</strong>로 개편.
         </p>
-        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">리플 패턴 실행 예시 — PIPELINE_END 발화 시:</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">리플 패턴 실행 예시: PIPELINE_END 발화 시</p>
         <div style="display: flex; flex-direction: column; gap: 2pt;">
           <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 4pt 8pt;">
             <p style="font-size: 6.5pt; font-weight: bold; color: #34D399; min-width: 26pt;">P50</p>
@@ -64,37 +64,37 @@ body {
           <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
             <div style="background: #0D1117; border: 1pt solid #F9731640; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Pipeline Lifecycle</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events — START · END · ERROR</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events: START · END · ERROR</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Node Execution</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4 events — ENTER · EXIT · RETRY · ERROR</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4 events: ENTER · EXIT · RETRY · ERROR</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Analysis / Verify</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">6 events — COMPLETE · FAIL · ESCALATE</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">6 events: COMPLETE · FAIL · ESCALATE</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Memory Storage</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4 events — SAVE · LOAD · UPDATE · PURGE</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4 events: SAVE · LOAD · UPDATE · PURGE</p>
             </div>
           </div>
           <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Prompt Change</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events — ASSEMBLE · CACHE · UPDATE</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events: ASSEMBLE · CACHE · UPDATE</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Sub-Agent</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">5 events — SPAWN · COMPLETE · FAIL · TIMEOUT</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">5 events: SPAWN · COMPLETE · FAIL · TIMEOUT</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Context Overflow</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events — 80% · 95% · OVERFLOW_ACTION</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events: 80% · 95% · OVERFLOW_ACTION</p>
             </div>
             <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1;">
               <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Tool HITL</p>
-              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events — REQUESTED · GRANTED · DENIED</p>
+              <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">3 events: REQUESTED · GRANTED · DENIED</p>
             </div>
           </div>
         </div>
@@ -109,19 +109,19 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">HOOK MATURITY MODEL</p>
         <div style="display: flex; flex-direction: column; gap: 3pt;">
           <div style="background: #F9731610; border: 1pt dashed #F9731440; border-radius: 4pt; padding: 4pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy — 백로그</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy: 백로그</p>
             <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">승인 이력 &#8594; 자동 승인 룰 학습</p>
           </div>
           <div style="background: #F5C54210; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 4pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L3 Decide — 현재 프론티어</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L3 Decide: 현재 프론티어</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> CONTEXT_OVERFLOW_ACTION 전략 위임</p>
           </div>
           <div style="background: #4ECDC410; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 4pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React — 자동 반응</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React: 자동 반응</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> DRIFT &#8594; 스냅샷 · PIPELINE_END &#8594; MEMORY.md</p>
           </div>
           <div style="background: #34D39910; border: 1pt solid #34D39940; border-radius: 4pt; padding: 4pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L1 Observe — 기록만</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L1 Observe: 기록만</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> RunLog: ALL 46 events &#8594; runs.jsonl</p>
           </div>
         </div>
@@ -134,9 +134,8 @@ body {
       </div>
 
       <!-- Trade-off -->
-      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 7pt 11pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">Trade-off: Observer 오버헤드 vs 확장성</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">단순 콜백보다 초기 등록 오버헤드가 있지만, 핸들러 간 에러 격리 덕분에 46이벤트가 독립적으로 확장된다.</p>
+      <div style="background: #1E293B; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 5pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #F97316;">Trade-off: Observer 오버헤드 vs 확장성</strong> — 단순 콜백보다 초기 등록 오버헤드가 있지만, 핸들러 간 에러 격리 덕분에 46이벤트가 독립적으로 확장된다.</p>
       </div>
     </div>
   </div>

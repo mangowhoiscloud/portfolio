@@ -62,7 +62,7 @@ export function ArchitectureSection() {
             6-Layer Stack
           </h2>
           <p className="text-[#8B9CC0] max-w-lg mb-4 leading-relaxed">
-            6개 레이어, 26개 포트. 의존성 주입으로 결합된 전 계층이{" "}
+            6개 레이어, 187개 모듈, 26개 포트. 의존성 주입으로 결합된 전 계층이{" "}
             <code className="text-[#818CF8]/70 text-[13px]">compile_graph()</code> 한 번에
             부팅됩니다 . cold start ~15초.
           </p>

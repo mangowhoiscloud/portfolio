@@ -19,13 +19,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑦</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE: 실행 흐름 ⑦</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">PromptAssembler: 다음 턴 준비 &#8594; 6-Phase 동적 조립 &#8594; SHA-256 추적</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">수동 편집으로는 변경 추적이 불가능하고 캐시 히트율이 떨어졌다 — 6-Phase 조립으로 2회차부터 입력 비용 10%</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">수동 편집으로는 변경 추적이 불가능하고 캐시 히트율이 떨어졌기 때문에 6-Phase 조립을 도입해 2회차부터 입력 비용을 10%로 낮췄다</p>
   </div>
 
   <!-- Main content -->
@@ -87,26 +87,26 @@ body {
       <!-- SHA-256 tracking -->
       <div style="background: #161B22; border-left: 3pt solid #4ECDC4; border: 1pt solid #21262D; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">SHA-256 변경 추적</p>
-        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">조립 후 SHA-256 해시 생성 — 동일 프롬프트 재조립 시 캐시 히트 판별. 수동 편집으로는 불가능했던 변경 추적을 코드 레벨에서 보장한다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">조립 후 SHA-256 해시를 생성하여 동일 프롬프트 재조립 시 캐시 히트를 판별한다. 수동 편집으로는 불가능했던 변경 추적을 코드 레벨에서 보장한다.</p>
         <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace; margin-top: 4pt;">hash = sha256(assembled_prompt) &#8594; cache_key</p>
       </div>
 
       <!-- Before/After + Trade-off -->
-      <div style="background: #1E293B; border: 1pt solid #818CF8; border-radius: 4pt; padding: 8pt 11pt; flex: 1;">
-        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Trade-off: 조립 복잡도(6단계) vs 비용 절감(90%) + 재현성</p>
+      <div style="background: #1E293B; border: 1pt solid #818CF8; border-radius: 4pt; padding: 6pt 11pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 2pt;">Trade-off: 조립 복잡도(6단계) vs 비용 절감(90%)과 재현성</p>
         <div style="display: flex; gap: 8pt;">
           <div style="flex: 1;">
-            <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">Before — 수동 편집 3대 문제</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">Before: 수동 편집 3대 문제</p>
             <ul style="padding-left: 12pt;">
-              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">변경 추적 불가 — drift 감지 없음</li>
-              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">캐시 히트율 저하 — 매 요청 100% 비용</li>
-              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">노드 간 프롬프트 불일치 — 7 노드 각자 편집</li>
+              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">변경 추적 불가: drift 감지 없음</li>
+              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">캐시 히트율 저하: 매 요청 100% 비용</li>
+              <li style="font-size: 6pt; color: #8B949E; line-height: 1.5;">노드 간 프롬프트 불일치: 7 노드 각자 편집</li>
             </ul>
           </div>
           <div style="flex: 1;">
-            <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">After — 6-Phase 조립</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">After: 6-Phase 조립</p>
             <ul style="padding-left: 12pt;">
-              <li style="font-size: 6pt; color: #E2E8F0; line-height: 1.5;">SHA-256으로 drift 감지 — 동일 해시면 재조립 스킵</li>
+              <li style="font-size: 6pt; color: #E2E8F0; line-height: 1.5;">SHA-256으로 drift 감지: 동일 해시면 재조립 스킵</li>
               <li style="font-size: 6pt; color: #34D399; line-height: 1.5;">캐시 100% 유지 — 2회차부터 입력 비용 10%</li>
               <li style="font-size: 6pt; color: #E2E8F0; line-height: 1.5;">7노드 동일 프롬프트 1 cache entry 공유</li>
             </ul>
@@ -137,13 +137,13 @@ body {
       <!-- 21 skills -->
       <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 3pt;">P3 — 21 Scaffold Skills</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">태스크 유형에 따라 필요한 스킬만 동적 선택 주입 — 프롬프트 크기 최적화.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">태스크 유형에 따라 필요한 스킬만 동적 선택해 주입하므로 프롬프트 크기가 최적화된다.</p>
       </div>
 
       <!-- PROMPT_ASSEMBLE hook -->
       <div style="background: #1E293B; border: 1pt solid #F9731440; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
         <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">PROMPT_ASSEMBLE hook</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">P6 완료 시 Prompt Change 카테고리 이벤트 발화 — 캐시 상태와 조립 결과를 관측 레이어에 전달.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">P6 완료 시 Prompt Change 카테고리 이벤트가 발화되어 캐시 상태와 조립 결과를 관측 레이어에 전달한다.</p>
       </div>
     </div>
 

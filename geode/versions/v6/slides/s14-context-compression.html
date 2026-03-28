@@ -19,13 +19,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑤</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE: 실행 흐름 ⑤</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Context Compression: 80% WARNING &#8594; 95% CRITICAL &#8594; 3-Phase 압축</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">컨텍스트 윈도우가 넘치면 루프가 강제 종료됐다 — Lossless Selection으로 정보 손실 없이 비용 0.03%로 절감</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">컨텍스트 윈도우가 넘치면 루프가 강제 종료됐기 때문에 Lossless Selection을 도입해 정보 손실 없이 비용을 0.03%로 절감했다</p>
   </div>
 
   <!-- Main content -->
@@ -37,8 +37,8 @@ body {
 
       <!-- Phase 1: Monitor -->
       <div style="background: #161B22; border-left: 3pt solid #4ECDC4; border: 1pt solid #21262D; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Phase 1 — MONITOR</p>
-        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">컨텍스트 사용률 상시 추적. <strong style="color: #F5C542;">80%</strong> 도달 시 CONTEXT_WARNING 이벤트 발화 — 루프는 계속 진행하되 compact 준비 신호를 핸들러에게 전달한다.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Phase 1: MONITOR</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">컨텍스트 사용률 상시 추적. <strong style="color: #F5C542;">80%</strong> 도달 시 CONTEXT_WARNING 이벤트를 발화하여 루프는 계속 진행하되 compact 준비 신호를 핸들러에게 전달한다.</p>
       </div>
 
       <!-- Arrow -->
@@ -48,7 +48,7 @@ body {
 
       <!-- Phase 2: Select -->
       <div style="background: #161B22; border-left: 3pt solid #F5C542; border: 1pt solid #21262D; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Phase 2 — LOSSLESS SELECT</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Phase 2: LOSSLESS SELECT</p>
         <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">Lossy 요약 대신 LLM이 코드로 관련 청크만 선별한다. 요약이 아니라 선택이기 때문에 <strong style="color: #4ECDC4;">정보 손실 0%</strong> — LLM 호출 비용 <strong style="color: #34D399;">0.03%</strong>로 절감. 깊이 3이면 서브에이전트 독립 200K window로 유효 컨텍스트 600K 선형 확장.</p>
         <div style="display: flex; gap: 5pt; margin-top: 5pt;">
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; border-left: 2pt solid #EF4444;">
@@ -57,7 +57,7 @@ body {
           </div>
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; border-left: 2pt solid #34D399;">
             <p style="font-size: 6pt; color: #34D399; font-weight: bold;">Lossless Selection</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">관련 청크만 선별 — 내용 유지</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">관련 청크만 선별, 내용 유지</p>
           </div>
         </div>
       </div>
@@ -69,14 +69,13 @@ body {
 
       <!-- Phase 3: Emergency -->
       <div style="background: #161B22; border-left: 3pt solid #EF4444; border: 1pt solid #EF444440; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Phase 3 — EMERGENCY PRUNE (95%)</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Phase 3: EMERGENCY PRUNE (95%)</p>
         <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;"><strong style="color: #EF4444;">95%</strong> 초과 시 CONTEXT_CRITICAL 이벤트 — 강제 pruning 발동. 최초 사용자 메시지 보존 + bridge 메시지 삽입 후 루프 재개.</p>
       </div>
 
       <!-- Trade-off -->
-      <div style="background: #1E293B; border: 1pt solid #818CF8; border-radius: 4pt; padding: 7pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Trade-off: 정보 손실 vs 크래시 방지</p>
-        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">Lossy 요약은 구현이 쉽지만 정보가 사라진다. Lossless Selection은 LLM 호출 비용이 있지만 0.03%의 비용으로 정보 손실을 막았다.</p>
+      <div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 4pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #818CF8;">Trade-off: 정보 손실 vs 크래시 방지</strong> — Lossy 요약은 구현이 쉽지만 정보가 사라진다. Lossless Selection은 LLM 호출 비용이 추가되지만 0.03% 비용으로 정보 손실을 막았다.</p>
       </div>
     </div>
 
@@ -89,15 +88,15 @@ body {
         <div style="display: flex; flex-direction: column; gap: 4pt;">
           <div style="background: #34D39915; border: 1pt solid #34D39940; border-radius: 4pt; padding: 5pt 10pt; display: flex; align-items: center; gap: 8pt;">
             <p style="font-size: 16pt; font-weight: bold; color: #34D399; line-height: 1; min-width: 44pt;">0-79%</p>
-            <p style="font-size: 7pt; color: #8B949E;">정상 운영 — 모니터링만</p>
+            <p style="font-size: 7pt; color: #8B949E;">정상 운영: 모니터링만</p>
           </div>
           <div style="background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 5pt 10pt; display: flex; align-items: center; gap: 8pt;">
             <p style="font-size: 16pt; font-weight: bold; color: #F5C542; line-height: 1; min-width: 44pt;">80%</p>
-            <p style="font-size: 7pt; color: #E2E8F0;">WARNING — Lossless Select 준비</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">WARNING: Lossless Select 준비</p>
           </div>
           <div style="background: #F9731615; border: 1pt solid #F9731640; border-radius: 4pt; padding: 5pt 10pt; display: flex; align-items: center; gap: 8pt;">
             <p style="font-size: 16pt; font-weight: bold; color: #F97316; line-height: 1; min-width: 44pt;">95%</p>
-            <p style="font-size: 7pt; color: #E2E8F0;">CRITICAL — Emergency Prune 발동</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">CRITICAL: Emergency Prune 발동</p>
           </div>
         </div>
       </div>

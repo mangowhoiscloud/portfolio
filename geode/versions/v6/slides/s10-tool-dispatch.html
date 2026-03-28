@@ -142,10 +142,9 @@ body {
       </div>
 
       <!-- Trade-off -->
-      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 11pt; flex: 1;">
-        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">Trade-off</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">병렬 실행 속도 때문에 T0-1은 <strong style="color: #4ECDC4;">asyncio.gather</strong>로 완전 병렬화하고, 안전 등급 보장 때문에 T3-4는 순차 개별 승인으로 격리했다.</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt; font-family: 'Courier New', monospace;">MAX_CONSECUTIVE_FAILURES = 2 &#183; max_recovery = 3</p>
+      <div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #4ECDC4;">Trade-off:</strong> 병렬 실행 속도 때문에 T0-1은 <strong style="color: #4ECDC4;">asyncio.gather</strong>로 완전 병렬화하고, 안전 등급 보장 때문에 T3-4는 순차 개별 승인으로 격리했다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; font-family: 'Courier New', monospace;">MAX_CONSECUTIVE_FAILURES = 2 &#183; max_recovery = 3</p>
       </div>
     </div>
   </div>
