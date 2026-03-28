@@ -75,45 +75,54 @@ export function MultiLlmSection() {
           {mode === "pipeline" && (
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
-                <svg viewBox="0 0 740 180" className="w-full min-w-[540px]" style={{ maxHeight: 210 }}>
-                  {/* Opus block — covers all nodes */}
-                  <rect x={20} y={20} width={520} height={140} rx={12} fill="none" stroke="#F4B8C8" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={280} y={14} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary, 전 노드)</text>
+                <svg viewBox="0 0 800 170" className="w-full min-w-[600px]" style={{ maxHeight: 200 }}>
+                  {/* Opus Primary group */}
+                  <rect x={15} y={15} width={460} height={120} rx={12} fill="none" stroke="#F4B8C8" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
+                  <text x={245} y={10} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary)</text>
 
-                  {/* Pipeline nodes */}
+                  {/* Pipeline nodes — evenly spaced */}
                   {[
-                    { x: 55, label: "Router" },
-                    { x: 145, label: "Analyst×4" },
-                    { x: 245, label: "Eval×3" },
-                    { x: 335, label: "Scoring" },
+                    { x: 60, label: "Router" },
+                    { x: 155, label: "Analyst×4" },
+                    { x: 255, label: "Eval×3" },
+                    { x: 345, label: "Scoring" },
                     { x: 435, label: "Synth" },
                   ].map((n, i) => (
                     <g key={n.label}>
-                      <rect x={n.x - 38} y={50} width={76} height={40} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.6} strokeOpacity={0.35} />
-                      <text x={n.x} y={74} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                      {i < 4 && <line x1={n.x + 38} y1={70} x2={n.x + 52} y2={70} stroke="white" strokeOpacity={0.08} strokeWidth={1} />}
+                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
+                      <text x={n.x} y={63} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
+                      {i < 4 && <path d={`M${n.x + 36},59 C${n.x + 45},56 ${n.x + 55},56 ${n.x + 59},59`} stroke="white" strokeOpacity={0.15} strokeWidth={1} fill="none" />}
                     </g>
                   ))}
 
-                  {/* Verification — dual model */}
-                  <rect x={530} y={30} width={190} height={130} rx={12} fill="none" stroke="#34D399" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={625} y={24} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Cross-LLM Verification</text>
+                  {/* Arrow: Pipeline → Verification */}
+                  <path d="M471,59 C490,55 510,55 530,59" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
 
-                  <rect x={550} y={50} width={75} height={40} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.6} strokeOpacity={0.35} />
-                  <text x={587} y={67} textAnchor="middle" fill="#F4B8C8" fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
-                  <text x={587} y={80} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
+                  {/* Cross-LLM Verification group */}
+                  <rect x={520} y={15} width={265} height={120} rx={12} fill="none" stroke="#34D399" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
+                  <text x={652} y={10} textAnchor="middle" fill="#34D399" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Cross-LLM Verification</text>
 
-                  <rect x={640} y={50} width={75} height={40} rx={8} fill="#0A0F1A" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.35} />
-                  <text x={677} y={67} textAnchor="middle" fill="#34D399" fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>GPT-5.4</text>
-                  <text x={677} y={80} textAnchor="middle" fill="#34D399" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">secondary</text>
+                  {/* Opus + GPT side by side */}
+                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={577} y={56} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
+                  <text x={577} y={70} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
 
-                  {/* Agreement */}
-                  <rect x={570} y={105} width={120} height={36} rx={8} fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.35} />
-                  <text x={630} y={120} textAnchor="middle" fill="#818CF8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement</text>
-                  <text x={630} y={133} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">≥ 0.67 · α ≥ 0.80</text>
+                  <rect x={635} y={40} width={85} height={38} rx={8} fill="#0A0F1A" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={677} y={56} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>GPT-5.4</text>
+                  <text x={677} y={70} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">secondary</text>
 
-                  {/* Arrow from pipeline to verification */}
-                  <line x1={473} y1={70} x2={530} y2={70} stroke="white" strokeOpacity={0.08} strokeWidth={1} />
+                  {/* Agreement — below, clear spacing */}
+                  <rect x={560} y={95} width={155} height={32} rx={8} fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={637} y={115} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement ≥ 0.67 · α ≥ 0.80</text>
+
+                  {/* Converge arrows from Opus+GPT to Agreement */}
+                  <path d="M577,78 C577,86 610,90 637,95" stroke="#818CF8" strokeOpacity={0.15} strokeWidth={0.8} fill="none" />
+                  <path d="M677,78 C677,86 660,90 637,95" stroke="#818CF8" strokeOpacity={0.15} strokeWidth={0.8} fill="none" />
+
+                  {/* Bottom annotation */}
+                  <text x={400} y={160} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">
+                    Opus 전 노드 Primary + GPT-5.4 Cross-LLM Secondary
+                  </text>
                 </svg>
               </div>
 
