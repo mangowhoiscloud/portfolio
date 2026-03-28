@@ -30,8 +30,8 @@ const evaluators = [
 
 /* ── Radar Chart: each axis individually shoots out from center ── */
 const CX = 150, CY = 150, R = 110;
-const ANIM_DURATION = 1200; // ms
-const STAGGER = 120; // ms between each axis
+const ANIM_DURATION = 500; // ms — fast snap
+const STAGGER = 60; // ms between each axis
 
 function easeOutCubic(t: number) { return 1 - Math.pow(1 - t, 3); }
 
