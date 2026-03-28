@@ -117,15 +117,17 @@ export function AutomationSection() {
               <text x={570} y={58} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
               <text x={570} y={75} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
 
-              {/* ── Feedback return arc (y=130~170, well below boxes) ── */}
-              <path d="M570,95 C575,130 550,155 400,160 C250,165 100,155 75,130 C65,118 55,105 55,95" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
+              {/* ── Feedback: two arcs with TriggerManager in between ── */}
+              {/* Arc 1: HookSystem → TriggerManager */}
+              <path d="M570,95 C575,125 540,145 475,150" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
+              {/* TriggerManager */}
+              <rect x={345} y={137} width={130} height={30} rx={8} fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.4} />
+              <text x={410} y={156} textAnchor="middle" fill="#C084FC" fillOpacity={0.7} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
+              {/* Arc 2: TriggerManager → Scheduler */}
+              <path d="M345,150 C260,145 160,135 75,120 C60,115 50,105 50,95" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
 
-              {/* TriggerManager — on the arc, not overlapping boxes */}
-              <rect x={310} y={140} width={110} height={28} rx={6} fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.3} />
-              <text x={365} y={158} textAnchor="middle" fill="#C084FC" fillOpacity={0.6} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
-
-              {/* Feedback description — below arc */}
-              <text x={360} y={192} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석</text>
+              {/* Feedback description */}
+              <text x={360} y={185} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석</text>
             </svg>
           </div>
         </ScrollReveal>

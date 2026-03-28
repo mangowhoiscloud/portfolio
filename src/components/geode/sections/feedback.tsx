@@ -30,23 +30,24 @@ export function FeedbackSection() {
         {/* 5-Phase SVG */}
         <ScrollReveal delay={0.1}>
           <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-            <svg viewBox="0 0 780 160" className="w-full min-w-[580px]" style={{ maxHeight: 190 }}>
+            <svg viewBox="0 0 750 170" className="w-full min-w-[560px]" style={{ maxHeight: 200 }}>
               {phases.map((p, i) => {
-                const x = 40 + i * 148;
+                const x = 20 + i * 146;
+                const w = 130;
                 return (
                   <g key={p.id}>
-                    <rect x={x} y={20} width={128} height={70} rx={10} fill="#0A0F1A" stroke={p.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                    <text x={x + 64} y={45} textAnchor="middle" fill={p.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{p.name}</text>
-                    <text x={x + 64} y={62} textAnchor="middle" fill={p.color} fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">Phase {p.id}</text>
+                    <rect x={x} y={25} width={w} height={60} rx={10} fill="#0C1220" stroke={p.color} strokeWidth={0.8} strokeOpacity={0.4} />
+                    <text x={x + w / 2} y={50} textAnchor="middle" fill={p.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{p.name}</text>
+                    <text x={x + w / 2} y={68} textAnchor="middle" fill={p.color} fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">Phase {p.id}</text>
                     {i < 4 && (
-                      <path d={`M${x + 128},55 C${x + 134},50 ${x + 142},50 ${x + 148},55`} stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
+                      <path d={`M${x + w},55 C${x + w + 5},50 ${x + w + 11},50 ${x + w + 16},55`} stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
                     )}
                   </g>
                 );
               })}
-              {/* Loopback */}
-              <path d="M768,90 C770,130 400,140 40,130 C38,110 38,100 40,90" fill="none" stroke="#F5C542" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
-              <text x={404} y={135} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">cycle → ModelRegistry promotion</text>
+              {/* Loopback — smooth U-arc below all boxes */}
+              <path d="M730,85 C735,120 680,140 400,145 C120,140 30,120 20,85" fill="none" stroke="#F5C542" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
+              <text x={375} y={155} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">cycle → ModelRegistry promotion</text>
             </svg>
           </div>
         </ScrollReveal>

@@ -9,8 +9,8 @@ function PipelineDag() {
   const W = 840;
   const H = 260;
   const yMid = 120;
-  const nR = 22; // node radius
-  const aR = 18; // analyst radius
+  const nR = 26; // node radius
+  const aR = 22; // analyst radius
 
   // X positions for main flow
   const xRouter = 45;
