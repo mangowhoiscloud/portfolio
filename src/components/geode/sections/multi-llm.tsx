@@ -170,38 +170,73 @@ export function MultiLlmSection() {
           {mode === "agentic" && (
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
-                <svg viewBox="0 0 720 170" className="w-full min-w-[540px]" style={{ maxHeight: 200 }}>
-                  {/* Failover chain: 4 boxes in a row */}
-                  {[
-                    { x: 20, w: 130, label: "Opus 4.6", sub: "Primary", color: "#F4B8C8" },
-                    { x: 190, w: 130, label: "Sonnet 4.6", sub: "Anthropic Failover", color: "#818CF8" },
-                    { x: 360, w: 130, label: "GPT-5.4", sub: "Cross-Provider", color: "#34D399" },
-                    { x: 530, w: 110, label: "GLM-5", sub: "Budget", color: "#F5C542" },
-                  ].map((m, i) => (
-                    <g key={m.label}>
-                      <rect x={m.x} y={40} width={m.w} height={50} rx={10} fill="#0A0F1A" stroke={m.color} strokeWidth={i === 0 ? 1 : 0.7} strokeOpacity={i === 0 ? 0.4 : 0.25} />
-                      <text x={m.x + m.w / 2} y={60} textAnchor="middle" fill={m.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{m.label}</text>
-                      <text x={m.x + m.w / 2} y={78} textAnchor="middle" fill={m.color} fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">{m.sub}</text>
-                      {i < 3 && (
-                        <>
-                          <line x1={m.x + m.w} y1={65} x2={[190, 360, 530][i]} y2={65} stroke="#E87080" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="3 3" />
-                          <text x={m.x + m.w + ([190, 360, 530][i] - m.x - m.w) / 2} y={56} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">fail</text>
-                        </>
-                      )}
-                    </g>
-                  ))}
+                <svg viewBox="0 0 760 260" className="w-full min-w-[580px]" style={{ maxHeight: 300 }}>
+                  <defs>
+                    <marker id="arr-fail" viewBox="0 0 7 5" refX="6" refY="2.5" markerWidth="6" markerHeight="5" orient="auto">
+                      <path d="M0,0 L7,2.5 L0,5" fill="#E87080" opacity={0.5} />
+                    </marker>
+                  </defs>
 
                   {/* Title */}
-                  <text x={360} y={22} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                    LLM Resilience. 런타임 프로바이더 교체
+                  <text x={380} y={22} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                    LLM Resilience. Port/Adapter DI 런타임 교체
                   </text>
 
-                  {/* Bottom: Haiku + retry policy */}
-                  <rect x={20} y={105} width={150} height={32} rx={6} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.2} />
-                  <text x={95} y={125} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">Haiku 4.5 Token Guard</text>
+                  {/* ── Anthropic provider group (Gold border) ── */}
+                  <rect x={20} y={35} width={310} height={100} rx={12} fill="rgba(217,119,87,0.04)" stroke="#D97757" strokeWidth={1.5} strokeOpacity={0.3} />
+                  <text x={175} y={52} textAnchor="middle" fill="#D97757" fillOpacity={0.6} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>Anthropic Provider</text>
 
-                  <text x={430} y={125} textAnchor="middle" fill="white" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">
-                    max 3 retries · exp backoff 2s~30s · MODEL_SWITCHED hook
+                  {/* Opus */}
+                  <rect x={35} y={65} width={130} height={55} rx={10} fill="#0C1220" stroke="#D97757" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={100} y={88} textAnchor="middle" fill="#D97757" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>Opus 4.6</text>
+                  <text x={100} y={106} textAnchor="middle" fill="#D97757" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">Primary</text>
+
+                  {/* fail arrow */}
+                  <path d="M165,92 C180,92 185,92 195,92" stroke="#E87080" strokeOpacity={0.35} strokeWidth={1.2} strokeDasharray="4 3" fill="none" markerEnd="url(#arr-fail)" />
+                  <text x={180} y={84} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">fail</text>
+
+                  {/* Sonnet */}
+                  <rect x={195} y={65} width={120} height={55} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={255} y={88} textAnchor="middle" fill="#818CF8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Sonnet 4.6</text>
+                  <text x={255} y={106} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">Failover</text>
+
+                  {/* ── Cross-provider fail ── */}
+                  <path d="M330,92 C350,92 365,92 385,92" stroke="#E87080" strokeOpacity={0.35} strokeWidth={1.2} strokeDasharray="4 3" fill="none" markerEnd="url(#arr-fail)" />
+                  <text x={358} y={84} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">fail</text>
+
+                  {/* ── OpenAI provider group (Teal border) ── */}
+                  <rect x={385} y={35} width={150} height={100} rx={12} fill="rgba(52,211,153,0.04)" stroke="#34D399" strokeWidth={1.5} strokeOpacity={0.3} />
+                  <text x={460} y={52} textAnchor="middle" fill="#34D399" fillOpacity={0.6} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>OpenAI Provider</text>
+                  <rect x={400} y={65} width={120} height={55} rx={10} fill="#0C1220" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={460} y={88} textAnchor="middle" fill="#34D399" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>GPT-5.4</text>
+                  <text x={460} y={106} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">Cross-Provider</text>
+
+                  {/* fail arrow */}
+                  <path d="M535,92 C555,92 565,92 580,92" stroke="#E87080" strokeOpacity={0.35} strokeWidth={1.2} strokeDasharray="4 3" fill="none" markerEnd="url(#arr-fail)" />
+                  <text x={558} y={84} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">fail</text>
+
+                  {/* ── GLM provider group (Gold border) ── */}
+                  <rect x={580} y={35} width={150} height={100} rx={12} fill="rgba(245,197,66,0.04)" stroke="#F5C542" strokeWidth={1.5} strokeOpacity={0.3} />
+                  <text x={655} y={52} textAnchor="middle" fill="#F5C542" fillOpacity={0.6} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>ZhipuAI Provider</text>
+                  <rect x={595} y={65} width={120} height={55} rx={10} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={655} y={88} textAnchor="middle" fill="#F5C542" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>GLM-5</text>
+                  <text x={655} y={106} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">Budget Fallback</text>
+
+                  {/* ── Bottom section: Haiku Token Guard + Retry Policy ── */}
+                  <rect x={20} y={155} width={340} height={55} rx={10} fill="rgba(78,205,196,0.04)" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.25} />
+                  <text x={190} y={175} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.7} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Haiku 4.5 Token Guard (Budget Tier)</text>
+                  <text x={190} y={195} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">SubAgent summary cap · context budget enforcement</text>
+
+                  <rect x={385} y={155} width={345} height={55} rx={10} fill="rgba(129,140,248,0.04)" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.25} />
+                  <text x={557} y={175} textAnchor="middle" fill="#818CF8" fillOpacity={0.7} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Retry Policy</text>
+                  <text x={557} y={195} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">max 3 retries · exp backoff 2s~30s · MODEL_SWITCHED hook</text>
+
+                  {/* Port/Adapter tags */}
+                  <text x={380} y={235} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">
+                    ClaudeAgenticAdapter · OpenAIAgenticAdapter · GlmAgenticAdapter
+                  </text>
+                  <text x={380} y={252} textAnchor="middle" fill="white" fillOpacity={0.15} fontSize={8} fontFamily="ui-monospace, monospace">
+                    update_model() 런타임 교체 · MODEL_SWITCHED hook · auto context window adapt
                   </text>
                 </svg>
               </div>

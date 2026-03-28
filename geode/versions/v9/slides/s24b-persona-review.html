@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">HE-0 SCAFFOLD</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">4-Persona Review: 구현 전 맹점 제거</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">단일 관점 리뷰는 Confirmation Bias로 자기 설계의 결함을 놓친다. 4인격이 각자 다른 failure mode를 담당하므로 한 시점의 맹점을 다른 시점이 잡는다.</p>
+</div>
+
+<!-- Content -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Left: 4 personas -->
+  <div style="flex: 1.3; display: flex; flex-direction: column; gap: 5pt;">
+
+    <!-- Beck -->
+    <div style="background: #161B22; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 42pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">Beck</p>
+        <p style="font-size: 6pt; color: #8B949E;">테스트 누락</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">레이어 의존성 역전 여부, 인터페이스 일관성, v0.40 생존 가능성을 검사한다. 상위 레이어가 하위를 직접 임포트하거나 플러그인 교체 시 코어 수정이 발생하면 블로킹한다.</p>
+      </div>
+    </div>
+
+    <!-- Karpathy -->
+    <div style="background: #161B22; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 42pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">Karpathy</p>
+        <p style="font-size: 6pt; color: #8B949E;">과잉 구현</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">토큰 비용, 지연 시간, 캐시 히트율을 기준으로 과잉 구현을 차단한다. LLM 호출을 줄이거나 컨텍스트를 재사용하는 더 단순한 경로가 있으면 반드시 제안한다.</p>
+      </div>
+    </div>
+
+    <!-- Steinberger -->
+    <div style="background: #161B22; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 42pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">Steinberger</p>
+        <p style="font-size: 6pt; color: #8B949E;">운영 장애</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Bash 인젝션, 권한 에스컬레이션, Trust Model 위반을 탐지한다. 외부 입력이 직접 shell로 전달되는 경로가 있으면 머지 전에 차단하므로 .env 파일 권한 취약점도 이 단계에서 포착한다.</p>
+      </div>
+    </div>
+
+    <!-- Cherny -->
+    <div style="background: #161B22; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 42pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399;">Cherny</p>
+        <p style="font-size: 6pt; color: #8B949E;">에이전트 안전</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">엣지 케이스, 회귀 가능성, 커버리지를 확인한다. 새로운 코드 경로가 3,216 기존 테스트를 깨거나 에이전트 루프 안전 조건을 위반하면 블로킹한다.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: trade-off + .env case study -->
+  <div style="width: 196pt; display: flex; flex-direction: column; gap: 6pt;">
+
+    <!-- Trade-off box -->
+    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 3pt; height: 12pt; background: #818CF8; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Trade-off: 4인 리뷰 비용</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4인 리뷰는 단일 리뷰보다 시간이 4배 걸린다. 그러나 머지 후 P0 보안 이슈를 발견하는 비용은 리뷰 비용의 10배를 넘는다. 리뷰 시간에 투자하면 사후 복구 비용을 회피하므로 순이익이 발생한다.</p>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 9pt;">
+        <p style="font-size: 6.5pt; color: #EF4444; line-height: 1.4;"><strong style="color: #EF4444;">실증:</strong> .env 환경변수를 LLM 프롬프트에 직접 삽입하는 경로를 Steinberger가 머지 전에 포착. CANNOT 규칙 추가로 API 키 유출 벡터 영구 차단.</p>
+      </div>
+    </div>
+
+    <!-- Design rationale -->
+    <div style="background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 10pt 12pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 3pt; height: 12pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">왜 4명인가</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4명의 페르소나는 각각 다른 failure mode를 담당한다. Beck은 테스트 누락, Karpathy는 과잉 구현, Steinberger는 운영 장애, Cherny는 에이전트 안전을 맡는다. 한 시점에서는 놓치는 결함을 다른 시점이 잡으므로, 단일 설계자의 Confirmation Bias가 구조적으로 제거된다.</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">4인격은 별도 LLM 세션이 아니다. 동일 컨텍스트에서 역할을 명시적으로 전환하는 프롬프트 패턴이므로 비용은 1회 추론이다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 · Beck × Karpathy × Steinberger × Cherny: 4인격 1세션</p>
+  <p style="font-size: 5pt; color: #8B949E;">26b / 35</p>
+</div>
+
+</body>
+</html>

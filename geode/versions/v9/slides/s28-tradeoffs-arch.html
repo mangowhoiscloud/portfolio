@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION &middot; TRADE-OFFS</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 6pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">핵심 Trade-off 8선: 포기하지 않은 설계 결정은 결정이 아니다</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">아키텍처, 에이전트 실행, 인프라 전반. 모든 피봇은 CHANGELOG에 &ldquo;왜&rdquo;가 기록되어 있다</p>
+</div>
+
+<!-- Content: 2-column running-text list -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 14pt; min-height: 0;">
+
+  <!-- Left column: 4 entries -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">Port/Adapter DI</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">직접 호출 단순성을 포기하고 DI를 도입하니 GEODE&rarr;REODE 이식 시 코어 코드 변경 0줄이 된다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">Lossless Context Selection</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">단순 요약(빠르지만 정보 손실)을 버리고 LLM이 직접 청크를 선별하게 하니 비용 0.03%로 절감되면서 정보 손실이 사라진다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">5-Tier Safety: 병렬 vs 순차</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">T3-4 병렬 처리 속도를 포기하고 DANGEROUS 명령은 개별 순차 승인으로 격리하니 권한 에스컬레이션 경로가 차단된다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">Sub-Agent 4096 Token Guard</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">자식 출력 전체 반환(완전한 컨텍스트)을 포기하고 4096 guard를 적용하니 부모 컨텍스트 폭발이 방지되어 MAX_CONCURRENT=5 병렬이 가능해진다.</p>
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+  <div style="width: 1pt; background: #21262D;"></div>
+
+  <!-- Right column: 4 entries -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">SHA-256 PromptAssembler</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">수동 편집의 즉각성을 포기하고 6-Phase 조립과 SHA-256 추적을 도입하니 cache_control ephemeral로 2회차 입력 비용이 10%로 준다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">MCPRegistry 삭제</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">중앙 집중 도구 관리(단일 조회 포인트)를 포기하고 auto-discovery를 채택하니 proxy stub 9개가 제거되고 45 MCP 서버를 자동 등록할 수 있게 된다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #F97316; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">Hook Priority 핸들러 순서 보장</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">병렬 핸들러 처리량을 포기하고 Priority 정렬을 넣으니 Security 핸들러가 Logging보다 항상 먼저 실행되는 것이 보장된다.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #F97316; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">50 Rounds &times; 200 Turns 상한</p>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">완전 자율(무제한 실행)을 포기하고 수렴 감지 + 비용 상한을 도입했더니 파이프라인 폭주가 차단되고 장기 운용 비용이 예측 가능해졌다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 &middot; 40 releases &middot; 모든 피봇 CHANGELOG 기록</p>
+  <p style="font-size: 5pt; color: #8B949E;">30 / 35</p>
+</div>
+
+</body>
+</html>

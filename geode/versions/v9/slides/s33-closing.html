@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+</style>
+</head>
+<body>
+
+<!-- Background image (full bleed, dimmed) -->
+<img src="assets/bg-cover.png" style="position: absolute; top: 0; left: 0; width: 720pt; height: 405pt; object-fit: cover; opacity: 0.12; z-index: 0;">
+
+<!-- Content layer -->
+<div style="position: relative; z-index: 1; display: flex; flex-direction: column; height: 405pt;">
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">CLOSING</p>
+    <div style="flex: 1;"></div>
+    <p style="font-size: 8pt; color: #8B949E;">GEODE v0.32.0 · Feb 21 to Mar 28, 2026</p>
+  </div>
+
+  <!-- Main content row -->
+  <div style="flex: 1; display: flex; gap: 16pt; padding: 4pt 36pt; align-items: stretch;">
+
+    <!-- Left: thesis callback + Triple Loop mini + value props -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt; justify-content: center;">
+
+      <!-- Opening thesis callback -->
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 10pt 14pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Opening Thesis</p>
+        <p style="font-size: 9pt; color: #FFFFFF; line-height: 1.6; font-weight: bold;">"확률적 시스템(LLM)은 제어 없이 발산합니다.<br>발산을 루프와 가치로 수렴시키는 하네스를 만듭니다."</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 6pt; line-height: 1.5;">GEODE v0.32.0: 36일, 1,174 커밋, 40 릴리스. 이 숫자들이 명제의 실증이다.</p>
+      </div>
+
+      <!-- Triple Loop mini -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 14pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 6pt;">Triple Loop: 하네스의 3개 피드백 사이클</p>
+        <div style="display: flex; gap: 8pt; align-items: center;">
+          <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">META Loop</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Frontier → CANNOT → 다음 설계</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4;">→</p>
+          <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">DEV Loop</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">8-Step → PR → CHANGELOG</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4;">→</p>
+          <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RUNTIME Loop</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">while(tool_use) → Hook → LEARNINGS</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 value propositions -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 14pt; display: flex; flex-direction: column; gap: 5pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">3 Value Propositions</p>
+        <div style="display: flex; align-items: flex-start; gap: 8pt;">
+          <div style="width: 3pt; height: 3pt; background: #818CF8; border-radius: 50%; margin-top: 5pt; flex-shrink: 0;"></div>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #818CF8; font-weight: bold;">Scaffold:</span> 23 CANNOT + 21 Skills로 LLM 자율성과 제어의 균형을 잡는 방법론</p>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 8pt;">
+          <div style="width: 3pt; height: 3pt; background: #4ECDC4; border-radius: 50%; margin-top: 5pt; flex-shrink: 0;"></div>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #4ECDC4; font-weight: bold;">Autonomous:</span> 50R × 200T 장기 실행을 비용 상한 + 수렴 감지로 안정 운용하는 기술</p>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 8pt;">
+          <div style="width: 3pt; height: 3pt; background: #34D399; border-radius: 50%; margin-top: 5pt; flex-shrink: 0;"></div>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399; font-weight: bold;">Portable:</span> GEODE → REODE 이식: 하네스가 도메인을 선택하지 않는 구조</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: mascot + contact -->
+    <div style="width: 155pt; display: flex; flex-direction: column; align-items: center; gap: 10pt; justify-content: center;">
+
+      <img src="assets/mascot.png" style="width: 110pt; height: 110pt; object-fit: contain;">
+
+      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 12pt; width: 100%; text-align: center; display: flex; flex-direction: column; gap: 6pt;">
+        <p style="font-size: 13pt; font-weight: bold; color: #FFFFFF;">류지환</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Harness Engineer</p>
+        <div style="border-top: 1px solid #21262D; padding-top: 6pt; display: flex; flex-direction: column; gap: 4pt;">
+          <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace;">GEODE · REODE</p>
+          <p style="font-size: 7pt; color: #8B949E;">v0.32.0 · 1,174 commits</p>
+          <p style="font-size: 7pt; color: #8B949E;">Feb 21 to Mar 28, 2026</p>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; width: 100%; text-align: center;">
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">감사합니다.<br>질문은 언제든 환영합니다.</p>
+      </div>
+      <div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt; width: 100%;">
+        <p style="font-size: 6pt; color: #8B949E; line-height: 1.4; text-align: center;"><strong style="color: #4ECDC4;">핵심 Trade-off:</strong> 자율성을 높이면 안전 비용이 오른다. 46 Hook + 3 Brake + 5-Tier로 그 비용을 지불하고, 36일 무중단 실행이 수익이다.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">Anthropic / OpenAI / ZhipuAI · 3 Providers · 187 Modules · 3,216 Tests</p>
+    <p style="font-size: 5pt; color: #8B949E;">35 / 35</p>
+  </div>
+
+</div>
+</body>
+</html>

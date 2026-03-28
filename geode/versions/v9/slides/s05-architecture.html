@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">PART 1 · WHAT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">6-Layer Architecture: 187 모듈이 수직 분리된 이유</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">단일 계층으로 설계하면 LLM 교체 시 전체를 다시 짜야 하므로 Port/Adapter로 6-Layer를 수직 분리한다</p>
+  </div>
+
+  <!-- Content: diagram + right side cards -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: flex-start;">
+
+    <!-- Diagram -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <img src="assets/v028-diagram-3tier.png" style="width: 400pt; height: 186pt; border-radius: 4pt; object-fit: contain;">
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; text-align: center;">6-Layer 수직 분리 · Hook이 모든 계층을 횡단</p>
+    </div>
+
+    <!-- Right: stat + rationale cards -->
+    <div style="flex: 0 0 186pt; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Module / Hook stats -->
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; display: flex; gap: 10pt;">
+        <div style="text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4; line-height: 1;">187</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Python Modules</p>
+        </div>
+        <div style="width: 1pt; background: #21262D;"></div>
+        <div style="text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #F97316; line-height: 1;">46</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Hook Events</p>
+        </div>
+      </div>
+
+      <!-- 왜 6-Layer: Trade-off box -->
+      <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Trade-off: 왜 6-Layer인가</p>
+        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">3-Layer(Presentation/Business/Data)는 에이전트에 맞지 않는다. 도구, 메모리, 오케스트레이션이 독립적으로 교체되어야 하므로 6-Layer로 분리한다.</p>
+        <p style="font-size: 6.5pt; color: #F5C542; line-height: 1.5; margin-bottom: 3pt;"><strong>비용:</strong> 레이어 간 Protocol 정의가 필요하다.</p>
+        <p style="font-size: 6.5pt; color: #34D399; line-height: 1.5;"><strong>결과:</strong> GEODE→REODE 피봇 시 L5만 교체하고 L0-L4는 그대로 유지한다.</p>
+      </div>
+
+      <!-- Hook 분리 이유 -->
+      <div style="background: #161B22; border: 1px solid #F97316; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">왜 Hook을 L3에서 분리하는가</p>
+        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">Hook을 L3 오케스트레이션에 두면 L0-L4 전체가 L3에 의존하는 역전 구조가 발생한다. 이를 막기 위해 Hook을 cross-cutting 모듈로 독립시킨다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">46개 이벤트가 L0-L5 모든 계층을 관측하되 어느 계층에도 종속되지 않는다.</p>
+      </div>
+
+      <!-- Layer 역할 요약 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">교체 단위로서의 계층</p>
+        <ul style="margin-left: 10pt;">
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">LLM 교체 → L4만 변경</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">메모리 백엔드 교체 → L5만 변경</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">도구 추가 → L3만 확장</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">187 modules · 3,216 tests · 46 hooks · v0.32.0</p>
+    <p style="font-size: 6pt; color: #8B949E;">05 / 35</p>
+  </div>
+
+</body>
+</html>
