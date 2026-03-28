@@ -184,15 +184,15 @@ export function AgentsTasksSection() {
                 <div className="overflow-x-auto -mx-4 px-4 pb-2">
                   <svg viewBox="0 0 740 200" className="w-full min-w-[600px]" style={{ maxHeight: 230 }}>
                     <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
-                      <line x1={70} y1={100} x2={145} y2={100} />
+                      <path d="M70,100 C95,96 120,96 145,100" fill="none" />
                       {[40, 80, 120, 160].map((y) => (
                         <path key={y} d={`M170,100 C200,100 210,${y} 250,${y}`} />
                       ))}
                       {[40, 80, 120, 160].map((y) => (
                         <path key={`e${y}`} d={`M310,${y} C340,${y} 350,100 380,100`} />
                       ))}
-                      <line x1={440} y1={100} x2={495} y2={100} />
-                      <line x1={560} y1={100} x2={615} y2={100} />
+                      <path d="M440,100 C455,96 480,96 495,100" fill="none" />
+                      <path d="M560,100 C575,96 600,96 615,100" fill="none" />
                     </g>
                     {[
                       { x: 50, y: 100, label: "Router", color: "#4ECDC4" },

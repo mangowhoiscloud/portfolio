@@ -66,14 +66,14 @@ export function ReasoningSection() {
                   <text x={105} y={83} textAnchor="middle" fill="#60A5FA" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>OBSERVE</text>
                   <text x={105} y={100} textAnchor="middle" fill="#60A5FA" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">LLM call + context</text>
 
-                  <line x1={170} y1={90} x2={230} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
+                  <path d="M170,90 C190,86 210,86 230,90" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
 
                   {/* ACT */}
                   <rect x={230} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={295} y={83} textAnchor="middle" fill="#4ECDC4" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>ACT</text>
                   <text x={295} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">tool execution</text>
 
-                  <line x1={360} y1={90} x2={420} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
+                  <path d="M360,90 C380,86 400,86 420,90" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
 
                   {/* REFLECT */}
                   <rect x={420} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
