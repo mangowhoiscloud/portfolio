@@ -25,7 +25,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Memory + Auto-Learning: 턴 종료 &#8594; TURN_COMPLETE hook &#8594; MEMORY.md 자동 학습</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">분석 세션이 끝나면 인사이트가 휘발됐기 때문에 PIPELINE_END 이벤트가 MEMORY.md에 자동 축적하여 다음 세션에 반영합니다</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">세션이 끝나면 인사이트가 휘발되는 문제 때문에 PIPELINE_END 이벤트를 설계해 MEMORY.md에 자동 축적하고, 다음 세션 PromptAssembler P4가 이를 주입한다</p>
   </div>
 
   <!-- Main content -->
@@ -140,7 +140,7 @@ body {
       <!-- Failover memory guarantee -->
       <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 11pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 3pt;">Provider Failover 후에도 메모리 유지</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">4-Tier 메모리가 LLMClientPort 추상화 위에 있기 때문에 Provider 전환 후에도 세션 학습 내용이 사라지지 않는다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">Provider Failover 시 메모리가 함께 사라지는 버그가 있었기 때문에 4-Tier 메모리를 LLMClientPort 추상화 위에 배치했다. 이제 Provider 전환 후에도 세션 학습이 유지된다.</p>
       </div>
 
       <!-- Trade-off -->

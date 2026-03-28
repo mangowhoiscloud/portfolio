@@ -28,7 +28,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">장시간 운용을 위한 2가지 혁신: Plan-first + Provider-aware Compaction</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">복잡한 작업의 사전 계획 + 컨텍스트 포화를 프로바이더별 전략으로 해결</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">잘못된 방향으로 50 rounds 소모를 막기 위해 Plan-first를 도입했고, 컨텍스트 포화가 프로바이더마다 달랐기 때문에 Provider-aware Compaction을 분리했다</p>
   </div>
 
   <!-- Content: two halves -->
@@ -79,7 +79,7 @@ body {
         </div>
 
         <div style="margin-top: 6pt; background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
-          <p style="font-size: 6pt; color: #8B949E;">잘못된 방향으로 50 rounds를 소모하기 전에 사람이 개입할 수 있습니다.</p>
+          <p style="font-size: 6pt; color: #8B949E;">잘못된 방향으로 50 rounds를 소모하기 전에 사람이 개입할 수 있다.</p>
           <p style="font-size: 6pt; color: #F97316; margin-top: 2pt; font-family: 'Courier New', monospace;">LLM.create_plan() → user_approval_gate</p>
         </div>
       </div>
@@ -130,7 +130,7 @@ body {
 
         <!-- Hook -->
         <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
-          <p style="font-size: 6pt; color: #8B949E;">context_action.py hook이 프로바이더를 감지하여 전략을 자동 선택합니다.</p>
+          <p style="font-size: 6pt; color: #8B949E;">Anthropic과 OpenAI의 캐시 규칙이 달라서 단일 압축 전략을 쓰면 캐시 히트율이 붕괴한다. context_action.py hook이 프로바이더를 감지해 전략을 자동 분기한다.</p>
           <p style="font-size: 6pt; color: #818CF8; font-family: 'Courier New', monospace; margin-top: 2pt;">context_action.py → provider_strategy()</p>
         </div>
 
@@ -142,7 +142,7 @@ body {
   <!-- Trade-off bar -->
   <div style="padding: 4pt 36pt 0pt;">
     <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
-      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> 서버사이드 compaction은 API 종속적이지만 품질 최상. 클라이언트는 범용적이지만 lossy. Plan-first는 자율성을 일부 제한하지만 잘못된 방향의 50 rounds 낭비를 사전 차단합니다.</p>
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> 서버사이드 compaction은 API 종속적이지만 품질 최상. 클라이언트는 범용적이지만 lossy. Plan-first는 자율성을 일부 제한하지만 잘못된 방향의 50 rounds 낭비를 사전 차단한다.</p>
     </div>
   </div>
 

@@ -24,7 +24,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">AgenticLoop: while(tool_use) 50 rounds × 200-turn Window</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Claude Code 패턴을 참고해 설계 — 5가지 경로로만 종료합니다</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Claude Code while(tool_use) 패턴을 참고했고, 제어 없이 실행하면 무한 소모이기 때문에 5가지 종료 경로로 수렴을 강제했다</p>
   </div>
 
   <!-- Content: diagram + termination conditions -->
@@ -61,11 +61,11 @@ body {
       <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">5가지 종료 경로</p>
         <ul style="margin-left: 10pt;">
-          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #34D399;">end_turn</strong> — LLM이 tool_use 없이 응답</li>
-          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #EF4444;">max_rounds</strong> — 50라운드 도달</li>
-          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #F97316;">convergence</strong> — 동일 에러 3회 반복 감지</li>
-          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #F5C542;">force_text</strong> — 잔여 2라운드에서 텍스트 강제</li>
-          <li style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #818CF8;">budget_stop</strong> — 세션 비용 상한 초과</li>
+          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #34D399;">end_turn</strong>: LLM이 tool_use 없이 응답</li>
+          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #EF4444;">max_rounds</strong>: 50라운드 도달</li>
+          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #F97316;">convergence</strong>: 동일 에러 3회 반복 감지</li>
+          <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 3pt;"><strong style="color: #F5C542;">force_text</strong>: 잔여 2라운드에서 텍스트 강제</li>
+          <li style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #818CF8;">budget_stop</strong>: 세션 비용 상한 초과</li>
         </ul>
       </div>
 
@@ -79,7 +79,7 @@ body {
       <!-- 왜 max 50 rounds -->
       <div style="background: #1E293B; border: 1px solid #4ECDC460; border-radius: 6pt; padding: 9pt 12pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">왜 max 50 rounds?</p>
-        <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">실측 기반: 평균 <strong style="color: #34D399;">4.2 라운드</strong>에 자연 종료(end_turn). 50은 탈출 불가 상황의 안전망 — 긴 분석 작업에서 드물게 30+ 라운드 도달.</p>
+        <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">실측 기반: 평균 <strong style="color: #34D399;">4.2 라운드</strong>에 자연 종료(end_turn). 50은 탈출 불가 상황의 안전망이며 긴 분석 작업에서 드물게 30+ 라운드 도달.</p>
         <div style="display: flex; gap: 4pt;">
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
             <p style="font-size: 11pt; font-weight: bold; color: #34D399; line-height: 1.1;">4.2</p>

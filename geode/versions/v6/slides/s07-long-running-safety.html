@@ -55,7 +55,7 @@ body {
         <!-- Solution -->
         <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크: 인과 흐름</p>
-          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">TokenTracker가 매 턴 비용 누적 → budget 상한 도달 시 budget_stop 신호 → LOOP_END 강제 발화. 사람 없이 비용 상한을 보장합니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">TokenTracker가 매 턴 비용 누적 → budget 상한 도달 시 budget_stop 신호 → LOOP_END 강제 발화. 사람 없이 비용 상한을 보장한다.</p>
         </div>
 
         <!-- Karpathy badge -->
@@ -77,7 +77,7 @@ body {
         <!-- Problem -->
         <div style="background: #1A0D00; border-radius: 4pt; padding: 6pt 8pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #F97316;">위험: 수렴 고착의 비용</p>
-          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">LLM이 동일한 에러를 반복하면 50 rounds 전체를 낭비. 동일 요청에 $7.50를 태우고 실패를 반환합니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">LLM이 동일한 에러를 반복하면 50 rounds 전체를 낭비한다. 동일 요청에 $7.50를 태우고 실패를 반환하는 구조적 낭비다.</p>
         </div>
 
         <!-- Solution -->
@@ -105,13 +105,13 @@ body {
         <!-- Problem -->
         <div style="background: #1A1500; border-radius: 4pt; padding: 6pt 8pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">위험: 탐색 편향의 결과</p>
-          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 도구만 반복 호출하면 탐색 공간이 좁아지고, 다른 접근법으로 해결 가능한 문제를 50 rounds 내내 놓칩니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 도구만 반복 호출하면 탐색 공간이 좁아지고, 다른 접근법으로 해결 가능한 문제를 50 rounds 내내 놓친다.</p>
         </div>
 
         <!-- Solution -->
         <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크: 인과 흐름</p>
-          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">도구 반복 <strong style="color: #FFFFFF;">5회</strong> 감지 → Hook이 hint 메시지 자동 주입 → LLM이 다른 도구 경로를 탐색. 다양성을 구조적으로 강제합니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">도구 반복 <strong style="color: #FFFFFF;">5회</strong> 감지 → Hook이 hint 메시지 자동 주입 → LLM이 다른 도구 경로를 탐색. 다양성을 구조적으로 강제한다.</p>
         </div>
 
         <!-- Badge -->
@@ -125,7 +125,7 @@ body {
 
     <!-- Trade-off bar -->
     <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
-      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off: 자율성 vs 안전</strong> — 브레이크가 강할수록 자율 실행 범위가 줄어듭니다. 3가지 임계값(budget 한도, 수렴 횟수 3회, 반복 횟수 5회)은 사용자가 조정 가능하며, 기본값은 실험적으로 도출했습니다.</p>
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off: 자율성 vs 안전</strong> 브레이크가 강할수록 자율 실행 범위가 줄어든다. 3가지 임계값(budget 한도, 수렴 횟수 3회, 반복 횟수 5회)은 사용자가 조정 가능하며, 기본값은 실험적으로 도출했다.</p>
     </div>
 
   </div>

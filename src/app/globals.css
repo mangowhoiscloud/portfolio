@@ -102,6 +102,16 @@ body {
   100% { opacity: 0; }
 }
 
+@keyframes radar-expand {
+  0% { transform: scale(0); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-radar-expand {
+  animation: radar-expand 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: center;
+}
+
 /* Noise texture overlay */
 .noise::after {
   content: '';

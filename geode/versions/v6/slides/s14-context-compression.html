@@ -49,7 +49,7 @@ body {
       <!-- Phase 2: Select -->
       <div style="background: #161B22; border-left: 3pt solid #F5C542; border: 1pt solid #21262D; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Phase 2: LOSSLESS SELECT</p>
-        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">Lossy 요약 대신 LLM이 코드로 관련 청크만 선별한다. 요약이 아니라 선택이기 때문에 <strong style="color: #4ECDC4;">정보 손실 0%</strong> — LLM 호출 비용 <strong style="color: #34D399;">0.03%</strong>로 절감. 깊이 3이면 서브에이전트 독립 200K window로 유효 컨텍스트 600K 선형 확장.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">Lossy 요약 대신 LLM이 코드로 관련 청크만 선별한다. 요약이 아니라 선택이기 때문에 <strong style="color: #4ECDC4;">정보 손실 0%</strong>이며 LLM 호출 비용 <strong style="color: #34D399;">0.03%</strong>로 절감. 깊이 3이면 서브에이전트 독립 200K window로 유효 컨텍스트 600K 선형 확장.</p>
         <div style="display: flex; gap: 5pt; margin-top: 5pt;">
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; border-left: 2pt solid #EF4444;">
             <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">Lossy 요약</p>
@@ -70,12 +70,12 @@ body {
       <!-- Phase 3: Emergency -->
       <div style="background: #161B22; border-left: 3pt solid #EF4444; border: 1pt solid #EF444440; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Phase 3: EMERGENCY PRUNE (95%)</p>
-        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;"><strong style="color: #EF4444;">95%</strong> 초과 시 CONTEXT_CRITICAL 이벤트 — 강제 pruning 발동. 최초 사용자 메시지 보존 + bridge 메시지 삽입 후 루프 재개.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;"><strong style="color: #EF4444;">95%</strong> 초과 시 CONTEXT_CRITICAL 이벤트 발생 시 강제 pruning 발동. 최초 사용자 메시지 보존 + bridge 메시지 삽입 후 루프 재개.</p>
       </div>
 
       <!-- Trade-off -->
       <div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 4pt 8pt;">
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #818CF8;">Trade-off: 정보 손실 vs 크래시 방지</strong> — Lossy 요약은 구현이 쉽지만 정보가 사라진다. Lossless Selection은 LLM 호출 비용이 추가되지만 0.03% 비용으로 정보 손실을 막았다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #818CF8;">Trade-off: 정보 손실 vs 크래시 방지</strong> Lossy 요약은 구현이 쉽지만 정보가 사라진다. Lossless Selection은 LLM 호출 비용이 추가되지만 0.03% 비용으로 정보 손실을 막았다.</p>
       </div>
     </div>
 

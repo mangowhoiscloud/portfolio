@@ -24,7 +24,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Triple Loop: META → DEV → RUNTIME + 46 Hook 신경계</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴드가 자기 자신을 개발하고, RUNTIME이 자율 실행합니다</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴드가 자기 자신을 개발하고, RUNTIME이 자율 실행한다</p>
   </div>
 
   <!-- Content -->
@@ -41,7 +41,7 @@ body {
         </div>
         <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
         <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">Claude Code 스스로 GEODE를 개발합니다. 21 Skills + CANNOT 23-Rule + Socratic Gate로 요구사항을 정제하고 1,160 커밋을 생성했습니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">인간이 직접 코딩하면 Harness가 실패하기 때문에 Claude Code가 GEODE를 자체 개발했다. 21 Skills + CANNOT 23-Rule + Socratic Gate로 1,160 커밋을 생성했다.</p>
           <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">harness-for-real 해커톤 · "키보드에 손이 닿는 순간 하네스의 실패다"</p>
         </div>
         <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
@@ -63,7 +63,7 @@ body {
         </div>
         <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
         <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">AgenticLoop가 PR 단위 코드를 자율 작성합니다. 8-Step Loop(Socratic→Plan→Code→Test→Hook→Review→Merge→Learn)로 70% 테스트 비율을 유지합니다.</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">테스트 없이 머지하면 회귀가 쌓이기 때문에 AgenticLoop가 8-Step Loop로 PR 단위 코드를 작성하며 70% 테스트 비율을 강제한다. 결과: 39/39 릴리스 무회귀.</p>
           <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">typecheck+lint backpressure · LEARNINGS.md 패턴 축적</p>
         </div>
         <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
@@ -85,8 +85,8 @@ body {
         </div>
         <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
         <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">while(tool_use) 50 라운드. 사용자 요청 → AgenticLoop → Tool 실행 → 결과 반환. 52 Tools + 45 MCP + 46 Hook이 완전 자율 실행을 구성합니다.</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Safety Brake · Scheduler · Gateway — 사람 없이 오래 실행</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">사람 없이 장기 실행하기 위해 Safety Brake·Scheduler·Gateway를 추가했다. 52 Tools + 45 MCP + 46 Hook이 while(tool_use) 50 라운드를 자율 구동한다.</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Safety Brake · Scheduler · Gateway: 사람 없이 오래 실행</p>
         </div>
         <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
           <p style="font-size: 6pt; color: #F5C542;">52 Tools</p>
@@ -113,14 +113,14 @@ body {
           <li style="font-size: 7pt; color: #E2E8F0;">CONTEXT_COMPACT</li>
           <li style="font-size: 7pt; color: #E2E8F0;">AGENT_SPAWN / RETURN</li>
         </ul>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt;">Priority 기반 핸들러 실행. 핸들러 간 에러 격리로 한 이벤트 실패가 루프를 중단시키지 않습니다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt;">Priority 기반 핸들러 실행. 핸들러 간 에러 격리로 한 이벤트 실패가 루프를 중단시키지 않는다.</p>
       </div>
 
       <!-- Feedback loop note -->
       <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자기 증강 피드백</p>
         <p style="font-size: 6pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.4;">PIPELINE_END 이벤트 → MEMORY.md 인사이트 자동 축적 → 다음 세션 PromptAssembler가 반영</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">3-Loop가 서로 강화합니다</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">3-Loop가 서로 강화한다</p>
       </div>
 
       <!-- Trade-off: 왜 3중 루프인가 -->
@@ -146,7 +146,7 @@ body {
 
   <!-- Footer -->
   <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
-    <p style="font-size: 6pt; color: #8B949E;">META가 DEV를 낳고, DEV가 RUNTIME을 완성하고, RUNTIME이 META를 강화합니다</p>
+    <p style="font-size: 6pt; color: #8B949E;">META가 DEV를 낳고, DEV가 RUNTIME을 완성하고, RUNTIME이 META를 강화한다</p>
     <p style="font-size: 6pt; color: #8B949E;">04 / 34</p>
   </div>
 

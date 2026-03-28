@@ -28,7 +28,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Scheduler + Gateway: 시간 기반 자율 실행과 채널 라우팅</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Cron 세션 격리로 메인 대화 오염 방지 · 채널 무관 단일 세션 관리</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Cron이 메인 컨텍스트를 오염시키는 문제 때문에 격리를 기본값으로 설계했고, 채널마다 어댑터를 새로 짜는 비용을 0으로 만들기 위해 Gateway를 단일 진입점으로 집중했다</p>
   </div>
 
   <!-- Content: two halves -->
@@ -55,7 +55,7 @@ body {
         <div style="width: 1pt; background: #21262D; flex-shrink: 0;"></div>
         <div style="flex: 1;">
           <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">실행 흐름</p>
-          <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">NL 파싱 → action_queue 등록 → 트리거 시각 도달 → AgenticLoop 위임. 큐 관리로 동시 실행 충돌을 방지합니다.</p>
+          <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">NL 파싱 → action_queue 등록 → 트리거 시각 도달 → AgenticLoop 위임. 큐 관리로 동시 실행 충돌을 방지한다.</p>
           <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace; margin-top: 4pt;">action_queue → AgenticLoop</p>
         </div>
       </div>
@@ -84,7 +84,7 @@ body {
           </div>
         </div>
 
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">격리가 기본값이기 때문에 메인 대화 컨텍스트를 오염시키지 않습니다. systemEvent로 메인에 결과 주입도 가능합니다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">Cron 태스크가 메인 대화의 컨텍스트를 덮어쓰는 버그가 있었기 때문에 isolated=True를 기본값으로 바꿨다. 결과 주입이 필요하면 systemEvent로 메인에 선택적으로 전달한다.</p>
       </div>
 
     </div>
@@ -158,7 +158,7 @@ body {
         <!-- geode serve -->
         <div style="background: #0A1A1A; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 6pt 9pt; text-align: center;">
           <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">geode serve</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">AgenticLoop 단일 진입점: 채널 추가 시 어댑터 1개만 구현하면 됩니다</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">채널별 AgenticLoop 인스턴스를 따로 관리하면 세션이 분산됐기 때문에 Gateway를 단일 진입점으로 집중했다. 채널 추가 시 어댑터 1개만 구현하면 된다.</p>
         </div>
 
       </div>
@@ -170,7 +170,7 @@ body {
   <!-- Trade-off bar -->
   <div style="padding: 4pt 36pt 0pt;">
     <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
-      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> Cron은 격리가 기본이기 때문에 메인 대화 오염을 방지합니다. 단, systemEvent로 메인 주입도 가능하여 격리와 연계를 상황에 따라 선택할 수 있습니다. Gateway는 채널 추가 시 어댑터 1개만 구현하면 됩니다.</p>
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> Cron 격리로 메인 오염을 막았지만, 격리 세션은 이전 학습을 공유하지 않는다. systemEvent 주입으로 필요할 때만 연계한다. Gateway 단일화는 채널 다양성을 포기했지만 어댑터 1개로 신규 채널을 추가할 수 있게 됐다.</p>
     </div>
   </div>
 
