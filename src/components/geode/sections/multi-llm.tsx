@@ -77,8 +77,8 @@ export function MultiLlmSection() {
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 800 170" className="w-full min-w-[600px]" style={{ maxHeight: 200 }}>
                   {/* Opus Primary group */}
-                  <rect x={15} y={15} width={460} height={120} rx={12} fill="none" stroke="#F4B8C8" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={245} y={10} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary)</text>
+                  <rect x={15} y={15} width={460} height={120} rx={12} fill="none" stroke="#D97757" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
+                  <text x={245} y={10} textAnchor="middle" fill="#D97757" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary)</text>
 
                   {/* Pipeline nodes — evenly spaced */}
                   {[
@@ -89,8 +89,8 @@ export function MultiLlmSection() {
                     { x: 435, label: "Synth" },
                   ].map((n, i) => (
                     <g key={n.label}>
-                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
-                      <text x={n.x} y={63} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
+                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0C1220" stroke="#D97757" strokeWidth={0.8} strokeOpacity={0.4} />
+                      <text x={n.x} y={63} textAnchor="middle" fill="#D97757" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
                       {i < 4 && <path d={`M${n.x + 36},59 C${n.x + 45},56 ${n.x + 55},56 ${n.x + 59},59`} stroke="white" strokeOpacity={0.15} strokeWidth={1} fill="none" />}
                     </g>
                   ))}
@@ -103,9 +103,9 @@ export function MultiLlmSection() {
                   <text x={652} y={10} textAnchor="middle" fill="#34D399" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Cross-LLM Verification</text>
 
                   {/* Opus + GPT side by side */}
-                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={577} y={56} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
-                  <text x={577} y={70} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
+                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#D97757" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={577} y={56} textAnchor="middle" fill="#D97757" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
+                  <text x={577} y={70} textAnchor="middle" fill="#D97757" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
 
                   <rect x={635} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.4} />
                   <text x={677} y={56} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>GPT-5.4</text>
