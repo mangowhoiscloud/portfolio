@@ -420,6 +420,27 @@ export function LoopSection() {
             <p className="text-xs text-[#7A8CA8] font-mono mt-3">
               Wrap-Up Headroom: 만료 30초 전부터 tool_choice=none → 결과 정리 후 자연 종료
             </p>
+
+            {/* Failure modes */}
+            <div className="mt-6 rounded-xl border border-white/[0.04] px-5 py-4">
+              <div className="text-sm font-semibold text-white/70 mb-3">Failure Recovery</div>
+              <div className="space-y-1.5 text-sm">
+                {[
+                  { scenario: "LLM 전체 장애", recovery: "Cross-provider failover (Anthropic → OpenAI → GLM)", color: "#E87080" },
+                  { scenario: "MCP 서버 미응답", recovery: "spawn retry + graceful skip", color: "#F5C542" },
+                  { scenario: "컨텍스트 오버플로우", recovery: "80% compaction → 95% emergency prune → UI 알림", color: "#818CF8" },
+                  { scenario: "도구 연속 실패 ≥2", recovery: "adaptive recovery chain + 모델 에스컬레이션", color: "#C084FC" },
+                ].map((f) => (
+                  <div key={f.scenario} className="flex items-start gap-3">
+                    <span className="shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={{ background: f.color }} />
+                    <div>
+                      <span className="text-white/60">{f.scenario}</span>
+                      <span className="text-[#7A8CA8] ml-2">{f.recovery}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </div>

@@ -282,6 +282,20 @@ export function HooksSection() {
               </tbody>
             </table>
           </div>
+
+          {/* Observability stack */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { name: "RunLog", desc: "46개 이벤트 전수 JSONL 기록. 세션별 append-only.", color: "#60A5FA" },
+              { name: "JournalHook", desc: "파이프라인 완료/에러/서브에이전트 결과를 runs.jsonl에 구조화.", color: "#34D399" },
+              { name: "LangSmith", desc: "@traceable 데코레이터로 전 노드 트레이스. 선택적 활성화.", color: "#F5C542" },
+            ].map((o) => (
+              <div key={o.name} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${o.color}03` }}>
+                <div className="text-sm font-semibold mb-1" style={{ color: o.color }}>{o.name}</div>
+                <div className="text-xs text-[#8B9CC0] leading-relaxed">{o.desc}</div>
+              </div>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
     </section>
