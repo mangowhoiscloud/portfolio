@@ -151,7 +151,7 @@ function OrbitalCycle() {
                 fill="#0A0F1A"
                 stroke={step.color}
                 strokeWidth={isActive ? 1.5 : 0.5}
-                strokeOpacity={isActive ? 0.6 : 0.1}
+                strokeOpacity={isActive ? 0.7 : 0.2}
                 style={{ transition: "stroke-width 0.4s, stroke-opacity 0.4s" }}
               />
               <text
@@ -162,7 +162,7 @@ function OrbitalCycle() {
                 fontSize={9}
                 fontFamily="ui-monospace, monospace"
                 fontWeight={600}
-                opacity={isActive ? 1 : 0.3}
+                opacity={isActive ? 1 : 0.45}
                 style={{ transition: "opacity 0.4s" }}
               >
                 {step.label}

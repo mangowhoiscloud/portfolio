@@ -128,7 +128,7 @@ function OnionDiagram({
                   fillOpacity={isActive ? 0.06 : 0}
                   stroke={layer.accent}
                   strokeWidth={isActive ? 1.5 : 0.6}
-                  strokeOpacity={isActive ? 0.5 : 0.12}
+                  strokeOpacity={isActive ? 0.6 : 0.2}
                   style={{ transition: "all 0.4s ease", cursor: "pointer" }}
                   onMouseEnter={() => onHover(i)}
                 />

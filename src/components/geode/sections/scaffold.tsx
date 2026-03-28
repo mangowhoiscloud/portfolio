@@ -174,7 +174,7 @@ function RacingTrack({
                 cx={x} cy={NODE_Y} r={18}
                 fill="#0A0F1A" stroke={s.color}
                 strokeWidth={isActive ? 1.5 : 0.6}
-                strokeOpacity={isActive ? 0.6 : 0.12}
+                strokeOpacity={isActive ? 0.7 : 0.2}
                 style={{ transition: "all 0.3s" }}
               />
               <text
