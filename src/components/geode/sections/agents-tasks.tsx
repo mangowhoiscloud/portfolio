@@ -83,73 +83,61 @@ export function AgentsTasksSection() {
             <div>
               {/* Spawn → Execute → Announce flow diagram */}
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
-                <svg viewBox="0 0 760 210" className="w-full min-w-[580px]" style={{ maxHeight: 250 }}>
+                <svg viewBox="0 0 700 240" className="w-full min-w-[540px]" style={{ maxHeight: 280 }}>
                   {/* Parent agent */}
-                  <rect x={20} y={70} width={120} height={60} rx={10} fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
-                  <text x={80} y={93} textAnchor="middle" fill="#F4B8C8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Parent</text>
-                  <text x={80} y={110} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">AgenticLoop</text>
+                  <rect x={15} y={60} width={100} height={55} rx={10} fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
+                  <text x={65} y={83} textAnchor="middle" fill="#F4B8C8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Parent</text>
+                  <text x={65} y={100} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">AgenticLoop</text>
 
-                  {/* Spawn arrows → 3 children */}
-                  <text x={170} y={80} fill="#4ECDC4" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">delegate()</text>
-                  {[40, 100, 160].map((y, i) => (
-                    <g key={`spawn-${i}`}>
-                      <path d={`M145,100 C185,100 195,${y} 230,${y}`} fill="none" stroke="#4ECDC4" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="4 3" className="animate-flow" />
-                    </g>
+                  {/* Spawn: Parent → 3 SubAgents */}
+                  <text x={140} y={55} fill="#4ECDC4" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">delegate()</text>
+                  {[30, 85, 140].map((y, i) => (
+                    <path key={`sp-${i}`} d={`M115,87 C140,87 150,${y + 20} 175,${y + 20}`} fill="none" stroke="#4ECDC4" strokeOpacity={0.25} strokeWidth={1} strokeDasharray="4 3" />
                   ))}
 
-                  {/* Sub agents (3 parallel) */}
+                  {/* 3 SubAgents */}
                   {[
                     { y: 30, label: "Sub-A", task: "analyze" },
-                    { y: 90, label: "Sub-B", task: "search" },
-                    { y: 150, label: "Sub-C", task: "compare" },
+                    { y: 85, label: "Sub-B", task: "search" },
+                    { y: 140, label: "Sub-C", task: "compare" },
                   ].map((sa) => (
                     <g key={sa.label}>
-                      <rect x={230} y={sa.y} width={100} height={44} rx={8} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.2} />
-                      <text x={280} y={sa.y + 18} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{sa.label}</text>
-                      <text x={280} y={sa.y + 32} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">{sa.task}</text>
+                      <rect x={175} y={sa.y} width={90} height={40} rx={8} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.3} />
+                      <text x={220} y={sa.y + 17} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{sa.label}</text>
+                      <text x={220} y={sa.y + 31} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">{sa.task}</text>
                     </g>
                   ))}
 
-                  {/* IsolatedRunner box */}
-                  <rect x={220} y={15} width={120} height={190} rx={12} fill="none" stroke="#4ECDC4" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={280} y={10} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">IsolatedRunner (threads)</text>
-
-                  {/* Execute arrows → Results */}
-                  {[40, 100, 160].map((y, i) => (
-                    <g key={`exec-${i}`}>
-                      <line x1={330} y1={y + 10} x2={395} y2={y + 10} stroke="#34D399" strokeOpacity={0.2} strokeWidth={1} />
-                      <text x={362} y={y + 3} fill="#34D399" fillOpacity={0.30} fontSize={8}>✓</text>
-                    </g>
+                  {/* Execute → Results */}
+                  {[30, 85, 140].map((y, i) => (
+                    <path key={`ex-${i}`} d={`M265,${y + 20} C285,${y + 18} 305,${y + 18} 325,${y + 20}`} fill="none" stroke="#34D399" strokeOpacity={0.25} strokeWidth={1} />
                   ))}
 
-                  {/* SubAgentResult boxes */}
+                  {/* Results */}
                   {[
-                    { y: 30, status: "ok", score: "82.2 S" },
-                    { y: 90, status: "ok", score: "12 results" },
-                    { y: 150, status: "ok", score: "3 matches" },
+                    { y: 30, score: "81.2 S" },
+                    { y: 85, score: "12 results" },
+                    { y: 140, score: "3 matches" },
                   ].map((r, i) => (
-                    <g key={`result-${i}`}>
-                      <rect x={395} y={r.y} width={90} height={44} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.2} />
-                      <text x={440} y={r.y + 18} textAnchor="middle" fill="#34D399" fillOpacity={0.7} fontSize={9} fontFamily="ui-monospace, monospace">{r.status}</text>
-                      <text x={440} y={r.y + 32} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">{r.score}</text>
+                    <g key={`r-${i}`}>
+                      <rect x={325} y={r.y} width={80} height={40} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.3} />
+                      <text x={365} y={r.y + 17} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace">ok</text>
+                      <text x={365} y={r.y + 31} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">{r.score}</text>
                     </g>
                   ))}
 
-                  {/* Announce arrows → queue */}
-                  <text x={520} y={65} fill="#F5C542" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">announce</text>
-                  {[40, 100, 160].map((y, i) => (
-                    <path key={`ann-${i}`} d={`M 485,${y + 10} C 530,${y + 10} 540,100 570,100`} fill="none" stroke="#F5C542" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="3 3" className="animate-flow" />
+                  {/* Announce → Queue */}
+                  {[30, 85, 140].map((y, i) => (
+                    <path key={`an-${i}`} d={`M405,${y + 20} C430,${y + 18} 450,90 470,95`} fill="none" stroke="#F5C542" strokeOpacity={0.25} strokeWidth={1} strokeDasharray="3 3" />
                   ))}
 
-                  {/* Announce queue */}
-                  <rect x={570} y={75} width={80} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
-                  <text x={610} y={95} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Queue</text>
-                  <text x={610} y={110} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">announce_queue</text>
+                  <rect x={470} y={72} width={75} height={46} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={507} y={92} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Queue</text>
+                  <text x={507} y={107} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">announce</text>
 
-                  {/* Drain arrow — routes BELOW all boxes to avoid crossing */}
-                  <path d="M650,100 C670,100 690,110 700,130 C710,160 700,185 650,190 L150,190 C100,190 80,170 80,140 L80,100" fill="none" stroke="#F4B8C8" strokeOpacity={0.35} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
-                  <text x={700} y={175} fill="#F4B8C8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">drain</text>
-                  <text x={400} y={185} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">→ parent 대화 컨텍스트 주입</text>
+                  {/* Drain: Queue → Parent (smooth arc BELOW everything) */}
+                  <path d="M507,118 C507,160 507,200 400,210 C250,220 100,210 65,200 C40,195 15,170 15,115" fill="none" stroke="#F4B8C8" strokeOpacity={0.3} strokeWidth={1.2} strokeDasharray="5 4" />
+                  <text x={280} y={220} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">drain → parent 컨텍스트 주입</text>
                 </svg>
               </div>
 

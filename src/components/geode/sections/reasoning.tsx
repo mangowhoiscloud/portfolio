@@ -80,15 +80,15 @@ export function ReasoningSection() {
                   <text x={485} y={83} textAnchor="middle" fill="#C084FC" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>REFLECT</text>
                   <text x={485} y={100} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
 
-                  {/* Loop-back */}
-                  <path d="M485,120 C485,165 295,175 105,165 C105,150 105,135 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.28} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
-                  <text x={295} y={180} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
+                  {/* Loop-back — smooth U-arc */}
+                  <path d="M485,120 C490,155 440,175 295,175 C150,175 100,155 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.28} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
+                  <text x={295} y={195} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
 
                   {/* GoalDecomposer fork */}
                   <rect x={560} y={40} width={110} height={50} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.7} strokeOpacity={0.2} />
                   <text x={615} y={60} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>GoalDecomposer</text>
                   <text x={615} y={75} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청 분해</text>
-                  <line x1={550} y1={65} x2={560} y2={65} stroke="#F4B8C8" strokeOpacity={0.22} strokeWidth={1} />
+                  <path d="M550,90 C555,80 558,70 560,65" stroke="#F4B8C8" strokeOpacity={0.22} strokeWidth={1} fill="none" />
 
                   {/* Tool tiers */}
                   <text x={295} y={40} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">
