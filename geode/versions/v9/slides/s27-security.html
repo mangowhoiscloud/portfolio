@@ -24,15 +24,15 @@ body {
 <!-- Title -->
 <div style="padding: 0 36pt 5pt;">
   <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Security: Bash 3-Layer + Dual Trust Model</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율 에이전트는 신뢰 경계가 없으면 시스템을 파괴하기 때문에 PolicyChain이 실행 전 모든 명령을 검문한다</p>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 1pt;">자율 에이전트는 신뢰 경계가 없으면 시스템을 파괴하기 때문에 PolicyChain이 실행 전 모든 명령을 검문한다</p>
 </div>
 
 <!-- Content: diagram + layers + dual trust -->
 <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: stretch;">
 
   <!-- PolicyChain diagram -->
-  <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
-    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+  <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 9pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 2pt;">
       <div style="width: 3pt; height: 12pt; background: #EF4444; border-radius: 2pt;"></div>
       <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">PolicyChain &#xB2E4;&#xC774;&#xC5B4;&#xADF8;&#xB7A8;</p>
     </div>
@@ -40,40 +40,40 @@ body {
   </div>
 
   <!-- Right: 3-Layer + Dual Trust -->
-  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
 
     <!-- Bash 3-Layer -->
-    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 9pt; display: flex; flex-direction: column; gap: 6pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Bash 3-Layer &#xC2E4;&#xD589; &#xC81C;&#xC5B4; &#x2014; &#xC778;&#xACFC; &#xC11C;&#xC220;</p>
 
-      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L1: Blocked &#x2014; Regex 9-Pattern Safe-First</p>
-        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;"><span style="color: #F87171; font-family: 'Courier New', monospace;">rm&#x2011;rf</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">sudo</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">curl|sh</span> &#xB4F1; 9&#xAC1C; regex &#xD328;&#xD134;&#xC744; &#xC6B0;&#xC120; &#xAC80;&#xC0AC;&#xD55C;&#xB2E4;. safe&#x2011;first&#xB85C; &#xAC80;&#xC0AC;&#xD558;&#xBA74; <span style="color: #F87171; font-family: 'Courier New', monospace;">ls / &amp;&amp; rm&#x2011;rf /</span> &#xAC19;&#xC740; &#xD30C;&#xC774;&#xD504; &#xC8FC;&#xC785;&#xC744; &#xB193;&#xCE58;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xC800; &#xC21C;&#xC11C;&#xAC00; &#xD544;&#xC218;&#xB2E4;.</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 1pt; line-height: 1.5;"><span style="color: #F87171; font-family: 'Courier New', monospace;">rm&#x2011;rf</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">sudo</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">curl|sh</span> &#xB4F1; 9&#xAC1C; regex &#xD328;&#xD134;&#xC744; &#xC6B0;&#xC120; &#xAC80;&#xC0AC;&#xD55C;&#xB2E4;. safe&#x2011;first&#xB85C; &#xAC80;&#xC0AC;&#xD558;&#xBA74; <span style="color: #F87171; font-family: 'Courier New', monospace;">ls / &amp;&amp; rm&#x2011;rf /</span> &#xAC19;&#xC740; &#xD30C;&#xC774;&#xD504; &#xC8FC;&#xC785;&#xC744; &#xB193;&#xCE58;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xC800; &#xC21C;&#xC11C;&#xAC00; &#xD544;&#xC218;&#xB2E4;.</p>
       </div>
 
-      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L2: Resource &#x2014; setrlimit Child Process &#xAC15;&#xC81C;</p>
-        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;"><span style="color: #FCD34D; font-family: 'Courier New', monospace;">preexec_fn setrlimit</span>&#xC73C;&#xB85C; CPU 30s, FSIZE 50MB, NPROC 64&#xB97C; child process&#xC5D0; &#xAC15;&#xC81C;&#xD55C;&#xB2E4;. L1&#xC744; &#xD1B5;&#xACFC;&#xD558;&#xB354;&#xB77C;&#xB3C4; &#xC2AC;&#xB85C;&#xC6B0; &#xB8E8;&#xD504;&#xB098; &#xB300;&#xC6A9;&#xB7C9; &#xD30C;&#xC77C; &#xC0DD;&#xC131;&#xC744; &#xCE28;&#xB2E4;.</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 1pt; line-height: 1.5;"><span style="color: #FCD34D; font-family: 'Courier New', monospace;">preexec_fn setrlimit</span>&#xC73C;&#xB85C; CPU 30s, FSIZE 50MB, NPROC 64&#xB97C; child process&#xC5D0; &#xAC15;&#xC81C;&#xD55C;&#xB2E4;. L1&#xC744; &#xD1B5;&#xACFC;&#xD558;&#xB354;&#xB77C;&#xB3C4; &#xC2AC;&#xB85C;&#xC6B0; &#xB8E8;&#xD504;&#xB098; &#xB300;&#xC6A9;&#xB7C9; &#xD30C;&#xC77C; &#xC0DD;&#xC131;&#xC744; &#xCE28;&#xB2E4;.</p>
       </div>
 
-      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L3: HITL &#x2014; stdin &#xC5C6;&#xC73C;&#xBA74; deny&#x2011;by&#x2011;default</p>
-        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">L1&#x2011;2&#xB97C; &#xD1B5;&#xACFC;&#xD55C; &#xBBF8;&#xBD84;&#xB958; &#xBA85;&#xB839;&#xC740; &#xC0AC;&#xC6A9;&#xC790; &#xC2B9;&#xC778;&#xC744; &#xC694;&#xCCAD;&#xD55C;&#xB2E4;. <span style="color: #F87171; font-family: 'Courier New', monospace;">geode serve</span>&#xC5D0;&#xC11C;&#xB294; stdin&#xC774; &#xC5C6;&#xC73C;&#xBBC0;&#xB85C; &#xC790;&#xB3D9;&#xC73C;&#xB85C; deny&#x2011;by&#x2011;default&#xB85C; &#xCC98;&#xB9AC;&#xB41C;&#xB2E4;.</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 1pt; line-height: 1.5;">L1&#x2011;2&#xB97C; &#xD1B5;&#xACFC;&#xD55C; &#xBBF8;&#xBD84;&#xB958; &#xBA85;&#xB839;&#xC740; &#xC0AC;&#xC6A9;&#xC790; &#xC2B9;&#xC778;&#xC744; &#xC694;&#xCCAD;&#xD55C;&#xB2E4;. <span style="color: #F87171; font-family: 'Courier New', monospace;">geode serve</span>&#xC5D0;&#xC11C;&#xB294; stdin&#xC774; &#xC5C6;&#xC73C;&#xBBC0;&#xB85C; &#xC790;&#xB3D9;&#xC73C;&#xB85C; deny&#x2011;by&#x2011;default&#xB85C; &#xCC98;&#xB9AC;&#xB41C;&#xB2E4;.</p>
       </div>
     </div>
 
     <!-- Dual Trust Model -->
-    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 7pt 9pt; display: flex; flex-direction: column; gap: 5pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model: &#xC785;&#xB825; &#xCC28;&#xB2E8; &#xD6C4; &#xCD9C;&#xB825; &#xAC80;&#xC99D;</p>
       <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 2pt;">&#xC5D0;&#xC774;&#xC804;&#xD2B8; &#xC548;&#xC804;&#xACFC; &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xAC80;&#xC99D;&#xC740; &#xB3C5;&#xB9BD; &#xCD95;&#xC774;&#xB2E4;. Input Gating&#xC740; &#xC2E4;&#xD589; &#xC804; &#xCC28;&#xB2E8;&#xD558;&#xACE0;, Output Validation&#xC740; &#xC2E4;&#xD589; &#xD6C4; &#xC0B0;&#xCD9C;&#xBB3C;&#xC744; &#xAC80;&#xC99D;&#xD55C;&#xB2E4;. &#xB450; &#xCD95; &#xBAA8;&#xB450; &#xD1B5;&#xACFC;&#xD574;&#xC57C;&#xB9CC; &#xACB0;&#xACFC;&#xAC00; &#xC2E0;&#xB8B0;&#xB41C;&#xB2E4;.</p>
       <div style="display: flex; gap: 6pt;">
         <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Input Gating</p>
-          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">4&#x2011;Tier HITL &#xAC8C;&#xCE35;&#xC73C;&#xB85C; &#xC5D0;&#xC774;&#xC804;&#xD2B8; &#xC2E4;&#xD589; &#xC804; &#xCC28;&#xB2E8;. TIER 0&#x2011;1: asyncio.gather &#xC790;&#xB3D9; / TIER 3&#x2011;4: &#xAC1C;&#xBCC4; &#xC218;&#xB3D9; &#xC2B9;&#xC778; &#xD544;&#xC218;</p>
+          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 1pt; line-height: 1.4;">4&#x2011;Tier HITL &#xAC8C;&#xCE35;&#xC73C;&#xB85C; &#xC5D0;&#xC774;&#xC804;&#xD2B8; &#xC2E4;&#xD589; &#xC804; &#xCC28;&#xB2E8;. TIER 0&#x2011;1: asyncio.gather &#xC790;&#xB3D9; / TIER 3&#x2011;4: &#xAC1C;&#xBCC4; &#xC218;&#xB3D9; &#xC2B9;&#xC778; &#xD544;&#xC218;</p>
         </div>
         <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Output Validation</p>
-          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">5&#x2011;Tier Safety &#xB4F1;&#xAE09;&#xC73C;&#xB85C; &#xC2E4;&#xD589; &#xD6C4; &#xCD9C;&#xB825; &#xAC80;&#xC99D;. &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xACB0;&#xACFC;&#xBB3C;&#xB9CC; &#xC774; &#xC544;&#xCE58;&#xB97C; &#xD1B5;&#xACFC;&#xD55C;&#xB2E4;</p>
+          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 1pt; line-height: 1.4;">5&#x2011;Tier Safety &#xB4F1;&#xAE09;&#xC73C;&#xB85C; &#xC2E4;&#xD589; &#xD6C4; &#xCD9C;&#xB825; &#xAC80;&#xC99D;. &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xACB0;&#xACFC;&#xBB3C;&#xB9CC; &#xC774; &#xC544;&#xCE58;&#xB97C; &#xD1B5;&#xACFC;&#xD55C;&#xB2E4;</p>
         </div>
       </div>
     </div>
