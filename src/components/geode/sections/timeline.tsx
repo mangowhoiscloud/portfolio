@@ -36,7 +36,7 @@ const phases = [
   {
     phase: "Fork",
     period: "2026.03.16 — 05.16 (@pinxlab, 프리랜스)",
-    title: "REODE — Domain Pivot 실증",
+    title: "REODE. Domain Pivot 실증",
     desc: "산업 적용 전 DomainPort 교체 가능성 실증. Java 1.8→22 + Spring 4.3→6.1 자동 마이그레이션. 5,523파일 엔터프라이즈 프로젝트 83/83 테스트 통과. 에러 4분류 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리. 5시간 30분, 1,153턴 자율 수행.",
     badge: "FORK",
     badgeColor: "#C084FC",

@@ -46,13 +46,13 @@ export const geodeCategories: CategoryData[] = [
     icon: "▶️",
     title: "Runtime & Router",
     postsCount: 2,
-    statusKo: "6-Route Planner (Gemini 3.0 Flash)",
-    statusEn: "6-Route Planner (Gemini 3.0 Flash)",
-    techBadges: ["Gemini Flash", "6 Routes", "Plan Mode", "Pydantic Settings"],
+    statusKo: "6-Route Planner (GLM-5)",
+    statusEn: "6-Route Planner (GLM-5)",
+    techBadges: ["GLM-5", "6 Routes", "Plan Mode", "Pydantic Settings"],
     descriptionKo:
-      "Gemini 3.0 Flash 기반 Planner가 6개 라우트(full_pipeline $1.50, prospect $0.80, partial_rerun $0.15, data_refresh $0.30, direct_answer $0.02, script_route $0.05)로 최적 분기합니다. Plan Mode에서 사용자 승인 후 실행합니다.",
+      "GLM-5 기반 Planner가 6개 라우트(full_pipeline $1.50, prospect $0.80, partial_rerun $0.15, data_refresh $0.30, direct_answer $0.02, script_route $0.05)로 최적 분기합니다. Plan Mode에서 사용자 승인 후 실행합니다.",
     descriptionEn:
-      "Gemini 3.0 Flash-based Planner routes to 6 optimal paths: full_pipeline ($1.50), prospect ($0.80), partial_rerun ($0.15), data_refresh ($0.30), direct_answer ($0.02), script_route ($0.05). Plan Mode requires user approval before execution.",
+      "GLM-5-based Planner routes to 6 optimal paths: full_pipeline ($1.50), prospect ($0.80), partial_rerun ($0.15), data_refresh ($0.30), direct_answer ($0.02), script_route ($0.05). Plan Mode requires user approval before execution.",
     achievements: [
       { icon: "⚙️", titleKo: "6-Route Planner full_pipeline~script_route 비용 최적화 분기", titleEn: "6-Route Planner full_pipeline~script_route cost-optimized routing", modalId: "modal-geode-settings" },
       { icon: "🏭", titleKo: "Plan Mode 분석 전략 수립 → 사용자 승인 → 실행", titleEn: "Plan Mode analysis strategy → user approval → execution", modalId: "modal-geode-factory" },
@@ -87,8 +87,8 @@ export const geodeCategories: CategoryData[] = [
     icon: "🎛️",
     title: "Orchestration",
     postsCount: 4,
-    statusKo: "11 Hook Events + TaskSystem + Bootstrap",
-    statusEn: "11 Hook Events + TaskSystem + Bootstrap",
+    statusKo: "46 Hook Events + TaskSystem + Bootstrap",
+    statusEn: "46 Hook Events + TaskSystem + Bootstrap",
     techBadges: ["11 Events", "CONTINUE/ABORT/MODIFY", "TaskSystem", "Bootstrap"],
     descriptionKo:
       "11개 Hook 이벤트(SESSION_START/END, PRE/POST_ANALYSIS, PRE/POST_TOOL_USE, TASK_START/COMPLETE/FAIL, ON_ERROR, ON_NOTIFICATION)로 파이프라인 라이프사이클을 관리합니다. Hook 결과는 CONTINUE/ABORT/MODIFY로 흐름을 제어합니다. TaskSystem으로 의존성 그래프 기반 분석 작업을 스케줄링합니다.",
@@ -97,7 +97,7 @@ export const geodeCategories: CategoryData[] = [
     achievements: [
       { icon: "🪝", titleKo: "Hook System 11 이벤트 × CONTINUE/ABORT/MODIFY 제어", titleEn: "Hook System 11 events × CONTINUE/ABORT/MODIFY control", modalId: "modal-geode-hooks" },
       { icon: "📝", titleKo: "TaskSystem 의존성 그래프 기반 병렬/순차 작업 스케줄링", titleEn: "TaskSystem dependency graph-based parallel/sequential scheduling", modalId: "modal-geode-task-system" },
-      { icon: "🧭", titleKo: "Planner Gemini 3.0 Flash 6-route 분기 + Plan Mode 승인", titleEn: "Planner Gemini 3.0 Flash 6-route branching + Plan Mode approval", modalId: "modal-geode-planner" },
+      { icon: "🧭", titleKo: "Planner GLM-5 6-route 분기 + Plan Mode 승인", titleEn: "Planner GLM-5 6-route branching + Plan Mode approval", modalId: "modal-geode-planner" },
       { icon: "🔌", titleKo: "Bootstrap 서비스 와이어링 + Hook Registry 초기화", titleEn: "Bootstrap service wiring + Hook Registry initialization", modalId: "modal-geode-bootstrap" },
     ],
     blogLink: "",
@@ -151,11 +151,11 @@ export const geodeCategories: CategoryData[] = [
     postsCount: 4,
     statusKo: "5모델 LLMClientPort + 14축 Rubric + PSM",
     statusEn: "5-model LLMClientPort + 14-axis Rubric + PSM",
-    techBadges: ["Opus 4.5", "Sonnet 4", "Haiku", "GPT-5.2", "Gemini 3.0"],
+    techBadges: ["Opus 4.6", "Sonnet 4.6", "Haiku", "GPT-5.4", "GLM-5"],
     descriptionKo:
-      "LLMClientPort 추상화로 5개 모델을 역할별 배치: Claude Opus 4.5(Analyst×4, Evaluator×3, Synthesizer), Claude Sonnet 4(LLM Judge, Memory), Claude Haiku(Per-Agent Guardrail), GPT-5.2(Cortex SQL), Gemini 3.0 Flash(Planner). 14축 루브릭(Quality 8 + Hidden Value 3 + Momentum 3)과 14-covariate PSM으로 정량 평가합니다.",
+      "LLMClientPort 추상화로 5개 모델을 역할별 배치: Claude Opus 4.6(Analyst×4, Evaluator×3, Synthesizer), Claude Sonnet 4(LLM Judge, Memory), Claude Haiku(Per-Agent Guardrail), GPT-5.4(Cortex SQL), GLM-5(Planner). 14축 루브릭(Quality 8 + Hidden Value 3 + Momentum 3)과 14-covariate PSM으로 정량 평가합니다.",
     descriptionEn:
-      "LLMClientPort abstraction deploys 5 models by role: Claude Opus 4.5 (Analyst×4, Evaluator×3, Synthesizer), Claude Sonnet 4 (LLM Judge, Memory), Claude Haiku (Per-Agent Guardrail), GPT-5.2 (Cortex SQL), Gemini 3.0 Flash (Planner). 14-axis rubric (Quality 8 + Hidden Value 3 + Momentum 3) and 14-covariate PSM for quantitative evaluation.",
+      "LLMClientPort abstraction deploys 5 models by role: Claude Opus 4.6 (Analyst×4, Evaluator×3, Synthesizer), Claude Sonnet 4 (LLM Judge, Memory), Claude Haiku (Per-Agent Guardrail), GPT-5.4 (Cortex SQL), GLM-5 (Planner). 14-axis rubric (Quality 8 + Hidden Value 3 + Momentum 3) and 14-covariate PSM for quantitative evaluation.",
     achievements: [
       { icon: "🤖", titleKo: "5-Model 배치 역할별 최적 모델 할당 (Opus→Haiku)", titleEn: "5-Model deployment role-optimized model assignment (Opus→Haiku)", modalId: "modal-geode-claude-client" },
       { icon: "📐", titleKo: "14축 루브릭 Quality(8) + Hidden Value(3) + Momentum(3)", titleEn: "14-axis rubric Quality(8) + Hidden Value(3) + Momentum(3)", modalId: "modal-geode-structured-output" },
