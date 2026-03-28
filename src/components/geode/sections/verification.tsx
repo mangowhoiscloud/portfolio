@@ -29,9 +29,9 @@ const pipelineLayers = [
   {
     tier: 4,
     title: "BiasBuster",
-    items: ["RECOGNIZE", "EXPLAIN", "ALTER", "EVALUATE"],
+    items: ["confirmation", "recency", "anchoring", "position", "verbosity", "self_enhancement"],
     accent: "#F5C542",
-    description: "앵커링 바이어스를 4단계로 탐지·교정합니다. CV < 0.05이면 앵커링 플래그, Clean Context에서 독립 재평가 후 교차 비교합니다.",
+    description: "6종 인지 바이어스를 탐지합니다. CV < 0.05(n≥4)이면 앵커링 플래그. Fast path(CV ≥ 0.10, range ≥ 0.5)는 LLM 생략. 4단계 교정: RECOGNIZE → EXPLAIN → ALTER → EVALUATE.",
   },
   {
     tier: 5,
