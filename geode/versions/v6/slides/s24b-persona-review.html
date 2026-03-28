@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">HE-0 SCAFFOLD</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">4-Persona Review — 구현 전 맹점 제거</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">혼자 설계하면 Confirmation Bias로 실패한다 — 4인격이 독립 관점으로 리뷰하여 서로의 맹점을 보완한다</p>
+</div>
+
+<!-- Content -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Left: 4 personas -->
+  <div style="flex: 1.3; display: flex; flex-direction: column; gap: 5pt;">
+
+    <!-- Beck -->
+    <div style="background: #161B22; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 36pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">Beck</p>
+        <p style="font-size: 6pt; color: #8B949E;">Architect</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">레이어 의존성 역전 여부, 인터페이스 일관성, v0.40 생존 가능성. 체크 항목: 상위 레이어가 하위를 직접 임포트하는가? 플러그인 교체 시 코어 수정이 발생하는가?</p>
+      </div>
+    </div>
+
+    <!-- Karpathy -->
+    <div style="background: #161B22; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 36pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">Karpathy</p>
+        <p style="font-size: 6pt; color: #8B949E;">Simplicity</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">토큰 비용, 지연 시간, 캐시 히트율 관점. 체크 항목: 이 LLM 호출을 줄일 수 있는가? 컨텍스트를 재사용하는가? 배치 처리가 가능한가?</p>
+      </div>
+    </div>
+
+    <!-- Steinberger -->
+    <div style="background: #161B22; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 36pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">Steinberger</p>
+        <p style="font-size: 6pt; color: #8B949E;">Security</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Bash 인젝션, 권한 에스컬레이션, Trust Model 위반. 체크 항목: 이 경로가 샌드박스를 우회하는가? 외부 입력이 직접 shell로 전달되는가?</p>
+      </div>
+    </div>
+
+    <!-- Cherny -->
+    <div style="background: #161B22; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 11pt; display: flex; gap: 10pt; align-items: flex-start;">
+      <div style="min-width: 36pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399;">Cherny</p>
+        <p style="font-size: 6pt; color: #8B949E;">QA</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">엣지 케이스, 회귀 가능성, 커버리지. 체크 항목: 이 코드가 3,201 테스트를 통과하는가? 새로운 경로가 기존 픽스처를 깨는가?</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: .env case study + rationale -->
+  <div style="width: 196pt; display: flex; flex-direction: column; gap: 6pt;">
+
+    <!-- .env security case study -->
+    <div style="background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 3pt; height: 12pt; background: #EF4444; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">.env 보안 케이스</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Steinberger 리뷰가 실제로 막은 사례. 초기 설계에서 에이전트가 환경변수를 직접 읽어 LLM 프롬프트에 삽입하는 경로가 있었다. API 키 유출 벡터. CANNOT 규칙에 ".env 직접 참조 금지" 추가로 차단했다.</p>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 6pt; color: #EF4444; line-height: 1.4;">Before: agent reads .env → injects into prompt<br>After: env vars injected at harness boundary only</p>
+      </div>
+    </div>
+
+    <!-- Design rationale -->
+    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 3pt; height: 12pt; background: #818CF8; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">설계 근거</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4인격은 별도 LLM 세션이 아니다. 동일 컨텍스트에서 역할을 명시적으로 전환하는 프롬프트 패턴이다. 비용은 1회 추론이고, 효과는 4가지 시각의 독립 체크다. Confirmation Bias를 구조적으로 제거한다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · Beck × Karpathy × Steinberger × Cherny — 4인격 1세션</p>
+  <p style="font-size: 5pt; color: #8B949E;">24b / 34</p>
+</div>
+
+</body>
+</html>

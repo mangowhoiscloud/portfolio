@@ -201,11 +201,11 @@ export function ContextTiersSection() {
             <div className="text-sm font-semibold text-white/70 mb-3">Runtime Memory Hierarchy (5-Tier)</div>
             <div className="space-y-1.5">
               {[
-                { tier: "T0", name: "SOUL", desc: "조직 미션/원칙 (SOUL.md)", color: "#F4B8C8" },
-                { tier: "T0.5", name: "User Profile", desc: "사용자 선호, 언어, 타임존", color: "#E87080" },
-                { tier: "T1", name: "Organization", desc: "MonoLake fixture 기반 장르 파라미터, 가중치", color: "#818CF8" },
-                { tier: "T2", name: "Project", desc: "분석 이력, 캐시 시그널, IP 메타데이터", color: "#4ECDC4" },
-                { tier: "T3", name: "Session", desc: "현재 파이프라인 상태, ContextVar[SessionCtx]", color: "#F5C542" },
+                { tier: "T0", name: "Identity", desc: "GEODE.md. 에이전트 미션, 핵심 원칙, 실행 모델 (Karpathy P7)", color: "#F4B8C8" },
+                { tier: "T0.5", name: "User Profile", desc: "FileBasedUserProfile. 역할, 전문성, 자동 학습 패턴, 선호 설정", color: "#E87080" },
+                { tier: "T1", name: "Organization", desc: "MonoLake fixture JSON. IP 메타데이터, 시그널, PSM 공변량, 기대 결과", color: "#818CF8" },
+                { tier: "T2", name: "Project", desc: "ProjectMemory. PROJECT.md(200줄) + .geode/rules/*.md 글로브 매칭", color: "#4ECDC4" },
+                { tier: "T3", name: "Session", desc: "InMemorySessionStore. TTL 3600s, 체크포인트 save/load, 세션 간 격리", color: "#F5C542" },
               ].map((m) => (
                 <div key={m.tier} className="flex items-center gap-3 px-3 py-2 rounded-lg border border-white/[0.03]" style={{ background: `${m.color}03` }}>
                   <span className="shrink-0 w-8 text-center text-[10px] font-mono font-bold" style={{ color: m.color }}>{m.tier}</span>

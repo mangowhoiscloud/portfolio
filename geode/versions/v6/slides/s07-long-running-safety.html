@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #EF4444; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">PART 1 · LONG-RUNNING SAFETY</p>
+    <div style="flex: 1;"></div>
+    <div style="background: #1A0A0A; border: 1px solid #EF4444; border-radius: 4pt; padding: 3pt 8pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">NEW SLIDE</p>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">장기 자율 실행의 3대 위험과 자동 브레이크</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율성과 안전의 균형 — 사람 없이 하네스를 보호하는 3가지 메커니즘</p>
+  </div>
+
+  <!-- Content: 3 danger columns + trade-off bar -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 8pt;">
+
+    <!-- 3 Brake cards row -->
+    <div style="display: flex; gap: 8pt; flex: 1;">
+
+      <!-- Brake 1: Cost Explosion -->
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+        <div style="display: flex; align-items: center; gap: 6pt;">
+          <div style="background: #EF4444; border-radius: 50%; width: 18pt; height: 18pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">1</p>
+          </div>
+          <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">비용 폭발</p>
+        </div>
+
+        <!-- Problem -->
+        <div style="background: #1A0A0A; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">위험 — 실제 비용 계산</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">while(tool_use) 특성상 비용 폭발은 구조적으로 불가피. <strong style="color: #EF4444;">50라운드 × $0.15/turn = 세션당 $7.50</strong>. budget 초과 시 자동 정지가 없으면 하룻밤 무인 실행에 <strong style="color: #EF4444;">$500+ 소모</strong> 가능.</p>
+        </div>
+
+        <!-- Solution -->
+        <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">TokenTracker가 매 턴 비용 누적 → budget 상한 도달 시 budget_stop 신호 → LOOP_END 강제 발화. 사람 없이 비용 상한을 보장합니다.</p>
+        </div>
+
+        <!-- Karpathy badge -->
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 4pt 7pt; margin-top: auto;">
+          <p style="font-size: 6pt; color: #8B949E;">Karpathy P3 원칙 적용</p>
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">budget_stop → LOOP_END</p>
+        </div>
+      </div>
+
+      <!-- Brake 2: Infinite Loop -->
+      <div style="flex: 1; background: #161B22; border: 1px solid #F97316; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+        <div style="display: flex; align-items: center; gap: 6pt;">
+          <div style="background: #F97316; border-radius: 50%; width: 18pt; height: 18pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">2</p>
+          </div>
+          <p style="font-size: 8pt; font-weight: bold; color: #F97316;">무한 루프</p>
+        </div>
+
+        <!-- Problem -->
+        <div style="background: #1A0D00; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">위험 — 수렴 고착의 비용</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">LLM이 동일한 에러를 반복하면 50 rounds 전체를 낭비. 동일 요청에 $7.50를 태우고 실패를 반환합니다.</p>
+        </div>
+
+        <!-- Solution -->
+        <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 에러 <strong style="color: #FFFFFF;">3회</strong> 감지 → 수렴 판정 → Haiku→Sonnet→Opus 상위 모델 에스컬레이션 → 모델 체인 소진 시 Cross-Provider 자동 이동.</p>
+        </div>
+
+        <!-- Badge -->
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 4pt 7pt; margin-top: auto;">
+          <p style="font-size: 6pt; color: #8B949E;">Karpathy P4 원칙 적용</p>
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">convergence → model escalation</p>
+        </div>
+      </div>
+
+      <!-- Brake 3: Exploration Fixation -->
+      <div style="flex: 1; background: #161B22; border: 1px solid #F5C542; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+        <div style="display: flex; align-items: center; gap: 6pt;">
+          <div style="background: #F5C542; border-radius: 50%; width: 18pt; height: 18pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 8pt; font-weight: bold; color: #0D1117;">3</p>
+          </div>
+          <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">탐색 고착</p>
+        </div>
+
+        <!-- Problem -->
+        <div style="background: #1A1500; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">위험 — 탐색 편향의 결과</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 도구만 반복 호출하면 탐색 공간이 좁아지고, 다른 접근법으로 해결 가능한 문제를 50 rounds 내내 놓칩니다.</p>
+        </div>
+
+        <!-- Solution -->
+        <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">도구 반복 <strong style="color: #FFFFFF;">5회</strong> 감지 → Hook이 hint 메시지 자동 주입 → LLM이 다른 도구 경로를 탐색. 다양성을 구조적으로 강제합니다.</p>
+        </div>
+
+        <!-- Badge -->
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 4pt 7pt; margin-top: auto;">
+          <p style="font-size: 6pt; color: #8B949E;">다양성 강제 (Diversity Forcing)</p>
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">tool_repeat_5x → hint_inject</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Trade-off bar -->
+    <div style="background: #1E293B; border: 1px solid #8B949E; border-radius: 6pt; padding: 8pt 14pt; display: flex; align-items: center; gap: 10pt;">
+      <div style="width: 4pt; height: 30pt; background: #8B949E; border-radius: 2pt; flex-shrink: 0;"></div>
+      <div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">Trade-off: 자율성 vs 안전</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt;">브레이크가 강할수록 자율 실행 범위가 줄어듭니다. 3가지 임계값(budget 한도, 수렴 횟수 3회, 반복 횟수 5회)은 사용자가 조정 가능합니다. 기본값은 실험적으로 도출했습니다.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">3 자동 브레이크 → 사람 없이 장기 실행 가능 · core/orchestration/safety.py</p>
+    <p style="font-size: 6pt; color: #8B949E;">07 / 34</p>
+  </div>
+
+</body>
+</html>

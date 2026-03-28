@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION · TRADE-OFFS</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Architecture Trade-offs</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">모든 설계 결정은 무언가를 포기하고 무언가를 얻는다 — Trade-off를 인식한 결정만이 장기 운용된다</p>
+</div>
+
+<!-- Content: 2-column grid of trade-offs -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Left column: 4 trade-offs -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Port/Adapter DI</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 직접 호출 단순성</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> GEODE→REODE 이식 시 코어 코드 변경 0줄</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Lossless Context Selection</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 단순 요약(빠르지만 정보 손실)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> LLM이 직접 선별 → 컨텍스트 비용 0.03%로 절감</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Provider-aware Compaction</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 단일 압축 로직의 단순성</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> Anthropic Beta tool_use 캐시 규칙 준수 → Failover 안정성</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">6-Layer Architecture</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 초기 설계 속도 (레이어마다 인터페이스 정의)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> 187 모듈 중 어느 레이어도 교체 가능한 구조</p>
+    </div>
+
+  </div>
+
+  <!-- Right column: 3 trade-offs + principle -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">MCPRegistry 삭제</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 중앙 집중 도구 관리 (단일 조회 포인트)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> Proxy stub 9개 제거 → 45 MCP auto-discovery</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">SHA-256 PromptAssembler</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 수동 편집의 즉각성</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> cache_control ephemeral → 2회차 입력 비용 10%로 감소</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">4-Tier Memory (휘발 → 불변)</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 단순 Redis 캐시 (단계 없는 단일 레이어)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> Provider Failover 시에도 학습 내용 보존</p>
+    </div>
+
+    <!-- Principle box -->
+    <div style="background: #1E293B; border-radius: 4pt; padding: 9pt 12pt;">
+      <p style="font-size: 7pt; color: #34D399; font-weight: bold;">Trade-off 원칙</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.5;">포기하는 것을 명시하지 않은 설계 결정은 결정이 아니다. 7개 피봇 모두 CHANGELOG에 "왜"가 기록되어 있다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 39 releases · 모든 피봇 CHANGELOG 기록</p>
+  <p style="font-size: 5pt; color: #8B949E;">28 / 34</p>
+</div>
+
+</body>
+</html>

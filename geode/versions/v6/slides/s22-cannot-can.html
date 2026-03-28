@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">HE-0 SCAFFOLD</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 6pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">CANNOT — 6 핵심 규칙</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">LLM에게 자유를 주되 발산을 막는 헌법 — 금지 규칙이 명확할수록 허용 공간이 넓어진다</p>
+</div>
+
+<!-- Content: 3x2 rule grid + side panel -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Left: 6 rules in 3x2 grid -->
+  <div style="flex: 1.4; display: flex; flex-direction: column; gap: 5pt;">
+
+    <!-- Row 1: Git isolation + Quality gate -->
+    <div style="display: flex; gap: 5pt; flex: 1;">
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Git 격리</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">Worktree 없이 코드 작업 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">에이전트가 main 브랜치에 직접 쓰면 병렬 작업 충돌이 발생한다. 각 태스크는 반드시 독립 worktree에서 실행돼야 한다.</p>
+      </div>
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">품질 게이트</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">lint/type/test 실패 상태 커밋 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">실패한 상태의 커밋은 다음 에이전트를 오염시킨다. CI가 3종 체크를 모두 통과한 후에만 머지를 허용한다.</p>
+      </div>
+    </div>
+
+    <!-- Row 2: Plan gate + Traceability -->
+    <div style="display: flex; gap: 5pt; flex: 1;">
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">과잉 구현 방지</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">Plan 승인 없이 구현 착수 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">LLM은 승인 없이 구현하려는 성질이 있다. 설계 문서에 인간 승인 서명이 없으면 첫 줄도 작성하지 않는다.</p>
+      </div>
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">추적성</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">CHANGELOG 없이 기능 커밋 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">500+ PR의 결정 근거가 사라지면 재설계 비용이 폭증한다. 모든 기능 커밋은 CHANGELOG 항목을 동반해야 한다.</p>
+      </div>
+    </div>
+
+    <!-- Row 3: CSS constraint + Narrative -->
+    <div style="display: flex; gap: 5pt; flex: 1;">
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">html2pptx 제약</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">CSS gradient 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">linear-gradient/radial-gradient는 html2pptx가 렌더링하지 못한다. 배경 효과는 solid color + border 조합으로 대체한다.</p>
+      </div>
+      <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">내러티브 품질</p>
+          <div style="background: #EF4444; border-radius: 2pt; padding: 1pt 5pt;">
+            <p style="font-size: 6pt; color: #0D1117; font-weight: bold;">CANNOT</p>
+          </div>
+        </div>
+        <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">단순 박스형 배치 금지</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">키워드만 넣은 카드 그리드는 발표가 아니다. 각 박스는 "X 때문에 Y를 선택했고 Z가 나왔다" 수준의 인과 서술을 포함해야 한다.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right: remaining count + CAN -->
+  <div style="width: 174pt; display: flex; flex-direction: column; gap: 6pt;">
+
+    <!-- Remaining rules notice -->
+    <div style="background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 11pt 13pt; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="display: flex; align-items: baseline; gap: 6pt;">
+        <p style="font-size: 28pt; font-weight: bold; color: #EF4444;">17</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">개 규칙 추가<br>CLAUDE.md 수록</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">나머지 17개 규칙은 CLAUDE.md 425줄에 명시. 하나라도 위반하면 CI가 머지를 차단한다.</p>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 6pt; color: #EF4444; line-height: 1.5;">타이포그래피 4개 · 레이아웃 5개<br>html2pptx 추가 4개 · 내러티브 4개</p>
+      </div>
+    </div>
+
+    <!-- CAN principle -->
+    <div style="background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 11pt 13pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="width: 3pt; height: 12pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">CAN — 허용 공간</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">제약이 명확할수록 허용 공간이 넓어진다. 금지 규칙이 경계를 정하면, 그 안에서 LLM은 구체적 숫자, DAG, 인과 서술로 자유롭게 표현한다.</p>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 8pt; margin-top: auto;">
+        <p style="font-size: 7pt; color: #34D399;">문제→설계→결과 인과 흐름 시각화</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 4pt 36pt 5pt; display: flex; justify-content: space-between; align-items: center;">
+  <div style="display: flex; align-items: center; gap: 6pt;">
+    <p style="font-size: 12pt; font-weight: bold; color: #EF4444;">23</p>
+    <p style="font-size: 5pt; color: #8B949E;">CANNOT 전체 규칙 — 제약이 명확할수록 자유가 넓어진다</p>
+  </div>
+  <p style="font-size: 5pt; color: #8B949E;">22 / 34</p>
+</div>
+
+</body>
+</html>

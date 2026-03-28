@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION · CONSTRAINTS → RESULTS</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 4pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Constraints → HOW → Results</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">금지 규칙 → 어떤 메커니즘으로 → 어떤 결과가 나왔는가</p>
+</div>
+
+<!-- Content: 5 CANNOT → HOW → Result triples -->
+<div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 5pt; justify-content: center;">
+
+  <!-- Pair 1 -->
+  <div style="display: flex; align-items: stretch; gap: 6pt;">
+    <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">키워드 나열식 슬라이드 금지</p>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
+      <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CANNOT 위반 시 Socratic Gate 재통과 강제 — 인과관계 1문장 없으면 PR 차단</p>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">34장</strong> 전체 DAG 내러티브</p>
+    </div>
+  </div>
+
+  <!-- Pair 2 -->
+  <div style="display: flex; align-items: stretch; gap: 6pt;">
+    <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">Socratic Gate 통과 전 코드 작성 금지</p>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
+      <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">구현 전 5-질문 의무화 → 잘못된 전제로 50 rounds 낭비 사전 차단</p>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">39회</strong> 릴리스 무회귀</p>
+    </div>
+  </div>
+
+  <!-- Pair 3 -->
+  <div style="display: flex; align-items: stretch; gap: 6pt;">
+    <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">단순 박스형 다이어그램 금지</p>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
+      <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">화살표 + 분기 + 루프백 필수 → 4-Persona Review의 Architect 검사 통과 시에만 머지</p>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">21 Skills</strong> 흐름도 누적</p>
+    </div>
+  </div>
+
+  <!-- Pair 4 -->
+  <div style="display: flex; align-items: stretch; gap: 6pt;">
+    <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">Trade-off 명시 없는 설계 결정 금지</p>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
+      <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">CHANGELOG에 "포기한 것 / 얻은 것" 쌍 없으면 기능 커밋 자체가 차단됨</p>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">6회</strong> 피봇 WHY 전부 기록</p>
+    </div>
+  </div>
+
+  <!-- Pair 5 -->
+  <div style="display: flex; align-items: stretch; gap: 6pt;">
+    <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;">카드 6개 초과 금지 — 밀도 강제 압축</p>
+    </div>
+    <div style="display: flex; align-items: center; flex-direction: column; justify-content: center; gap: 2pt; width: 18pt; flex-shrink: 0;">
+      <p style="font-size: 7pt; color: #8B949E; text-align: center;">HOW</p>
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1.4; background: #161B22; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #8B949E;">MECHANISM</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">초과 시 슬라이드 분리 강제 → 정보 우선순위 결정이 설계자에게 귀환</p>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 12pt; flex-shrink: 0;">
+      <p style="font-size: 11pt; color: #34D399; font-weight: bold;">→</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 7pt 10pt;">
+      <p style="font-size: 6.5pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 7.5pt; color: #E2E8F0; margin-top: 2pt;"><strong style="color: #34D399;">34장</strong> 슬라이드당 1메시지</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 23 CANNOT rules · 제약이 품질을 만든다</p>
+  <p style="font-size: 5pt; color: #8B949E;">30 / 34</p>
+</div>
+
+</body>
+</html>

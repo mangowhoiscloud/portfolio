@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑥</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Memory + Auto-Learning: 턴 종료 &#8594; TURN_COMPLETE hook &#8594; MEMORY.md 자동 학습</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">분석 세션이 끝나면 인사이트가 휘발됐다 — PIPELINE_END 이벤트가 MEMORY.md에 자동 축적, 다음 세션에 반영</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Auto-learning feedback loop + 4-Tier (57%) -->
+    <div style="flex: 0 0 396pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Auto-learning feedback loop -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 11pt; display: flex; flex-direction: column; gap: 5pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 3pt;">AUTO-LEARNING FEEDBACK LOOP</p>
+
+        <!-- Loop steps -->
+        <div style="display: flex; align-items: center; gap: 5pt;">
+          <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 6pt 9pt; text-align: center; flex: 1;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">턴 실행</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">AgenticLoop 1 turn</p>
+          </div>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #F9731620; border: 1pt solid #F9731450; border-radius: 4pt; padding: 6pt 9pt; text-align: center; flex: 1;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">TURN_COMPLETE</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Hook 이벤트 발화</p>
+          </div>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #34D39920; border: 1pt solid #34D39950; border-radius: 4pt; padding: 6pt 9pt; text-align: center; flex: 1;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">MEMORY.md</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">인사이트 자동 축적</p>
+          </div>
+        </div>
+
+        <!-- PIPELINE_END arrow -->
+        <div style="display: flex; justify-content: center; gap: 6pt; align-items: center;">
+          <p style="font-size: 6pt; color: #F97316;">PIPELINE_END &#8594; memory write-back &#8594; 다음 세션 Tier 3 주입</p>
+        </div>
+
+        <!-- Loopback -->
+        <div style="background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 6pt 10pt; text-align: center;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">다음 세션 시작 시 PromptAssembler P4 (memory 페이즈)가 MEMORY.md 인사이트를 프롬프트에 자동 주입</p>
+        </div>
+      </div>
+
+      <!-- 4-Tier Memory -->
+      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 3pt;">4-TIER MEMORY 계층</p>
+        <div style="display: flex; gap: 5pt; flex: 1;">
+          <div style="flex: 1; background: #818CF820; border: 1pt solid #818CF840; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Tier 4 — Organization</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">불변 가이드라인 · CLAUDE.md · 전역 정책</p>
+          </div>
+          <div style="flex: 1; background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Tier 3 — Project</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">세션 간 인사이트 · LEARNINGS.md 자동 업데이트</p>
+          </div>
+          <div style="flex: 1; background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Tier 2 — Session</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">TTL 단기 메모리 · 200 turns sliding window</p>
+          </div>
+          <div style="flex: 1; background: #F9731615; border: 1pt solid #F9731440; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Tier 1 — Hybrid</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Redis L1 고속 캐시 + File L2 영속 저장</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Write-back mechanics + Trade-off (43%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- write-back details -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 11pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 5pt;">Memory Write-back 메커니즘</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 3pt solid #F97316;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">PIPELINE_END hook</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">파이프라인 종료 시 L2 React 핸들러 자동 실행</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 3pt solid #4ECDC4;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">패턴 추출 + 요약</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">LLM이 인사이트·패턴·결정 이유를 구조화</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 3pt solid #34D399;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">MEMORY.md 누적</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Tier 3 Project 메모리에 append — 세션 간 지속</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 왜 4-Tier? design rationale -->
+      <div style="background: #161B22; border: 1pt solid #818CF860; border-radius: 4pt; padding: 8pt 11pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">왜 4-Tier인가?</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">단일 메모리면 프로젝트 간 격리가 안 되고, 세션 메모리만으로는 인사이트가 휘발된다. 4-Tier로 범위별 TTL과 접근 권한을 분리했다.</p>
+        <div style="display: flex; gap: 4pt;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 5pt; text-align: center;">
+            <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">T4 영구</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">정책 불변</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 5pt; text-align: center;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">T3 장기</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">세션 간 누적</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 5pt; text-align: center;">
+            <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">T2 TTL</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">세션 단위</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 5pt; text-align: center;">
+            <p style="font-size: 6pt; color: #F97316; font-weight: bold;">T1 고속</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">Redis 캐시</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Failover memory guarantee -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 11pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 3pt;">Provider Failover 후에도 메모리 유지</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">4-Tier 메모리가 LLMClientPort 추상화 위에 있기 때문에 Provider 전환 후에도 세션 학습 내용이 사라지지 않는다.</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 11pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Trade-off: 자동 학습 오버헤드 vs 지식 휘발</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">PIPELINE_END마다 LLM 호출이 추가되지만, 세션마다 인사이트가 휘발되는 비용이 더 크다. write-back 덕분에 동일 분석 영역에서 세션이 누적될수록 품질이 개선된다.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">TURN_COMPLETE · PIPELINE_END hook &#183; 4-Tier: Session&#8594;Project&#8594;Org&#8594;Hybrid &#183; Redis L1 + File L2 &#183; MEMORY.md write-back</p>
+    <p style="font-size: 5pt; color: #8B949E;">15 / 34</p>
+  </div>
+
+</body>
+</html>
