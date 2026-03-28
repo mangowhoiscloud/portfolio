@@ -16,90 +16,140 @@ body {
 <body>
 
   <!-- Header -->
-  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 14pt; background: #F97316; border-radius: 2pt;"></div>
     <p style="font-size: 9pt; font-weight: bold; color: #F97316;">PART 0 · ARCHITECTURE</p>
   </div>
 
   <!-- Title -->
-  <div style="padding: 0 36pt 6pt;">
+  <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Triple Loop: META → DEV → RUNTIME + 46 Hook 신경계</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴드가 자기 자신을 개발하고, RUNTIME이 자율 실행한다</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 2pt;">스캐폴드가 자기 자신을 개발하고, RUNTIME이 자율 실행한다</p>
   </div>
 
   <!-- Content -->
-  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: flex-start;">
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: flex-start; min-height: 0;">
 
-    <!-- Left: Triple Loop diagram (text-based DAG) -->
-    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+    <!-- Left: Triple Loop vertical flow -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 0;">
 
       <!-- META Loop -->
-      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
-        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
-          <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">META</p>
+      <div style="background: #161B22; border: 1.5pt solid #818CF8; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <!-- Step label -->
+        <div style="flex-shrink: 0; width: 52pt; text-align: center;">
+          <div style="background: #818CF8; border-radius: 4pt; padding: 4pt 0; margin-bottom: 3pt;">
+            <p style="font-size: 10pt; font-weight: bold; color: #0D1117;">META</p>
+          </div>
           <p style="font-size: 6pt; color: #8B949E;">스캐폴드 루프</p>
         </div>
-        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
-        <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">인간이 직접 코딩하면 Harness가 실패하기 때문에 Claude Code가 GEODE를 자체 개발한다. 21 Skills + CANNOT 23-Rule + Socratic Gate로 1,174 커밋을 생성한다.</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">harness-for-real 해커톤 · "키보드에 손이 닿는 순간 하네스의 실패다"</p>
-        </div>
-        <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 9pt; flex-shrink: 0;">
-          <p style="font-size: 6pt; color: #818CF8;">21 Skills</p>
-          <p style="font-size: 6pt; color: #818CF8;">425줄 CLAUDE.md</p>
+        <!-- Divider -->
+        <div style="width: 1pt; height: 34pt; background: #21262D; flex-shrink: 0;"></div>
+        <!-- Steps with arrows -->
+        <div style="flex: 1; display: flex; align-items: center; gap: 5pt;">
+          <div style="background: #0D1117; border: 1pt solid #818CF8; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">21 Skills</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CLAUDE.md 425줄</p>
+          </div>
+          <p style="font-size: 10pt; color: #818CF8; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #818CF8; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Socratic Gate</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CANNOT 23-Rule</p>
+          </div>
+          <p style="font-size: 10pt; color: #818CF8; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #818CF8; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">1,174 Commits</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">자체 개발</p>
+          </div>
         </div>
       </div>
 
-      <!-- Arrow down -->
-      <div style="text-align: center;">
-        <p style="font-size: 12pt; color: #F97316;">↓ Hook 이벤트 전파</p>
+      <!-- Connector: META → DEV -->
+      <div style="display: flex; align-items: center; gap: 0; padding: 0 0 0 25pt;">
+        <!-- Vertical connector bar + label -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0; width: 52pt;">
+          <div style="width: 2pt; height: 8pt; background: #F97316;"></div>
+          <div style="width: 2pt; height: 8pt; background: #F97316;"></div>
+        </div>
+        <div style="margin-left: 8pt; display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 9pt; color: #F97316;">▼</p>
+          <p style="font-size: 6pt; color: #F97316; font-weight: bold;">Hook 이벤트 전파</p>
+          <p style="font-size: 6pt; color: #8B949E;">PIPELINE_END → DEV 규칙 강화</p>
+        </div>
       </div>
 
       <!-- DEV Loop -->
-      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
-        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
-          <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">DEV</p>
+      <div style="background: #161B22; border: 1.5pt solid #4ECDC4; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <div style="flex-shrink: 0; width: 52pt; text-align: center;">
+          <div style="background: #4ECDC4; border-radius: 4pt; padding: 4pt 0; margin-bottom: 3pt;">
+            <p style="font-size: 10pt; font-weight: bold; color: #0D1117;">DEV</p>
+          </div>
           <p style="font-size: 6pt; color: #8B949E;">개발 루프</p>
         </div>
-        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
-        <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">테스트 없이 머지하면 회귀가 쌓이기 때문에 AgenticLoop가 8-Step Loop로 PR 단위 코드를 작성하며 70% 테스트 비율을 강제한다. 결과: 40/40 릴리스 무회귀.</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">typecheck+lint backpressure · LEARNINGS.md 패턴 축적</p>
-        </div>
-        <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 9pt; flex-shrink: 0;">
-          <p style="font-size: 6pt; color: #4ECDC4;">3,216 Tests</p>
-          <p style="font-size: 6pt; color: #4ECDC4;">500+ PRs</p>
+        <div style="width: 1pt; height: 34pt; background: #21262D; flex-shrink: 0;"></div>
+        <div style="flex: 1; display: flex; align-items: center; gap: 5pt;">
+          <div style="background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">8-Step Loop</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">PR 단위 작성</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">CI 5-Job Gate</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">70% 테스트 강제</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">3,216 Tests</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">500+ PRs 무회귀</p>
+          </div>
         </div>
       </div>
 
-      <!-- Arrow down -->
-      <div style="text-align: center;">
-        <p style="font-size: 12pt; color: #F97316;">↓ Hook 이벤트 전파</p>
+      <!-- Connector: DEV → RUNTIME -->
+      <div style="display: flex; align-items: center; gap: 0; padding: 0 0 0 25pt;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 0; width: 52pt;">
+          <div style="width: 2pt; height: 8pt; background: #F97316;"></div>
+          <div style="width: 2pt; height: 8pt; background: #F97316;"></div>
+        </div>
+        <div style="margin-left: 8pt; display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 9pt; color: #F97316;">▼</p>
+          <p style="font-size: 6pt; color: #F97316; font-weight: bold;">Hook 이벤트 전파</p>
+          <p style="font-size: 6pt; color: #8B949E;">NODE_EXIT → RUNTIME 안전장치 트리거</p>
+        </div>
       </div>
 
       <!-- RUNTIME Loop -->
-      <div style="background: #161B22; border: 1px solid #F5C542; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
-        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
-          <p style="font-size: 10pt; font-weight: bold; color: #F5C542;">RUNTIME</p>
+      <div style="background: #161B22; border: 1.5pt solid #F5C542; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <div style="flex-shrink: 0; width: 52pt; text-align: center;">
+          <div style="background: #F5C542; border-radius: 4pt; padding: 4pt 0; margin-bottom: 3pt;">
+            <p style="font-size: 9pt; font-weight: bold; color: #0D1117;">RUNTIME</p>
+          </div>
           <p style="font-size: 6pt; color: #8B949E;">자율 실행 루프</p>
         </div>
-        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
-        <div style="flex: 1;">
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">사람 없이 장기 실행하기 위해 Safety Brake·Scheduler·Gateway를 추가하여 안전성을 확보한다. 52 Tools + 45 MCP + 46 Hook이 while(tool_use) 50 라운드를 자율 구동한다.</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Safety Brake · Scheduler · Gateway: 사람 없이 오래 실행</p>
-        </div>
-        <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 9pt; flex-shrink: 0;">
-          <p style="font-size: 6pt; color: #F5C542;">52 Tools</p>
-          <p style="font-size: 6pt; color: #F5C542;">45 MCP</p>
+        <div style="width: 1pt; height: 34pt; background: #21262D; flex-shrink: 0;"></div>
+        <div style="flex: 1; display: flex; align-items: center; gap: 5pt;">
+          <div style="background: #0D1117; border: 1pt solid #F5C542; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">52 Tools</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">45 MCP</p>
+          </div>
+          <p style="font-size: 10pt; color: #F5C542; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #F5C542; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">while(tool_use)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">50 라운드</p>
+          </div>
+          <p style="font-size: 10pt; color: #F5C542; flex-shrink: 0;">→</p>
+          <div style="background: #0D1117; border: 1pt solid #F5C542; border-radius: 4pt; padding: 7pt 8pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Safety Brake</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">사람 없이 자율</p>
+          </div>
         </div>
       </div>
 
     </div>
 
     <!-- Right: Hook 46 events panel -->
-    <div style="flex: 0 0 168pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="flex: 0 0 162pt; display: flex; flex-direction: column; gap: 6pt;">
 
-      <div style="background: #1E293B; border: 1px solid #F97316; border-radius: 6pt; padding: 10pt;">
+      <div style="background: #1E293B; border: 1pt solid #F97316; border-radius: 6pt; padding: 10pt;">
         <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 6pt;">
           <div style="width: 4pt; height: 12pt; background: #F97316; border-radius: 2pt;"></div>
           <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Hook 신경계</p>
@@ -113,31 +163,41 @@ body {
           <li style="font-size: 7pt; color: #E2E8F0;">CONTEXT_WARNING</li>
           <li style="font-size: 7pt; color: #E2E8F0;">SUBAGENT_STARTED / SUBAGENT_COMPLETED</li>
         </ul>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt;">Priority 기반 핸들러 실행. 핸들러 간 에러 격리로 한 이벤트 실패가 루프를 중단시키지 않는다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt;">Priority 기반 핸들러 실행. 에러 격리로 한 이벤트 실패가 루프를 중단시키지 않는다.</p>
       </div>
 
       <!-- Feedback loop note -->
-      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt;">
+      <div style="background: #161B22; border: 1pt solid #34D399; border-radius: 6pt; padding: 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자기 증강 피드백</p>
-        <p style="font-size: 6pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.4;">PIPELINE_END 이벤트 → MEMORY.md 인사이트 자동 축적 → 다음 세션 PromptAssembler가 반영</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">3-Loop가 서로 강화한다</p>
+        <div style="display: flex; align-items: center; gap: 5pt; margin-top: 5pt;">
+          <div style="background: #0D1117; border-radius: 3pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #F97316;">PIPELINE_END</p>
+          </div>
+          <p style="font-size: 9pt; color: #34D399;">→</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #E2E8F0;">MEMORY.md</p>
+          </div>
+          <p style="font-size: 9pt; color: #34D399;">→</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #818CF8;">다음 세션</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">3-Loop가 서로 강화한다</p>
       </div>
 
-      <!-- Trade-off: 왜 3중 루프인가 -->
-      <div style="background: #1E293B; border: 1px solid #F5C542; border-radius: 4pt; padding: 8pt 9pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 2pt;">Trade-off: 왜 3중 루프인가?</p>
-        <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">DEV+RUNTIME 2중 루프로는 규칙이 진화하지 않는다. 같은 실수가 반복되고 패턴이 코드베이스에 남는다.</p>
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border: 1pt solid #F5C542; border-radius: 4pt; padding: 8pt 9pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 3pt;">왜 3중 루프인가?</p>
         <div style="display: flex; gap: 4pt;">
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt;">
             <p style="font-size: 6pt; color: #EF4444;">2중 루프</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">CANNOT 위반 반복 · 학습 없음</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">CANNOT 위반 반복 · 학습 없음</p>
           </div>
           <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt;">
             <p style="font-size: 6pt; color: #34D399;">META 추가</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">규칙이 CHANGELOG에서 진화</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">규칙이 CHANGELOG에서 진화</p>
           </div>
         </div>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">비용: META 루프 투자 시간 ↑ · 수익: RUNTIME 품질 복리 ↑</p>
       </div>
 
     </div>
@@ -145,7 +205,7 @@ body {
   </div>
 
   <!-- Footer -->
-  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
     <p style="font-size: 6pt; color: #8B949E;">META가 DEV를 낳고, DEV가 RUNTIME을 완성하고, RUNTIME이 META를 강화한다</p>
     <p style="font-size: 6pt; color: #8B949E;">04 / 35</p>
   </div>

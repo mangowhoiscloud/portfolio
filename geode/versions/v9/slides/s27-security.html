@@ -18,7 +18,7 @@ body {
 <!-- Header -->
 <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
   <div style="width: 4pt; height: 16pt; background: #EF4444; border-radius: 2pt;"></div>
-  <p style="font-size: 10pt; font-weight: bold; color: #EF4444;">SAFETY · SECURITY</p>
+  <p style="font-size: 10pt; font-weight: bold; color: #EF4444;">SAFETY &#xB7; SECURITY</p>
 </div>
 
 <!-- Title -->
@@ -34,51 +34,53 @@ body {
   <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
     <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
       <div style="width: 3pt; height: 12pt; background: #EF4444; border-radius: 2pt;"></div>
-      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">PolicyChain 다이어그램</p>
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">PolicyChain &#xB2E4;&#xC774;&#xC5B4;&#xADF8;&#xB7A8;</p>
     </div>
     <img src="assets/v028-diagram-policy-chain.png" style="width: 340pt; height: 158pt; border-radius: 4pt; object-fit: contain;">
   </div>
 
   <!-- Right: 3-Layer + Dual Trust -->
-  <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
 
     <!-- Bash 3-Layer -->
-    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Bash 3-Layer 실행 제어</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Bash 3-Layer &#xC2E4;&#xD589; &#xC81C;&#xC5B4; &#x2014; &#xC778;&#xACFC; &#xC11C;&#xC220;</p>
+
       <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L1: Syntax Validation</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">rm -rf / · chmod 777 · curl | bash 패턴 차단. 실행 전 정적 분석.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L1: Blocked &#x2014; Regex 9-Pattern Safe-First</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;"><span style="color: #F87171; font-family: 'Courier New', monospace;">rm&#x2011;rf</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">sudo</span>, <span style="color: #F87171; font-family: 'Courier New', monospace;">curl|sh</span> &#xB4F1; 9&#xAC1C; regex &#xD328;&#xD134;&#xC744; &#xC6B0;&#xC120; &#xAC80;&#xC0AC;&#xD55C;&#xB2E4;. safe&#x2011;first&#xB85C; &#xAC80;&#xC0AC;&#xD558;&#xBA74; <span style="color: #F87171; font-family: 'Courier New', monospace;">ls / &amp;&amp; rm&#x2011;rf /</span> &#xAC19;&#xC740; &#xD30C;&#xC774;&#xD504; &#xC8FC;&#xC785;&#xC744; &#xB193;&#xCE58;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xC800; &#xC21C;&#xC11C;&#xAC00; &#xD544;&#xC218;&#xB2E4;.</p>
       </div>
+
       <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L2: PolicyChain Hook</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">46 Hook Events 중 BASH_EXEC_PRE에서 PolicyChain 통과 여부 확인. 거부 시 즉시 차단 + 사유 반환.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L2: Resource &#x2014; setrlimit Child Process &#xAC15;&#xC81C;</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;"><span style="color: #FCD34D; font-family: 'Courier New', monospace;">preexec_fn setrlimit</span>&#xC73C;&#xB85C; CPU 30s, FSIZE 50MB, NPROC 64&#xB97C; child process&#xC5D0; &#xAC15;&#xC81C;&#xD55C;&#xB2E4;. L1&#xC744; &#xD1B5;&#xACFC;&#xD558;&#xB354;&#xB77C;&#xB3C4; &#xC2AC;&#xB85C;&#xC6B0; &#xB8E8;&#xD504;&#xB098; &#xB300;&#xC6A9;&#xB7C9; &#xD30C;&#xC77C; &#xC0DD;&#xC131;&#xC744; &#xCE28;&#xB2E4;.</p>
       </div>
+
       <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L3: macOS Seatbelt Sandbox</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">REODE: 34-패턴 deny-list. 파일시스템 쓰기, 네트워크 외부 접근, 프로세스 fork 제한.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L3: HITL &#x2014; stdin &#xC5C6;&#xC73C;&#xBA74; deny&#x2011;by&#x2011;default</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">L1&#x2011;2&#xB97C; &#xD1B5;&#xACFC;&#xD55C; &#xBBF8;&#xBD84;&#xB958; &#xBA85;&#xB839;&#xC740; &#xC0AC;&#xC6A9;&#xC790; &#xC2B9;&#xC778;&#xC744; &#xC694;&#xCCAD;&#xD55C;&#xB2E4;. <span style="color: #F87171; font-family: 'Courier New', monospace;">geode serve</span>&#xC5D0;&#xC11C;&#xB294; stdin&#xC774; &#xC5C6;&#xC73C;&#xBBC0;&#xB85C; &#xC790;&#xB3D9;&#xC73C;&#xB85C; deny&#x2011;by&#x2011;default&#xB85C; &#xCC98;&#xB9AC;&#xB41C;&#xB2E4;.</p>
       </div>
     </div>
 
     <!-- Dual Trust Model -->
     <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model: 두 독립 축</p>
-      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 2pt;">에이전트 안전과 파이프라인 검증은 독립 축이다. 에이전트는 입력을 차단(Input Gating), 파이프라인은 출력을 검증(Output Validation). 둘 다 통과해야만 결과가 신뢰된다.</p>
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model: &#xC785;&#xB825; &#xCC28;&#xB2E8; &#xD6C4; &#xCD9C;&#xB825; &#xAC80;&#xC99D;</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 2pt;">&#xC5D0;&#xC774;&#xC804;&#xD2B8; &#xC548;&#xC804;&#xACFC; &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xAC80;&#xC99D;&#xC740; &#xB3C5;&#xB9BD; &#xCD95;&#xC774;&#xB2E4;. Input Gating&#xC740; &#xC2E4;&#xD589; &#xC804; &#xCC28;&#xB2E8;&#xD558;&#xACE0;, Output Validation&#xC740; &#xC2E4;&#xD589; &#xD6C4; &#xC0B0;&#xCD9C;&#xBB3C;&#xC744; &#xAC80;&#xC99D;&#xD55C;&#xB2E4;. &#xB450; &#xCD95; &#xBAA8;&#xB450; &#xD1B5;&#xACFC;&#xD574;&#xC57C;&#xB9CC; &#xACB0;&#xACFC;&#xAC00; &#xC2E0;&#xB8B0;&#xB41C;&#xB2E4;.</p>
       <div style="display: flex; gap: 6pt;">
         <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Input Gating</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4-Tier HITL 권한 모델: 에이전트 실행 전 차단</p>
+          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">4&#x2011;Tier HITL &#xAC8C;&#xCE35;&#xC73C;&#xB85C; &#xC5D0;&#xC774;&#xC804;&#xD2B8; &#xC2E4;&#xD589; &#xC804; &#xCC28;&#xB2E8;. TIER 0&#x2011;1: asyncio.gather &#xC790;&#xB3D9; / TIER 3&#x2011;4: &#xAC1C;&#xBCC4; &#xC218;&#xB3D9; &#xC2B9;&#xC778; &#xD544;&#xC218;</p>
         </div>
         <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
           <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Output Validation</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">5-Tier Safety 등급: 실행 후 출력 검증</p>
+          <p style="font-size: 6.5pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">5&#x2011;Tier Safety &#xB4F1;&#xAE09;&#xC73C;&#xB85C; &#xC2E4;&#xD589; &#xD6C4; &#xCD9C;&#xB825; &#xAC80;&#xC99D;. &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xACB0;&#xACFC;&#xBB3C;&#xB9CC; &#xC774; &#xC544;&#xCE58;&#xB97C; &#xD1B5;&#xACFC;&#xD55C;&#xB2E4;</p>
         </div>
       </div>
-      <p style="font-size: 6pt; color: #8B949E; line-height: 1.4; margin-top: 2pt;">TIER 0-1: asyncio.gather 병렬 자동 실행 / TIER 3-4: 개별 수동 승인 필수</p>
     </div>
 
     <!-- Trade-off note -->
     <div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 9pt;">
-      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #EF4444;">Trade-off: 3-Layer 제어 비용</strong> L1 정적 분석 + L2 PolicyChain + L3 Seatbelt 모두 통과 시 지연이 발생하지만, 자율 에이전트가 시스템을 파괴한 사례가 0건인 것이 증거다.</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #EF4444;">Trade-off: 3-Layer &#xC81C;&#xC5B4; &#xBE44;&#xC6A9;</strong> L1 &#xC815;&#xC801; &#xBD84;&#xC11D; + L2 setrlimit + L3 HITL &#xBAA8;&#xB450; &#xD1B5;&#xACFC; &#xC2DC; &#xC9C0;&#xC5F0;&#xC774; &#xBC1C;&#xC0DD;&#xD558;&#xC9C0;&#xB9CC;, &#xC790;&#xC728; &#xC5D0;&#xC774;&#xC804;&#xD2B8;&#xAC00; &#xC2DC;&#xC2A4;&#xD15C;&#xC744; &#xD30C;&#xAD34;&#xD55C; &#xC0AC;&#xB840;&#xAC00; 0&#xAC74;&#xC778; &#xAC83;&#xC774; &#xC99D;&#xAC70;&#xB2E4;.</p>
     </div>
 
   </div>
@@ -87,7 +89,7 @@ body {
 
 <!-- Footer -->
 <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
-  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 · 46 Hook Events · 5-Tier Tool Safety · macOS Seatbelt (REODE)</p>
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 &#xB7; 46 Hook Events &#xB7; 5-Tier Tool Safety &#xB7; Bash 3-Layer + Dual Trust</p>
   <p style="font-size: 5pt; color: #8B949E;">29 / 35</p>
 </div>
 
