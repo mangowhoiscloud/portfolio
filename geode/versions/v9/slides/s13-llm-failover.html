@@ -23,19 +23,19 @@ body {
   </div>
 
   <!-- Title -->
-  <div style="padding: 0 36pt 5pt;">
+  <div style="padding: 0 36pt 4pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">LLM Failover: 호출 실패 &#8594; CircuitBreaker &#8594; Cross-Provider Fallback</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">단일 Provider에 의존하면 Rate Limit·장애 시 파이프라인 전체가 중단되기 때문에 3-Provider 체인으로 단일 장애점을 제거한다</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">단일 Provider에 의존하면 Rate Limit·장애 시 파이프라인 전체가 중단되기 때문에 3-Provider 체인으로 단일 장애점을 제거한다</p>
   </div>
 
   <!-- Main content -->
   <div style="flex: 1; padding: 0 36pt; display: flex; gap: 9pt; min-height: 0;">
 
-    <!-- Left: 3-Provider chain (57%) -->
+    <!-- Left: 3-Provider chain + Circuit Breaker state machine -->
     <div style="flex: 0 0 400pt; display: flex; flex-direction: column; gap: 6pt;">
 
       <!-- 3 Providers -->
-      <div style="display: flex; gap: 5pt;">
+      <div style="display: flex; gap: 5pt; align-items: stretch;">
         <!-- Anthropic -->
         <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 9pt 10pt; border-top: 2pt solid #4ECDC4; display: flex; flex-direction: column; gap: 4pt;">
           <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Anthropic</p>
@@ -100,37 +100,72 @@ body {
         </div>
       </div>
 
-      <!-- Circuit Breaker state machine -->
-      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; display: flex; flex-direction: column; gap: 5pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 2pt;">Circuit Breaker 상태 머신 (Provider별 독립)</p>
-        <div style="display: flex; gap: 6pt; align-items: center;">
-          <div style="flex: 1; background: #1E293B; border: 1pt solid #34D399; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+      <!-- Circuit Breaker state machine — visual state diagram -->
+      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; display: flex; flex-direction: column; gap: 6pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Circuit Breaker 상태 머신 (Provider별 독립)</p>
+
+        <!-- State boxes with transition arrows -->
+        <div style="display: flex; gap: 0; align-items: center;">
+
+          <!-- CLOSED state -->
+          <div style="flex: 1; background: #0D2A0D; border: 2pt solid #34D399; border-radius: 4pt; padding: 9pt 8pt; text-align: center;">
+            <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CLOSED</p>
+            <p style="font-size: 6pt; color: #34D399; margin-top: 2pt;">정상 처리</p>
+          </div>
+
+          <!-- CLOSED → OPEN transition -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2pt; padding: 0 6pt; flex-shrink: 0;">
+            <p style="font-size: 6pt; color: #EF4444; white-space: nowrap;">5 fails</p>
+            <div style="display: flex; align-items: center; gap: 0;">
+              <div style="width: 16pt; height: 1.5pt; background: #EF4444;"></div>
+              <p style="font-size: 9pt; color: #EF4444; line-height: 1;">&#9658;</p>
+            </div>
+          </div>
+
+          <!-- OPEN state -->
+          <div style="flex: 1; background: #1A0A0A; border: 2pt solid #EF4444; border-radius: 4pt; padding: 9pt 8pt; text-align: center;">
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">OPEN</p>
+            <p style="font-size: 6pt; color: #EF4444; margin-top: 2pt;">60s 차단</p>
+          </div>
+
+          <!-- OPEN → HALF-OPEN transition -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2pt; padding: 0 6pt; flex-shrink: 0;">
+            <p style="font-size: 6pt; color: #F5C542; white-space: nowrap;">60s 후</p>
+            <div style="display: flex; align-items: center; gap: 0;">
+              <div style="width: 16pt; height: 1.5pt; background: #F5C542;"></div>
+              <p style="font-size: 9pt; color: #F5C542; line-height: 1;">&#9658;</p>
+            </div>
+          </div>
+
+          <!-- HALF-OPEN state -->
+          <div style="flex: 1; background: #1A1500; border: 2pt solid #F5C542; border-radius: 4pt; padding: 9pt 8pt; text-align: center;">
+            <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">HALF-OPEN</p>
+            <p style="font-size: 6pt; color: #F5C542; margin-top: 2pt;">프로브 1회</p>
+          </div>
+
+          <!-- HALF-OPEN → CLOSED transition (probe OK) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2pt; padding: 0 6pt; flex-shrink: 0;">
+            <p style="font-size: 6pt; color: #34D399; white-space: nowrap;">probe OK</p>
+            <div style="display: flex; align-items: center; gap: 0;">
+              <div style="width: 16pt; height: 1.5pt; background: #34D399;"></div>
+              <p style="font-size: 9pt; color: #34D399; line-height: 1;">&#9658;</p>
+            </div>
+          </div>
+
+          <!-- CLOSED (loop back target, lighter) -->
+          <div style="flex: 0 0 44pt; background: #0D1A0D; border: 1pt solid #34D399; border-radius: 4pt; padding: 8pt 5pt; text-align: center;">
             <p style="font-size: 7pt; font-weight: bold; color: #34D399;">CLOSED</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">정상 처리</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">복구</p>
           </div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 1pt;">
-            <p style="font-size: 6pt; color: #8B949E;">5회 연속 실패</p>
-            <p style="font-size: 8pt; color: #EF4444;">&#8594;</p>
-          </div>
-          <div style="flex: 1; background: #1E293B; border: 1pt solid #EF4444; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-            <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">OPEN</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">60s 차단</p>
-          </div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 1pt;">
-            <p style="font-size: 6pt; color: #8B949E;">60s 후</p>
-            <p style="font-size: 8pt; color: #F5C542;">&#8594;</p>
-          </div>
-          <div style="flex: 1; background: #1E293B; border: 1pt solid #F5C542; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">HALF-OPEN</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">프로브 1회</p>
-          </div>
+
         </div>
-        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Retryable: Timeout · RateLimit · Connection → Exponential Backoff ±25% Jitter</p>
-        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Non-Retryable: 잔액 부족 → 즉시 다음 Provider 에스컬레이션</p>
+
+        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Retryable: Timeout · RateLimit · Connection &#8594; Exponential Backoff &#177;25% Jitter</p>
+        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Non-Retryable: 잔액 부족 &#8594; 즉시 다음 Provider 에스컬레이션</p>
       </div>
     </div>
 
-    <!-- Right: Port/Adapter + ZhipuAI rationale + Trade-off (43%) -->
+    <!-- Right: Port/Adapter + ZhipuAI rationale + Trade-off -->
     <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
 
       <!-- Port/Adapter -->
@@ -139,7 +174,7 @@ body {
         <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">3개 Provider를 Port/Adapter DI로 추상화했기 때문에 Failover 시에도 메모리가 모델에 종속되지 않는다. 세션 학습이 Provider 전환 후에도 유지된다.</p>
         <div style="background: #0D1117; border-radius: 3pt; padding: 7pt 9pt; margin-top: 5pt; display: flex; gap: 6pt; align-items: center;">
           <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">LLMClientPort</p>
-          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
           <p style="font-size: 6pt; color: #E2E8F0; font-family: 'Courier New', monospace;">Anthropic · OpenAI · ZhipuAI</p>
         </div>
       </div>
@@ -153,7 +188,7 @@ body {
       <!-- Trade-off -->
       <div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">Trade-off: 3-Provider 유지 비용 vs 단일 장애점</p>
-        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">어댑터 3개 유지 비용이 있지만, 단일 Provider 장애로 파이프라인 전체가 중단되는 비용이 훨씬 크다. ZhipuAI 무료 tier 덕분에 추가 비용 없이 단일 장애점을 제거한다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">어댑터 3개 유지 비용이 있지만, 단일 Provider 장애로 파이프라인 전체가 중단되는 비용이 훨씬 크다.</p>
         <div style="display: flex; gap: 8pt; margin-top: 8pt; justify-content: center;">
           <div style="text-align: center;">
             <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4; line-height: 1;">3</p>

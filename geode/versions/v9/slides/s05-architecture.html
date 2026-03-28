@@ -18,13 +18,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
     <div style="width: 4pt; height: 14pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">PART 1 · WHAT</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">PART 1 &#xB7; WHAT</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
-    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">6-Layer Architecture: 187 모듈이 수직 분리된 이유</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">단일 계층으로 설계하면 LLM 교체 시 전체를 다시 짜야 하므로 Port/Adapter로 6-Layer를 수직 분리한다</p>
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">6-Layer Architecture: 187 &#xBAA8;&#xB4C8;&#xC774; &#xC218;&#xC9C1; &#xBD84;&#xB9AC;&#xB41C; &#xC774;&#xC720;</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">&#xB2E8;&#xC77C; &#xACC4;&#xCE35;&#xC73C;&#xB85C; &#xC124;&#xACC4;&#xD558;&#xBA74; LLM &#xAD50;&#xCCB4; &#xC2DC; &#xC804;&#xCCB4;&#xB97C; &#xB2E4;&#xC2DC; &#xC9DC;&#xC57C; &#xD558;&#xBBC0;&#xB85C; Port/Adapter&#xB85C; 6-Layer&#xB97C; &#xC218;&#xC9C1; &#xBD84;&#xB9AC;&#xD55C;&#xB2E4;</p>
   </div>
 
   <!-- Content: diagram + right side cards -->
@@ -33,7 +33,7 @@ body {
     <!-- Diagram -->
     <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <img src="assets/v028-diagram-3tier.png" style="width: 400pt; height: 186pt; border-radius: 4pt; object-fit: contain;">
-      <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; text-align: center;">6-Layer 수직 분리 · Hook이 모든 계층을 횡단</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; text-align: center;">6-Layer &#xC218;&#xC9C1; &#xBD84;&#xB9AC; &#xB7; Hook&#xC774; &#xBAA8;&#xB4E0; &#xACC4;&#xCE35;&#xC744; &#xD69F;&#xB2E8;</p>
     </div>
 
     <!-- Right: stat + rationale cards -->
@@ -54,26 +54,26 @@ body {
 
       <!-- 왜 6-Layer: Trade-off box -->
       <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Trade-off: 왜 6-Layer인가</p>
-        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">3-Layer(Presentation/Business/Data)는 에이전트에 맞지 않는다. 도구, 메모리, 오케스트레이션이 독립적으로 교체되어야 하므로 6-Layer로 분리한다.</p>
-        <p style="font-size: 6.5pt; color: #F5C542; line-height: 1.5; margin-bottom: 3pt;"><strong>비용:</strong> 레이어 간 Protocol 정의가 필요하다.</p>
-        <p style="font-size: 6.5pt; color: #34D399; line-height: 1.5;"><strong>결과:</strong> GEODE→REODE 피봇 시 L5만 교체하고 L0-L4는 그대로 유지한다.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">&#xC65C; 6-Layer&#xC778;&#xAC00; &#x2014; &#xC124;&#xACC4; &#xD310;&#xB2E8;&#xC758; &#xC778;&#xACFC;</p>
+        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">3-Layer(Presentation/Business/Data)&#xB294; &#xC5D0;&#xC774;&#xC804;&#xD2B8;&#xC5D0; &#xB9DE;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;. &#xB3C4;&#xAD6C;, &#xBA54;&#xBAA8;&#xB9AC;, &#xC624;&#xCF00;&#xC2A4;&#xD2B8;&#xB808;&#xC774;&#xC158;&#xC774; &#xB3C5;&#xB9BD;&#xC801;&#xC73C;&#xB85C; &#xAD50;&#xCCB4;&#xB418;&#xC5B4;&#xC57C; &#xD558;&#xBBC0;&#xB85C; 6-Layer&#xB85C; &#xBD84;&#xB9AC;&#xD55C;&#xB2E4;.</p>
+        <p style="font-size: 6.5pt; color: #F5C542; line-height: 1.5; margin-bottom: 3pt;"><strong>&#xBE44;&#xC6A9;:</strong> &#xB808;&#xC774;&#xC5B4; &#xAC04; Protocol &#xC815;&#xC758;&#xAC00; &#xD544;&#xC694;&#xD558;&#xB2E4;.</p>
+        <p style="font-size: 6.5pt; color: #34D399; line-height: 1.5;"><strong>&#xACB0;&#xACFC;:</strong> GEODE&#x2192;REODE &#xD53C;&#xBC97; &#xC2DC; L5&#xB9CC; &#xAD50;&#xCCB4;&#xD558;&#xACE0; L0&#x2011;L4&#xB294; &#xADF8;&#xB300;&#xB85C; &#xC720;&#xC9C0;&#xD55C;&#xB2E4;.</p>
       </div>
 
       <!-- Hook 분리 이유 -->
       <div style="background: #161B22; border: 1px solid #F97316; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">왜 Hook을 L3에서 분리하는가</p>
-        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">Hook을 L3 오케스트레이션에 두면 L0-L4 전체가 L3에 의존하는 역전 구조가 발생한다. 이를 막기 위해 Hook을 cross-cutting 모듈로 독립시킨다.</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">46개 이벤트가 L0-L5 모든 계층을 관측하되 어느 계층에도 종속되지 않는다.</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">&#xC65C; Hook&#xC744; L3&#xC5D0;&#xC11C; &#xBD84;&#xB9AC;&#xD558;&#xB294;&#xAC00;</p>
+        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">Hook&#xC744; L3 &#xC624;&#xCF00;&#xC2A4;&#xD2B8;&#xB808;&#xC774;&#xC158;&#xC5D0; &#xB450;&#xBA74; L0&#x2011;L4 &#xC804;&#xCCB4;&#xAC00; L3&#xC5D0; &#xC758;&#xC874;&#xD558;&#xB294; &#xC5ED;&#xC804; &#xAD6C;&#xC870;&#xAC00; &#xBC1C;&#xC0DD;&#xD55C;&#xB2E4;. &#xC774;&#xB97C; &#xB9C9;&#xAE30; &#xC704;&#xD574; Hook&#xC744; cross&#x2011;cutting &#xBAA8;&#xB4C8;&#xB85C; &#xB3C5;&#xB9BD;&#xC2DC;&#xD0A8;&#xB2E4;.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt; line-height: 1.4;">46&#xAC1C; &#xC774;&#xBCA4;&#xD2B8;&#xAC00; L0&#x2011;L5 &#xBAA8;&#xB4E0; &#xACC4;&#xCE35;&#xC744; &#xAD00;&#xCE21;&#xD558;&#xB418; &#xC5B4;&#xB290; &#xACC4;&#xCE35;&#xC5D0;&#xB3C4; &#xC885;&#xC18D;&#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;.</p>
       </div>
 
       <!-- Layer 역할 요약 -->
       <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
-        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">교체 단위로서의 계층</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">&#xAD50;&#xCCB4; &#xB2E8;&#xC704;&#xB85C;&#xC11C;&#xC758; &#xACC4;&#xCE35;</p>
         <ul style="margin-left: 10pt;">
-          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">LLM 교체 → L4만 변경</li>
-          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">메모리 백엔드 교체 → L5만 변경</li>
-          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">도구 추가 → L3만 확장</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">LLM &#xAD50;&#xCCB4; &#x2192; L4&#xB9CC; &#xBCC0;&#xACBD;</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">&#xBA54;&#xBAA8;&#xB9AC; &#xBC31;&#xC5D4;&#xB4DC; &#xAD50;&#xCCB4; &#x2192; L5&#xB9CC; &#xBCC0;&#xACBD;</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">&#xB3C4;&#xAD6C; &#xCD94;&#xAC00; &#x2192; L3&#xB9CC; &#xD655;&#xC7A5;</li>
         </ul>
       </div>
 
@@ -83,7 +83,7 @@ body {
 
   <!-- Footer -->
   <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
-    <p style="font-size: 6pt; color: #8B949E;">187 modules · 3,216 tests · 46 hooks · v0.32.0</p>
+    <p style="font-size: 6pt; color: #8B949E;">187 modules &#xB7; 3,216 tests &#xB7; 46 hooks &#xB7; v0.32.0</p>
     <p style="font-size: 6pt; color: #8B949E;">05 / 35</p>
   </div>
 

@@ -158,10 +158,7 @@ function HookArchitectureDiagram() {
           </g>
         ))}
 
-        {/* L1/L2 boundary label */}
-        <line x1={CHAIN_X - 80} y1={153} x2={CHAIN_X + 78} y2={153} stroke="#4ECDC4" strokeOpacity={0.28} strokeWidth={1} strokeDasharray="4 4" />
-        <text x={CHAIN_X + 82} y={157} fill="#4ECDC4" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">L2 ↑</text>
-        <text x={CHAIN_X + 82} y={145} fill="#60A5FA" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">L1 ↓</text>
+        {/* L1/L2 boundary removed — 시인성 해침 */}
       </svg>
     </div>
   );

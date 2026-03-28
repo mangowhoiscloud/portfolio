@@ -28,90 +28,124 @@ body {
     <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">병렬 서브에이전트 결과 반환 시 부모 컨텍스트가 기하급수적으로 팽창하기 때문에 full inheritance + 4096 guard로 해결한다</p>
   </div>
 
-  <!-- Center-hero layout: left stat | center diagram (70%) | right stat -->
-  <div style="flex: 1; padding: 0 24pt; display: flex; gap: 8pt; min-height: 0;">
+  <!-- Main layout: Left Parent | Center Flow | Right stats -->
+  <div style="flex: 1; padding: 0 24pt; display: flex; gap: 10pt; min-height: 0; align-items: stretch;">
 
-    <!-- Left margin stats -->
-    <div style="width: 100pt; display: flex; flex-direction: column; gap: 6pt; justify-content: center;">
-      <div style="background: #161B22; border: 1pt solid #EF4444; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-        <p style="font-size: 18pt; font-weight: bold; color: #EF4444; line-height: 1;">40K</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">토큰 guard 없을 때</p>
-        <p style="font-size: 6pt; color: #8B949E;">5 × 8K 부모 유입</p>
-      </div>
-      <div style="background: #161B22; border: 1pt solid #F59E0B; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-        <p style="font-size: 18pt; font-weight: bold; color: #F59E0B; line-height: 1;">250ms</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CoalescingQueue</p>
-        <p style="font-size: 6pt; color: #8B949E;">중복 태스크 제거</p>
-      </div>
-      <div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 8pt;">
-        <p style="font-size: 6.5pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">문제</p>
-        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">guard 없음: 부모 컨텍스트 40% 소비, 루프 강제 종료 위험</p>
+    <!-- Left: Parent Agent (big box) -->
+    <div style="width: 148pt; display: flex; flex-direction: column; gap: 6pt; justify-content: center;">
+      <div style="background: #1E293B; border: 2pt solid #4ECDC4; border-radius: 6pt; padding: 12pt 10pt; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <p style="font-size: 12pt; font-weight: bold; color: #4ECDC4;">Parent</p>
+        <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">Agent</p>
+        <div style="width: 32pt; height: 1pt; background: #21262D; margin: 6pt 0;"></div>
+        <p style="font-size: 6.5pt; color: #8B949E;">tools &middot; MCP &middot; skills</p>
+        <p style="font-size: 6.5pt; color: #8B949E;">memory 전체 보유</p>
+        <div style="margin-top: 8pt; background: #0D1117; border-radius: 4pt; padding: 7pt 8pt; width: 100%;">
+          <p style="font-size: 6pt; color: #8B949E;">컨텍스트 위험</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-top: 2pt;">40K tokens</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">guard 없을 때</p>
+        </div>
       </div>
     </div>
 
-    <!-- Center: main diagram (70% = ~370pt) -->
+    <!-- Center arrows → children and ← return -->
+    <div style="width: 80pt; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4pt;">
+
+      <!-- Forward arrows -->
+      <div style="width: 100%; display: flex; flex-direction: column; gap: 3pt; margin-bottom: 4pt;">
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <div style="flex: 1; height: 1pt; background: #4ECDC4;"></div>
+          <p style="font-size: 9pt; color: #4ECDC4; flex-shrink: 0;">&#8594;</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <div style="flex: 1; height: 1pt; background: #4ECDC4;"></div>
+          <p style="font-size: 9pt; color: #4ECDC4; flex-shrink: 0;">&#8594;</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <div style="flex: 1; height: 1pt; background: #4ECDC4;"></div>
+          <p style="font-size: 9pt; color: #4ECDC4; flex-shrink: 0;">&#8594;</p>
+        </div>
+      </div>
+      <p style="font-size: 6pt; color: #4ECDC4; text-align: center; line-height: 1.3;">full inheritance<br>위임이지 파견이 아니다</p>
+
+      <!-- Divider -->
+      <div style="width: 100%; height: 1pt; background: #21262D; margin: 6pt 0;"></div>
+
+      <!-- Return arrows with guard label -->
+      <div style="background: #1E1A00; border: 1pt solid #F59E0B; border-radius: 4pt; padding: 6pt 7pt; width: 100%; text-align: center; margin-bottom: 4pt;">
+        <p style="font-size: 6pt; font-weight: bold; color: #F59E0B;">4096 guard</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">구조화 요약 압축</p>
+      </div>
+      <div style="width: 100%; display: flex; flex-direction: column; gap: 3pt;">
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <p style="font-size: 9pt; color: #F59E0B; flex-shrink: 0;">&#8592;</p>
+          <div style="flex: 1; height: 1pt; background: #F59E0B;"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <p style="font-size: 9pt; color: #F59E0B; flex-shrink: 0;">&#8592;</p>
+          <div style="flex: 1; height: 1pt; background: #F59E0B;"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <p style="font-size: 9pt; color: #F59E0B; flex-shrink: 0;">&#8592;</p>
+          <div style="flex: 1; height: 1pt; background: #F59E0B;"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: 3 Child Agent cards (smaller) + return summary -->
     <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt; justify-content: center;">
 
-      <!-- Parent agent -->
-      <div style="background: #1E293B; border: 1.5pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 14pt; text-align: center;">
-        <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">Parent Agent</p>
-        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 2pt;">tools &middot; MCP &middot; skills &middot; memory 전체 보유</p>
+      <!-- 3 child agents -->
+      <div style="display: flex; gap: 6pt; align-items: stretch;">
+        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 8pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent A</p>
+          <div style="width: 24pt; height: 1pt; background: #21262D; margin: 4pt auto;"></div>
+          <p style="font-size: 6pt; color: #8B949E;">독립 200K window</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 상속</p>
+        </div>
+        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 8pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent B</p>
+          <div style="width: 24pt; height: 1pt; background: #21262D; margin: 4pt auto;"></div>
+          <p style="font-size: 6pt; color: #8B949E;">독립 200K window</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 상속</p>
+        </div>
+        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 8pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent C</p>
+          <div style="width: 24pt; height: 1pt; background: #21262D; margin: 4pt auto;"></div>
+          <p style="font-size: 6pt; color: #8B949E;">독립 200K window</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 상속</p>
+        </div>
       </div>
 
-      <!-- Arrow + label -->
-      <div style="text-align: center;">
-        <p style="font-size: 8pt; color: #4ECDC4;">&#8595;</p>
-        <p style="font-size: 6.5pt; color: #4ECDC4;">full inheritance &mdash; 위임이지 파견이 아니다</p>
+      <!-- Compressed return result -->
+      <div style="background: #1E293B; border: 1pt solid #F59E0B; border-radius: 4pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt;">
+        <p style="font-size: 10pt; color: #F59E0B; flex-shrink: 0;">&#8593;</p>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F59E0B;">Compressed Summary &#8594; Parent</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">원시 출력 대신 구조화 요약 반환 — 컨텍스트 폭발 방지</p>
+        </div>
+        <div style="text-align: center; flex-shrink: 0;">
+          <p style="font-size: 14pt; font-weight: bold; color: #34D399; line-height: 1;">75%</p>
+          <p style="font-size: 6pt; color: #8B949E;">절감</p>
+        </div>
       </div>
 
-      <!-- 3 sub-agents side by side -->
+      <!-- Stats row -->
       <div style="display: flex; gap: 6pt;">
-        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Sub-Agent A</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">독립 200K window</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 그대로 상속</p>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+          <p style="font-size: 16pt; font-weight: bold; color: #4ECDC4; line-height: 1;">5</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">MAX_CONCURRENT</p>
         </div>
-        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Sub-Agent B</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">독립 200K window</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 그대로 상속</p>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #818CF8; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+          <p style="font-size: 16pt; font-weight: bold; color: #818CF8; line-height: 1;">600K</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">깊이 3 유효 컨텍스트</p>
         </div>
-        <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Sub-Agent C</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">독립 200K window</p>
-          <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">부모 능력 그대로 상속</p>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #F59E0B; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
+          <p style="font-size: 16pt; font-weight: bold; color: #F59E0B; line-height: 1;">250ms</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CoalescingQueue</p>
         </div>
       </div>
 
-      <!-- Guard arrow -->
-      <div style="text-align: center;">
-        <p style="font-size: 6.5pt; color: #F59E0B;">&#8595; 반환 전 4096-token guard: 구조화 요약 압축</p>
-      </div>
-
-      <!-- Compressed return -->
-      <div style="background: #1E293B; border: 1pt solid #F59E0B; border-radius: 4pt; padding: 7pt 14pt; text-align: center;">
-        <p style="font-size: 8pt; font-weight: bold; color: #F59E0B;">Compressed Summary &#8594; Parent</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">원시 출력 대신 구조화 요약 반환 &mdash; 컨텍스트 폭발 방지</p>
-      </div>
-
-    </div>
-
-    <!-- Right margin stats -->
-    <div style="width: 100pt; display: flex; flex-direction: column; gap: 6pt; justify-content: center;">
-      <div style="background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-        <p style="font-size: 18pt; font-weight: bold; color: #4ECDC4; line-height: 1;">5</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">MAX_CONCURRENT</p>
-        <p style="font-size: 6pt; color: #8B949E;">DAG scheduling</p>
-      </div>
-      <div style="background: #161B22; border: 1pt solid #818CF8; border-radius: 4pt; padding: 8pt 9pt; text-align: center;">
-        <p style="font-size: 18pt; font-weight: bold; color: #818CF8; line-height: 1;">600K</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">깊이 3 유효 컨텍스트</p>
-        <p style="font-size: 6pt; color: #8B949E;">200K × 3 선형</p>
-      </div>
-      <div style="background: #1E293B; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 8pt;">
-        <p style="font-size: 6.5pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">결과</p>
-        <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">4096 guard 적용: 20K&#8594;5K <strong style="color: #34D399;">75% 절감</strong></p>
-      </div>
     </div>
 
   </div>

@@ -28,52 +28,89 @@ body {
     <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">LLM이 tool_use 블록을 반환하는 순간, 모든 실행 경로는 ToolExecutor 하나로 수렴한다.</p>
   </div>
 
-  <!-- Full-width vertical flow -->
-  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+  <!-- Content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
 
-    <!-- Row 1: Entry node -->
+    <!-- Row 1: Entry node centered -->
     <div style="display: flex; justify-content: center;">
-      <div style="background: #1E293B; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 20pt; text-align: center; min-width: 280pt;">
-        <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">LLM <span style="color: #4ECDC4;">&#8594;</span> ToolExecutor.execute()</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">단일 진입점 &middot; tool_use 블록 수신 &middot; 도구 유형 판별</p>
+      <div style="background: #1E293B; border: 2pt solid #4ECDC4; border-radius: 6pt; padding: 9pt 24pt; text-align: center; min-width: 260pt;">
+        <p style="font-size: 10pt; font-weight: bold; color: #FFFFFF;">LLM <span style="color: #4ECDC4;">&#8594;</span> ToolExecutor.execute()</p>
+        <p style="font-size: 6.5pt; color: #8B949E; margin-top: 2pt;">단일 진입점 &middot; tool_use 블록 수신 &middot; 도구 유형 판별</p>
       </div>
     </div>
 
-    <!-- Connector -->
-    <div style="display: flex; justify-content: center;">
-      <p style="font-size: 8pt; color: #4ECDC4;">&#8595; 도구 유형 판별 &#8594; 4경로 분기</p>
+    <!-- Fan-out connectors: center stem splits into 4 branches -->
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 0; position: relative; height: 22pt;">
+      <!-- Vertical stem down from entry -->
+      <div style="position: absolute; left: 50%; top: 0; width: 2pt; height: 11pt; background: #4ECDC4; margin-left: -1pt;"></div>
+      <!-- Horizontal bar -->
+      <div style="position: absolute; left: 20%; top: 11pt; width: 60%; height: 2pt; background: #4ECDC4;"></div>
+      <!-- 4 vertical drops -->
+      <div style="position: absolute; left: 20%; top: 11pt; width: 2pt; height: 11pt; background: #F97316;"></div>
+      <div style="position: absolute; left: 40%; top: 11pt; width: 2pt; height: 11pt; background: #4ECDC4; margin-left: -1pt;"></div>
+      <div style="position: absolute; left: 60%; top: 11pt; width: 2pt; height: 11pt; background: #818CF8; margin-left: -1pt;"></div>
+      <div style="position: absolute; left: 80%; top: 11pt; width: 2pt; height: 11pt; background: #F5C542; margin-left: -1pt;"></div>
+      <!-- Connector label -->
+      <div style="position: absolute; left: 52%; top: 1pt;">
+        <p style="font-size: 6pt; color: #4ECDC4;">4경로 분기</p>
+      </div>
     </div>
 
-    <!-- Row 2: 4 branches spreading full width -->
+    <!-- Row 2: 4 branch cards -->
     <div style="display: flex; gap: 6pt;">
-      <div style="flex: 1; background: #0D1117; border: 1pt solid #F97316; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 7pt 9pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">Bash Path</p>
+      <div style="flex: 1; background: #0D1117; border: 1.5pt solid #F97316; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 9pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Bash Path</p>
         <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">run_bash 계열: 3-layer safety + PolicyChain 통과</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">명령 허용 목록 &#8594; PolicyChain &#8594; 실행</p>
+        <div style="display: flex; align-items: center; gap: 4pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #8B949E;">허용 목록</p>
+          <p style="font-size: 8pt; color: #F97316;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">PolicyChain</p>
+          <p style="font-size: 8pt; color: #F97316;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">실행</p>
+        </div>
       </div>
-      <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC4; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 3pt;">Native Tool</p>
+      <div style="flex: 1; background: #0D1117; border: 1.5pt solid #4ECDC4; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 9pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Native Tool</p>
         <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">registry 핸들러 매칭: 52 native tools</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">tool_name &#8594; handler lookup &#8594; 실행</p>
+        <div style="display: flex; align-items: center; gap: 4pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #8B949E;">tool_name</p>
+          <p style="font-size: 8pt; color: #4ECDC4;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">handler</p>
+          <p style="font-size: 8pt; color: #4ECDC4;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">실행</p>
+        </div>
       </div>
-      <div style="flex: 1; background: #0D1117; border: 1pt solid #818CF8; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 9pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 3pt;">MCP Path</p>
+      <div style="flex: 1; background: #0D1117; border: 1.5pt solid #818CF8; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 9pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">MCP Path</p>
         <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">45 catalog 서버 auto-discovery</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">server routing &#8594; protocol call &#8594; 결과 반환</p>
+        <div style="display: flex; align-items: center; gap: 4pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #8B949E;">routing</p>
+          <p style="font-size: 8pt; color: #818CF8;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">protocol</p>
+          <p style="font-size: 8pt; color: #818CF8;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">반환</p>
+        </div>
       </div>
-      <div style="flex: 1; background: #0D1117; border: 1pt solid #F5C542; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 7pt 9pt;">
-        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 3pt;">LangGraph DAG</p>
+      <div style="flex: 1; background: #0D1117; border: 1.5pt solid #F5C542; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 9pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">LangGraph DAG</p>
         <p style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.4;">analyze_ip &#8594; 13-task StateGraph 실행</p>
-        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">DAG dispatch &#8594; 병렬 노드 &#8594; 결과 집계</p>
+        <div style="display: flex; align-items: center; gap: 4pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #8B949E;">DAG dispatch</p>
+          <p style="font-size: 8pt; color: #F5C542;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">병렬 노드</p>
+          <p style="font-size: 8pt; color: #F5C542;">→</p>
+          <p style="font-size: 6pt; color: #8B949E;">집계</p>
+        </div>
       </div>
     </div>
 
-    <!-- Connector -->
-    <div style="display: flex; justify-content: center;">
-      <p style="font-size: 7pt; color: #8B949E;">&#8595; 2개 이상 tool_use 시 ToolCallProcessor가 안전 등급 분류</p>
+    <!-- Connector to safety table -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 6pt;">
+      <p style="font-size: 8pt; color: #8B949E;">&#8595;</p>
+      <p style="font-size: 7pt; color: #8B949E;">2개 이상 tool_use 시 ToolCallProcessor가 안전 등급 분류</p>
     </div>
 
-    <!-- Row 3: 5-Tier table full width -->
+    <!-- Row 3: 5-Tier safety table -->
     <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">5-TIER SAFETY — 병렬 속도와 안전 격리의 균형</p>
       <div style="display: flex; gap: 5pt;">
@@ -122,7 +159,7 @@ body {
 
   <!-- Footer -->
   <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
-    <p style="font-size: 5pt; color: #8B949E;">tool_executor.py &middot; policy.py &middot; error_recovery.py &middot; v0.32.0 &middot; 52 native tools &middot; 45 MCP &middot; 5-Tier safety &middot; Action Summary &middot; Deferred Load 85%↓</p>
+    <p style="font-size: 5pt; color: #8B949E;">tool_executor.py &middot; policy.py &middot; error_recovery.py &middot; v0.32.0 &middot; 52 native tools &middot; 45 MCP &middot; 5-Tier safety &middot; Action Summary &middot; Deferred Load 85%&#8595;</p>
     <p style="font-size: 5pt; color: #8B949E;">11 / 35</p>
   </div>
 

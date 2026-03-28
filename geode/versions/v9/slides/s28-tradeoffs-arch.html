@@ -18,67 +18,82 @@ body {
 <!-- Header -->
 <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
   <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
-  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION &middot; TRADE-OFFS</p>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION &#xB7; TRADE-OFFS</p>
 </div>
 
 <!-- Title -->
-<div style="padding: 0 36pt 6pt;">
-  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">핵심 Trade-off 8선: 포기하지 않은 설계 결정은 결정이 아니다</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">아키텍처, 에이전트 실행, 인프라 전반. 모든 피봇은 CHANGELOG에 &ldquo;왜&rdquo;가 기록되어 있다</p>
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">&#xD575;&#xC2EC; Trade-off 8&#xC120;: &#xD3EC;&#xAE30;&#xD558;&#xC9C0; &#xC54A;&#xC740; &#xC124;&#xACC4; &#xACB0;&#xC815;&#xC740; &#xACB0;&#xC815;&#xC774; &#xC544;&#xB2C8;&#xB2E4;</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">TOP 3&#xB294; &#xC778;&#xACFC;&#xAD00;&#xACC4;&#xB85C; &#xC11C;&#xC220;&#xD55C;&#xB2E4;. &#xB098;&#xBA38;&#xC9C0; 5&#xAC1C;&#xB294; before/after &#xD55C; &#xC904;&#xB85C; &#xC720;&#xC9C0;. &#xBAA8;&#xB4E0; &#xD53C;&#xBC97;&#xC740; CHANGELOG&#xC5D0; &#x201C;&#xC654;&#x201D;&#xAC00; &#xAE30;&#xB85D;&#xB418;&#xC5B4; &#xC788;&#xB2E4;</p>
 </div>
 
-<!-- Content: 2-column running-text list -->
-<div style="flex: 1; padding: 0 36pt; display: flex; gap: 14pt; min-height: 0;">
+<!-- Content: 2-column -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 12pt; min-height: 0;">
 
-  <!-- Left column: 4 entries -->
-  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+  <!-- Left column: TOP 3 (expanded) -->
+  <div style="flex: 1.15; display: flex; flex-direction: column; gap: 6pt;">
 
-    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">Port/Adapter DI</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">직접 호출 단순성을 포기하고 DI를 도입하니 GEODE&rarr;REODE 이식 시 코어 코드 변경 0줄이 된다.</p>
+    <!-- TOP 1 -->
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt; background: #0F1923; border-radius: 0 4pt 4pt 0;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399; background: #0a2218; border: 1px solid #34D399; border-radius: 3pt; padding: 3pt 7pt;">TOP 1</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Clean Context vs &#xC804;&#xCCB4; &#xACF5;&#xC720;</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 2pt;">Analyst A&#xC758; S&#xAE09; &#xD3C9;&#xAC00;&#xAC00; B&#xB97C; &#xD3B8;&#xD5A5;&#xC2DC;&#xD0A4;&#xB294; &#xC559;&#xCEE4;&#xB9C1;&#xC744; &#xAD6C;&#xC870;&#xC801;&#xC73C;&#xB85C; &#xCC28;&#xB2E8;&#xD55C;&#xB2E4;.</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;"><span style="font-family: 'Courier New', monospace; color: #4ECDC4;">analyses</span> &#xD544;&#xB4DC;&#xB97C; &#xBE48; &#xBC30;&#xC5F4;&#xB85C; &#xC804;&#xB2EC;&#xD558;&#xC5EC; 4&#xBA85;&#xC758; Analyst&#xAC00; &#xC644;&#xC804; &#xB3C5;&#xB9BD; &#xD3C9;&#xAC00;&#xB97C; &#xC218;&#xD589;&#xD55C;&#xB2E4;. &#xAC00;&#xD5CC; &#xAD70;&#xC0AC;&#xC801; &#xAC1C;&#xC785;&#xC774; &#xC5C6;&#xB294; &#xC81C;&#xD55C;&#xB41C; &#xD310;&#xB2E8;&#xC774; &#xBB34;&#xC791;&#xC704; &#xD569;&#xC758;&#xBCF4;&#xB2E4; &#xC2E0;&#xB8B0;&#xB3C4;&#xAC00; &#xB192;&#xB2E4;.</p>
     </div>
 
-    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">Lossless Context Selection</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">단순 요약(빠르지만 정보 손실)을 버리고 LLM이 직접 청크를 선별하게 하니 비용 0.03%로 절감되면서 정보 손실이 사라진다.</p>
+    <!-- TOP 2 -->
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt; background: #0F1923; border-radius: 0 4pt 4pt 0;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399; background: #0a2218; border: 1px solid #34D399; border-radius: 3pt; padding: 3pt 7pt;">TOP 2</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">DomainPort Protocol vs &#xD558;&#xB4DC;&#xC640;&#xC774;&#xC5B4;</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 2pt;">&#xB3C4;&#xBA54;&#xC778; &#xAD50;&#xCCB4; &#xC2DC; &#xCF54;&#xC5B4; &#xC218;&#xC815; 0&#xC904;. GEODE&#x2192;REODE &#xD53C;&#xBC97;&#xC5D0;&#xC11C; &#xC2E4;&#xC99D;&#xB418;&#xC5C8;&#xB2E4;.</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">DomainPort&#xAC00; &#xACC4;&#xC57D;&#xB9CC; &#xC815;&#xC758;&#xD558;&#xACE0; &#xAD6C;&#xD604;&#xC740; &#xC0BD;&#xC785;&#xD55C;&#xB2E4;. L5 &#xC5D4;&#xB4DC;&#xD3EC;&#xC778;&#xD2B8;&#xB9CC; &#xAD50;&#xCCB4;&#xD558;&#xACE0; L0&#x2011;L4&#xAC00; &#xADF8;&#xB300;&#xB85C; &#xC720;&#xC9C0;&#xB41C;&#xB2E4;.</p>
     </div>
 
-    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">5-Tier Safety: 병렬 vs 순차</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">T3-4 병렬 처리 속도를 포기하고 DANGEROUS 명령은 개별 순차 승인으로 격리하니 권한 에스컬레이션 경로가 차단된다.</p>
-    </div>
-
-    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">Sub-Agent 4096 Token Guard</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">자식 출력 전체 반환(완전한 컨텍스트)을 포기하고 4096 guard를 적용하니 부모 컨텍스트 폭발이 방지되어 MAX_CONCURRENT=5 병렬이 가능해진다.</p>
+    <!-- TOP 3 -->
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt; background: #0F1923; border-radius: 0 4pt 4pt 0;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399; background: #0a2218; border: 1px solid #34D399; border-radius: 3pt; padding: 3pt 7pt;">TOP 3</p>
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Provider-aware Compaction vs &#xB2E8;&#xC77C; &#xC804;&#xB7B5;</p>
+      </div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 2pt;">Anthropic&#xC740; &#xC11C;&#xBC84;&#xC0AC;&#xC774;&#xB4DC;(compact_20260112), OpenAI/GLM&#xC740; &#xD074;&#xB77C;&#xC774;&#xC5B8;&#xD2B8;&#xC0AC;&#xC774;&#xB4DC;.</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;"><span style="font-family: 'Courier New', monospace; color: #818CF8;">context_action.py</span> hook&#xC774; &#xD504;&#xB85C;&#xBC14;&#xC774;&#xB354;&#xBCC4; &#xCD5C;&#xC801; &#xC804;&#xB7B5;&#xC744; &#xBD84;&#xD654;&#xD55C;&#xB2E4;. &#xB2E8;&#xC77C; &#xC804;&#xB7B5;&#xC73C;&#xB85C;&#xB294; Anthropic&#xC758; &#xB124;&#xC774;&#xD2F0;&#xBE0C; &#xCEE4;&#xD328;&#xC158; &#xD6A8;&#xC728;&#xC744; &#xD65C;&#xC6A9;&#xD560; &#xC218; &#xC5C6;&#xB2E4;.</p>
     </div>
 
   </div>
 
   <!-- Divider -->
-  <div style="width: 1pt; background: #21262D;"></div>
+  <div style="width: 1pt; background: #21262D; flex-shrink: 0;"></div>
 
-  <!-- Right column: 4 entries -->
-  <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+  <!-- Right column: remaining 5 (1-line each) -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
 
-    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">SHA-256 PromptAssembler</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">수동 편집의 즉각성을 포기하고 6-Phase 조립과 SHA-256 추적을 도입하니 cache_control ephemeral로 2회차 입력 비용이 10%로 준다.</p>
+    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 7.5pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">5-Tier Safety: &#xBCD1;&#xB82C; vs &#xC21C;&#xCC28;</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">T3&#x2011;4 &#xBCD1;&#xB82C; &#xC18D;&#xB3C4;&#xB97C; &#xD3EC;&#xAE30;&#xD558;&#xACE0; DANGEROUS &#xBA85;&#xB839;&#xC740; &#xAC1C;&#xBCC4; &#xC21C;&#xCC28; &#xC2B9;&#xC778;&#xC73C;&#xB85C; &#xACA9;&#xB9AC;&#xD558;&#xB2C8; &#xAD8C;&#xD55C; &#xC5D0;&#xC2A4;&#xCE7C;&#xB808;&#xC774;&#xC158; &#xACBD;&#xB85C;&#xAC00; &#xCC28;&#xB2E8;&#xB41C;&#xB2E4;.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #4ECDC4; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 7.5pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">Sub-Agent 4096 Token Guard</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">&#xC790;&#xC2DD; &#xCD9C;&#xB825; &#xC804;&#xCCB4; &#xBC18;&#xD658;&#xC744; &#xD3EC;&#xAE30;&#xD558;&#xACE0; 4096 guard&#xB97C; &#xC801;&#xC6A9;&#xD558;&#xB2C8; &#xBD80;&#xBAA8; &#xCEE8;&#xD14D;&#xC2A4;&#xD2B8; &#xD3ED;&#xBC1C;&#xC774; &#xBC29;&#xC9C0;&#xB418;&#xC5B4; MAX_CONCURRENT=5 &#xBCD1;&#xB82C;&#xC774; &#xAC00;&#xB2A5;&#xD574;&#xC9C4;&#xB2E4;.</p>
     </div>
 
     <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">MCPRegistry 삭제</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">중앙 집중 도구 관리(단일 조회 포인트)를 포기하고 auto-discovery를 채택하니 proxy stub 9개가 제거되고 45 MCP 서버를 자동 등록할 수 있게 된다.</p>
+      <p style="font-size: 7.5pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">SHA-256 PromptAssembler</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">&#xC218;&#xB3D9; &#xD3B8;&#xC9D1;&#xC758; &#xC989;&#xAC01;&#xC131;&#xC744; &#xD3EC;&#xAE30;&#xD558;&#xACE0; 6&#x2011;Phase &#xC870;&#xB9BD;&#xACFC; SHA&#x2011;256 &#xCD94;&#xC801;&#xC744; &#xB3C4;&#xC785;&#xD558;&#xB2C8; cache_control ephemeral&#xB85C; 2&#xD68C;&#xCC28; &#xC785;&#xB825; &#xBE44;&#xC6A9;&#xC774; 10%&#xB85C; &#xC900;&#xB2E4;.</p>
+    </div>
+
+    <div style="border-left: 3pt solid #34D399; padding: 7pt 0 7pt 10pt;">
+      <p style="font-size: 7.5pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">MCPRegistry &#xC0AD;&#xC81C;</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">&#xC911;&#xC559; &#xC9D1;&#xC911; &#xB3C4;&#xAD6C; &#xAD00;&#xB9AC;&#xB97C; &#xD3EC;&#xAE30;&#xD558;&#xACE0; auto&#x2011;discovery&#xB97C; &#xCC44;&#xD0DD;&#xD558;&#xB2C8; proxy stub 9&#xAC1C;&#xAC00; &#xC81C;&#xAC70;&#xB418;&#xACE0; 45 MCP &#xC11C;&#xBC84;&#xB97C; &#xC790;&#xB3D9; &#xB4F1;&#xB85D;&#xD560; &#xC218; &#xC788;&#xAC8C; &#xB41C;&#xB2E4;.</p>
     </div>
 
     <div style="border-left: 3pt solid #F97316; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">Hook Priority 핸들러 순서 보장</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">병렬 핸들러 처리량을 포기하고 Priority 정렬을 넣으니 Security 핸들러가 Logging보다 항상 먼저 실행되는 것이 보장된다.</p>
-    </div>
-
-    <div style="border-left: 3pt solid #F97316; padding: 7pt 0 7pt 10pt;">
-      <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">50 Rounds &times; 200 Turns 상한</p>
-      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">완전 자율(무제한 실행)을 포기하고 수렴 감지 + 비용 상한을 도입했더니 파이프라인 폭주가 차단되고 장기 운용 비용이 예측 가능해졌다.</p>
+      <p style="font-size: 7.5pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">50 Rounds &#xD6C4; 200 Turns &#xC0C1;&#xD55C;</p>
+      <p style="font-size: 6.5pt; color: #8B949E; line-height: 1.5;">&#xC644;&#xC804; &#xC790;&#xC728;&#xC744; &#xD3EC;&#xAE30;&#xD558;&#xACE0; &#xC218;&#xB834; &#xAC10;&#xC9C0; + &#xBE44;&#xC6A9; &#xC0C1;&#xD55C;&#xC744; &#xB3C4;&#xC785;&#xD588;&#xB354;&#xB2C8; &#xD30C;&#xC774;&#xD504;&#xB77C;&#xC778; &#xD3ED;&#xC8FC;&#xAC00; &#xCC28;&#xB2E8;&#xB418;&#xACE0; &#xC7A5;&#xAE30; &#xC6B4;&#xC6A9; &#xBE44;&#xC6A9;&#xC774; &#xC608;&#xCE21; &#xAC00;&#xB2A5;&#xD574;&#xC84C;&#xB2E4;.</p>
     </div>
 
   </div>
@@ -87,7 +102,7 @@ body {
 
 <!-- Footer -->
 <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
-  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 &middot; 40 releases &middot; 모든 피봇 CHANGELOG 기록</p>
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 &#xB7; 40 releases &#xB7; &#xBAA8;&#xB4E0; &#xD53C;&#xBC97; CHANGELOG &#xAE30;&#xB85D;</p>
   <p style="font-size: 5pt; color: #8B949E;">30 / 35</p>
 </div>
 
