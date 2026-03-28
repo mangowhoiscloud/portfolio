@@ -19,7 +19,7 @@ const modes = [
       { step: "AgenticLoop", detail: "hitl_level=0, max_rounds=30" },
       { step: "응답", detail: "SlackNotificationAdapter → 채널" },
     ],
-    tags: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어"],
+    tags: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어", "binding hot-reload (v0.31)"],
   },
   {
     id: "serve" as Mode,
@@ -33,7 +33,7 @@ const modes = [
       { step: "webhook", detail: "HTTP POST :8765 (선택)" },
       { step: "signal", detail: "SIGINT/SIGTERM → graceful shutdown" },
     ],
-    tags: ["데몬 모드", "multi-poller", "Webhook :8765"],
+    tags: ["데몬 모드", "multi-poller", "Webhook :8765", "3-provider web search fallback"],
   },
   {
     id: "mcp" as Mode,
@@ -48,7 +48,7 @@ const modes = [
       { step: "list_fixtures", detail: "분석 가능 IP 목록" },
       { step: "get_health", detail: "파이프라인 + 프로바이더 상태" },
     ],
-    tags: ["FastMCP", "6 Tools", "2 Resources"],
+    tags: ["FastMCP", "6 Tools", "2 Resources", "config.toml 단일 진실 소스"],
   },
 ];
 
