@@ -16,6 +16,7 @@ import { ScoringSection } from "@/components/geode/sections/scoring";
 import { MultiLlmSection } from "@/components/geode/sections/multi-llm";
 import { VerificationSection } from "@/components/geode/sections/verification";
 import { TimelineSection } from "@/components/geode/sections/timeline";
+import { GeodeFooter } from "@/components/geode/sections/footer";
 
 export default function GeodePage() {
   return (
@@ -38,6 +39,7 @@ export default function GeodePage() {
       <div id="llm"><MultiLlmSection /></div>
       <div id="verify"><VerificationSection /></div>
       <div id="timeline"><TimelineSection /></div>
+      <GeodeFooter />
     </main>
   );
 }

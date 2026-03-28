@@ -122,7 +122,7 @@ function RacingTrack({
         />
 
         {/* Return lane label */}
-        <text x={460} y={216} textAnchor="middle" fill="white" fillOpacity={0.18} fontSize={10} fontFamily="ui-monospace, monospace">
+        <text x={460} y={216} textAnchor="middle" fill="white" fillOpacity={0.28} fontSize={10} fontFamily="ui-monospace, monospace">
           ← next task from kanban
         </text>
 

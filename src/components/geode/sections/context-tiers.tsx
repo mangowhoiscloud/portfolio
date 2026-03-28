@@ -20,7 +20,7 @@ const tiers = [
       { name: "mcp/", purpose: "MCP 서버 설정. 글로벌 기본 서버 목록", color: "#4ECDC4" },
       { name: "config.toml", purpose: "글로벌 기본값. cascade 베이스 레이어", color: "#818CF8" },
     ],
-    dataFlow: "읽기 전용 참조 — 프로젝트별 오버라이드 가능",
+    dataFlow: "읽기 전용 참조. 프로젝트별 오버라이드 가능",
   },
   {
     id: "project",
@@ -33,7 +33,7 @@ const tiers = [
       { name: "sessions/", purpose: "턴 히스토리. 멀티턴 대화 컨텍스트 복원용", color: "#60A5FA" },
       { name: "snapshots/", purpose: "드리프트/디버그 캡처. 재현 가능한 상태 저장", color: "#F5C542" },
     ],
-    dataFlow: "쓰기 대상 — 파이프라인/루프 실행 결과가 여기에 축적",
+    dataFlow: "쓰기 대상. 파이프라인/루프 실행 결과가 여기에 축적",
   },
   {
     id: "workspace",

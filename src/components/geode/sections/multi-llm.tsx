@@ -52,7 +52,7 @@ export function MultiLlmSection() {
                 border: `1px solid ${mode === "pipeline" ? "rgba(192,132,252,0.2)" : "rgba(255,255,255,0.04)"}`,
               }}
             >
-              Pipeline — LLM-as-Judge
+              Pipeline. LLM-as-Judge
               <span className="ml-2 text-[10px] opacity-50">Opus + GPT Cross</span>
             </button>
             <button
@@ -64,7 +64,7 @@ export function MultiLlmSection() {
                 border: `1px solid ${mode === "agentic" ? "rgba(78,205,196,0.2)" : "rgba(255,255,255,0.04)"}`,
               }}
             >
-              Agentic Loop — Resilient Failover
+              Agentic Loop. Resilient Failover
               <span className="ml-2 text-[10px] opacity-50">5 Models · 3 Providers</span>
             </button>
           </div>
@@ -78,7 +78,7 @@ export function MultiLlmSection() {
                 <svg viewBox="0 0 740 180" className="w-full min-w-[540px]" style={{ maxHeight: 210 }}>
                   {/* Opus block — covers all nodes */}
                   <rect x={20} y={20} width={520} height={140} rx={12} fill="none" stroke="#F4B8C8" strokeOpacity={0.12} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={280} y={14} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary — 전 노드)</text>
+                  <text x={280} y={14} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary, 전 노드)</text>
 
                   {/* Pipeline nodes */}
                   {[

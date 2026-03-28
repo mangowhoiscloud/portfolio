@@ -48,7 +48,7 @@ export function AgentsTasksSection() {
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
             병렬 에이전트 위임(SubAgent), 의존성 기반 작업 DAG(TaskGraph),
-            실행 전 계획 승인(PlanMode) — 세 시스템이 연동하여 복잡한 작업을 분할·병렬·검증합니다.
+            실행 전 계획 승인(PlanMode). 세 시스템이 연동하여 복잡한 작업을 분할·병렬·검증합니다.
           </p>
         </ScrollReveal>
 
@@ -341,7 +341,7 @@ export function AgentsTasksSection() {
                   <line x1={630} y1={90} x2={640} y2={101} stroke="#818CF8" strokeOpacity={0.14} strokeWidth={1} />
 
                   {/* Top label */}
-                  <text x={400} y={25} textAnchor="middle" fill="white" fillOpacity={0.18} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">
+                  <text x={400} y={25} textAnchor="middle" fill="white" fillOpacity={0.28} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">
                     PLANNER → DRAFT → PRESENT → APPROVE(HITL) → EXECUTE → COMPLETE
                   </text>
                 </svg>

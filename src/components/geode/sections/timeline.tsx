@@ -10,7 +10,7 @@ const phases = [
     phase: "Phase 1",
     period: "2025.01.31 — 02.28",
     title: "Game IP 가치추론 DAG",
-    desc: "넥슨 네비게이터실 과제 전형. 게임/IP 저평가 분석 파이프라인 설계 — 14축 루브릭 + PSM 인과추론 + LangGraph StateGraph.",
+    desc: "넥슨 네비게이터실 과제 전형. 게임/IP 저평가 분석 파이프라인 설계. 14축 루브릭 + PSM 인과추론 + LangGraph StateGraph.",
     badge: "과제 합격",
     badgeColor: "#34D399",
     versions: ["v0.6 MVP", "v0.8 Multi-LLM"],
@@ -59,7 +59,7 @@ export function TimelineSection() {
           <p className="text-[#8B9CC0] max-w-lg mb-16">
             과제 전형용 도메인 파이프라인에서 범용 자율 실행 하네스로.
             <br />
-            <span className="text-white/40">35일 만에 피봇, 총 3개월 — 현재 진행형.</span>
+            <span className="text-white/40">35일 만에 피봇, 총 3개월, 현재 진행형.</span>
           </p>
         </ScrollReveal>
 

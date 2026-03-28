@@ -10,7 +10,7 @@ const pipelineLayers = [
     title: "Per-Agent Guardrails",
     items: ["G1 Schema", "G2 Range", "G3 Grounding", "G4 Consistency"],
     accent: "#34D399",
-    description: "모든 에이전트의 매 라운드 출력을 즉시 검증합니다. Haiku가 4가지 규칙으로 게이트킵 — 스키마 위반, 범위 이탈, 근거 부재, 내부 모순을 걸러냅니다.",
+    description: "모든 에이전트의 매 라운드 출력을 즉시 검증합니다. Haiku가 4가지 규칙으로 게이트킵. 스키마 위반, 범위 이탈, 근거 부재, 내부 모순을 걸러냅니다.",
   },
   {
     tier: 2,
