@@ -31,7 +31,7 @@ export function MultiLlmSection() {
             Multi-LLM
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            Port/Adapter 기반 LLM 교체
+            LLM Resilience
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
             파이프라인과 에이전트 루프에서 LLM을 다르게 운용합니다.
@@ -179,7 +179,7 @@ export function MultiLlmSection() {
 
                   {/* Port/Adapter DI label */}
                   <text x={380} y={30} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                    Port/Adapter DI. 런타임 프로바이더 교체
+                    LLM Resilience. 런타임 프로바이더 교체
                   </text>
 
                   {/* Retry policy */}

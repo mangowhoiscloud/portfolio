@@ -127,6 +127,11 @@ function HookArchitectureDiagram() {
           </g>
         ))}
 
+        {/* HookSystem hub pulse */}
+        <circle cx={HUB_X} cy={H / 2} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0}>
+          <animate attributeName="r" values="0;80" dur="3s" repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0.12;0" dur="3s" repeatCount="indefinite" />
+        </circle>
         {/* HookSystem hub */}
         <rect x={HUB_X - 55} y={H / 2 - 35} width={110} height={70} rx={12} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.25} />
         <text x={HUB_X} y={H / 2 - 10} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>

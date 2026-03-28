@@ -52,6 +52,16 @@ export function ScoringSection() {
             {/* SVG radar-like chart */}
             <div className="flex justify-center">
               <svg viewBox="0 0 300 300" className="w-full max-w-[280px]">
+                {/* Radar sweep animation */}
+                <circle cx={150} cy={150} r={0} fill="none" stroke="#818CF8" strokeWidth={1} strokeOpacity={0}>
+                  <animate attributeName="r" values="0;110" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="stroke-opacity" values="0.2;0" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx={150} cy={150} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0}>
+                  <animate attributeName="r" values="0;110" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                  <animate attributeName="stroke-opacity" values="0.15;0" dur="3s" begin="1.5s" repeatCount="indefinite" />
+                </circle>
+
                 {/* Hexagonal grid */}
                 {[0.33, 0.66, 1.0].map((scale) => (
                   <polygon
@@ -61,14 +71,14 @@ export function ScoringSection() {
                       const r = 110 * scale;
                       return `${150 + r * Math.cos(angle)},${150 + r * Math.sin(angle)}`;
                     }).join(" ")}
-                    fill="none" stroke="white" strokeOpacity={0.04} strokeWidth={1}
+                    fill="none" stroke="white" strokeOpacity={0.06} strokeWidth={1}
                   />
                 ))}
                 {/* Axis lines */}
                 {weights.map((_, i) => {
                   const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
                   return (
-                    <line key={i} x1={150} y1={150} x2={150 + 110 * Math.cos(angle)} y2={150 + 110 * Math.sin(angle)} stroke="white" strokeOpacity={0.04} strokeWidth={1} />
+                    <line key={i} x1={150} y1={150} x2={150 + 110 * Math.cos(angle)} y2={150 + 110 * Math.sin(angle)} stroke="white" strokeOpacity={0.06} strokeWidth={1} />
                   );
                 })}
                 {/* Weight fill polygon */}
@@ -78,8 +88,16 @@ export function ScoringSection() {
                     const r = 110 * (w.w / 0.25);
                     return `${150 + r * Math.cos(angle)},${150 + r * Math.sin(angle)}`;
                   }).join(" ")}
-                  fill="#818CF8" fillOpacity={0.18} stroke="#818CF8" strokeOpacity={0.3} strokeWidth={1.5}
+                  fill="#818CF8" fillOpacity={0.12} stroke="#818CF8" strokeOpacity={0.4} strokeWidth={1.5}
                 />
+                {/* Weight vertex dots */}
+                {weights.map((w, i) => {
+                  const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+                  const r = 110 * (w.w / 0.25);
+                  return (
+                    <circle key={`dot-${i}`} cx={150 + r * Math.cos(angle)} cy={150 + r * Math.sin(angle)} r={3} fill={w.color} fillOpacity={0.6} />
+                  );
+                })}
                 {/* Labels */}
                 {weights.map((w, i) => {
                   const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;

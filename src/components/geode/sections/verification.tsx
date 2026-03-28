@@ -149,10 +149,16 @@ function OnionDiagram({
             );
           })}
 
-        <text x={CX} y={CY - 5} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">
+        {/* Center pulse */}
+        <circle cx={CX} cy={CY} r={0} fill="none" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0}>
+          <animate attributeName="r" values="0;{radii[radii.length - 1]}" dur="4s" repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0.15;0" dur="4s" repeatCount="indefinite" />
+        </circle>
+
+        <text x={CX} y={CY - 5} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace">
           Agent
         </text>
-        <text x={CX} y={CY + 8} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>
+        <text x={CX} y={CY + 8} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
           Output
         </text>
       </svg>

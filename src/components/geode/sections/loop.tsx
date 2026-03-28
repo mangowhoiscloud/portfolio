@@ -171,11 +171,17 @@ function OrbitalCycle() {
           );
         })}
 
+        {/* Center pulse */}
+        <circle cx={CX} cy={CY} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0}>
+          <animate attributeName="r" values="0;{R}" dur="3s" repeatCount="indefinite" />
+          <animate attributeName="stroke-opacity" values="0.15;0" dur="3s" repeatCount="indefinite" />
+        </circle>
+
         {/* Center label */}
-        <text x={CX} y={CY - 4} textAnchor="middle" fill="white" fillOpacity={0.20} fontSize={8} fontFamily="ui-monospace, monospace">
+        <text x={CX} y={CY - 4} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">
           while
         </text>
-        <text x={CX} y={CY + 9} textAnchor="middle" fill="white" fillOpacity={0.30} fontSize={9.5} fontFamily="ui-monospace, monospace" fontWeight={600}>
+        <text x={CX} y={CY + 9} textAnchor="middle" fill="white" fillOpacity={0.35} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
           (tool_use)
         </text>
       </svg>
