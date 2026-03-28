@@ -142,6 +142,28 @@ export function ScoringSection() {
             </div>
           </div>
         </ScrollReveal>
+
+        {/* Fixture results */}
+        <ScrollReveal delay={0.2}>
+          <div className="mt-8 rounded-xl border border-white/[0.04] px-5 py-4">
+            <div className="text-sm font-semibold text-white/70 mb-3">Fixture 분석 결과</div>
+            <div className="space-y-2 font-mono text-sm">
+              {[
+                { name: "Berserk", score: "81.2", tier: "S", color: "#F5C542" },
+                { name: "Cowboy Bebop", score: "68.4", tier: "A", color: "#818CF8" },
+                { name: "Ghost in the Shell", score: "51.7", tier: "B", color: "#4ECDC4" },
+              ].map((f) => (
+                <div key={f.name} className="flex items-center justify-between px-3 py-2 rounded-lg border border-white/[0.03]">
+                  <span className="text-white/60">{f.name}</span>
+                  <div className="flex items-center gap-3">
+                    <span style={{ color: f.color }} className="font-bold">{f.score}</span>
+                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ color: f.color, background: `${f.color}12` }}>{f.tier}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
