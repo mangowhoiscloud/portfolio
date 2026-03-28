@@ -24,7 +24,7 @@ body {
 <!-- Title -->
 <div style="padding: 0 36pt 5pt;">
   <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Frontier Mining: 4개 하네스 GAP 분석</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">직접 구현하기 전에 먼저 읽었고, 3/4 수렴 규칙으로 차용 여부를 결정했다</p>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">직접 구현하기 전에 먼저 읽고, 3/4 수렴 규칙으로 차용 여부를 결정한다</p>
 </div>
 
 <!-- Content -->
@@ -37,16 +37,16 @@ body {
       <!-- Claude Code -->
       <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 4pt;">
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Claude Code</p>
-        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">while(tool_use) 패턴: LLM이 tool_use를 반환하는 한 루프를 유지하는 구조를 직접 확인했다. GEODE AgenticLoop 50 라운드 설계의 직접 근거가 됐다.</p>
-        <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt; margin-top: auto;">
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">while(tool_use) 패턴: LLM이 tool_use를 반환하는 한 루프를 유지하는 구조를 직접 확인한다. GEODE AgenticLoop 50 라운드 설계의 직접 근거가 된다.</p>
+        <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 9pt; margin-top: auto;">
           <p style="font-size: 6pt; color: #818CF8;">채택: 루프 계속 조건 + end_turn 종료 패턴</p>
         </div>
       </div>
       <!-- autoresearch -->
       <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 4pt;">
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">autoresearch</p>
-        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">Karpathy P1 제약 기반 설계, P4 래칫(되돌아가지 않음), P6 컨텍스트 예산 명시: 이 세 원칙이 CLAUDE.md 규칙 체계의 뼈대가 됐다.</p>
-        <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt; margin-top: auto;">
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">Karpathy P1 제약 기반 설계, P4 래칫(되돌아가지 않음), P6 컨텍스트 예산 명시: 이 세 원칙이 CLAUDE.md 규칙 체계의 뼈대가 된다.</p>
+        <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 9pt; margin-top: auto;">
           <p style="font-size: 6pt; color: #818CF8;">채택: P1/P4/P6 → CANNOT 규칙 3종</p>
         </div>
       </div>
@@ -57,15 +57,15 @@ body {
       <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 4pt;">
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">OpenClaw</p>
         <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">Gateway, Session Key, Lane Queue, Plugin 4-계층 디스패치 구조에서 에이전트 요청을 분리된 채널로 라우팅하는 아이디어를 여기서 얻었다.</p>
-        <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt; margin-top: auto;">
+        <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 9pt; margin-top: auto;">
           <p style="font-size: 6pt; color: #818CF8;">채택: SessionKey 격리 + LaneQueue 우선순위</p>
         </div>
       </div>
       <!-- Codex CLI -->
       <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 4pt;">
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Codex CLI</p>
-        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">Worktree 격리, .owner 파일 보호, Dumb Platform 원칙으로 Git 충돌 없이 여러 에이전트가 병렬 작업할 수 있는 구조의 실증 사례였다.</p>
-        <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 8pt; margin-top: auto;">
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">Worktree 격리, .owner 파일 보호, Dumb Platform 원칙으로 Git 충돌 없이 여러 에이전트가 병렬 작업할 수 있는 구조의 실증 사례다.</p>
+        <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 9pt; margin-top: auto;">
           <p style="font-size: 6pt; color: #818CF8;">채택: Worktree 의무화 → CANNOT Git 규칙</p>
         </div>
       </div>
@@ -83,7 +83,7 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">3/4 수렴 규칙</p>
       </div>
       <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4개 하네스 중 3개 이상이 동일한 패턴을 사용하면 GEODE도 채택한다. 1-2개만 사용하면 독자 설계로 간다. 단순 다수결이지만 프론티어의 수렴은 신뢰할 수 있는 신호다.</p>
-      <div style="display: flex; align-items: center; gap: 6pt; background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
+      <div style="display: flex; align-items: center; gap: 6pt; background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
         <p style="font-size: 18pt; font-weight: bold; color: #818CF8;">3/4</p>
         <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">수렴 시 채택<br>미달 시 독자 설계</p>
       </div>
@@ -104,7 +104,7 @@ body {
 
 <!-- Footer -->
 <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
-  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 · Frontier Mining: 읽고 차용하고, 없으면 설계했다</p>
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.32.0 · Frontier Mining: 읽고 차용하고, 없으면 설계한다</p>
   <p style="font-size: 5pt; color: #8B949E;">26 / 35</p>
 </div>
 

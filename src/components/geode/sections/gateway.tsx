@@ -104,21 +104,21 @@ export function GatewaySection() {
                 <g key={s.label}>
                   <rect x={20} y={s.y} width={80} height={36} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.25} />
                   <text x={60} y={s.y + 22} textAnchor="middle" fill={s.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
-                  <line x1={100} y1={s.y + 18} x2={160} y2={85} stroke={s.color} strokeOpacity={0.18} strokeWidth={1} />
+                  <path d={`M100,${s.y + 18} C120,${s.y + 18} 140,85 160,85`} stroke={s.color} strokeOpacity={0.18} strokeWidth={1} fill="none" />
                 </g>
               ))}
               <rect x={160} y={55} width={120} height={60} rx={10} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.3} />
               <text x={220} y={78} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>ChannelMgr</text>
               <text x={220} y={95} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">binding match</text>
-              <line x1={280} y1={85} x2={330} y2={85} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+              <path d="M280,85 C295,80 315,80 330,85" stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none" />
               <rect x={330} y={55} width={100} height={60} rx={10} fill="#0A0F1A" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.25} />
               <text x={380} y={78} textAnchor="middle" fill="#C084FC" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>SessionStore</text>
               <text x={380} y={95} textAnchor="middle" fill="#C084FC" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">멀티턴</text>
-              <line x1={430} y1={85} x2={480} y2={85} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+              <path d="M430,85 C445,80 465,80 480,85" stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none" />
               <rect x={480} y={50} width={120} height={70} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.3} />
               <text x={540} y={78} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
               <text x={540} y={95} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">hitl=0, 30 rounds</text>
-              <line x1={600} y1={85} x2={650} y2={85} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+              <path d="M600,85 C615,80 635,80 650,85" stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none" />
               <rect x={650} y={60} width={90} height={50} rx={10} fill="#0A0F1A" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.25} />
               <text x={695} y={82} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Response</text>
               <text x={695} y={97} textAnchor="middle" fill="#34D399" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">→ channel</text>

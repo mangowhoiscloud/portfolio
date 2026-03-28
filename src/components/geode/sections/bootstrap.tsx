@@ -40,7 +40,7 @@ export function BootstrapSection() {
                     <text x={x + 45} y={47} textAnchor="middle" fill={s.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{s.name}</text>
                     <text x={x + 45} y={63} textAnchor="middle" fill={s.color} fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">Step {s.id}</text>
                     {i < steps.length - 1 && (
-                      <line x1={x + 90} y1={52} x2={x + 108} y2={52} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+                      <path d={`M${x + 90},52 C${x + 95},48 ${x + 103},48 ${x + 108},52`} stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none" />
                     )}
                   </g>
                 );

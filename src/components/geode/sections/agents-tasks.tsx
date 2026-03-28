@@ -93,7 +93,7 @@ export function AgentsTasksSection() {
                   <text x={170} y={80} fill="#4ECDC4" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace">delegate()</text>
                   {[40, 100, 160].map((y, i) => (
                     <g key={`spawn-${i}`}>
-                      <path d={`M 140,100 C 180,100 190,${y} 230,${y}`} fill="none" stroke="#4ECDC4" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="4 3" className="animate-flow" />
+                      <path d={`M145,100 C185,100 195,${y} 230,${y}`} fill="none" stroke="#4ECDC4" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="4 3" className="animate-flow" />
                     </g>
                   ))}
 
@@ -147,7 +147,7 @@ export function AgentsTasksSection() {
                   <text x={610} y={110} textAnchor="middle" fill="#F5C542" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">announce_queue</text>
 
                   {/* Drain arrow back to parent */}
-                  <path d="M 650,100 C 680,100 700,100 720,100 C 740,100 740,140 720,150 L 140,150 L 140,120" fill="none" stroke="#F4B8C8" strokeOpacity={0.18} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
+                  <path d="M650,100 C680,100 700,100 720,100 C740,100 740,145 720,155 C500,155 300,155 145,155 C140,150 140,135 140,125" fill="none" stroke="#F4B8C8" strokeOpacity={0.18} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
                   <text x={700} y={88} fill="#F4B8C8" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">drain</text>
                   <text x={180} y={162} fill="#F4B8C8" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">→ 대화 컨텍스트 주입</text>
                 </svg>

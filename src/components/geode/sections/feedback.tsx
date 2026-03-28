@@ -39,7 +39,7 @@ export function FeedbackSection() {
                     <text x={x + 64} y={45} textAnchor="middle" fill={p.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{p.name}</text>
                     <text x={x + 64} y={62} textAnchor="middle" fill={p.color} fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">Phase {p.id}</text>
                     {i < 4 && (
-                      <line x1={x + 128} y1={55} x2={x + 148} y2={55} stroke="white" strokeOpacity={0.1} strokeWidth={1} />
+                      <path d={`M${x + 128},55 C${x + 134},50 ${x + 142},50 ${x + 148},55`} stroke="white" strokeOpacity={0.12} strokeWidth={1} fill="none" />
                     )}
                   </g>
                 );

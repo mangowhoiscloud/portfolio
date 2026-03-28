@@ -25,7 +25,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 4pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Context Compression: 80% WARNING &#8594; 95% CRITICAL &#8594; 3-Phase 압축</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">컨텍스트 윈도우가 넘치면 루프가 강제 종료됐기 때문에 Lossless Selection을 도입해 정보 손실 없이 비용을 0.03%로 절감했다</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">컨텍스트 윈도우가 넘치면 루프가 강제 종료되기 때문에 Lossless Selection을 도입해 정보 손실 없이 비용을 0.03%로 절감한다</p>
   </div>
 
   <!-- Vertical 3-stack: Phase 1 top → Phase 2 middle → Phase 3 bottom -->
@@ -34,18 +34,18 @@ body {
     <!-- Phase 1: MONITOR -->
     <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
       <!-- Phase label -->
-      <div style="width: 72pt; background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 72pt; background: #1E293B; border: 1pt solid #4ECDC4; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; text-align: center;">Phase 1</p>
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; text-align: center;">MONITOR</p>
         <p style="font-size: 11pt; font-weight: bold; color: #4ECDC4; line-height: 1; margin-top: 3pt;">80%</p>
         <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; text-align: center;">WARNING</p>
       </div>
       <!-- Content -->
-      <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC430; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 6pt 10pt; display: flex; flex-direction: column; justify-content: center;">
+      <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC4; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; display: flex; flex-direction: column; justify-content: center;">
         <p style="font-size: 7.5pt; color: #E2E8F0; line-height: 1.5;">컨텍스트 사용률 상시 추적. <strong style="color: #4ECDC4;">80%</strong> 도달 시 <code style="font-family: 'Courier New', monospace; font-size: 7pt; color: #4ECDC4;">CONTEXT_WARNING</code> 이벤트 발화 &mdash; 루프는 계속 진행하되 compact 준비 신호를 핸들러에 전달한다.</p>
       </div>
       <!-- Stat -->
-      <div style="width: 70pt; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 70pt; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 9pt; font-weight: bold; color: #34D399; text-align: center;">0-79%</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center; margin-top: 2pt;">정상 운영</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center;">모니터링만</p>
@@ -60,7 +60,7 @@ body {
     <!-- Phase 2: LOSSLESS SELECT -->
     <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1.5;">
       <!-- Phase label -->
-      <div style="width: 72pt; background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 72pt; background: #1E293B; border: 1pt solid #F5C542; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542; text-align: center;">Phase 2</p>
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542; text-align: center;">LOSSLESS</p>
         <p style="font-size: 7pt; font-weight: bold; color: #F5C542; text-align: center;">SELECT</p>
@@ -68,21 +68,21 @@ body {
         <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; text-align: center;">압축 비용</p>
       </div>
       <!-- Content -->
-      <div style="flex: 1; background: #161B22; border: 1pt solid #F5C54230; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 6pt 10pt; display: flex; flex-direction: column; justify-content: center; gap: 4pt;">
+      <div style="flex: 1; background: #161B22; border: 1pt solid #F5C542; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; display: flex; flex-direction: column; justify-content: center; gap: 4pt;">
         <p style="font-size: 7.5pt; color: #E2E8F0; line-height: 1.5;">Lossy 요약 대신 LLM이 코드로 관련 청크만 선별. 요약이 아니라 <strong style="color: #34D399;">선택</strong>이기 때문에 정보 손실 0%, LLM 호출 비용 <strong style="color: #34D399;">0.03%</strong>로 절감.</p>
         <div style="display: flex; gap: 5pt;">
-          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; border-left: 2pt solid #EF4444;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt; border-left: 2pt solid #EF4444;">
             <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">Lossy 요약</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">구현 쉽지만 정보 소실 불가피</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; border-left: 2pt solid #34D399;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt; border-left: 2pt solid #34D399;">
             <p style="font-size: 6pt; color: #34D399; font-weight: bold;">Lossless Selection</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">관련 청크만 선별, 내용 100% 유지</p>
           </div>
         </div>
       </div>
       <!-- Stat -->
-      <div style="width: 70pt; background: #0D2B1E; border: 1pt solid #34D39940; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 70pt; background: #0D2B1E; border: 1pt solid #34D399; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 16pt; font-weight: bold; color: #34D399; line-height: 1;">75%</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center; margin-top: 3pt;">컨텍스트</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center;">절감 (깊이3)</p>
@@ -97,7 +97,7 @@ body {
     <!-- Phase 3: EMERGENCY PRUNE -->
     <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
       <!-- Phase label -->
-      <div style="width: 72pt; background: #EF444415; border: 1pt solid #EF444440; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 72pt; background: #1E293B; border: 1pt solid #EF4444; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #EF4444; text-align: center;">Phase 3</p>
         <p style="font-size: 7pt; font-weight: bold; color: #EF4444; text-align: center;">EMERGENCY</p>
         <p style="font-size: 7pt; font-weight: bold; color: #EF4444; text-align: center;">PRUNE</p>
@@ -105,11 +105,11 @@ body {
         <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; text-align: center;">CRITICAL</p>
       </div>
       <!-- Content -->
-      <div style="flex: 1; background: #161B22; border: 1pt solid #EF444430; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 6pt 10pt; display: flex; flex-direction: column; justify-content: center;">
+      <div style="flex: 1; background: #161B22; border: 1pt solid #EF4444; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt; display: flex; flex-direction: column; justify-content: center;">
         <p style="font-size: 7.5pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #EF4444;">95%</strong> 초과 시 <code style="font-family: 'Courier New', monospace; font-size: 7pt; color: #EF4444;">CONTEXT_CRITICAL</code> 이벤트 발생 &mdash; 강제 pruning 발동. 최초 사용자 메시지 보존 + bridge 메시지 삽입 후 루프 재개.</p>
       </div>
       <!-- Stat -->
-      <div style="width: 70pt; background: #161B22; border: 1pt solid #818CF840; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6pt;">
+      <div style="width: 70pt; background: #161B22; border: 1pt solid #818CF8; border-radius: 4pt; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8pt;">
         <p style="font-size: 9pt; font-weight: bold; color: #818CF8; text-align: center; line-height: 1.2;">600K</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center; margin-top: 2pt;">깊이3 유효</p>
         <p style="font-size: 6pt; color: #8B949E; text-align: center;">컨텍스트</p>

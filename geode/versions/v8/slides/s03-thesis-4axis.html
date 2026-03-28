@@ -68,7 +68,7 @@ body {
           </div>
           <p style="font-size: 7pt; color: #8B949E;">컨텍스트 제어</p>
           <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">매 세션 프롬프트를 수동 편집하면 drift가 발생했기 때문에 PromptAssembler 6-Phase + SHA-256으로 자동 조립한다. 80%/95%에서 compaction이 발동해 루프가 컨텍스트 과부하로 중단되지 않는다.</p>
-          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 8pt; margin-top: auto;">
             <p style="font-size: 6pt; color: #818CF8; font-family: 'Courier New', monospace;">PromptAssembler · CompactionHook</p>
           </div>
         </div>
@@ -80,8 +80,8 @@ body {
             <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">축 2 · Execution Loop</p>
           </div>
           <p style="font-size: 7pt; color: #8B949E;">실행 루프</p>
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">브레이크 없이 실행하면 비용·수렴·탐색 고착이 발생하기 때문에 3개 자동 브레이크를 설계했다. 실측 평균 4.2 라운드 종료, 상한은 50 라운드.</p>
-          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">브레이크 없이 실행하면 비용·수렴·탐색 고착이 발생하기 때문에 3개 자동 브레이크를 설계하여 수렴을 강제한다. 실측 평균 4.2 라운드 종료, 상한은 50 라운드.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 8pt; margin-top: auto;">
             <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">AgenticLoop · SafetyBrake</p>
           </div>
         </div>
@@ -98,8 +98,8 @@ body {
             <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">축 3 · Verification</p>
           </div>
           <p style="font-size: 7pt; color: #8B949E;">검증</p>
-          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">단일 LLM 평가는 Anchoring 편향으로 점수 분산이 ±18점이었기 때문에 5-Layer 검증(Guardrails→BiasBuster→Cross-LLM→Rights→Ground Truth)으로 신뢰도를 확보했다.</p>
-          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">단일 LLM 평가는 Anchoring 편향으로 점수 분산이 ±18점이 나오기 때문에 5-Layer 검증(Guardrails→BiasBuster→Cross-LLM→Rights→Ground Truth)으로 신뢰도를 확보한다.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 8pt; margin-top: auto;">
             <p style="font-size: 6pt; color: #F5C542; font-family: 'Courier New', monospace;">VerificationPipeline · CrossLLM</p>
           </div>
         </div>
@@ -112,7 +112,7 @@ body {
           </div>
           <p style="font-size: 7pt; color: #8B949E;">관측</p>
           <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">관측 공백이 있으면 CUSUM이 드리프트를 감지하지 못했기 때문에 46 Hook Events로 신경계를 구성하고 TokenTracker로 실시간 비용을 추적한다.</p>
-          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 8pt; margin-top: auto;">
             <p style="font-size: 6pt; color: #34D399; font-family: 'Courier New', monospace;">HookSystem · TokenTracker</p>
           </div>
         </div>

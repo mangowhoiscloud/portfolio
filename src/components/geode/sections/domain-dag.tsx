@@ -35,7 +35,7 @@ function PipelineDag() {
         {/* ── Edges ── */}
         <g stroke="white" strokeOpacity={0.12} strokeWidth={1} fill="none">
           {/* Router → Signals */}
-          <line x1={xRouter + nR} y1={yMid} x2={xSignals - nR} y2={yMid} />
+          <path d={`M${xRouter + nR},${yMid} C${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${xSignals - nR},${yMid}`} />
           {/* Signals → 4 Analysts (fan-out) */}
           {aY.map((y) => (
             <path key={`s-${y}`} d={edge(xSignals + nR, yMid, xAnalysts - aR, y)} />
@@ -45,9 +45,9 @@ function PipelineDag() {
             <path key={`e-${y}`} d={edge(xAnalysts + aR, y, xEval - nR, yMid)} />
           ))}
           {/* Eval → Scoring → Verify → Synth */}
-          <line x1={xEval + nR} y1={yMid} x2={xScoring - nR} y2={yMid} />
-          <line x1={xScoring + nR} y1={yMid} x2={xVerify - nR} y2={yMid} />
-          <line x1={xVerify + nR} y1={yMid} x2={xSynth - nR} y2={yMid} stroke="#34D399" strokeOpacity={0.12} />
+          <path d={`M${xEval + nR},${yMid} C${(xEval + nR + xScoring - nR) / 2},${yMid - 4} ${(xEval + nR + xScoring - nR) / 2},${yMid - 4} ${xScoring - nR},${yMid}`} />
+          <path d={`M${xScoring + nR},${yMid} C${(xScoring + nR + xVerify - nR) / 2},${yMid - 4} ${(xScoring + nR + xVerify - nR) / 2},${yMid - 4} ${xVerify - nR},${yMid}`} />
+          <path d={`M${xVerify + nR},${yMid} C${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${xSynth - nR},${yMid}`} stroke="#34D399" strokeOpacity={0.12} />
         </g>
 
         {/* Confidence loopback: Verify → Gather → Signals */}
@@ -139,12 +139,12 @@ function ReodeDag() {
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 800 220" className="w-full min-w-[600px]" style={{ maxHeight: 260 }}>
             <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
-              <line x1={75} y1={110} x2={130} y2={110} />
-              <line x1={185} y1={110} x2={240} y2={110} />
-              <line x1={295} y1={110} x2={350} y2={110} />
-              <line x1={405} y1={110} x2={460} y2={110} />
-              <line x1={515} y1={110} x2={570} y2={110} />
-              <line x1={625} y1={110} x2={680} y2={110} />
+              <path d="M75,110 C102,106 102,106 130,110" fill="none" />
+              <path d="M185,110 C212,106 212,106 240,110" fill="none" />
+              <path d="M295,110 C322,106 322,106 350,110" fill="none" />
+              <path d="M405,110 C432,106 432,106 460,110" fill="none" />
+              <path d="M515,110 C542,106 542,106 570,110" fill="none" />
+              <path d="M625,110 C652,106 652,106 680,110" fill="none" />
               {/* Fix → Transform feedback */}
               <path d="M530,85 C530,50 270,50 270,85" stroke="#E87080" strokeOpacity={0.12} strokeDasharray="4 4" className="animate-flow" />
               {/* startup_verify → fix (fail) */}
@@ -186,12 +186,12 @@ function ReodeDag() {
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 720 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
             <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
-              <line x1={85} y1={100} x2={155} y2={100} />
-              <line x1={215} y1={100} x2={285} y2={100} />
-              <line x1={345} y1={100} x2={415} y2={100} />
-              <line x1={475} y1={100} x2={545} y2={100} />
+              <path d="M85,100 C120,96 120,96 155,100" fill="none" />
+              <path d="M215,100 C250,96 250,96 285,100" fill="none" />
+              <path d="M345,100 C380,96 380,96 415,100" fill="none" />
+              <path d="M475,100 C510,96 510,96 545,100" fill="none" />
               <path d="M560,75 C560,45 430,45 430,75" stroke="#E87080" strokeOpacity={0.12} strokeDasharray="4 4" className="animate-flow" />
-              <line x1={475} y1={100} x2={615} y2={100} stroke="#34D399" strokeOpacity={0.12} />
+              <path d="M475,100 C545,96 545,96 615,100" fill="none" stroke="#34D399" strokeOpacity={0.12} />
             </g>
             {[
               { x: 60, label: "Assess", color: "#60A5FA" },
@@ -217,9 +217,9 @@ function ReodeDag() {
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 560 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
             <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
-              <line x1={95} y1={90} x2={175} y2={90} />
-              <line x1={265} y1={90} x2={345} y2={90} />
-              <line x1={435} y1={90} x2={500} y2={90} />
+              <path d="M95,90 C135,86 135,86 175,90" fill="none" />
+              <path d="M265,90 C305,86 305,86 345,90" fill="none" />
+              <path d="M435,90 C467,86 467,86 500,90" fill="none" />
               <path d="M395,65 C395,35 225,35 225,65" stroke="#4ECDC4" strokeOpacity={0.18} strokeDasharray="4 4" className="animate-flow" />
             </g>
             {[

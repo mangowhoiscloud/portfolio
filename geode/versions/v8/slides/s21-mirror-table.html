@@ -24,7 +24,7 @@ body {
 <!-- Title -->
 <div style="padding: 0 36pt 6pt;">
   <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Mirror Table: Scaffold ↔ Runtime</h1>
-  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴딩이 Runtime을 설계했기 때문에 동형 구조가 나왔다. 의도한 것이 아닌 좋은 설계의 부산물</p>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴딩이 Runtime을 설계하기 때문에 동형 구조가 나온다. 의도한 것이 아닌 좋은 설계의 부산물</p>
 </div>
 
 <!-- Content -->
@@ -38,7 +38,7 @@ body {
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CLAUDE.md 23 CANNOT</p>
-      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">LLM이 발산하지 않도록 23개 금지 규칙을 CLAUDE.md에 주입했다. 위반하면 CI가 머지를 차단한다.</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">LLM이 발산하지 않도록 23개 금지 규칙을 CLAUDE.md에 주입한다. 위반하면 CI가 머지를 차단한다.</p>
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">21 Skills → 8-Step Loop</p>
@@ -46,11 +46,11 @@ body {
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Frontier Mining + 4-Persona</p>
-      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">독자 설계만 하면 이미 해결된 문제를 재발명했기 때문에 4개 하네스를 리서치하고 3/4 수렴 규칙으로 채택 여부를 결정했다.</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">독자 설계만 하면 이미 해결된 문제를 재발명하기 때문에 4개 하네스를 리서치하고 3/4 수렴 규칙으로 채택 여부를 결정한다.</p>
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CHANGELOG 40 Releases</p>
-      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">결정 이유가 사라지면 같은 실수를 반복하기 때문에 v0.6 → v0.32 40회 릴리스의 모든 피봇 WHY를 CHANGELOG에 기록했다.</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">결정 이유가 사라지면 같은 실수를 반복하기 때문에 v0.6 → v0.32 40회 릴리스의 모든 피봇 WHY를 CHANGELOG에 기록한다.</p>
     </div>
   </div>
 
@@ -76,19 +76,19 @@ body {
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">3-Provider Failover + 5-Tier Safety</p>
-      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Frontier Mining에서 3/4 수렴으로 선택한 3-Provider Failover + 5-Tier Safety가 Runtime에서 단일 장애점 0을 달성했다.</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Frontier Mining에서 3/4 수렴으로 선택한 3-Provider Failover + 5-Tier Safety가 Runtime에서 단일 장애점 0을 달성한다.</p>
     </div>
     <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">3,216 Tests · 187 Modules</p>
-      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">테스트 없이 커밋을 허용하면 회귀가 누적됐기 때문에 70% 테스트 비율을 CANNOT으로 강제했다. 결과: 3,216 Tests, 40/40 무회귀.</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">테스트 없이 커밋을 허용하면 회귀가 누적되기 때문에 70% 테스트 비율을 CANNOT으로 강제한다. 결과: 3,216 Tests, 40/40 무회귀.</p>
     </div>
   </div>
 
   <!-- Insight box -->
   <div style="width: 148pt; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt; justify-content: center;">
     <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">왜 구조적 동형인가?</p>
-    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">설계가 아닌 발견이었다. Scaffold가 성숙하면서 Runtime과 자연스럽게 동형 구조가 됐고, 의도한 것이 아니라 좋은 설계의 부산물이다.</p>
-    <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
+    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">설계가 아닌 발견이었다. Scaffold가 성숙하면서 Runtime과 자연스럽게 동형 구조가 되고, 의도한 것이 아니라 좋은 설계의 부산물이다.</p>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 9pt;">
       <p style="font-size: 6pt; color: #8B949E; line-height: 1.4;">CANNOT 규칙 위반 → 빌드 실패</p>
       <p style="font-size: 6pt; color: #8B949E; line-height: 1.4; margin-top: 2pt;">Hook 규칙 위반 → 실행 차단</p>
       <p style="font-size: 6pt; color: #4ECDC4; line-height: 1.4; margin-top: 3pt;">같은 원칙, 다른 계층에서 작동</p>

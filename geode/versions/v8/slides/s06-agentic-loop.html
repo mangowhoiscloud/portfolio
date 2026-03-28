@@ -24,7 +24,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">AgenticLoop: while(tool_use) 50 rounds × 200-turn Window</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Claude Code while(tool_use) 패턴을 참고했고, 제어 없이 실행하면 무한 소모이기 때문에 5가지 종료 경로로 수렴을 강제했다</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Claude Code while(tool_use) 패턴을 참고하여, 제어 없이 실행하면 무한 소모이기 때문에 5가지 종료 경로로 수렴을 강제한다</p>
   </div>
 
   <!-- Content: diagram + termination conditions -->
@@ -40,7 +40,7 @@ body {
     <div style="flex: 0 0 178pt; display: flex; flex-direction: column; gap: 5pt;">
 
       <!-- Loop stats -->
-      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 6pt 10pt; display: flex; gap: 10pt;">
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; display: flex; gap: 10pt;">
         <div style="text-align: center; flex: 1;">
           <p style="font-size: 18pt; font-weight: bold; color: #4ECDC4;">50</p>
           <p style="font-size: 6pt; color: #8B949E;">Max Rounds</p>
@@ -58,7 +58,7 @@ body {
       </div>
 
       <!-- 5 termination conditions -->
-      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 10pt;">
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">5가지 종료 경로</p>
         <ul style="margin-left: 10pt;">
           <li style="font-size: 6pt; color: #E2E8F0; margin-bottom: 2pt;"><strong style="color: #34D399;">end_turn</strong>: LLM이 tool_use 없이 응답</li>
@@ -70,26 +70,26 @@ body {
       </div>
 
       <!-- Context window management -->
-      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 10pt;">
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">컨텍스트 관리</p>
         <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">30개 메시지 초과 시 최초 사용자 메시지 보존 + bridge 삽입. 80%에서 compact, 95%에서 emergency prune 자동 발동.</p>
         <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">LLM 2회 연속 실패 → Provider 모델 체인 → Cross-Provider Fallback</p>
       </div>
 
       <!-- 왜 max 50 rounds -->
-      <div style="background: #1E293B; border: 1px solid #4ECDC460; border-radius: 4pt; padding: 6pt 10pt;">
+      <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
         <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">왜 max 50 rounds?</p>
         <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">실측 기반: 평균 <strong style="color: #34D399;">4.2 라운드</strong>에 자연 종료(end_turn). 50은 탈출 불가 상황의 안전망이며 긴 분석 작업에서 드물게 30+ 라운드 도달.</p>
         <div style="display: flex; gap: 4pt;">
-          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt; text-align: center;">
             <p style="font-size: 11pt; font-weight: bold; color: #34D399; line-height: 1.1;">4.2</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">평균 라운드</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt; text-align: center;">
             <p style="font-size: 11pt; font-weight: bold; color: #F5C542; line-height: 1.1;">30+</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">심층 분석 시</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+          <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 7pt 8pt; text-align: center;">
             <p style="font-size: 11pt; font-weight: bold; color: #EF4444; line-height: 1.1;">50</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">안전망 상한</p>
           </div>

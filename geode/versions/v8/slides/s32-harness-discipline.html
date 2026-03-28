@@ -43,7 +43,7 @@ body {
       <p style="font-size: 11pt; font-weight: bold; color: #818CF8;">v0.6 → v0.32</p>
       <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">26버전 동안 4축이 유지됨</p>
     </div>
-    <div style="background: #1A1A2E; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 4pt 8pt; margin-top: 2pt;">
+    <div style="background: #1A1A2E; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 9pt; margin-top: 2pt;">
       <p style="font-size: 6pt; color: #8B949E; line-height: 1.4;"><strong style="color: #818CF8;">Trade-off: 디시플린 비용</strong> 4축 실천은 PR마다 시간이 든다. 이를 포기하면 릴리스 속도는 올라가지만 회귀가 쌓인다. 40/40 무회귀가 그 비용의 수익이다.</p>
     </div>
   </div>
@@ -58,7 +58,7 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">컨텍스트 제어: 장기 진화 방향</p>
         <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">수동 편집은 drift를 감지할 수 없었기 때문에 SHA-256 캐싱을 도입해 2회차 입력 비용을 10%로 낮췄다. 다음 단계: Semantic diff로 선택적 재생성, Provider별 캐시 효율 최적화.</p>
       </div>
-      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; text-align: center; flex-shrink: 0;">
         <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">90%</p>
         <p style="font-size: 6pt; color: #8B949E;">비용 절감</p>
       </div>
@@ -71,7 +71,7 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">실행 루프: 장기 진화 방향</p>
         <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">비용 폭발·수렴 고착을 막기 위해 단일 루프에 3 Brake를 추가했다. 실측 평균 4.2 라운드 종료로 안정성을 확보. 다음 단계: 멀티 에이전트 DAG 오케스트레이션으로 확장.</p>
       </div>
-      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; text-align: center; flex-shrink: 0;">
         <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">50R</p>
         <p style="font-size: 6pt; color: #8B949E;">×200 turns</p>
       </div>
@@ -84,7 +84,7 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #34D399;">검증: 장기 진화 방향</p>
         <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">단일 LLM 편향이 ±18점 분산을 냈기 때문에 Cross-LLM α≥0.67로 편향을 구조적으로 제거했다. 다음 단계: CUSUM 드리프트 감지로 실시간 합의도 추적.</p>
       </div>
-      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; text-align: center; flex-shrink: 0;">
         <p style="font-size: 9pt; font-weight: bold; color: #34D399;">α≥0.67</p>
         <p style="font-size: 6pt; color: #8B949E;">합의도</p>
       </div>
@@ -97,7 +97,7 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #F97316;">관측: 장기 진화 방향</p>
         <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">LangSmith 단독으로는 모델별 비용 분리가 안 됐기 때문에 자체 TokenTracker를 구축해 46 Hook Events로 관측했다. 다음 단계: 자동 비용 예측 + ML 실행 계획 최적화.</p>
       </div>
-      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+      <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; text-align: center; flex-shrink: 0;">
         <p style="font-size: 9pt; font-weight: bold; color: #F97316;">46</p>
         <p style="font-size: 6pt; color: #8B949E;">Hook Events</p>
       </div>
