@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUMMARY — GEODE v0.30 + REODE v0.21</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 4pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Harness Engineering — 전체 지표</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 1pt;">확률적 시스템을 수렴시키는 4개 축의 실증 결과 (GEODE + REODE 합산)</p>
+  </div>
+
+  <!-- 4-axis Harness Engineering header bar -->
+  <div style="padding: 0 36pt 4pt; display: flex; gap: 4pt;">
+    <div style="flex: 1; background: #818CF815; border: 1pt solid #818CF840; border-radius: 6pt; padding: 4pt 8pt; display: flex; align-items: center; gap: 5pt;">
+      <div style="width: 3pt; height: 14pt; background: #818CF8; border-radius: 2pt;"></div>
+      <div>
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">컨텍스트 제어</p>
+        <p style="font-size: 7pt; color: #8B949E;">PromptAssembler 6-Phase · SHA-256 캐시 90% 절감</p>
+      </div>
+    </div>
+    <div style="flex: 1; background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 6pt; padding: 4pt 8pt; display: flex; align-items: center; gap: 5pt;">
+      <div style="width: 3pt; height: 14pt; background: #4ECDC4; border-radius: 2pt;"></div>
+      <div>
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">실행 루프</p>
+        <p style="font-size: 7pt; color: #8B949E;">AgenticLoop while(tool_use) · 54 tools × 50 rounds</p>
+      </div>
+    </div>
+    <div style="flex: 1; background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 6pt; padding: 4pt 8pt; display: flex; align-items: center; gap: 5pt;">
+      <div style="width: 3pt; height: 14pt; background: #F5C542; border-radius: 2pt;"></div>
+      <div>
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">검증</p>
+        <p style="font-size: 7pt; color: #8B949E;">Swiss Cheese 5-Layer · 신뢰도 69.4 → 99.8%</p>
+      </div>
+    </div>
+    <div style="flex: 1; background: #34D39915; border: 1pt solid #34D39940; border-radius: 6pt; padding: 4pt 8pt; display: flex; align-items: center; gap: 5pt;">
+      <div style="width: 3pt; height: 14pt; background: #34D399; border-radius: 2pt;"></div>
+      <div>
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">관측</p>
+        <p style="font-size: 7pt; color: #8B949E;">36-Event Hook Observer · CUSUM 드리프트</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main stat grid -->
+  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; gap: 5pt;">
+
+    <!-- LEFT: GEODE stats -->
+    <div style="flex: 1.2; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #818CF830; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">GEODE v0.30 — 코드베이스</p>
+      </div>
+
+      <!-- Big numbers row -->
+      <div style="display: flex; gap: 4pt;">
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 20pt; font-weight: bold; color: #818CF8; line-height: 1;">184</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Python 모듈</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4; line-height: 1;">48K+</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Lines of Code</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 18pt; font-weight: bold; color: #F5C542; line-height: 1;">3,159</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">테스트 함수</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 20pt; font-weight: bold; color: #34D399; line-height: 1;">25</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">semver 릴리스</p>
+        </div>
+      </div>
+
+      <!-- Architecture + Security details -->
+      <div style="display: flex; gap: 4pt;">
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">파이프라인 · 도구</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">9-Node StateGraph DAG</p>
+          <p style="font-size: 7pt; color: #8B949E;">54 Tools · 44 MCP 서버 · 25 Skills</p>
+          <p style="font-size: 7pt; color: #8B949E;">3채널 Gateway (Slack/Discord/Telegram)</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">보안 · 검증</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">9 Bash 차단 · 8 Secret 탐지</p>
+          <p style="font-size: 7pt; color: #8B949E;">6-Layer PolicyChain · 4-Tier HITL</p>
+          <p style="font-size: 7pt; color: #8B949E;">Calibration 80/100 통과</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: REODE -->
+    <div style="flex: 0.8; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #F9731630; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">REODE v0.21 — 이식성 증명</p>
+      </div>
+
+      <!-- REODE big numbers -->
+      <div style="display: flex; gap: 4pt;">
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 18pt; font-weight: bold; color: #F97316; line-height: 1;">209</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">모듈</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 4pt 8pt; text-align: center;">
+          <p style="font-size: 18pt; font-weight: bold; color: #F97316; line-height: 1;">3,274</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">테스트</p>
+        </div>
+      </div>
+
+      <!-- REODE proof -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">103K LoC 마이그레이션 · 83/83 통과</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">33 세션 / 1,133 라운드 / 5h 48m</p>
+        <p style="font-size: 7pt; color: #34D399; margin-top: 2pt; font-weight: bold;">core 코드 변경 0줄</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Python ≥3.12 · LangGraph · Anthropic SDK · FastAPI · Redis · SQLite · mypy strict</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE(184) + REODE(209) = 393 모듈 · 6,433 테스트 — 확률론적 시스템을 루프와 가치로 수렴</p>
+    <p style="font-size: 5pt; color: #8B949E;">23 / 24</p>
+  </div>
+
+</body>
+</html>

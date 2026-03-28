@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 8pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING</p>
+  </div>
+
+  <!-- Title + badge -->
+  <div style="padding: 0 36pt 4pt; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+      <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">CANNOT / CAN — 23 Hard Rules</h1>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">엄격함이 속도를 가능하게 한다. 제약이 없으면 LLM은 발산한다.</p>
+    </div>
+    <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 4pt; padding: 5pt 10pt; flex-shrink: 0; text-align: center;">
+      <p style="font-size: 18pt; font-weight: bold; color: #818CF8; line-height: 1;">500+</p>
+      <p style="font-size: 5pt; color: #8B949E;">PRs · 0 regressions</p>
+    </div>
+  </div>
+
+  <!-- Main: 5 domain columns + CAN sidebar -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 6pt; min-height: 0;">
+
+    <!-- 5 domain cards -->
+    <div style="flex: 13; display: flex; gap: 5pt; min-height: 0;">
+
+      <!-- Git -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 7pt 8pt; border-top: 2pt solid #EF4444; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Git <span style="color: #8B949E; font-weight: normal; font-size: 6pt;">(6)</span></p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.65;">
+          <li>worktree 없이 코드 작업</li>
+          <li>main/develop 직접 push</li>
+          <li>타 세션 worktree 삭제</li>
+          <li>원격 미동기화 브랜치 생성</li>
+          <li>force push to main</li>
+          <li>squash 없이 merge</li>
+        </ul>
+      </div>
+
+      <!-- Planning -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 7pt 8pt; border-top: 2pt solid #F59E0B; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F59E0B;">Planning <span style="color: #8B949E; font-weight: normal; font-size: 6pt;">(4)</span></p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.65;">
+          <li>GAP Audit 없이 구현 시작</li>
+          <li>Socratic Gate 미통과 PR</li>
+          <li>TODO: FIXME 병합</li>
+          <li>1 PR에 2개 이상 기능</li>
+        </ul>
+      </div>
+
+      <!-- Quality -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 7pt 8pt; border-top: 2pt solid #818CF8; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Quality <span style="color: #8B949E; font-weight: normal; font-size: 6pt;">(5)</span></p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.65;">
+          <li>lint/type/test 실패 커밋</li>
+          <li>XXXX 자리표시자 커밋</li>
+          <li>live 테스트 무단 실행</li>
+          <li>커버리지 하락 머지</li>
+          <li>mypy --ignore-errors</li>
+        </ul>
+      </div>
+
+      <!-- Docs -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 7pt 8pt; border-top: 2pt solid #4ECDC4; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Docs <span style="color: #8B949E; font-weight: normal; font-size: 6pt;">(4)</span></p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.65;">
+          <li>코드 커밋 시 CHANGELOG 누락</li>
+          <li>버전 4곳 불일치</li>
+          <li>ADR 없이 아키텍처 변경</li>
+          <li>plans/ 미반영 PR</li>
+        </ul>
+      </div>
+
+      <!-- PR -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 7pt 8pt; border-top: 2pt solid #34D399; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">PR <span style="color: #8B949E; font-weight: normal; font-size: 6pt;">(4)</span></p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.65;">
+          <li>CI 미통과 PR 머지</li>
+          <li>Why 근거 없이 PR 오픈</li>
+          <li>리뷰 없이 self-merge</li>
+          <li>500줄 초과 단일 PR</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CAN + Trade-off + Result -->
+    <div style="flex: 6; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+
+      <!-- CAN block -->
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 5pt;">CAN — 5 Freedoms</p>
+        <ul style="font-size: 6pt; color: #8B949E; margin-left: 10pt; line-height: 1.7;">
+          <li>버그/문서 수정: Plan 없이 바로</li>
+          <li>개선 발견: 현재 완료 후 다음</li>
+          <li>테스트 선별 실행: 최종만 전체</li>
+          <li>커밋 메시지: 한글/영어 자유</li>
+          <li>도구 선택: 더 빠른 도구 가능</li>
+        </ul>
+      </div>
+
+      <!-- Trade-off box -->
+      <div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">Trade-off: 엄격함 vs 속도</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">규칙이 많을수록 느려진다고 가정했지만, 결과는 반대였다.</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">23개 CANNOT이 LLM의 발산 충동을 소스에서 차단하여, CI 수정 비용과 리뷰 비용을 0으로 수렴시켰다.</p>
+        <div style="display: flex; gap: 8pt; margin-top: 8pt; justify-content: space-around;">
+          <div style="text-align: center;">
+            <p style="font-size: 18pt; font-weight: bold; color: #818CF8; line-height: 1;">500+</p>
+            <p style="font-size: 5pt; color: #8B949E;">PRs merged</p>
+          </div>
+          <div style="text-align: center;">
+            <p style="font-size: 18pt; font-weight: bold; color: #34D399; line-height: 1;">0</p>
+            <p style="font-size: 5pt; color: #8B949E;">regressions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">CANNOT에 없는 것은 자유 — 23개 경계가 에이전트의 과잉 구현 충동을 구조적으로 제거한다</p>
+    <p style="font-size: 5pt; color: #8B949E;">11 / 31</p>
+  </div>
+</body>
+</html>

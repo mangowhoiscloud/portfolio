@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #F5C542;">OPENING — TIMELINE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">과제 합격 &#8594; 면접 탈락 &#8594; 자율 피봇 &#8594; 하네스 완성</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">면접 탈락이 오히려 설계의 깊이를 증명했습니다. 도메인 파이프라인에서 범용 자율 실행 하네스로 &#8212; 36일 피봇.</p>
+  </div>
+
+  <!-- Timeline connector row -->
+  <div style="padding: 0 36pt 4pt; display: flex; align-items: center; gap: 0;">
+    <div style="width: 10pt; height: 10pt; border-radius: 50%; background: #F5C542; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #F5C54260;"></div>
+    <div style="width: 12pt; height: 12pt; border-radius: 50%; background: #EF4444; flex-shrink: 0; border: 2pt solid #EF444460;"></div>
+    <div style="flex: 1; height: 2pt; background: #F9731660;"></div>
+    <div style="width: 10pt; height: 10pt; border-radius: 50%; background: #F97316; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #4ECDC460;"></div>
+    <div style="width: 10pt; height: 10pt; border-radius: 50%; background: #4ECDC4; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #818CF860;"></div>
+    <div style="width: 10pt; height: 10pt; border-radius: 50%; background: #818CF8; flex-shrink: 0;"></div>
+  </div>
+
+  <!-- Phase cards row -->
+  <div style="flex: 1; padding: 0 36pt 2pt; display: flex; gap: 7pt; min-height: 0;">
+
+    <!-- Phase 1: 과제 합격 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #F5C54240; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="background: #F5C54220; border: 1pt solid #F5C54260; border-radius: 4pt; padding: 2pt 6pt; flex-shrink: 0;">
+          <p style="font-size: 5pt; font-weight: bold; color: #F5C542;">v0.6 &#8212; v0.8</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Feb 2026</p>
+      </div>
+      <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">Phase 1 &#8212; 과제 합격</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">넥슨 네비게이터실 Game IP 가치추론 DAG 전형. LangGraph StateGraph 9-Node 파이프라인으로 S/A/B/C 등급 판별.</p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+        <li><p style="font-size: 6pt; color: #8B949E;">14축 루브릭 + PSM 인과추론</p></li>
+        <li><p style="font-size: 6pt; color: #8B949E;">5-Layer Cross-LLM 검증 (69.4&#8594;99.8)</p></li>
+      </ul>
+      <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+        <p style="font-size: 6pt; color: #F5C542; font-family: 'Courier New', monospace;">LangGraph StateGraph</p>
+        <p style="font-size: 5pt; color: #8B949E;">도메인 종속 파이프라인</p>
+      </div>
+    </div>
+
+    <!-- Pivot: 면접 탈락 -->
+    <div style="flex: 0.85; background: #1E0D0D; border: 1pt solid #EF444440; border-top: 3pt solid #EF4444; border-radius: 4pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="background: #EF444420; border: 1pt solid #EF444460; border-radius: 4pt; padding: 2pt 6pt; flex-shrink: 0;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">PIVOT</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 초 2026</p>
+      </div>
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">면접 탈락</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">탈락 이유가 오히려 명확했습니다. 도메인 파이프라인은 넥슨에 종속, 재사용 불가. 범용 자율 실행 하네스로 방향 전환.</p>
+      <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+        <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">DomainPort 설계 시작</p>
+        <p style="font-size: 5pt; color: #8B949E;">가장 인간적인 피봇</p>
+      </div>
+    </div>
+
+    <!-- Phase 2: Autonomous Pivot -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #F9731640; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="background: #F9731620; border: 1pt solid #F9731660; border-radius: 4pt; padding: 2pt 6pt; flex-shrink: 0;">
+          <p style="font-size: 5pt; font-weight: bold; color: #F97316;">v0.10 &#8212; v0.16</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 초 2026</p>
+      </div>
+      <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Phase 2 &#8212; Autonomous Pivot</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">도메인 종속 파이프라인을 범용 하네스로 전환. DomainPort Protocol 설계로 코어를 도메인에서 분리.</p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+        <li><p style="font-size: 6pt; color: #8B949E;">Hook System 8-Category 분류</p></li>
+        <li><p style="font-size: 6pt; color: #8B949E;">ContextVar DI로 도메인 교체 가능</p></li>
+      </ul>
+      <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+        <p style="font-size: 6pt; color: #F97316; font-family: 'Courier New', monospace;">DomainPort Protocol</p>
+        <p style="font-size: 5pt; color: #8B949E;">범용 하네스 전환점</p>
+      </div>
+    </div>
+
+    <!-- Phase 3: Harness 완성 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC440; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="background: #4ECDC420; border: 1pt solid #4ECDC460; border-radius: 4pt; padding: 2pt 6pt; flex-shrink: 0;">
+          <p style="font-size: 5pt; font-weight: bold; color: #4ECDC4;">v0.24 &#8212; v0.31</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 중후 2026</p>
+      </div>
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Phase 3 &#8212; Harness 완성</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">META &#8594; DEV &#8594; RUNTIME 3중 루프 완성. 46 Hook Events, 21 Skills, 52 Tools.</p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+        <li><p style="font-size: 6pt; color: #8B949E;">187 모듈 · 3,201 테스트 무회귀</p></li>
+        <li><p style="font-size: 6pt; color: #8B949E;">while(tool_use) 자율 실행 하네스</p></li>
+      </ul>
+      <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+        <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">while tool_use: loop()</p>
+        <p style="font-size: 5pt; color: #8B949E;">46 Hooks · 21 Skills 완성</p>
+      </div>
+    </div>
+
+    <!-- Fork: REODE -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #818CF840; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 9pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 5pt;">
+        <div style="background: #818CF820; border: 1pt solid #818CF860; border-radius: 4pt; padding: 2pt 6pt; flex-shrink: 0;">
+          <p style="font-size: 5pt; font-weight: bold; color: #818CF8;">FORK: REODE</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 2026</p>
+      </div>
+      <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Fork &#8212; 범용성 실증</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Java 8&#8594;22, Spring 4.3&#8594;6.1. 241소스 103K LoC 레거시 마이그레이션 에이전트.</p>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+        <li><p style="font-size: 6pt; color: #34D399; font-weight: bold;">83/83 mvn compile+test 패스</p></li>
+        <li><p style="font-size: 6pt; color: #8B949E;">에이전트 코어 수정 0줄</p></li>
+      </ul>
+      <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+        <p style="font-size: 6pt; color: #818CF8; font-family: 'Courier New', monospace;">DomainPort: 0 core changes</p>
+        <p style="font-size: 5pt; color: #8B949E;">범용성 검증 완료</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Key message banner -->
+  <div style="margin: 4pt 36pt 0; background: #1E293B; border: 1pt solid #EF444430; border-radius: 4pt; padding: 5pt 12pt;">
+    <p style="font-size: 7pt; color: #F5C542; font-weight: bold; text-align: center;">면접 탈락 &#8594; 자율 피봇이 가장 인간적 내러티브. 도메인 종속에서 범용 하네스로, 36일.</p>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">과제 합격(v0.6) &#8594; 면접 탈락(Pivot) &#8594; 범용 하네스(v0.31) &#8594; REODE fork 실증 &#8212; 36일</p>
+    <p style="font-size: 5pt; color: #8B949E;">02 / 31</p>
+  </div>
+
+</body>
+</html>

@@ -1,4 +1,24 @@
-import { Achievement, CategoryData } from "../categories";
+export interface Achievement {
+  icon: string;
+  titleKo: string;
+  titleEn: string;
+  modalId: string;
+}
+
+export interface CategoryData {
+  id: string;
+  icon: string;
+  title: string;
+  postsCount: number;
+  statusKo: string;
+  statusEn: string;
+  techBadges: string[];
+  descriptionKo: string;
+  descriptionEn: string;
+  achievements: Achievement[];
+  blogLink: string;
+  color: string;
+}
 
 export const geodeCategories: CategoryData[] = [
   {

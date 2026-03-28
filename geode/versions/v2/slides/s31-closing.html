@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+</style>
+</head>
+<body>
+
+  <!-- Background cover image -->
+  <img src="assets/bg-cover.png" style="position: absolute; top: 0; left: 0; width: 720pt; height: 405pt; opacity: 0.25;">
+
+  <!-- Main layout -->
+  <div style="position: relative; flex: 1; display: flex; flex-direction: column; padding: 18pt 44pt 0;">
+
+    <!-- Top section: thesis + triple loop -->
+    <div style="display: flex; gap: 14pt; align-items: flex-start;">
+
+      <!-- Left: thesis + value props -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 9pt;">
+
+        <!-- Opening thesis callback -->
+        <div style="background: #161B22; border: 1px solid #818CF8; border-left: 4pt solid #818CF8; border-radius: 4pt; padding: 10pt 12pt;">
+          <p style="font-size: 11pt; font-weight: bold; color: #FFFFFF; line-height: 1.4;">확률적 시스템은 제어 없이 발산합니다.</p>
+          <p style="font-size: 8pt; color: #4ECDC4; margin-top: 4pt; line-height: 1.4;">발산을 루프와 가치로 수렴시키는 하네스를 만들었습니다.</p>
+        </div>
+
+        <!-- 3 value propositions -->
+        <div style="display: flex; flex-direction: column; gap: 6pt;">
+
+          <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt; display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 4pt 7pt; min-width: 28pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; line-height: 1;">01</p>
+            </div>
+            <div>
+              <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">자율 실행 + 제어 공존</p>
+              <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">while(tool_use) 50 rounds 자율 실행과 5-Tier 안전 등급을 동시에. HITL 없이도 deny-by-default로 경계 유지</p>
+            </div>
+          </div>
+
+          <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt; display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #1E293B; border: 1px solid #34D399; border-radius: 4pt; padding: 4pt 7pt; min-width: 28pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #34D399; line-height: 1;">02</p>
+            </div>
+            <div>
+              <p style="font-size: 8pt; font-weight: bold; color: #34D399;">패턴은 재사용된다</p>
+              <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">GEODE Port/Adapter + HookSystem + CircuitBreaker → REODE 83/83 실증. 하네스 설계가 도메인을 초월</p>
+            </div>
+          </div>
+
+          <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt; display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 4pt 7pt; min-width: 28pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #818CF8; line-height: 1;">03</p>
+            </div>
+            <div>
+              <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">측정되지 않으면 존재하지 않는다</p>
+              <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">46-Event Hook + TokenTracker + 3,201 Tests. 모든 자율 실행은 관측 가능하고 검증됩니다</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Right: Triple Loop mini + mascot -->
+      <div style="width: 196pt; display: flex; flex-direction: column; gap: 9pt; align-items: center;">
+
+        <!-- Triple Loop mini diagram -->
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 10pt; width: 100%;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; text-align: center; margin-bottom: 7pt;">Triple Loop</p>
+
+          <!-- Outer loop -->
+          <div style="border: 1px solid #818CF8; border-radius: 4pt; padding: 7pt; position: relative;">
+            <p style="font-size: 5pt; color: #818CF8; text-align: right; margin-bottom: 5pt;">Scaffold Loop</p>
+
+            <!-- Middle loop -->
+            <div style="border: 1px solid #4ECDC4; border-radius: 4pt; padding: 6pt; position: relative;">
+              <p style="font-size: 5pt; color: #4ECDC4; text-align: right; margin-bottom: 4pt;">Agentic Loop</p>
+
+              <!-- Inner loop -->
+              <div style="border: 1px solid #34D399; border-radius: 4pt; padding: 5pt; text-align: center;">
+                <p style="font-size: 5pt; color: #34D399; font-weight: bold;">Tool Loop</p>
+                <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">observe → act</p>
+              </div>
+              <p style="font-size: 5pt; color: #4ECDC4; margin-top: 4pt; text-align: center;">while(tool_use) × 50</p>
+            </div>
+            <p style="font-size: 5pt; color: #818CF8; margin-top: 5pt; text-align: center;">8-Step × LEARNINGS.md</p>
+          </div>
+        </div>
+
+        <!-- Mascot -->
+        <img src="assets/mascot.png" style="width: 72pt; height: 72pt; border-radius: 50%; opacity: 0.85;">
+
+        <!-- Contact -->
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt; width: 100%; text-align: center;">
+          <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">류지환</p>
+          <p style="font-size: 7pt; color: #4ECDC4; margin-top: 3pt; font-family: 'Courier New', monospace;">github.com/mangowhoiscloud</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="position: relative; padding: 6pt 44pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — v0.31.0 · 36 days · Feb 21–Mar 28, 2026</p>
+    <p style="font-size: 5pt; color: #8B949E;">31 / 31</p>
+  </div>
+
+</body>
+</html>

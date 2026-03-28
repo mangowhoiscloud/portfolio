@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS AGENT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">LLM Failover: 단일 Provider 의존 → 3-Provider Chain</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">Rate Limit·장애 시 파이프라인 전체 중단 방지 — CircuitBreaker 3-state + Exponential Backoff</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Provider chain + circuit breaker (60%) -->
+    <div style="flex: 0 0 408pt; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Problem narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          단일 Provider에 의존하면 Rate Limit이나 장애 시 파이프라인 전체가 중단됩니다.
+          Anthropic·OpenAI·ZhipuAI를 <strong>Port/Adapter</strong>로 추상화하고,
+          Provider별 독립 <strong style="color: #4ECDC4;">Circuit Breaker</strong>를 배치했습니다.
+        </p>
+      </div>
+
+      <!-- 3-Provider chain -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">3-PROVIDER FAILOVER CHAIN</p>
+
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 8pt;">
+          <!-- Anthropic -->
+          <div style="flex: 1; background: #818CF820; border: 1pt solid #818CF840; border-radius: 4pt; padding: 8pt 10pt;">
+            <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">Anthropic</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">claude-opus-4-6</p>
+            <p style="font-size: 5pt; color: #8B949E;">↓ claude-sonnet-4-6</p>
+            <p style="font-size: 5pt; color: #8B949E;">↓ claude-haiku-3-5</p>
+          </div>
+
+          <!-- Fail arrow -->
+          <div style="text-align: center; flex-shrink: 0;">
+            <p style="font-size: 5pt; color: #EF4444;">5 fails</p>
+            <p style="font-size: 14pt; color: #EF4444;">→</p>
+          </div>
+
+          <!-- OpenAI -->
+          <div style="flex: 1; background: #34D39920; border: 1pt solid #34D39940; border-radius: 4pt; padding: 8pt 10pt;">
+            <p style="font-size: 9pt; font-weight: bold; color: #34D399;">OpenAI</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">gpt-5.4</p>
+            <p style="font-size: 5pt; color: #8B949E;">↓ gpt-5.3</p>
+            <p style="font-size: 5pt; color: #8B949E;">↓ gpt-4o</p>
+          </div>
+
+          <!-- Fail arrow -->
+          <div style="text-align: center; flex-shrink: 0;">
+            <p style="font-size: 5pt; color: #EF4444;">5 fails</p>
+            <p style="font-size: 14pt; color: #EF4444;">→</p>
+          </div>
+
+          <!-- ZhipuAI -->
+          <div style="flex: 1; background: #F5C54220; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 8pt 10pt;">
+            <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">ZhipuAI</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">GLM-5</p>
+            <p style="font-size: 5pt; color: #8B949E;">최후 보루</p>
+            <p style="font-size: 5pt; color: #8B949E;">80K context</p>
+          </div>
+        </div>
+
+        <!-- Circuit Breaker state machine -->
+        <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 6pt;">CircuitBreaker 상태 머신 (Provider별 독립)</p>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="flex: 1; background: #34D39920; border: 1pt solid #34D39950; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CLOSED</p>
+              <p style="font-size: 5pt; color: #8B949E;">정상 운영</p>
+            </div>
+            <div style="text-align: center; flex-shrink: 0;">
+              <p style="font-size: 5pt; color: #EF4444;">연속 5회 실패</p>
+              <p style="font-size: 10pt; color: #EF4444;">→</p>
+            </div>
+            <div style="flex: 1; background: #EF444420; border: 1pt solid #EF444450; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">OPEN</p>
+              <p style="font-size: 5pt; color: #8B949E;">요청 차단</p>
+            </div>
+            <div style="text-align: center; flex-shrink: 0;">
+              <p style="font-size: 5pt; color: #F5C542;">60초 후</p>
+              <p style="font-size: 10pt; color: #F5C542;">→</p>
+            </div>
+            <div style="flex: 1; background: #F5C54220; border: 1pt solid #F5C54250; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">HALF-OPEN</p>
+              <p style="font-size: 5pt; color: #8B949E;">프로브 1회</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar (40%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Error classification -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">에러 분류</p>
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 1; background: #34D39915; border: 1pt solid #34D39940; border-radius: 4pt; padding: 8pt 10pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 5pt;">Retryable</p>
+            <ul style="margin-left: 14pt;">
+              <li style="font-size: 7pt; color: #E2E8F0;">Timeout</li>
+              <li style="font-size: 7pt; color: #E2E8F0;">RateLimit</li>
+              <li style="font-size: 7pt; color: #E2E8F0;">Connection</li>
+            </ul>
+            <p style="font-size: 5pt; color: #8B949E; margin-top: 5pt;">Exp. Backoff ±25% Jitter</p>
+          </div>
+          <div style="flex: 1; background: #EF444415; border: 1pt solid #EF444440; border-radius: 4pt; padding: 8pt 10pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 5pt;">Non-retryable</p>
+            <ul style="margin-left: 14pt;">
+              <li style="font-size: 7pt; color: #E2E8F0;">잔액 부족</li>
+              <li style="font-size: 7pt; color: #E2E8F0;">API Key 오류</li>
+              <li style="font-size: 7pt; color: #E2E8F0;">Context 초과</li>
+            </ul>
+            <p style="font-size: 5pt; color: #8B949E; margin-top: 5pt;">즉시 다음 Provider</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key design decision -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">핵심 설계 결정</p>
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #4ECDC4;">메모리가 모델에 종속되지 않습니다.</strong>
+          4-Tier 메모리는 Provider와 분리되어 Failover 시에도 세션 학습 내용이 그대로 유지됩니다.
+        </p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 6pt; line-height: 1.4;">
+          Port/Adapter 추상화로 새 Provider 추가 시 어댑터 1개만 구현. Thundering Herd 방지를 위해 ±25% Jitter 적용.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt 36pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">llm_client.py · circuit_breaker.py · Port/Adapter pattern — 3 providers, 9 models in chain · thread-safe Lock per CircuitBreaker</p>
+    <p style="font-size: 5pt; color: #8B949E;">14 / 24</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #F97316; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F97316;">HE-1: AUTONOMOUS AGENT — HOOK SYSTEM</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Hook System: 하드코딩 콜백 &#8594; 46-Event Bus</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">재귀 개선·자기 증강을 위한 실시간 추적 — Claude Code · Devin · OpenHands 리서치 후 개편</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 9pt; min-height: 0;">
+
+    <!-- Left: Story + 8 Categories (55%) -->
+    <div style="flex: 0 0 384pt; display: flex; flex-direction: column; gap: 4pt;">
+
+      <!-- Why narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.4;">
+          <strong style="color: #F97316;">문제:</strong> DAG 노드 상태·검증 결과·드리프트를 실시간 추적하려면 하드코딩 콜백으로는 확장이 불가능했다.
+          프론티어 3종 리서치 후 <strong>8개 카테고리 46개 이벤트</strong>로 개편했다.
+        </p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 5pt;">
+          <strong style="color: #F97316;">리플 패턴:</strong> 하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나간다. PIPELINE_END 하나가 runs.jsonl 기록과 MEMORY.md 업데이트를 동시에 발동.
+        </p>
+      </div>
+
+      <!-- 8 Category grid (2 rows x 4 cols) -->
+      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 2pt;">8 EVENT CATEGORIES — 46 total</p>
+        <div style="display: flex; gap: 4pt; flex: 1;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+            <div style="background: #0D1117; border: 1pt solid #F9731640; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Pipeline Lifecycle</p>
+              <p style="font-size: 5pt; color: #8B949E;">3 events — START · END · ERROR</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Node Execution</p>
+              <p style="font-size: 5pt; color: #8B949E;">4 events — ENTER · EXIT · RETRY · ERROR</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Analysis/Verification</p>
+              <p style="font-size: 5pt; color: #8B949E;">6 events — COMPLETE · FAIL · ESCALATE</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Memory Storage</p>
+              <p style="font-size: 5pt; color: #8B949E;">4 events — SAVE · LOAD · UPDATE · PURGE</p>
+            </div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Prompt Change</p>
+              <p style="font-size: 5pt; color: #8B949E;">3 events — ASSEMBLE · CACHE · UPDATE</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Sub-Agent</p>
+              <p style="font-size: 5pt; color: #8B949E;">5 events — SPAWN · COMPLETE · FAIL · TIMEOUT</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Context Overflow</p>
+              <p style="font-size: 5pt; color: #8B949E;">3 events — 80% · 95% · OVERFLOW_ACTION</p>
+            </div>
+            <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt; flex: 1;">
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Tool HITL</p>
+              <p style="font-size: 5pt; color: #8B949E;">3 events — REQUESTED · GRANTED · DENIED</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar (45%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+
+      <!-- Maturity Model -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">HOOK MATURITY MODEL</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="background: #F9731615; border: 1pt dashed #F9731640; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy — 백로그</p>
+            <p style="font-size: 7pt; color: #8B949E;">승인 이력 &#8594; 자동 승인 룰 학습</p>
+          </div>
+          <div style="background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L3 Decide — 현재 프론티어</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-size: 8pt;">&#10003;</span> CONTEXT_OVERFLOW_ACTION 전략 위임</p>
+          </div>
+          <div style="background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React — 자동 반응</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-size: 8pt;">&#10003;</span> DRIFT &#8594; 스냅샷 · PIPELINE_END &#8594; MEMORY.md</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39940; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L1 Observe — 기록만</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-size: 8pt;">&#10003;</span> RunLog: ALL 46 events &#8594; runs.jsonl</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- StuckDetector + Trade-off -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">StuckDetector</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">NODE_ENTER 후 <strong style="color: #EF4444;">120초</strong> 내 NODE_EXIT 없으면 파이프라인 강제 중단. Priority 기반 핸들러 순서 보장 (P30 &#8594; P50 &#8594; P85).</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Trade-off: Observer 오버헤드 vs 확장성</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">핸들러 등록 오버헤드 때문에 단순 콜백보다 초기 지연이 있지만, 핸들러 간 에러 격리와 Priority 체인 덕분에 46개 이벤트가 독립적으로 확장된다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; font-family: 'Courier New', monospace;">core/hooks/ · 46 events · 17 handlers registered</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.30.1: core/hooks/ 추출 — 26개 파일 순환 의존 해소 · 46 HookEvent enum members · 17 handlers</p>
+    <p style="font-size: 5pt; color: #8B949E;">18 / 31</p>
+  </div>
+</body>
+</html>

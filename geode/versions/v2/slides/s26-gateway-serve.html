@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 5pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #EF4444; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #EF4444;">PART 5 — SAFETY</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Gateway + Serve — ChannelBinding → LaneQueue → AgenticLoop</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">always-on vs HITL — serve 모드는 HITL 없이 deny-by-default로 자율 실행 경계 제어</p>
+  </div>
+
+  <!-- Content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: Gateway flow -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Gateway 연결 플로우</p>
+
+      <!-- Flow: ChannelBinding → Session Key → LaneQueue → AgenticLoop -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; gap: 6pt; align-items: center;">
+          <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 6pt 8pt; text-align: center; min-width: 80pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">ChannelBinding</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">채널 등록 + 인증</p>
+          </div>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #F5C542; border-radius: 4pt; padding: 6pt 8pt; text-align: center; min-width: 80pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Session Key</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">세션 격리 키 발급</p>
+          </div>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #F97316; border-radius: 4pt; padding: 6pt 8pt; text-align: center; min-width: 80pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">LaneQueue</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">우선순위 큐 배분</p>
+          </div>
+          <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt; text-align: center; min-width: 80pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">AgenticLoop</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">자율 실행 시작</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Each step explanation -->
+      <div style="display: flex; gap: 6pt;">
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 7pt 8pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">ChannelBinding</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.3;">Slack/API/CLI 채널별 독립 바인딩. 채널 인증 실패 시 연결 거부</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 7pt 8pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Session Key</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.3;">세션별 격리 컨텍스트. 다중 세션 간 메모리 혼입 방지</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 7pt 8pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #F97316;">LaneQueue</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.3;">URGENT/NORMAL/BATCH 우선순위. CoalescingQueue 250ms dedup</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 7pt 8pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #34D399;">AgenticLoop</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.3;">while(tool_use) 자율 실행. 5종 종료 경로</p>
+        </div>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 7pt 10pt; margin-top: 2pt;">
+        <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">TRADE-OFF</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">always-on vs HITL — serve 모드는 HITL 없이 <span style="color: #EF4444; font-weight: bold;">deny-by-default</span>로 운영. DANGEROUS 등급 자동 차단</p>
+      </div>
+    </div>
+
+    <!-- Right: geode serve headless daemon -->
+    <div style="width: 240pt; display: flex; flex-direction: column; gap: 7pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">geode serve — Headless Daemon</p>
+
+      <!-- serve mode description -->
+      <div style="background: #0D1117; border: 1px solid #EF4444; border-radius: 4pt; padding: 9pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; font-family: 'Courier New', monospace;">$ geode serve --headless</p>
+        <p style="font-size: 7pt; color: #8B949E; font-family: 'Courier New', monospace; margin-top: 3pt;">Mode: HEADLESS</p>
+        <p style="font-size: 7pt; color: #8B949E; font-family: 'Courier New', monospace;">HITL: DISABLED</p>
+        <p style="font-size: 7pt; color: #EF4444; font-family: 'Courier New', monospace;">Policy: DENY_BY_DEFAULT</p>
+      </div>
+
+      <!-- Interactive mode comparison -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Interactive 모드 vs Serve 모드</p>
+        <div style="margin-top: 4pt; display: flex; flex-direction: column; gap: 4pt;">
+          <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 7pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">Interactive</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">사용자 입력 대기. HITL 승인 요청. WRITE/DANGEROUS는 pause</p>
+          </div>
+          <div style="background: #1E293B; border-radius: 4pt; padding: 5pt 7pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">Serve (Headless)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt; line-height: 1.3;">HITL 없음. SAFE/AUTO만 실행. WRITE 이상은 deny-by-default 차단</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why deny-by-default -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">왜 deny-by-default인가</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">24/7 자율 실행 환경에서 사람이 검토 없이 WRITE 권한이 열리면 의도치 않은 파일/DB 수정이 발생. 최소 권한 원칙으로 안전한 자율성 확보</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — ChannelBinding → Session Key → LaneQueue → AgenticLoop</p>
+    <p style="font-size: 5pt; color: #8B949E;">26 / 31</p>
+  </div>
+
+</body>
+</html>

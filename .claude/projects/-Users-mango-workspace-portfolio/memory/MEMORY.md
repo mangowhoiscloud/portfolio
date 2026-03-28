@@ -1,0 +1,3 @@
+- [Project structure](project_structure.md) — portfolio/{geode,reode,eco2} Next.js rebuild, v0.30
+- [Design priorities](design_priorities.md) — Section rhythm > Code structure > Hero impact
+- [ECO2 reference](eco2_reference.md) — mangowhoiscloud.github.io/resume/eco2-portfolio.html

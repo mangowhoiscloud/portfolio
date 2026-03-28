@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 5pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 7pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Cost Tracking — TokenTracker ContextVar + 18-Model Registry</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">LangSmith만으로는 모델별 비용 추적 불가 → 자체 TokenTracker 구축</p>
+  </div>
+
+  <!-- Content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: TokenTracker flow -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">TokenTracker 흐름</p>
+
+      <!-- Flow steps -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">ContextVar 싱글톤 (요청별 격리)</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">각 LLM 호출마다 ContextVar로 독립 추적 컨텍스트 생성. 비동기 병렬 호출 간 데이터 혼입 없음</p>
+        <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace; margin-top: 3pt;">model, input_tokens, output_tokens, cache_creation, cache_read</p>
+      </div>
+
+      <div style="display: flex; justify-content: center;">
+        <p style="font-size: 8pt; color: #4ECDC4;">&#8595;</p>
+      </div>
+
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">18-Model 가격 레지스트리</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">Anthropic(Opus/Sonnet/Haiku) + OpenAI(GPT-5.4/5.3/4o) + ZhipuAI 포함 <span style="color: #F5C542; font-weight: bold;">18개</span> 모델 단가 등록. 실시간 비용 산출</p>
+      </div>
+
+      <div style="display: flex; justify-content: center;">
+        <p style="font-size: 8pt; color: #4ECDC4;">&#8595;</p>
+      </div>
+
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">UsageStore + ProjectJournal</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">UsageStore: 월별 JSONL 영속 저장. ProjectJournal: 프로젝트별 실행 이력과 누적 비용 추적</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 7pt 10pt; margin-top: 2pt;">
+        <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">TRADE-OFF</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">LangSmith만으로는 모델별 비용 추적 불가 → ContextVar 싱글톤 자체 구축으로 캐시 히트율까지 실측</p>
+      </div>
+    </div>
+
+    <!-- Right: /cost CLI + adaptive pruning -->
+    <div style="width: 250pt; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- /cost CLI mockup -->
+      <div style="background: #0D1117; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 9pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; font-family: 'Courier New', monospace;">$ geode /cost</p>
+        <div style="margin-top: 6pt; display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Session</p>
+            <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace; font-weight: bold;">$0.42</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Daily</p>
+            <p style="font-size: 7pt; color: #F5C542; font-family: 'Courier New', monospace; font-weight: bold;">$3.17</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Monthly</p>
+            <p style="font-size: 7pt; color: #E2E8F0; font-family: 'Courier New', monospace; font-weight: bold;">$41.83</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3pt; border-top: 1px solid #21262D; padding-top: 3pt;">
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Cache Hit</p>
+            <p style="font-size: 7pt; color: #34D399; font-family: 'Courier New', monospace; font-weight: bold;">87.3%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adaptive pruning thresholds -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Adaptive Pruning 임계값</p>
+        <div style="margin-top: 5pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 7pt;">
+            <div style="background: #1E293B; border: 1px solid #F5C542; border-radius: 4pt; padding: 4pt 8pt; min-width: 36pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #F5C542; line-height: 1;">80%</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.3;">compact 경고 발동. 루프는 계속</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 7pt;">
+            <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 4pt; padding: 4pt 8pt; min-width: 36pt; text-align: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #EF4444; line-height: 1;">95%</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.3;">emergency prune 자동 발동</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why self-build -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">왜 자체 구축했는가</p>
+        <ul style="margin-top: 4pt; padding-left: 12pt;">
+          <li style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">LangSmith: 트레이싱 강점, 모델별 단가 계산 미지원</li>
+          <li style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">cache_creation/cache_read 별도 추적 필요</li>
+          <li style="font-size: 7pt; color: #34D399; line-height: 1.5;">결과: 36-day 총 비용 실시간 파악</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — N11: TokenTracker ContextVar, 18-Model Registry, /cost CLI</p>
+    <p style="font-size: 5pt; color: #8B949E;">24 / 31</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  
+  
+  <p:cSld>
+    
+    
+    <p:spTree>
+      
+      
+      <p:nvGrpSpPr>
+        
+        
+        <p:cNvPr id="1" name=""/>
+        
+        
+        <p:cNvGrpSpPr/>
+        
+        
+        <p:nvPr/>
+        
+      
+      </p:nvGrpSpPr>
+      
+      
+      <p:grpSpPr>
+        
+        
+        <a:xfrm>
+          
+          
+          <a:off x="0" y="0"/>
+          
+          
+          <a:ext cx="0" cy="0"/>
+          
+          
+          <a:chOff x="0" y="0"/>
+          
+          
+          <a:chExt cx="0" cy="0"/>
+          
+        
+        </a:xfrm>
+        
+      
+      </p:grpSpPr>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldImg" idx="2"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="body" idx="3" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+        
+        <p:txBody>
+          
+          
+          <a:bodyPr/>
+          
+          
+          <a:lstStyle/>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>[HE-2: Domain-Specific DAG &#8212; &#54032;&#45800; &#44540;&#44144;]</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>GEODE&#51032; DomainPort&#50752; REODE&#51032; PipelineTemplate+LanguageAdapter&#45716; &#46041;&#51068;&#54620; &#54056;&#53556;&#51032; &#45796;&#47480; &#44396;&#54788;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#50640;&#51060;&#51204;&#53944; &#53076;&#50612;(AgenticLoop + &#50724;&#52992;&#49828;&#53944;&#47112;&#51060;&#49496;)&#45716; &#44277;&#50976;&#54616;&#46104;, &#46020;&#47700;&#51064; &#54028;&#51060;&#54532;&#46972;&#51064;&#47564; &#44368;&#52404;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>GEODE: IP &#44032;&#52824; &#52628;&#47200; &#8594; 9-node DAG (Send API fan-out, confidence gate)</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>REODE: &#53076;&#46300; &#47560;&#51060;&#44536;&#47112;&#51060;&#49496; &#8594; 6-node DAG (OpenRewrite + LLM &#54616;&#51060;&#48652;&#47532;&#46300;, build+test &#47000;&#52843;)</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#53944;&#47112;&#51060;&#46300;&#50724;&#54532;: Protocol &#44592;&#48152; &#44368;&#52404; &#44032;&#45733;&#49457; vs &#46020;&#47700;&#51064; &#53945;&#54868; &#52572;&#51201;&#54868;. &#48276;&#50857; Protocol&#51060; &#50557;&#44036;&#51032; &#49457;&#45733; &#50724;&#48260;&#54756;&#46300;&#47484; &#44048;&#49688;&#54616;&#51648;&#47564;, &#54588;&#48391; &#48708;&#50857;&#51012; 0&#50640; &#44032;&#44637;&#44172; &#47564;&#46310;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#44160;&#51613;: GEODE&#8594;REODE &#54588;&#48391;&#51004;&#47196; &#51060;&#49885;&#49457; &#49892;&#51613; &#50756;&#47308;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+        
+        </p:txBody>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+    
+    </p:spTree>
+    
+  
+  </p:cSld>
+  
+  
+  <p:clrMapOvr>
+    
+    
+    <a:masterClrMapping/>
+    
+  
+  </p:clrMapOvr>
+  
+
+</p:notes>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  
+  
+  <p:cSld>
+    
+    
+    <p:spTree>
+      
+      
+      <p:nvGrpSpPr>
+        
+        
+        <p:cNvPr id="1" name=""/>
+        
+        
+        <p:cNvGrpSpPr/>
+        
+        
+        <p:nvPr/>
+        
+      
+      </p:nvGrpSpPr>
+      
+      
+      <p:grpSpPr>
+        
+        
+        <a:xfrm>
+          
+          
+          <a:off x="0" y="0"/>
+          
+          
+          <a:ext cx="0" cy="0"/>
+          
+          
+          <a:chOff x="0" y="0"/>
+          
+          
+          <a:chExt cx="0" cy="0"/>
+          
+        
+        </a:xfrm>
+        
+      
+      </p:grpSpPr>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldImg" idx="2"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="body" idx="3" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+        
+        <p:txBody>
+          
+          
+          <a:bodyPr/>
+          
+          
+          <a:lstStyle/>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>[Sub-Agent Dispatch &#8212; &#54032;&#45800; &#44540;&#44144;]</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#50780; Queue + DAG &#46168; &#45796; &#54596;&#50836;&#54620;&#44032;: &#51649;&#44368; &#44288;&#49900;&#49324; &#48516;&#47532;. Queue&#45716; &#49884;&#44036;&#51201;(dedup, rate limit), DAG&#45716; &#44396;&#51312;&#51201;(dependency, parallel/sequential).</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>OpenClaw "Default Serial, Explicit Parallel" &#52280;&#44256;: &#47700;&#47784;&#47532; &#44201;&#47532;&#51032; &#44540;&#44144;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>Karpathy "Dumb Platform" &#44288;&#51216;: Queue/DAG&#45716; &#50808;&#48512; &#49884;&#49828;&#53596; &#51228;&#50557;(API rate limit, timeout)&#51012; &#45796;&#47336;&#48064;&#47196; LLM&#51004;&#47196; &#47560;&#51648;&#47561;&#50640; &#51060;&#51204;&#46104;&#45716; &#47112;&#51060;&#50612;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#53944;&#47112;&#51060;&#46300;&#50724;&#54532;: max_depth=2&#45716; &#52968;&#53581;&#49828;&#53944; &#54253;&#48156; &#48169;&#51648; vs &#48373;&#51105;&#54620; &#50948;&#51076; &#52404;&#51064; &#48520;&#44032;. Token Guard(summary only merge)&#45716; &#51221;&#48372; &#49552;&#49892; vs &#47700;&#47784;&#47532; &#50504;&#51204;&#49457;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#54644;&#44208; &#47928;&#51228;: &#48337;&#47148; &#49892;&#54665; &#49884; &#44221;&#54633; &#51312;&#44148;, &#51473;&#48373; &#50836;&#52397;, &#51032;&#51316;&#49457; &#49692;&#49436; &#50948;&#48152;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+        
+        </p:txBody>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+    
+    </p:spTree>
+    
+  
+  </p:cSld>
+  
+  
+  <p:clrMapOvr>
+    
+    
+    <a:masterClrMapping/>
+    
+  
+  </p:clrMapOvr>
+  
+
+</p:notes>

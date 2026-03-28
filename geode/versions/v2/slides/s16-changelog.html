@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 8pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">VELOCITY — CHANGELOG EVOLUTION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 4pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">아키텍처 결정 타임라인 — v0.6 &#8594; v0.31</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">39 releases — 각 결정은 문제 인식에서 시작해 before/after 전환으로 끝났다.</p>
+  </div>
+
+  <!-- Timeline -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+
+    <!-- Timeline row container -->
+    <div style="display: flex; gap: 6pt; flex: 1; min-height: 0;">
+
+      <!-- Left: 5 milestones stacked -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+
+        <!-- v0.10: DomainPort -->
+        <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 6pt 10pt; border-left: 3pt solid #34D399; display: flex; flex-direction: column; justify-content: center; gap: 3pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #34D399; white-space: nowrap;">v0.10</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">DomainPort Protocol 도입</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">단일 도메인 의존 때문에 확장이 불가능했고, Port/Adapter DI를 설계했고, GameIP &#8594; REODE 동일 코어 재사용이 됐다.</p>
+        </div>
+
+        <!-- v0.14: Identity Pivot -->
+        <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 6pt 10pt; border-left: 3pt solid #F59E0B; display: flex; flex-direction: column; justify-content: center; gap: 3pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #F59E0B; white-space: nowrap;">v0.14</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Identity Pivot — 범용 에이전트</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">"Undervalued IP" 전용 제약 때문에 범용화 불가였고, GEODE.md를 분리했고, 4/day &#8594; 67/day 속도가 나왔다.</p>
+        </div>
+
+        <!-- v0.15: Token Guard removal -->
+        <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 6pt 10pt; border-left: 3pt solid #EF4444; display: flex; flex-direction: column; justify-content: center; gap: 3pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #EF4444; white-space: nowrap;">v0.15</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Token Guard 철폐 — 압축으로 전환</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">max_turns 20 하드 캡 때문에 긴 작업이 중단됐고, compact@80% + prune@95%로 전환했고, max_turns 200으로 확장됐다.</p>
+        </div>
+
+      </div>
+
+      <!-- Vertical divider with version labels -->
+      <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center; width: 20pt; gap: 0;">
+        <div style="width: 2pt; height: 100%; background: #21262D; border-radius: 1pt;"></div>
+      </div>
+
+      <!-- Right: 2 more milestones -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt; min-height: 0;">
+
+        <!-- v0.30: Hook Extract -->
+        <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 6pt 10pt; border-left: 3pt solid #F97316; display: flex; flex-direction: column; justify-content: center; gap: 3pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #F97316; white-space: nowrap;">v0.30</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Hook Extract — cross-cutting 분리</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">하드코딩 콜백 때문에 26개 파일 순환 의존이 생겼고, core/hooks/를 분리했고, 46-Event Bus + 의존성 0이 됐다.</p>
+          <p style="font-size: 6pt; color: #F97316; font-family: 'Courier New', monospace;">core/hooks/ &#8594; 46 events · 17 handlers</p>
+        </div>
+
+        <!-- v0.30: MCP Simplify -->
+        <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 6pt 10pt; border-left: 3pt solid #4ECDC4; display: flex; flex-direction: column; justify-content: center; gap: 3pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; white-space: nowrap;">v0.30</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">MCP Simplify — Registry 삭제</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">MCPRegistry(257줄) 때문에 탐색 병목이 생겼고, Catalog 검색 전용 축소 + config.toml 통합했고, Proxy stub 9개 제거됐다.</p>
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">3계층 &#8594; 2계층 · 45 catalog auto-discovery</p>
+        </div>
+
+        <!-- Summary row -->
+        <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; border-top: 2pt solid #34D399;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">Trade-off 원칙: 모든 아키텍처 결정의 공통 패턴</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #EF4444;">문제 인식</span> &#8594; <span style="color: #F59E0B;">프론티어 3/4 검증</span> &#8594; <span style="color: #34D399;">최소 변경 채택</span> &#8594; <span style="color: #4ECDC4;">CI 통과 후 머지</span></p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">v0.6 &#8594; v0.31: 187 modules · 3,201 tests · 39 releases · 0 regressions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">CHANGELOG.md 39 releases — 각 릴리스는 하나의 아키텍처 결정을 담는다</p>
+    <p style="font-size: 5pt; color: #8B949E;">16 / 31</p>
+  </div>
+</body>
+</html>

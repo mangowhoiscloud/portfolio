@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 8pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING — 4-PERSONA REVIEW</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">4-Persona Parallel Review</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">단일 관점으로는 사각지대가 생긴다. 4명의 엔지니어가 동시에 PR을 리뷰한다.</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; min-height: 0;">
+
+    <!-- Left: 4 persona cards -->
+    <div style="flex: 8; display: flex; gap: 5pt; min-height: 0;">
+
+      <!-- Beck -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 9pt 10pt; border-top: 2pt solid #34D399; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Kent Beck</p>
+        <p style="font-size: 6pt; color: #8B949E; font-style: italic; margin-bottom: 2pt;">TDD / Simplicity</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">테스트가 설계를 드라이브하는가? Red-Green-Refactor 사이클이 지켜졌는가?</p>
+        <div style="background: #34D39915; border-radius: 3pt; padding: 4pt 8pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #34D399; line-height: 1.5;">묻는 것: "이 코드가 가장 단순한 형태인가? 테스트가 먼저인가?"</p>
+        </div>
+      </div>
+
+      <!-- Karpathy -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 9pt 10pt; border-top: 2pt solid #4ECDC4; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Karpathy</p>
+        <p style="font-size: 6pt; color: #8B949E; font-style: italic; margin-bottom: 2pt;">ML Systems / Efficiency</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">토큰 효율이 최적화됐는가? 모델 선택이 작업 복잡도에 맞는가?</p>
+        <div style="background: #4ECDC415; border-radius: 3pt; padding: 4pt 8pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #4ECDC4; line-height: 1.5;">묻는 것: "캐시 히트율은? 더 작은 모델로 동일한 결과가 나오는가?"</p>
+        </div>
+      </div>
+
+      <!-- Steinberger -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 9pt 10pt; border-top: 2pt solid #F97316; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Steinberger</p>
+        <p style="font-size: 6pt; color: #8B949E; font-style: italic; margin-bottom: 2pt;">Security / Threat Model</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">비밀값이 노출되는가? DANGEROUS 등급 도구가 적절히 차단됐는가?</p>
+        <div style="background: #F9731615; border-radius: 3pt; padding: 4pt 8pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #F97316; line-height: 1.5;">묻는 것: "공격 표면이 확대됐는가? injection 벡터는?"</p>
+        </div>
+      </div>
+
+      <!-- Cherny -->
+      <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 9pt 10pt; border-top: 2pt solid #818CF8; display: flex; flex-direction: column; gap: 4pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Cherny</p>
+        <p style="font-size: 6pt; color: #8B949E; font-style: italic; margin-bottom: 2pt;">TypeSystem / Contracts</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">타입 계약이 전파됐는가? Any 오염이나 mypy 우회가 없는가?</p>
+        <div style="background: #818CF815; border-radius: 3pt; padding: 4pt 8pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #818CF8; line-height: 1.5;">묻는 것: "인터페이스가 명확한가? 암묵적 의존이 없는가?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Case study + Trade-off -->
+    <div style="flex: 4; display: flex; flex-direction: column; gap: 6pt; min-height: 0;">
+
+      <!-- Case study: .env atomic write -->
+      <div style="background: #161B22; border: 1pt solid #EF444440; border-radius: 4pt; padding: 9pt 11pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 5pt;">보안 케이스: .env atomic write</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Steinberger가 .env 직접 쓰기의 경쟁 조건을 지적했다. tmp 파일 원자적 교체로 수정 — 머지 전 P0 차단.</p>
+        <div style="background: #EF444415; border-radius: 3pt; padding: 4pt 8pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">tmp &#8594; os.replace(tmp, .env)</p>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">단일 관점이었다면 머지 후 발견. 4-Persona 때문에 머지 전 차단됐다.</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 9pt 11pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">Trade-off: 리뷰 비용 vs P0 발견 비용</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4 관점 병렬 리뷰 비용이 크지만, 머지 후 P0 발견 비용이 훨씬 크다.</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">500+ PRs 동안 P0 hotfix bypass 0건 — 4-Persona 리뷰가 소스에서 차단했다.</p>
+        <div style="display: flex; gap: 6pt; margin-top: 7pt;">
+          <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt;">
+            <p style="font-size: 14pt; font-weight: bold; color: #818CF8; line-height: 1;">4</p>
+            <p style="font-size: 5pt; color: #8B949E;">관점 병렬</p>
+          </div>
+          <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 4pt 6pt;">
+            <p style="font-size: 14pt; font-weight: bold; color: #34D399; line-height: 1;">0</p>
+            <p style="font-size: 5pt; color: #8B949E;">P0 bypass</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">.claude/skills/: kent-beck-review · karpathy-patterns · steinberger-security · cherny-types — 4 스킬 병렬 실행</p>
+    <p style="font-size: 5pt; color: #8B949E;">14 / 31</p>
+  </div>
+</body>
+</html>

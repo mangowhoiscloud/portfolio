@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #F97316; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F97316;">PART 0 · ARCHITECTURE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Triple Loop: META → DEV → RUNTIME + 46 Hook 신경계</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴드가 자기 자신을 개발하고, RUNTIME이 자율 실행합니다</p>
+  </div>
+
+  <!-- Content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: flex-start;">
+
+    <!-- Left: Triple Loop diagram (text-based DAG) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- META Loop -->
+      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
+          <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">META</p>
+          <p style="font-size: 6pt; color: #8B949E;">스캐폴드 루프</p>
+        </div>
+        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">Claude Code 스스로 GEODE를 개발합니다. 21 Skills + CANNOT 23-Rule + Socratic Gate로 요구사항을 정제하고 1,160 커밋을 생성했습니다.</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">harness-for-real 해커톤 · "키보드에 손이 닿는 순간 하네스의 실패다"</p>
+        </div>
+        <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
+          <p style="font-size: 6pt; color: #818CF8;">21 Skills</p>
+          <p style="font-size: 6pt; color: #818CF8;">425줄 CLAUDE.md</p>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="text-align: center;">
+        <p style="font-size: 12pt; color: #F97316;">↓ Hook 이벤트 전파</p>
+      </div>
+
+      <!-- DEV Loop -->
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
+          <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">DEV</p>
+          <p style="font-size: 6pt; color: #8B949E;">개발 루프</p>
+        </div>
+        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">AgenticLoop가 PR 단위 코드를 자율 작성합니다. 8-Step Loop(Socratic→Plan→Code→Test→Hook→Review→Merge→Learn)로 70% 테스트 비율을 유지합니다.</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">typecheck+lint backpressure · LEARNINGS.md 패턴 축적</p>
+        </div>
+        <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
+          <p style="font-size: 6pt; color: #4ECDC4;">3,201 Tests</p>
+          <p style="font-size: 6pt; color: #4ECDC4;">500+ PRs</p>
+        </div>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="text-align: center;">
+        <p style="font-size: 12pt; color: #F97316;">↓ Hook 이벤트 전파</p>
+      </div>
+
+      <!-- RUNTIME Loop -->
+      <div style="background: #161B22; border: 1px solid #F5C542; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 10pt;">
+        <div style="flex-shrink: 0; text-align: center; width: 50pt;">
+          <p style="font-size: 10pt; font-weight: bold; color: #F5C542;">RUNTIME</p>
+          <p style="font-size: 6pt; color: #8B949E;">자율 실행 루프</p>
+        </div>
+        <div style="width: 1pt; height: 32pt; background: #21262D;"></div>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">while(tool_use) 50 라운드. 사용자 요청 → AgenticLoop → Tool 실행 → 결과 반환. 52 Tools + 45 MCP + 46 Hook이 완전 자율 실행을 구성합니다.</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Safety Brake · Scheduler · Gateway — 사람 없이 오래 실행</p>
+        </div>
+        <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt; flex-shrink: 0;">
+          <p style="font-size: 6pt; color: #F5C542;">52 Tools</p>
+          <p style="font-size: 6pt; color: #F5C542;">45 MCP</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Hook 46 events panel -->
+    <div style="flex: 0 0 168pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <div style="background: #1E293B; border: 1px solid #F97316; border-radius: 6pt; padding: 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 6pt;">
+          <div style="width: 4pt; height: 12pt; background: #F97316; border-radius: 2pt;"></div>
+          <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Hook 신경계</p>
+        </div>
+        <p style="font-size: 22pt; font-weight: bold; color: #F97316; text-align: center;">46</p>
+        <p style="font-size: 7pt; color: #8B949E; text-align: center; margin-bottom: 8pt;">Hook Events</p>
+        <ul style="margin-left: 12pt;">
+          <li style="font-size: 7pt; color: #E2E8F0;">LOOP_START / LOOP_END</li>
+          <li style="font-size: 7pt; color: #E2E8F0;">TOOL_BEFORE / TOOL_AFTER</li>
+          <li style="font-size: 7pt; color: #E2E8F0;">MEMORY_SAVE / LEARN</li>
+          <li style="font-size: 7pt; color: #E2E8F0;">CONTEXT_COMPACT</li>
+          <li style="font-size: 7pt; color: #E2E8F0;">AGENT_SPAWN / RETURN</li>
+        </ul>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt;">Priority 기반 핸들러 실행. 핸들러 간 에러 격리로 한 이벤트 실패가 루프를 중단시키지 않습니다.</p>
+      </div>
+
+      <!-- Feedback loop note -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자기 증강 피드백</p>
+        <p style="font-size: 6pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.4;">PIPELINE_END 이벤트 → MEMORY.md 인사이트 자동 축적 → 다음 세션 PromptAssembler가 반영</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">3-Loop가 서로 강화합니다</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">META가 DEV를 낳고, DEV가 RUNTIME을 완성하고, RUNTIME이 META를 강화합니다</p>
+    <p style="font-size: 6pt; color: #8B949E;">04 / 33</p>
+  </div>
+
+</body>
+</html>

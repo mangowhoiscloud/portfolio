@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑦</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">PromptAssembler: 다음 턴 준비 &#8594; 6-Phase 동적 조립 &#8594; SHA-256 추적</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">수동 편집으로는 변경 추적이 불가능하고 캐시 히트율이 떨어졌다 — 6-Phase 조립으로 2회차부터 입력 비용 10%</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: 6-Phase pipeline + SHA-256 (60%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">6-Phase 조립 파이프라인</p>
+
+      <!-- 6 phases horizontal -->
+      <div style="display: flex; gap: 4pt; align-items: stretch;">
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">P1</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">template</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">역할 기반 기본 구조 로드</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">P2</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">override</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">프로젝트별 파라미터 덮어쓰기</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">P3</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">skill</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">21개 Scaffold Skill 동적 주입</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">P4</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">memory</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">4-Tier 메모리 인사이트 주입</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-top: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">P5</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">bootstrap</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">context window 초기화 bridge</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+        <div style="flex: 1; background: #1E293B; border: 1pt solid #4ECDC4; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 6pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">P6</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">assemble</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">최종 메시지 배열 출력</p>
+        </div>
+      </div>
+
+      <!-- SHA-256 tracking -->
+      <div style="background: #161B22; border-left: 3pt solid #4ECDC4; border: 1pt solid #21262D; border-left-width: 3pt; border-radius: 4pt; padding: 8pt 11pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">SHA-256 변경 추적</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">조립 후 SHA-256 해시 생성 — 동일 프롬프트 재조립 시 캐시 히트 판별. 수동 편집으로는 불가능했던 변경 추적을 코드 레벨에서 보장한다.</p>
+        <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace; margin-top: 4pt;">hash = sha256(assembled_prompt) &#8594; cache_key</p>
+      </div>
+
+      <!-- Before/After + Trade-off -->
+      <div style="background: #1E293B; border: 1pt solid #818CF8; border-radius: 4pt; padding: 8pt 11pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Trade-off: 조립 복잡도 vs 캐시 안정성</p>
+        <div style="display: flex; gap: 8pt;">
+          <div style="flex: 1;">
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">Before — 수동 편집</p>
+            <ul style="padding-left: 12pt;">
+              <li style="font-size: 7pt; color: #8B949E; line-height: 1.5;">변경 추적 불가 — 캐시 미스 빈발</li>
+              <li style="font-size: 7pt; color: #8B949E; line-height: 1.5;">프롬프트 버전 관리 없음</li>
+            </ul>
+          </div>
+          <div style="flex: 1;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 3pt;">After — 6-Phase 조립</p>
+            <ul style="padding-left: 12pt;">
+              <li style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">SHA-256 추적 + 캐시 히트 보장</li>
+              <li style="font-size: 7pt; color: #34D399; line-height: 1.5;">2회차부터 입력 비용 10%</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Cache stat + node sharing (38%) -->
+    <div style="width: 210pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- 10% cost stat -->
+      <div style="background: #161B22; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 10pt; text-align: center;">
+        <p style="font-size: 24pt; font-weight: bold; color: #34D399; line-height: 1;">10%</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">2회차+ 입력 비용</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">vs 1회차 100%</p>
+      </div>
+
+      <!-- cache_control ephemeral -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 3pt;">cache_control: ephemeral</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">동일 파이프라인 내 7개 노드가 동일 시스템 프롬프트를 공유. ephemeral 마킹 1회로 전체 캐시 적용.</p>
+        <div style="background: #0D1117; border-radius: 3pt; padding: 4pt 7pt; margin-top: 5pt;">
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">7 nodes &#215; same system prompt &#8594; 1 cache entry</p>
+        </div>
+      </div>
+
+      <!-- 21 skills -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 3pt;">P3 — 21 Scaffold Skills</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">태스크 유형에 따라 필요한 스킬만 동적 선택 주입 — 프롬프트 크기 최적화.</p>
+      </div>
+
+      <!-- PROMPT_ASSEMBLE hook -->
+      <div style="background: #1E293B; border: 1pt solid #F9731440; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">PROMPT_ASSEMBLE hook</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">P6 완료 시 Prompt Change 카테고리 이벤트 발화 — 캐시 상태와 조립 결과를 관측 레이어에 전달.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">PromptAssembler 6-Phase &#183; SHA-256 cache_key &#183; cache_control: ephemeral &#183; 21 skills &#183; 7-node prompt sharing</p>
+    <p style="font-size: 5pt; color: #8B949E;">16 / 33</p>
+  </div>
+
+</body>
+</html>

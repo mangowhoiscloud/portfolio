@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION · TRADE-OFFS</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Agent + Infra Trade-offs</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">에이전트 실행과 인프라 결정 — 자율성을 높이면 안전성 비용이 오르고, 안전성을 높이면 처리량이 줄어든다</p>
+</div>
+
+<!-- Content: 2-column grid -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Left column -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #4ECDC4; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">50 Rounds × 200 Turns 무한 루프 방지</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 완전 자율 (무제한 실행 시도)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> 수렴 감지 + 비용 상한 → 파이프라인 폭주 차단</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #4ECDC4; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Sub-Agent 4096 Token Guard</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 자식 출력 전체 반환 (완전한 컨텍스트)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> 부모 컨텍스트 폭발 방지 → MAX_CONCURRENT=5 병렬 가능</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #4ECDC4; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">5-Tier Safety: 병렬 vs 순차</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> TIER 3-4 병렬 처리 (속도)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> DANGEROUS 명령 개별 승인 → 권한 에스컬레이션 차단</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #4ECDC4; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">StuckDetector 120s Timeout</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 느린 작업 완료 대기</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> NODE_ENTER 후 EXIT 미감지 시 파이프라인 강제 중단</p>
+    </div>
+
+  </div>
+
+  <!-- Right column -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #F97316; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Hook Priority 핸들러 순서 보장</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 병렬 핸들러 실행 (최대 처리량)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> Security 핸들러가 Logging보다 항상 먼저 실행 보장</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #F97316; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">CircuitBreaker OPEN 60s</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 즉시 재시도 (지연 없는 복구 시도)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> 5회 연속 실패 후 60s OPEN → RateLimit 폭주 차단</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #F97316; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Cron 세션 격리</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 공유 컨텍스트 (이전 세션 학습 즉시 반영)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> 스케줄 충돌 없는 독립 실행 → 장기 운용 안정성</p>
+    </div>
+
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+        <div style="width: 3pt; height: 10pt; background: #F97316; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">MCP dry-run 자동 전환</p>
+      </div>
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;"><span style="color: #EF4444;">포기:</span> 항상 라이브 데이터 (API 키 필수)</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="color: #34D399;">얻음:</span> API 키 부재 시 fixture fallback → 오프라인 테스트 가능</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 52 Tools · 45 MCP · 46 Hook Events</p>
+  <p style="font-size: 5pt; color: #8B949E;">29 / 33</p>
+</div>
+
+</body>
+</html>

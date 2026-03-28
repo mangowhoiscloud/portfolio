@@ -1,0 +1,171 @@
+GEODE TOOL DISPATCH LAYER — QUICK INDEX
+=========================================
+
+Location: /Users/mango/workspace/portfolio/geode/plans/sot-tool-dispatch.md
+Size: 54 KB, 1,436 lines
+
+SECTION BREAKDOWN
+=================
+
+1. DISPATCH FLOW — FROM LLM RESPONSE TO EXECUTION
+   - Full pipeline sequence diagram
+   - 5 execution stages
+   - Sequential vs. parallel routing
+
+2. TOOL CLASSIFICATION MATRIX
+   - 5-tier safety system (TIER 0-4)
+   - 12 tool categories with counts
+   - Safety-level lookup tables (SAFE, WRITE, EXPENSIVE, DANGEROUS)
+
+3. TOOL REGISTRY & LOOKUP
+   - ToolRegistry lifecycle
+   - Deferred loading mechanism (to_anthropic_tools_with_defer)
+   - ALWAYS_LOADED_TOOLS list
+   - 2-hop retrieval pattern (tool_search discovery)
+
+4. HITL APPROVAL GATES
+   - HITL flow diagram
+   - HITL level constants (0=autonomous, 1=write-only, 2=full)
+   - Session-level "Always" approval mechanism
+
+5. NATIVE TOOL EXECUTION PATH
+   - Handler registration & dispatch
+   - Handler pattern example
+
+6. MCP TOOL EXECUTION PATH
+   - MCPServerManager lifecycle
+   - MCP dispatch in ToolExecutor
+   - Config priority (toml > json)
+
+7. BASH TOOL — 3-LAYER SAFETY
+   - BashTool architecture
+   - Layer 1: blocked patterns (regex)
+   - Layer 2: resource limits (CPU/FSIZE/NPROC)
+   - Layer 3: secret redaction
+   - SAFE_BASH_PREFIXES list
+
+8. POLICY CHAIN — 6-LAYER TOOL ACCESS CONTROL
+   - PolicyChain architecture
+   - 6 layers (Org → Profile → Mode → Agent → Node → SubAgent)
+   - Policy builder (build_6layer_chain)
+   - Node-scope policy (per-node allowlists)
+
+9. ERROR RECOVERY — 4-STAGE STRATEGY CHAIN
+   - ErrorRecoveryStrategy lifecycle
+   - 4 stages: RETRY → ALTERNATIVE → FALLBACK → ESCALATE
+   - Strategy selection logic
+   - Excluded tools (DANGEROUS + WRITE)
+
+10. PARALLEL EXECUTION ARCHITECTURE
+    - ToolCallProcessor._execute_parallel
+    - 5-tier batch approval
+    - Tier classification logic
+    - Ordering preservation (results returned in input order)
+
+11. DESIGN TRADE-OFFS & DECISIONS
+    - Why direct LLM tool_use vs. NL router
+    - Why unified tool list vs. separate namespaces
+    - Why deferred loading vs. always loading
+    - Why 3 dispatch routes vs. single executor
+
+12. KEY CLASSES & METHOD SIGNATURES
+    - ToolCallProcessor (async orchestrator)
+    - ToolExecutor (sync dispatcher)
+    - ToolRegistry (tool management)
+    - PolicyChain (6-layer access control)
+    - BashTool (shell execution)
+    - MCPServerManager (MCP lifecycle)
+    - ErrorRecoveryStrategy (4-stage recovery)
+
+13. INTEGRATION POINTS
+    - ToolCallProcessor + AgenticLoop
+    - ToolExecutor + ToolCallProcessor
+    - PolicyChain + ToolRegistry
+
+14. CHANGELOG REFERENCES
+    - v0.30.0: MCPRegistry deleted
+    - v0.29.0: LLM Provider Module split
+    - v0.26.0: ToolCallProcessor extracted
+    - v0.25.1: MCP lazy parallel connection
+    - v0.24.0: MCPServerManager singleton
+    - v0.22.0: Sandbox hardening + PolicyChain L1-2
+
+15. FILE PATHS & STRUCTURE
+    - Core module locations
+    - Line counts per file
+
+KEY STATISTICS
+==============
+
+Total Code Coverage: 3,225 lines
+├─ tool_executor.py        1,179 lines
+├─ error_recovery.py         461 lines
+├─ policy.py                 431 lines
+├─ mcp/manager.py            580 lines
+├─ registry.py               401 lines
+└─ bash_tool.py              173 lines
+
+Tool Categories: 12
+├─ analysis (8)
+├─ external (7)
+├─ discovery (5)
+├─ memory (5)
+├─ model (5)
+├─ planning (6)
+├─ task (5)
+├─ calendar (3)
+├─ profile (4)
+├─ scheduling (2)
+├─ notification (1)
+└─ data (1)
+
+Total Tools: 52
+
+Safety Levels:
+├─ TIER 0 (SAFE): 6 tools → immediate parallel
+├─ TIER 1 (MCP auto-approved): 5 servers → immediate parallel
+├─ TIER 2 (EXPENSIVE): 5 tools (~$0.15-0.50) → batch cost gate
+├─ TIER 3 (WRITE): 9 tools → HITL per-tool sequential
+├─ TIER 4 (DANGEROUS): 1 tool (bash) → HITL + blocked patterns
+
+HITL Levels:
+├─ 0: Autonomous (no approval needed)
+├─ 1: Write-only (write + cost gate, bash skipped)
+└─ 2: Full (all gates active, default)
+
+Recovery Strategies:
+├─ Stage 1: RETRY (1s delay)
+├─ Stage 2: ALTERNATIVE (same category)
+├─ Stage 3: FALLBACK (cheaper cost tier)
+└─ Stage 4: ESCALATE (to user, always fails)
+
+USAGE NOTES
+===========
+
+For presentations/slides:
+- Section 1: Full dispatch flow diagram
+- Section 2: Tool classification matrix (6 tables)
+- Section 4: HITL decision tree
+- Section 9: Error recovery 4-stage flow
+- Section 10: Parallel execution 5-tier system
+- Section 11: Trade-offs analysis
+
+For implementation/debugging:
+- Section 3: ToolRegistry API
+- Section 5: Native tool handler pattern
+- Section 6: MCP integration points
+- Section 7: Bash safety layers
+- Section 8: Policy chain construction
+- Section 12: Full method signatures
+
+For architecture decisions:
+- Section 11: Design rationale
+- Section 13: Integration patterns
+- Section 14: CHANGELOG references
+- Section 15: File structure
+
+Cross-references:
+- All sections include file:line_number references
+- Code snippets show exact class/method locations
+- Lookup tables reference core/agent/safety_constants.py
+- Policy defaults reference NODE_TOOL_ALLOWLISTS in policy.py

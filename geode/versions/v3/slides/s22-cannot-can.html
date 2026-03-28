@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">HE-0 SCAFFOLD</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 6pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">CANNOT / CAN — 23 Rules</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">LLM에게 자유를 주되 발산을 막는 헌법 — 금지 규칙이 명확할수록 허용 공간이 넓어진다</p>
+</div>
+
+<!-- Content: 3 columns -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- CANNOT block -->
+  <div style="flex: 1.2; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+      <div style="width: 3pt; height: 12pt; background: #EF4444; border-radius: 2pt;"></div>
+      <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">CANNOT — 23 절대 금지</p>
+    </div>
+
+    <!-- Typography group -->
+    <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">타이포그래피 (4)</p>
+      <ul style="padding-left: 12pt; margin-top: 3pt;">
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">5pt 미만 텍스트 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">괄호 안 스펙 3개 이상 나열 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">em dash 2개 이상 연속 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0;">본문에 bullet 기호(•, -, *) 직접 입력 금지</li>
+      </ul>
+    </div>
+
+    <!-- Layout group -->
+    <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">레이아웃 (5)</p>
+      <ul style="padding-left: 12pt; margin-top: 3pt;">
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">슬라이드당 카드 6개 초과 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">ul/li 5개 초과 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">padding 6pt 미만 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">gap 4pt 미만 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0;">border-radius 4pt 미만 금지</li>
+      </ul>
+    </div>
+
+    <!-- html2pptx group -->
+    <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">html2pptx 변환 (5)</p>
+      <ul style="padding-left: 12pt; margin-top: 3pt;">
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">CSS gradient 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">background-image on div 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">div에 직접 텍스트 금지 → p/h1-h6 필수</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">position: fixed 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0;">z-index 중첩 3단 이상 금지</li>
+      </ul>
+    </div>
+
+    <!-- Diagram group -->
+    <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">다이어그램 + 내러티브 (9)</p>
+      <ul style="padding-left: 12pt; margin-top: 3pt;">
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">단순 박스형 배치 금지 — DAG 필수</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">텍스트만으로 플로우 표현 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">키워드만 박스에 채우기 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0; margin-bottom: 2pt;">키워드 나열식 발표 금지</li>
+        <li style="font-size: 7pt; color: #E2E8F0;">스펙 시트만으로 슬라이드 금지</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CAN + Why block -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+    <div style="background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 10pt 12pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <div style="width: 3pt; height: 12pt; background: #34D399; border-radius: 2pt;"></div>
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CAN — 허용 설계 원칙</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">각 슬라이드 = 하나의 내러티브 시각화</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">문제→설계→결과 인과 흐름을 화살표 DAG로</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">구체적 숫자 강조 + before/after 대비</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">50 rounds · 5가지 종료 · 80%/95% 임계값 명시</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">v028 PNG 재활용 + Mermaid Sharp 렌더링</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">다이어그램 = 의사결정 분기 + 루프백 포함</p>
+      </div>
+    </div>
+
+    <!-- Counter badge -->
+    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; display: flex; align-items: center; gap: 12pt;">
+      <div style="text-align: center;">
+        <p style="font-size: 22pt; font-weight: bold; color: #EF4444;">23</p>
+        <p style="font-size: 6pt; color: #8B949E;">CANNOT</p>
+      </div>
+      <div style="width: 1px; height: 36pt; background: #21262D;"></div>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.6; flex: 1;">규칙이 많을수록 LLM이 창의성을 발휘하는 공간이 좁아지는 것이 아니다. 무엇을 하면 안 되는지가 명확할수록 무엇을 해도 되는지가 더 넓게 열린다. 23 CANNOT이 v0.31까지 품질을 유지한 헌법이다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · CLAUDE.md 425줄 · 21 Skills</p>
+  <p style="font-size: 5pt; color: #8B949E;">22 / 33</p>
+</div>
+
+</body>
+</html>

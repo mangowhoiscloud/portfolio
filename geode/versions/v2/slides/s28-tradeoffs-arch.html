@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 5pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #34D399;">PART 6 — CONNECTION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 7pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Trade-offs — Architecture + Pipeline 설계 결정</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">각 결정에 기각된 대안이 있었다. 채택 이유와 결과를 검증한다.</p>
+  </div>
+
+  <!-- Content: 2-column grid of trade-off cards -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; overflow: hidden;">
+
+    <!-- Column 1 -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- TO-1 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">LangGraph StateGraph DAG</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 직접 함수 체인</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">분기/루프백이 있는 파이프라인은 함수 체인으로 상태 관리 불가 → StateGraph로 노드 재진입과 조건 분기 표현</p>
+      </div>
+
+      <!-- TO-2 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Port/Adapter DI 패턴</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 직접 의존성</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">직접 의존성이면 LLM Provider 교체 시 파이프라인 전체 수정 → Port 추상화로 Provider 교체 시 Adapter만 교체</p>
+      </div>
+
+      <!-- TO-3 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">6-Layer Verification</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 단일 LLM 평가</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">단일 평가자는 Confirmation Bias. Guardrails→BiasBuster→Cross-LLM→Rights Risk→GT 5단계 체인으로 69.4→99.8 신뢰도</p>
+      </div>
+
+      <!-- TO-4 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Lossless Selection 압축</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: Lossy 요약</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">요약은 코드/수치 정보 손실. LLM이 코드로 관련 청크 선별 → 정보 손실 0%, 비용 0.03%</p>
+      </div>
+
+    </div>
+
+    <!-- Column 2 -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- TO-5 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">6-Phase PromptAssembler</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 수동 프롬프트 편집</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">수동 편집은 변경 추적 불가, 캐시 미스. SHA-256 추적 + ephemeral 캐시 → 2회차부터 입력 비용 10%</p>
+      </div>
+
+      <!-- TO-6 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">4096-token 서브에이전트 Guard</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 무제한 반환</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">서브에이전트 결과 무제한 반환 시 부모 컨텍스트 폭발. 4096-token guard로 구조화 요약 강제</p>
+      </div>
+
+      <!-- TO-7 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">asyncio.gather 5-Tier 병렬</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 순차 실행</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">순차 실행은 도구 N개 × 지연 선형 증가. SAFE/AUTO는 병렬, WRITE 이상은 순차로 안전성과 속도 균형</p>
+      </div>
+
+      <!-- TO-8 -->
+      <div style="background: #161B22; border: 1px solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">187 모듈 × 3,201 테스트</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 테스트 최소화</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">LLM 생성 코드는 미묘한 버그 多. 70% 테스트 비율 강제 → 39 릴리스 무회귀 달성</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — Architecture + Pipeline trade-off decisions</p>
+    <p style="font-size: 5pt; color: #8B949E;">28 / 31</p>
+  </div>
+
+</body>
+</html>

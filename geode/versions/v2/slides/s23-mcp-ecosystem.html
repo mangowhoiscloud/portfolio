@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 5pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 7pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">MCP Ecosystem — Registry 삭제 → Catalog 전용 → 45 Servers</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Registry가 확장 병목임을 인지 → 257줄 삭제, Proxy stub 9개 제거, config.toml 통합</p>
+  </div>
+
+  <!-- Content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: Before→After evolution story -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">아키텍처 진화: 3계층 → 2계층</p>
+
+      <!-- Before -->
+      <div style="background: #161B22; border: 1px solid #EF4444; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">BEFORE — 3계층 구조 (병목)</p>
+        <div style="display: flex; gap: 5pt; margin-top: 5pt; align-items: center;">
+          <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 7pt; text-align: center; flex: 1;">
+            <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">MCPRegistry</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">257줄</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 7pt; text-align: center; flex: 1;">
+            <p style="font-size: 6pt; color: #8B949E; font-weight: bold;">Catalog</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">검색+관리</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 7pt; text-align: center; flex: 1;">
+            <p style="font-size: 6pt; color: #8B949E; font-weight: bold;">Config</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">분산 설정</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #EF4444; margin-top: 4pt; line-height: 1.3;">Registry가 LLM의 도구 탐색을 막는 병목. Proxy stub 9개 중복. auto-discovery 불가</p>
+      </div>
+
+      <!-- Arrow down -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 8pt;">
+        <p style="font-size: 7pt; color: #34D399;">&#8595; Registry 257줄 삭제 + Proxy stub 9개 제거</p>
+      </div>
+
+      <!-- After -->
+      <div style="background: #161B22; border: 1px solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">AFTER — 2계층 구조 (탐색 자유도)</p>
+        <div style="display: flex; gap: 5pt; margin-top: 5pt; align-items: center;">
+          <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 5pt 7pt; text-align: center; flex: 1;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">Catalog</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">검색 전용</p>
+          </div>
+          <p style="font-size: 7pt; color: #4ECDC4;">&#8594;</p>
+          <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 5pt 7pt; text-align: center; flex: 1;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">config.toml</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">[mcp.servers] 통합</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 4pt; line-height: 1.3;"><span style="color: #4ECDC4; font-weight: bold;">45</span> catalog servers auto-discovery. API key 부재 시 dry-run 자동 전환</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">TRADE-OFF</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">제어(Registry) vs 탐색 자유도(direct config) — Registry 삭제로 LLM이 catalog 직접 탐색 가능</p>
+      </div>
+    </div>
+
+    <!-- Right: MCP-first + fixture fallback + HITL -->
+    <div style="width: 250pt; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- 45 servers stat -->
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 9pt 10pt; text-align: center;">
+        <p style="font-size: 24pt; font-weight: bold; color: #4ECDC4; line-height: 1;">45</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">MCP Catalog Servers</p>
+        <p style="font-size: 6pt; color: #8B949E;">auto-discovery 관리</p>
+      </div>
+
+      <!-- MCP-first / fixture fallback -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">MCP-first + Fixture Fallback</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.4;">5개 signal 도구: 라이브 환경에서는 MCP 직접 호출, 오프라인/CI에서는 fixture 데이터로 자동 전환 — 라이브 수집과 테스트 양립</p>
+      </div>
+
+      <!-- 4-Tier HITL -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">4-Tier HITL 권한 모델</p>
+        <ul style="margin-top: 4pt; padding-left: 12pt;">
+          <li style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">SAFE: 자동 실행</li>
+          <li style="font-size: 7pt; color: #F5C542; line-height: 1.5;">EXPENSIVE: 비용 일괄 승인</li>
+          <li style="font-size: 7pt; color: #F97316; line-height: 1.5;">WRITE: 개별 승인</li>
+          <li style="font-size: 7pt; color: #EF4444; line-height: 1.5;">DANGEROUS: 강제 차단</li>
+        </ul>
+      </div>
+
+      <!-- Code path -->
+      <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace; line-height: 1.4;">config.toml [mcp.servers]</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt; line-height: 1.3;">Proxy stub 9개 제거 → 직접 연결</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — N10: MCP Registry→Catalog 단순화, 45 servers auto-discovery</p>
+    <p style="font-size: 5pt; color: #8B949E;">23 / 31</p>
+  </div>
+
+</body>
+</html>

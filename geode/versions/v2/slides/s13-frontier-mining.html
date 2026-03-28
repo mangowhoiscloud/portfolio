@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 8pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING — FRONTIER MINING</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Frontier Pattern Mining — 자체 발명 vs 검증된 채택</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">Claude Code · Devin · OpenHands · SWE-agent 4개 하네스 리서치 후 3/4 수렴 패턴만 채택.</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; min-height: 0;">
+
+    <!-- Left: 4 frontier sources -->
+    <div style="flex: 7; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+
+      <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 2pt;">4개 프론티어 하네스 — 수렴 패턴 추출</p>
+
+      <!-- Source cards in 2x2 grid -->
+      <div style="display: flex; gap: 5pt; flex: 1;">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+          <!-- Claude Code -->
+          <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #818CF8;">
+            <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Claude Code</p>
+            <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.5;">while(tool_use) 루프 패턴 채택. 최대 50 라운드, 5가지 종료 경로. CANNOT/CAN 제약 방법론을 하네스 SOT에 적용.</p>
+            <div style="background: #818CF815; border-radius: 3pt; padding: 3pt 7pt; margin-top: 5pt; display: inline-block;">
+              <p style="font-size: 6pt; color: #818CF8;">채택: AgenticLoop · CANNOT 방법론</p>
+            </div>
+          </div>
+
+          <!-- Devin -->
+          <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #4ECDC4;">
+            <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Devin</p>
+            <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.5;">Planner-Executor 분리 패턴. 장기 Task 상태 보존과 SubAgent 위임 구조. Token Guard 설계에 영향.</p>
+            <div style="background: #4ECDC415; border-radius: 3pt; padding: 3pt 7pt; margin-top: 5pt; display: inline-block;">
+              <p style="font-size: 6pt; color: #4ECDC4;">채택: SubAgent 위임 · 상태 보존</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+          <!-- OpenHands -->
+          <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #F97316;">
+            <p style="font-size: 8pt; font-weight: bold; color: #F97316;">OpenHands</p>
+            <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.5;">이벤트 기반 Hook 시스템. 파이프라인 생명주기 관측과 핸들러 Priority 체인. 46-Event Bus 설계의 직접 영감.</p>
+            <div style="background: #F9731615; border-radius: 3pt; padding: 3pt 7pt; margin-top: 5pt; display: inline-block;">
+              <p style="font-size: 6pt; color: #F97316;">채택: Hook Bus · Priority 핸들러</p>
+            </div>
+          </div>
+
+          <!-- SWE-agent -->
+          <div style="flex: 1; background: #161B22; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #F5C542;">
+            <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">SWE-agent</p>
+            <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt; line-height: 1.5;">CircuitBreaker + Exponential Backoff 장애 복원 패턴. 5회 연속 실패 시 60s OPEN 전환, ±25% Jitter 재시도.</p>
+            <div style="background: #F5C54215; border-radius: 3pt; padding: 3pt 7pt; margin-top: 5pt; display: inline-block;">
+              <p style="font-size: 6pt; color: #F5C542;">채택: CircuitBreaker · Jitter Backoff</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 3/4 Rule + Token Guard example + Trade-off -->
+    <div style="flex: 5; display: flex; flex-direction: column; gap: 6pt; min-height: 0;">
+
+      <!-- 3/4 Convergence Rule -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 11pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">3/4 수렴 규칙</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">4개 프론티어 중 3개 이상에서 동일 패턴이 발견될 때만 채택. 1-2개는 재검증. Socratic Q5와 동일 기준.</p>
+        <div style="display: flex; gap: 5pt; margin-top: 7pt;">
+          <div style="flex: 3; background: #818CF820; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+            <p style="font-size: 12pt; font-weight: bold; color: #818CF8; line-height: 1;">3/4</p>
+            <p style="font-size: 5pt; color: #8B949E;">채택 임계</p>
+          </div>
+          <div style="flex: 3; background: #EF444415; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+            <p style="font-size: 12pt; font-weight: bold; color: #EF4444; line-height: 1;">1-2</p>
+            <p style="font-size: 5pt; color: #8B949E;">재검증</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Token Guard case study -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 11pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 5pt;">실제 채택 사례: Token Guard</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">v0.15.0: max_turns 하드 캡 20 때문에 긴 작업이 중단됐고, 프론티어 3종이 모두 압축 방식을 채택했기 때문에 컨텍스트 압축으로 전환했고, max_turns 200으로 확장됐다.</p>
+        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace; margin-top: 5pt;">max_turns: 20 &#8594; 200 · compact@80% · prune@95%</p>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 9pt 11pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">Trade-off: 자체 발명 vs 검증된 패턴 채택</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">직접 발명하면 창의적이지만 검증 비용이 크고, 프론티어 패턴은 이미 실전에서 검증됐다. 3/4 수렴 규칙 때문에 자체 발명 충동을 구조적으로 억제했고, 결과적으로 39 releases 동안 0 P0 장애가 나왔다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">Claude Code · Devin · OpenHands · SWE-agent — 프론티어 리서치 후 3/4 수렴 패턴만 채택</p>
+    <p style="font-size: 5pt; color: #8B949E;">13 / 31</p>
+  </div>
+</body>
+</html>

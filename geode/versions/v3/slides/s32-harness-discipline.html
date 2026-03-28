@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">CLOSING · DISCIPLINE</p>
+</div>
+
+<!-- Title + Thesis -->
+<div style="padding: 0 36pt 6pt;">
+  <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Harness Engineering은 디시플린입니다</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">도구가 아닌 습관 — 4축이 매 릴리스마다 실천될 때 하네스가 장기 운용된다</p>
+</div>
+
+<!-- Main content: thesis + 4-axis long-term evolution -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Thesis left panel -->
+  <div style="width: 168pt; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 12pt; display: flex; flex-direction: column; gap: 8pt; justify-content: center;">
+    <div style="background: #1E293B; border-radius: 4pt; padding: 10pt 12pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8; line-height: 1.5; text-align: center;">"확률적 시스템은<br>제어 없이 발산한다"</p>
+    </div>
+    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.6; text-align: center;">발산을 루프와 가치로<br>수렴시키는 하네스를 만듭니다.</p>
+    <div style="border-top: 1px solid #21262D; padding-top: 8pt;">
+      <p style="font-size: 7pt; color: #8B949E; line-height: 1.5; text-align: center;">디시플린은 일회성 설계가 아니다. 매 PR마다, 매 릴리스마다 4축이 실천되어야 하네스가 살아남는다.</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 8pt 10pt; text-align: center; margin-top: 4pt;">
+      <p style="font-size: 11pt; font-weight: bold; color: #818CF8;">v0.6 → v0.31</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">25버전 동안 4축이 유지됨</p>
+    </div>
+  </div>
+
+  <!-- Right: 4-axis long-term evolution -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+    <!-- Context control axis -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; display: flex; gap: 8pt; align-items: center;">
+      <div style="width: 3pt; flex-shrink: 0; height: 100%; background: #818CF8; border-radius: 2pt;"></div>
+      <div style="flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">컨텍스트 제어 — 장기 진화 방향</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">SHA-256 캐싱 → Semantic diff 기반 선택적 재생성으로 진화. Provider별 캐시 효율 최적화가 장기 비용 절감의 핵심.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">90%</p>
+        <p style="font-size: 6pt; color: #8B949E;">비용 절감</p>
+      </div>
+    </div>
+
+    <!-- Execution loop axis -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; display: flex; gap: 8pt; align-items: center;">
+      <div style="width: 3pt; flex-shrink: 0; height: 100%; background: #4ECDC4; border-radius: 2pt;"></div>
+      <div style="flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">실행 루프 — 장기 진화 방향</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">단일 루프 → Plan-first + Executor 분리 → 멀티 에이전트 DAG 오케스트레이션. 수렴 감지와 다양성 강제가 루프 품질을 유지.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">50R</p>
+        <p style="font-size: 6pt; color: #8B949E;">×200 turns</p>
+      </div>
+    </div>
+
+    <!-- Validation axis -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; display: flex; gap: 8pt; align-items: center;">
+      <div style="width: 3pt; flex-shrink: 0; height: 100%; background: #34D399; border-radius: 2pt;"></div>
+      <div style="flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399;">검증 — 장기 진화 방향</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">5-Layer 정적 검증 → CUSUM 드리프트 감지 + 실시간 Cross-LLM 합의도 추적. 비결정론을 측정 가능한 지표로 관리.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399;">α≥0.67</p>
+        <p style="font-size: 6pt; color: #8B949E;">합의도</p>
+      </div>
+    </div>
+
+    <!-- Observation axis -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; display: flex; gap: 8pt; align-items: center;">
+      <div style="width: 3pt; flex-shrink: 0; height: 100%; background: #F97316; border-radius: 2pt;"></div>
+      <div style="flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">관측 — 장기 진화 방향</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">LangSmith/OTEL 수동 트레이싱 → 자동 비용 예측 + 예산 소진율 알림 → ML 기반 실행 계획 최적화.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt; text-align: center; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F97316;">46</p>
+        <p style="font-size: 6pt; color: #8B949E;">Hook Events</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · Harness Engineering = Context × Loop × Validation × Observation</p>
+  <p style="font-size: 5pt; color: #8B949E;">32 / 33</p>
+</div>
+
+</body>
+</html>

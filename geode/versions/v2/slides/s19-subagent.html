@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS AGENT — SUB-AGENT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Sub-Agent: 컨텍스트 폭발 방지</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">병렬 서브에이전트가 부모 컨텍스트에 결과를 반환할 때 토큰이 기하급수적으로 증가했다.</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 9pt; min-height: 0;">
+
+    <!-- Left: Problem → Design flow (55%) -->
+    <div style="flex: 0 0 390pt; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- Problem narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 5pt;">문제: 컨텍스트 폭발</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">병렬 서브에이전트가 각자 완전한 실행 컨텍스트를 부모에게 반환하면, 3개 에이전트만으로도 부모 컨텍스트가 200K 토큰을 초과했다.</p>
+      </div>
+
+      <!-- Design solution flow -->
+      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 2pt;">SOLUTION: 선택적 상속 + 4096 Guard</p>
+
+        <!-- Parent → Child inheritance -->
+        <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 7pt 10pt; text-align: center;">
+          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Parent Agent</p>
+          <p style="font-size: 5pt; color: #8B949E;">tools · MCP · skills · memory 전체 보유</p>
+        </div>
+
+        <!-- Arrow down + label -->
+        <div style="display: flex; align-items: center; gap: 8pt; padding: 0 20pt;">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3pt;">
+            <p style="font-size: 7pt; color: #4ECDC4; text-align: center;">상속 (full inheritance)</p>
+            <div style="width: 2pt; height: 18pt; background: #4ECDC4;"></div>
+          </div>
+        </div>
+
+        <!-- 3 sub-agents + coalescing queue -->
+        <div style="display: flex; gap: 5pt;">
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent A</p>
+            <p style="font-size: 5pt; color: #8B949E;">독립 200K window</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent B</p>
+            <p style="font-size: 5pt; color: #8B949E;">독립 200K window</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Sub-Agent C</p>
+            <p style="font-size: 5pt; color: #8B949E;">독립 200K window</p>
+          </div>
+        </div>
+
+        <!-- 4096 Guard compression label -->
+        <p style="font-size: 6pt; color: #F59E0B; text-align: center;">&#8595; 반환 전 4096-token guard — 구조화 요약으로 압축</p>
+
+        <!-- Return compressed -->
+        <div style="background: #F59E0B20; border: 1pt solid #F59E0B40; border-radius: 4pt; padding: 6pt 10pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F59E0B;">Compressed Summary &#8594; Parent</p>
+          <p style="font-size: 5pt; color: #8B949E;">원시 출력이 아닌 구조화 요약 반환 — 컨텍스트 폭발 방지</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Concurrency control + Trade-off (45%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- Concurrency control -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">동시성 제어</p>
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 2pt solid #4ECDC4;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">MAX_CONCURRENT = 5</p>
+            <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">DAG scheduling — 동시 실행 서브에이전트 최대 5개 제한</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 2pt solid #F59E0B;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">CoalescingQueue 250ms dedup</p>
+            <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">250ms 내 동일 태스크 중복 제거 — 토큰 낭비 방지</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 2pt solid #818CF8;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">깊이 3 = 유효 컨텍스트 600K</p>
+            <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">서브에이전트는 부모와 독립된 200K window — 깊이당 선형 확장</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 9pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">Trade-off: full inheritance vs sandbox</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">완전 격리 sandbox는 안전하지만, 부모의 tools·skills·memory를 재설정해야 해서 위임의 의미를 잃는다.</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">full inheritance + 4096 Guard 때문에 서브에이전트가 부모의 능력을 그대로 쓰면서도 컨텍스트 폭발을 방지했다. 위임이지 파견이 아니다.</p>
+        <div style="display: flex; gap: 6pt; margin-top: 8pt;">
+          <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 5pt 6pt;">
+            <p style="font-size: 14pt; font-weight: bold; color: #4ECDC4; line-height: 1;">5</p>
+            <p style="font-size: 5pt; color: #8B949E;">max concurrent</p>
+          </div>
+          <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 5pt 6pt;">
+            <p style="font-size: 14pt; font-weight: bold; color: #F59E0B; line-height: 1;">4096</p>
+            <p style="font-size: 5pt; color: #8B949E;">token guard</p>
+          </div>
+          <div style="flex: 1; text-align: center; background: #0D1117; border-radius: 3pt; padding: 5pt 6pt;">
+            <p style="font-size: 14pt; font-weight: bold; color: #818CF8; line-height: 1;">600K</p>
+            <p style="font-size: 5pt; color: #8B949E;">depth-3 context</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">full inheritance + 4096-token guard + CoalescingQueue 250ms — 위임의 의미를 살리는 서브에이전트</p>
+    <p style="font-size: 5pt; color: #8B949E;">19 / 31</p>
+  </div>
+</body>
+</html>

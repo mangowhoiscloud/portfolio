@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 5pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #34D399;">PART 6 — CONNECTION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 7pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Trade-offs — Agent + Security + Gateway 설계 결정</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율성과 안전성 사이, 각 결정의 기각된 대안과 채택 근거</p>
+  </div>
+
+  <!-- Content: 2-column grid -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; overflow: hidden;">
+
+    <!-- Column 1 -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- TO-A1 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">3-Provider Circuit Breaker</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 단일 Provider</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">Rate Limit·장애 시 파이프라인 전체 중단. Circuit Breaker 5회 실패→60s OPEN→Half-Open으로 자동 복구</p>
+      </div>
+
+      <!-- TO-A2 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Exponential Backoff ±25% Jitter</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 고정 지연 재시도</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">고정 지연은 다수 에이전트가 동시 재시도 → Thundering Herd. Jitter로 재시도 분산, RateLimit 회피</p>
+      </div>
+
+      <!-- TO-A3 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">ZhipuAI (GLM-5) 3번째 Provider</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: Gemini</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">Gemini는 API 응답 포맷이 비표준 케이스 多. ZhipuAI는 OpenAI-compatible API로 Adapter 재사용 가능</p>
+      </div>
+
+      <!-- TO-A4 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">46-Event Hook Observer</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 하드코딩 콜백</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">하드코딩 콜백은 이벤트 추가 시 코어 수정 필요. Priority 핸들러 + 에러 격리로 확장성과 격리 확보</p>
+      </div>
+
+    </div>
+
+    <!-- Column 2 -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- TO-A5 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Dual Trust (Input + Output Gate)</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: Input만 검사</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">Input만 막으면 Output 경로로 secret 우회 가능. Output Validation 독립 레이어로 양방향 차단</p>
+      </div>
+
+      <!-- TO-A6 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Deny-by-default (serve 모드)</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: allow-by-default</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">HITL 없는 headless 모드에서 WRITE 허용이면 의도치 않은 파일 수정. 최소 권한 원칙 → SAFE만 허용</p>
+      </div>
+
+      <!-- TO-A7 -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">MCP-first + fixture fallback</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 라이브 전용</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">라이브 전용이면 CI 환경에서 테스트 불가. fixture fallback으로 오프라인 테스트 + 라이브 수집 양립</p>
+      </div>
+
+      <!-- TO-A8 -->
+      <div style="background: #161B22; border: 1px solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+          <div style="background: #34D399; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #0D1117;">채택</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">GEODE→REODE 패턴 이식</p>
+          <p style="font-size: 7pt; color: #8B949E;">vs</p>
+          <div style="background: #1E293B; border: 1px solid #EF4444; border-radius: 2pt; padding: 2pt 5pt;">
+            <p style="font-size: 6pt; color: #EF4444;">기각: 처음부터 재설계</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.3;">GEODE v0.13 기반 Port/Adapter, HookSystem, CircuitBreaker를 REODE에 직접 이식 → 33세션 83/83 패스</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 — Agent + Security + Gateway trade-off decisions</p>
+    <p style="font-size: 5pt; color: #8B949E;">29 / 31</p>
+  </div>
+
+</body>
+</html>

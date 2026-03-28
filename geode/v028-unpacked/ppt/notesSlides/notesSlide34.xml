@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  
+  
+  <p:cSld>
+    
+    
+    <p:spTree>
+      
+      
+      <p:nvGrpSpPr>
+        
+        
+        <p:cNvPr id="1" name=""/>
+        
+        
+        <p:cNvGrpSpPr/>
+        
+        
+        <p:nvPr/>
+        
+      
+      </p:nvGrpSpPr>
+      
+      
+      <p:grpSpPr>
+        
+        
+        <a:xfrm>
+          
+          
+          <a:off x="0" y="0"/>
+          
+          
+          <a:ext cx="0" cy="0"/>
+          
+          
+          <a:chOff x="0" y="0"/>
+          
+          
+          <a:chExt cx="0" cy="0"/>
+          
+        
+        </a:xfrm>
+        
+      
+      </p:grpSpPr>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldImg" idx="2"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="body" idx="3" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+        
+        <p:txBody>
+          
+          
+          <a:bodyPr/>
+          
+          
+          <a:lstStyle/>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>[Scaffold Build DAG &#8212; &#54032;&#45800; &#44540;&#44144;]</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#50780; Scaffold&#51064;&#44032;: &#51228;&#54408; &#53076;&#46300;&#44032; &#50500;&#45772; &#51228;&#50612; &#44228;&#52789;. Karpathy program.md &#54056;&#53556;&#50640;&#49436; &#50689;&#44048;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#53944;&#47112;&#51060;&#46300;&#50724;&#54532;: Soft 78% vs Hard 16%. &#47928;&#49436; &#44592;&#48152; &#51228;&#50612;&#45716; &#47784;&#45944;&#51060; &#47924;&#49884;&#54624; &#49688; &#51080;&#51648;&#47564;, CI &#54616;&#46300; &#44172;&#51060;&#53944;&#47564;&#51004;&#47196;&#45716; &#49444;&#44228; &#52384;&#54617;&#51012; &#51204;&#45804;&#54624; &#49688; &#50630;&#51020;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#54644;&#44208; &#47928;&#51228;: LLM &#50640;&#51060;&#51204;&#53944;&#51032; &#44284;&#51081; &#44396;&#54788;. Socratic Gate + CI Ratchet &#51312;&#54633;&#51004;&#47196; &#49324;&#51204; &#52264;&#45800;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#44540;&#44144;: 436 PR / 24 &#49464;&#49496; / 0 &#54924;&#44480;. Soft &#51228;&#50612;&#44032; &#52649;&#48516;&#55176; &#46041;&#51089;&#54632;&#51012; &#49892;&#51613;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+        
+        </p:txBody>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+    
+    </p:spTree>
+    
+  
+  </p:cSld>
+  
+  
+  <p:clrMapOvr>
+    
+    
+    <a:masterClrMapping/>
+    
+  
+  </p:clrMapOvr>
+  
+
+</p:notes>

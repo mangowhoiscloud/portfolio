@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">HE-0 SCAFFOLD</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 6pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Mirror Table: Scaffold ↔ Runtime</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">스캐폴딩이 런타임 아키텍처를 그대로 거울처럼 반영한다 — 같은 구조, 다른 주체</p>
+</div>
+
+<!-- Content -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; align-items: stretch;">
+
+  <!-- Scaffold column -->
+  <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+      <div style="width: 3pt; height: 12pt; background: #818CF8; border-radius: 2pt;"></div>
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">SCAFFOLD (빌드 타임)</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CLAUDE.md 23 CANNOT</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Claude에게 주입되는 헌법 — 어길 수 없는 규칙이 LLM 행동을 제어</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">21 Skills → 8-Step Loop</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">소크라테스 정제 → Frontier 리서치 → 구현 → 검증 반복</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Frontier Mining + 4-Persona</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Claude Code / Devin / OpenHands 리서치 → GAP 분석 → 설계 결정</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CHANGELOG 39 Releases</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">v0.6 → v0.31 아키텍처 결정 이력 — 모든 피봇을 문서화</p>
+    </div>
+  </div>
+
+  <!-- Arrow -->
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4pt; width: 40pt;">
+    <p style="font-size: 14pt; color: #818CF8;">⟺</p>
+    <p style="font-size: 6pt; color: #8B949E; text-align: center;">동형<br>구조</p>
+  </div>
+
+  <!-- Runtime column -->
+  <div style="flex: 1; background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+      <div style="width: 3pt; height: 12pt; background: #4ECDC4; border-radius: 2pt;"></div>
+      <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">RUNTIME (실행 타임)</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">46 Hook Events (PolicyChain)</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">에이전트 행동을 실시간 감시 — 위반 즉시 차단</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">AgenticLoop 50 rounds × 200 turns</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">스캐폴딩이 설계한 루프가 자율 실행으로 구현됨</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">3-Provider Failover + 5-Tier Safety</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">Frontier 리서치 결과를 그대로 구현한 내결함성</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">3,201 Tests · 187 Modules</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">각 릴리스가 회귀 없이 축적된 구조적 증거</p>
+    </div>
+  </div>
+
+  <!-- Insight box -->
+  <div style="width: 130pt; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 8pt; justify-content: center;">
+    <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">왜 Mirror인가</p>
+    <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">스캐폴딩이 런타임과 동형 구조를 가질 때, 설계 결정이 코드로 직접 흐른다.</p>
+    <p style="font-size: 7pt; color: #8B949E; line-height: 1.5; margin-top: 4pt;">CANNOT 규칙 위반 → 빌드 실패<br>Hook 규칙 위반 → 실행 차단</p>
+    <div style="border-top: 1px solid #21262D; padding-top: 8pt;">
+      <p style="font-size: 7pt; color: #34D399; font-weight: bold;">결과</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">스캐폴딩 없이는 v0.6에서 멈췄을 것</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 1,160 커밋 · 36일</p>
+  <p style="font-size: 5pt; color: #8B949E;">21 / 33</p>
+</div>
+
+</body>
+</html>

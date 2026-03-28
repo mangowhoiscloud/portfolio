@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #34D399;">HE-1: RESULTS FIRST &#8212; PATTERN REUSE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Eco&#178; &#8594; GEODE &#8594; REODE: 패턴 재사용 증거</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">세 프로젝트에 걸쳐 동일 패턴이 진화했습니다. Trade-off: 프레임워크 재사용 vs 바닥부터 재설계 &#8212; 재사용 선택 이유는 아래 4개 패턴이 증명합니다.</p>
+  </div>
+
+  <!-- Evolution header row -->
+  <div style="padding: 0 36pt 5pt; display: flex; gap: 0; align-items: center;">
+    <div style="flex: 1; background: #161B22; border-radius: 4pt 0 0 4pt; border: 1pt solid #34D39940; padding: 5pt 10pt; text-align: center;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399;">Eco&#178;</p>
+      <p style="font-size: 6pt; color: #8B949E;">원형 패턴</p>
+    </div>
+    <div style="padding: 0 4pt;">
+      <p style="font-size: 10pt; color: #34D39960;">&#8594;</p>
+    </div>
+    <div style="flex: 1.2; background: #161B22; border: 1pt solid #4ECDC440; padding: 5pt 10pt; text-align: center;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">GEODE v0.31</p>
+      <p style="font-size: 6pt; color: #8B949E;">패턴 심화</p>
+    </div>
+    <div style="padding: 0 4pt;">
+      <p style="font-size: 10pt; color: #818CF860;">&#8594;</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border-radius: 0 4pt 4pt 0; border: 1pt solid #818CF840; padding: 5pt 10pt; text-align: center;">
+      <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">REODE</p>
+      <p style="font-size: 6pt; color: #8B949E;">실증 적용</p>
+    </div>
+  </div>
+
+  <!-- 4 Pattern rows -->
+  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+
+    <!-- Pattern 1: Verification -->
+    <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #F5C542; border-radius: 2pt;"></div>
+      <div style="width: 100pt; flex-shrink: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">검증 레이어</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #8B949E;">Swiss Cheese 3-Layer</p>
+        <p style="font-size: 6pt; color: #8B949E;">단일 LLM 평가 &#8594; 3겹 필터</p>
+      </div>
+      <p style="font-size: 8pt; color: #F5C54260; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.2;">
+        <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">GEODE 5-Layer Verification</p>
+        <p style="font-size: 6pt; color: #8B949E;">BiasBuster(6종) + Cross-LLM &#945;&#8805;0.67 + Confidence Gate &#8594; 69.4&#8594;99.8</p>
+      </div>
+      <p style="font-size: 8pt; color: #818CF860; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">5-Gate Migration Scorecard</p>
+        <p style="font-size: 6pt; color: #8B949E;">마이그레이션 품질 5관문 차단</p>
+      </div>
+    </div>
+
+    <!-- Pattern 2: Port/Adapter -->
+    <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #818CF8; border-radius: 2pt;"></div>
+      <div style="width: 100pt; flex-shrink: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">LLM 추상화</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #8B949E;">LLMClientPort 추상화</p>
+        <p style="font-size: 6pt; color: #8B949E;">단일 Provider 종속 위험</p>
+      </div>
+      <p style="font-size: 8pt; color: #818CF860; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.2;">
+        <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">Port/Adapter DI + ContextVar</p>
+        <p style="font-size: 6pt; color: #8B949E;">Anthropic&#183;OpenAI&#183;ZhipuAI 3-Provider 독립 추상화</p>
+      </div>
+      <p style="font-size: 8pt; color: #818CF860; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">DomainPort Protocol</p>
+        <p style="font-size: 6pt; color: #8B949E;">코어 수정 0줄로 Java 도메인 교체</p>
+      </div>
+    </div>
+
+    <!-- Pattern 3: Event Bus / Hook -->
+    <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #F97316; border-radius: 2pt;"></div>
+      <div style="width: 100pt; flex-shrink: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">이벤트 시스템</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #8B949E;">Event Bus 3-Tier</p>
+        <p style="font-size: 6pt; color: #8B949E;">하드코딩 콜백으로 확장 불가</p>
+      </div>
+      <p style="font-size: 8pt; color: #F9731660; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.2;">
+        <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">HookSystem 46 Events, 8 Categories</p>
+        <p style="font-size: 6pt; color: #8B949E;">Priority 기반 핸들러 &#183; StuckDetector 120s &#183; 에러 격리</p>
+      </div>
+      <p style="font-size: 8pt; color: #818CF860; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">REODE HookSystem 상속</p>
+        <p style="font-size: 6pt; color: #8B949E;">Migration lifecycle 이벤트 동일 패턴</p>
+      </div>
+    </div>
+
+    <!-- Pattern 4: Circuit Breaker -->
+    <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 4pt; flex-shrink: 0; align-self: stretch; background: #EF4444; border-radius: 2pt;"></div>
+      <div style="width: 100pt; flex-shrink: 0;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">장애 복원력</p>
+      </div>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #8B949E;">Circuit Breaker + Jitter Backoff</p>
+        <p style="font-size: 6pt; color: #8B949E;">단일 Provider 장애 시 전체 중단</p>
+      </div>
+      <p style="font-size: 8pt; color: #EF444460; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1.2;">
+        <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">3-Provider Failover (CB &#215;3)</p>
+        <p style="font-size: 6pt; color: #8B949E;">5회 연속 실패 &#8594; 60s OPEN &#8594; Half-Open 프로브. Exp. Backoff &#177;25% Jitter.</p>
+      </div>
+      <p style="font-size: 8pt; color: #818CF860; padding: 0 4pt;">&#10132;</p>
+      <div style="flex: 1;">
+        <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">REODE LLM Failover</p>
+        <p style="font-size: 6pt; color: #8B949E;">동일 CB 패턴으로 마이그레이션 내성</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Trade-off bar -->
+  <div style="margin: 0 36pt 3pt; background: #1E293B; border: 1pt solid #34D39930; border-radius: 4pt; padding: 5pt 12pt;">
+    <p style="font-size: 7pt; color: #34D399; font-weight: bold; text-align: center;">Trade-off &#8212; 프레임워크 재사용 vs 바닥부터 재설계: 재사용으로 REODE 출시 기간을 단축하고, Eco&#178;에서 검증된 패턴으로 품질을 보장했습니다.</p>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">Swiss Cheese &#8594; 5-Layer &#183; LLMClientPort &#8594; Port/Adapter &#183; Event Bus &#8594; HookSystem &#183; Circuit Breaker &#8594; 3-Provider Failover</p>
+    <p style="font-size: 5pt; color: #8B949E;">09 / 31</p>
+  </div>
+
+</body>
+</html>

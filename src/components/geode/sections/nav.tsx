@@ -1,0 +1,66 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
+const navItems = [
+  { id: "hero", label: "Overview" },
+  { id: "scaffold", label: "Scaffold" },
+  { id: "loop", label: "Loop" },
+  { id: "reasoning", label: "Reasoning" },
+  { id: "architecture", label: "Architecture" },
+  { id: "hooks", label: "Hooks" },
+  { id: "agents", label: "Agents" },
+  { id: "automation", label: "Automation" },
+  { id: "feedback", label: "Feedback" },
+  { id: "context", label: "Context" },
+  { id: "gateway", label: "Gateway" },
+  { id: "domain", label: "Domain" },
+  { id: "scoring", label: "Scoring" },
+  { id: "llm", label: "Multi-LLM" },
+  { id: "verify", label: "Verify" },
+  { id: "timeline", label: "Timeline" },
+];
+
+export function GeodeNav() {
+  const [active, setActive] = useState("hero");
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  function scrollTo(id: string) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActive(id);
+    }
+  }
+
+  if (!visible) return null;
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B1628]/80 backdrop-blur-md border-b border-white/[0.04] transition-all duration-300">
+      <div className="max-w-5xl mx-auto px-4 py-2 flex items-center gap-1 overflow-x-auto scrollbar-hide">
+        <span className="text-xs font-mono font-bold text-white/30 shrink-0 mr-2">GEODE</span>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => scrollTo(item.id)}
+            className="shrink-0 px-2.5 py-1 rounded text-[10px] font-mono transition-all duration-200"
+            style={{
+              color: active === item.id ? "#4ECDC4" : "#7A8CA8",
+              background: active === item.id ? "rgba(78,205,196,0.08)" : "transparent",
+            }}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+    </nav>
+  );
+}

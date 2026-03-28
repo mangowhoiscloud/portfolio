@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS AGENT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Context + Memory: 압축 전략 × 4-Tier 자동 학습</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">세션 종료 시 인사이트 휘발 방지 — PIPELINE_END → MEMORY.md 자동 축적 루프</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Compression strategy (50%) -->
+    <div style="flex: 0 0 344pt; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Context compression narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          서브에이전트는 부모와 독립된 200K 컨텍스트 윈도우를 갖기 때문에
+          <strong style="color: #4ECDC4;">깊이 3이면 유효 컨텍스트가 600K로 선형 확장</strong>됩니다.
+          임계값 초과 시 3-Phase 압축이 자동 발동합니다.
+        </p>
+      </div>
+
+      <!-- Compression phases -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">컨텍스트 압축 3-PHASE</p>
+
+        <div style="display: flex; flex-direction: column; gap: 8pt;">
+          <!-- Phase 1 -->
+          <div style="display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #F5C54220; border: 1pt solid #F5C54250; border-radius: 4pt; padding: 5pt 8pt; min-width: 80pt; text-align: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">80% WARNING</p>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 8pt; color: #E2E8F0; font-weight: bold;">Phase 1 SUMMARIZE</p>
+              <p style="font-size: 5pt; color: #8B949E;">tool_result 블록 &gt;5% 윈도우 → [summarized: N tokens]</p>
+            </div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div style="display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #EF444420; border: 1pt solid #EF444450; border-radius: 4pt; padding: 5pt 8pt; min-width: 80pt; text-align: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">95% CRITICAL</p>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 8pt; color: #E2E8F0; font-weight: bold;">Phase 2 ADAPTIVE PRUNE</p>
+              <p style="font-size: 5pt; color: #8B949E;">최신→과거 순 70% 예산 내 유지, first+last 2 보존</p>
+            </div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div style="display: flex; align-items: flex-start; gap: 8pt;">
+            <div style="background: #EF444410; border: 1pt dashed #EF444440; border-radius: 4pt; padding: 5pt 8pt; min-width: 80pt; text-align: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">비상 폴백</p>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 8pt; color: #E2E8F0; font-weight: bold;">Phase 3 EMERGENCY PRUNE</p>
+              <p style="font-size: 5pt; color: #8B949E;">prune_oldest_messages(keep_recent=10) 최후 수단</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Karpathy note -->
+        <div style="background: #0D1117; border-radius: 4pt; padding: 7pt 10pt; margin-top: 8pt;">
+          <p style="font-size: 5pt; color: #8B949E;">Karpathy P6 패턴: 4 chars/token 보수적 추정 → 실제보다 낮게 계산 = 안전 마진 확보</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 4-Tier Memory pyramid + Auto-learning (50%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- 4-Tier Memory -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">4-TIER MEMORY 피라미드</p>
+
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 7pt 10pt; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Session (Tier 3) — 최우선</p>
+              <p style="font-size: 5pt; color: #8B949E;">TTL 기반 · 현재 작업 맥락</p>
+            </div>
+            <p style="font-size: 7pt; color: #4ECDC4; font-family: 'Courier New', monospace;">40%</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39940; border-radius: 4pt; padding: 7pt 10pt; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Project (Tier 2)</p>
+              <p style="font-size: 5pt; color: #8B949E;">.geode/memory/PROJECT.md · max 200 lines</p>
+            </div>
+            <p style="font-size: 7pt; color: #34D399; font-family: 'Courier New', monospace;">25%</p>
+          </div>
+          <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 4pt; padding: 7pt 10pt; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Organization (Tier 1)</p>
+              <p style="font-size: 5pt; color: #8B949E;">불변 가이드라인 · 공통 루브릭</p>
+            </div>
+            <p style="font-size: 7pt; color: #818CF8; font-family: 'Courier New', monospace;">25%</p>
+          </div>
+          <div style="background: #E2E8F010; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">SOUL (Tier 0) — GEODE.md</p>
+              <p style="font-size: 5pt; color: #8B949E;">에이전트 정체성 · Karpathy P7 패턴</p>
+            </div>
+            <p style="font-size: 7pt; color: #8B949E; font-family: 'Courier New', monospace;">10%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Auto-learning loop -->
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399; margin-bottom: 6pt;">PIPELINE_END → 자동 학습 루프</p>
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          분석 세션이 끝나면 Hook P85 <strong>memory_write_back</strong>이 인사이트를
+          <span style="font-family: 'Courier New', monospace; font-size: 7pt; color: #34D399;">.geode/memory/PROJECT.md</span>에 자동 축적합니다.
+          최대 50개 인사이트 (oldest-drop rotation).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt 36pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">context_monitor.py · memory/context.py (ContextAssembler) · 280-char LLM summary budget · file-based .geode/ hub (git-trackable)</p>
+    <p style="font-size: 5pt; color: #8B949E;">15 / 24</p>
+  </div>
+</body>
+</html>

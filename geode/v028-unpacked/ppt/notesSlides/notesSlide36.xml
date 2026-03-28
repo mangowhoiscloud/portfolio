@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  
+  
+  <p:cSld>
+    
+    
+    <p:spTree>
+      
+      
+      <p:nvGrpSpPr>
+        
+        
+        <p:cNvPr id="1" name=""/>
+        
+        
+        <p:cNvGrpSpPr/>
+        
+        
+        <p:nvPr/>
+        
+      
+      </p:nvGrpSpPr>
+      
+      
+      <p:grpSpPr>
+        
+        
+        <a:xfrm>
+          
+          
+          <a:off x="0" y="0"/>
+          
+          
+          <a:ext cx="0" cy="0"/>
+          
+          
+          <a:chOff x="0" y="0"/>
+          
+          
+          <a:chExt cx="0" cy="0"/>
+          
+        
+        </a:xfrm>
+        
+      
+      </p:grpSpPr>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldImg" idx="2"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="body" idx="3" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+        
+        <p:txBody>
+          
+          
+          <a:bodyPr/>
+          
+          
+          <a:lstStyle/>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>[Scaffold Build DAG &#49884;&#44033;&#54868; &#8212; &#54032;&#45800; &#44540;&#44144;]</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>5-Axis &#47336;&#54532;&#45716; Karpathy&#51032; while(tool_use) + CI Ratchet &#54056;&#53556;&#51032; &#51312;&#54633;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>HARNESS&#8594;CONTEXT&#8594;EXECUTE&#8594;VERIFY&#8594;OBSERVE&#8594;HARNESS &#49692;&#54872;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>&#54645;&#49900;: "&#54616;&#45348;&#49828;&#44032; &#54616;&#45348;&#49828;&#47484; &#47564;&#46304;&#45796;" &#51088;&#44592; &#52280;&#51312; &#47336;&#54532;. &#44288;&#52769; &#44208;&#44284;&#44032; &#45796;&#51020; &#44508;&#52825;&#51060; &#46120;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>CANNOT/CAN Framework: &#51228;&#50557;&#51060; &#51088;&#50976;&#46020;&#48372;&#45796; &#47676;&#51200;. Guardrails first, capabilities second.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+        
+        </p:txBody>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+    
+    </p:spTree>
+    
+  
+  </p:cSld>
+  
+  
+  <p:clrMapOvr>
+    
+    
+    <a:masterClrMapping/>
+    
+  
+  </p:clrMapOvr>
+  
+
+</p:notes>

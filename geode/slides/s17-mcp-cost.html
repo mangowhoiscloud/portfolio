@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 8pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">MCP 단순화 + TokenTracker 자체 관측</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 4pt;">Registry 병목 제거로 LLM 도구 탐색을 열고, 자체 비용 트레이싱으로 루프 비용을 제어합니다.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: MCP Before → After -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">MCP 단순화 — Before → After</p>
+
+      <!-- Before -->
+      <div style="background: #1A1010; border: 1pt solid #EF444450; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 6pt;">BEFORE: 3-Layer 병목</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 5pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0;">MCPRegistry <span style="color: #8B949E;">(257줄)</span> — LLM 탐색을 가로막는 중앙 레지스트리</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">Catalog — Registry에 종속, 독립 검색 불가</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">Proxy stub 9개 — 중복 래퍼, 유지 관리 부담</p></li>
+        </ul>
+      </div>
+
+      <!-- After -->
+      <div style="background: #0D1E17; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">AFTER: 2-Layer 직관</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 5pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #EF4444; font-weight: bold;">MCPRegistry 삭제</span> → Catalog 검색 전용으로 축소</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;"><span style="font-family: Courier New, monospace; color: #4ECDC4; font-size: 7pt;">config.toml [mcp.servers]</span>로 설정 통합</p></li>
+          <li><p style="font-size: 7pt; color: #4ECDC4;">44개 서버 auto-discovery · Proxy stub 9개 제거</p></li>
+        </ul>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #0D1117; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Trade-off — 제어 vs 탐색 자유도</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Registry는 도구 목록을 완전 통제하지만 LLM의 런타임 탐색을 막습니다. Catalog로 전환하면 <span style="color: #4ECDC4;">44개 서버를 동적 관리</span>하면서도 HITL 4-Tier 권한 모델로 실행 경계를 유지합니다.</p>
+      </div>
+    </div>
+
+    <!-- Right: TokenTracker -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">TokenTracker — 자체 비용 트레이싱</p>
+
+      <!-- Why built -->
+      <div style="background: #161B22; border-left: 4pt solid #F5C542; border-radius: 4pt; padding: 9pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 5pt;">왜 만들었나</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">while(tool_use) 루프는 LLM 턴이 많습니다. LangSmith만으로는 <span style="color: #F5C542;">모델별 비용 내역과 캐시 히트율</span>을 추적하기 어려웠습니다.</p>
+      </div>
+
+      <!-- Architecture cards -->
+      <div style="display: flex; gap: 8pt;">
+        <div style="flex: 1; background: #161B22; border-top: 2pt solid #4ECDC4; border-radius: 4pt; padding: 9pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">ContextVar 싱글톤</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">모델, 입출력 토큰, cache_creation, cache_read 기록. 스레드 안전.</p>
+        </div>
+        <div style="flex: 1; background: #161B22; border-top: 2pt solid #F5C542; border-radius: 4pt; padding: 9pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 5pt;">18개 모델 가격 레지스트리</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">Anthropic·OpenAI·GLM 실시간 비용 산출. 월별 JSONL 영속 저장.</p>
+        </div>
+      </div>
+
+      <!-- /cost CLI result -->
+      <div style="background: #060B14; border: 1pt solid #21262D; border-radius: 4pt; padding: 9pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 7pt;">/cost CLI 대시보드</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 5pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0;">세션/일간/월간 비용 + <span style="color: #F5C542;">예산 소진율 실시간 표시</span></p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">컨텍스트 <span style="color: #F5C542; font-weight: bold;">80%</span> 경고 → <span style="color: #EF4444; font-weight: bold;">95%</span> 위험 시 adaptive pruning 자동 발동</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">ProjectJournal: 프로젝트별 실행 이력 + 누적 비용 추적</p></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt 36pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">MCPRegistry(257줄) 삭제 · Catalog 검색 전용 · config.toml 통합 · TokenTracker ContextVar · 18 모델 가격 레지스트리 · /cost CLI</p>
+    <p style="font-size: 5pt; color: #8B949E;">17 / 24</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">PART 1 · WHAT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">6-Layer Architecture: 187 모듈이 수직 분리된 이유</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">단일 계층 시스템은 테스트와 교체가 불가능 — Port/Adapter로 LLM 종속성을 분리했습니다</p>
+  </div>
+
+  <!-- Content: diagram + right side cards -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: flex-start;">
+
+    <!-- Diagram -->
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <img src="assets/v028-diagram-3tier.png" style="width: 420pt; height: 195pt; border-radius: 4pt; object-fit: contain;">
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt; text-align: center;">6-Layer 수직 분리 · Hook이 모든 계층을 횡단</p>
+    </div>
+
+    <!-- Right: stat cards -->
+    <div style="flex: 0 0 170pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Module count -->
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 8pt;">
+        <p style="font-size: 22pt; font-weight: bold; color: #4ECDC4; flex-shrink: 0;">187</p>
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">Python Modules</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">core/ 하위 계층별 분리</p>
+        </div>
+      </div>
+
+      <!-- Hook count -->
+      <div style="background: #161B22; border: 1px solid #F97316; border-radius: 6pt; padding: 9pt 12pt; display: flex; align-items: center; gap: 8pt;">
+        <p style="font-size: 22pt; font-weight: bold; color: #F97316; flex-shrink: 0;">46</p>
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF;">Hook Events</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">계층 횡단 관측 신경계</p>
+        </div>
+      </div>
+
+      <!-- Layers description -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">계층별 역할</p>
+        <ul style="margin-left: 10pt;">
+          <li style="font-size: 6pt; color: #E2E8F0;">L1 Gateway: 채널 입력 라우팅</li>
+          <li style="font-size: 6pt; color: #E2E8F0;">L2 Orchestrator: AgenticLoop</li>
+          <li style="font-size: 6pt; color: #E2E8F0;">L3 Tool/Agent: 52 Tools + Sub</li>
+          <li style="font-size: 6pt; color: #E2E8F0;">L4 LLM: 3-Provider Failover</li>
+          <li style="font-size: 6pt; color: #E2E8F0;">L5 Memory: 4-Tier 학습</li>
+        </ul>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">Port/Adapter → LLM 교체 시 나머지 불변</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">187 modules · 3,201 tests · 46 hooks · v0.31.0</p>
+    <p style="font-size: 6pt; color: #8B949E;">05 / 33</p>
+  </div>
+
+</body>
+</html>

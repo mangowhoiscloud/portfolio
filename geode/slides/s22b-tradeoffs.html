@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CONNECTION — DESIGN DECISIONS (2/2)</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">설계 결정: 게이트웨이 · 인프라</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">결정론적·제로 레이턴시 라우팅부터 도메인 이식성까지 — 8가지 인프라 결정</p>
+  </div>
+
+  <!-- 2-column layout: Gateway left, Infra right -->
+  <div style="flex: 1; padding: 0 36pt 6pt; display: flex; gap: 10pt;">
+
+    <!-- COLUMN 1: Gateway -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">게이트웨이 · 통신</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">정적 바인딩 라우팅</span> vs LLM 의도 라우팅</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">결정론적·제로 레이턴시·감사 가능 — LLM 라우팅은 비용·지연·불확실성 추가</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Daemon Thread 폴링</span> vs asyncio 이벤트 루프</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">동기 LangGraph와 단순 통합 — 비동기 복잡도 없이 동시성 확보</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Echo Prevention (subtype + _last_ts)</span> vs DB dedup</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">경량·DB 의존 없음 — 3초 폴링 주기에 충분한 메모리 기반 dedup</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">계층형 세션 키</span> vs 플랫 UUID</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">gateway:ch:id:sender:thread — 스레드별 컨텍스트 격리, 사람이 읽을 수 있는 키</p>
+      </div>
+
+    </div>
+
+    <!-- COLUMN 2: Infrastructure -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #F9731640; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F97316;">인프라 · 이식성</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">DomainPort Protocol + ContextVar DI</span> vs ABC 상속</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">구조적 타이핑 — 상속 결합 없음, 스레드 안전 교체 가능</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">SqliteSaver + MemorySaver fallback</span> vs 항상 인메모리</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">프로덕션 크래시 복구 + 개발 경량 — 단일 팩토리로 환경별 전환</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">서버 사이드 점수 계산</span> vs LLM composite_score</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">(axes_sum-8)/32×100 — 투명·검증 가능, LLM 수치는 비교 참고만</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Serve = REPL 팩토리 + hitl_level=0</span> vs 별도 코드베이스</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">_build_agentic_stack() 재사용 — 동작 플래그만 다름, 코드 중복 0</p>
+      </div>
+
+      <!-- Summary callout -->
+      <div style="background: #34D39912; border: 1pt solid #34D39940; border-left: 3pt solid #34D399; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">이식성 증명: GEODE → REODE</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">동일 6-Layer 코어 — 도메인 플러그인만 교체, core/graph.py 변경 0줄</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">게이트웨이 4 + 인프라·이식성 4 — 20가지 결정 완료. 모든 채택 근거는 코드 경로로 검증됨</p>
+    <p style="font-size: 5pt; color: #8B949E;">22b / 24</p>
+  </div>
+
+</body>
+</html>

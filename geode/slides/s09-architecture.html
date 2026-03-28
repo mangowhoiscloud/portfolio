@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS CORE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">6-Layer Architecture</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">monolithic runtime.py 1,476줄에서 185개 모듈, 6개 레이어로 — 새 도메인은 DomainPort Protocol 12 메서드만 구현하면 된다.</p>
+  </div>
+
+  <!-- Main: diagram + sidebar -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Diagram -->
+    <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+      <img src="assets/v028-diagram-3tier.png" style="width: 440pt; height: 205pt; border-radius: 4pt;">
+    </div>
+
+    <!-- Sidebar -->
+    <div style="width: 192pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">Layer Module Counts</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L0 CLI + Agent</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">26 + 8</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L1 Infra + Gateway</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">16 + 13</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L2 Memory</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">14</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L3 Orchestration</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">14</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L4 Tools + MCP</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">13 + 18</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">L5 Domain Plugins</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">14</p>
+          </div>
+          <div style="border-top: 1px solid #21262D; padding-top: 4pt; display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">TOTAL</p>
+            <p style="font-size: 20pt; font-weight: bold; color: #F59E0B;">185</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">Hook System — Cross-cutting</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.5;">core/hooks/ (7 모듈)는 L0–L5 전 레이어에서 import 가능한 횡단 관심사. 종속 사이클 해소를 위해 분리 추출.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 5pt;">45 events · 17 handlers</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">DomainPort Protocol 12 methods — new domain swap without touching infrastructure code</p>
+    <p style="font-size: 5pt; color: #8B949E;">09 / 24</p>
+  </div>
+</body>
+</html>

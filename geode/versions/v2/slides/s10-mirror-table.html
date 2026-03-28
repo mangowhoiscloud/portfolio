@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING — STRUCTURAL ISOMORPHISM</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Harness Builds Harness — 3 Mirror Pairs</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">SCAFFOLD과 GEODE가 동일한 아키텍처 원시형을 공유한다. 빌더와 결과물의 구조적 거울.</p>
+  </div>
+
+  <!-- 3-column mirror layout -->
+  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; gap: 6pt; min-height: 0;">
+
+    <!-- SCAFFOLD column -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #818CF8; border-radius: 5pt; padding: 10pt; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="background: #818CF820; border: 1pt solid #818CF850; border-radius: 4pt; padding: 4pt 10pt; text-align: center;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">SCAFFOLD</p>
+        <p style="font-size: 6pt; color: #8B949E;">Claude Code — GEODE를 빌드</p>
+      </div>
+
+      <!-- Pair 1 -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #818CF8; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CLAUDE.md — 425줄</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">LLM이 읽고 내면화하는 빌더 SOT. 23 CANNOT 규칙으로 과잉 구현을 소스에서 차단.</p>
+      </div>
+
+      <!-- Pair 2 -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #818CF8; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CI 5-Job Ratchet</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">lint → type → test(&#8805;2,900) → security → gate. PR 머지 전 5/5 통과 필수.</p>
+      </div>
+
+      <!-- Pair 3 -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #818CF8; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CANNOT / CAN — 23 Rules</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">Git · Planning · Quality · Docs · PR 5개 도메인. 경계 밖은 자유.</p>
+      </div>
+    </div>
+
+    <!-- Center spine -->
+    <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center; width: 64pt;">
+      <!-- while(tool_use) core -->
+      <div style="background: #161B22; border: 1pt solid #F5C542; border-radius: 5pt; padding: 8pt 6pt; text-align: center; width: 100%;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; font-family: 'Courier New', monospace; line-height: 1.6;">while</p>
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; font-family: 'Courier New', monospace; line-height: 1.6;">(tool_use)</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 4pt;">공유 원시형</p>
+      </div>
+
+      <!-- Arrow labels for 3 pairs -->
+      <div style="display: flex; flex-direction: column; gap: 4pt; align-items: center; width: 100%;">
+        <div style="background: #818CF820; border-radius: 3pt; padding: 3pt 5pt; width: 100%; text-align: center;">
+          <p style="font-size: 6pt; color: #818CF8;">SOT &#8596; SOT</p>
+        </div>
+        <div style="background: #818CF820; border-radius: 3pt; padding: 3pt 5pt; width: 100%; text-align: center;">
+          <p style="font-size: 6pt; color: #818CF8;">Gate &#8596; Layer</p>
+        </div>
+        <div style="background: #818CF820; border-radius: 3pt; padding: 3pt 5pt; width: 100%; text-align: center;">
+          <p style="font-size: 6pt; color: #818CF8;">Rule &#8596; Chain</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GEODE column -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC4; border-radius: 5pt; padding: 10pt; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 4pt 10pt; text-align: center;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">GEODE</p>
+        <p style="font-size: 6pt; color: #8B949E;">Autonomous agent runtime</p>
+      </div>
+
+      <!-- Pair 1 mirror -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #4ECDC4; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">GEODE.md — 에이전트 정체성</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">SESSION_START 시 자동 로드. 런타임 CANNOT 4규칙. 왜: LLM이 역할을 잊지 않도록.</p>
+      </div>
+
+      <!-- Pair 2 mirror -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #4ECDC4; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">5-Layer Verification</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">G1-G4 Guardrails → BiasBuster → Cross-LLM(&#945;&#8805;0.67) → Confidence&#8805;0.7 → Rights.</p>
+      </div>
+
+      <!-- Pair 3 mirror -->
+      <div style="background: #0D1117; border-radius: 4pt; padding: 8pt 10pt; border-left: 2pt solid #4ECDC4; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">PolicyChain — 6 Layer</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt; line-height: 1.5;">Profile → Org → Mode → Agent(STANDARD/WRITE/DANGEROUS) → Node-scope → Sub-agent.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E; font-style: italic;">하네스를 빌드하는 하네스는 자신의 구조를 공유한다 — 3쌍의 거울</p>
+    <p style="font-size: 5pt; color: #8B949E;">10 / 31</p>
+  </div>
+</body>
+</html>

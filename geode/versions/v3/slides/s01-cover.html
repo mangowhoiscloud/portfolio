@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+</style>
+</head>
+<body>
+
+<!-- Background image (full bleed, dimmed) -->
+<img src="assets/bg-cover.png" style="position: absolute; top: 0; left: 0; width: 720pt; height: 405pt; object-fit: cover; opacity: 0.18; z-index: 0;">
+
+<!-- Content layer -->
+<div style="position: relative; z-index: 1; display: flex; flex-direction: column; height: 405pt;">
+
+  <!-- Top bar -->
+  <div style="display: flex; align-items: center; padding: 14pt 36pt 0pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">GEODE v0.31.0</p>
+    <div style="flex: 1;"></div>
+    <p style="font-size: 8pt; color: #8B949E;">36일 · 1,160 커밋 · 39 릴리스</p>
+  </div>
+
+  <!-- Main content row -->
+  <div style="flex: 1; display: flex; align-items: center; padding: 0 36pt; gap: 24pt;">
+
+    <!-- Left: title block -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10pt;">
+
+      <!-- Tagline badge -->
+      <div style="display: inline-flex; align-items: center; gap: 6pt; background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 5pt 10pt; width: fit-content;">
+        <div style="width: 6pt; height: 6pt; background: #4ECDC4; border-radius: 50%;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; font-family: 'Courier New', monospace;">while(tool_use) → 50 rounds × 200 turns</p>
+      </div>
+
+      <!-- Main title -->
+      <div>
+        <h1 style="font-size: 32pt; font-weight: bold; color: #FFFFFF; line-height: 1.1;">GEODE</h1>
+        <h2 style="font-size: 14pt; font-weight: bold; color: #4ECDC4; margin-top: 4pt;">장기 자율 실행 하네스</h2>
+        <p style="font-size: 9pt; color: #8B949E; margin-top: 6pt;">Long-Running Autonomous Execution Harness</p>
+      </div>
+
+      <!-- Author line -->
+      <div style="display: flex; align-items: center; gap: 8pt; margin-top: 4pt;">
+        <div style="width: 2pt; height: 28pt; background: #818CF8; border-radius: 1pt;"></div>
+        <div>
+          <p style="font-size: 13pt; font-weight: bold; color: #FFFFFF;">류지환</p>
+          <p style="font-size: 9pt; color: #818CF8; font-weight: bold;">Harness Engineer</p>
+        </div>
+      </div>
+
+      <!-- Stat row -->
+      <div style="display: flex; gap: 8pt; margin-top: 8pt;">
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4;">187</p>
+          <p style="font-size: 6pt; color: #8B949E;">Python Modules</p>
+        </div>
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #818CF8;">3,201</p>
+          <p style="font-size: 6pt; color: #8B949E;">Tests</p>
+        </div>
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #F5C542;">46</p>
+          <p style="font-size: 6pt; color: #8B949E;">Hook Events</p>
+        </div>
+        <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; text-align: center; flex: 1;">
+          <p style="font-size: 20pt; font-weight: bold; color: #34D399;">52</p>
+          <p style="font-size: 6pt; color: #8B949E;">Native Tools</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: mascot -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8pt;">
+      <img src="assets/mascot.png" style="width: 140pt; height: 140pt; object-fit: contain;">
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 8pt 12pt; text-align: center;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Game IP Analysis</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">Domain Harness</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 10pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 6pt; color: #8B949E;">Feb 21 – Mar 28, 2026 · Anthropic / OpenAI / ZhipuAI · 3 Providers</p>
+    <p style="font-size: 6pt; color: #8B949E;">01 / 33</p>
+  </div>
+
+</div>
+</body>
+</html>

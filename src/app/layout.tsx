@@ -1,36 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { I18nProvider } from "@/lib/i18n";
-import { ModalProvider } from "@/components/modal/modal-provider";
+import { Inter, Fira_Code, Outfit } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const outfit = Outfit({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+});
+
+const firaCode = Fira_Code({
+  variable: "--font-fira-code",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Eco² Portfolio | Backend & Infrastructure",
+  title: "Jihwan Ryu — Portfolio",
   description:
-    "Multi-LLM Agent 기반 비동기 분산 클러스터 - 24-Node Kubernetes, LangGraph Pipeline, Event-Driven Architecture",
-  keywords: [
-    "Kubernetes",
-    "LangGraph",
-    "FastAPI",
-    "LLM",
-    "Distributed Systems",
-    "Backend",
-  ],
+    "GEODE · REODE · ECO2 — Agentic AI, Migration Harness, Distributed Systems",
   authors: [{ name: "Jihwan Ryu", url: "https://github.com/mangowhoiscloud" }],
   openGraph: {
-    title: "Eco² Portfolio",
-    description: "Multi-LLM Agent 기반 비동기 분산 클러스터",
+    title: "Jihwan Ryu — Portfolio",
+    description: "GEODE · REODE · ECO2",
     type: "website",
   },
 };
@@ -41,20 +36,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${outfit.variable} ${firaCode.variable} antialiased bg-[#0B1628] text-[#F0F0FF]`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <I18nProvider>
-            <ModalProvider>{children}</ModalProvider>
-          </I18nProvider>
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

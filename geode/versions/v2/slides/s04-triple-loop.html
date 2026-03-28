@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 10pt; font-weight: bold; color: #818CF8;">OPENING &#8212; HARNESS ENGINEERING</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Triple Loop: META, DEV, RUNTIME</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;"><span style="color: #F5C542; font-family: 'Courier New', monospace;">while(tool_use)</span> &#8212; 세 루프의 공유 기본 단위. RUNTIME이 DEV를 먹이고, DEV가 META를 먹인다. Hook 46 events가 루프 간 신호를 전달한다.</p>
+  </div>
+
+  <!-- Triple Loop Diagram -->
+  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; flex-direction: column; gap: 5pt; min-height: 0;">
+
+    <!-- META LOOP -->
+    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 5pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 82pt; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">META</p>
+        <p style="font-size: 6pt; color: #8B949E;">Scaffold Evolution</p>
+        <p style="font-size: 6pt; color: #818CF8; margin-top: 1pt;">weeks</p>
+      </div>
+      <div style="display: flex; align-items: stretch; gap: 4pt; flex: 1;">
+        <div style="background: #818CF812; border: 1px solid #818CF840; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Observe</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CI 결과 · DRIFT_DETECTED · 세션 회고</p>
+        </div>
+        <p style="font-size: 8pt; color: #818CF8; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #818CF812; border: 1px solid #818CF840; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Learn</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">패턴 추출 · anti-pattern 식별</p>
+        </div>
+        <p style="font-size: 8pt; color: #818CF8; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #818CF812; border: 1px solid #818CF840; border-radius: 4pt; padding: 6pt 8pt; flex: 1.3;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Update Scaffold</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">CLAUDE.md 23 CANNOT 규칙 · 21 Skills · CI 래칫 &#8805;3,201</p>
+        </div>
+      </div>
+      <div style="background: #818CF820; border-radius: 3pt; padding: 4pt 7pt; flex-shrink: 0;">
+        <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">controls</p>
+      </div>
+    </div>
+
+    <!-- Hook connector META&#8596;DEV -->
+    <div style="display: flex; align-items: center; gap: 6pt; padding-left: 92pt;">
+      <div style="width: 2pt; height: 10pt; background: #F97316;"></div>
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">PIPELINE_END · TURN_COMPLETE &#8594; LEARNINGS.md 업데이트 &#8594; CLAUDE.md CANNOT 규칙 추가 · 스킬 생성</p>
+    </div>
+
+    <!-- DEV LOOP -->
+    <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 5pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 82pt; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">DEV</p>
+        <p style="font-size: 6pt; color: #8B949E;">Claude Code per-PR</p>
+        <p style="font-size: 6pt; color: #4ECDC4; margin-top: 1pt;">hours</p>
+      </div>
+      <div style="display: flex; align-items: stretch; gap: 4pt; flex: 1;">
+        <div style="background: #4ECDC412; border: 1px solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Plan</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Socratic 5Q · GAP Audit</p>
+        </div>
+        <p style="font-size: 8pt; color: #4ECDC4; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #4ECDC412; border: 1px solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Implement</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">feature branch · ruff+mypy+pytest</p>
+        </div>
+        <p style="font-size: 8pt; color: #4ECDC4; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #4ECDC412; border: 1px solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Verify</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4-persona 리뷰 · CI 5/5</p>
+        </div>
+        <p style="font-size: 8pt; color: #4ECDC4; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #4ECDC412; border: 1px solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Merge</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">PR&#8594;main · #500+ PRs · progress.md</p>
+        </div>
+      </div>
+      <div style="background: #4ECDC420; border-radius: 3pt; padding: 4pt 7pt; flex-shrink: 0;">
+        <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">produces</p>
+      </div>
+    </div>
+
+    <!-- Hook connector DEV&#8596;RUNTIME -->
+    <div style="display: flex; align-items: center; gap: 6pt; padding-left: 92pt;">
+      <div style="width: 2pt; height: 10pt; background: #F97316;"></div>
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">SESSION_START &#8594; GEODE.md + MEMORY.md + LEARNINGS.md 로드 · VERIFICATION_FAIL &#8594; 새 DEV PR 트리거</p>
+    </div>
+
+    <!-- RUNTIME LOOP -->
+    <div style="background: #161B22; border: 1px solid #34D399; border-radius: 5pt; padding: 8pt 10pt; display: flex; align-items: center; gap: 8pt;">
+      <div style="width: 82pt; flex-shrink: 0;">
+        <p style="font-size: 9pt; font-weight: bold; color: #34D399;">RUNTIME</p>
+        <p style="font-size: 6pt; color: #8B949E;">GEODE while(tool_use)</p>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 1pt;">seconds</p>
+      </div>
+      <div style="display: flex; align-items: stretch; gap: 4pt; flex: 1;">
+        <div style="background: #34D39912; border: 1px solid #34D39940; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Query</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">사용자 입력 · SESSION_START</p>
+        </div>
+        <p style="font-size: 8pt; color: #34D399; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #34D39912; border: 1px solid #34D39940; border-radius: 4pt; padding: 6pt 8pt; flex: 1.1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Tool Select</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">52 native + 45 MCP · 4-경로 디스패치</p>
+        </div>
+        <p style="font-size: 8pt; color: #34D399; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #34D39912; border: 1px solid #34D39940; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Execute</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">PolicyChain 6-layer · conf &#8805;0.7</p>
+        </div>
+        <p style="font-size: 8pt; color: #34D399; align-self: center; padding: 0 2pt;">&#10132;</p>
+        <div style="background: #34D39912; border: 1px solid #34D39940; border-radius: 4pt; padding: 6pt 8pt; flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Observe</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;"><span style="color: #F97316; font-weight: bold;">46</span> Hook events · 메모리 저장</p>
+        </div>
+      </div>
+      <div style="background: #34D39920; border-radius: 3pt; padding: 4pt 7pt; flex-shrink: 0;">
+        <p style="font-size: 6pt; font-weight: bold; color: #34D399;">spawns</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E; font-style: italic;">워크플로우가 시스템을 만든다. 시스템이 워크플로우를 증명한다. 46 Hook events가 세 루프를 연결한다.</p>
+    <p style="font-size: 5pt; color: #8B949E;">04 / 31</p>
+  </div>
+</body>
+</html>

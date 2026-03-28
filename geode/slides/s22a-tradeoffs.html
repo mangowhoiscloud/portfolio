@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CONNECTION — DESIGN DECISIONS (1/2)</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">설계 결정: 파이프라인 · 실행 · 보안</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">각 항목: [채택] vs [기각] — 왜 이 선택인가를 1줄로 정당화</p>
+  </div>
+
+  <!-- 2-column layout -->
+  <div style="flex: 1; padding: 0 36pt 6pt; display: flex; gap: 10pt;">
+
+    <!-- COLUMN 1: Pipeline & Execution -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">파이프라인 · 실행</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Plan-and-Execute DAG</span> vs ReAct</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">결정론적 실행 순서 + 병렬 노드 — 재귀 추론 루프 없이 구조화된 다단계 가능</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Send API 병렬 실행</span> vs 순차 처리</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">4 애널리스트 × 3 평가자 동시 — LangGraph Send가 상태 병합을 자동 처리</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Clean Context (analyses: [])</span> vs 전체 공유</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">앵커링 편향 구조적 차단 — 단일 설계 결정이 평가 품질에 가장 큰 영향</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Confidence Gate ≥0.7 루프백</span> vs 단일 패스</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">수동 개입 없는 자가 치유 — MAX=5로 무한루프 차단</p>
+      </div>
+
+    </div>
+
+    <!-- COLUMN 2: Security & Verification -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #EF444440; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">보안 · 검증</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">3중 보안 (regex+limits+redaction)</span> vs 단일 샌드박스</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">Swiss Cheese — 각 레이어가 독립적으로 다른 공격 면을 차단</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">PolicyChain AND 체인</span> vs OR 허용</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">모든 정책 통과 필수 — Org 정책(priority=5)이 모든 하위 규칙 오버라이드</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">4-Tier HITL (SAFE/WRITE/DANGEROUS/EXPENSIVE)</span> vs 이진</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">30개 안전 접두사 자동 승인 — 세분화로 마찰 최소화, 위험 제어</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">5-Layer Swiss Cheese 검증</span> vs 단일 종합 검사</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">G1-G4 구조 + BiasBuster 인지 + Cross-LLM 통계 + Rights 법적 + Calibration 실증</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">파이프라인 4 + 보안·검증 4 — 채택 근거는 코드 경로와 측정 결과로 뒷받침 (2/2는 다음 슬라이드)</p>
+    <p style="font-size: 5pt; color: #8B949E;">22a / 24</p>
+  </div>
+
+</body>
+</html>

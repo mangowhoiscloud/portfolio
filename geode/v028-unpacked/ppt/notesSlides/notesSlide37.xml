@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ascii"?>
+<p:notes xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  
+  
+  <p:cSld>
+    
+    
+    <p:spTree>
+      
+      
+      <p:nvGrpSpPr>
+        
+        
+        <p:cNvPr id="1" name=""/>
+        
+        
+        <p:cNvGrpSpPr/>
+        
+        
+        <p:nvPr/>
+        
+      
+      </p:nvGrpSpPr>
+      
+      
+      <p:grpSpPr>
+        
+        
+        <a:xfrm>
+          
+          
+          <a:off x="0" y="0"/>
+          
+          
+          <a:ext cx="0" cy="0"/>
+          
+          
+          <a:chOff x="0" y="0"/>
+          
+          
+          <a:chExt cx="0" cy="0"/>
+          
+        
+        </a:xfrm>
+        
+      
+      </p:grpSpPr>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="2" name="Slide Image Placeholder 1"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldImg" idx="2"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="3" name="Notes Placeholder 2"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="body" idx="3" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+        
+        <p:txBody>
+          
+          
+          <a:bodyPr/>
+          
+          
+          <a:lstStyle/>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>[Model-Switching Compression Flow &#49884;&#44033;&#54868; &#8212; &#54032;&#45800; &#44540;&#44144;]</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>Context Windows &#48708;&#44368;: Opus/Sonnet/GPT-5.4 &#47784;&#46160; 1M&#44553;&#51060;&#51648;&#47564; GLM-5&#47564; 200K(&#54616;&#46300;&#52983; 80K).</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>Compression Triggers 3&#45800;&#44228;: 80% WARNING(proactive) &#8594; 95% CRITICAL(emergency) &#8594; update_model()(model switch).</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+          
+          <a:p>
+            
+            
+            <a:r>
+              
+              
+              <a:t>"Research &#48169;&#50504; E &#54616;&#51060;&#48652;&#47532;&#46300;" &#52292;&#53469;: &#45800;&#51068; &#51204;&#47029;(&#51096;&#46972;&#45236;&#44592; or &#50836;&#50557;)&#48372;&#45796; &#45800;&#44228;&#51201; &#51217;&#44540;&#51060; &#54408;&#51656;/&#48708;&#50857; &#53944;&#47112;&#51060;&#46300;&#50724;&#54532;&#50640;&#49436; &#50864;&#49688;.</a:t>
+              
+            
+            </a:r>
+            
+          
+          </a:p>
+          
+        
+        </p:txBody>
+        
+      
+      </p:sp>
+      
+      
+      <p:sp>
+        
+        
+        <p:nvSpPr>
+          
+          
+          <p:cNvPr id="4" name="Slide Number Placeholder 3"/>
+          
+          
+          <p:cNvSpPr>
+            
+            
+            <a:spLocks noGrp="1"/>
+            
+          
+          </p:cNvSpPr>
+          
+          
+          <p:nvPr>
+            
+            
+            <p:ph type="sldNum" idx="5" sz="quarter"/>
+            
+          
+          </p:nvPr>
+          
+        
+        </p:nvSpPr>
+        
+        
+        <p:spPr/>
+        
+      
+      </p:sp>
+      
+    
+    </p:spTree>
+    
+  
+  </p:cSld>
+  
+  
+  <p:clrMapOvr>
+    
+    
+    <a:masterClrMapping/>
+    
+  
+  </p:clrMapOvr>
+  
+
+</p:notes>

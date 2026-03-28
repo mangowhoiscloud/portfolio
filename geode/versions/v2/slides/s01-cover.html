@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+</style>
+</head>
+<body>
+
+  <!-- Background image -->
+  <img src="assets/bg-cover.png" style="position: absolute; top: 0; left: 0; width: 720pt; height: 405pt; opacity: 1;">
+
+  <!-- Main content -->
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 52pt; position: relative;">
+
+    <!-- Top badges row -->
+    <div style="display: flex; align-items: center; gap: 7pt; margin-bottom: 10pt;">
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 4pt 10pt;">
+        <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold; letter-spacing: 0.3pt;">v0.31.0</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 4pt 10pt;">
+        <p style="font-size: 6pt; color: #8B949E;">Autonomous Execution Agent</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #F97316; border-radius: 4pt; padding: 4pt 10pt;">
+        <p style="font-size: 6pt; color: #F97316; font-weight: bold;">36-day SOLO build</p>
+      </div>
+    </div>
+
+    <!-- Project name + presenter -->
+    <h1 style="font-size: 28pt; font-weight: bold; color: #FFFFFF; letter-spacing: -0.5pt; line-height: 1.1;">GEODE</h1>
+    <p style="font-size: 9pt; color: #8B949E; margin-top: 4pt;">류지환 &mdash; Harness Engineer</p>
+
+    <!-- Tagline -->
+    <p style="font-size: 7pt; color: #4ECDC4; margin-top: 5pt; font-family: 'Courier New', monospace; letter-spacing: 0.4pt;">while(tool_use) &#123; observe &#8594; learn &#8594; act &#125;</p>
+
+    <!-- Opening thesis -->
+    <div style="background: #161B22; border: 1pt solid #818CF8; border-left: 4pt solid #818CF8; border-radius: 4pt; padding: 9pt 12pt; margin-top: 10pt; max-width: 430pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF; line-height: 1.5;">확률적 시스템(LLM)은 제어 없이 발산합니다.</p>
+      <p style="font-size: 8pt; color: #8B949E; line-height: 1.5; margin-top: 4pt;">발산을 루프와 가치로 수렴시키는 하네스를 만듭니다.</p>
+    </div>
+
+    <!-- Primary stat cards -->
+    <div style="display: flex; gap: 7pt; margin-top: 14pt;">
+      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 4pt; padding: 8pt 11pt; text-align: center; min-width: 64pt;">
+        <p style="font-size: 18pt; font-weight: bold; color: #818CF8; line-height: 1;">187</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">Python Modules</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 8pt 11pt; text-align: center; min-width: 64pt;">
+        <p style="font-size: 18pt; font-weight: bold; color: #4ECDC4; line-height: 1;">3,201</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">Tests Passing</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #F5C542; border-radius: 4pt; padding: 8pt 11pt; text-align: center; min-width: 64pt;">
+        <p style="font-size: 18pt; font-weight: bold; color: #F5C542; line-height: 1;">1,160</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">Commits</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #F97316; border-radius: 4pt; padding: 8pt 11pt; text-align: center; min-width: 64pt;">
+        <p style="font-size: 18pt; font-weight: bold; color: #F97316; line-height: 1;">46</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">Hook Events</p>
+      </div>
+      <div style="background: #161B22; border: 1px solid #34D399; border-radius: 4pt; padding: 8pt 11pt; text-align: center; min-width: 64pt;">
+        <p style="font-size: 18pt; font-weight: bold; color: #34D399; line-height: 1;">500+</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 2pt;">PRs Merged</p>
+      </div>
+    </div>
+
+    <!-- Secondary stats -->
+    <p style="font-size: 6pt; color: #8B949E; margin-top: 9pt;">
+      <span style="color: #E2E8F0;">52</span> tools + <span style="color: #E2E8F0;">45</span> MCP &nbsp;&#183;&nbsp;
+      <span style="color: #E2E8F0;">21</span> Scaffold Skills &nbsp;&#183;&nbsp;
+      <span style="color: #E2E8F0;">39</span> Releases &nbsp;&#183;&nbsp;
+      Feb 21 &#8212; Mar 28, 2026
+    </p>
+  </div>
+
+  <!-- Mascot -->
+  <img src="assets/mascot.png" style="position: absolute; bottom: 14pt; right: 28pt; width: 86pt; height: 86pt; opacity: 0.75; border-radius: 50%;">
+
+  <!-- Footer -->
+  <div style="padding: 6pt 52pt; position: relative; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE Portfolio V2 &#8212; Harness Engineering</p>
+    <p style="font-size: 5pt; color: #8B949E;">01 / 31</p>
+  </div>
+</body>
+</html>
