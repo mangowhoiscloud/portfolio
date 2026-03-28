@@ -99,7 +99,7 @@ body {
   <!-- Right: Socratic Gate + Stats -->
   <div style="width: 160pt; display: flex; flex-direction: column; gap: 8pt;">
 
-    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+    <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;">
       <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Socratic Gate (①)</p>
       <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">구현 전 반드시 통과해야 하는 5가지 질문:</p>
       <ul style="padding-left: 12pt;">
@@ -112,6 +112,21 @@ body {
       <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.4;">이 5가지를 답하지 못하면 코드 작성 불가 — 루프가 ①로 되돌아간다.</p>
     </div>
 
+    <!-- Trade-off: 왜 8단계인가 -->
+    <div style="background: #1E293B; border: 1px solid #34D39960; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 4pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">왜 8단계인가?</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 4pt;">5단계(Plan→Implement→Test→Merge→Deploy)면 충분하지 않은가?</p>
+      <div style="display: flex; gap: 5pt;">
+        <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 5pt 7pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #EF4444; margin-bottom: 2pt;">5단계 부재 시</p>
+          <p style="font-size: 6pt; color: #8B949E; line-height: 1.4;">GAP Audit·Socratic Gate 없으면 불필요한 구현이 50% — 잘못된 전제로 PR이 병합된다</p>
+        </div>
+        <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 5pt 7pt;">
+          <p style="font-size: 6pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">8단계 추가 비용</p>
+          <p style="font-size: 6pt; color: #8B949E; line-height: 1.4;">①② Socratic+Frontier로 착수가 느리지만, 회귀 없는 39회 릴리스가 증거다</p>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -120,7 +135,7 @@ body {
 <!-- Footer -->
 <div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
   <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 21 Skills · LEARNINGS.md 패턴 축적</p>
-  <p style="font-size: 5pt; color: #8B949E;">23 / 33</p>
+  <p style="font-size: 5pt; color: #8B949E;">23 / 34</p>
 </div>
 
 </body>

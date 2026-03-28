@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const stats = [
   { value: "6", label: "Layers", sub: "L0–L5" },
-  { value: "96", label: "Tools", sub: "52 + 44 MCP" },
+  { value: "98", label: "Tools", sub: "54 + 44 MCP" },
   { value: "46", label: "Hooks", sub: "lifecycle" },
   { value: "3.3K+", label: "Tests", sub: "CI ratchet" },
 ];

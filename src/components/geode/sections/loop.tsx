@@ -339,18 +339,21 @@ function TypingTerminal() {
 /* ── Stats ── */
 const loopStats = [
   { value: "∞", label: "while True" },
-  { value: "52", label: "built-in tools" },
+  { value: "54", label: "built-in tools" },
   { value: "44", label: "MCP catalog" },
-  { value: "5", label: "safety guards" },
+  { value: "8", label: "safety guards" },
 ];
 
-/* ── 5 Safety Guards ── */
+/* ── 5+3 Safety Guards ── */
 const guards = [
   { name: "수렴 감지", trigger: "동일 에러 4회 연속", effect: "break", color: "#E87080" },
   { name: "시간 예산", trigger: "wall-clock 만료 (Karpathy P3)", effect: "wrap-up → end", color: "#F5C542" },
-  { name: "컨텍스트 80%", trigger: "Provider별 자동 압축", effect: "요약 후 계속", color: "#818CF8" },
+  { name: "컨텍스트 80%", trigger: "Provider별 자동 압축 (Anthropic compact_20260112 / OpenAI client-side)", effect: "요약 후 계속", color: "#818CF8" },
   { name: "컨텍스트 95%", trigger: "긴급 프루닝 + UI 알림", effect: "최근 N개만 유지", color: "#C084FC" },
   { name: "StuckDetector", trigger: "2시간 무응답", effect: "세션 자동 해제", color: "#4ECDC4" },
+  { name: "비용 자동 정지", trigger: "세션당 비용 상한 초과", effect: "자동 정지 (v0.32)", color: "#F4B8C8" },
+  { name: "래칫 에러 감지", trigger: "결과 악화 패턴 (Karpathy P4)", effect: "롤백", color: "#60A5FA" },
+  { name: "다양성 강제", trigger: "동일 도구 5회 연속 호출", effect: "다른 경로 시도", color: "#34D399" },
 ];
 
 /* ── Section ── */

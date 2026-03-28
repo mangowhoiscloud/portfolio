@@ -35,7 +35,7 @@ const layers = [
   {
     id: "L4",
     name: "Extensibility",
-    detail: "52 Tools + 44 MCP · PolicyChain · 21 Skills",
+    detail: "54 Tools + 44 MCP · PolicyChain · 21 Skills",
     color: "#F5C542",
     modules: "core/tools, core/skills, core/mcp",
   },

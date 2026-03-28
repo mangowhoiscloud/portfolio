@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #EF4444; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #EF4444;">SAFETY · SECURITY</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Security: Bash 3-Layer + Dual Trust Model</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율 에이전트는 신뢰 경계가 없으면 시스템을 파괴한다 — PolicyChain이 실행 전 모든 명령을 검문한다</p>
+</div>
+
+<!-- Content: diagram + layers + dual trust -->
+<div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; align-items: stretch;">
+
+  <!-- PolicyChain diagram -->
+  <div style="flex: 1.1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 6pt;">
+    <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+      <div style="width: 3pt; height: 12pt; background: #EF4444; border-radius: 2pt;"></div>
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">PolicyChain 다이어그램</p>
+    </div>
+    <img src="assets/v028-diagram-policy-chain.png" style="width: 340pt; height: 158pt; border-radius: 4pt; object-fit: contain;">
+  </div>
+
+  <!-- Right: 3-Layer + Dual Trust -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+    <!-- Bash 3-Layer -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Bash 3-Layer 실행 제어</p>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L1 — Syntax Validation</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">rm -rf / · chmod 777 · curl | bash 패턴 차단. 실행 전 정적 분석.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L2 — PolicyChain Hook</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">46 Hook Events 중 BASH_EXEC_PRE에서 PolicyChain 통과 여부 확인. 거부 시 즉시 차단 + 사유 반환.</p>
+      </div>
+      <div style="background: #1E293B; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">L3 — macOS Seatbelt Sandbox</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">REODE: 34-패턴 deny-list. 파일시스템 쓰기, 네트워크 외부 접근, 프로세스 fork 제한.</p>
+      </div>
+    </div>
+
+    <!-- Dual Trust Model -->
+    <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 5pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">Dual Trust Model — 두 독립 축</p>
+      <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-bottom: 2pt;">에이전트 안전과 파이프라인 검증은 독립 축이다. 에이전트는 입력을 차단(Input Gating), 파이프라인은 출력을 검증(Output Validation). 둘 다 통과해야만 결과가 신뢰된다.</p>
+      <div style="display: flex; gap: 6pt;">
+        <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Input Gating</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4-Tier HITL 권한 모델 — 에이전트 실행 전 차단</p>
+        </div>
+        <div style="flex: 1; background: #1E293B; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Output Validation</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">5-Tier Safety 등급 — 실행 후 출력 검증</p>
+        </div>
+      </div>
+      <p style="font-size: 6pt; color: #8B949E; line-height: 1.4; margin-top: 2pt;">TIER 0-1: asyncio.gather 병렬 자동 실행 / TIER 3-4: 개별 수동 승인 필수</p>
+    </div>
+
+    <!-- Trade-off note -->
+    <div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">Trade-off: 3-Layer 제어 비용</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">L1 정적 분석 + L2 PolicyChain + L3 Seatbelt 모두 통과 시 지연이 있지만, 자율 에이전트가 시스템을 파괴한 사례가 0건인 것이 증거다.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 46 Hook Events · 5-Tier Tool Safety · macOS Seatbelt (REODE)</p>
+  <p style="font-size: 5pt; color: #8B949E;">27 / 34</p>
+</div>
+
+</body>
+</html>

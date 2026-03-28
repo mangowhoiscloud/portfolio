@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">PART 0 · HOOK</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 8pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">36일의 피봇 스토리: 과제 → 탈락 → 자율 하네스</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">면접 탈락이 아키텍처 피봇의 계기가 되었습니다</p>
+  </div>
+
+  <!-- Timeline -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; justify-content: center; gap: 6pt;">
+
+    <!-- Phase row: horizontal timeline line -->
+    <div style="display: flex; align-items: flex-start; gap: 0pt; position: relative;">
+
+      <!-- Phase 1 -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0pt;">
+        <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt 10pt; width: 100%; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">PHASE 1</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF; margin-top: 3pt;">Game IP Agent</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">Feb 21</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 6pt;">넥슨 코딩 과제:</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">5-Layer 검증 파이프라인</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">도메인 분석 에이전트</p>
+        </div>
+        <!-- connector -->
+        <div style="width: 1pt; height: 14pt; background: #21262D;"></div>
+        <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 8pt; width: 100%;">
+          <p style="font-size: 6pt; color: #8B949E;">AgenticLoop v0.1</p>
+          <p style="font-size: 6pt; color: #8B949E;">3 Provider Failover</p>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="display: flex; align-items: flex-start; padding-top: 22pt;">
+        <p style="font-size: 14pt; color: #F5C542; padding: 0 6pt;">→</p>
+      </div>
+
+      <!-- PIVOT MOMENT -->
+      <div style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0pt;">
+        <div style="background: #1A0A0A; border: 2px solid #EF4444; border-radius: 6pt; padding: 10pt 14pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">PIVOT</p>
+          <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF; margin-top: 3pt;">면접 탈락</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">Mar 03</p>
+          <p style="font-size: 7pt; color: #EF4444; margin-top: 6pt;">"도메인 에이전트로는</p>
+          <p style="font-size: 7pt; color: #EF4444;">부족하다"</p>
+        </div>
+        <div style="width: 1pt; height: 14pt; background: #EF4444;"></div>
+        <div style="background: #1A0A0A; border: 1px solid #EF4444; border-radius: 4pt; padding: 5pt 8pt; text-align: center;">
+          <p style="font-size: 6pt; color: #EF4444;">자율 피봇 결정</p>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="display: flex; align-items: flex-start; padding-top: 22pt;">
+        <p style="font-size: 14pt; color: #4ECDC4; padding: 0 6pt;">→</p>
+      </div>
+
+      <!-- Phase 2 -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0pt;">
+        <div style="background: #161B22; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 10pt 10pt; width: 100%; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">PHASE 2</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF; margin-top: 3pt;">하네스 강화</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">Mar 04 – Mar 18</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 6pt;">46 Hook Events</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">Plan-first + Compaction</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">Safety 3-Brake</p>
+        </div>
+        <div style="width: 1pt; height: 14pt; background: #21262D;"></div>
+        <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 8pt; width: 100%;">
+          <p style="font-size: 6pt; color: #8B949E;">Scheduler + Gateway</p>
+          <p style="font-size: 6pt; color: #8B949E;">Cron 세션 격리</p>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div style="display: flex; align-items: flex-start; padding-top: 22pt;">
+        <p style="font-size: 14pt; color: #34D399; padding: 0 6pt;">→</p>
+      </div>
+
+      <!-- Phase 3: Fork -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0pt;">
+        <div style="background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 10pt 10pt; width: 100%; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">PHASE 3 · FORK</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #FFFFFF; margin-top: 3pt;">REODE 제품화</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">Mar 19 – Mar 28</p>
+          <p style="font-size: 7pt; color: #E2E8F0; margin-top: 6pt;">GEODE v0.13 → Fork</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">209 모듈 · 3,274 테스트</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">83/83 mvn 패스</p>
+        </div>
+        <div style="width: 1pt; height: 14pt; background: #21262D;"></div>
+        <div style="background: #1E293B; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 8pt; width: 100%;">
+          <p style="font-size: 6pt; color: #8B949E;">하네스 패턴 재사용 증명</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom insight bar -->
+    <div style="background: #1E293B; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 8pt 14pt; margin-top: 6pt; display: flex; align-items: center; gap: 10pt;">
+      <div style="width: 4pt; height: 36pt; background: #4ECDC4; border-radius: 2pt; flex-shrink: 0;"></div>
+      <div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">피봇의 결론</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 3pt;">도메인 에이전트는 <strong style="color: #FFFFFF;">무엇을</strong> 분석하는가의 문제입니다. 하네스는 <strong style="color: #FFFFFF;">어떻게 오래, 안전하게 실행하는가</strong>의 문제입니다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt;">REODE 포크는 같은 하네스로 Java 코드 마이그레이션을 자율 수행 — <strong style="color: #34D399;">하네스 이식성의 증명</strong>.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">v0.31.0 · 1,160 commits · 39 releases · 36 days</p>
+    <p style="font-size: 6pt; color: #8B949E;">02 / 34</p>
+  </div>
+
+</body>
+</html>

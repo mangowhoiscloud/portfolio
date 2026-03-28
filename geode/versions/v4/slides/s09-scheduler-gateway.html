@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">PART 1 · SCHEDULER + GATEWAY</p>
+    <div style="flex: 1;"></div>
+    <div style="background: #0A1A1A; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 3pt 8pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">NEW SLIDE</p>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Scheduler + Gateway: 시간 기반 자율 실행과 채널 라우팅</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Cron 세션 격리로 메인 대화 오염 방지 · 채널 무관 단일 세션 관리</p>
+  </div>
+
+  <!-- Content: two halves -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt;">
+
+    <!-- Left: Scheduler -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 4pt; height: 12pt; background: #4ECDC4; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Scheduler — 시간 기반 자율 실행</p>
+      </div>
+
+      <!-- NL Parser + Types -->
+      <div style="background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 9pt; display: flex; gap: 8pt;">
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">스케줄 유형</p>
+          <ul style="margin-left: 10pt;">
+            <li style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">AT</strong> — 특정 시각 1회 실행</li>
+            <li style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">EVERY</strong> — 간격 반복 실행</li>
+            <li style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">CRON</strong> — cron 표현식 실행</li>
+          </ul>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">NL Parser: "매일 오전 9시에 리포트 생성" → AT/EVERY/CRON으로 파싱</p>
+        </div>
+        <div style="width: 1pt; background: #21262D; flex-shrink: 0;"></div>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">실행 흐름</p>
+          <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">NL 파싱 → action_queue 등록 → 트리거 시각 도달 → AgenticLoop 위임. 큐 관리로 동시 실행 충돌을 방지합니다.</p>
+          <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace; margin-top: 4pt;">action_queue → AgenticLoop</p>
+        </div>
+      </div>
+
+      <!-- Cron isolation highlight -->
+      <div style="background: #0A1A1A; border: 1px solid #4ECDC4; border-radius: 6pt; padding: 9pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 5pt;">
+          <div style="width: 4pt; height: 4pt; background: #4ECDC4; border-radius: 50%;"></div>
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Cron 세션 격리 (isolated=True)</p>
+        </div>
+
+        <!-- Flow boxes -->
+        <div style="display: flex; align-items: center; gap: 4pt;">
+          <div style="background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #8B949E;">Cron 트리거</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4;">→</p>
+          <div style="background: #0D1117; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">fresh ConversationContext</p>
+            <p style="font-size: 5pt; color: #8B949E; margin-top: 1pt;">isolated=True</p>
+          </div>
+          <p style="font-size: 10pt; color: #4ECDC4;">→</p>
+          <div style="background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt 7pt; flex: 1; text-align: center;">
+            <p style="font-size: 6pt; color: #E2E8F0;">AgenticLoop</p>
+            <p style="font-size: 5pt; color: #8B949E; margin-top: 1pt;">독립 실행</p>
+          </div>
+        </div>
+
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 5pt;">격리 기본값 — 메인 대화 컨텍스트를 오염시키지 않습니다. systemEvent로 메인에 결과 주입도 가능합니다.</p>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div style="width: 1pt; background: #21262D;"></div>
+
+    <!-- Right: Gateway -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 4pt; height: 12pt; background: #818CF8; border-radius: 2pt;"></div>
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Gateway — 채널 무관 라우팅</p>
+      </div>
+
+      <!-- Gateway flow -->
+      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 9pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+        <!-- Channel inputs -->
+        <div style="display: flex; gap: 5pt;">
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt; text-align: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Discord</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt; text-align: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Slack</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt; text-align: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">CLI</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 5pt; text-align: center;">
+            <p style="font-size: 7pt; color: #E2E8F0;">REST</p>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="text-align: center;">
+          <p style="font-size: 10pt; color: #818CF8;">↓</p>
+        </div>
+
+        <!-- ChannelBinding -->
+        <div style="background: #1A1A2E; border: 1px solid #818CF8; border-radius: 4pt; padding: 6pt 9pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">ChannelBinding</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">채널별 어댑터 → 표준 메시지 변환</p>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="text-align: center;">
+          <p style="font-size: 10pt; color: #818CF8;">↓</p>
+        </div>
+
+        <!-- Session key + LaneQueue row -->
+        <div style="display: flex; gap: 5pt;">
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">session key</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">채널:사용자 조합으로 세션 식별</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">LaneQueue</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">채널 간 처리 순서 보장</p>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div style="text-align: center;">
+          <p style="font-size: 10pt; color: #818CF8;">↓</p>
+        </div>
+
+        <!-- geode serve -->
+        <div style="background: #0A1A1A; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 6pt 9pt; text-align: center;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">geode serve</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">AgenticLoop 단일 진입점</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Trade-off bar -->
+  <div style="padding: 4pt 36pt 0pt;">
+    <div style="background: #1E293B; border: 1px solid #8B949E; border-radius: 6pt; padding: 7pt 14pt; display: flex; align-items: center; gap: 10pt;">
+      <div style="width: 4pt; height: 24pt; background: #8B949E; border-radius: 2pt; flex-shrink: 0;"></div>
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> Cron은 격리가 기본 — 메인 대화 오염 방지. 단, systemEvent로 메인 주입도 가능하여 격리와 연계를 선택할 수 있습니다. Gateway는 채널 추가 시 어댑터 1개만 구현하면 됩니다.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">core/scheduler/ · core/gateway/ · isolated=True → fresh ConversationContext</p>
+    <p style="font-size: 6pt; color: #8B949E;">09 / 34</p>
+  </div>
+
+</body>
+</html>

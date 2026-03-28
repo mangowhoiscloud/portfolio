@@ -66,10 +66,10 @@ export function ContextTiersSection() {
             Context Hierarchy
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            3-Tier 경로 분리
+            Context Hierarchy
           </h2>
           <p className="text-lg text-white/40 font-semibold mb-4">
-            Global · Per-Project · Workspace
+            3-Tier 경로 + 5-Tier 런타임 메모리
           </p>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
             Claude Code의 <code className="text-[#818CF8]/70">~/.claude/</code> 패턴을 참조하여
@@ -195,8 +195,30 @@ export function ContextTiersSection() {
           </div>
         </ScrollReveal>
 
-        {/* Project ID encoding */}
+        {/* Runtime Memory Hierarchy (5-Tier) */}
         <ScrollReveal delay={0.2}>
+          <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
+            <div className="text-sm font-semibold text-white/70 mb-3">Runtime Memory Hierarchy (5-Tier)</div>
+            <div className="space-y-1.5">
+              {[
+                { tier: "T0", name: "SOUL", desc: "조직 미션/원칙 (SOUL.md)", color: "#F4B8C8" },
+                { tier: "T0.5", name: "User Profile", desc: "사용자 선호, 언어, 타임존", color: "#E87080" },
+                { tier: "T1", name: "Organization", desc: "MonoLake fixture 기반 장르 파라미터, 가중치", color: "#818CF8" },
+                { tier: "T2", name: "Project", desc: "분석 이력, 캐시 시그널, IP 메타데이터", color: "#4ECDC4" },
+                { tier: "T3", name: "Session", desc: "현재 파이프라인 상태, ContextVar[SessionCtx]", color: "#F5C542" },
+              ].map((m) => (
+                <div key={m.tier} className="flex items-center gap-3 px-3 py-2 rounded-lg border border-white/[0.03]" style={{ background: `${m.color}03` }}>
+                  <span className="shrink-0 w-8 text-center text-[10px] font-mono font-bold" style={{ color: m.color }}>{m.tier}</span>
+                  <span className="text-sm font-medium text-white/70 w-[100px] shrink-0">{m.name}</span>
+                  <span className="text-sm text-[#7A8CA8]">{m.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Project ID encoding */}
+        <ScrollReveal delay={0.25}>
           <div className="rounded-lg border border-white/[0.06] px-5 py-3.5 font-mono text-sm">
             <span className="text-[#7A8CA8]">Project ID 인코딩: </span>
             <span className="text-white/60">/Users/mango/workspace/geode</span>

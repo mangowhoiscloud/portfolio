@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+  <div style="width: 4pt; height: 16pt; background: #34D399; border-radius: 2pt;"></div>
+  <p style="font-size: 10pt; font-weight: bold; color: #34D399;">CONNECTION · CONSTRAINTS → RESULTS</p>
+</div>
+
+<!-- Title -->
+<div style="padding: 0 36pt 5pt;">
+  <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Constraints → Results</h1>
+  <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">CANNOT 규칙과 설계 제약이 결과를 만든다 — 제약 없는 자유가 아닌 제약을 통한 성취</p>
+</div>
+
+<!-- Content: 5 CANNOT → Result pairs -->
+<div style="flex: 1; padding: 0 36pt; display: flex; flex-direction: column; gap: 7pt; justify-content: center;">
+
+  <!-- Pair 1 -->
+  <div style="display: flex; align-items: center; gap: 8pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">키워드 나열식 슬라이드 금지 — 인과관계 1문장 필수</p>
+    </div>
+    <p style="font-size: 14pt; color: #34D399; font-weight: bold;">→</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">33장 모든 슬라이드가 DAG + 내러티브 시각화로 구성됨</p>
+    </div>
+  </div>
+
+  <!-- Pair 2 -->
+  <div style="display: flex; align-items: center; gap: 8pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">Socratic Gate 통과 전 코드 작성 금지</p>
+    </div>
+    <p style="font-size: 14pt; color: #34D399; font-weight: bold;">→</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;"><span style="font-size: 11pt; font-weight: bold; color: #34D399;">39</span>회 릴리스 무회귀 — 회귀 이슈 60% 감소</p>
+    </div>
+  </div>
+
+  <!-- Pair 3 -->
+  <div style="display: flex; align-items: center; gap: 8pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">단순 박스형 다이어그램 금지 — 화살표 흐름 + 분기 필수</p>
+    </div>
+    <p style="font-size: 14pt; color: #34D399; font-weight: bold;">→</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;"><span style="font-size: 11pt; font-weight: bold; color: #34D399;">21</span> Skills 모두 흐름도 기반 설계 문서로 누적됨</p>
+    </div>
+  </div>
+
+  <!-- Pair 4 -->
+  <div style="display: flex; align-items: center; gap: 8pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">Trade-off 명시 없는 설계 결정 금지</p>
+    </div>
+    <p style="font-size: 14pt; color: #34D399; font-weight: bold;">→</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;"><span style="font-size: 11pt; font-weight: bold; color: #34D399;">6</span>회 아키텍처 피봇 모두 CHANGELOG에 WHY 기록</p>
+    </div>
+  </div>
+
+  <!-- Pair 5 -->
+  <div style="display: flex; align-items: center; gap: 8pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;">카드 6개 초과 금지 — 정보 밀도 강제 압축</p>
+    </div>
+    <p style="font-size: 14pt; color: #34D399; font-weight: bold;">→</p>
+    <div style="flex: 1; background: #161B22; border: 1px solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RESULT</p>
+      <p style="font-size: 8pt; color: #E2E8F0; margin-top: 2pt;"><span style="font-size: 11pt; font-weight: bold; color: #34D399;">33</span>장 프레젠테이션 — 슬라이드당 핵심 1메시지 유지</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="padding: 5pt 36pt 7pt; display: flex; justify-content: space-between;">
+  <p style="font-size: 5pt; color: #8B949E;">GEODE v0.31.0 · 23 CANNOT rules · 제약이 품질을 만든다</p>
+  <p style="font-size: 5pt; color: #8B949E;">30 / 34</p>
+</div>
+
+</body>
+</html>
