@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #EF4444; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">PART 1 · LONG-RUNNING INNOVATION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">장시간 운용을 위한 2가지 혁신: Plan-first + Provider-aware Compaction</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">잘못된 방향으로 50 rounds 소모를 막기 위해 Plan-first를 도입했고, 컨텍스트 포화가 프로바이더마다 달랐기 때문에 Provider-aware Compaction을 분리했다</p>
+  </div>
+
+  <!-- Content: two halves -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt;">
+
+    <!-- Left: Plan-first -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 4pt; height: 14pt; background: #F97316; border-radius: 2pt;"></div>
+        <p style="font-size: 9pt; font-weight: bold; color: #F97316;">혁신 1 · Plan-first</p>
+      </div>
+
+      <!-- Flow diagram (text DAG) -->
+      <div style="background: #161B22; border: 1px solid #F97316; border-radius: 6pt; padding: 10pt; flex: 1;">
+
+        <!-- Step boxes -->
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+
+          <div style="background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 9pt; display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; flex-shrink: 0;">INPUT</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">사용자 요청 수신</p>
+          </div>
+
+          <!-- Decision diamond represented as special box -->
+          <div style="background: #1A0D00; border: 1px solid #F97316; border-radius: 4pt; padding: 6pt 9pt; display: flex; align-items: center; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #F97316; font-weight: bold;">복잡도 판별</p>
+            <p style="font-size: 6pt; color: #8B949E;">3+ steps?</p>
+          </div>
+
+          <div style="display: flex; gap: 5pt;">
+            <!-- Simple path -->
+            <div style="flex: 1; background: #0D1117; border: 1px solid #21262D; border-radius: 4pt; padding: 6pt 8pt; text-align: center;">
+              <p style="font-size: 6pt; color: #8B949E;">단순 요청</p>
+              <p style="font-size: 6pt; color: #34D399; margin-top: 2pt;">→ 직접 실행</p>
+            </div>
+            <!-- Complex path -->
+            <div style="flex: 1; background: #1A0D00; border: 1px solid #F97316; border-radius: 4pt; padding: 6pt 8pt; text-align: center;">
+              <p style="font-size: 6pt; color: #F97316; font-weight: bold;">복잡 요청</p>
+              <p style="font-size: 6pt; color: #E2E8F0; margin-top: 2pt;">create_plan 자발 호출</p>
+            </div>
+          </div>
+
+          <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 9pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399; margin-bottom: 2pt;">HITL UI · plan_id 노출</p>
+            <p style="font-size: 6.5pt; color: #E2E8F0;">승인 / 수정 / 거부 선택 → 확인 후 실행</p>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 6pt; background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+          <p style="font-size: 6pt; color: #8B949E;">잘못된 방향으로 50 rounds를 소모하기 전에 사람이 개입. plan_id로 수정·재승인 가능.</p>
+          <p style="font-size: 6pt; color: #F97316; margin-top: 2pt; font-family: 'Courier New', monospace;">LLM.create_plan() → plan_id → user_approval_gate</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div style="width: 1pt; background: #21262D;"></div>
+
+    <!-- Right: Provider-aware Compaction -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <div style="display: flex; align-items: center; gap: 6pt;">
+        <div style="width: 4pt; height: 14pt; background: #818CF8; border-radius: 2pt;"></div>
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">혁신 2 · Provider-aware Compaction</p>
+      </div>
+
+      <div style="background: #161B22; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt; flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+        <!-- 80% trigger -->
+        <div style="background: #1A1500; border: 1px solid #F5C542; border-radius: 4pt; padding: 6pt 9pt; display: flex; align-items: center; gap: 6pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #F5C542; flex-shrink: 0;">80%</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">컨텍스트 윈도우 포화 → 프로바이더 분기</p>
+        </div>
+
+        <!-- Provider split -->
+        <div style="display: flex; gap: 5pt; flex: 1;">
+
+          <!-- Anthropic -->
+          <div style="flex: 1; background: #0D1117; border: 1px solid #4ECDC4; border-radius: 4pt; padding: 8pt; display: flex; flex-direction: column; gap: 4pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Anthropic</p>
+            <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">서버사이드 compaction</p>
+            <p style="font-size: 6pt; color: #8B949E; line-height: 1.3;">compact_20260112 + clear_tool_uses. API가 직접 컨텍스트를 압축.</p>
+            <div style="background: #0D2A0D; border-radius: 3pt; padding: 4pt 6pt; margin-top: auto;">
+              <p style="font-size: 6pt; color: #34D399;">품질 최상 / API 종속적</p>
+            </div>
+          </div>
+
+          <!-- OpenAI / GLM -->
+          <div style="flex: 1; background: #0D1117; border: 1px solid #818CF8; border-radius: 4pt; padding: 8pt; display: flex; flex-direction: column; gap: 4pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">OpenAI / GLM</p>
+            <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">클라이언트사이드 compaction</p>
+            <p style="font-size: 6pt; color: #8B949E; line-height: 1.3;">LLM 요약 기반 압축. 80% 도달 시 직접 요약 삽입.</p>
+            <div style="background: #1A1500; border-radius: 3pt; padding: 4pt 6pt; margin-top: auto;">
+              <p style="font-size: 6pt; color: #F5C542;">범용적 / lossy 손실 있음</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hook -->
+        <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+          <p style="font-size: 6pt; color: #8B949E;">Anthropic과 OpenAI의 캐시 규칙이 달라서 단일 압축 전략을 쓰면 캐시 히트율이 붕괴한다. context_action.py hook이 프로바이더를 감지해 전략을 자동 분기한다.</p>
+          <p style="font-size: 6pt; color: #818CF8; font-family: 'Courier New', monospace; margin-top: 2pt;">context_action.py → provider_strategy()</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Trade-off bar -->
+  <div style="padding: 4pt 36pt 0pt;">
+    <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off:</strong> 서버사이드 compaction은 API 종속적이지만 품질 최상. 클라이언트는 범용적이지만 lossy. Plan-first는 자율성을 일부 제한하지만 잘못된 방향의 50 rounds 낭비를 사전 차단한다.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">core/context/context_action.py · core/orchestration/plan_manager.py</p>
+    <p style="font-size: 6pt; color: #8B949E;">08 / 35</p>
+  </div>
+
+</body>
+</html>

@@ -81,7 +81,7 @@ export function ReasoningSection() {
                   <text x={485} y={100} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
 
                   {/* Loop-back */}
-                  <path d="M485,120 C485,160 295,170 105,160 L105,120" fill="none" stroke="#F5C542" strokeOpacity={0.18} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
+                  <path d="M485,120 C485,165 295,175 105,165 C105,150 105,135 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.18} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
                   <text x={295} y={180} textAnchor="middle" fill="#F5C542" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
 
                   {/* GoalDecomposer fork */}
@@ -132,7 +132,7 @@ export function ReasoningSection() {
                   <text x={620} y={45} fill="#F5C542" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">full $1.50</text>
                   <text x={620} y={60} fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">prospect $0.80</text>
                   {/* REJECT */}
-                  <path d="M310,80 L310,105 L180,105 L180,80" fill="none" stroke="#E87080" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="3 3" />
+                  <path d="M310,80 C310,100 290,105 245,105 C200,105 180,100 180,80" fill="none" stroke="#E87080" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="3 3" />
                   <text x={245} y={118} textAnchor="middle" fill="#E87080" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">REJECTED → re-plan</text>
                 </svg>
               </div>

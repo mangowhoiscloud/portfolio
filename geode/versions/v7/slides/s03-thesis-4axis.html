@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 12pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 14pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">PART 0 · THESIS</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">확률적 시스템(LLM)은 제어 없이 발산한다</h1>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">Harness 4-Axis: 장기 운용에서 컨텍스트·루프·검증·관측 4축이 없으면 열화가 불가피하다</p>
+  </div>
+
+  <!-- Content: left thesis + right 4-axis -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt;">
+
+    <!-- Left: Thesis block -->
+    <div style="flex: 0 0 200pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Core thesis -->
+      <div style="background: #1E293B; border: 1px solid #818CF8; border-radius: 6pt; padding: 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">핵심 주장</p>
+        <p style="font-size: 8pt; color: #FFFFFF; line-height: 1.45;">LLM 단독 실행은 비결정론, 컨텍스트 손실, 비용 폭발, 루프 고착 4가지 이유로 반드시 발산한다.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 5pt; line-height: 1.4;">발산을 수렴시키는 것이 하네스의 역할이다. 4개 축이 없으면 자율 실행은 불가능하다.</p>
+      </div>
+
+      <!-- Degradation insight -->
+      <div style="background: #161B22; border: 1px solid #EF4444; border-radius: 6pt; padding: 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 5pt;">장기 운용의 열화: 실제 예시</p>
+        <ul style="margin-left: 12pt; margin-top: 2pt;">
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">컨텍스트 <strong style="color: #F5C542;">80%</strong> 채우면 응답 품질 저하 시작</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">세션 <strong style="color: #F5C542;">10턴</strong> 넘으면 인사이트 휘발</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">Prompt drift로 <strong style="color: #F5C542;">행동 변화</strong>: 같은 입력에도 다른 출력 발생</li>
+          <li style="font-size: 6.5pt; color: #E2E8F0; line-height: 1.5;">관측 공백 → CUSUM이 드리프트 미감지</li>
+        </ul>
+        <p style="font-size: 7pt; color: #EF4444; margin-top: 5pt; font-weight: bold;">→ 4축 자동 보정이 없으면 발산은 불가피</p>
+      </div>
+
+    </div>
+
+    <!-- Right: 4-Axis grid -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Axis row 1 -->
+      <div style="display: flex; gap: 6pt; flex: 1;">
+
+        <!-- Axis 1: Context Control -->
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 4pt; height: 4pt; background: #818CF8; border-radius: 50%;"></div>
+            <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">축 1 · Context Control</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">컨텍스트 제어</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">매 세션 프롬프트를 수동 편집하면 drift가 발생했기 때문에 PromptAssembler 6-Phase + SHA-256으로 자동 조립한다. 80%/95%에서 compaction이 발동해 루프가 컨텍스트 과부하로 중단되지 않는다.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+            <p style="font-size: 6pt; color: #818CF8; font-family: 'Courier New', monospace;">PromptAssembler · CompactionHook</p>
+          </div>
+        </div>
+
+        <!-- Axis 2: Execution Loop -->
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 4pt; height: 4pt; background: #4ECDC4; border-radius: 50%;"></div>
+            <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">축 2 · Execution Loop</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">실행 루프</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">브레이크 없이 실행하면 비용·수렴·탐색 고착이 발생하기 때문에 3개 자동 브레이크를 설계했다. 실측 평균 4.2 라운드 종료, 상한은 50 라운드.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace;">AgenticLoop · SafetyBrake</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Axis row 2 -->
+      <div style="display: flex; gap: 6pt; flex: 1;">
+
+        <!-- Axis 3: Verification -->
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 4pt; height: 4pt; background: #F5C542; border-radius: 50%;"></div>
+            <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">축 3 · Verification</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">검증</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">단일 LLM 평가는 Anchoring 편향으로 점수 분산이 ±18점이었기 때문에 5-Layer 검증(Guardrails→BiasBuster→Cross-LLM→Rights→Ground Truth)으로 신뢰도를 확보했다.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+            <p style="font-size: 6pt; color: #F5C542; font-family: 'Courier New', monospace;">VerificationPipeline · CrossLLM</p>
+          </div>
+        </div>
+
+        <!-- Axis 4: Observability -->
+        <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 6pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 4pt; height: 4pt; background: #34D399; border-radius: 50%;"></div>
+            <p style="font-size: 8pt; font-weight: bold; color: #34D399;">축 4 · Observability</p>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">관측</p>
+          <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">관측 공백이 있으면 CUSUM이 드리프트를 감지하지 못했기 때문에 46 Hook Events로 신경계를 구성하고 TokenTracker로 실시간 비용을 추적한다.</p>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 7pt; margin-top: auto;">
+            <p style="font-size: 6pt; color: #34D399; font-family: 'Courier New', monospace;">HookSystem · TokenTracker</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 8pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 6pt; color: #8B949E;">4축은 서로 보완하며, 하나의 결함이 전체 자율 실행을 무너뜨립니다</p>
+    <p style="font-size: 6pt; color: #8B949E;">03 / 35</p>
+  </div>
+
+</body>
+</html>

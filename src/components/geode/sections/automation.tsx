@@ -120,7 +120,7 @@ export function AutomationSection() {
               <text x={610} y={93} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
 
               {/* Feedback: Hook → TriggerManager → Scheduler */}
-              <path d="M610,120 L610,150 L90,150 L90,120" fill="none" stroke="#C084FC" strokeOpacity={0.14} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
+              <path d="M610,120 C610,155 610,155 350,155 C90,155 90,155 90,120" fill="none" stroke="#C084FC" strokeOpacity={0.14} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
               <text x={350} y={145} textAnchor="middle" fill="#C084FC" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석 파이프라인</text>
 
               {/* TriggerManager label on feedback */}

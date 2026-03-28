@@ -45,7 +45,7 @@ export function FeedbackSection() {
                 );
               })}
               {/* Loopback */}
-              <path d="M768,90 C780,120 40,120 40,90" fill="none" stroke="#F5C542" strokeOpacity={0.12} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
+              <path d="M768,90 C770,130 400,140 40,130 C38,110 38,100 40,90" fill="none" stroke="#F5C542" strokeOpacity={0.12} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
               <text x={404} y={135} textAnchor="middle" fill="#F5C542" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">cycle → ModelRegistry promotion</text>
             </svg>
           </div>

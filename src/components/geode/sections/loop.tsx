@@ -173,7 +173,7 @@ function OrbitalCycle() {
 
         {/* Center pulse */}
         <circle cx={CX} cy={CY} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0}>
-          <animate attributeName="r" values="0;{R}" dur="3s" repeatCount="indefinite" />
+          <animate attributeName="r" values="0;88" dur="3s" repeatCount="indefinite" />
           <animate attributeName="stroke-opacity" values="0.15;0" dur="3s" repeatCount="indefinite" />
         </circle>
 
