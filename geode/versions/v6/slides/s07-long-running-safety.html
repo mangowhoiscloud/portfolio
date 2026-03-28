@@ -28,7 +28,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 6pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">장기 자율 실행의 3대 위험과 자동 브레이크</h1>
-    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율성과 안전의 균형 — 사람 없이 하네스를 보호하는 3가지 메커니즘</p>
+    <p style="font-size: 8pt; color: #8B949E; margin-top: 3pt;">자율성과 안전의 균형: 사람 없이 하네스를 보호하는 3가지 메커니즘</p>
   </div>
 
   <!-- Content: 3 danger columns + trade-off bar -->
@@ -48,13 +48,13 @@ body {
 
         <!-- Problem -->
         <div style="background: #1A0A0A; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">위험 — 실제 비용 계산</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">위험: 실제 비용 계산</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">while(tool_use) 특성상 비용 폭발은 구조적으로 불가피. <strong style="color: #EF4444;">50라운드 × $0.15/turn = 세션당 $7.50</strong>. budget 초과 시 자동 정지가 없으면 하룻밤 무인 실행에 <strong style="color: #EF4444;">$500+ 소모</strong> 가능.</p>
         </div>
 
         <!-- Solution -->
         <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크: 인과 흐름</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">TokenTracker가 매 턴 비용 누적 → budget 상한 도달 시 budget_stop 신호 → LOOP_END 강제 발화. 사람 없이 비용 상한을 보장합니다.</p>
         </div>
 
@@ -76,13 +76,13 @@ body {
 
         <!-- Problem -->
         <div style="background: #1A0D00; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">위험 — 수렴 고착의 비용</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">위험: 수렴 고착의 비용</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">LLM이 동일한 에러를 반복하면 50 rounds 전체를 낭비. 동일 요청에 $7.50를 태우고 실패를 반환합니다.</p>
         </div>
 
         <!-- Solution -->
         <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크: 인과 흐름</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 에러 <strong style="color: #FFFFFF;">3회</strong> 감지 → 수렴 판정 → Haiku→Sonnet→Opus 상위 모델 에스컬레이션 → 모델 체인 소진 시 Cross-Provider 자동 이동.</p>
         </div>
 
@@ -104,13 +104,13 @@ body {
 
         <!-- Problem -->
         <div style="background: #1A1500; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">위험 — 탐색 편향의 결과</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">위험: 탐색 편향의 결과</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">동일 도구만 반복 호출하면 탐색 공간이 좁아지고, 다른 접근법으로 해결 가능한 문제를 50 rounds 내내 놓칩니다.</p>
         </div>
 
         <!-- Solution -->
         <div style="background: #0D2A0D; border: 1px solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
-          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크 — 인과 흐름</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">자동 브레이크: 인과 흐름</p>
           <p style="font-size: 7pt; color: #E2E8F0; margin-top: 2pt; line-height: 1.4;">도구 반복 <strong style="color: #FFFFFF;">5회</strong> 감지 → Hook이 hint 메시지 자동 주입 → LLM이 다른 도구 경로를 탐색. 다양성을 구조적으로 강제합니다.</p>
         </div>
 
@@ -125,7 +125,7 @@ body {
 
     <!-- Trade-off bar -->
     <div style="background: #1E293B; border-left: 3pt solid #8B949E; border-radius: 4pt; padding: 4pt 10pt;">
-      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off — 자율성 vs 안전:</strong> 브레이크가 강할수록 자율 실행 범위가 줄어듭니다. 3가지 임계값(budget 한도, 수렴 횟수 3회, 반복 횟수 5회)은 사용자가 조정 가능합니다. 기본값은 실험적으로 도출했습니다.</p>
+      <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #FFFFFF;">Trade-off: 자율성 vs 안전</strong> — 브레이크가 강할수록 자율 실행 범위가 줄어듭니다. 3가지 임계값(budget 한도, 수렴 횟수 3회, 반복 횟수 5회)은 사용자가 조정 가능하며, 기본값은 실험적으로 도출했습니다.</p>
     </div>
 
   </div>

@@ -19,13 +19,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ④</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE: 실행 흐름 ④</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">LLM Failover: 호출 실패 &#8594; CircuitBreaker &#8594; Cross-Provider Fallback</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">단일 Provider 의존 때문에 Rate Limit·장애 시 파이프라인 전체가 중단됐다 — 3-Provider 체인으로 단일 장애점 제거</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">단일 Provider에 의존했기 때문에 Rate Limit·장애 시 파이프라인 전체가 중단됐고, 3-Provider 체인으로 단일 장애점을 제거했다</p>
   </div>
 
   <!-- Main content -->
@@ -125,8 +125,8 @@ body {
             <p style="font-size: 6pt; color: #8B949E; margin-top: 1pt;">프로브 1회</p>
           </div>
         </div>
-        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Retryable: Timeout · RateLimit · Connection — Exponential Backoff &#177;25% Jitter</p>
-        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Non-Retryable: 잔액 부족 — 즉시 다음 Provider 에스컬레이션</p>
+        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Retryable: Timeout · RateLimit · Connection → Exponential Backoff ±25% Jitter</p>
+        <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">Non-Retryable: 잔액 부족 → 즉시 다음 Provider 에스컬레이션</p>
       </div>
     </div>
 
@@ -170,7 +170,7 @@ body {
 
   <!-- Footer -->
   <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
-    <p style="font-size: 5pt; color: #8B949E;">Anthropic(Opus·Sonnet·Haiku) · OpenAI(GPT-5.4·5.3·4o) · ZhipuAI(GLM-5 80K) — Provider별 독립 CircuitBreaker 3-state</p>
+    <p style="font-size: 5pt; color: #8B949E;">Anthropic(Opus·Sonnet·Haiku) · OpenAI(GPT-5.4·5.3·4o) · ZhipuAI(GLM-5 80K) · Provider별 독립 CircuitBreaker 3-state</p>
     <p style="font-size: 5pt; color: #8B949E;">13 / 34</p>
   </div>
 

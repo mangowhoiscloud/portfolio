@@ -172,6 +172,7 @@ export function HooksSection() {
 
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(78,205,196,0.015)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#4ECDC4]/60 uppercase tracking-[0.25em] mb-3">

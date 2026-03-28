@@ -19,13 +19,13 @@ body {
   <!-- Header -->
   <div style="display: flex; align-items: center; padding: 9pt 36pt 3pt; gap: 6pt;">
     <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
-    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE — 실행 흐름 ⑥</p>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1 DEEP DIVE: 실행 흐름 ⑥</p>
   </div>
 
   <!-- Title -->
   <div style="padding: 0 36pt 5pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Memory + Auto-Learning: 턴 종료 &#8594; TURN_COMPLETE hook &#8594; MEMORY.md 자동 학습</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">분석 세션이 끝나면 인사이트가 휘발됐다 — PIPELINE_END 이벤트가 MEMORY.md에 자동 축적, 다음 세션에 반영</p>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">분석 세션이 끝나면 인사이트가 휘발됐기 때문에 PIPELINE_END 이벤트가 MEMORY.md에 자동 축적하여 다음 세션에 반영합니다</p>
   </div>
 
   <!-- Main content -->
@@ -72,19 +72,19 @@ body {
         <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 3pt;">4-TIER MEMORY 계층</p>
         <div style="display: flex; gap: 5pt; flex: 1;">
           <div style="flex: 1; background: #818CF820; border: 1pt solid #818CF840; border-radius: 4pt; padding: 6pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Tier 4 — Organization</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Tier 4: Organization</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">불변 가이드라인 · CLAUDE.md · 전역 정책</p>
           </div>
           <div style="flex: 1; background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 6pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Tier 3 — Project</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Tier 3: Project</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">세션 간 인사이트 · LEARNINGS.md 자동 업데이트</p>
           </div>
           <div style="flex: 1; background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 6pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Tier 2 — Session</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Tier 2: Session</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">TTL 단기 메모리 · 200 turns sliding window</p>
           </div>
           <div style="flex: 1; background: #F9731615; border: 1pt solid #F9731440; border-radius: 4pt; padding: 6pt 8pt;">
-            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Tier 1 — Hybrid</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Tier 1: Hybrid</p>
             <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Redis L1 고속 캐시 + File L2 영속 저장</p>
           </div>
         </div>
@@ -108,7 +108,7 @@ body {
           </div>
           <div style="background: #0D1117; border-radius: 4pt; padding: 6pt 9pt; border-left: 3pt solid #34D399;">
             <p style="font-size: 7pt; font-weight: bold; color: #34D399;">MEMORY.md 누적</p>
-            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Tier 3 Project 메모리에 append — 세션 간 지속</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Tier 3 Project 메모리에 append, 세션 간 지속</p>
           </div>
         </div>
       </div>

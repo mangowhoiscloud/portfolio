@@ -31,6 +31,7 @@ const evaluators = [
 export function ScoringSection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,197,66,0.015)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#F5C542]/60 uppercase tracking-[0.25em] mb-3">
