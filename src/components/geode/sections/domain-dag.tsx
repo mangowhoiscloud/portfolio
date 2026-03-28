@@ -38,7 +38,7 @@ function PipelineDag() {
             <stop offset="100%" stopColor="#080E1A" />
           </linearGradient>
         </defs>        {/* ── Edges ── */}
-        <g stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none">
+        <g stroke="white" strokeOpacity={0.2} strokeWidth={1.2} fill="none">
           {/* Router → Signals */}
           <path d={`M${xRouter + nR},${yMid} C${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${xSignals - nR},${yMid}`} />
           {/* Signals → 4 Analysts (fan-out) */}
@@ -143,7 +143,7 @@ function ReodeDag() {
       {pipe === "spring" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 800 220" className="w-full min-w-[600px]" style={{ maxHeight: 260 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
               <path d="M75,110 C102,106 102,106 130,110" fill="none" />
               <path d="M185,110 C212,106 212,106 240,110" fill="none" />
               <path d="M295,110 C322,106 322,106 350,110" fill="none" />
@@ -190,7 +190,7 @@ function ReodeDag() {
       {pipe === "migration" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 720 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
               <path d="M85,100 C120,96 120,96 155,100" fill="none" />
               <path d="M215,100 C250,96 250,96 285,100" fill="none" />
               <path d="M345,100 C380,96 380,96 415,100" fill="none" />
@@ -221,7 +221,7 @@ function ReodeDag() {
       {pipe === "porting" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 560 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
               <path d="M95,90 C135,86 135,86 175,90" fill="none" />
               <path d="M265,90 C305,86 305,86 345,90" fill="none" />
               <path d="M435,90 C467,86 467,86 500,90" fill="none" />

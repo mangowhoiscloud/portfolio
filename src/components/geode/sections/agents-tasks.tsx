@@ -183,7 +183,7 @@ export function AgentsTasksSection() {
                 </div>
                 <div className="overflow-x-auto -mx-4 px-4 pb-2">
                   <svg viewBox="0 0 740 200" className="w-full min-w-[600px]" style={{ maxHeight: 230 }}>
-                    <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
+                    <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
                       <line x1={70} y1={100} x2={145} y2={100} />
                       {[40, 80, 120, 160].map((y) => (
                         <path key={y} d={`M170,100 C200,100 210,${y} 250,${y}`} />
