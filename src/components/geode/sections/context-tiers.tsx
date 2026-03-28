@@ -90,42 +90,42 @@ export function ContextTiersSection() {
                 return (
                   <g key={t.id} style={{ cursor: "pointer" }} onClick={() => setActiveTier(i)}>
                     <rect x={x} y={20} width={230} height={150} rx={14}
-                      fill={`${t.color}${isActive ? "0A" : "04"}`}
+                      fill={`${t.color}${isActive ? "0C" : "06"}`}
                       stroke={t.color}
-                      strokeWidth={isActive ? 1.5 : 0.6}
-                      strokeOpacity={isActive ? 0.5 : 0.12}
+                      strokeWidth={isActive ? 1.5 : 0.8}
+                      strokeOpacity={isActive ? 0.6 : 0.2}
                       style={{ transition: "all 0.3s" }}
                     />
                     {/* Scope badge */}
-                    <rect x={x + 10} y={30} width={60} height={20} rx={4}
-                      fill={t.color} fillOpacity={isActive ? 0.15 : 0.06}
+                    <rect x={x + 10} y={30} width={65} height={22} rx={5}
+                      fill={t.color} fillOpacity={isActive ? 0.2 : 0.08}
                     />
-                    <text x={x + 40} y={44} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.8 : 0.4}
-                      fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}
+                    <text x={x + 42} y={45} textAnchor="middle" fill={t.color}
+                      fillOpacity={isActive ? 0.9 : 0.5}
+                      fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}
                     >
                       {t.scope}
                     </text>
                     {/* Path */}
-                    <text x={x + 115} y={75} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.8 : 0.35}
-                      fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}
+                    <text x={x + 115} y={78} textAnchor="middle" fill={t.color}
+                      fillOpacity={isActive ? 0.9 : 0.45}
+                      fontSize={13} fontFamily="ui-monospace, monospace" fontWeight={700}
                     >
-                      {t.label.length > 20 ? t.label.slice(0, 18) + "…" : t.label}
+                      {t.label.length > 22 ? t.label.slice(0, 20) + "…" : t.label}
                     </text>
                     {/* Dir count */}
                     <text x={x + 115} y={100} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.5 : 0.2}
+                      fillOpacity={isActive ? 0.6 : 0.3}
                       fontSize={10} fontFamily="ui-monospace, monospace"
                     >
                       {t.dirs.length} entries
                     </text>
                     {/* Data flow */}
                     <text x={x + 115} y={155} textAnchor="middle" fill={t.color}
-                      fillOpacity={isActive ? 0.4 : 0.15}
-                      fontSize={8} fontFamily="ui-monospace, monospace"
+                      fillOpacity={isActive ? 0.5 : 0.25}
+                      fontSize={9} fontFamily="ui-monospace, monospace"
                     >
-                      {t.dataFlow.slice(0, 30)}
+                      {t.dataFlow}
                     </text>
                   </g>
                 );
@@ -133,20 +133,20 @@ export function ContextTiersSection() {
 
               {/* Cascade arrows */}
               <g>
-                <line x1={260} y1={95} x2={290} y2={95} stroke="white" strokeOpacity={0.15} strokeWidth={1.5} />
-                <text x={275} y={85} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={12}>→</text>
-                <line x1={520} y1={95} x2={550} y2={95} stroke="white" strokeOpacity={0.15} strokeWidth={1.5} />
-                <text x={535} y={85} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={12}>→</text>
+                <path d="M260,95 C270,90 280,90 290,95" stroke="white" strokeOpacity={0.25} strokeWidth={1.5} fill="none" />
+                <text x={275} y={83} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={14}>→</text>
+                <path d="M520,95 C530,90 540,90 550,95" stroke="white" strokeOpacity={0.25} strokeWidth={1.5} fill="none" />
+                <text x={535} y={83} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={14}>→</text>
               </g>
 
               {/* Cascade label */}
-              <rect x={250} y={190} width={300} height={28} rx={6} fill="#0A0F1A" stroke="white" strokeOpacity={0.06} strokeWidth={1} />
-              <text x={400} y={208} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
+              <rect x={230} y={188} width={340} height={30} rx={8} fill="#0C1220" stroke="white" strokeOpacity={0.1} strokeWidth={1} />
+              <text x={400} y={208} textAnchor="middle" fill="white" fillOpacity={0.45} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
                 config.toml cascade: Global → Project override
               </text>
 
               {/* Backward compat label */}
-              <text x={400} y={235} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">
+              <text x={400} y={235} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">
                 기존 .geode/ 경로 → 자동 fallback (backward-compat)
               </text>
             </svg>
