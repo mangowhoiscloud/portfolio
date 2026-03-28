@@ -112,8 +112,9 @@ export function MultiLlmSection() {
                   <text x={677} y={70} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">secondary</text>
 
                   {/* Agreement — below, clear spacing */}
-                  <rect x={560} y={95} width={155} height={32} rx={8} fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={637} y={115} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement ≥ 0.67 · α ≥ 0.80</text>
+                  <rect x={550} y={92} width={175} height={38} rx={8} fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={637} y={108} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement ≥ 0.67</text>
+                  <text x={637} y={122} textAnchor="middle" fill="#818CF8" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">Krippendorff α ≥ 0.80</text>
 
                   {/* Converge arrows from Opus+GPT to Agreement */}
                   <path d="M577,78 C577,86 610,90 637,95" stroke="#818CF8" strokeOpacity={0.15} strokeWidth={0.8} fill="none" />

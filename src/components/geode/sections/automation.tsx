@@ -86,49 +86,46 @@ export function AutomationSection() {
         {/* ── Architecture SVG: Scheduler ↔ Trigger ↔ Hook ── */}
         <ScrollReveal delay={0.08}>
           <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-            <svg viewBox="0 0 760 180" className="w-full min-w-[560px]" style={{ maxHeight: 210 }}>
-              {/* SchedulerService */}
-              <rect x={20} y={50} width={140} height={70} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={90} y={75} textAnchor="middle" fill="#818CF8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Scheduler</text>
-              <text x={90} y={93} textAnchor="middle" fill="#818CF8" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">AT · EVERY · CRON</text>
-              <text x={90} y={108} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">~/.geode/scheduler/</text>
+            <svg viewBox="0 0 720 210" className="w-full min-w-[540px]" style={{ maxHeight: 240 }}>
+              {/* Top label */}
+              <text x={360} y={18} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">SCHEDULER → QUEUE → LOOP → HOOK → TRIGGER</text>
 
-              {/* Arrow: Scheduler → action_queue */}
-              <path d="M160,85 C175,80 205,80 220,85" stroke="#818CF8" fill="none" strokeOpacity={0.2} strokeWidth={1} />
-              <text x={190} y={78} textAnchor="middle" fill="#818CF8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">enqueue</text>
+              {/* ── Main flow row (y=55) ── */}
+              {/* Scheduler */}
+              <rect x={15} y={35} width={120} height={60} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
+              <text x={75} y={58} textAnchor="middle" fill="#818CF8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Scheduler</text>
+              <text x={75} y={75} textAnchor="middle" fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">AT · EVERY · CRON</text>
 
-              {/* action_queue */}
-              <rect x={220} y={60} width={100} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
-              <text x={270} y={82} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>action_queue</text>
-              <text x={270} y={97} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">prompt text</text>
+              <path d="M135,65 C155,60 175,60 195,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
 
-              {/* Arrow: queue → AgenticLoop */}
-              <path d="M320,85 C340,80 360,80 380,85" stroke="#F5C542" fill="none" strokeOpacity={0.2} strokeWidth={1} />
+              {/* Queue */}
+              <rect x={195} y={40} width={95} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+              <text x={242} y={62} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Queue</text>
+              <text x={242} y={77} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">action_queue</text>
+
+              <path d="M290,65 C310,60 330,60 350,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
 
               {/* AgenticLoop */}
-              <rect x={380} y={50} width={120} height={70} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={440} y={75} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
-              <text x={440} y={93} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">실행 + 검증</text>
+              <rect x={350} y={35} width={110} height={60} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
+              <text x={405} y={58} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
+              <text x={405} y={75} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">실행 + 검증</text>
 
-              {/* Arrow: Loop → HookSystem */}
-              <path d="M500,85 C520,80 540,80 560,85" stroke="#4ECDC4" fill="none" strokeOpacity={0.2} strokeWidth={1} />
-              <text x={530} y={78} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">emit</text>
+              <path d="M460,65 C480,60 500,60 520,65" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
 
               {/* HookSystem */}
-              <rect x={560} y={50} width={100} height={70} rx={10} fill="#0C1220" stroke="#E87080" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={610} y={75} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
-              <text x={610} y={93} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
+              <rect x={520} y={35} width={100} height={60} rx={10} fill="#0C1220" stroke="#E87080" strokeWidth={1} strokeOpacity={0.4} />
+              <text x={570} y={58} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
+              <text x={570} y={75} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
 
-              {/* Feedback: Hook → TriggerManager → Scheduler */}
-              <path d="M610,120 C610,155 610,155 350,155 C90,155 90,155 90,120" fill="none" stroke="#C084FC" strokeOpacity={0.22} strokeWidth={1} strokeDasharray="4 4" className="animate-flow" />
-              <text x={350} y={145} textAnchor="middle" fill="#C084FC" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석 파이프라인</text>
+              {/* ── Feedback return arc (y=130~170, well below boxes) ── */}
+              <path d="M570,95 C575,130 550,155 400,160 C250,165 100,155 75,130 C65,118 55,105 55,95" fill="none" stroke="#C084FC" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" className="animate-flow" />
 
-              {/* TriggerManager label on feedback */}
-              <rect x={300} y={130} width={100} height={24} rx={6} fill="#0C1220" stroke="#C084FC" strokeWidth={0.6} strokeOpacity={0.15} />
-              <text x={350} y={146} textAnchor="middle" fill="#C084FC" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
+              {/* TriggerManager — on the arc, not overlapping boxes */}
+              <rect x={310} y={140} width={110} height={28} rx={6} fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.3} />
+              <text x={365} y={158} textAnchor="middle" fill="#C084FC" fillOpacity={0.6} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
 
-              {/* Top label */}
-              <text x={380} y={30} textAnchor="middle" fill="white" fillOpacity={0.28} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">SCHEDULER → QUEUE → LOOP → HOOK → TRIGGER (FEEDBACK)</text>
+              {/* Feedback description — below arc */}
+              <text x={360} y={192} textAnchor="middle" fill="#C084FC" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석</text>
             </svg>
           </div>
         </ScrollReveal>
