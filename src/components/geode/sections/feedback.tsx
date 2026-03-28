@@ -68,6 +68,32 @@ export function FeedbackSection() {
             ))}
           </div>
         </ScrollReveal>
+
+        {/* CUSUM Drift Detection */}
+        <ScrollReveal delay={0.2}>
+          <div className="mt-8 rounded-xl border border-white/[0.04] px-5 py-4">
+            <div className="text-sm font-semibold text-white/70 mb-3">CUSUM Drift Detection</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {[
+                { zone: "NONE", range: "< 2.5", color: "#34D399", desc: "정상. 드리프트 미감지." },
+                { zone: "WARNING", range: "2.5 ~ 4.0", color: "#F5C542", desc: "모니터링 강화. PSI 0.10~0.25." },
+                { zone: "CRITICAL", range: "≥ 4.0", color: "#E87080", desc: "DRIFT_DETECTED hook 발화. 재분석 트리거." },
+              ].map((z) => (
+                <div key={z.zone} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${z.color}04` }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-2 h-2 rounded-full" style={{ background: z.color }} />
+                    <span className="text-sm font-mono font-bold" style={{ color: z.color }}>{z.zone}</span>
+                    <span className="text-xs font-mono text-[#7A8CA8] ml-auto">{z.range}</span>
+                  </div>
+                  <div className="text-xs text-[#8B9CC0]">{z.desc}</div>
+                </div>
+              ))}
+            </div>
+            <div className="text-xs text-[#7A8CA8] font-mono">
+              4 metrics: spearman_rho(0.50) · human_llm_alpha(0.80) · precision@10(0.60) · tier_accuracy(0.70)
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
