@@ -13,7 +13,7 @@ const stats = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-[radial-gradient(ellipse,rgba(129,140,248,0.06)_0%,transparent_70%)]" />
         <div className="absolute top-1/3 left-1/3 w-[500px] h-[400px] rounded-full bg-[radial-gradient(ellipse,rgba(244,184,200,0.04)_0%,transparent_70%)] animate-drift" />

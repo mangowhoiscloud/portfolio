@@ -21,7 +21,7 @@ const Divider = () => <div className="max-w-3xl mx-auto border-t border-white/[0
 
 export default function GeodePage() {
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-surface)_0%,var(--sea-upper)_8%,var(--sea-mid)_20%,var(--sea-deep)_40%,var(--sea-deep)_60%,var(--sea-abyss)_80%,#060A14_100%)] text-[#F0F0FF] overflow-x-hidden">
+    <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-surface)_0%,var(--sea-upper)_6%,var(--sea-mid)_15%,var(--sea-deep)_30%,#0A1320_50%,var(--sea-abyss)_75%,#030608_100%)] text-[#F0F0FF] overflow-x-hidden">
       <GeodeNav />
       <div id="hero"><HeroSection /></div>
       <div id="scaffold"><ScaffoldSection /></div>

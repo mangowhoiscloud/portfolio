@@ -94,7 +94,7 @@ export function AutomationSection() {
               <text x={90} y={108} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">~/.geode/scheduler/</text>
 
               {/* Arrow: Scheduler → action_queue */}
-              <line x1={160} y1={85} x2={220} y2={85} stroke="#818CF8" strokeOpacity={0.12} strokeWidth={1} />
+              <path d="M160,85 C175,80 205,80 220,85" stroke="#818CF8" fill="none" strokeOpacity={0.12} strokeWidth={1} />
               <text x={190} y={78} textAnchor="middle" fill="#818CF8" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">enqueue</text>
 
               {/* action_queue */}
@@ -103,7 +103,7 @@ export function AutomationSection() {
               <text x={270} y={97} textAnchor="middle" fill="#F5C542" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">prompt text</text>
 
               {/* Arrow: queue → AgenticLoop */}
-              <line x1={320} y1={85} x2={380} y2={85} stroke="#F5C542" strokeOpacity={0.12} strokeWidth={1} />
+              <path d="M320,85 C340,80 360,80 380,85" stroke="#F5C542" fill="none" strokeOpacity={0.12} strokeWidth={1} />
 
               {/* AgenticLoop */}
               <rect x={380} y={50} width={120} height={70} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.3} />
@@ -111,7 +111,7 @@ export function AutomationSection() {
               <text x={440} y={93} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">실행 + 검증</text>
 
               {/* Arrow: Loop → HookSystem */}
-              <line x1={500} y1={85} x2={560} y2={85} stroke="#4ECDC4" strokeOpacity={0.12} strokeWidth={1} />
+              <path d="M500,85 C520,80 540,80 560,85" stroke="#4ECDC4" fill="none" strokeOpacity={0.12} strokeWidth={1} />
               <text x={530} y={78} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">emit</text>
 
               {/* HookSystem */}

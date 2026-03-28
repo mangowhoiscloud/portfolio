@@ -16,11 +16,11 @@ h1, h2 {
 
 /* Deep Sea Palette */
 :root {
-  --sea-abyss: #080E1A;
+  --sea-abyss: #040810;
   --sea-deep: #0B1628;
   --sea-mid: #0F1F3A;
-  --sea-upper: #162D50;
-  --sea-surface: #1A3A62;
+  --sea-upper: #1A365E;
+  --sea-surface: #1E4470;
 
   --glow-indigo: #818CF8;
   --glow-teal: #4ECDC4;
