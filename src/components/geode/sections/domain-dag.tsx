@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { ScrollReveal } from "../scroll-reveal";
+
+// Lazy-load React Flow diagram (heavy component)
+const GeodePipelineDiagram = dynamic(
+  () => import("../geode-pipeline-diagram").then((m) => ({ default: m.GeodePipelineDiagram })),
+  { ssr: false, loading: () => <div className="w-full h-[420px] rounded-xl bg-[#0a0a12] animate-pulse" /> },
+);
 
 /* ── GameIP Pipeline DAG (9-node, code-verified) ── */
 function PipelineDag() {
@@ -280,7 +287,7 @@ function DagViewer() {
         </button>
       </div>
 
-      {activeDag === "gameip" && <PipelineDag />}
+      {activeDag === "gameip" && <GeodePipelineDiagram />}
       {activeDag === "reode" && <ReodeDag />}
     </ScrollReveal>
   );

@@ -366,7 +366,7 @@ export function LoopSection() {
             AgenticLoop
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            while True. Long-running Agent
+            while True: Long-running Agent
           </h2>
           <p className="text-lg text-white/40 font-semibold mb-4">
             for range(50) → while True + 5 Guards
