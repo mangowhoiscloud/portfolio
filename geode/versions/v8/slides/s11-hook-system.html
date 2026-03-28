@@ -41,15 +41,15 @@ body {
         </p>
         <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">리플 패턴 실행 예시: PIPELINE_END 발화 시</p>
         <div style="display: flex; flex-direction: column; gap: 2pt;">
-          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 7pt 9pt;">
+          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 5pt 8pt;">
             <p style="font-size: 6.5pt; font-weight: bold; color: #34D399; min-width: 26pt;">P50</p>
             <p style="font-size: 6.5pt; color: #E2E8F0;">RunLog → runs.jsonl JSONL 기록 (L1 Observe)</p>
           </div>
-          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 7pt 9pt;">
+          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 5pt 8pt;">
             <p style="font-size: 6.5pt; font-weight: bold; color: #F5C542; min-width: 26pt;">P80</p>
             <p style="font-size: 6.5pt; color: #E2E8F0;">SnapshotManager → 상태 캡처 (L2 React)</p>
           </div>
-          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 7pt 9pt;">
+          <div style="display: flex; align-items: center; gap: 6pt; background: #0D1117; border-radius: 3pt; padding: 5pt 8pt;">
             <p style="font-size: 6.5pt; font-weight: bold; color: #F97316; min-width: 26pt;">P85</p>
             <p style="font-size: 6.5pt; color: #E2E8F0;">MemoryWriteBack → MEMORY.md 갱신 (L2 React)</p>
           </div>
@@ -108,19 +108,19 @@ body {
       <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 11pt; flex: 1;">
         <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">HOOK MATURITY MODEL</p>
         <div style="display: flex; flex-direction: column; gap: 3pt;">
-          <div style="background: #1E293B; border: 1pt dashed #F97314; border-radius: 4pt; padding: 7pt 9pt;">
+          <div style="background: #1E293B; border: 1pt dashed #F97314; border-radius: 4pt; padding: 5pt 8pt;">
             <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy: 백로그</p>
             <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">승인 이력 &#8594; 자동 승인 룰 학습</p>
           </div>
-          <div style="background: #1E293B; border: 1pt solid #F5C542; border-radius: 4pt; padding: 7pt 9pt;">
+          <div style="background: #1E293B; border: 1pt solid #F5C542; border-radius: 4pt; padding: 5pt 8pt;">
             <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L3 Decide: 현재 프론티어</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> CONTEXT_OVERFLOW_ACTION 전략 위임</p>
           </div>
-          <div style="background: #1E293B; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt;">
+          <div style="background: #1E293B; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 5pt 8pt;">
             <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React: 자동 반응</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> DRIFT &#8594; 스냅샷 · PIPELINE_END &#8594; MEMORY.md</p>
           </div>
-          <div style="background: #1E293B; border: 1pt solid #34D399; border-radius: 4pt; padding: 7pt 9pt;">
+          <div style="background: #1E293B; border: 1pt solid #34D399; border-radius: 4pt; padding: 5pt 8pt;">
             <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L1 Observe: 기록만</p>
             <p style="font-size: 7pt; color: #E2E8F0; margin-top: 1pt;"><span style="color: #34D399;">&#10003;</span> RunLog: ALL 46 events &#8594; runs.jsonl</p>
           </div>

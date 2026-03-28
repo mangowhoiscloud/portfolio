@@ -122,8 +122,8 @@ function HookArchitectureDiagram() {
             <rect x={SRC_X - 55} y={s.y} width={110} height={36} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.7} strokeOpacity={0.2} />
             <text x={SRC_X} y={s.y + 15} textAnchor="middle" fill={s.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
             <text x={SRC_X} y={s.y + 28} textAnchor="middle" fill={s.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{s.sub}</text>
-            {/* Arrow to hub */}
-            <line x1={SRC_X + 55} y1={s.y + 18} x2={HUB_X - 60} y2={H / 2} stroke={s.color} strokeOpacity={0.22} strokeWidth={1} />
+            {/* Arrow to hub — bezier curve */}
+            <path d={`M${SRC_X + 55},${s.y + 18} C${SRC_X + 120},${s.y + 18} ${HUB_X - 120},${H / 2} ${HUB_X - 60},${H / 2}`} stroke={s.color} strokeOpacity={0.22} strokeWidth={1} fill="none" />
           </g>
         ))}
 
@@ -138,9 +138,9 @@ function HookArchitectureDiagram() {
         <text x={HUB_X} y={H / 2 + 6} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">register()</text>
         <text x={HUB_X} y={H / 2 + 20} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">trigger()</text>
 
-        {/* Hub to handler chain arrows */}
+        {/* Hub to handler chain arrows — bezier curves */}
         {handlerChain.map((h) => (
-          <line key={h.label} x1={HUB_X + 55} y1={H / 2} x2={CHAIN_X - 70} y2={h.y + 14} stroke={h.color} strokeOpacity={0.2} strokeWidth={1} />
+          <path key={h.label} d={`M${HUB_X + 55},${H / 2} C${HUB_X + 120},${H / 2} ${CHAIN_X - 130},${h.y + 14} ${CHAIN_X - 70},${h.y + 14}`} stroke={h.color} strokeOpacity={0.2} strokeWidth={1} fill="none" />
         ))}
 
         {/* Handler chain (priority sorted) */}
@@ -243,7 +243,8 @@ export function HooksSection() {
             Coverage Matrix
           </p>
           <p className="text-sm text-[#7A8CA8] mb-5">
-            46개 이벤트 × 4 성숙도 레벨. 빈 칸은 아직 핸들러가 없는 확장 가능 영역입니다.
+            46개 이벤트 × 4 성숙도 레벨.
+            L1 OBSERVE 90%+ 커버, L2 REACT frontier 확장 중, L3/L4 계획 단계.
           </p>
           <div className="overflow-x-auto -mx-4 px-4">
             <table className="w-full text-xs font-mono border-collapse min-w-[540px]">
