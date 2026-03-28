@@ -28,85 +28,133 @@ const evaluators = [
   { name: "Community Momentum", axes: 3, labels: "J, K, L", color: "#C084FC" },
 ];
 
-/* ── Radar Chart: expands from center on scroll ── */
+/* ── Radar Chart: each axis individually shoots out from center ── */
+const CX = 150, CY = 150, R = 110;
+const ANIM_DURATION = 1200; // ms
+const STAGGER = 120; // ms between each axis
+
+function easeOutCubic(t: number) { return 1 - Math.pow(1 - t, 3); }
+
+// Target positions for each weight
+const targets = weights.map((w, i) => {
+  const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+  const r = R * (w.w / 0.25);
+  return { x: CX + r * Math.cos(a), y: CY + r * Math.sin(a) };
+});
+
 function RadarChart() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [expanded, setExpanded] = useState(false);
+  const [progress, setProgress] = useState<number[]>(weights.map(() => 0)); // 0→1 per axis
+  const startedRef = useRef(false);
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setExpanded(true); },
-      { threshold: 0.4 },
+      ([entry]) => {
+        if (entry.isIntersecting && !startedRef.current) {
+          startedRef.current = true;
+          const t0 = performance.now();
+          function tick(now: number) {
+            const elapsed = now - t0;
+            const next = weights.map((_, i) => {
+              const axisElapsed = Math.max(0, elapsed - i * STAGGER);
+              const raw = Math.min(1, axisElapsed / ANIM_DURATION);
+              return easeOutCubic(raw);
+            });
+            setProgress(next);
+            if (elapsed < ANIM_DURATION + STAGGER * (weights.length - 1) + 100) {
+              requestAnimationFrame(tick);
+            }
+          }
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.3 },
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
-  const CX = 150, CY = 150, R = 110;
+  // Interpolated positions
+  const current = progress.map((p, i) => ({
+    x: CX + (targets[i].x - CX) * p,
+    y: CY + (targets[i].y - CY) * p,
+  }));
+
+  const polyPoints = current.map((c) => `${c.x},${c.y}`).join(" ");
+  const allDone = progress.every((p) => p >= 1);
 
   return (
     <div ref={containerRef} className="flex justify-center">
-        <svg viewBox="0 0 300 300" className="w-full max-w-[280px]">
-          {/* Static hex grid + axis lines (always visible) */}
-          {[0.33, 0.66, 1.0].map((scale) => (
-            <polygon
-              key={scale}
-              points={weights.map((_, i) => {
-                const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-                const r = R * scale;
-                return `${CX + r * Math.cos(a)},${CY + r * Math.sin(a)}`;
-              }).join(" ")}
-              fill="none" stroke="white" strokeOpacity={0.06} strokeWidth={1}
-            />
-          ))}
-          {weights.map((_, i) => {
-            const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-            return <line key={i} x1={CX} y1={CY} x2={CX + R * Math.cos(a)} y2={CY + R * Math.sin(a)} stroke="white" strokeOpacity={0.06} strokeWidth={1} />;
-          })}
+      <svg viewBox="0 0 300 300" className="w-full max-w-[280px]">
+        {/* Static hex grid */}
+        {[0.33, 0.66, 1.0].map((scale) => (
+          <polygon
+            key={scale}
+            points={weights.map((_, i) => {
+              const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+              const r = R * scale;
+              return `${CX + r * Math.cos(a)},${CY + r * Math.sin(a)}`;
+            }).join(" ")}
+            fill="none" stroke="white" strokeOpacity={0.06} strokeWidth={1}
+          />
+        ))}
+        {/* Static axis lines */}
+        {weights.map((_, i) => {
+          const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+          return <line key={i} x1={CX} y1={CY} x2={CX + R * Math.cos(a)} y2={CY + R * Math.sin(a)} stroke="white" strokeOpacity={0.06} strokeWidth={1} />;
+        })}
 
-          {/* Data polygon + dots: scale(0)→scale(1) from center */}
-          <g
-            className={expanded ? "animate-radar-expand" : ""}
-            style={{ opacity: expanded ? undefined : 0, transformOrigin: `${CX}px ${CY}px` }}
+        {/* Animated data polygon */}
+        <polygon
+          points={polyPoints}
+          fill="#818CF8" fillOpacity={allDone ? 0.12 : 0.08}
+          stroke="#818CF8" strokeOpacity={allDone ? 0.4 : 0.2}
+          strokeWidth={1.5}
+          style={{ transition: allDone ? "fill-opacity 0.5s, stroke-opacity 0.5s" : undefined }}
+        />
+
+        {/* Animated axis lines from center → current position */}
+        {current.map((c, i) => (
+          <line key={`al-${i}`} x1={CX} y1={CY} x2={c.x} y2={c.y} stroke={weights[i].color} strokeOpacity={progress[i] * 0.2} strokeWidth={1} />
+        ))}
+
+        {/* Animated vertex dots */}
+        {current.map((c, i) => (
+          <circle
+            key={`ad-${i}`}
+            cx={c.x} cy={c.y}
+            r={progress[i] > 0.1 ? 4 : 0}
+            fill={weights[i].color}
+            fillOpacity={progress[i] * 0.8}
+          />
+        ))}
+
+        {/* Glow pulse after complete */}
+        {allDone && (
+          <polygon
+            points={targets.map((t) => `${t.x},${t.y}`).join(" ")}
+            fill="none" stroke="#818CF8" strokeWidth={2} strokeOpacity={0}
           >
-            {/* Fill polygon */}
-            <polygon
-              points={weights.map((w, i) => {
-                const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-                const r = R * (w.w / 0.25);
-                return `${CX + r * Math.cos(a)},${CY + r * Math.sin(a)}`;
-              }).join(" ")}
-              fill="#818CF8" fillOpacity={0.12} stroke="#818CF8" strokeOpacity={0.4} strokeWidth={1.5}
-            />
-            {/* Vertex dots */}
-            {weights.map((w, i) => {
-              const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-              const r = R * (w.w / 0.25);
-              return <circle key={`d-${i}`} cx={CX + r * Math.cos(a)} cy={CY + r * Math.sin(a)} r={4} fill={w.color} fillOpacity={0.7} />;
-            })}
-            {/* Vertex → center connecting lines (shows expansion direction) */}
-            {weights.map((w, i) => {
-              const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-              const r = R * (w.w / 0.25);
-              return <line key={`l-${i}`} x1={CX} y1={CY} x2={CX + r * Math.cos(a)} y2={CY + r * Math.sin(a)} stroke={w.color} strokeOpacity={0.15} strokeWidth={1} />;
-            })}
-          </g>
+            <animate attributeName="stroke-opacity" values="0.3;0" dur="1.5s" begin="0s" repeatCount="1" fill="freeze" />
+            <animate attributeName="stroke-width" values="2;8" dur="1.5s" begin="0s" repeatCount="1" fill="freeze" />
+          </polygon>
+        )}
 
-          {/* Labels (always visible) */}
-          {weights.map((w, i) => {
-            const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
-            const lx = CX + 130 * Math.cos(a);
-            const ly = CY + 130 * Math.sin(a);
-            return (
-              <g key={w.name}>
-                <text x={lx} y={ly - 5} textAnchor="middle" fill={w.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{w.name}</text>
-                <text x={lx} y={ly + 8} textAnchor="middle" fill={w.color} fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{(w.w * 100).toFixed(0)}%</text>
-              </g>
-            );
-          })}
-        </svg>
+        {/* Labels (always visible) */}
+        {weights.map((w, i) => {
+          const a = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+          const lx = CX + 130 * Math.cos(a);
+          const ly = CY + 130 * Math.sin(a);
+          return (
+            <g key={w.name}>
+              <text x={lx} y={ly - 5} textAnchor="middle" fill={w.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{w.name}</text>
+              <text x={lx} y={ly + 8} textAnchor="middle" fill={w.color} fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{(w.w * 100).toFixed(0)}%</text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
