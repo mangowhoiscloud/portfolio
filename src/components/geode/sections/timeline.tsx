@@ -28,10 +28,10 @@ const phases = [
     phase: "Phase 3",
     period: "2025.03 — 2026.Q1",
     title: "Autonomous Execution Harness",
-    desc: "Scaffold(CLAUDE.md + CI) → Runtime(45 Hooks + 21 Skills) → Loop(while tool_use) 3중 구조 완성. Slack Gateway, SubAgent DAG, 4-Tier Memory.",
+    desc: "Scaffold(CLAUDE.md + CI) → Runtime(46 Hooks + 21 Skills) → Loop(while True + 8 Guards) 3중 구조 완성. Slack Gateway, SubAgent DAG, 5-Tier Memory, Long-running Agent.",
     badge: "CURRENT",
     badgeColor: "#4ECDC4",
-    versions: ["v0.24 Harness", "v0.28 Gateway", "v0.30 Signal Live"],
+    versions: ["v0.24 Harness", "v0.28 Gateway", "v0.31 GitFlow", "v0.32 Long-run"],
   },
   {
     phase: "Fork",
