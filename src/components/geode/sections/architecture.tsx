@@ -14,14 +14,14 @@ const layers = [
   {
     id: "L1",
     name: "Infrastructure",
-    detail: "Claude · OpenAI · GLM Adapters, Port/Adapter DI",
+    detail: "Claude · OpenAI · GLM Adapters, Port/Adapter DI, PromptAssembler",
     color: "#60A5FA",
-    modules: "core/llm, core/infrastructure",
+    modules: "core/llm, core/runtime_wiring",
   },
   {
     id: "L2",
     name: "Memory",
-    detail: "4-Tier: User Profile → Org → Project → Session",
+    detail: "5-Tier: GEODE.md → User Profile → Org → Project → Session",
     color: "#F4B8C8",
     modules: "core/memory",
   },
