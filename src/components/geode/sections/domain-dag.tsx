@@ -143,46 +143,43 @@ function ReodeDag() {
       {/* Spring Migration — 7-node with startup_verify */}
       {pipe === "spring" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 800 220" className="w-full min-w-[600px]" style={{ maxHeight: 260 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
-              <path d="M75,110 C102,106 102,106 130,110" fill="none" />
-              <path d="M185,110 C212,106 212,106 240,110" fill="none" />
-              <path d="M295,110 C322,106 322,106 350,110" fill="none" />
-              <path d="M405,110 C432,106 432,106 460,110" fill="none" />
-              <path d="M515,110 C542,106 542,106 570,110" fill="none" />
-              <path d="M625,110 C652,106 652,106 680,110" fill="none" />
-              {/* Fix → Transform feedback */}
-              <path d="M530,85 C530,50 270,50 270,85" stroke="#E87080" strokeOpacity={0.2} strokeDasharray="4 4" className="animate-flow" />
-              {/* startup_verify → fix (fail) */}
-              <path d="M600,85 C600,60 530,60 530,85" stroke="#F5C542" strokeOpacity={0.28} strokeDasharray="3 3" />
-            </g>
-            <text x={400} y={42} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">fix loop (validate/startup fail)</text>
-            <text x={600} y={195} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">startup_verify: java_app_start → health check → HTTP 200</text>
-            {/* 4-class labels */}
+          <svg viewBox="0 0 840 230" className="w-full min-w-[640px]" style={{ maxHeight: 270 }}>
+            {/* Main flow edges */}
             {[
-              { label: "CONFIG", x: 395, y: 175, color: "#F5C542" },
-              { label: "CODE", x: 455, y: 175, color: "#60A5FA" },
-              { label: "BEHAVIOR", x: 525, y: 175, color: "#C084FC" },
-              { label: "ENV", x: 580, y: 175, color: "#E87080" },
-            ].map((c) => (
-              <text key={c.label} x={c.x} y={c.y} textAnchor="middle" fill={c.color} fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">{c.label}</text>
+              [80, 175], [195, 290], [310, 405], [425, 520], [540, 640], [660, 755],
+            ].map(([x1, x2], i) => (
+              <path key={`se-${i}`} d={`M${x1},115 C${(x1 + x2) / 2},108 ${(x1 + x2) / 2},108 ${x2},115`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
             ))}
-            {/* Nodes */}
+            {/* Fix → Transform loopback */}
+            <path d="M530,88 C530,45 310,40 310,88" stroke="#E87080" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
+            <text x={420} y={38} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">fix loop</text>
+            {/* Startup → Fix (fail) */}
+            <path d="M640,88 C640,55 545,55 545,88" stroke="#F5C542" strokeOpacity={0.25} strokeWidth={1} strokeDasharray="4 3" fill="none" />
+
+            {/* Nodes — r=28, consistent sizing */}
             {[
               { x: 55, label: "Assess", sub: "Spring", color: "#60A5FA" },
-              { x: 155, label: "Plan", sub: "Recipe", color: "#818CF8" },
-              { x: 270, label: "Transform", sub: "Sonnet", color: "#4ECDC4" },
-              { x: 380, label: "Validate", sub: "Haiku ×4", color: "#F5C542" },
-              { x: 490, label: "Fix", sub: "Architect", color: "#E87080" },
-              { x: 600, label: "Startup", sub: "verify", color: "#34D399" },
-              { x: 710, label: "Measure", sub: "Haiku", color: "#34D399" },
+              { x: 170, label: "Plan", sub: "Recipe", color: "#818CF8" },
+              { x: 285, label: "Transform", sub: "Sonnet", color: "#4ECDC4" },
+              { x: 400, label: "Validate", sub: "Haiku", color: "#F5C542" },
+              { x: 515, label: "Fix", sub: "Architect", color: "#E87080" },
+              { x: 630, label: "Startup", sub: "verify", color: "#34D399" },
+              { x: 755, label: "Measure", sub: "score", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={110} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                <text x={n.x} y={107} textAnchor="middle" fill={n.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                <text x={n.x} y={120} textAnchor="middle" fill={n.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{n.sub}</text>
+                <circle cx={n.x} cy={115} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
+                <text x={n.x} y={112} textAnchor="middle" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
+                <text x={n.x} y={126} textAnchor="middle" fill={n.color} fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">{n.sub}</text>
               </g>
             ))}
+
+            {/* 4-class routing */}
+            <text x={460} y={180} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">
+              4-Class Error Routing: CONFIG · CODE · BEHAVIOR · ENV
+            </text>
+            <text x={630} y={200} textAnchor="middle" fill="#34D399" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">
+              startup_verify: java_app_start → health check → HTTP 200
+            </text>
           </svg>
         </div>
       )}
@@ -190,30 +187,34 @@ function ReodeDag() {
       {/* Migration — 6-node */}
       {pipe === "migration" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 720 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
-              <path d="M85,100 C120,96 120,96 155,100" fill="none" />
-              <path d="M215,100 C250,96 250,96 285,100" fill="none" />
-              <path d="M345,100 C380,96 380,96 415,100" fill="none" />
-              <path d="M475,100 C510,96 510,96 545,100" fill="none" />
-              <path d="M560,75 C560,45 430,45 430,75" stroke="#E87080" strokeOpacity={0.2} strokeDasharray="4 4" className="animate-flow" />
-              <path d="M475,100 C545,96 545,96 615,100" fill="none" stroke="#34D399" strokeOpacity={0.2} />
-            </g>
+          <svg viewBox="0 0 740 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
+            {/* Main flow */}
+            {[
+              [85, 195], [225, 335], [365, 475], [505, 600],
+            ].map(([x1, x2], i) => (
+              <path key={`me-${i}`} d={`M${x1},100 C${(x1 + x2) / 2},93 ${(x1 + x2) / 2},93 ${x2},100`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
+            ))}
+            {/* Validate → Measure (success path) */}
+            <path d="M505,100 C560,93 600,93 660,100" stroke="#34D399" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
+            {/* Fix → Validate loopback */}
+            <path d="M580,72 C580,40 460,35 460,72" stroke="#E87080" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
+            <text x={520} y={30} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">fix loop</text>
+
+            {/* Nodes */}
             {[
               { x: 60, label: "Assess", color: "#60A5FA" },
-              { x: 185, label: "Plan", color: "#818CF8" },
-              { x: 315, label: "Transform", color: "#4ECDC4" },
-              { x: 445, label: "Validate", color: "#F5C542" },
-              { x: 560, label: "Fix", color: "#E87080" },
-              { x: 650, label: "Measure", color: "#34D399" },
+              { x: 200, label: "Plan", color: "#818CF8" },
+              { x: 340, label: "Transform", color: "#4ECDC4" },
+              { x: 480, label: "Validate", color: "#F5C542" },
+              { x: 600, label: "Fix", color: "#E87080" },
+              { x: 690, label: "Measure", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={100} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                <text x={n.x} y={104} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
+                <circle cx={n.x} cy={100} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
+                <text x={n.x} y={104} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
               </g>
             ))}
-            <text x={495} y={40} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">fix loop</text>
-            <text x={560} y={145} textAnchor="middle" fill="#E87080" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">Architect → Editor</text>
+            <text x={600} y={148} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">Architect → Editor</text>
           </svg>
         </div>
       )}
@@ -221,26 +222,30 @@ function ReodeDag() {
       {/* Porting — 4-node */}
       {pipe === "porting" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 560 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
-            <g stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none">
-              <path d="M95,90 C135,86 135,86 175,90" fill="none" />
-              <path d="M265,90 C305,86 305,86 345,90" fill="none" />
-              <path d="M435,90 C467,86 467,86 500,90" fill="none" />
-              <path d="M395,65 C395,35 225,35 225,65" stroke="#4ECDC4" strokeOpacity={0.28} strokeDasharray="4 4" className="animate-flow" />
-            </g>
+          <svg viewBox="0 0 580 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
+            {/* Main flow */}
+            {[
+              [95, 195], [280, 370], [460, 520],
+            ].map(([x1, x2], i) => (
+              <path key={`pe-${i}`} d={`M${x1},90 C${(x1 + x2) / 2},83 ${(x1 + x2) / 2},83 ${x2},90`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
+            ))}
+            {/* Retry loopback */}
+            <path d="M420,62 C420,30 240,25 240,62" stroke="#4ECDC4" strokeOpacity={0.28} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
+            <text x={330} y={22} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">retry loop</text>
+
+            {/* Nodes */}
             {[
               { x: 65, label: "Analyze", color: "#60A5FA" },
-              { x: 220, label: "Map Types", color: "#818CF8" },
-              { x: 390, label: "Generate", color: "#4ECDC4" },
-              { x: 520, label: "Verify", color: "#34D399" },
+              { x: 235, label: "Map Types", color: "#818CF8" },
+              { x: 405, label: "Generate", color: "#4ECDC4" },
+              { x: 535, label: "Verify", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={90} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                <text x={n.x} y={94} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
+                <circle cx={n.x} cy={90} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
+                <text x={n.x} y={94} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
               </g>
             ))}
-            <text x={310} y={30} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">retry loop (equivalence fail)</text>
-            <text x={280} y={150} textAnchor="middle" fill="white" fillOpacity={0.20} fontSize={9} fontFamily="ui-monospace, monospace">Language Porting: Java↔Go↔Python</text>
+            <text x={290} y={150} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">Language Porting: Java ↔ Go ↔ Python</text>
           </svg>
         </div>
       )}
