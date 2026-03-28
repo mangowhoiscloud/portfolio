@@ -292,7 +292,10 @@ export function DomainDagSection() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(192,132,252,0.02)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
+        {/* Geodi discover */}
+        <div className="absolute top-8 right-8 opacity-[0.08] pointer-events-none hidden md:block">
+          <img src="/portfolio/images/geode-discover.png" alt="" width={48} height={48} />
+        </div>        <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#C084FC]/60 uppercase tracking-[0.25em] mb-3">
             L5 Domain Plugin
           </p>

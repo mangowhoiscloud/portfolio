@@ -248,7 +248,10 @@ export function ScaffoldSection() {
   return (
     <section ref={containerRef} className="relative py-28 sm:py-36 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
-        <ScrollReveal>
+        {/* Geodi guide */}
+        <div className="absolute top-8 right-8 opacity-[0.08] pointer-events-none hidden md:block">
+          <img src="/portfolio/images/geode-idle.png" alt="" width={48} height={48} />
+        </div>        <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-3">
             Scaffold
           </p>

@@ -183,7 +183,10 @@ export function VerificationSection() {
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(52,211,153,0.015)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
+        {/* Geodi focus */}
+        <div className="absolute top-8 right-8 opacity-[0.08] pointer-events-none hidden md:block">
+          <img src="/portfolio/images/geode-focus.png" alt="" width={48} height={48} />
+        </div>        <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#34D399]/60 uppercase tracking-[0.25em] mb-3">
             Verification
           </p>
