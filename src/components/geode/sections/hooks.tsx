@@ -133,7 +133,7 @@ function HookArchitectureDiagram() {
           <animate attributeName="stroke-opacity" values="0.12;0" dur="3s" repeatCount="indefinite" />
         </circle>
         {/* HookSystem hub */}
-        <rect x={HUB_X - 55} y={H / 2 - 35} width={110} height={70} rx={12} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.35} />
+        <rect x={HUB_X - 55} y={H / 2 - 35} width={110} height={70} rx={12} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.35} />
         <text x={HUB_X} y={H / 2 - 10} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
         <text x={HUB_X} y={H / 2 + 6} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">register()</text>
         <text x={HUB_X} y={H / 2 + 20} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">trigger()</text>

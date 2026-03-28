@@ -62,21 +62,21 @@ export function ReasoningSection() {
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 700 220" className="w-full min-w-[520px]" style={{ maxHeight: 250 }}>
                   {/* OBSERVE */}
-                  <rect x={40} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
+                  <rect x={40} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={105} y={83} textAnchor="middle" fill="#60A5FA" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>OBSERVE</text>
                   <text x={105} y={100} textAnchor="middle" fill="#60A5FA" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">LLM call + context</text>
 
                   <line x1={170} y1={90} x2={230} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
 
                   {/* ACT */}
-                  <rect x={230} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
+                  <rect x={230} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={295} y={83} textAnchor="middle" fill="#4ECDC4" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>ACT</text>
                   <text x={295} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">tool execution</text>
 
                   <line x1={360} y1={90} x2={420} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
 
                   {/* REFLECT */}
-                  <rect x={420} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
+                  <rect x={420} y={60} width={130} height={60} rx={10} fill="#0C1220" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={485} y={83} textAnchor="middle" fill="#C084FC" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>REFLECT</text>
                   <text x={485} y={100} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
 
@@ -85,7 +85,7 @@ export function ReasoningSection() {
                   <text x={295} y={180} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
 
                   {/* GoalDecomposer fork */}
-                  <rect x={560} y={40} width={110} height={50} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.7} strokeOpacity={0.2} />
+                  <rect x={560} y={40} width={110} height={50} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.7} strokeOpacity={0.2} />
                   <text x={615} y={60} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>GoalDecomposer</text>
                   <text x={615} y={75} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청 분해</text>
                   <line x1={550} y1={65} x2={560} y2={65} stroke="#F4B8C8" strokeOpacity={0.22} strokeWidth={1} />

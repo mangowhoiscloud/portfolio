@@ -32,7 +32,12 @@ function PipelineDag() {
   return (
     <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[640px]" style={{ maxHeight: 300 }}>
-        {/* ── Edges ── */}
+        <defs>
+          <linearGradient id="nodeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#121A2E" />
+            <stop offset="100%" stopColor="#080E1A" />
+          </linearGradient>
+        </defs>        {/* ── Edges ── */}
         <g stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none">
           {/* Router → Signals */}
           <path d={`M${xRouter + nR},${yMid} C${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${xSignals - nR},${yMid}`} />
@@ -65,40 +70,40 @@ function PipelineDag() {
 
         {/* ── Nodes ── */}
         {/* Router */}
-        <circle cx={xRouter} cy={yMid} r={nR} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xRouter} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xRouter} y={yMid - 2} textAnchor="middle" fill="#4ECDC4" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Router</text>
         <text x={xRouter} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Memory</text>
 
         {/* Signals */}
-        <circle cx={xSignals} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xSignals} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#F5C542" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSignals} y={yMid - 2} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Signals</text>
         <text x={xSignals} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">MCP</text>
 
         {/* 4 Analysts */}
         {["Market", "Creative", "Audience", "Risk"].map((name, i) => (
           <g key={name}>
-            <circle cx={xAnalysts} cy={aY[i]} r={aR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.35} />
+            <circle cx={xAnalysts} cy={aY[i]} r={aR} fill="url(#nodeGrad)" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.35} />
             <text x={xAnalysts} y={aY[i] + 1} textAnchor="middle" dominantBaseline="central" fill="#F5C542" fillOpacity={0.8} fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>{name}</text>
           </g>
         ))}
 
         {/* Evaluators */}
-        <circle cx={xEval} cy={yMid} r={nR} fill="#0A0F1A" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xEval} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xEval} y={yMid - 2} textAnchor="middle" fill="#818CF8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Eval ×3</text>
         <text x={xEval} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Cross</text>
 
         {/* Scoring */}
-        <circle cx={xScoring} cy={yMid} r={nR} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xScoring} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xScoring} y={yMid - 2} textAnchor="middle" fill="#C084FC" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Scoring</text>
         <text x={xScoring} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">PSM</text>
 
         {/* Verification */}
-        <circle cx={xVerify} cy={yMid} r={nR} fill="#0A0F1A" stroke="#34D399" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xVerify} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#34D399" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xVerify} y={yMid - 2} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Verify</text>
         <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">6-Layer</text>
 
         {/* Synthesizer */}
-        <circle cx={xSynth} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
+        <circle cx={xSynth} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSynth} y={yMid - 2} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Synth</text>
         <text x={xSynth} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Report</text>
       </svg>

@@ -122,3 +122,9 @@ body {
   pointer-events: none;
   z-index: 1;
 }
+
+/* SVG node gradient for depth effect */
+.svg-node-gradient {
+  stop:first-child { stop-color: #0F1525; }
+  stop:last-child { stop-color: #080E1A; }
+}

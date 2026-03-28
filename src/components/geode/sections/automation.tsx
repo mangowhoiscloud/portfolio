@@ -88,7 +88,7 @@ export function AutomationSection() {
           <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
             <svg viewBox="0 0 760 180" className="w-full min-w-[560px]" style={{ maxHeight: 210 }}>
               {/* SchedulerService */}
-              <rect x={20} y={50} width={140} height={70} rx={10} fill="#0A0F1A" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
+              <rect x={20} y={50} width={140} height={70} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
               <text x={90} y={75} textAnchor="middle" fill="#818CF8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Scheduler</text>
               <text x={90} y={93} textAnchor="middle" fill="#818CF8" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">AT · EVERY · CRON</text>
               <text x={90} y={108} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">~/.geode/scheduler/</text>
@@ -98,7 +98,7 @@ export function AutomationSection() {
               <text x={190} y={78} textAnchor="middle" fill="#818CF8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">enqueue</text>
 
               {/* action_queue */}
-              <rect x={220} y={60} width={100} height={50} rx={8} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+              <rect x={220} y={60} width={100} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
               <text x={270} y={82} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>action_queue</text>
               <text x={270} y={97} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">prompt text</text>
 
@@ -106,7 +106,7 @@ export function AutomationSection() {
               <path d="M320,85 C340,80 360,80 380,85" stroke="#F5C542" fill="none" strokeOpacity={0.2} strokeWidth={1} />
 
               {/* AgenticLoop */}
-              <rect x={380} y={50} width={120} height={70} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
+              <rect x={380} y={50} width={120} height={70} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
               <text x={440} y={75} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
               <text x={440} y={93} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">실행 + 검증</text>
 
@@ -115,7 +115,7 @@ export function AutomationSection() {
               <text x={530} y={78} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">emit</text>
 
               {/* HookSystem */}
-              <rect x={560} y={50} width={100} height={70} rx={10} fill="#0A0F1A" stroke="#E87080" strokeWidth={1} strokeOpacity={0.4} />
+              <rect x={560} y={50} width={100} height={70} rx={10} fill="#0C1220" stroke="#E87080" strokeWidth={1} strokeOpacity={0.4} />
               <text x={610} y={75} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
               <text x={610} y={93} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">TRIGGER_FIRED</text>
 
@@ -124,7 +124,7 @@ export function AutomationSection() {
               <text x={350} y={145} textAnchor="middle" fill="#C084FC" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">DRIFT_DETECTED → EVENT trigger → 재분석 파이프라인</text>
 
               {/* TriggerManager label on feedback */}
-              <rect x={300} y={130} width={100} height={24} rx={6} fill="#0A0F1A" stroke="#C084FC" strokeWidth={0.6} strokeOpacity={0.15} />
+              <rect x={300} y={130} width={100} height={24} rx={6} fill="#0C1220" stroke="#C084FC" strokeWidth={0.6} strokeOpacity={0.15} />
               <text x={350} y={146} textAnchor="middle" fill="#C084FC" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>TriggerManager</text>
 
               {/* Top label */}

@@ -89,7 +89,7 @@ export function MultiLlmSection() {
                     { x: 435, label: "Synth" },
                   ].map((n, i) => (
                     <g key={n.label}>
-                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
+                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
                       <text x={n.x} y={63} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
                       {i < 4 && <path d={`M${n.x + 36},59 C${n.x + 45},56 ${n.x + 55},56 ${n.x + 59},59`} stroke="white" strokeOpacity={0.15} strokeWidth={1} fill="none" />}
                     </g>
@@ -103,16 +103,16 @@ export function MultiLlmSection() {
                   <text x={652} y={10} textAnchor="middle" fill="#34D399" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Cross-LLM Verification</text>
 
                   {/* Opus + GPT side by side */}
-                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.4} />
                   <text x={577} y={56} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
                   <text x={577} y={70} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
 
-                  <rect x={635} y={40} width={85} height={38} rx={8} fill="#0A0F1A" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <rect x={635} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.4} />
                   <text x={677} y={56} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>GPT-5.4</text>
                   <text x={677} y={70} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">secondary</text>
 
                   {/* Agreement — below, clear spacing */}
-                  <rect x={560} y={95} width={155} height={32} rx={8} fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
+                  <rect x={560} y={95} width={155} height={32} rx={8} fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
                   <text x={637} y={115} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement ≥ 0.67 · α ≥ 0.80</text>
 
                   {/* Converge arrows from Opus+GPT to Agreement */}
@@ -183,7 +183,7 @@ export function MultiLlmSection() {
                   </text>
 
                   {/* Bottom: Haiku + retry policy */}
-                  <rect x={20} y={105} width={150} height={32} rx={6} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.2} />
+                  <rect x={20} y={105} width={150} height={32} rx={6} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.2} />
                   <text x={95} y={125} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">Haiku 4.5 Token Guard</text>
 
                   <text x={430} y={125} textAnchor="middle" fill="white" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">

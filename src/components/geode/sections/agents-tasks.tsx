@@ -85,7 +85,7 @@ export function AgentsTasksSection() {
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 760 210" className="w-full min-w-[580px]" style={{ maxHeight: 250 }}>
                   {/* Parent agent */}
-                  <rect x={20} y={70} width={120} height={60} rx={10} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
+                  <rect x={20} y={70} width={120} height={60} rx={10} fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={80} y={93} textAnchor="middle" fill="#F4B8C8" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Parent</text>
                   <text x={80} y={110} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">AgenticLoop</text>
 
@@ -104,7 +104,7 @@ export function AgentsTasksSection() {
                     { y: 150, label: "Sub-C", task: "compare" },
                   ].map((sa) => (
                     <g key={sa.label}>
-                      <rect x={230} y={sa.y} width={100} height={44} rx={8} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.2} />
+                      <rect x={230} y={sa.y} width={100} height={44} rx={8} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.2} />
                       <text x={280} y={sa.y + 18} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{sa.label}</text>
                       <text x={280} y={sa.y + 32} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">{sa.task}</text>
                     </g>
@@ -129,7 +129,7 @@ export function AgentsTasksSection() {
                     { y: 150, status: "ok", score: "3 matches" },
                   ].map((r, i) => (
                     <g key={`result-${i}`}>
-                      <rect x={395} y={r.y} width={90} height={44} rx={8} fill="#0A0F1A" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.2} />
+                      <rect x={395} y={r.y} width={90} height={44} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.2} />
                       <text x={440} y={r.y + 18} textAnchor="middle" fill="#34D399" fillOpacity={0.7} fontSize={9} fontFamily="ui-monospace, monospace">{r.status}</text>
                       <text x={440} y={r.y + 32} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">{r.score}</text>
                     </g>
@@ -142,7 +142,7 @@ export function AgentsTasksSection() {
                   ))}
 
                   {/* Announce queue */}
-                  <rect x={570} y={75} width={80} height={50} rx={8} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <rect x={570} y={75} width={80} height={50} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
                   <text x={610} y={95} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Queue</text>
                   <text x={610} y={110} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">announce_queue</text>
 
@@ -205,7 +205,7 @@ export function AgentsTasksSection() {
                     ))}
                     {["Mech", "Exp", "Growth", "Disc"].map((l, i) => (
                       <g key={l}>
-                        <circle cx={280} cy={40 + i * 40} r={16} fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.35} />
+                        <circle cx={280} cy={40 + i * 40} r={16} fill="#0C1220" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.35} />
                         <text x={280} y={41 + i * 40} textAnchor="middle" dominantBaseline="central" fill="#818CF8" fillOpacity={0.7} fontSize={8} fontFamily="ui-monospace, monospace">{l}</text>
                       </g>
                     ))}
@@ -237,7 +237,7 @@ export function AgentsTasksSection() {
                 <div className="overflow-x-auto -mx-4 px-4 pb-2">
                   <svg viewBox="0 0 700 180" className="w-full min-w-[540px]" style={{ maxHeight: 210 }}>
                     {/* User request */}
-                    <rect x={20} y={60} width={110} height={50} rx={10} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.35} />
+                    <rect x={20} y={60} width={110} height={50} rx={10} fill="#0C1220" stroke="#F4B8C8" strokeWidth={0.8} strokeOpacity={0.35} />
                     <text x={75} y={80} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>User Request</text>
                     <text x={75} y={95} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청</text>
 
@@ -245,7 +245,7 @@ export function AgentsTasksSection() {
                     <line x1={130} y1={85} x2={180} y2={85} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
 
                     {/* GoalDecomposer */}
-                    <rect x={180} y={55} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
+                    <rect x={180} y={55} width={130} height={60} rx={10} fill="#0C1220" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
                     <text x={245} y={78} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>GoalDecomposer</text>
                     <text x={245} y={95} textAnchor="middle" fill="#818CF8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">분해 → sub-goals</text>
 
@@ -253,7 +253,7 @@ export function AgentsTasksSection() {
                     {[35, 85, 135].map((y, i) => (
                       <g key={`task-${i}`}>
                         <path d={`M310,85 C340,85 350,${y} 380,${y}`} fill="none" stroke="#4ECDC4" strokeOpacity={0.28} strokeWidth={1} />
-                        <rect x={380} y={y - 18} width={100} height={36} rx={8} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.2} />
+                        <rect x={380} y={y - 18} width={100} height={36} rx={8} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.2} />
                         <text x={430} y={y - 2} textAnchor="middle" fill="#4ECDC4" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>
                           {["Task A", "Task B", "Task C"][i]}
                         </text>
@@ -264,7 +264,7 @@ export function AgentsTasksSection() {
                     ))}
 
                     {/* CLI /tasks */}
-                    <rect x={530} y={55} width={80} height={60} rx={10} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.2} />
+                    <rect x={530} y={55} width={80} height={60} rx={10} fill="#0C1220" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.2} />
                     <text x={570} y={78} textAnchor="middle" fill="#F5C542" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>/tasks</text>
                     <text x={570} y={95} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">CLI 조회</text>
 
@@ -297,7 +297,7 @@ export function AgentsTasksSection() {
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 760 200" className="w-full min-w-[560px]" style={{ maxHeight: 230 }}>
                   {/* Planner (route selection) */}
-                  <rect x={20} y={60} width={100} height={60} rx={10} fill="#0A0F1A" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
+                  <rect x={20} y={60} width={100} height={60} rx={10} fill="#0C1220" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={70} y={83} textAnchor="middle" fill="#60A5FA" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Planner</text>
                   <text x={70} y={100} textAnchor="middle" fill="#60A5FA" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">route 선택</text>
 
@@ -328,11 +328,11 @@ export function AgentsTasksSection() {
                   <text x={290} y={163} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">REJECTED → DRAFT로 복귀</text>
 
                   {/* Templates */}
-                  <rect x={640} y={30} width={100} height={42} rx={8} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.2} />
+                  <rect x={640} y={30} width={100} height={42} rx={8} fill="#0C1220" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.2} />
                   <text x={690} y={48} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>full_pipeline</text>
                   <text x={690} y={62} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">10 steps · $1.50</text>
 
-                  <rect x={640} y={80} width={100} height={42} rx={8} fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.2} />
+                  <rect x={640} y={80} width={100} height={42} rx={8} fill="#0C1220" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.2} />
                   <text x={690} y={98} textAnchor="middle" fill="#818CF8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>prospect</text>
                   <text x={690} y={112} textAnchor="middle" fill="#5A6A8A" fontSize={8} fontFamily="ui-monospace, monospace">6 steps · $0.80</text>
 
