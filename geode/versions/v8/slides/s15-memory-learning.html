@@ -25,7 +25,7 @@ body {
   <!-- Title -->
   <div style="padding: 0 36pt 2pt;">
     <h1 style="font-size: 15pt; font-weight: bold; color: #FFFFFF;">Memory + Auto-Learning: 턴 종료 &#8594; TURN_COMPLETE hook &#8594; MEMORY.md 자동 학습</h1>
-    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">세션이 끝나면 인사이트가 휘발되는 문제 때문에 PIPELINE_END 이벤트를 설계해 MEMORY.md에 자동 축적하고, 다음 세션 PromptAssembler P4가 이를 주입한다</p>
+    <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">PIPELINE_END 이벤트가 MEMORY.md에 인사이트를 자동 축적하고, 다음 세션 PromptAssembler P4가 주입한다</p>
   </div>
 
   <!-- Main content -->
@@ -153,7 +153,7 @@ body {
   </div>
 
   <!-- Footer -->
-  <div style="padding: 2pt 36pt 5pt; display: flex; justify-content: space-between; align-items: center;">
+  <div style="padding: 1pt 36pt 4pt; display: flex; justify-content: space-between; align-items: center;">
     <p style="font-size: 5pt; color: #8B949E;">TURN_COMPLETE · PIPELINE_END hook &#183; 4-Tier: Session&#8594;Project&#8594;Org&#8594;Hybrid &#183; Redis L1 + File L2 &#183; MEMORY.md write-back</p>
     <p style="font-size: 5pt; color: #8B949E;">16 / 35</p>
   </div>

@@ -75,55 +75,68 @@ export function MultiLlmSection() {
           {mode === "pipeline" && (
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
-                <svg viewBox="0 0 800 170" className="w-full min-w-[600px]" style={{ maxHeight: 200 }}>
-                  {/* Opus Primary group */}
-                  <rect x={15} y={15} width={460} height={120} rx={12} fill="none" stroke="#D97757" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={245} y={10} textAnchor="middle" fill="#D97757" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>claude-opus-4-6 (Primary)</text>
+                <svg viewBox="0 0 760 280" className="w-full min-w-[580px]" style={{ maxHeight: 320 }}>
+                  <defs>
+                    <filter id="glow-merge" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                    </filter>
+                    <marker id="arr-gold" viewBox="0 0 7 5" refX="6" refY="2.5" markerWidth="6" markerHeight="5" orient="auto">
+                      <path d="M0,0 L7,2.5 L0,5" fill="#F5C542" opacity={0.5} />
+                    </marker>
+                    <marker id="arr-teal" viewBox="0 0 7 5" refX="6" refY="2.5" markerWidth="6" markerHeight="5" orient="auto">
+                      <path d="M0,0 L7,2.5 L0,5" fill="#34D399" opacity={0.5} />
+                    </marker>
+                    <marker id="arr-indigo" viewBox="0 0 7 5" refX="6" refY="2.5" markerWidth="6" markerHeight="5" orient="auto">
+                      <path d="M0,0 L7,2.5 L0,5" fill="#818CF8" opacity={0.5} />
+                    </marker>
+                  </defs>
 
-                  {/* Pipeline nodes — evenly spaced */}
+                  {/* PRIMARY — Claude Opus 4.6 */}
+                  <rect x={20} y={20} width={280} height={150} rx={12} fill="rgba(245,197,66,0.04)" stroke="#F5C542" strokeWidth={1.5} strokeOpacity={0.35} />
+                  <text x={160} y={42} textAnchor="middle" fill="#F5C542" fillOpacity={0.7} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>PRIMARY — Opus 4.6</text>
+                  <text x={160} y={58} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">primary_analysts + evaluators</text>
+                  <rect x={35} y={70} width={120} height={30} rx={6} fill="#0C1220" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.3} />
+                  <text x={95} y={89} textAnchor="middle" fill="#F5C542" fillOpacity={0.6} fontSize={9} fontFamily="ui-monospace, monospace">Analyst ×4 (Send)</text>
+                  <rect x={165} y={70} width={120} height={30} rx={6} fill="#0C1220" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.3} />
+                  <text x={225} y={89} textAnchor="middle" fill="#F5C542" fillOpacity={0.6} fontSize={9} fontFamily="ui-monospace, monospace">Eval ×3 + Scoring</text>
+                  <rect x={80} y={115} width={160} height={28} rx={6} fill="#0C1220" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.25} />
+                  <text x={160} y={133} textAnchor="middle" fill="#F5C542" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">Synthesizer + Report</text>
+
+                  {/* SECONDARY — GPT-5.4 */}
+                  <rect x={20} y={185} width={280} height={65} rx={12} fill="rgba(52,211,153,0.04)" stroke="#34D399" strokeWidth={1.5} strokeOpacity={0.35} />
+                  <text x={160} y={207} textAnchor="middle" fill="#34D399" fillOpacity={0.7} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>SECONDARY — GPT-5.4</text>
+                  <text x={160} y={225} textAnchor="middle" fill="#34D399" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">secondary_analysts · cross-eval</text>
+
+                  {/* SCORE MERGE (glow) */}
+                  <rect x={380} y={100} width={140} height={60} rx={12} fill="rgba(129,140,248,0.08)" stroke="#818CF8" strokeWidth={2} strokeOpacity={0.5} filter="url(#glow-merge)" />
+                  <text x={450} y={125} textAnchor="middle" fill="#818CF8" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>Score Merge</text>
+                  <text x={450} y={145} textAnchor="middle" fill="#818CF8" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">agreement ≥ 0.67</text>
+
+                  {/* RELIABILITY CHECK */}
+                  <rect x={570} y={90} width={170} height={80} rx={12} fill="rgba(192,132,252,0.05)" stroke="#C084FC" strokeWidth={1.5} strokeOpacity={0.35} />
+                  <text x={655} y={118} textAnchor="middle" fill="#C084FC" fillOpacity={0.7} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Reliability Check</text>
+                  <text x={655} y={138} textAnchor="middle" fill="#C084FC" fillOpacity={0.45} fontSize={10} fontFamily="ui-monospace, monospace">Krippendorff α</text>
+                  <text x={655} y={155} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">target: α ≥ 0.80</text>
+
+                  {/* Edges */}
+                  <path d="M300,95 C340,95 360,120 380,125" stroke="#F5C542" strokeOpacity={0.4} strokeWidth={1.5} fill="none" markerEnd="url(#arr-gold)" />
+                  <path d="M300,215 C340,215 360,145 380,140" stroke="#34D399" strokeOpacity={0.4} strokeWidth={1.5} fill="none" markerEnd="url(#arr-teal)" />
+                  <path d="M520,130 C540,130 555,130 570,130" stroke="#818CF8" strokeOpacity={0.4} strokeWidth={1.5} fill="none" markerEnd="url(#arr-indigo)" />
+
+                  {/* Supporting models */}
+                  <text x={630} y={195} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">Supporting:</text>
                   {[
-                    { x: 60, label: "Router" },
-                    { x: 155, label: "Analyst×4" },
-                    { x: 255, label: "Eval×3" },
-                    { x: 345, label: "Scoring" },
-                    { x: 435, label: "Synth" },
-                  ].map((n, i) => (
-                    <g key={n.label}>
-                      <rect x={n.x - 36} y={40} width={72} height={38} rx={8} fill="#0C1220" stroke="#D97757" strokeWidth={0.8} strokeOpacity={0.4} />
-                      <text x={n.x} y={63} textAnchor="middle" fill="#D97757" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                      {i < 4 && <path d={`M${n.x + 36},59 C${n.x + 45},56 ${n.x + 55},56 ${n.x + 59},59`} stroke="white" strokeOpacity={0.15} strokeWidth={1} fill="none" />}
+                    { label: "Sonnet 4.6", color: "#818CF8", x: 595, y: 210 },
+                    { label: "Haiku 4.5", color: "#818CF8", x: 680, y: 210 },
+                    { label: "GLM-5", color: "#34D399", x: 638, y: 238 },
+                  ].map((m) => (
+                    <g key={m.label}>
+                      <rect x={m.x - 38} y={m.y - 10} width={76} height={22} rx={4} fill="#0C1220" stroke={m.color} strokeWidth={0.5} strokeOpacity={0.3} />
+                      <text x={m.x} y={m.y + 5} textAnchor="middle" fill={m.color} fillOpacity={0.5} fontSize={8} fontFamily="ui-monospace, monospace">{m.label}</text>
                     </g>
                   ))}
-
-                  {/* Arrow: Pipeline → Verification */}
-                  <path d="M471,59 C490,55 510,55 530,59" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
-
-                  {/* Cross-LLM Verification group */}
-                  <rect x={520} y={15} width={265} height={120} rx={12} fill="none" stroke="#34D399" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="6 4" />
-                  <text x={652} y={10} textAnchor="middle" fill="#34D399" fillOpacity={0.5} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Cross-LLM Verification</text>
-
-                  {/* Opus + GPT side by side */}
-                  <rect x={535} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#D97757" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={577} y={56} textAnchor="middle" fill="#D97757" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Opus 4.6</text>
-                  <text x={577} y={70} textAnchor="middle" fill="#D97757" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">primary</text>
-
-                  <rect x={635} y={40} width={85} height={38} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={677} y={56} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>GPT-5.4</text>
-                  <text x={677} y={70} textAnchor="middle" fill="#34D399" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">secondary</text>
-
-                  {/* Agreement — below, clear spacing */}
-                  <rect x={550} y={92} width={175} height={38} rx={8} fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={637} y={108} textAnchor="middle" fill="#818CF8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Agreement ≥ 0.67</text>
-                  <text x={637} y={122} textAnchor="middle" fill="#818CF8" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">Krippendorff α ≥ 0.80</text>
-
-                  {/* Converge arrows from Opus+GPT to Agreement */}
-                  <path d="M577,78 C577,86 610,90 637,95" stroke="#818CF8" strokeOpacity={0.15} strokeWidth={0.8} fill="none" />
-                  <path d="M677,78 C677,86 660,90 637,95" stroke="#818CF8" strokeOpacity={0.15} strokeWidth={0.8} fill="none" />
-
-                  {/* Bottom annotation */}
-                  <text x={400} y={160} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">
-                    Opus 전 노드 Primary + GPT-5.4 Cross-LLM Secondary
-                  </text>
+                  <text x={638} y={268} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">Judge · Guardrail · Planner</text>
                 </svg>
               </div>
 
