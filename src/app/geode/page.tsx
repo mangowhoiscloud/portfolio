@@ -8,7 +8,6 @@ import { HooksSection } from "@/components/geode/sections/hooks";
 import { AgentsTasksSection } from "@/components/geode/sections/agents-tasks";
 import { AutomationSection } from "@/components/geode/sections/automation";
 import { FeedbackSection } from "@/components/geode/sections/feedback";
-// Bootstrap merged into Architecture (v7)
 import { ContextTiersSection } from "@/components/geode/sections/context-tiers";
 import { GatewaySection } from "@/components/geode/sections/gateway";
 import { DomainDagSection } from "@/components/geode/sections/domain-dag";
@@ -18,25 +17,32 @@ import { VerificationSection } from "@/components/geode/sections/verification";
 import { TimelineSection } from "@/components/geode/sections/timeline";
 import { GeodeFooter } from "@/components/geode/sections/footer";
 
+const Divider = () => <div className="max-w-3xl mx-auto border-t border-white/[0.03]" />;
+
 export default function GeodePage() {
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#0B1628_0%,#0D1A30_15%,#0A1220_30%,#0E1525_45%,#0B1628_55%,#080E1A_70%,#0A1220_85%,#0B1628_100%)] text-[#F0F0FF] overflow-x-hidden">
+    <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-surface)_0%,var(--sea-upper)_8%,var(--sea-mid)_20%,var(--sea-deep)_40%,var(--sea-deep)_60%,var(--sea-abyss)_80%,#060A14_100%)] text-[#F0F0FF] overflow-x-hidden">
       <GeodeNav />
       <div id="hero"><HeroSection /></div>
       <div id="scaffold"><ScaffoldSection /></div>
+      <Divider />
       <div id="loop"><LoopSection /></div>
       <div id="reasoning"><ReasoningSection /></div>
+      <Divider />
       <div id="architecture"><ArchitectureSection /></div>
       <div id="hooks"><HooksSection /></div>
+      <Divider />
       <div id="agents"><AgentsTasksSection /></div>
       <div id="automation"><AutomationSection /></div>
       <div id="feedback"><FeedbackSection /></div>
+      <Divider />
       <div id="context"><ContextTiersSection /></div>
-      {/* Bootstrap removed — merged into Architecture section (v7) */}
       <div id="gateway"><GatewaySection /></div>
+      <Divider />
       <div id="domain"><DomainDagSection /></div>
       <div id="scoring"><ScoringSection /></div>
       <div id="llm"><MultiLlmSection /></div>
+      <Divider />
       <div id="verify"><VerificationSection /></div>
       <div id="timeline"><TimelineSection /></div>
       <GeodeFooter />

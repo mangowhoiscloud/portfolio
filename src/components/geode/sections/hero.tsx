@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const stats = [
-  { value: "6", label: "Layers", sub: "L0–L5" },
-  { value: "98", label: "Tools", sub: "54 + 44 MCP" },
-  { value: "46", label: "Hooks", sub: "lifecycle" },
-  { value: "3.3K+", label: "Tests", sub: "CI ratchet" },
+  { value: "1,153", label: "Autonomous Turns", sub: "single session" },
+  { value: "83/83", label: "Tests Passed", sub: "Java migration" },
+  { value: "5h30m", label: "Unattended Run", sub: "REODE" },
+  { value: "3.3K+", label: "Test Suite", sub: "CI ratchet" },
 ];
 
 export function HeroSection() {
