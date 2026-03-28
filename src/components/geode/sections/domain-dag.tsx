@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { DagRenderer } from "../dag-renderer";
+import type { DagNode, DagEdge } from "../dag-renderer";
 
 
 /* ── GameIP Pipeline DAG (9-node, code-verified) ── */
@@ -140,114 +142,75 @@ function ReodeDag() {
         ))}
       </div>
 
-      {/* Spring Migration — 7-node with startup_verify */}
+      {/* Spring Migration — 7-node (DagRenderer) */}
       {pipe === "spring" && (
-        <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 840 230" className="w-full min-w-[640px]" style={{ maxHeight: 270 }}>
-            {/* Main flow edges */}
-            {[
-              [80, 175], [195, 290], [310, 405], [425, 520], [540, 640], [660, 755],
-            ].map(([x1, x2], i) => (
-              <path key={`se-${i}`} d={`M${x1},115 C${(x1 + x2) / 2},108 ${(x1 + x2) / 2},108 ${x2},115`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
-            ))}
-            {/* Fix → Transform loopback */}
-            <path d="M530,88 C530,45 310,40 310,88" stroke="#E87080" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
-            <text x={420} y={38} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">fix loop</text>
-            {/* Startup → Fix (fail) */}
-            <path d="M640,88 C640,55 545,55 545,88" stroke="#F5C542" strokeOpacity={0.25} strokeWidth={1} strokeDasharray="4 3" fill="none" />
-
-            {/* Nodes — r=28, consistent sizing */}
-            {[
-              { x: 55, label: "Assess", sub: "Spring", color: "#60A5FA" },
-              { x: 170, label: "Plan", sub: "Recipe", color: "#818CF8" },
-              { x: 285, label: "Transform", sub: "Sonnet", color: "#4ECDC4" },
-              { x: 400, label: "Validate", sub: "Haiku", color: "#F5C542" },
-              { x: 515, label: "Fix", sub: "Architect", color: "#E87080" },
-              { x: 630, label: "Startup", sub: "verify", color: "#34D399" },
-              { x: 755, label: "Measure", sub: "score", color: "#34D399" },
-            ].map((n) => (
-              <g key={n.label}>
-                <circle cx={n.x} cy={115} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
-                <text x={n.x} y={112} textAnchor="middle" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
-                <text x={n.x} y={126} textAnchor="middle" fill={n.color} fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">{n.sub}</text>
-              </g>
-            ))}
-
-            {/* 4-class routing */}
-            <text x={460} y={180} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">
-              4-Class Error Routing: CONFIG · CODE · BEHAVIOR · ENV
-            </text>
-            <text x={630} y={200} textAnchor="middle" fill="#34D399" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">
-              startup_verify: java_app_start → health check → HTTP 200
-            </text>
-          </svg>
-        </div>
+        <DagRenderer
+          nodes={[
+            { id: "assess", label: "Assess", sub: "Spring", color: "#60A5FA", column: 0 },
+            { id: "plan", label: "Plan", sub: "Recipe", color: "#818CF8", column: 1 },
+            { id: "transform", label: "Transform", sub: "Sonnet", color: "#4ECDC4", column: 2 },
+            { id: "validate", label: "Validate", sub: "Haiku", color: "#F5C542", column: 3 },
+            { id: "fix", label: "Fix", sub: "Architect", color: "#E87080", column: 4 },
+            { id: "startup", label: "Startup", sub: "verify", color: "#34D399", column: 5 },
+            { id: "measure", label: "Measure", sub: "score", color: "#34D399", column: 6 },
+          ]}
+          edges={[
+            { from: "assess", to: "plan" },
+            { from: "plan", to: "transform" },
+            { from: "transform", to: "validate" },
+            { from: "validate", to: "fix" },
+            { from: "fix", to: "startup" },
+            { from: "startup", to: "measure" },
+            { from: "fix", to: "transform", dashed: true, color: "#E87080", label: "fix loop", animated: true },
+            { from: "startup", to: "fix", dashed: true, color: "#F5C542" },
+          ]}
+          annotations={[
+            { x: 450, y: 10, text: "4-Class Error Routing: CONFIG · CODE · BEHAVIOR · ENV" },
+          ]}
+        />
       )}
 
-      {/* Migration — 6-node */}
+      {/* Migration — 6-node (DagRenderer) */}
       {pipe === "migration" && (
-        <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 740 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
-            {/* Main flow */}
-            {[
-              [85, 195], [225, 335], [365, 475], [505, 600],
-            ].map(([x1, x2], i) => (
-              <path key={`me-${i}`} d={`M${x1},100 C${(x1 + x2) / 2},93 ${(x1 + x2) / 2},93 ${x2},100`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
-            ))}
-            {/* Validate → Measure (success path) */}
-            <path d="M505,100 C560,93 600,93 660,100" stroke="#34D399" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
-            {/* Fix → Validate loopback */}
-            <path d="M580,72 C580,40 460,35 460,72" stroke="#E87080" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
-            <text x={520} y={30} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">fix loop</text>
-
-            {/* Nodes */}
-            {[
-              { x: 60, label: "Assess", color: "#60A5FA" },
-              { x: 200, label: "Plan", color: "#818CF8" },
-              { x: 340, label: "Transform", color: "#4ECDC4" },
-              { x: 480, label: "Validate", color: "#F5C542" },
-              { x: 600, label: "Fix", color: "#E87080" },
-              { x: 690, label: "Measure", color: "#34D399" },
-            ].map((n) => (
-              <g key={n.label}>
-                <circle cx={n.x} cy={100} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
-                <text x={n.x} y={104} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
-              </g>
-            ))}
-            <text x={600} y={148} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">Architect → Editor</text>
-          </svg>
-        </div>
+        <DagRenderer
+          nodes={[
+            { id: "assess", label: "Assess", color: "#60A5FA", column: 0 },
+            { id: "plan", label: "Plan", color: "#818CF8", column: 1 },
+            { id: "transform", label: "Transform", color: "#4ECDC4", column: 2 },
+            { id: "validate", label: "Validate", color: "#F5C542", column: 3 },
+            { id: "fix", label: "Fix", sub: "Architect", color: "#E87080", column: 4 },
+            { id: "measure", label: "Measure", color: "#34D399", column: 5 },
+          ]}
+          edges={[
+            { from: "assess", to: "plan" },
+            { from: "plan", to: "transform" },
+            { from: "transform", to: "validate" },
+            { from: "validate", to: "fix" },
+            { from: "validate", to: "measure", color: "#34D399" },
+          ]}
+          loopback={{ from: "fix", to: "validate", label: "fix loop", color: "#E87080" }}
+        />
       )}
 
-      {/* Porting — 4-node */}
+      {/* Porting — 4-node (DagRenderer) */}
       {pipe === "porting" && (
-        <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
-          <svg viewBox="0 0 580 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
-            {/* Main flow */}
-            {[
-              [95, 195], [280, 370], [460, 520],
-            ].map(([x1, x2], i) => (
-              <path key={`pe-${i}`} d={`M${x1},90 C${(x1 + x2) / 2},83 ${(x1 + x2) / 2},83 ${x2},90`} stroke="white" strokeOpacity={0.22} strokeWidth={1.2} fill="none" />
-            ))}
-            {/* Retry loopback */}
-            <path d="M420,62 C420,30 240,25 240,62" stroke="#4ECDC4" strokeOpacity={0.28} strokeWidth={1.2} strokeDasharray="5 4" fill="none" className="animate-flow" />
-            <text x={330} y={22} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">retry loop</text>
-
-            {/* Nodes */}
-            {[
-              { x: 65, label: "Analyze", color: "#60A5FA" },
-              { x: 235, label: "Map Types", color: "#818CF8" },
-              { x: 405, label: "Generate", color: "#4ECDC4" },
-              { x: 535, label: "Verify", color: "#34D399" },
-            ].map((n) => (
-              <g key={n.label}>
-                <circle cx={n.x} cy={90} r={28} fill="#0C1220" stroke={n.color} strokeWidth={1} strokeOpacity={0.4} />
-                <text x={n.x} y={94} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>{n.label}</text>
-              </g>
-            ))}
-            <text x={290} y={150} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={9} fontFamily="ui-monospace, monospace">Language Porting: Java ↔ Go ↔ Python</text>
-          </svg>
-        </div>
+        <DagRenderer
+          nodes={[
+            { id: "analyze", label: "Analyze", color: "#60A5FA", column: 0 },
+            { id: "map", label: "Map Types", color: "#818CF8", column: 1 },
+            { id: "generate", label: "Generate", color: "#4ECDC4", column: 2 },
+            { id: "verify", label: "Verify", color: "#34D399", column: 3 },
+          ]}
+          edges={[
+            { from: "analyze", to: "map" },
+            { from: "map", to: "generate" },
+            { from: "generate", to: "verify" },
+          ]}
+          loopback={{ from: "verify", to: "generate", label: "retry loop", color: "#4ECDC4" }}
+          annotations={[
+            { x: 280, y: 10, text: "Language Porting: Java ↔ Go ↔ Python" },
+          ]}
+        />
       )}
     </div>
   );
