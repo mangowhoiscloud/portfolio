@@ -36,11 +36,11 @@ export function BootstrapSection() {
                 const x = 30 + i * 108;
                 return (
                   <g key={s.id}>
-                    <rect x={x} y={25} width={90} height={55} rx={10} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.25} />
+                    <rect x={x} y={25} width={90} height={55} rx={10} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.35} />
                     <text x={x + 45} y={47} textAnchor="middle" fill={s.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{s.name}</text>
-                    <text x={x + 45} y={63} textAnchor="middle" fill={s.color} fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">Step {s.id}</text>
+                    <text x={x + 45} y={63} textAnchor="middle" fill={s.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">Step {s.id}</text>
                     {i < steps.length - 1 && (
-                      <path d={`M${x + 90},52 C${x + 95},48 ${x + 103},48 ${x + 108},52`} stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none" />
+                      <path d={`M${x + 90},52 C${x + 95},48 ${x + 103},48 ${x + 108},52`} stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
                     )}
                   </g>
                 );

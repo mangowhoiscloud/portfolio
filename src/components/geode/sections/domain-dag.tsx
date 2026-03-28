@@ -33,7 +33,7 @@ function PipelineDag() {
     <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[640px]" style={{ maxHeight: 300 }}>
         {/* ── Edges ── */}
-        <g stroke="white" strokeOpacity={0.12} strokeWidth={1} fill="none">
+        <g stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none">
           {/* Router → Signals */}
           <path d={`M${xRouter + nR},${yMid} C${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${(xRouter + nR + xSignals - nR) / 2},${yMid - 4} ${xSignals - nR},${yMid}`} />
           {/* Signals → 4 Analysts (fan-out) */}
@@ -47,7 +47,7 @@ function PipelineDag() {
           {/* Eval → Scoring → Verify → Synth */}
           <path d={`M${xEval + nR},${yMid} C${(xEval + nR + xScoring - nR) / 2},${yMid - 4} ${(xEval + nR + xScoring - nR) / 2},${yMid - 4} ${xScoring - nR},${yMid}`} />
           <path d={`M${xScoring + nR},${yMid} C${(xScoring + nR + xVerify - nR) / 2},${yMid - 4} ${(xScoring + nR + xVerify - nR) / 2},${yMid - 4} ${xVerify - nR},${yMid}`} />
-          <path d={`M${xVerify + nR},${yMid} C${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${xSynth - nR},${yMid}`} stroke="#34D399" strokeOpacity={0.12} />
+          <path d={`M${xVerify + nR},${yMid} C${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${(xVerify + nR + xSynth - nR) / 2},${yMid - 4} ${xSynth - nR},${yMid}`} stroke="#34D399" strokeOpacity={0.2} />
         </g>
 
         {/* Confidence loopback: Verify → Gather → Signals */}
@@ -55,50 +55,50 @@ function PipelineDag() {
           d={`M${xVerify},${yMid + nR + 4} C${xVerify},${yMid + 65} ${xSignals},${yMid + 65} ${xSignals},${yMid + nR + 4}`}
           fill="none" stroke="#E87080" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="4 4" className="animate-flow"
         />
-        <text x={(xVerify + xSignals) / 2} y={yMid + 72} textAnchor="middle" fill="#E87080" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace">
+        <text x={(xVerify + xSignals) / 2} y={yMid + 72} textAnchor="middle" fill="#E87080" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">
           confidence &lt; 0.7 → gather → loopback (max 5)
         </text>
 
         {/* Labels */}
-        <text x={(xSignals + xAnalysts) / 2} y={14} textAnchor="middle" fill="#F5C542" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace">Send API (fan-out ×4)</text>
-        <text x={(xAnalysts + xEval) / 2} y={14} textAnchor="middle" fill="#818CF8" fillOpacity={0.3} fontSize={9} fontFamily="ui-monospace, monospace">fan-in ×3</text>
+        <text x={(xSignals + xAnalysts) / 2} y={14} textAnchor="middle" fill="#F5C542" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">Send API (fan-out ×4)</text>
+        <text x={(xAnalysts + xEval) / 2} y={14} textAnchor="middle" fill="#818CF8" fillOpacity={0.45} fontSize={9} fontFamily="ui-monospace, monospace">fan-in ×3</text>
 
         {/* ── Nodes ── */}
         {/* Router */}
-        <circle cx={xRouter} cy={yMid} r={nR} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xRouter} cy={yMid} r={nR} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xRouter} y={yMid - 2} textAnchor="middle" fill="#4ECDC4" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Router</text>
         <text x={xRouter} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Memory</text>
 
         {/* Signals */}
-        <circle cx={xSignals} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xSignals} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSignals} y={yMid - 2} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Signals</text>
         <text x={xSignals} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">MCP</text>
 
         {/* 4 Analysts */}
         {["Market", "Creative", "Audience", "Risk"].map((name, i) => (
           <g key={name}>
-            <circle cx={xAnalysts} cy={aY[i]} r={aR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.25} />
+            <circle cx={xAnalysts} cy={aY[i]} r={aR} fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.7} strokeOpacity={0.35} />
             <text x={xAnalysts} y={aY[i] + 1} textAnchor="middle" dominantBaseline="central" fill="#F5C542" fillOpacity={0.8} fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>{name}</text>
           </g>
         ))}
 
         {/* Evaluators */}
-        <circle cx={xEval} cy={yMid} r={nR} fill="#0A0F1A" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xEval} cy={yMid} r={nR} fill="#0A0F1A" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xEval} y={yMid - 2} textAnchor="middle" fill="#818CF8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Eval ×3</text>
         <text x={xEval} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Cross</text>
 
         {/* Scoring */}
-        <circle cx={xScoring} cy={yMid} r={nR} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xScoring} cy={yMid} r={nR} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xScoring} y={yMid - 2} textAnchor="middle" fill="#C084FC" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Scoring</text>
         <text x={xScoring} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">PSM</text>
 
         {/* Verification */}
-        <circle cx={xVerify} cy={yMid} r={nR} fill="#0A0F1A" stroke="#34D399" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xVerify} cy={yMid} r={nR} fill="#0A0F1A" stroke="#34D399" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xVerify} y={yMid - 2} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Verify</text>
         <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">6-Layer</text>
 
         {/* Synthesizer */}
-        <circle cx={xSynth} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.3} />
+        <circle cx={xSynth} cy={yMid} r={nR} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSynth} y={yMid - 2} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Synth</text>
         <text x={xSynth} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Report</text>
       </svg>
@@ -138,7 +138,7 @@ function ReodeDag() {
       {pipe === "spring" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 800 220" className="w-full min-w-[600px]" style={{ maxHeight: 260 }}>
-            <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
               <path d="M75,110 C102,106 102,106 130,110" fill="none" />
               <path d="M185,110 C212,106 212,106 240,110" fill="none" />
               <path d="M295,110 C322,106 322,106 350,110" fill="none" />
@@ -146,12 +146,12 @@ function ReodeDag() {
               <path d="M515,110 C542,106 542,106 570,110" fill="none" />
               <path d="M625,110 C652,106 652,106 680,110" fill="none" />
               {/* Fix → Transform feedback */}
-              <path d="M530,85 C530,50 270,50 270,85" stroke="#E87080" strokeOpacity={0.12} strokeDasharray="4 4" className="animate-flow" />
+              <path d="M530,85 C530,50 270,50 270,85" stroke="#E87080" strokeOpacity={0.2} strokeDasharray="4 4" className="animate-flow" />
               {/* startup_verify → fix (fail) */}
-              <path d="M600,85 C600,60 530,60 530,85" stroke="#F5C542" strokeOpacity={0.18} strokeDasharray="3 3" />
+              <path d="M600,85 C600,60 530,60 530,85" stroke="#F5C542" strokeOpacity={0.28} strokeDasharray="3 3" />
             </g>
-            <text x={400} y={42} textAnchor="middle" fill="#E87080" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">fix loop (validate/startup fail)</text>
-            <text x={600} y={195} textAnchor="middle" fill="#F5C542" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">startup_verify: java_app_start → health check → HTTP 200</text>
+            <text x={400} y={42} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">fix loop (validate/startup fail)</text>
+            <text x={600} y={195} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">startup_verify: java_app_start → health check → HTTP 200</text>
             {/* 4-class labels */}
             {[
               { label: "CONFIG", x: 395, y: 175, color: "#F5C542" },
@@ -159,7 +159,7 @@ function ReodeDag() {
               { label: "BEHAVIOR", x: 525, y: 175, color: "#C084FC" },
               { label: "ENV", x: 580, y: 175, color: "#E87080" },
             ].map((c) => (
-              <text key={c.label} x={c.x} y={c.y} textAnchor="middle" fill={c.color} fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">{c.label}</text>
+              <text key={c.label} x={c.x} y={c.y} textAnchor="middle" fill={c.color} fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">{c.label}</text>
             ))}
             {/* Nodes */}
             {[
@@ -172,9 +172,9 @@ function ReodeDag() {
               { x: 710, label: "Measure", sub: "Haiku", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={110} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.3} />
+                <circle cx={n.x} cy={110} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
                 <text x={n.x} y={107} textAnchor="middle" fill={n.color} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
-                <text x={n.x} y={120} textAnchor="middle" fill={n.color} fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">{n.sub}</text>
+                <text x={n.x} y={120} textAnchor="middle" fill={n.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{n.sub}</text>
               </g>
             ))}
           </svg>
@@ -185,13 +185,13 @@ function ReodeDag() {
       {pipe === "migration" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 720 200" className="w-full min-w-[560px]" style={{ maxHeight: 240 }}>
-            <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
               <path d="M85,100 C120,96 120,96 155,100" fill="none" />
               <path d="M215,100 C250,96 250,96 285,100" fill="none" />
               <path d="M345,100 C380,96 380,96 415,100" fill="none" />
               <path d="M475,100 C510,96 510,96 545,100" fill="none" />
-              <path d="M560,75 C560,45 430,45 430,75" stroke="#E87080" strokeOpacity={0.12} strokeDasharray="4 4" className="animate-flow" />
-              <path d="M475,100 C545,96 545,96 615,100" fill="none" stroke="#34D399" strokeOpacity={0.12} />
+              <path d="M560,75 C560,45 430,45 430,75" stroke="#E87080" strokeOpacity={0.2} strokeDasharray="4 4" className="animate-flow" />
+              <path d="M475,100 C545,96 545,96 615,100" fill="none" stroke="#34D399" strokeOpacity={0.2} />
             </g>
             {[
               { x: 60, label: "Assess", color: "#60A5FA" },
@@ -202,11 +202,11 @@ function ReodeDag() {
               { x: 650, label: "Measure", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={100} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.3} />
+                <circle cx={n.x} cy={100} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
                 <text x={n.x} y={104} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
               </g>
             ))}
-            <text x={495} y={40} textAnchor="middle" fill="#E87080" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">fix loop</text>
+            <text x={495} y={40} textAnchor="middle" fill="#E87080" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">fix loop</text>
             <text x={560} y={145} textAnchor="middle" fill="#E87080" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">Architect → Editor</text>
           </svg>
         </div>
@@ -216,11 +216,11 @@ function ReodeDag() {
       {pipe === "porting" && (
         <div className="w-full overflow-x-auto -mx-6 px-6 pb-4">
           <svg viewBox="0 0 560 180" className="w-full min-w-[440px]" style={{ maxHeight: 220 }}>
-            <g stroke="white" strokeOpacity={0.14} strokeWidth={1} fill="none">
+            <g stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none">
               <path d="M95,90 C135,86 135,86 175,90" fill="none" />
               <path d="M265,90 C305,86 305,86 345,90" fill="none" />
               <path d="M435,90 C467,86 467,86 500,90" fill="none" />
-              <path d="M395,65 C395,35 225,35 225,65" stroke="#4ECDC4" strokeOpacity={0.18} strokeDasharray="4 4" className="animate-flow" />
+              <path d="M395,65 C395,35 225,35 225,65" stroke="#4ECDC4" strokeOpacity={0.28} strokeDasharray="4 4" className="animate-flow" />
             </g>
             {[
               { x: 65, label: "Analyze", color: "#60A5FA" },
@@ -229,11 +229,11 @@ function ReodeDag() {
               { x: 520, label: "Verify", color: "#34D399" },
             ].map((n) => (
               <g key={n.label}>
-                <circle cx={n.x} cy={90} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.3} />
+                <circle cx={n.x} cy={90} r={22} fill="#0A0F1A" stroke={n.color} strokeWidth={0.8} strokeOpacity={0.4} />
                 <text x={n.x} y={94} textAnchor="middle" dominantBaseline="central" fill={n.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{n.label}</text>
               </g>
             ))}
-            <text x={310} y={30} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.2} fontSize={8} fontFamily="ui-monospace, monospace">retry loop (equivalence fail)</text>
+            <text x={310} y={30} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">retry loop (equivalence fail)</text>
             <text x={280} y={150} textAnchor="middle" fill="white" fillOpacity={0.20} fontSize={9} fontFamily="ui-monospace, monospace">Language Porting: Java↔Go↔Python</text>
           </svg>
         </div>

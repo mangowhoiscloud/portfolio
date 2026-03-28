@@ -62,33 +62,33 @@ export function ReasoningSection() {
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 700 220" className="w-full min-w-[520px]" style={{ maxHeight: 250 }}>
                   {/* OBSERVE */}
-                  <rect x={40} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.3} />
+                  <rect x={40} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#60A5FA" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={105} y={83} textAnchor="middle" fill="#60A5FA" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>OBSERVE</text>
                   <text x={105} y={100} textAnchor="middle" fill="#60A5FA" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">LLM call + context</text>
 
-                  <line x1={170} y1={90} x2={230} y2={90} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+                  <line x1={170} y1={90} x2={230} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
 
                   {/* ACT */}
-                  <rect x={230} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.3} />
+                  <rect x={230} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={295} y={83} textAnchor="middle" fill="#4ECDC4" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>ACT</text>
                   <text x={295} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">tool execution</text>
 
-                  <line x1={360} y1={90} x2={420} y2={90} stroke="white" strokeOpacity={0.14} strokeWidth={1} />
+                  <line x1={360} y1={90} x2={420} y2={90} stroke="white" strokeOpacity={0.22} strokeWidth={1} />
 
                   {/* REFLECT */}
-                  <rect x={420} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.3} />
+                  <rect x={420} y={60} width={130} height={60} rx={10} fill="#0A0F1A" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
                   <text x={485} y={83} textAnchor="middle" fill="#C084FC" fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={700}>REFLECT</text>
                   <text x={485} y={100} textAnchor="middle" fill="#C084FC" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">result → context</text>
 
                   {/* Loop-back */}
-                  <path d="M485,120 C485,165 295,175 105,165 C105,150 105,135 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.18} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
-                  <text x={295} y={180} textAnchor="middle" fill="#F5C542" fillOpacity={0.2} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
+                  <path d="M485,120 C485,165 295,175 105,165 C105,150 105,135 105,120" fill="none" stroke="#F5C542" strokeOpacity={0.28} strokeWidth={1.5} strokeDasharray="6 4" className="animate-flow" />
+                  <text x={295} y={180} textAnchor="middle" fill="#F5C542" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">while(tool_use), max 50 rounds</text>
 
                   {/* GoalDecomposer fork */}
                   <rect x={560} y={40} width={110} height={50} rx={8} fill="#0A0F1A" stroke="#F4B8C8" strokeWidth={0.7} strokeOpacity={0.2} />
                   <text x={615} y={60} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>GoalDecomposer</text>
-                  <text x={615} y={75} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청 분해</text>
-                  <line x1={550} y1={65} x2={560} y2={65} stroke="#F4B8C8" strokeOpacity={0.14} strokeWidth={1} />
+                  <text x={615} y={75} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">복합 요청 분해</text>
+                  <line x1={550} y1={65} x2={560} y2={65} stroke="#F4B8C8" strokeOpacity={0.22} strokeWidth={1} />
 
                   {/* Tool tiers */}
                   <text x={295} y={40} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.30} fontSize={8} fontFamily="ui-monospace, monospace">
@@ -96,7 +96,7 @@ export function ReasoningSection() {
                   </text>
 
                   {/* Error recovery */}
-                  <text x={295} y={210} textAnchor="middle" fill="#E87080" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">
+                  <text x={295} y={210} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">
                     consecutive failure ≥ 2 → adaptive recovery chain
                   </text>
                 </svg>
@@ -122,7 +122,7 @@ export function ReasoningSection() {
                     { label: "DONE", x: 560, color: "#34D399", sub: "scorecard" },
                   ].map((s, i) => (
                     <g key={s.label}>
-                      <rect x={s.x - 50} y={30} width={100} height={50} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.3} />
+                      <rect x={s.x - 50} y={30} width={100} height={50} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.4} />
                       <text x={s.x} y={52} textAnchor="middle" fill={s.color} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>{s.label}</text>
                       <text x={s.x} y={68} textAnchor="middle" fill={s.color} fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">{s.sub}</text>
                       {i < 4 && <line x1={s.x + 50} y1={55} x2={[180, 310, 440, 560][i] - 50} y2={55} stroke="white" strokeOpacity={0.1} strokeWidth={1} />}
@@ -133,7 +133,7 @@ export function ReasoningSection() {
                   <text x={620} y={60} fill="#818CF8" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">prospect $0.80</text>
                   {/* REJECT */}
                   <path d="M310,80 C310,100 290,105 245,105 C200,105 180,100 180,80" fill="none" stroke="#E87080" strokeOpacity={0.15} strokeWidth={1} strokeDasharray="3 3" />
-                  <text x={245} y={118} textAnchor="middle" fill="#E87080" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">REJECTED → re-plan</text>
+                  <text x={245} y={118} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">REJECTED → re-plan</text>
                 </svg>
               </div>
               <p className="text-sm text-[#8B9CC0] leading-relaxed">

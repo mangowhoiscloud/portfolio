@@ -112,18 +112,18 @@ function HookArchitectureDiagram() {
     <div className="w-full overflow-x-auto -mx-4 px-4 pb-2 mb-10">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full min-w-[600px]" style={{ maxHeight: 350 }}>
         {/* Column labels */}
-        <text x={SRC_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Event Sources</text>
-        <text x={HUB_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
-        <text x={CHAIN_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Handler Chain</text>
+        <text x={SRC_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Event Sources</text>
+        <text x={HUB_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
+        <text x={CHAIN_X} y={16} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>Handler Chain</text>
 
         {/* Event source boxes */}
         {eventSources.map((s) => (
           <g key={s.label}>
             <rect x={SRC_X - 55} y={s.y} width={110} height={36} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.7} strokeOpacity={0.2} />
             <text x={SRC_X} y={s.y + 15} textAnchor="middle" fill={s.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
-            <text x={SRC_X} y={s.y + 28} textAnchor="middle" fill={s.color} fillOpacity={0.3} fontSize={8} fontFamily="ui-monospace, monospace">{s.sub}</text>
+            <text x={SRC_X} y={s.y + 28} textAnchor="middle" fill={s.color} fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{s.sub}</text>
             {/* Arrow to hub */}
-            <line x1={SRC_X + 55} y1={s.y + 18} x2={HUB_X - 60} y2={H / 2} stroke={s.color} strokeOpacity={0.14} strokeWidth={1} />
+            <line x1={SRC_X + 55} y1={s.y + 18} x2={HUB_X - 60} y2={H / 2} stroke={s.color} strokeOpacity={0.22} strokeWidth={1} />
           </g>
         ))}
 
@@ -133,14 +133,14 @@ function HookArchitectureDiagram() {
           <animate attributeName="stroke-opacity" values="0.12;0" dur="3s" repeatCount="indefinite" />
         </circle>
         {/* HookSystem hub */}
-        <rect x={HUB_X - 55} y={H / 2 - 35} width={110} height={70} rx={12} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.25} />
+        <rect x={HUB_X - 55} y={H / 2 - 35} width={110} height={70} rx={12} fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.35} />
         <text x={HUB_X} y={H / 2 - 10} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
         <text x={HUB_X} y={H / 2 + 6} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">register()</text>
         <text x={HUB_X} y={H / 2 + 20} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={9} fontFamily="ui-monospace, monospace">trigger()</text>
 
         {/* Hub to handler chain arrows */}
         {handlerChain.map((h) => (
-          <line key={h.label} x1={HUB_X + 55} y1={H / 2} x2={CHAIN_X - 70} y2={h.y + 14} stroke={h.color} strokeOpacity={0.12} strokeWidth={1} />
+          <line key={h.label} x1={HUB_X + 55} y1={H / 2} x2={CHAIN_X - 70} y2={h.y + 14} stroke={h.color} strokeOpacity={0.2} strokeWidth={1} />
         ))}
 
         {/* Handler chain (priority sorted) */}
@@ -150,7 +150,7 @@ function HookArchitectureDiagram() {
             <text x={CHAIN_X - 48} y={h.y + 18} fill={h.color} fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>{h.label}</text>
             <text x={CHAIN_X + 10} y={h.y + 18} fill="white" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace, monospace">{h.name}</text>
             {/* Maturity indicator */}
-            <circle cx={CHAIN_X + 58} cy={h.y + 14} r={3} fill={h.color} fillOpacity={0.3} />
+            <circle cx={CHAIN_X + 58} cy={h.y + 14} r={3} fill={h.color} fillOpacity={0.45} />
             {/* Chain connector */}
             {i < handlerChain.length - 1 && (
               <line x1={CHAIN_X} y1={h.y + 28} x2={CHAIN_X} y2={handlerChain[i + 1].y} stroke="white" strokeOpacity={0.04} strokeWidth={1} strokeDasharray="2 3" />
@@ -159,9 +159,9 @@ function HookArchitectureDiagram() {
         ))}
 
         {/* L1/L2 boundary label */}
-        <line x1={CHAIN_X - 70} y1={153} x2={CHAIN_X + 68} y2={153} stroke="#4ECDC4" strokeOpacity={0.18} strokeWidth={1} strokeDasharray="4 4" />
-        <text x={CHAIN_X + 72} y={157} fill="#4ECDC4" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">L2 ↑</text>
-        <text x={CHAIN_X + 72} y={145} fill="#60A5FA" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace, monospace">L1 ↓</text>
+        <line x1={CHAIN_X - 70} y1={153} x2={CHAIN_X + 68} y2={153} stroke="#4ECDC4" strokeOpacity={0.28} strokeWidth={1} strokeDasharray="4 4" />
+        <text x={CHAIN_X + 72} y={157} fill="#4ECDC4" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">L2 ↑</text>
+        <text x={CHAIN_X + 72} y={145} fill="#60A5FA" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">L1 ↓</text>
       </svg>
     </div>
   );
