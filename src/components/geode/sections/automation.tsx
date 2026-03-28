@@ -54,7 +54,7 @@ export function AutomationSection() {
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
             시간 기반 스케줄(AT/EVERY/CRON), 이벤트 기반 트리거(F1-F4), 드리프트 감지 자동 재분석.
-            세 축이 연동하여 파이프라인을 자율적으로 운용합니다.
+            세 축이 연동하여 파이프라인을 자율적으로 운용합니다. ConfigWatcher가 .env와 config.toml 변경을 hot-reload합니다.
           </p>
         </ScrollReveal>
 

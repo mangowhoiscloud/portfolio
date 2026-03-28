@@ -56,7 +56,7 @@ const agenticLayers = [
     title: "Tool Classification",
     items: ["SAFE (auto)", "STANDARD (auto)", "WRITE (gate)", "DANGEROUS (always gate)"],
     accent: "#4ECDC4",
-    description: "모든 도구를 위험도에 따라 4단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/DANGEROUS는 반드시 사용자 승인을 받아야 합니다.",
+    description: "모든 도구를 위험도에 따라 4단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/DANGEROUS는 반드시 사용자 승인. Action Summary(Tier 1)로 도구별 결정적 요약을 제공합니다.",
   },
   {
     tier: 2,
