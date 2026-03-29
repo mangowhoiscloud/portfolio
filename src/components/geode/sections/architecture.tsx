@@ -35,7 +35,7 @@ const layers = [
   {
     id: "L4",
     name: "Extensibility",
-    detail: "54 Tools + 44 MCP · PolicyChain · 21 Skills",
+    detail: "52 Tools + 44 MCP · PolicyChain 6-Layer · Skills Progressive Disclosure",
     color: "#F5C542",
     modules: "core/tools, core/skills, core/mcp",
   },
@@ -62,9 +62,9 @@ export function ArchitectureSection() {
             6-Layer Stack
           </h2>
           <p className="text-[#8B9CC0] max-w-lg mb-4 leading-relaxed">
-            6개 레이어, 187개 모듈, 26개 포트. 의존성 주입으로 결합된 전 계층이{" "}
-            <code className="text-[#818CF8]/70 text-[13px]">compile_graph()</code> 한 번에
-            부팅됩니다 . cold start ~15초.
+            6개 레이어, 188개 모듈. 의존성 주입으로 결합된 전 계층이{" "}
+            <code className="text-[#818CF8]/70 text-[13px]">bootstrap_geode()</code> 한 번에
+            부팅됩니다.
           </p>
         </ScrollReveal>
 
