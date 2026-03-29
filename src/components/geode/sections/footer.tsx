@@ -9,7 +9,7 @@ export function GeodeFooter() {
           <Image src="/portfolio/images/geode-idle.png" alt="Geodi" width={32} height={32} className="opacity-40" />
           <div>
             <div className="text-sm font-semibold text-white/50">GEODE v0.32</div>
-            <div className="text-xs text-[#7A8CA8]">Autonomous Execution Harness</div>
+            <div className="text-xs text-[#7A8CA8]">Long-running Autonomous Execution Harness</div>
           </div>
         </div>
 

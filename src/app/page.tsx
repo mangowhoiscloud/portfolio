@@ -4,7 +4,7 @@ const projects = [
   {
     id: "geode",
     title: "GEODE",
-    subtitle: "Autonomous Execution Harness",
+    subtitle: "Long-running Autonomous Execution Harness",
     description: "범용 자율 실행 에이전트 하네스",
     status: "v0.28.1",
     color: "#818CF8",

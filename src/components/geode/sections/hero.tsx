@@ -59,7 +59,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center max-w-lg"
         >
-          <p className="text-lg text-[#8B9CC0]">Autonomous Execution Harness</p>
+          <p className="text-lg text-[#8B9CC0]">Long-running Autonomous Execution Harness</p>
           <p className="text-sm text-white/45 mt-1.5 max-w-lg text-center leading-relaxed">
             게임 IP 가치 추론부터 Java 1.8→22 자동 마이그레이션(83/83 테스트, 5h30m, 1,153턴)까지.
             Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증하는 자율 실행 하네스.
