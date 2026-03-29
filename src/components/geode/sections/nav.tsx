@@ -39,7 +39,7 @@ const navGroups: NavItem[] = [
     children: [
       { id: "hooks", label: "Hooks" },
       { id: "agents", label: "Agents" },
-      { id: "tools", label: "Tool Use" },
+      { id: "tools", label: "Tool Orchestration" },
     ],
   },
   {

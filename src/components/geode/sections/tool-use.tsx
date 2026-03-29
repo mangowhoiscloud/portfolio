@@ -8,7 +8,7 @@ import { TabBar } from "../ui/tab-bar";
 const routes = [
   { id: "bash",   label: "Bash",  count: "38 safe prefixes", color: "#E87080", desc: "PolicyChain 3-layer 방어. safe prefix(cat, ls, git...)는 자동 실행, 위험 패턴(rm -rf /, sudo)은 차단, 나머지는 HITL 승인." },
   { id: "native", label: "Tool",  count: "52 native",        color: "#4ECDC4", desc: "definitions.json에 등록된 52개 도구. 12개 카테고리(Analysis, Memory, Planning 등). ToolExecutor가 handler dict에서 디스패치." },
-  { id: "mcp",    label: "MCP",   count: "44 catalog",       color: "#818CF8", desc: "MCPServerManager auto-discovery. Anthropic format 자동 정규화. steam/arxiv/linkedin은 사전 승인, 나머지는 서버별 1회 승인." },
+  { id: "mcp",    label: "MCP",   count: "41 catalog",       color: "#818CF8", desc: "MCPServerManager auto-discovery. Anthropic format 자동 정규화. steam/arxiv/linkedin은 사전 승인, 나머지는 서버별 1회 승인. install_mcp_server로 NL 설치." },
   { id: "skill",  label: "Skill", count: "3-tier disclosure", color: "#C084FC", desc: "Progressive Disclosure: T1 메타데이터(system prompt) → T2 본문(lazy load) → T3 context:fork(격리 서브에이전트). 4 scope 우선순위." },
   { id: "dag",    label: "DAG",   count: "13-node pipeline",  color: "#F5C542", desc: "analyze_ip 호출 시 LangGraph StateGraph 13노드 파이프라인 실행. Router → Analyst×4(Send API) → Evaluator×3 → Scoring → Synthesizer." },
 ];
@@ -38,7 +38,15 @@ const categories = [
   { name: "Data",         count: 1, color: "#4ECDC4" },
 ];
 
-type Tab = "routes" | "safety" | "inventory";
+/* ── Deferred Loading ── */
+const deferredSpec = {
+  threshold: 10,
+  alwaysLoaded: ["list_ips", "search_ips", "analyze_ip", "memory_search", "show_help", "general_web_search"],
+  saving: "~85%",
+  categories: ["analysis", "data", "signals", "memory", "output", "mcp", "other"],
+};
+
+type Tab = "routes" | "safety" | "deferred" | "inventory";
 
 export function ToolUseSection() {
   const [activeTab, setActiveTab] = useState<Tab>("routes");
@@ -49,16 +57,15 @@ export function ToolUseSection() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#4ECDC4]/60 uppercase tracking-[0.25em] mb-3">
-            Tool Use
+            Tool Orchestration
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
-            5-Route Dispatch + 5-Tier Safety
+            Dispatch, Search, Safety
           </h2>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            LLM이 <code className="text-[#4ECDC4]/70">tool_use</code>를 반환하면
-            ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다.
-            6-Layer PolicyChain이 모든 호출을 게이트하고,
-            5-Tier 안전 분류가 병렬/순차 실행을 결정합니다.
+            LLM이 도구를 선택하면 ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다.
+            52+ 도구는 tool_search로 지연 로딩하여 컨텍스트를 85% 절감하고,
+            6-Layer PolicyChain + 5-Tier 안전 분류가 병렬/순차 실행을 결정합니다.
           </p>
         </ScrollReveal>
 
@@ -160,8 +167,9 @@ export function ToolUseSection() {
             variant="underline"
             tabs={[
               { id: "routes", label: "5-Route Dispatch", color: "#4ECDC4" },
+              { id: "deferred", label: "Deferred Loading", color: "#F5C542" },
               { id: "safety", label: "5-Tier Safety", color: "#E87080" },
-              { id: "inventory", label: "52 Tools Inventory", color: "#818CF8" },
+              { id: "inventory", label: "Inventory", color: "#818CF8" },
             ]}
             activeId={activeTab}
             onSelect={(id) => setActiveTab(id as Tab)}
@@ -188,6 +196,127 @@ export function ToolUseSection() {
                   <p className="text-sm text-[#A0B4D4] leading-relaxed">{r.desc}</p>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* ── Deferred Loading ── */}
+          {activeTab === "deferred" && (
+            <div>
+              {/* How it works SVG */}
+              <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
+                <svg viewBox="0 0 760 140" className="w-full min-w-[560px]" style={{ maxHeight: 160 }}>
+                  {/* All tools */}
+                  <rect x={15} y={30} width={120} height={80} rx={10}
+                    fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={75} y={55} textAnchor="middle" fill="#818CF8"
+                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>52 + MCP</text>
+                  <text x={75} y={72} textAnchor="middle" fill="#818CF8" fillOpacity={0.4}
+                    fontSize={8} fontFamily="ui-monospace, monospace">combined &gt; 10</text>
+                  <text x={75} y={88} textAnchor="middle" fill="#818CF8" fillOpacity={0.3}
+                    fontSize={7} fontFamily="ui-monospace, monospace">defer 활성화</text>
+
+                  <path d="M135,70 C155,70 165,40 185,40" stroke="#34D399" strokeOpacity={0.3} strokeWidth={1} fill="none" />
+                  <path d="M135,70 C155,70 165,100 185,100" stroke="#F5C542" strokeOpacity={0.3} strokeWidth={1} fill="none" />
+
+                  {/* Always loaded */}
+                  <rect x={185} y={18} width={140} height={45} rx={8}
+                    fill="#0C1220" stroke="#34D399" strokeWidth={1} strokeOpacity={0.45} />
+                  <text x={255} y={37} textAnchor="middle" fill="#34D399"
+                    fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>Always Loaded (6)</text>
+                  <text x={255} y={52} textAnchor="middle" fill="#34D399" fillOpacity={0.4}
+                    fontSize={7} fontFamily="ui-monospace, monospace">core tools, 즉시 호출 가능</text>
+
+                  {/* Deferred */}
+                  <rect x={185} y={78} width={140} height={45} rx={8}
+                    fill="#0C1220" stroke="#F5C542" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={255} y={97} textAnchor="middle" fill="#F5C542"
+                    fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>Deferred (나머지)</text>
+                  <text x={255} y={112} textAnchor="middle" fill="#F5C542" fillOpacity={0.4}
+                    fontSize={7} fontFamily="ui-monospace, monospace">이름만 노출, 스키마 지연</text>
+
+                  {/* tool_search */}
+                  <path d="M325,100 C345,100 355,70 375,70" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
+                  <rect x={375} y={45} width={130} height={50} rx={10}
+                    fill="#0C1220" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.45} />
+                  <text x={440} y={65} textAnchor="middle" fill="#C084FC"
+                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>tool_search</text>
+                  <text x={440} y={82} textAnchor="middle" fill="#C084FC" fillOpacity={0.4}
+                    fontSize={7} fontFamily="ui-monospace, monospace">query → 관련 도구 로딩</text>
+
+                  {/* Result */}
+                  <path d="M505,70 C525,70 535,70 555,70" stroke="white" strokeOpacity={0.2} strokeWidth={1} fill="none" />
+                  <rect x={555} y={45} width={130} height={50} rx={10}
+                    fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.35} />
+                  <text x={620} y={65} textAnchor="middle" fill="#4ECDC4"
+                    fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Schema Loaded</text>
+                  <text x={620} y={82} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
+                    fontSize={7} fontFamily="ui-monospace, monospace">이후 턴에서도 유지</text>
+
+                  <text x={380} y={15} textAnchor="middle" fill="white" fillOpacity={0.2}
+                    fontSize={8} fontFamily="ui-monospace, monospace" letterSpacing="0.08em">
+                    SPLIT → CORE ALWAYS / REST DEFERRED → SEARCH → LOAD
+                  </text>
+                </svg>
+              </div>
+
+              {/* Always loaded tools */}
+              <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-4" style={{ background: "#34D39904" }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-sm font-mono font-bold text-[#34D399]">Always Loaded</span>
+                  <span className="text-[10px] font-mono text-white/30">{deferredSpec.alwaysLoaded.length} core tools</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {deferredSpec.alwaysLoaded.map((t) => (
+                    <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#34D399]/70 bg-[#34D399]/08 border border-[#34D399]/12">{t}</span>
+                  ))}
+                </div>
+                <p className="text-xs text-[#9BB0CC]">
+                  가장 빈번하게 사용되는 core 도구. defer 활성화 여부와 관계없이 항상 전체 스키마가 로딩됩니다.
+                </p>
+              </div>
+
+              {/* Deferred mechanism */}
+              <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-4" style={{ background: "#F5C54204" }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-sm font-mono font-bold text-[#F5C542]">Deferred Mechanism</span>
+                  <span className="text-[10px] font-mono text-white/30">threshold={deferredSpec.threshold}</span>
+                </div>
+                <div className="space-y-2 text-xs text-[#A0B4D4]">
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">1</span>
+                    <span>native(52) + MCP 합산이 {deferredSpec.threshold}개를 초과하면 deferred 모드 활성화</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">2</span>
+                    <span>나머지 도구는 <code className="text-[#C084FC]/60">defer_loading: true</code> 마킹. 이름만 LLM에 전달</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">3</span>
+                    <span>LLM이 <code className="text-[#C084FC]/60">tool_search(query="...")</code>로 필요한 도구 검색</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">4</span>
+                    <span>매칭된 도구의 전체 스키마가 로딩되어 이후 턴에서도 유지</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Context saving + categories */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="rounded-lg border border-white/[0.04] px-4 py-3">
+                  <div className="text-2xl font-bold text-[#4ECDC4]">{deferredSpec.saving}</div>
+                  <div className="text-[10px] font-mono text-white/30">Context Token 절감</div>
+                  <div className="text-[9px] font-mono text-white/15 mt-1">전체 스키마 대신 이름만 전달</div>
+                </div>
+                <div className="rounded-lg border border-white/[0.04] px-4 py-3">
+                  <div className="text-sm font-mono font-bold text-[#C084FC] mb-1">Search Categories</div>
+                  <div className="flex flex-wrap gap-1">
+                    {deferredSpec.categories.map((c) => (
+                      <span key={c} className="px-1.5 py-px rounded text-[9px] font-mono text-[#C084FC]/50 bg-[#C084FC]/06">{c}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -251,12 +380,12 @@ export function ToolUseSection() {
                   <div className="text-[9px] font-mono text-white/15 mt-1">12 categories</div>
                 </div>
                 <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#818CF804" }}>
-                  <div className="text-2xl font-bold text-[#818CF8]">44</div>
+                  <div className="text-2xl font-bold text-[#818CF8]">41</div>
                   <div className="text-[10px] font-mono text-white/30">MCP Servers</div>
                   <div className="text-[9px] font-mono text-white/15 mt-1">3 auto-approved</div>
                 </div>
                 <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#C084FC04" }}>
-                  <div className="text-2xl font-bold text-[#C084FC]">96+</div>
+                  <div className="text-2xl font-bold text-[#C084FC]">93+</div>
                   <div className="text-[10px] font-mono text-white/30">Total Toolset</div>
                   <div className="text-[9px] font-mono text-white/15 mt-1">native + MCP + skills</div>
                 </div>
