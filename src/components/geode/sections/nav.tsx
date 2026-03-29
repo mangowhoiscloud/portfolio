@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 
 const navItems = [
   { id: "hero", label: "Overview" },
-  { id: "kanban", label: "Kanban" },
   { id: "scaffold", label: "Scaffold" },
+  { id: "kanban", label: "Kanban" },
   { id: "loop", label: "Loop" },
   { id: "reasoning", label: "Reasoning" },
   { id: "architecture", label: "Architecture" },
