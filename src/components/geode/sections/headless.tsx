@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { TabBar } from "../ui/tab-bar";
+import { useLocale, t } from "../locale-context";
 
 /* ── Channel types ── */
 type Channel = "slack" | "webhook" | "mcp";
@@ -12,54 +13,63 @@ const channels: {
   id: Channel;
   label: string;
   color: string;
-  desc: string;
-  flow: { step: string; detail: string }[];
-  tags: string[];
+  descKo: string;
+  descEn: string;
+  flow: { step: string; detailKo: string; detailEn: string }[];
+  tagsKo: string[];
+  tagsEn: string[];
 }[] = [
   {
     id: "slack",
     label: "Slack Gateway",
     color: "#4ECDC4",
-    desc: "Slack 채널에서 @geode 멘션으로 분석을 요청합니다. ChannelBinding 규칙에 따라 자동 응답하고, 쓰레드별로 멀티턴 대화를 유지합니다.",
+    descKo: "Slack 채널에서 @geode 멘션으로 분석을 요청합니다. ChannelBinding 규칙에 따라 자동 응답하고, 쓰레드별로 멀티턴 대화를 유지합니다.",
+    descEn: "Request analysis by @geode mention in a Slack channel. Auto-responds per ChannelBinding rules and maintains multi-turn conversations per thread.",
     flow: [
-      { step: "SlackPoller", detail: "MCP로 채널 히스토리 폴링 (poll_interval=3s)" },
-      { step: "ChannelManager", detail: "바인딩 매칭 → 세션 키 생성 → LaneQueue" },
-      { step: "AgenticLoop", detail: "hitl_level=0, max_rounds=30" },
-      { step: "SlackNotificationAdapter", detail: "결과를 쓰레드에 응답" },
+      { step: "SlackPoller", detailKo: "MCP로 채널 히스토리 폴링 (poll_interval=3s)", detailEn: "Polls channel history via MCP (poll_interval=3s)" },
+      { step: "ChannelManager", detailKo: "바인딩 매칭 → 세션 키 생성 → LaneQueue", detailEn: "Binding match → session key creation → LaneQueue" },
+      { step: "AgenticLoop", detailKo: "hitl_level=0, max_rounds=30", detailEn: "hitl_level=0, max_rounds=30" },
+      { step: "SlackNotificationAdapter", detailKo: "결과를 쓰레드에 응답", detailEn: "Replies result to thread" },
     ],
-    tags: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어", "binding hot-reload"],
+    tagsKo: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어", "binding hot-reload"],
+    tagsEn: ["ChannelBinding", "Multi-turn session", "LaneQueue concurrency", "binding hot-reload"],
   },
   {
     id: "webhook",
     label: "Webhook",
     color: "#F5C542",
-    desc: "HTTP POST :8765 엔드포인트로 외부 시스템(CI/CD, 모니터링)에서 파이프라인을 트리거합니다. JSON payload로 IP 이름과 분석 옵션을 전달합니다.",
+    descKo: "HTTP POST :8765 엔드포인트로 외부 시스템(CI/CD, 모니터링)에서 파이프라인을 트리거합니다. JSON payload로 IP 이름과 분석 옵션을 전달합니다.",
+    descEn: "External systems (CI/CD, monitoring) trigger the pipeline via HTTP POST :8765. Pass IP name and analysis options as JSON payload.",
     flow: [
-      { step: "WebhookHandler", detail: "BaseHTTPRequestHandler.do_POST()" },
-      { step: "Payload 파싱", detail: "ip_name, options, callback_url 추출" },
-      { step: "ChannelManager", detail: "webhook 채널로 라우팅 → 세션 생성" },
-      { step: "AgenticLoop", detail: "분석 실행 → callback_url에 결과 POST" },
+      { step: "WebhookHandler", detailKo: "BaseHTTPRequestHandler.do_POST()", detailEn: "BaseHTTPRequestHandler.do_POST()" },
+      { step: "Payload Parse", detailKo: "ip_name, options, callback_url 추출", detailEn: "Extract ip_name, options, callback_url" },
+      { step: "ChannelManager", detailKo: "webhook 채널로 라우팅 → 세션 생성", detailEn: "Route to webhook channel → create session" },
+      { step: "AgenticLoop", detailKo: "분석 실행 → callback_url에 결과 POST", detailEn: "Run analysis → POST result to callback_url" },
     ],
-    tags: ["HTTP POST :8765", "JSON Payload", "Callback URL", "CI/CD 연동"],
+    tagsKo: ["HTTP POST :8765", "JSON Payload", "Callback URL", "CI/CD 연동"],
+    tagsEn: ["HTTP POST :8765", "JSON Payload", "Callback URL", "CI/CD integration"],
   },
   {
     id: "mcp",
     label: "MCP Server",
     color: "#818CF8",
-    desc: "FastMCP 기반 6개 도구를 외부에 노출합니다. Claude Code, Cursor 등 MCP 클라이언트가 직접 파이프라인에 접근합니다.",
+    descKo: "FastMCP 기반 6개 도구를 외부에 노출합니다. Claude Code, Cursor 등 MCP 클라이언트가 직접 파이프라인에 접근합니다.",
+    descEn: "Exposes 6 tools externally via FastMCP. MCP clients such as Claude Code and Cursor access the pipeline directly.",
     flow: [
-      { step: "analyze_ip", detail: "전체 파이프라인 실행 (full_pipeline)" },
-      { step: "quick_score", detail: "스코어링만 실행 (dry-run)" },
-      { step: "get_ip_signals", detail: "커뮤니티 시그널 조회" },
-      { step: "query_memory", detail: "프로젝트 메모리 검색" },
-      { step: "list_fixtures", detail: "분석 가능 IP 목록 반환" },
-      { step: "get_health", detail: "파이프라인 + 프로바이더 상태 체크" },
+      { step: "analyze_ip", detailKo: "전체 파이프라인 실행 (full_pipeline)", detailEn: "Full pipeline execution (full_pipeline)" },
+      { step: "quick_score", detailKo: "스코어링만 실행 (dry-run)", detailEn: "Scoring only (dry-run)" },
+      { step: "get_ip_signals", detailKo: "커뮤니티 시그널 조회", detailEn: "Query community signals" },
+      { step: "query_memory", detailKo: "프로젝트 메모리 검색", detailEn: "Search project memory" },
+      { step: "list_fixtures", detailKo: "분석 가능 IP 목록 반환", detailEn: "Return list of analyzable IPs" },
+      { step: "get_health", detailKo: "파이프라인 + 프로바이더 상태 체크", detailEn: "Pipeline + provider health check" },
     ],
-    tags: ["FastMCP", "6 Tools", "2 Resources", "config.toml 단일 진실 소스"],
+    tagsKo: ["FastMCP", "6 Tools", "2 Resources", "config.toml 단일 진실 소스"],
+    tagsEn: ["FastMCP", "6 Tools", "2 Resources", "config.toml single source of truth"],
   },
 ];
 
 export function HeadlessSection() {
+  const locale = useLocale();
   const [active, setActive] = useState<Channel>("slack");
   const ch = channels.find((c) => c.id === active)!;
 
@@ -70,7 +80,10 @@ export function HeadlessSection() {
           variant="quote"
           labelColor="#818CF8"
           title="Daemon Mode"
-          description="geode serve --poll 3.0 한 줄이면 데몬으로 상시 대기. Slack, Webhook, MCP 세 채널을 동시에 수신하며, hitl_level=0 자율 모드로 실행합니다."
+          description={t(locale,
+            "geode serve가 유일한 데몬. config.toml [gateway] pollers로 동적 등록. SessionLane(per-key) + Lane(global, max=8)이 동시성 제어. ONE HookSystem, ONE MCP, ONE SkillRegistry.",
+            "geode serve is the single daemon. Pollers registered dynamically via config.toml [gateway]. SessionLane(per-key) + Lane(global, max=8) control concurrency. ONE HookSystem, ONE MCP, ONE SkillRegistry."
+          )}
         />
 
         {/* ── Serve architecture SVG ── */}
@@ -172,21 +185,21 @@ export function HeadlessSection() {
               background: `linear-gradient(135deg, ${ch.color}06, transparent 60%)`,
             }}
           >
-            <p className="text-sm text-[#A0B4D4] leading-relaxed mb-5">{ch.desc}</p>
+            <p className="text-sm text-[#A0B4D4] leading-relaxed mb-5">{locale === "en" ? ch.descEn : ch.descKo}</p>
             <div className="space-y-2 mb-4">
               {ch.flow.map((f, i) => (
                 <div key={f.step} className="flex items-center gap-3">
                   <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                     style={{ color: ch.color, background: `${ch.color}10` }}>{i + 1}</span>
                   <span className="text-sm font-medium text-white/70 w-[140px] sm:w-[180px] shrink-0 font-mono">{f.step}</span>
-                  <span className="text-sm text-[#9BB0CC]">{f.detail}</span>
+                  <span className="text-sm text-[#9BB0CC]">{locale === "en" ? f.detailEn : f.detailKo}</span>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {ch.tags.map((t) => (
-                <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono"
-                  style={{ color: `${ch.color}80`, background: `${ch.color}08`, border: `1px solid ${ch.color}15` }}>{t}</span>
+              {(locale === "en" ? ch.tagsEn : ch.tagsKo).map((tag) => (
+                <span key={tag} className="px-2 py-0.5 rounded text-[11px] font-mono"
+                  style={{ color: `${ch.color}80`, background: `${ch.color}08`, border: `1px solid ${ch.color}15` }}>{tag}</span>
               ))}
             </div>
           </div>

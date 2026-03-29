@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { TabBar } from "../ui/tab-bar";
+import { useLocale, t } from "../locale-context";
 
 /* ── Pipeline Verification (GameIP Domain — Output Validation) ── */
 const pipelineLayers = [
@@ -12,6 +13,7 @@ const pipelineLayers = [
     items: ["G1 Schema", "G2 Range", "G3 Grounding", "G4 Consistency"],
     accent: "#34D399",
     description: "모든 에이전트의 매 라운드 출력을 즉시 검증합니다. Haiku가 4가지 규칙으로 게이트킵. 스키마 위반, 범위 이탈, 근거 부재, 내부 모순을 걸러냅니다.",
+    descriptionEn: "Immediately validates every agent's output each round. Haiku gatekeeps with 4 rules, filtering schema violations, range deviations, missing grounding, and internal contradictions.",
   },
   {
     tier: 2,
@@ -19,6 +21,7 @@ const pipelineLayers = [
     items: ["threshold 0.7", "max 5 iterations", "cortex loopback"],
     accent: "#818CF8",
     description: "Scoring 신뢰도가 0.7 미만이면 Cortex부터 자동 재실행합니다. 최대 5회 반복 후에도 미달이면 low-confidence 경고와 함께 결과를 반환합니다.",
+    descriptionEn: "Auto-reruns from Cortex if scoring confidence is below 0.7. Returns results with a low-confidence warning if still below threshold after 5 iterations.",
   },
   {
     tier: 3,
@@ -26,6 +29,7 @@ const pipelineLayers = [
     items: ["IP 권리 검증", "CLEAR/RESTRICTED", "라이선스 체크"],
     accent: "#E87080",
     description: "분석 대상 IP의 권리 상태를 사전 검증합니다. RESTRICTED 또는 UNKNOWN이면 분석을 중단하고 경고를 반환합니다.",
+    descriptionEn: "Pre-validates the rights status of the target IP. Halts analysis and returns a warning if RESTRICTED or UNKNOWN.",
   },
   {
     tier: 4,
@@ -33,6 +37,7 @@ const pipelineLayers = [
     items: ["confirmation", "recency", "anchoring", "position", "verbosity", "self_enhancement"],
     accent: "#F5C542",
     description: "6종 인지 바이어스를 탐지합니다. CV < 0.05(n≥4)이면 앵커링 플래그. Fast path(CV ≥ 0.10, range ≥ 0.5)는 LLM 생략. 4단계 교정: RECOGNIZE → EXPLAIN → ALTER → EVALUATE.",
+    descriptionEn: "Detects 6 types of cognitive bias. Anchoring flag if CV < 0.05 (n>=4). Fast path (CV >= 0.10, range >= 0.5) skips LLM. 4-stage correction: RECOGNIZE → EXPLAIN → ALTER → EVALUATE.",
   },
   {
     tier: 5,
@@ -40,6 +45,7 @@ const pipelineLayers = [
     items: ["Multi-model", "agreement ≥0.67", "Krippendorff α≥0.80"],
     accent: "#C084FC",
     description: "다른 LLM(Claude vs GPT)과 교차 검증합니다. Agreement coefficient가 0.67 미만이면 합의 실패로 판정하고 재실행합니다.",
+    descriptionEn: "Cross-validates with another LLM (Claude vs GPT). If agreement coefficient is below 0.67, consensus fails and a rerun is triggered.",
   },
   {
     tier: 6,
@@ -47,6 +53,7 @@ const pipelineLayers = [
     items: ["Golden Set", "per-axis ±0.5", "threshold 80.0"],
     accent: "#60A5FA",
     description: "전문가 주석 Golden Set과 비교하여 분석 정확도를 검증합니다. 축별 허용 오차 ±0.5, 전체 통과 기준 80.0점입니다.",
+    descriptionEn: "Verifies analysis accuracy against an expert-annotated Golden Set. Per-axis tolerance ±0.5, overall pass threshold 80.0.",
   },
 ];
 
@@ -58,20 +65,25 @@ const agenticLayers = [
     items: ["SAFE 13 (auto)", "STANDARD 25 (auto)", "WRITE 10 (gate)", "EXPENSIVE 3 ($)", "DANGEROUS 1 (bash)"],
     accent: "#4ECDC4",
     description: "52개 도구를 5단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/EXPENSIVE/DANGEROUS는 사용자 승인. Action Summary로 도구별 결정적 요약을 제공합니다.",
+    descriptionEn: "Classifies 52 tools into 5 tiers. SAFE/STANDARD auto-execute, WRITE/EXPENSIVE/DANGEROUS require user approval. Action Summary provides deterministic per-tool summaries.",
   },
   {
     tier: 2,
     title: "HITL [Y/n/A]",
     items: ["Y: 1회 승인", "N: 거부 (Ctrl+C 포함)", "A: 세션 전체 Always"],
+    itemsEn: ["Y: Approve once", "N: Reject (incl. Ctrl+C)", "A: Always for session"],
     accent: "#818CF8",
     description: "모든 승인 프롬프트에 [Y/n/A] 3선택지. A 응답 시 해당 카테고리(bash, write, cost, mcp:서버)가 세션 내 자동 승인. approval_history.jsonl에 결정 이력을 기록하고, 5회 연속 승인 시 자동 승인을 제안합니다.",
+    descriptionEn: "All approval prompts offer 3 choices: [Y/n/A]. Answering A auto-approves the category (bash, write, cost, mcp:server) for the session. Decisions logged to approval_history.jsonl, auto-approve suggested after 5 consecutive approvals.",
   },
   {
     tier: 3,
     title: "HITL Levels (0/1/2)",
     items: ["Level 0: 전체 자율", "Level 1: WRITE만 승인", "Level 2: 전체 승인 (기본값)"],
+    itemsEn: ["Level 0: Full autonomy", "Level 1: WRITE approval only", "Level 2: Full approval (default)"],
     accent: "#60A5FA",
     description: "hitl_level로 승인 강도를 3단계 제어합니다. Level 0은 Headless/Scheduler에서 사용(hitl_level=0), Level 2가 REPL 기본값. SubAgent는 STANDARD 도구에 한해 auto_approve=True.",
+    descriptionEn: "Controls approval intensity in 3 levels via hitl_level. Level 0 used in Headless/Scheduler (hitl_level=0), Level 2 is REPL default. SubAgents use auto_approve=True for STANDARD tools only.",
   },
   {
     tier: 4,
@@ -79,13 +91,16 @@ const agenticLayers = [
     items: ["41 safe prefixes (auto)", "9 blocking patterns", "non-safe → [Y/n/A]"],
     accent: "#E87080",
     description: "Layer 1: rm -rf /, sudo 등 9개 위험 패턴 무조건 차단. Layer 2: cat, ls, git log 등 41개 읽기 전용 접두사 자동 승인. Layer 3: 나머지 명령 [Y/n/A] 승인. 자원 제한(CPU 30s, FSIZE 50MB).",
+    descriptionEn: "Layer 1: 9 dangerous patterns (rm -rf /, sudo, etc.) unconditionally blocked. Layer 2: 41 read-only prefixes (cat, ls, git log, etc.) auto-approved. Layer 3: remaining commands require [Y/n/A]. Resource limits (CPU 30s, FSIZE 50MB).",
   },
   {
     tier: 5,
     title: "Cost + MCP Gate",
     items: ["analyze_ip $1.50", "batch $5.00", "MCP per-server 1회", "steam/arxiv auto"],
+    itemsEn: ["analyze_ip $1.50", "batch $5.00", "MCP per-server once", "steam/arxiv auto"],
     accent: "#F5C542",
     description: "EXPENSIVE 도구는 실행 전 비용 표시 후 [Y/n/A] 확인. MCP는 서버별 첫 호출 시 승인, 이후 세션 내 캐시. steam, arxiv, linkedin-reader는 사전 승인.",
+    descriptionEn: "EXPENSIVE tools show cost before execution and require [Y/n/A]. MCP requires approval on first call per server, then cached for the session. steam, arxiv, linkedin-reader are pre-approved.",
   },
 ];
 
@@ -169,15 +184,15 @@ function OnionDiagram({
 
 /* ── Ratchet Workflow (Dev Quality) ── */
 const ratchetSteps = [
-  { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장." },
-  { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류." },
-  { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?" },
-  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,433+ pass)." },
-  { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입." },
-  { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증." },
-  { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함." },
-  { id: 7, name: "Rebuild",           color: "#E87080", desc: "geode serve 종료 → uv tool install → 버전 확인 → serve 재시작." },
-  { id: 8, name: "Board + Clear",     color: "#818CF8", desc: "In Progress → Done. 워크트리 정리. 컨텍스트 클리어." },
+  { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장.", descEn: "Backlog → In Progress. Allocate isolated env via git worktree. Session ownership via .owner file." },
+  { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류.", descEn: "Remove already-implemented items by code inspection. Classify as Fully/Partially/Not Implemented." },
+  { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?", descEn: "Socratic 5Q gate. Q1 Already exists? Q2 What breaks without it? Q3 Measurable? Q4 Minimum impl? Q5 Common in 3+ systems?" },
+  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,433+ pass).", descEn: "Code changes → repeat 3 Quality Gates. ruff (lint 0) + mypy (type 0) + pytest (3,433+ pass)." },
+  { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입.", descEn: "Verify existing results unchanged via dry-run. Cowboy Bebop A (68.4). Deploy 4-persona verification team for major changes." },
+  { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증.", descEn: "Sync CHANGELOG + versions across 4 files (CHANGELOG, CLAUDE.md, README, pyproject.toml). Re-verify metrics." },
+  { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함.", descEn: "feature → develop → main. HEREDOC PR. CI 5/5 required. Include 'Why' rationale." },
+  { id: 7, name: "Rebuild",           color: "#E87080", desc: "geode serve 종료 → uv tool install → 버전 확인 → serve 재시작.", descEn: "Stop geode serve → uv tool install → verify version → restart serve." },
+  { id: 8, name: "Board + Clear",     color: "#818CF8", desc: "In Progress → Done. 워크트리 정리. 컨텍스트 클리어.", descEn: "In Progress → Done. Clean up worktree. Clear context." },
 ];
 
 const qualityGates = [
@@ -189,6 +204,7 @@ const qualityGates = [
 
 /* ── Section ── */
 export function VerificationSection() {
+  const locale = useLocale();
   const [mode, setMode] = useState<"pipeline" | "agentic" | "ratchet">("pipeline");
   const [activeLayer, setActiveLayer] = useState(0);
 
@@ -215,9 +231,11 @@ export function VerificationSection() {
             Dual Trust Model
           </h2>
           <p className="text-[#A0B4D4] max-w-lg mb-8 leading-relaxed">
-            GEODE는 두 가지 신뢰 모델을 병행합니다.
-            자율 에이전트는 <span className="text-[#4ECDC4]/80">실행 전 입력을 차단</span>하고,
-            분석 파이프라인은 <span className="text-[#C084FC]/80">실행 후 출력을 검증</span>합니다.
+            {locale === "en" ? (
+              <>GEODE uses a dual trust model. Autonomous agents <span className="text-[#4ECDC4]/80">block inputs before execution</span>, while analysis pipelines <span className="text-[#C084FC]/80">verify outputs after execution</span>.</>
+            ) : (
+              <>GEODE는 두 가지 신뢰 모델을 병행합니다. 자율 에이전트는 <span className="text-[#4ECDC4]/80">실행 전 입력을 차단</span>하고, 분석 파이프라인은 <span className="text-[#C084FC]/80">실행 후 출력을 검증</span>합니다.</>
+            )}
           </p>
         </ScrollReveal>
 
@@ -276,10 +294,10 @@ export function VerificationSection() {
                     </span>
                   </div>
                   <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
-                    {active.description}
+                    {locale === "en" && "descriptionEn" in active ? (active as { descriptionEn: string }).descriptionEn : active.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
-                    {active.items.map((item) => (
+                    {(locale === "en" && "itemsEn" in active ? (active as { itemsEn: string[] }).itemsEn : active.items).map((item) => (
                       <span
                         key={item}
                         className="px-2 py-0.5 rounded text-[11px] font-mono"
@@ -341,14 +359,14 @@ export function VerificationSection() {
                     <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                       style={{ color: s.color, background: `${s.color}10` }}>{s.id}</span>
                     <span className="text-sm font-medium text-white/70 w-[130px] sm:w-[150px] shrink-0">{s.name}</span>
-                    <span className="text-sm text-[#9BB0CC]">{s.desc}</span>
+                    <span className="text-sm text-[#9BB0CC]">{locale === "en" ? s.descEn : s.desc}</span>
                   </div>
                 ))}
               </div>
 
               {/* Quality Gates */}
               <div className="rounded-xl border border-white/[0.04] px-5 py-4">
-                <div className="text-sm font-semibold text-white/70 mb-3">Quality Gates (Step 3 반복)</div>
+                <div className="text-sm font-semibold text-white/70 mb-3">{locale === "en" ? "Quality Gates (Step 3 Loop)" : "Quality Gates (Step 3 반복)"}</div>
                 <div className="space-y-2">
                   {qualityGates.map((g) => (
                     <div key={g.gate} className="flex items-center gap-4 px-3 py-2 rounded-lg border border-white/[0.03]"
@@ -360,7 +378,9 @@ export function VerificationSection() {
                   ))}
                 </div>
                 <p className="text-xs text-[#9BB0CC] font-mono mt-3">
-                  CANNOT: lint/type/test 실패 상태로 커밋 금지. 플레이스홀더(XXXX) 금지. 측정값만 기록.
+                  {locale === "en"
+                    ? "CANNOT: No commits with failing lint/type/test. No placeholders (XXXX). Record measured values only."
+                    : "CANNOT: lint/type/test 실패 상태로 커밋 금지. 플레이스홀더(XXXX) 금지. 측정값만 기록."}
                 </p>
               </div>
             </div>

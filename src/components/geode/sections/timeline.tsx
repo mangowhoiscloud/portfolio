@@ -4,47 +4,61 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollReveal, ScrollRevealGroup, revealChild } from "../scroll-reveal";
 import { motion } from "framer-motion";
+import { useLocale, t } from "../locale-context";
 
 const phases = [
   {
     phase: "Phase 1",
-    period: "2025.01.31 — 02.28",
+    period: "2025.01.31 ~ 02.28",
     title: "Game IP 가치추론 DAG",
+    titleEn: "Game IP Value Inference DAG",
     desc: "넥슨 네비게이터실 과제 전형. 게임/IP 저평가 분석 파이프라인 설계. 14축 루브릭 + PSM 인과추론 + LangGraph StateGraph.",
+    descEn: "Nexon Navigator team take-home project. Game/IP undervaluation analysis pipeline. 14-axis rubric + PSM causal inference + LangGraph StateGraph.",
     badge: "과제 합격",
+    badgeEn: "PASSED",
     badgeColor: "#34D399",
     versions: ["v0.6 MVP", "v0.8 Multi-LLM"],
   },
   {
     phase: "Phase 2",
-    period: "2025.03 — 03.06",
+    period: "2025.03 ~ 03.06",
     title: "면접 탈락 → Autonomous Pivot",
+    titleEn: "Interview Rejection → Autonomous Pivot",
     desc: "과제 전형 합격, 면접 탈락. 도메인 종속적 파이프라인에서 범용 자율 실행 하네스로 전환. DomainPort Protocol로 파이프라인을 교체 가능한 플러그인으로 분리.",
+    descEn: "Passed take-home, rejected at interview. Pivoted from domain-specific pipeline to general-purpose autonomous execution harness. Separated pipelines into swappable plugins via DomainPort Protocol.",
     badge: "PIVOT",
+    badgeEn: "PIVOT",
     badgeColor: "#F5C542",
     versions: ["v0.10 DomainPort", "v0.16 AgenticLoop"],
   },
   {
     phase: "Phase 3",
-    period: "2025.03 — 2026.Q1",
+    period: "2025.03 ~ 2026.Q1",
     title: "Long-running Autonomous Execution Harness",
+    titleEn: "Long-running Autonomous Execution Harness",
     desc: "Scaffold(CLAUDE.md + CI) → Runtime(46 Hooks + 21 Skills) → Loop(while True + 8 Guards) 3중 구조 완성. Slack Gateway, SubAgent DAG, 5-Tier Memory, Long-running Agent.",
+    descEn: "Completed 3-layer structure: Scaffold (CLAUDE.md + CI) → Runtime (46 Hooks + 21 Skills) → Loop (while True + 8 Guards). Slack Gateway, SubAgent DAG, 5-Tier Memory, Long-running Agent.",
     badge: "CURRENT",
+    badgeEn: "CURRENT",
     badgeColor: "#4ECDC4",
     versions: ["v0.24 Harness", "v0.28 Gateway", "v0.31 GitFlow", "v0.32 Long-run"],
   },
   {
     phase: "Fork",
-    period: "2026.03.16 — 05.16 (@pinxlab, 프리랜스)",
+    period: "2026.03.16 ~ 05.16 (@pinxlab, freelance)",
     title: "REODE. Domain Pivot 실증",
+    titleEn: "REODE. Domain Pivot Validation",
     desc: "산업 적용 전 DomainPort 교체 가능성 실증. Java 1.8→22 + Spring 4.3→6.1 자동 마이그레이션. 5,523파일 엔터프라이즈 프로젝트 83/83 테스트 통과. 에러 4분류 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리. 5시간 30분, 1,153턴 자율 수행.",
+    descEn: "Validated DomainPort swappability before industrial deployment. Java 1.8→22 + Spring 4.3→6.1 automated migration. 83/83 tests passing on a 5,523-file enterprise project. 4-class error routing (CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor separation. 5h 30m, 1,153 autonomous rounds.",
     badge: "FORK",
+    badgeEn: "FORK",
     badgeColor: "#C084FC",
     versions: ["v0.21", "83/83 tests", "$388 / 1,153 rounds"],
   },
 ];
 
 export function TimelineSection() {
+  const locale = useLocale();
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
 
@@ -57,9 +71,11 @@ export function TimelineSection() {
             Domain → Autonomous
           </h2>
           <p className="text-[#A0B4D4] max-w-lg mb-16">
-            과제 전형용 도메인 파이프라인에서 범용 자율 실행 하네스로.
-            <br />
-            <span className="text-white/40">35일 만에 피봇, 총 3개월, 현재 진행형.</span>
+            {locale === "en" ? (
+              <>From a domain pipeline for a take-home project to a general-purpose autonomous execution harness.<br /><span className="text-white/40">Pivoted in 35 days. 3+ months total. Ongoing.</span></>
+            ) : (
+              <>과제 전형용 도메인 파이프라인에서 범용 자율 실행 하네스로.<br /><span className="text-white/40">35일 만에 피봇, 총 3개월, 현재 진행형.</span></>
+            )}
           </p>
         </ScrollReveal>
 
@@ -99,12 +115,12 @@ export function TimelineSection() {
                         borderColor: `${p.badgeColor}25`,
                       }}
                     >
-                      {p.badge}
+                      {locale === "en" ? p.badgeEn : p.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white/80 mb-1.5">{p.title}</h3>
-                  <p className="text-sm text-[#9BB0CC] leading-relaxed mb-3">{p.desc}</p>
+                  <h3 className="text-base font-semibold text-white/80 mb-1.5">{locale === "en" ? p.titleEn : p.title}</h3>
+                  <p className="text-sm text-[#9BB0CC] leading-relaxed mb-3">{locale === "en" ? p.descEn : p.desc}</p>
 
                   <div className="flex flex-wrap gap-1.5">
                     {p.versions.map((v) => (
@@ -126,7 +142,7 @@ export function TimelineSection() {
           <div className="mt-20 flex items-center justify-center gap-4">
             <Image src="/portfolio/images/geode-idle.png" alt="Geodi" width={32} height={32} className="opacity-40" />
             <Link href="/" className="text-xs font-mono text-[#9BB0CC] hover:text-[#A0B4D4] transition-colors">
-              ← Back to portfolio
+              {locale === "en" ? "← Back to portfolio" : "← 포트폴리오로 돌아가기"}
             </Link>
           </div>
         </ScrollReveal>

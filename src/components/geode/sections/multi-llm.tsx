@@ -2,25 +2,27 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 type Mode = "pipeline" | "agentic";
 
 /* ── Pipeline pricing (actually used) ── */
 const pipelinePricing = [
-  { model: "claude-opus-4-6", role: "전 노드 Primary", input: "$5.00", output: "$25.00", color: "#F4B8C8" },
-  { model: "gpt-5.4", role: "Cross-LLM 검증 Secondary", input: "$2.50", output: "$15.00", color: "#34D399" },
+  { model: "claude-opus-4-6", role: "전 노드 Primary", roleEn: "All-Node Primary", input: "$5.00", output: "$25.00", color: "#F4B8C8" },
+  { model: "gpt-5.4", role: "Cross-LLM 검증 Secondary", roleEn: "Cross-LLM Validation Secondary", input: "$2.50", output: "$15.00", color: "#34D399" },
 ];
 
 /* ── Agentic pricing (failover chain) ── */
 const agenticPricing = [
-  { model: "claude-opus-4-6", role: "Primary (기본)", input: "$5.00", output: "$25.00", color: "#F4B8C8" },
-  { model: "claude-sonnet-4-6", role: "Failover #1", input: "$3.00", output: "$15.00", color: "#818CF8" },
-  { model: "gpt-5.4", role: "Cross-Provider Failover", input: "$2.50", output: "$15.00", color: "#34D399" },
-  { model: "glm-5", role: "Budget / Cross-Provider", input: "$0.72", output: "$2.30", color: "#F5C542" },
-  { model: "claude-haiku-4-5", role: "Token Guard (budget)", input: "$1.00", output: "$5.00", color: "#4ECDC4" },
+  { model: "claude-opus-4-6", role: "Primary (기본)", roleEn: "Primary (Default)", input: "$5.00", output: "$25.00", color: "#F4B8C8" },
+  { model: "claude-sonnet-4-6", role: "Failover #1", roleEn: "Failover #1", input: "$3.00", output: "$15.00", color: "#818CF8" },
+  { model: "gpt-5.4", role: "Cross-Provider Failover", roleEn: "Cross-Provider Failover", input: "$2.50", output: "$15.00", color: "#34D399" },
+  { model: "glm-5", role: "Budget / Cross-Provider", roleEn: "Budget / Cross-Provider", input: "$0.72", output: "$2.30", color: "#F5C542" },
+  { model: "claude-haiku-4-5", role: "Token Guard (budget)", roleEn: "Token Guard (Budget)", input: "$1.00", output: "$5.00", color: "#4ECDC4" },
 ];
 
 export function MultiLlmSection() {
+  const locale = useLocale();
   const [mode, setMode] = useState<Mode>("pipeline");
 
   return (
@@ -34,9 +36,10 @@ export function MultiLlmSection() {
             LLM Resilience
           </h2>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            파이프라인과 에이전트 루프에서 LLM을 다르게 운용합니다.
-            Port/Adapter DI 패턴으로 런타임에 프로바이더를 교체하고,
-            프로바이더 장애 시 자동 failover합니다.
+            {t(locale,
+              "파이프라인과 에이전트 루프에서 LLM을 다르게 운용합니다. Port/Adapter DI 패턴으로 런타임에 프로바이더를 교체하고, 프로바이더 장애 시 자동 failover합니다.",
+              "LLMs are operated differently in pipelines vs. agent loops. Providers are swapped at runtime via the Port/Adapter DI pattern, with automatic failover on provider failure."
+            )}
           </p>
         </ScrollReveal>
 
@@ -146,7 +149,7 @@ export function MultiLlmSection() {
                   <thead>
                     <tr className="border-b border-white/[0.06]">
                       <th className="text-left py-2 px-3 text-[#9BB0CC]">Model</th>
-                      <th className="text-left py-2 px-3 text-[#9BB0CC]">역할</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">{locale === "en" ? "Role" : "역할"}</th>
                       <th className="text-right py-2 px-2 text-[#9BB0CC]">Input</th>
                       <th className="text-right py-2 px-2 text-[#9BB0CC]">Output</th>
                     </tr>
@@ -155,7 +158,7 @@ export function MultiLlmSection() {
                     {pipelinePricing.map((p) => (
                       <tr key={p.model} className="border-b border-white/[0.03]">
                         <td className="py-2 px-3" style={{ color: p.color }}>{p.model}</td>
-                        <td className="py-2 px-3 text-white/50">{p.role}</td>
+                        <td className="py-2 px-3 text-white/50">{locale === "en" ? p.roleEn : p.role}</td>
                         <td className="text-right py-2 px-2 text-white/40">{p.input}</td>
                         <td className="text-right py-2 px-2 text-white/40">{p.output}</td>
                       </tr>
@@ -179,7 +182,7 @@ export function MultiLlmSection() {
 
                   {/* Title */}
                   <text x={380} y={22} textAnchor="middle" fill="white" fillOpacity={0.4} fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                    LLM Resilience. Port/Adapter DI 런타임 교체
+                    {locale === "en" ? "LLM Resilience. Port/Adapter DI Runtime Swap" : "LLM Resilience. Port/Adapter DI 런타임 교체"}
                   </text>
 
                   {/* ── Anthropic provider group (Gold border) ── */}
@@ -236,7 +239,7 @@ export function MultiLlmSection() {
                     ClaudeAgenticAdapter · OpenAIAgenticAdapter · GlmAgenticAdapter
                   </text>
                   <text x={380} y={252} textAnchor="middle" fill="white" fillOpacity={0.15} fontSize={8} fontFamily="ui-monospace, monospace">
-                    update_model() 런타임 교체 · MODEL_SWITCHED hook · auto context window adapt
+                    {locale === "en" ? "update_model() runtime swap · MODEL_SWITCHED hook · auto context window adapt" : "update_model() 런타임 교체 · MODEL_SWITCHED hook · auto context window adapt"}
                   </text>
                 </svg>
               </div>
@@ -247,7 +250,7 @@ export function MultiLlmSection() {
                   <thead>
                     <tr className="border-b border-white/[0.06]">
                       <th className="text-left py-2 px-3 text-[#9BB0CC]">Model</th>
-                      <th className="text-left py-2 px-3 text-[#9BB0CC]">역할</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">{locale === "en" ? "Role" : "역할"}</th>
                       <th className="text-right py-2 px-2 text-[#9BB0CC]">Input</th>
                       <th className="text-right py-2 px-2 text-[#9BB0CC]">Output</th>
                     </tr>
@@ -256,7 +259,7 @@ export function MultiLlmSection() {
                     {agenticPricing.map((p) => (
                       <tr key={p.model} className="border-b border-white/[0.03]">
                         <td className="py-2 px-3" style={{ color: p.color }}>{p.model}</td>
-                        <td className="py-2 px-3 text-white/50">{p.role}</td>
+                        <td className="py-2 px-3 text-white/50">{locale === "en" ? p.roleEn : p.role}</td>
                         <td className="text-right py-2 px-2 text-white/40">{p.input}</td>
                         <td className="text-right py-2 px-2 text-white/40">{p.output}</td>
                       </tr>
@@ -267,8 +270,8 @@ export function MultiLlmSection() {
 
               {/* Port/Adapter explanation */}
               <div className="mt-4 flex flex-wrap gap-1.5">
-                {["ClaudeAgenticAdapter", "OpenAIAgenticAdapter", "GlmAgenticAdapter", "update_model() 런타임 교체", "MODEL_SWITCHED hook"].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#4ECDC4]/70 bg-[#4ECDC4]/06 border border-[#4ECDC4]/12">{t}</span>
+                {["ClaudeAgenticAdapter", "OpenAIAgenticAdapter", "GlmAgenticAdapter", locale === "en" ? "update_model() runtime swap" : "update_model() 런타임 교체", "MODEL_SWITCHED hook"].map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#4ECDC4]/70 bg-[#4ECDC4]/06 border border-[#4ECDC4]/12">{tag}</span>
                 ))}
               </div>
             </div>

@@ -3,21 +3,22 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 /* ── Column Definitions ── */
 const columns = [
-  { id: "backlog", label: "Backlog", color: "#7A8CA8", desc: "대기. plan 문서 링크, 우선순위 태깅" },
-  { id: "in-progress", label: "In Progress", color: "#818CF8", desc: "워크트리 할당됨. .owner에 세션 ID 기록" },
-  { id: "in-review", label: "In Review", color: "#F5C542", desc: "PR 생성됨. CI 5/5 대기" },
-  { id: "done", label: "Done", color: "#34D399", desc: "main 머지 완료. 세션별 그룹핑" },
+  { id: "backlog", label: "Backlog", color: "#7A8CA8", descKo: "대기. plan 문서 링크, 우선순위 태깅", descEn: "Waiting. Plan doc link, priority tagging" },
+  { id: "in-progress", label: "In Progress", color: "#818CF8", descKo: "워크트리 할당됨. .owner에 세션 ID 기록", descEn: "Worktree assigned. Session ID recorded in .owner" },
+  { id: "in-review", label: "In Review", color: "#F5C542", descKo: "PR 생성됨. CI 5/5 대기", descEn: "PR created. Awaiting CI 5/5" },
+  { id: "done", label: "Done", color: "#34D399", descKo: "main 머지 완료. 세션별 그룹핑", descEn: "Merged to main. Grouped by session" },
 ];
 
 /* ── Board Rules ── */
 const rules = [
-  { rule: "main-only write", desc: "feature/develop 브랜치에서 progress.md 수정 금지. main에서만 업데이트.", color: "#E87080" },
-  { rule: ".owner 격리", desc: "워크트리마다 .owner 파일에 session + task_id 기록. 타 세션 삭제 차단.", color: "#818CF8" },
-  { rule: "Backlog→Done 점프 금지", desc: "반드시 In Progress를 거쳐야 Done. 모든 작업에 실행 흔적 보장.", color: "#F5C542" },
-  { rule: "3-Checkpoint", desc: "Alloc(Step 0) → Free(PR merge) → Cross-check(세션 시작). 누수 탐지.", color: "#4ECDC4" },
+  { ruleKo: "main-only write", ruleEn: "main-only write", descKo: "feature/develop 브랜치에서 progress.md 수정 금지. main에서만 업데이트.", descEn: "No progress.md edits on feature/develop branches. Update on main only.", color: "#E87080" },
+  { ruleKo: ".owner 격리", ruleEn: ".owner isolation", descKo: "워크트리마다 .owner 파일에 session + task_id 기록. 타 세션 삭제 차단.", descEn: "Each worktree records session + task_id in .owner file. Prevents deletion by other sessions.", color: "#818CF8" },
+  { ruleKo: "Backlog→Done 점프 금지", ruleEn: "No Backlog→Done skip", descKo: "반드시 In Progress를 거쳐야 Done. 모든 작업에 실행 흔적 보장.", descEn: "Must go through In Progress before Done. Ensures execution trace for all tasks.", color: "#F5C542" },
+  { ruleKo: "3-Checkpoint", ruleEn: "3-Checkpoint", descKo: "Alloc(Step 0) → Free(PR merge) → Cross-check(세션 시작). 누수 탐지.", descEn: "Alloc (Step 0) → Free (PR merge) → Cross-check (session start). Leak detection.", color: "#4ECDC4" },
 ];
 
 /* ── Example Board Items ── */
@@ -294,6 +295,7 @@ function KanbanColumn({
 
 /* ── Main KanbanSection ── */
 export function KanbanSection() {
+  const locale = useLocale();
   const [activeCol, setActiveCol] = useState(1);
   const [boardItems, setBoardItems] = useState(initialItems);
   const [migrationStep, setMigrationStep] = useState(0);
@@ -369,10 +371,11 @@ export function KanbanSection() {
             Markdown Collaboration Board
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
-            <code className="text-[#F4B8C8]/60">docs/progress.md</code>를 SOT로
-            사람과 다수의 세션 및 에이전트가 협업합니다.
-            Git이 트랜잭션 로그, main 브랜치가 단일 진실 소스.
-            30+ 세션의 작업 이력이 추적됩니다.
+            {locale === "ko" ? (
+              <><code className="text-[#F4B8C8]/60">docs/progress.md</code>를 SOT로 사람과 다수의 세션 및 에이전트가 협업합니다. Git이 트랜잭션 로그, main 브랜치가 단일 진실 소스. 30+ 세션의 작업 이력이 추적됩니다.</>
+            ) : (
+              <>Humans and multiple sessions/agents collaborate with <code className="text-[#F4B8C8]/60">docs/progress.md</code> as SOT. Git serves as the transaction log, main branch as single source of truth. Work history across 30+ sessions is tracked.</>
+            )}
           </p>
         </ScrollReveal>
 
@@ -446,9 +449,11 @@ export function KanbanSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <div className="text-xs text-[#8B9CC0] leading-relaxed mb-3">
-                  작업마다 <code className="text-[#818CF8]/60">git worktree add</code>로 격리 환경을 할당합니다.
-                  <code className="text-[#F4B8C8]/60 ml-1">.owner</code> 파일에 세션 ID + task_id를 기록하여
-                  타 세션이 워크트리를 삭제하는 것을 방지합니다.
+                  {locale === "ko" ? (
+                    <>작업마다 <code className="text-[#818CF8]/60">git worktree add</code>로 격리 환경을 할당합니다. <code className="text-[#F4B8C8]/60 ml-1">.owner</code> 파일에 세션 ID + task_id를 기록하여 타 세션이 워크트리를 삭제하는 것을 방지합니다.</>
+                  ) : (
+                    <>Each task gets an isolated environment via <code className="text-[#818CF8]/60">git worktree add</code>. The <code className="text-[#F4B8C8]/60 ml-1">.owner</code> file records session ID + task_id to prevent other sessions from deleting the worktree.</>
+                  )}
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
@@ -464,8 +469,10 @@ export function KanbanSection() {
               </div>
               <div>
                 <div className="text-xs text-[#8B9CC0] leading-relaxed mb-3">
-                  동시에 여러 워크트리를 운영하여 병렬 작업이 가능합니다.
-                  세션 시작 시 Cross-check로 고아 워크트리(In Progress인데 워크트리 없음)를 탐지합니다.
+                  {t(locale,
+                    "동시에 여러 워크트리를 운영하여 병렬 작업이 가능합니다. 세션 시작 시 Cross-check로 고아 워크트리(In Progress인데 워크트리 없음)를 탐지합니다.",
+                    "Multiple worktrees can run simultaneously for parallel work. On session start, cross-check detects orphan worktrees (In Progress but no worktree exists)."
+                  )}
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
@@ -498,7 +505,7 @@ export function KanbanSection() {
           <div className="space-y-2.5">
             {rules.map((r, i) => (
               <motion.div
-                key={r.rule}
+                key={r.ruleKo}
                 initial={{ opacity: 0, x: -15 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
@@ -511,8 +518,8 @@ export function KanbanSection() {
                   style={{ background: r.color, opacity: 0.5 }}
                 />
                 <div>
-                  <span className="text-sm font-mono font-semibold text-white/70">{r.rule}</span>
-                  <p className="text-xs text-[#8B9CC0] mt-0.5 leading-relaxed">{r.desc}</p>
+                  <span className="text-sm font-mono font-semibold text-white/70">{locale === "en" ? r.ruleEn : r.ruleKo}</span>
+                  <p className="text-xs text-[#8B9CC0] mt-0.5 leading-relaxed">{locale === "en" ? r.descEn : r.descKo}</p>
                 </div>
               </motion.div>
             ))}

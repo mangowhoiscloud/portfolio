@@ -2,67 +2,92 @@
 
 import { useEffect, useState, useRef } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 /* ── 8-stage workflow (실제 운영 기반) ── */
 const stages = [
-  { id: 0, label: "Board", sub: "progress.md", color: "#F4B8C8" },
-  { id: 1, label: "Audit", sub: "GAP 탐지", color: "#E87080" },
-  { id: 2, label: "Plan", sub: "Research", color: "#818CF8" },
-  { id: 3, label: "Implement", sub: "코드 작성", color: "#60A5FA" },
-  { id: 4, label: "Ratchet", sub: "CI 래칫", color: "#34D399" },
-  { id: 5, label: "Docs", sub: "Sync", color: "#4ECDC4" },
-  { id: 6, label: "PR", sub: "GitFlow", color: "#C084FC" },
-  { id: 7, label: "Done", sub: "Kanban Done", color: "#F5C542" },
+  { id: 0, label: "Board", sub: "progress.md", subEn: "progress.md", color: "#F4B8C8" },
+  { id: 1, label: "Audit", sub: "GAP 탐지", subEn: "GAP Detection", color: "#E87080" },
+  { id: 2, label: "Plan", sub: "Research", subEn: "Research", color: "#818CF8" },
+  { id: 3, label: "Implement", sub: "코드 작성", subEn: "Code", color: "#60A5FA" },
+  { id: 4, label: "Ratchet", sub: "CI 래칫", subEn: "CI Ratchet", color: "#34D399" },
+  { id: 5, label: "Docs", sub: "Sync", subEn: "Sync", color: "#4ECDC4" },
+  { id: 6, label: "PR", sub: "GitFlow", subEn: "GitFlow", color: "#C084FC" },
+  { id: 7, label: "Done", sub: "Kanban Done", subEn: "Kanban Done", color: "#F5C542" },
 ];
 
-const stageDetails: Record<number, { title: string; result: string; kanban: string; git: string }> = {
+const stageDetails: Record<number, { title: string; titleEn: string; result: string; resultEn: string; kanban: string; git: string; gitEn: string }> = {
   0: {
     title: "Board + Worktree 할당",
+    titleEn: "Board + Worktree Allocation",
     result: "docs/progress.md에 작업을 Backlog → In Progress로 이동합니다. git fetch로 로컬/리모트 동기화를 검증한 뒤, git worktree add .claude/worktrees/<작업명> -b feature/<name> develop으로 격리 공간을 할당합니다. .owner 파일에 세션 ID를 기록하여 타 세션의 삭제를 방지합니다.",
+    resultEn: "Move the task from Backlog to In Progress in docs/progress.md. Verify local/remote sync via git fetch, then allocate an isolated workspace with git worktree add .claude/worktrees/<task> -b feature/<name> develop. Record the session ID in .owner to prevent deletion by other sessions.",
     kanban: "Backlog → In Progress",
     git: "git worktree add → feature/xxx",
+    gitEn: "git worktree add → feature/xxx",
   },
   1: {
     title: "GAP Audit. 소크라틱 게이트",
+    titleEn: "GAP Audit. Socratic Gate",
     result: "docs/plans/의 To-Be 항목과 실제 코드를 대조하여 GAP을 분류합니다(구현 완료 / 부분 구현 / 미구현). 미구현 항목에 소크라틱 5문항(코드에 있는가? 안 하면 뭐가 깨지나? 측정 가능한가? 최소 구현은? 프론티어 3종 패턴인가?)을 적용하여 실제 구현 대상만 필터링합니다.",
+    resultEn: "Compare To-Be items in docs/plans/ against actual code and classify GAPs (Fully / Partially / Not Implemented). Apply the Socratic 5-question gate to unimplemented items (Is it in the code? What breaks without it? Measurable? Minimum impl? Common in 3+ frontier systems?) to filter real implementation targets.",
     kanban: "In Progress",
     git: "feature/xxx에서 GAP 분석",
+    gitEn: "GAP analysis on feature/xxx",
   },
   2: {
     title: "Plan + Frontier Research",
+    titleEn: "Plan + Frontier Research",
     result: "신규 인프라 기능이면 frontier-harness-research 스킬로 Claude Code · Codex CLI · OpenClaw · Aider를 병렬 조사합니다. DISCOVER(조사) → COMPARE(기능 × 하네스 매트릭스) → DECIDE(Option A/B/C + 근거) → DOCUMENT(docs/plans/research-<topic>.md).",
+    resultEn: "For new infrastructure features, investigate Claude Code, Codex CLI, OpenClaw, and Aider in parallel using the frontier-harness-research skill. DISCOVER (investigate) → COMPARE (feature x harness matrix) → DECIDE (Option A/B/C + rationale) → DOCUMENT (docs/plans/research-<topic>.md).",
     kanban: "In Progress",
     git: "docs/plans/research-*.md",
+    gitEn: "docs/plans/research-*.md",
   },
   3: {
     title: "Implement. CANNOT/CAN 경계",
+    titleEn: "Implement. CANNOT/CAN Boundary",
     result: "CLAUDE.md의 CANNOT 23개 규칙(worktree 없이 코드 작업 금지, main 직접 push 금지, type:ignore 남발 금지, live 테스트 무단 실행 금지 등) 안에서 구현합니다. CAN 6개(버그 수정, 기회적 개선, 테스트 선택, 언어 선택, 도구 선택, worktree 병렬 실험)는 자율 판단입니다.",
+    resultEn: "Implement within the 23 CANNOT rules in CLAUDE.md (no code without worktree, no direct push to main, no type:ignore abuse, no unauthorized live tests, etc.). The 6 CAN items (bug fixes, opportunistic improvements, test selection, language choice, tool choice, worktree parallel experiments) are left to autonomous judgment.",
     kanban: "In Progress",
     git: "feature/xxx에서 코드 변경",
+    gitEn: "Code changes on feature/xxx",
   },
   4: {
     title: "Pre-PR Quality Gate",
+    titleEn: "Pre-PR Quality Gate",
     result: "ruff check · ruff format · mypy · bandit · pytest 5개 도구를 전부 통과해야 커밋합니다. 하나라도 실패하면 수정 → 재실행 루프. 코드와 docs(CHANGELOG [Unreleased], CLAUDE.md 수치, progress.md)를 반드시 하나의 커밋에 포함합니다. docs만 별도 커밋은 금지.",
+    resultEn: "All 5 tools must pass before committing: ruff check, ruff format, mypy, bandit, pytest. Any failure triggers a fix-and-rerun loop. Code and docs (CHANGELOG [Unreleased], CLAUDE.md metrics, progress.md) must be included in a single commit. Docs-only commits are prohibited.",
     kanban: "In Progress → In Review",
     git: "commit → push → PR 생성",
+    gitEn: "commit → push → PR creation",
   },
   5: {
     title: "Docs-Sync. 이중 검증",
+    titleEn: "Docs-Sync. Dual Verification",
     result: "Pre-PR에서 CHANGELOG.md [Unreleased] 항목, CLAUDE.md Tests/Modules 수치, docs/progress.md 오늘 날짜 섹션을 작성합니다. main merge 후에는 README.md 수치 정합성, pyproject.toml coverage omit, 버전 4곳 일치(CHANGELOG · CLAUDE.md · README · pyproject.toml)를 최종 검증합니다.",
+    resultEn: "In Pre-PR, write CHANGELOG.md [Unreleased] entries, CLAUDE.md Tests/Modules metrics, and docs/progress.md with today's date. After main merge, verify README.md metric consistency, pyproject.toml coverage omit, and version alignment across 4 files (CHANGELOG, CLAUDE.md, README, pyproject.toml).",
     kanban: "In Review",
     git: "docs 포함 커밋 → Post-merge 검증",
+    gitEn: "commit with docs → Post-merge verification",
   },
   6: {
     title: "PR + Post-PR CI 래칫",
+    titleEn: "PR + Post-PR CI Ratchet",
     result: "HEREDOC 포맷 PR body(요약 · 변경사항 · 영향범위 · 설계판단 · QG 체크리스트)를 작성합니다. gh pr checks --watch로 CI 전체 통과를 확인한 후에만 merge합니다. feature→develop 후 develop→main 배치 merge. Merge Queue 규칙: 한 번에 하나, 다음 worktree는 rebase 후 CI 재확인.",
+    resultEn: "Write a HEREDOC-formatted PR body (summary, changes, impact scope, design decisions, QG checklist). Merge only after gh pr checks --watch confirms all CI passes. feature→develop then develop→main batch merge. Merge Queue rule: one at a time, next worktree must rebase and re-verify CI.",
     kanban: "In Review",
     git: "feature→develop PR, develop→main PR",
+    gitEn: "feature→develop PR, develop→main PR",
   },
   7: {
     title: "Board 정리 + Worktree 해제",
+    titleEn: "Board Cleanup + Worktree Release",
     result: "progress.md를 In Progress → Done으로 이동합니다. git worktree remove로 작업 공간을 해제하고, git branch -d + git push origin --delete로 로컬·리모트 브랜치를 정리합니다. git worktree list로 누수(닫히지 않은 worktree)를 점검합니다.",
+    resultEn: "Move from In Progress to Done in progress.md. Release the workspace with git worktree remove, clean up local/remote branches with git branch -d + git push origin --delete. Check for leaks (unclosed worktrees) with git worktree list.",
     kanban: "In Review → Done",
     git: "worktree remove → branch -d → leak check",
+    gitEn: "worktree remove → branch -d → leak check",
   },
 };
 
@@ -96,9 +121,11 @@ const AUTO_CYCLE_MS = 2750;
 function RacingTrack({
   activeStage,
   onSelect,
+  locale,
 }: {
   activeStage: number;
   onSelect: (id: number) => void;
+  locale: "ko" | "en";
 }) {
   return (
     <div className="w-full overflow-x-auto -mx-6 px-6 pb-2">
@@ -191,7 +218,7 @@ function RacingTrack({
                 {s.label}
               </text>
               <text x={x} y={NODE_Y + 50} textAnchor="middle" fill={s.color} fillOpacity={isActive ? 0.35 : 0.1} fontSize={10} fontFamily="ui-monospace, monospace">
-                {s.sub}
+                {locale === "en" ? s.subEn : s.sub}
               </text>
             </g>
           );
@@ -203,15 +230,16 @@ function RacingTrack({
 
 /* ── Component Summary ── */
 const components = [
-  { label: "CLAUDE.md", sub: "CANNOT 23 / CAN 6", color: "#818CF8", badge: "SOT" },
-  { label: "progress.md", sub: "5컬럼 칸반", color: "#F4B8C8", badge: "kanban" },
-  { label: "21 Skills", sub: "YAML trigger 주입", color: "#F5C542", badge: "inject" },
-  { label: "46 Hooks", sub: "4단계 성숙도", color: "#4ECDC4", badge: "event" },
-  { label: "CI 5-Gate", sub: "Pre + Post 래칫", color: "#34D399", badge: "gate" },
-  { label: "Worktree", sub: "malloc / free", color: "#C084FC", badge: "isolation" },
+  { label: "CLAUDE.md", sub: "CANNOT 23 / CAN 6", subEn: "CANNOT 23 / CAN 6", color: "#818CF8", badge: "SOT" },
+  { label: "progress.md", sub: "5컬럼 칸반", subEn: "5-Column Kanban", color: "#F4B8C8", badge: "kanban" },
+  { label: "21 Skills", sub: "YAML trigger 주입", subEn: "YAML Trigger Injection", color: "#F5C542", badge: "inject" },
+  { label: "46 Hooks", sub: "4단계 성숙도", subEn: "4-Level Maturity", color: "#4ECDC4", badge: "event" },
+  { label: "CI 5-Gate", sub: "Pre + Post 래칫", subEn: "Pre + Post Ratchet", color: "#34D399", badge: "gate" },
+  { label: "Worktree", sub: "malloc / free", subEn: "malloc / free", color: "#C084FC", badge: "isolation" },
 ];
 
 export function ScaffoldSection() {
+  const locale = useLocale();
   const [activeStage, setActiveStage] = useState(0);
   const [autoCycle, setAutoCycle] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -256,17 +284,19 @@ export function ScaffoldSection() {
             Scaffold
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-4">
-            코드가 아닌 제어 계층
+            {t(locale, "코드가 아닌 제어 계층", "Control Layer, Not Code")}
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
-            칸반 등록부터 Worktree 정리까지 8단계.
-            복수의 에이전트가 이 트랙을 동시에 순환하며, 각 관문을 통과해야 다음 단계로 진행합니다.
+            {t(locale,
+              "칸반 등록부터 Worktree 정리까지 8단계. 복수의 에이전트가 이 트랙을 동시에 순환하며, 각 관문을 통과해야 다음 단계로 진행합니다.",
+              "8 stages from Kanban registration to Worktree cleanup. Multiple agents circulate this track simultaneously, and must pass each gate to proceed to the next stage."
+            )}
           </p>
         </ScrollReveal>
 
         {/* ── Racing Track ── */}
         <ScrollReveal delay={0.1}>
-          <RacingTrack activeStage={activeStage} onSelect={handleManualSelect} />
+          <RacingTrack activeStage={activeStage} onSelect={handleManualSelect} locale={locale} />
         </ScrollReveal>
 
         {/* ── Active stage detail (auto-switches with Agent C) ── */}
@@ -285,11 +315,11 @@ export function ScaffoldSection() {
               {activeStage}
             </span>
             <span className="font-semibold text-sm" style={{ color: `${stageColor}D0` }}>
-              {detail.title}
+              {locale === "en" ? detail.titleEn : detail.title}
             </span>
           </div>
           <p className="text-sm text-[#8B9CC0] leading-relaxed mb-3">
-            {detail.result}
+            {locale === "en" ? detail.resultEn : detail.result}
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4 text-[11px] font-mono">
             <div>
@@ -298,7 +328,7 @@ export function ScaffoldSection() {
             </div>
             <div>
               <span className="text-[#C084FC]/40 mr-1.5">GIT</span>
-              <span className="text-[#C084FC]/70">{detail.git}</span>
+              <span className="text-[#C084FC]/70">{locale === "en" ? detail.gitEn : detail.git}</span>
             </div>
           </div>
         </div>
@@ -320,7 +350,7 @@ export function ScaffoldSection() {
                 </span>
                 <div>
                   <div className="text-xs sm:text-sm font-semibold text-white/80">{c.label}</div>
-                  <div className="text-[10px] sm:text-xs text-[#7A8CA8]">{c.sub}</div>
+                  <div className="text-[10px] sm:text-xs text-[#7A8CA8]">{locale === "en" ? c.subEn : c.sub}</div>
                 </div>
               </div>
             ))}

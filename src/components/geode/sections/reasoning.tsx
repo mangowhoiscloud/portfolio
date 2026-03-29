@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 type Mode = "react" | "plan";
 
 export function ReasoningSection() {
+  const locale = useLocale();
   const [mode, setMode] = useState<Mode>("react");
 
   return (
@@ -19,11 +21,10 @@ export function ReasoningSection() {
             ReAct · Plan-and-Execute
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
-            안쪽 루프(L1-L2)는 ReAct로 매 턴마다 관측→추론→행동을 반복하고,
-            바깥 레이어(L4)는 Plan-and-Execute로 복잡한 요청을 구조화된 계획으로 분할합니다.
-            ReAct만으로는 장기 작업에서 도구 선택이 근시안적이 되고 비용이 예측 불가능해지기 때문에,
-            v0.36부터 복잡한 요청(3+ 단계, 고비용)은 자동으로 create_plan을 호출하여
-            비용을 사전 추정하고 HITL 승인을 거치는 Plan-first 패턴으로 전환했습니다.
+            {t(locale,
+              "안쪽 루프(L1-L2)는 ReAct로 매 턴마다 관측→추론→행동을 반복하고, 바깥 레이어(L4)는 Plan-and-Execute로 복잡한 요청을 구조화된 계획으로 분할합니다. ReAct만으로는 장기 작업에서 도구 선택이 근시안적이 되고 비용이 예측 불가능해지기 때문에, v0.36부터 복잡한 요청(3+ 단계, 고비용)은 자동으로 create_plan을 호출하여 비용을 사전 추정하고 HITL 승인을 거치는 Plan-first 패턴으로 전환했습니다.",
+              "The inner loop (L1-L2) uses ReAct to repeat observe-reason-act each turn, while the outer layer (L4) uses Plan-and-Execute to decompose complex requests into structured plans. Since ReAct alone leads to myopic tool selection and unpredictable costs in long-running tasks, starting from v0.36 complex requests (3+ steps, high cost) automatically invoke create_plan for upfront cost estimation and HITL approval via the Plan-first pattern."
+            )}
           </p>
         </ScrollReveal>
 
@@ -93,8 +94,10 @@ export function ReasoningSection() {
                 </svg>
               </div>
               <p className="text-sm text-[#8B9CC0] leading-relaxed">
-                매 라운드마다 LLM이 관측(OBSERVE)하고, 도구를 선택·실행(ACT)하고, 결과를 컨텍스트에 반영(REFLECT)합니다.
-                복합 요청이면 GoalDecomposer가 sub-goal로 분해하여 시스템 프롬프트에 주입합니다.
+                {t(locale,
+                  "매 라운드마다 LLM이 관측(OBSERVE)하고, 도구를 선택·실행(ACT)하고, 결과를 컨텍스트에 반영(REFLECT)합니다. 복합 요청이면 GoalDecomposer가 sub-goal로 분해하여 시스템 프롬프트에 주입합니다.",
+                  "Each round, the LLM observes (OBSERVE), selects and executes a tool (ACT), then reflects the result into context (REFLECT). For compound requests, GoalDecomposer breaks them into sub-goals and injects them into the system prompt."
+                )}
               </p>
             </div>
           )}
@@ -128,9 +131,10 @@ export function ReasoningSection() {
                 </svg>
               </div>
               <p className="text-sm text-[#8B9CC0] leading-relaxed">
-                Planner가 요청을 6개 Route로 분류하고, PlanMode가 DRAFT → APPROVE(HITL) → EXECUTE 생애주기를 관리합니다.
-                REJECTED되면 CREATE로 복귀합니다. 상세 PlanMode 다이어그램은 Orchestration 섹션 참조.
-                REJECTED되면 CREATE로 복귀하여 재계획합니다.
+                {t(locale,
+                  "Planner가 요청을 6개 Route로 분류하고, PlanMode가 DRAFT → APPROVE(HITL) → EXECUTE 생애주기를 관리합니다. REJECTED되면 CREATE로 복귀합니다. 상세 PlanMode 다이어그램은 Orchestration 섹션 참조. REJECTED되면 CREATE로 복귀하여 재계획합니다.",
+                  "The Planner classifies requests into 6 Routes, and PlanMode manages the DRAFT → APPROVE (HITL) → EXECUTE lifecycle. If REJECTED, it returns to CREATE for re-planning. See the Orchestration section for the full PlanMode diagram."
+                )}
               </p>
             </div>
           )}

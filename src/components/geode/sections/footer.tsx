@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "../locale-context";
 
 export function GeodeFooter() {
+  const locale = useLocale();
   return (
     <footer className="relative py-16 px-4 sm:px-6 border-t border-white/[0.04]">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -32,7 +36,7 @@ export function GeodeFooter() {
             href="/"
             className="text-xs font-mono text-[#9BB0CC] hover:text-[#A0B4D4] transition-colors"
           >
-            Portfolio
+            {locale === "en" ? "Portfolio" : "포트폴리오"}
           </Link>
         </div>
 

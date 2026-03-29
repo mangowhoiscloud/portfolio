@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 /* ── Terminal scenarios (geode.html 실제 출력 기반) ── */
 type Line = { type: string; text: string; input?: boolean };
@@ -387,18 +388,19 @@ const loopStats = [
 
 /* ── 5+3 Safety Guards ── */
 const guards = [
-  { name: "수렴 감지", trigger: "동일 에러 4회 연속", effect: "break", color: "#E87080" },
-  { name: "시간 예산", trigger: "wall-clock 만료 (Karpathy P3)", effect: "wrap-up → end", color: "#F5C542" },
-  { name: "컨텍스트 80%", trigger: "Provider별 자동 압축 (Anthropic compact_20260112 / OpenAI client-side)", effect: "요약 후 계속", color: "#818CF8" },
-  { name: "컨텍스트 95%", trigger: "긴급 프루닝 + UI 알림", effect: "최근 N개만 유지", color: "#C084FC" },
-  { name: "StuckDetector", trigger: "2시간 무응답", effect: "세션 자동 해제", color: "#4ECDC4" },
-  { name: "비용 자동 정지", trigger: "세션당 비용 상한 초과", effect: "자동 정지 (v0.36)", color: "#F4B8C8" },
-  { name: "래칫 에러 감지", trigger: "결과 악화 패턴 (Karpathy P4)", effect: "롤백", color: "#60A5FA" },
-  { name: "다양성 강제", trigger: "동일 도구 5회 연속 호출", effect: "다른 경로 시도", color: "#34D399" },
+  { nameKo: "수렴 감지", nameEn: "Convergence Detection", triggerKo: "동일 에러 4회 연속", triggerEn: "Same error 4 times consecutively", effectKo: "break", effectEn: "break", color: "#E87080" },
+  { nameKo: "시간 예산", nameEn: "Time Budget", triggerKo: "wall-clock 만료 (Karpathy P3)", triggerEn: "Wall-clock expiry (Karpathy P3)", effectKo: "wrap-up → end", effectEn: "wrap-up → end", color: "#F5C542" },
+  { nameKo: "컨텍스트 80%", nameEn: "Context 80%", triggerKo: "Provider별 자동 압축 (Anthropic compact_20260112 / OpenAI client-side)", triggerEn: "Per-provider auto compaction (Anthropic compact_20260112 / OpenAI client-side)", effectKo: "요약 후 계속", effectEn: "Summarize, continue", color: "#818CF8" },
+  { nameKo: "컨텍스트 95%", nameEn: "Context 95%", triggerKo: "긴급 프루닝 + UI 알림", triggerEn: "Emergency pruning + UI notification", effectKo: "최근 N개만 유지", effectEn: "Keep last N only", color: "#C084FC" },
+  { nameKo: "StuckDetector", nameEn: "StuckDetector", triggerKo: "2시간 무응답", triggerEn: "2 hours unresponsive", effectKo: "세션 자동 해제", effectEn: "Auto-release session", color: "#4ECDC4" },
+  { nameKo: "비용 자동 정지", nameEn: "Auto Cost Stop", triggerKo: "세션당 비용 상한 초과", triggerEn: "Per-session cost cap exceeded", effectKo: "자동 정지 (v0.36)", effectEn: "Auto-stop (v0.36)", color: "#F4B8C8" },
+  { nameKo: "래칫 에러 감지", nameEn: "Ratchet Error Detection", triggerKo: "결과 악화 패턴 (Karpathy P4)", triggerEn: "Result degradation pattern (Karpathy P4)", effectKo: "롤백", effectEn: "Rollback", color: "#60A5FA" },
+  { nameKo: "다양성 강제", nameEn: "Diversity Enforcement", triggerKo: "동일 도구 5회 연속 호출", triggerEn: "Same tool called 5 times consecutively", effectKo: "다른 경로 시도", effectEn: "Try different route", color: "#34D399" },
 ];
 
 /* ── Section ── */
 export function LoopSection() {
+  const locale = useLocale();
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -413,9 +415,11 @@ export function LoopSection() {
             for range(50) → while True + 5 Guards
           </p>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-12 leading-relaxed">
-            턴 제한이 아니라, 에이전트와 인프라가 함께 종료를 결정합니다.
-            LLM이 <code className="text-[#4ECDC4]/70">tool_use</code>를 반환하는 한 궤도는 멈추지 않으며,
-            수렴 감지 · 시간 예산 · 컨텍스트 압축 · StuckDetector 5개 가드가 무한 루프를 방지합니다.
+            {locale === "ko" ? (
+              <>턴 제한이 아니라, 에이전트와 인프라가 함께 종료를 결정합니다. LLM이 <code className="text-[#4ECDC4]/70">tool_use</code>를 반환하는 한 궤도는 멈추지 않으며, 수렴 감지 · 시간 예산 · 컨텍스트 압축 · StuckDetector 5개 가드가 무한 루프를 방지합니다.</>
+            ) : (
+              <>No turn limit. The agent and infrastructure decide termination together. The loop keeps running as long as the LLM returns <code className="text-[#4ECDC4]/70">tool_use</code>. Five guards (convergence detection, time budget, context compaction, StuckDetector) prevent infinite loops.</>
+            )}
           </p>
         </ScrollReveal>
 
@@ -457,7 +461,7 @@ export function LoopSection() {
               ))}
               <div className="flex-1 text-right">
                 <div className="text-[9px] font-mono text-white/30">REODE · Opus 4.6 · 5,523 files · Java 1.8→22 · Spring 4→6</div>
-                <div className="text-[8px] font-mono text-[#34D399]/50 mt-0.5">83/83 Tests · Build · FE/BE E2E 성공 · 전 기능 보존 · 고객 만족</div>
+                <div className="text-[8px] font-mono text-[#34D399]/50 mt-0.5">{t(locale, "83/83 Tests · Build · FE/BE E2E 성공 · 전 기능 보존 · 고객 만족", "83/83 Tests · Build · FE/BE E2E pass · All features preserved · Customer satisfied")}</div>
               </div>
             </div>
           </ScrollReveal>
@@ -471,28 +475,36 @@ export function LoopSection() {
             </p>
             <div className="space-y-2">
               {guards.map((g) => (
-                <div key={g.name} className="flex items-center gap-4 px-4 py-2.5 rounded-lg border border-white/[0.04]" style={{ background: `${g.color}03` }}>
+                <div key={g.nameKo} className="flex items-center gap-4 px-4 py-2.5 rounded-lg border border-white/[0.04]" style={{ background: `${g.color}03` }}>
                   <span className="shrink-0 w-2 h-2 rounded-full" style={{ background: g.color }} />
-                  <span className="text-sm font-semibold text-white/80 w-[100px] sm:w-[120px] shrink-0">{g.name}</span>
-                  <span className="text-sm text-[#7A8CA8] flex-1">{g.trigger}</span>
-                  <span className="text-xs font-mono shrink-0" style={{ color: g.color }}>{g.effect}</span>
+                  <span className="text-sm font-semibold text-white/80 w-[100px] sm:w-[120px] shrink-0">{locale === "en" ? g.nameEn : g.nameKo}</span>
+                  <span className="text-sm text-[#7A8CA8] flex-1">{locale === "en" ? g.triggerEn : g.triggerKo}</span>
+                  <span className="text-xs font-mono shrink-0" style={{ color: g.color }}>{locale === "en" ? g.effectEn : g.effectKo}</span>
                 </div>
               ))}
             </div>
             <p className="text-xs text-[#7A8CA8] font-mono mt-3">
-              Wrap-Up Headroom: 만료 30초 전부터 tool_choice=none → 결과 정리 후 자연 종료
+              {t(locale,
+                "Wrap-Up Headroom: 만료 30초 전부터 tool_choice=none → 결과 정리 후 자연 종료",
+                "Wrap-Up Headroom: 30s before expiry, tool_choice=none → finalize results, then graceful exit"
+              )}
             </p>
 
             {/* Failure modes */}
             <div className="mt-6 rounded-xl border border-white/[0.04] px-5 py-4">
               <div className="text-sm font-semibold text-white/70 mb-3">Failure Recovery</div>
               <div className="space-y-1.5 text-sm">
-                {[
+                {(locale === "en" ? [
+                  { scenario: "Full LLM outage", recovery: "Cross-provider failover (Anthropic → OpenAI → GLM)", color: "#E87080" },
+                  { scenario: "MCP server unresponsive", recovery: "spawn retry + graceful skip", color: "#F5C542" },
+                  { scenario: "Context overflow", recovery: "80% compaction → 95% emergency prune → UI notification", color: "#818CF8" },
+                  { scenario: "Tool consecutive failures ≥2", recovery: "adaptive recovery chain + model escalation", color: "#C084FC" },
+                ] : [
                   { scenario: "LLM 전체 장애", recovery: "Cross-provider failover (Anthropic → OpenAI → GLM)", color: "#E87080" },
                   { scenario: "MCP 서버 미응답", recovery: "spawn retry + graceful skip", color: "#F5C542" },
                   { scenario: "컨텍스트 오버플로우", recovery: "80% compaction → 95% emergency prune → UI 알림", color: "#818CF8" },
                   { scenario: "도구 연속 실패 ≥2", recovery: "adaptive recovery chain + 모델 에스컬레이션", color: "#C084FC" },
-                ].map((f) => (
+                ]).map((f) => (
                   <div key={f.scenario} className="flex items-start gap-3">
                     <span className="shrink-0 w-1.5 h-1.5 rounded-full mt-1.5" style={{ background: f.color }} />
                     <div>

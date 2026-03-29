@@ -2,36 +2,44 @@
 
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
+import { useLocale, t } from "../locale-context";
 
-/* ── 3 entry points ── */
-const entries = [
+/* ── 3 session modes (v0.36.0 thin-only architecture) ── */
+const modes = [
   {
-    id: "repl",
-    label: "REPL",
-    sub: "Interactive CLI",
+    id: "ipc",
+    label: "CLI (IPC)",
+    sub: "SessionMode.IPC",
     color: "#4ECDC4",
-    desc: "Typer 기반 대화형 CLI. 슬래시 명령은 COMMAND_MAP 결정론적 디스패치, 자유 텍스트는 AgenticLoop로 직행. Rich Live Display가 파이프라인 진행을 실시간 렌더링.",
-    details: ["Typer + Rich Live", "17 Tools × 5 Category", "NL Router 자연어→CLI"],
+    descKo: "thin CLI가 Unix socket(~/.geode/cli.sock)으로 serve에 접속. serve가 미실행이면 자동 시작(pidfile lock, TOCTOU 방지). line-delimited JSON 프로토콜. hitl=0, WRITE 허용, DANGEROUS 차단.",
+    descEn: "thin CLI connects to serve via Unix socket (~/.geode/cli.sock). Auto-starts serve if not running (pidfile lock, TOCTOU prevention). Line-delimited JSON protocol. hitl=0, WRITE allowed, DANGEROUS blocked.",
+    detailsKo: ["IPCClient + CLIPoller", "auto-start serve", "chmod 0o600 보안"],
+    detailsEn: ["IPCClient + CLIPoller", "auto-start serve", "chmod 0o600 security"],
   },
   {
-    id: "headless",
-    label: "Headless",
-    sub: "geode serve",
+    id: "daemon",
+    label: "Daemon",
+    sub: "SessionMode.DAEMON",
     color: "#818CF8",
-    desc: "REPL 없이 데몬 모드 실행. ChannelManager가 Slack/Discord/Telegram 폴러와 Webhook을 동시 가동. hitl_level=0 자율 실행.",
-    details: ["ChannelBinding 라우팅", "FastMCP 6 Tools", "Webhook :8765"],
+    descKo: "Slack/Discord/Telegram 폴러가 외부 메시지를 수신. config.toml [gateway] pollers에서 동적 등록(_POLLER_REGISTRY). hitl=0, quiet 모드, DANGEROUS 차단.",
+    descEn: "Slack/Discord/Telegram pollers receive external messages. Dynamically registered via config.toml [gateway] pollers (_POLLER_REGISTRY). hitl=0, quiet mode, DANGEROUS blocked.",
+    detailsKo: ["Config-driven pollers", "ChannelBinding 라우팅", "SessionLane 동시성"],
+    detailsEn: ["Config-driven pollers", "ChannelBinding routing", "SessionLane concurrency"],
   },
   {
     id: "scheduler",
     label: "Scheduler",
-    sub: "AT / EVERY / CRON",
+    sub: "SessionMode.SCHEDULER",
     color: "#F5C542",
-    desc: "시간/간격/크론 기반 자동 실행. action_queue에 잡을 투입하고 IsolatedRunner가 데몬 쓰레드에서 크래시 격리 실행.",
-    details: ["NL Schedule Parser", "Active Hours (TZ)", "IsolatedRunner 격리"],
+    descKo: "serve 내부에서 SchedulerService가 AT/EVERY/CRON 잡을 실행. hitl=0, quiet, 300s 시간 제한. fcntl.flock으로 jobs.json 동시 접근 방지. stuck job 10분 탐지.",
+    descEn: "SchedulerService runs AT/EVERY/CRON jobs inside serve. hitl=0, quiet, 300s time cap. fcntl.flock prevents concurrent jobs.json access. Stuck job detection at 10 min.",
+    detailsKo: ["serve 내장 데몬", "300s time cap", "fcntl.flock 잡 잠금"],
+    detailsEn: ["Built-in serve daemon", "300s time cap", "fcntl.flock job locking"],
   },
 ];
 
 export function GatewaySection() {
+  const locale = useLocale();
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -39,103 +47,141 @@ export function GatewaySection() {
           variant="side"
           label="Gateway"
           labelColor="#4ECDC4"
-          title="3 Entry Points, 1 Core"
-          description="대화형 REPL, 데몬 모드 Headless, 시간 기반 Scheduler. 세 진입점 모두 bootstrap_geode()로 초기화하고 AgenticLoop.run()으로 수렴합니다."
+          title="Unified Daemon"
+          description={t(locale,
+            "geode serve가 유일한 데몬. thin CLI, Slack, Scheduler 모두 serve에 접속하여 GeodeRuntime.create_session(mode)로 실행합니다. SessionLane이 동시성을 제어합니다.",
+            "geode serve is the single daemon. thin CLI, Slack, and Scheduler all connect to serve and run via GeodeRuntime.create_session(mode). SessionLane controls concurrency."
+          )}
         />
 
-        {/* ── Convergence SVG ── */}
+        {/* ── Thin-only architecture SVG ── */}
         <ScrollReveal delay={0.05}>
           <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-10">
-            <svg viewBox="0 0 760 150" className="w-full min-w-[560px]" style={{ maxHeight: 180 }}>
+            <svg viewBox="0 0 800 180" className="w-full min-w-[640px]" style={{ maxHeight: 210 }}>
+              {/* thin CLI */}
+              <rect x={15} y={20} width={100} height={40} rx={8}
+                fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.4} />
+              <text x={65} y={37} textAnchor="middle" fill="#4ECDC4"
+                fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>geode (thin)</text>
+              <text x={65} y={51} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
+                fontSize={7} fontFamily="ui-monospace, monospace">IPCClient</text>
+
+              {/* Unix socket arrow */}
+              <path d="M115,40 C140,40 155,40 175,40" stroke="#4ECDC4" strokeOpacity={0.3} strokeWidth={1} strokeDasharray="4 3" fill="none" />
+              <text x={145} y={32} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
+                fontSize={6} fontFamily="ui-monospace, monospace">cli.sock</text>
+
+              {/* geode serve (large central box) */}
+              <rect x={175} y={10} width={420} height={155} rx={12}
+                fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.3} />
+              <text x={385} y={28} textAnchor="middle" fill="#F4B8C8"
+                fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                geode serve (GeodeRuntime)
+              </text>
+
+              {/* Inside serve: SharedServices */}
+              <rect x={190} y={38} width={150} height={55} rx={8}
+                fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.25} />
+              <text x={265} y={55} textAnchor="middle" fill="#818CF8" fillOpacity={0.7}
+                fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>SharedServices</text>
+              <text x={265} y={70} textAnchor="middle" fill="#818CF8" fillOpacity={0.35}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">ONE Hook + MCP + Skills</text>
+              <text x={265} y={82} textAnchor="middle" fill="#818CF8" fillOpacity={0.25}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">create_session(mode)</text>
+
+              {/* Inside serve: SessionLane + Lane */}
+              <rect x={355} y={38} width={115} height={55} rx={8}
+                fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.25} />
+              <text x={412} y={55} textAnchor="middle" fill="#F5C542" fillOpacity={0.7}
+                fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>SessionLane</text>
+              <text x={412} y={70} textAnchor="middle" fill="#F5C542" fillOpacity={0.35}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">per-key Sem(1)</text>
+              <text x={412} y={82} textAnchor="middle" fill="#F5C542" fillOpacity={0.25}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">Lane(global, 8)</text>
+
+              {/* Inside serve: AgenticLoop */}
+              <rect x={485} y={38} width={95} height={55} rx={8}
+                fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.25} />
+              <text x={532} y={55} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.7}
+                fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>AgenticLoop</text>
+              <text x={532} y={70} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">while(tool_use)</text>
+              <text x={532} y={82} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.25}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">time_budget_s</text>
+
+              {/* 3 pollers inside serve */}
               {[
-                { label: "REPL", y: 15, color: "#4ECDC4" },
-                { label: "Headless", y: 60, color: "#818CF8" },
-                { label: "Scheduler", y: 105, color: "#F5C542" },
-              ].map((s) => (
-                <g key={s.label}>
-                  <rect x={20} y={s.y} width={90} height={32} rx={8}
-                    fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={65} y={s.y + 20} textAnchor="middle" fill={s.color}
-                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                    {s.label}
-                  </text>
-                  <path d={`M110,${s.y + 16} C140,${s.y + 16} 160,76 185,76`}
-                    stroke={s.color} strokeOpacity={0.3} strokeWidth={1} fill="none" />
+                { label: "CLIPoller", y: 105, color: "#4ECDC4", mode: "IPC" },
+                { label: "Gateway", y: 125, color: "#818CF8", mode: "DAEMON" },
+                { label: "Scheduler", y: 145, color: "#F5C542", mode: "SCHEDULER" },
+              ].map((p) => (
+                <g key={p.label}>
+                  <rect x={200} y={p.y} width={80} height={18} rx={5}
+                    fill="#0A0F1A" stroke={p.color} strokeWidth={0.5} strokeOpacity={0.3} />
+                  <text x={240} y={p.y + 12} textAnchor="middle" fill={p.color} fillOpacity={0.6}
+                    fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={600}>{p.label}</text>
+                  <text x={295} y={p.y + 12} fill={p.color} fillOpacity={0.3}
+                    fontSize={6} fontFamily="ui-monospace, monospace">{p.mode}</text>
+                  {/* Arrow to SessionLane */}
+                  <path d={`M340,${p.y + 9} L355,${p.y + 9}`} stroke={p.color} strokeOpacity={0.2} strokeWidth={0.8} />
                 </g>
               ))}
 
-              <rect x={185} y={46} width={130} height={60} rx={10}
-                fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={250} y={70} textAnchor="middle" fill="#F4B8C8"
-                fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                bootstrap_geode()
-              </text>
-              <text x={250} y={88} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4}
-                fontSize={8} fontFamily="ui-monospace, monospace">
-                env + domain + MCP + skills
+              {/* Arrows: SessionLane → AgenticLoop */}
+              <path d="M470,65 L485,65" stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
+
+              {/* External connections (left side) */}
+              <rect x={15} y={70} width={100} height={30} rx={7}
+                fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.3} />
+              <text x={65} y={88} textAnchor="middle" fill="#818CF8" fillOpacity={0.5}
+                fontSize={8} fontFamily="ui-monospace, monospace">Slack / Discord</text>
+              <path d="M115,85 C145,85 155,130 175,130" stroke="#818CF8" strokeOpacity={0.2} strokeWidth={0.8} fill="none" />
+
+              <rect x={15} y={115} width={100} height={30} rx={7}
+                fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.3} />
+              <text x={65} y={133} textAnchor="middle" fill="#F5C542" fillOpacity={0.5}
+                fontSize={8} fontFamily="ui-monospace, monospace">Cron / AT / EVERY</text>
+              <path d="M115,130 C145,130 155,148 175,148" stroke="#F5C542" strokeOpacity={0.2} strokeWidth={0.8} fill="none" />
+
+              {/* Top label */}
+              <text x={400} y={6} textAnchor="middle" fill="white" fillOpacity={0.2}
+                fontSize={7} fontFamily="ui-monospace, monospace" letterSpacing="0.08em">
+                ALL PATHS: acquire_all(key, [&quot;session&quot;, &quot;global&quot;]) → create_session(mode) → AgenticLoop
               </text>
 
-              <path d="M315,76 C335,76 345,76 365,76" stroke="white" strokeOpacity={0.25} strokeWidth={1.2} fill="none" />
-              <text x={340} y={68} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={12}>→</text>
-
-              <rect x={365} y={41} width={140} height={70} rx={10}
-                fill="#0C1220" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.5} />
-              <text x={435} y={68} textAnchor="middle" fill="#4ECDC4"
-                fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                AgenticLoop
-              </text>
-              <text x={435} y={86} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
-                fontSize={8} fontFamily="ui-monospace, monospace">
-                while(tool_use) 50R
-              </text>
-              <text x={435} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
-                fontSize={7} fontFamily="ui-monospace, monospace">
-                5 termination paths
-              </text>
-
-              <path d="M505,76 C525,76 535,76 555,76" stroke="white" strokeOpacity={0.25} strokeWidth={1.2} fill="none" />
-              <text x={530} y={68} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={12}>→</text>
-
-              <rect x={555} y={46} width={120} height={60} rx={10}
-                fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.35} />
-              <text x={615} y={70} textAnchor="middle" fill="#C084FC"
-                fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
-                52 Tools + MCP
-              </text>
-              <text x={615} y={88} textAnchor="middle" fill="#C084FC" fillOpacity={0.4}
-                fontSize={8} fontFamily="ui-monospace, monospace">
-                LangGraph Pipeline
-              </text>
-
-              <text x={380} y={12} textAnchor="middle" fill="white" fillOpacity={0.25}
-                fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">
-                ENTRY → BOOTSTRAP → LOOP → EXECUTE
-              </text>
+              {/* Result output */}
+              <rect x={620} y={45} width={95} height={40} rx={8}
+                fill="#0A0F1A" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.3} />
+              <text x={667} y={62} textAnchor="middle" fill="#34D399" fillOpacity={0.6}
+                fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>Result</text>
+              <text x={667} y={76} textAnchor="middle" fill="#34D399" fillOpacity={0.3}
+                fontSize={6.5} fontFamily="ui-monospace, monospace">→ channel</text>
+              <path d="M580,65 L620,65" stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
             </svg>
           </div>
         </ScrollReveal>
 
-        {/* ── Entry point cards ── */}
+        {/* ── Session mode cards ── */}
         <ScrollReveal delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            {entries.map((e, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {modes.map((m) => (
               <div
-                key={e.id}
-                className={`rounded-xl border px-5 py-5 ${i === 0 ? "sm:col-span-2" : ""}`}
+                key={m.id}
+                className="rounded-xl border px-5 py-5"
                 style={{
-                  borderColor: `${e.color}15`,
-                  background: `linear-gradient(160deg, ${e.color}06, transparent 70%)`,
+                  borderColor: `${m.color}15`,
+                  background: `linear-gradient(160deg, ${m.color}06, transparent 70%)`,
                 }}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-base font-mono font-bold" style={{ color: e.color }}>{e.label}</span>
-                  <span className="text-[10px] font-mono text-white/30">{e.sub}</span>
+                  <span className="text-base font-mono font-bold" style={{ color: m.color }}>{m.label}</span>
+                  <span className="text-[9px] font-mono text-white/25">{m.sub}</span>
                 </div>
-                <p className="text-xs text-[#8B9CC0] leading-relaxed mb-3">{e.desc}</p>
+                <p className="text-xs text-[#A0B4D4] leading-relaxed mb-3">{locale === "en" ? m.descEn : m.descKo}</p>
                 <div className="space-y-1">
-                  {e.details.map((d) => (
+                  {(locale === "en" ? m.detailsEn : m.detailsKo).map((d) => (
                     <div key={d} className="flex items-center gap-2">
-                      <div className="w-1 h-1 rounded-full" style={{ background: e.color, opacity: 0.5 }} />
+                      <div className="w-1 h-1 rounded-full" style={{ background: m.color, opacity: 0.5 }} />
                       <span className="text-[11px] font-mono text-white/40">{d}</span>
                     </div>
                   ))}

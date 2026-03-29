@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { DagRenderer } from "../dag-renderer";
+import { useLocale, t } from "../locale-context";
 
 /* ── SubAgent System ── */
 const subAgentSpecs = [
@@ -17,17 +18,23 @@ const subAgentSpecs = [
 /* ── SubAgent Architecture Details ── */
 const subAgentDetails = [
   { title: "Memory Isolation", color: "#F4B8C8",
-    desc: "부모 메모리 read-only 스냅샷 상속. 자식은 task_id-scoped 버퍼(.geode/agent-memory/{task_id}/)에만 쓰기. 완료 후 부모가 summary만 병합. 두 에이전트가 동시에 공유 메모리에 쓰지 않음." },
+    descKo: "부모 메모리 read-only 스냅샷 상속. 자식은 task_id-scoped 버퍼(.geode/agent-memory/{task_id}/)에만 쓰기. 완료 후 부모가 summary만 병합. 두 에이전트가 동시에 공유 메모리에 쓰지 않음.",
+    descEn: "Inherits parent memory as read-only snapshot. Child writes only to task_id-scoped buffer (.geode/agent-memory/{task_id}/). On completion, parent merges summary only. No concurrent writes to shared memory." },
   { title: "Tool Inheritance + Sandbox", color: "#4ECDC4",
-    desc: "부모의 52 native + 44 MCP + skills 전체 상속. 6개 위험 도구(set_api_key, manage_auth, profile_update, calendar_create/sync, delegate_task) 샌드박스 차단. auto_approve=True(STANDARD만)." },
-  { title: "Context Explosion 방지", color: "#818CF8",
-    desc: "독립 200K context window. announce=False로 delegate_task 이중 주입(tool_result + announce) 제거. 동기 호출만 비활성화, 비동기 경로는 True 유지. 2파일 4줄 변경." },
-  { title: "SessionLane per-key 직렬화", color: "#C084FC",
-    desc: "같은 session key는 Semaphore(1)로 직렬 실행. 다른 key는 병렬. Lane(\"global\", max=8)로 전체 동시성 제어." },
+    descKo: "부모의 52 native + 44 MCP + skills 전체 상속. 6개 위험 도구(set_api_key, manage_auth, profile_update, calendar_create/sync, delegate_task) 샌드박스 차단. auto_approve=True(STANDARD만).",
+    descEn: "Inherits all parent tools: 52 native + 44 MCP + skills. 6 dangerous tools (set_api_key, manage_auth, profile_update, calendar_create/sync, delegate_task) sandbox-blocked. auto_approve=True (STANDARD only)." },
+  { title: "Context Explosion Prevention", color: "#818CF8",
+    descKo: "독립 200K context window. announce=False로 delegate_task 이중 주입(tool_result + announce) 제거. 동기 호출만 비활성화, 비동기 경로는 True 유지. 2파일 4줄 변경.",
+    descEn: "Independent 200K context window. announce=False eliminates delegate_task double injection (tool_result + announce). Only sync calls disabled, async path stays True. 2 files, 4 lines changed." },
+  { title: "SessionLane per-key Serialization", color: "#C084FC",
+    descKo: "같은 session key는 Semaphore(1)로 직렬 실행. 다른 key는 병렬. Lane(\"global\", max=8)로 전체 동시성 제어.",
+    descEn: "Same session key serialized via Semaphore(1). Different keys run in parallel. Lane(\"global\", max=8) controls overall concurrency." },
   { title: "Error Classification", color: "#E87080",
-    desc: "TIMEOUT, API_ERROR는 retryable. VALIDATION, RESOURCE, DEPTH_EXCEEDED는 즉시 실패. 부모에게 error_category + retryable 플래그 반환." },
+    descKo: "TIMEOUT, API_ERROR는 retryable. VALIDATION, RESOURCE, DEPTH_EXCEEDED는 즉시 실패. 부모에게 error_category + retryable 플래그 반환.",
+    descEn: "TIMEOUT, API_ERROR are retryable. VALIDATION, RESOURCE, DEPTH_EXCEEDED fail immediately. Returns error_category + retryable flag to parent." },
   { title: "Subprocess Isolation", color: "#F5C542",
-    desc: "IsolatedRunner가 python -m core.agent.worker로 자식 프로세스 실행. 크래시 시 SIGKILL 보장. 쓰레드 모드 대비 완전 격리." },
+    descKo: "IsolatedRunner가 python -m core.agent.worker로 자식 프로세스 실행. 크래시 시 SIGKILL 보장. 쓰레드 모드 대비 완전 격리.",
+    descEn: "IsolatedRunner spawns child process via python -m core.agent.worker. SIGKILL guaranteed on crash. Full isolation compared to thread mode." },
 ];
 
 /* ── Task DAG nodes ── */
@@ -51,6 +58,7 @@ const planStates = ["DRAFT", "PRESENTED", "APPROVED", "EXECUTING", "COMPLETED"];
 type Tab = "subagent" | "taskgraph" | "planmode";
 
 export function AgentsTasksSection() {
+  const locale = useLocale();
   const [activeTab, setActiveTab] = useState<Tab>("subagent");
 
   return (
@@ -64,8 +72,10 @@ export function AgentsTasksSection() {
             SubAgent · TaskGraph · PlanMode
           </h2>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            병렬 에이전트 위임(SubAgent), 의존성 기반 작업 DAG(TaskGraph),
-            실행 전 계획 승인(PlanMode). 세 시스템이 연동하여 복잡한 작업을 분할·병렬·검증합니다.
+            {t(locale,
+              "병렬 에이전트 위임(SubAgent), 의존성 기반 작업 DAG(TaskGraph), 실행 전 계획 승인(PlanMode). 세 시스템이 연동하여 복잡한 작업을 분할·병렬·검증합니다.",
+              "Parallel agent delegation (SubAgent), dependency-based task DAG (TaskGraph), pre-execution plan approval (PlanMode). Three systems coordinate to decompose, parallelize, and verify complex tasks."
+            )}
           </p>
         </ScrollReveal>
 
@@ -73,9 +83,9 @@ export function AgentsTasksSection() {
         <ScrollReveal delay={0.05}>
           <div className="flex gap-2 mb-8 flex-wrap">
             {([
-              { id: "subagent" as Tab, label: "SubAgent", sub: "병렬 위임", color: "#4ECDC4" },
-              { id: "taskgraph" as Tab, label: "TaskGraph", sub: "DAG 추적", color: "#818CF8" },
-              { id: "planmode" as Tab, label: "PlanMode", sub: "계획 → 실행", color: "#F5C542" },
+              { id: "subagent" as Tab, label: "SubAgent", sub: t(locale, "병렬 위임", "Parallel delegation"), color: "#4ECDC4" },
+              { id: "taskgraph" as Tab, label: "TaskGraph", sub: t(locale, "DAG 추적", "DAG tracking"), color: "#818CF8" },
+              { id: "planmode" as Tab, label: "PlanMode", sub: t(locale, "계획 → 실행", "Plan → Execute"), color: "#F5C542" },
             ]).map((t) => (
               <button
                 key={t.id}
@@ -176,7 +186,7 @@ export function AgentsTasksSection() {
                     <div className="shrink-0 w-1.5 h-full min-h-[28px] rounded-full mt-0.5" style={{ background: d.color, opacity: 0.35 }} />
                     <div>
                       <span className="text-sm font-semibold text-white/75">{d.title}</span>
-                      <p className="text-xs text-[#A0B4D4] leading-relaxed mt-0.5">{d.desc}</p>
+                      <p className="text-xs text-[#A0B4D4] leading-relaxed mt-0.5">{locale === "en" ? d.descEn : d.descKo}</p>
                     </div>
                   </div>
                 ))}
@@ -191,7 +201,7 @@ export function AgentsTasksSection() {
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#818CF8]/10 text-[#818CF8]/80 border border-[#818CF8]/15">PIPELINE</span>
-                  <span className="text-sm font-semibold text-white/80">TaskGraph. Game IP 가치추론</span>
+                  <span className="text-sm font-semibold text-white/80">{t(locale, "TaskGraph. Game IP 가치추론", "TaskGraph. Game IP Valuation")}</span>
                 </div>
                 <DagRenderer
                   nodes={[
@@ -222,7 +232,10 @@ export function AgentsTasksSection() {
                   nodeRadius={24}
                 />
                 <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
-                  TaskGraphHookBridge가 NODE_ENTER/EXIT/ERROR를 수신하여 ~13개 Task 상태를 자동 갱신합니다. 실패 시 하류 Task를 자동 SKIP.
+                  {t(locale,
+                    "TaskGraphHookBridge가 NODE_ENTER/EXIT/ERROR를 수신하여 ~13개 Task 상태를 자동 갱신합니다. 실패 시 하류 Task를 자동 SKIP.",
+                    "TaskGraphHookBridge receives NODE_ENTER/EXIT/ERROR to auto-update ~13 task states. On failure, downstream tasks are auto-SKIPped."
+                  )}
                 </p>
               </div>
 
@@ -252,7 +265,10 @@ export function AgentsTasksSection() {
                   nodeRadius={24}
                 />
                 <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
-                  Java 1.8→22 자동 마이그레이션. 4분류 에러 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리.
+                  {t(locale,
+                    "Java 1.8→22 자동 마이그레이션. 4분류 에러 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리.",
+                    "Automated Java 1.8→22 migration. 4-class error routing (CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor separation."
+                  )}
                 </p>
               </div>
 
@@ -312,7 +328,10 @@ export function AgentsTasksSection() {
                   </svg>
                 </div>
                 <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
-                  GoalDecomposer가 복합 요청을 sub-goal로 분해하고, 세션별 ContextVar에 독립 TaskGraph를 생성합니다. CLI /tasks로 실시간 상태를 조회할 수 있습니다.
+                  {t(locale,
+                    "GoalDecomposer가 복합 요청을 sub-goal로 분해하고, 세션별 ContextVar에 독립 TaskGraph를 생성합니다. CLI /tasks로 실시간 상태를 조회할 수 있습니다.",
+                    "GoalDecomposer breaks complex requests into sub-goals and creates an independent TaskGraph in per-session ContextVar. Real-time status is queryable via CLI /tasks."
+                  )}
                 </p>
               </div>
             </div>
@@ -376,9 +395,10 @@ export function AgentsTasksSection() {
               </div>
 
               <p className="text-sm text-[#A0B4D4] leading-relaxed">
-                Planner가 요청을 6개 Route(FULL_PIPELINE, PROSPECT, PARTIAL_RERUN 등)로 분류하고,
-                PlanMode가 DRAFT → PRESENTED → APPROVED(HITL) → EXECUTING → COMPLETED 생애주기를 관리합니다.
-                REJECTED되면 DRAFT로 복귀합니다.
+                {t(locale,
+                  "Planner가 요청을 6개 Route(FULL_PIPELINE, PROSPECT, PARTIAL_RERUN 등)로 분류하고, PlanMode가 DRAFT → PRESENTED → APPROVED(HITL) → EXECUTING → COMPLETED 생애주기를 관리합니다. REJECTED되면 DRAFT로 복귀합니다.",
+                  "Planner classifies requests into 6 routes (FULL_PIPELINE, PROSPECT, PARTIAL_RERUN, etc.) and PlanMode manages the lifecycle: DRAFT → PRESENTED → APPROVED (HITL) → EXECUTING → COMPLETED. On REJECTED, reverts to DRAFT."
+                )}
               </p>
             </div>
           )}

@@ -2,6 +2,7 @@
 
 import { ScrollReveal, ScrollRevealGroup, revealChild } from "../scroll-reveal";
 import { motion } from "framer-motion";
+import { useLocale, t } from "../locale-context";
 
 /* ── 4-Layer Architecture (v0.36.0) ── */
 const layers = [
@@ -38,6 +39,7 @@ const layers = [
 ];
 
 export function ArchitectureSection() {
+  const locale = useLocale();
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-6xl mx-auto">
@@ -50,8 +52,14 @@ export function ArchitectureSection() {
               </h2>
             </div>
             <p className="text-sm text-[#A0B4D4] max-w-md leading-relaxed mt-3 md:mt-0 md:pb-1">
-              191개 모듈, 3,433+ 테스트. Model → Runtime → Harness → Agent 4계층.
-              <code className="text-[#818CF8]/70 ml-1">GeodeRuntime.create_session(mode)</code>로 부팅.
+              {t(locale,
+                "191개 모듈, 3,433+ 테스트. Model → Runtime → Harness → Agent 4계층.",
+                "191 modules, 3,433+ tests. Four layers: Model → Runtime → Harness → Agent."
+              )}
+              <code className="text-[#818CF8]/70 ml-1">{t(locale,
+                "GeodeRuntime.create_session(mode)로 부팅.",
+                "Boots via GeodeRuntime.create_session(mode)."
+              )}</code>
             </p>
           </div>
         </ScrollReveal>
@@ -156,14 +164,14 @@ export function ArchitectureSection() {
               <span className="text-[#4ECDC4] text-base">⟂</span>
               <div>
                 <span className="text-sm font-medium text-[#4ECDC4]/70">HookSystem</span>
-                <span className="text-xs text-[#9BB0CC] ml-2">46 events, 4계층 수직 관통</span>
+                <span className="text-xs text-[#9BB0CC] ml-2">{t(locale, "46 events, 4계층 수직 관통", "46 events, cross-cuts all 4 layers")}</span>
               </div>
             </div>
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-[#C084FC]/15 bg-[#C084FC]/[0.02]">
               <span className="text-[#C084FC] text-base">⟂</span>
               <div>
                 <span className="text-sm font-medium text-[#C084FC]/70">DomainPort</span>
-                <span className="text-xs text-[#9BB0CC] ml-2">Protocol 직교. GameIP, REODE 교체 가능</span>
+                <span className="text-xs text-[#9BB0CC] ml-2">{t(locale, "Protocol 직교. GameIP, REODE 교체 가능", "Orthogonal protocol. Swappable: GameIP, REODE")}</span>
               </div>
             </div>
           </div>

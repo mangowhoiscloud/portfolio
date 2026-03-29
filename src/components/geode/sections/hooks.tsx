@@ -2,50 +2,55 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { useLocale, t } from "../locale-context";
 
 /* ── Maturity Levels ── */
 const levels = [
   {
     id: "L1", name: "OBSERVE", color: "#60A5FA",
-    desc: "기록만, 상태 변경 없음",
+    descKo: "기록만, 상태 변경 없음",
+    descEn: "Logging only, no state mutation",
     handlers: [
-      { name: "TaskGraphBridge", priority: "P30", events: "NODE_ENTER/EXIT/ERROR" },
-      { name: "StuckDetector", priority: "P40", events: "PIPELINE_START/END/ERROR" },
-      { name: "RunLog", priority: "P50", events: "ALL 46 events → JSONL" },
-      { name: "LLM Lifecycle", priority: "P55", events: "LLM_CALL_START/END" },
-      { name: "JournalHook", priority: "P60", events: "END/ERROR → runs.jsonl" },
-      { name: "TableLoggers ×5", priority: "P90", events: "Automation events" },
+      { name: "TaskGraphBridge", priority: "P30", eventsKo: "NODE_ENTER/EXIT/ERROR", eventsEn: "NODE_ENTER/EXIT/ERROR" },
+      { name: "StuckDetector", priority: "P40", eventsKo: "PIPELINE_START/END/ERROR", eventsEn: "PIPELINE_START/END/ERROR" },
+      { name: "RunLog", priority: "P50", eventsKo: "ALL 46 events → JSONL", eventsEn: "ALL 46 events → JSONL" },
+      { name: "LLM Lifecycle", priority: "P55", eventsKo: "LLM_CALL_START/END", eventsEn: "LLM_CALL_START/END" },
+      { name: "JournalHook", priority: "P60", eventsKo: "END/ERROR → runs.jsonl", eventsEn: "END/ERROR → runs.jsonl" },
+      { name: "TableLoggers ×5", priority: "P90", eventsKo: "Automation events", eventsEn: "Automation events" },
     ],
     status: "complete",
   },
   {
     id: "L2", name: "REACT", color: "#4ECDC4",
-    desc: "이벤트에 자동 반응, 상태 변경",
+    descKo: "이벤트에 자동 반응, 상태 변경",
+    descEn: "Auto-react to events, mutate state",
     handlers: [
-      { name: "drift_pipeline_trigger", priority: "P70", events: "DRIFT → 재분석 트리거" },
-      { name: "drift_auto_snapshot", priority: "P80", events: "DRIFT → 상태 캡처" },
-      { name: "pipeline_end_snapshot", priority: "P80", events: "PIPELINE_END → 스냅샷" },
-      { name: "turn_auto_memory", priority: "P85", events: "TURN_COMPLETE → 인사이트 저장" },
-      { name: "memory_write_back", priority: "P85", events: "PIPELINE_END → MEMORY.md" },
+      { name: "drift_pipeline_trigger", priority: "P70", eventsKo: "DRIFT → 재분석 트리거", eventsEn: "DRIFT → re-analysis trigger" },
+      { name: "drift_auto_snapshot", priority: "P80", eventsKo: "DRIFT → 상태 캡처", eventsEn: "DRIFT → state capture" },
+      { name: "pipeline_end_snapshot", priority: "P80", eventsKo: "PIPELINE_END → 스냅샷", eventsEn: "PIPELINE_END → snapshot" },
+      { name: "turn_auto_memory", priority: "P85", eventsKo: "TURN_COMPLETE → 인사이트 저장", eventsEn: "TURN_COMPLETE → save insights" },
+      { name: "memory_write_back", priority: "P85", eventsKo: "PIPELINE_END → MEMORY.md", eventsEn: "PIPELINE_END → MEMORY.md" },
     ],
     status: "frontier",
   },
   {
     id: "L3", name: "DECIDE", color: "#F5C542",
-    desc: "Hook이 행동 방향을 결정",
+    descKo: "Hook이 행동 방향을 결정",
+    descEn: "Hooks determine action direction",
     handlers: [
-      { name: "context_action", priority: "P50", events: "CONTEXT_CRITICAL → 압축 전략 위임" },
-      { name: "session_start", priority: "—", events: "SESSION_START → 동적 프롬프트 보강" },
+      { name: "context_action", priority: "P50", eventsKo: "CONTEXT_CRITICAL → 압축 전략 위임", eventsEn: "CONTEXT_CRITICAL → delegate compaction strategy" },
+      { name: "session_start", priority: "\u2014", eventsKo: "SESSION_START → 동적 프롬프트 보강", eventsEn: "SESSION_START → dynamic prompt augmentation" },
     ],
     status: "partial",
   },
   {
     id: "L4", name: "AUTONOMY", color: "#C084FC",
-    desc: "패턴에서 규칙을 자율 학습",
+    descKo: "패턴에서 규칙을 자율 학습",
+    descEn: "Self-learn rules from patterns",
     handlers: [
-      { name: "tool-approval", priority: "—", events: "HITL 승인 이력 → 자동 승인 룰 학습" },
-      { name: "model-switched", priority: "—", events: "전환 사유 기록 → 자동 전환 정책" },
-      { name: "filesystem-plugin", priority: "—", events: ".geode/hooks/ 자동 발견 + 등록" },
+      { name: "tool-approval", priority: "\u2014", eventsKo: "HITL 승인 이력 → 자동 승인 룰 학습", eventsEn: "HITL approval history → learn auto-approve rules" },
+      { name: "model-switched", priority: "\u2014", eventsKo: "전환 사유 기록 → 자동 전환 정책", eventsEn: "Record switch reasons → auto-switch policy" },
+      { name: "filesystem-plugin", priority: "\u2014", eventsKo: ".geode/hooks/ 자동 발견 + 등록", eventsEn: ".geode/hooks/ auto-discovery + registration" },
     ],
     status: "planned",
   },
@@ -165,6 +170,7 @@ function HookArchitectureDiagram() {
 }
 
 export function HooksSection() {
+  const locale = useLocale();
   const [activeLevel, setActiveLevel] = useState(1);
 
   return (
@@ -176,15 +182,16 @@ export function HooksSection() {
             Hook System
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            이벤트 기반 리플 패턴
+            {t(locale, "이벤트 기반 리플 패턴", "Event-Driven Ripple Pattern")}
           </h2>
           <p className="text-lg sm:text-xl text-white/50 font-semibold mb-4">
             46 Events × 4 Maturity
           </p>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
-            6개 이벤트 소스에서 발생한 46개 이벤트가 HookSystem을 거쳐
-            우선순위 순으로 정렬된 핸들러 체인을 관통합니다.
-            하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나가는 것이 리플 패턴입니다.
+            {t(locale,
+              "6개 이벤트 소스에서 발생한 46개 이벤트가 HookSystem을 거쳐 우선순위 순으로 정렬된 핸들러 체인을 관통합니다. 하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나가는 것이 리플 패턴입니다.",
+              "46 events from 6 event sources pass through HookSystem into a priority-sorted handler chain. A single event traversing both L1 (observe) and L2 (react) simultaneously is the ripple pattern."
+            )}
           </p>
         </ScrollReveal>
 
@@ -213,7 +220,7 @@ export function HooksSection() {
                     <span className="text-sm font-mono font-bold" style={{ color: lv.color }}>{lv.id}</span>
                     <span className="text-sm font-semibold text-white/80">{lv.name}</span>
                   </div>
-                  <div className="text-xs text-[#9BB0CC] mb-2">{lv.desc}</div>
+                  <div className="text-xs text-[#9BB0CC] mb-2">{locale === "en" ? lv.descEn : lv.descKo}</div>
                   <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded" style={{ color: st.color, background: `${st.color}15` }}>
                     {st.text}
                   </span>
@@ -228,7 +235,7 @@ export function HooksSection() {
               <div key={h.name} className="flex items-center gap-4 px-4 py-2.5 rounded-lg border border-white/[0.04]" style={{ background: `${levels[activeLevel].color}03` }}>
                 <span className="shrink-0 w-10 text-center text-[11px] font-mono font-bold" style={{ color: levels[activeLevel].color }}>{h.priority}</span>
                 <span className="text-sm font-medium text-white/80 w-[160px] shrink-0">{h.name}</span>
-                <span className="text-sm text-[#9BB0CC]">{h.events}</span>
+                <span className="text-sm text-[#9BB0CC]">{locale === "en" ? h.eventsEn : h.eventsKo}</span>
               </div>
             ))}
           </div>
@@ -240,14 +247,16 @@ export function HooksSection() {
             Coverage Matrix
           </p>
           <p className="text-sm text-[#9BB0CC] mb-5">
-            46개 이벤트 × 4 성숙도 레벨.
-            L1 OBSERVE 90%+ 커버, L2 REACT frontier 확장 중, L3/L4 계획 단계.
+            {t(locale,
+              "46개 이벤트 × 4 성숙도 레벨. L1 OBSERVE 90%+ 커버, L2 REACT frontier 확장 중, L3/L4 계획 단계.",
+              "46 events × 4 maturity levels. L1 OBSERVE 90%+ coverage, L2 REACT frontier expanding, L3/L4 planned."
+            )}
           </p>
           <div className="overflow-x-auto -mx-4 px-4">
             <table className="w-full text-xs font-mono border-collapse min-w-[540px]">
               <thead>
                 <tr>
-                  <th className="text-left py-2 px-3 text-[#9BB0CC] font-semibold border-b border-white/[0.06]">이벤트 그룹</th>
+                  <th className="text-left py-2 px-3 text-[#9BB0CC] font-semibold border-b border-white/[0.06]">{t(locale, "이벤트 그룹", "Event Group")}</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#60A5FA" }}>L1</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#4ECDC4" }}>L2</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#F5C542" }}>L3</th>
@@ -284,11 +293,15 @@ export function HooksSection() {
 
           {/* Observability stack */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {[
+            {(locale === "en" ? [
+              { name: "RunLog", desc: "Full JSONL recording of all 46 events. Per-session append-only.", color: "#60A5FA" },
+              { name: "JournalHook", desc: "Structures pipeline completion/error/sub-agent results into runs.jsonl.", color: "#34D399" },
+              { name: "LangSmith", desc: "Traces all nodes via @traceable decorator. Optionally enabled.", color: "#F5C542" },
+            ] : [
               { name: "RunLog", desc: "46개 이벤트 전수 JSONL 기록. 세션별 append-only.", color: "#60A5FA" },
               { name: "JournalHook", desc: "파이프라인 완료/에러/서브에이전트 결과를 runs.jsonl에 구조화.", color: "#34D399" },
               { name: "LangSmith", desc: "@traceable 데코레이터로 전 노드 트레이스. 선택적 활성화.", color: "#F5C542" },
-            ].map((o) => (
+            ]).map((o) => (
               <div key={o.name} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${o.color}03` }}>
                 <div className="text-sm font-semibold mb-1" style={{ color: o.color }}>{o.name}</div>
                 <div className="text-xs text-[#A0B4D4] leading-relaxed">{o.desc}</div>

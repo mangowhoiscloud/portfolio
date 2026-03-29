@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLocale, t } from "../locale-context";
 
 const stats = [
   { value: "∞", label: "while True", sub: "" },
@@ -12,6 +13,7 @@ const stats = [
 ];
 
 export function HeroSection() {
+  const locale = useLocale();
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0 pointer-events-none">
@@ -61,8 +63,10 @@ export function HeroSection() {
         >
           <p className="text-lg text-[#8B9CC0]">Long-running Autonomous Execution Harness</p>
           <p className="text-sm text-white/45 mt-1.5 max-w-lg text-center leading-relaxed">
-            게임 IP 가치 추론부터 Java 1.8→22 + Spring 4→6 자동 마이그레이션(83/83 테스트, FE/BE E2E 성공, 1,133턴)까지.
-            Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증하는 자율 실행 하네스.
+            {t(locale,
+              "게임 IP 가치 추론부터 Java 1.8→22 + Spring 4→6 자동 마이그레이션(83/83 테스트, FE/BE E2E 성공, 1,133턴)까지. Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증하는 자율 실행 하네스.",
+              "From game IP valuation to automated Java 1.8→22 + Spring 4→6 migration (83/83 tests, FE/BE E2E pass, 1,133 turns). Scaffold constrains, Loop executes, Runtime verifies."
+            )}
           </p>
         </motion.div>
 

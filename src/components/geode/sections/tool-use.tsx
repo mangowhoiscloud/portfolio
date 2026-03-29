@@ -3,23 +3,24 @@
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { TabBar } from "../ui/tab-bar";
+import { useLocale, t } from "../locale-context";
 
 /* ── 5-Route Dispatch ── */
 const routes = [
-  { id: "bash",   label: "Bash",  count: "38 safe prefixes", color: "#E87080", desc: "PolicyChain 3-layer 방어. safe prefix(cat, ls, git...)는 자동 실행, 위험 패턴(rm -rf /, sudo)은 차단, 나머지는 HITL 승인." },
-  { id: "native", label: "Tool",  count: "52 native",        color: "#4ECDC4", desc: "definitions.json에 등록된 52개 도구. 12개 카테고리(Analysis, Memory, Planning 등). ToolExecutor가 handler dict에서 디스패치." },
-  { id: "mcp",    label: "MCP",   count: "41 catalog",       color: "#818CF8", desc: "MCPServerManager auto-discovery. Anthropic format 자동 정규화. steam/arxiv/linkedin은 사전 승인, 나머지는 서버별 1회 승인. install_mcp_server로 NL 설치." },
-  { id: "skill",  label: "Skill", count: "3-tier disclosure", color: "#C084FC", desc: "Progressive Disclosure: T1 메타데이터(system prompt) → T2 본문(lazy load) → T3 context:fork(격리 서브에이전트). 4 scope 우선순위." },
-  { id: "dag",    label: "DAG",   count: "13-node pipeline",  color: "#F5C542", desc: "analyze_ip 호출 시 LangGraph StateGraph 13노드 파이프라인 실행. Router → Analyst×4(Send API) → Evaluator×3 → Scoring → Synthesizer." },
+  { id: "bash",   label: "Bash",  count: "38 safe prefixes", color: "#E87080", descKo: "PolicyChain 3-layer 방어. safe prefix(cat, ls, git...)는 자동 실행, 위험 패턴(rm -rf /, sudo)은 차단, 나머지는 HITL 승인.", descEn: "PolicyChain 3-layer defense. Safe prefixes (cat, ls, git...) auto-execute, dangerous patterns (rm -rf /, sudo) blocked, rest requires HITL approval." },
+  { id: "native", label: "Tool",  count: "52 native",        color: "#4ECDC4", descKo: "definitions.json에 등록된 52개 도구. 12개 카테고리(Analysis, Memory, Planning 등). ToolExecutor가 handler dict에서 디스패치.", descEn: "52 tools registered in definitions.json. 12 categories (Analysis, Memory, Planning, etc.). ToolExecutor dispatches from handler dict." },
+  { id: "mcp",    label: "MCP",   count: "41 catalog",       color: "#818CF8", descKo: "MCPServerManager auto-discovery. Anthropic format 자동 정규화. steam/arxiv/linkedin은 사전 승인, 나머지는 서버별 1회 승인. install_mcp_server로 NL 설치.", descEn: "MCPServerManager auto-discovery. Auto-normalizes to Anthropic format. steam/arxiv/linkedin pre-approved, rest requires one-time per-server approval. NL install via install_mcp_server." },
+  { id: "skill",  label: "Skill", count: "3-tier disclosure", color: "#C084FC", descKo: "Progressive Disclosure: T1 메타데이터(system prompt) → T2 본문(lazy load) → T3 context:fork(격리 서브에이전트). 4 scope 우선순위.", descEn: "Progressive Disclosure: T1 metadata (system prompt) → T2 body (lazy load) → T3 context:fork (isolated sub-agent). 4-scope priority." },
+  { id: "dag",    label: "DAG",   count: "13-node pipeline",  color: "#F5C542", descKo: "analyze_ip 호출 시 LangGraph StateGraph 13노드 파이프라인 실행. Router → Analyst×4(Send API) → Evaluator×3 → Scoring → Synthesizer.", descEn: "On analyze_ip call, runs LangGraph StateGraph 13-node pipeline. Router → Analyst×4 (Send API) → Evaluator×3 → Scoring → Synthesizer." },
 ];
 
 /* ── 5-Tier Safety ── */
 const tiers = [
-  { tier: "T0", name: "SAFE",      count: 13, color: "#34D399", gate: "없음",         exec: "asyncio.gather 즉시 병렬", examples: "list_ips, search_ips, memory_search, web_fetch" },
-  { tier: "T1", name: "STANDARD",  count: 25, color: "#60A5FA", gate: "없음",         exec: "자동 실행. 서브에이전트 위임 가능", examples: "schedule_job, delegate_task, create_plan" },
-  { tier: "T2", name: "WRITE",     count: 10, color: "#F5C542", gate: "HITL 승인",    exec: "영속 상태 변경. 명시적 확인 필요", examples: "memory_save, set_api_key, profile_update" },
-  { tier: "T3", name: "EXPENSIVE", count: 3,  color: "#F4B8C8", gate: "비용 확인",    exec: "실행 전 비용 표시. Always 가능", examples: "analyze_ip($1.50), batch($5.00), compare($3.00)" },
-  { tier: "T4", name: "DANGEROUS", count: 1,  color: "#E87080", gate: "패턴+HITL",    exec: "safe prefix만 자동. 나머지 항상 승인", examples: "run_bash" },
+  { tier: "T0", name: "SAFE",      count: 13, color: "#34D399", gateKo: "없음", gateEn: "None",              execKo: "asyncio.gather 즉시 병렬", execEn: "Immediate parallel via asyncio.gather", examples: "list_ips, search_ips, memory_search, web_fetch" },
+  { tier: "T1", name: "STANDARD",  count: 25, color: "#60A5FA", gateKo: "없음", gateEn: "None",              execKo: "자동 실행. 서브에이전트 위임 가능", execEn: "Auto-execute. Can delegate to sub-agent", examples: "schedule_job, delegate_task, create_plan" },
+  { tier: "T2", name: "WRITE",     count: 10, color: "#F5C542", gateKo: "HITL 승인", gateEn: "HITL approval",    execKo: "영속 상태 변경. 명시적 확인 필요", execEn: "Persistent state change. Explicit confirmation required", examples: "memory_save, set_api_key, profile_update" },
+  { tier: "T3", name: "EXPENSIVE", count: 3,  color: "#F4B8C8", gateKo: "비용 확인", gateEn: "Cost confirm",    execKo: "실행 전 비용 표시. Always 가능", execEn: "Shows cost before execution. 'Always' option available", examples: "analyze_ip($1.50), batch($5.00), compare($3.00)" },
+  { tier: "T4", name: "DANGEROUS", count: 1,  color: "#E87080", gateKo: "패턴+HITL", gateEn: "Pattern+HITL",    execKo: "safe prefix만 자동. 나머지 항상 승인", execEn: "Only safe prefixes auto-run. Rest always requires approval", examples: "run_bash" },
 ];
 
 /* ── Tool Categories ── */
@@ -49,6 +50,7 @@ const deferredSpec = {
 type Tab = "routes" | "safety" | "deferred" | "inventory";
 
 export function ToolUseSection() {
+  const locale = useLocale();
   const [activeTab, setActiveTab] = useState<Tab>("routes");
   const [activeRoute, setActiveRoute] = useState(0);
 
@@ -63,9 +65,10 @@ export function ToolUseSection() {
             Dispatch, Search, Safety
           </h2>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            LLM이 도구를 선택하면 ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다.
-            52+ 도구는 tool_search로 지연 로딩하여 컨텍스트를 85% 절감하고,
-            6-Layer PolicyChain + 5-Tier 안전 분류가 병렬/순차 실행을 결정합니다.
+            {t(locale,
+              "LLM이 도구를 선택하면 ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다. 52+ 도구는 tool_search로 지연 로딩하여 컨텍스트를 85% 절감하고, 6-Layer PolicyChain + 5-Tier 안전 분류가 병렬/순차 실행을 결정합니다.",
+              "When the LLM selects a tool, ToolExecutor dispatches across 5 routes (Bash, Native, MCP, Skill, DAG). 52+ tools are deferred-loaded via tool_search, saving 85% context. 6-Layer PolicyChain + 5-Tier safety classification determines parallel/sequential execution."
+            )}
           </p>
         </ScrollReveal>
 
@@ -193,7 +196,7 @@ export function ToolUseSection() {
                     <div className="text-sm font-mono font-bold" style={{ color: r.color }}>{r.label}</div>
                     <div className="text-[9px] font-mono text-white/25 mt-0.5">{r.count}</div>
                   </div>
-                  <p className="text-sm text-[#A0B4D4] leading-relaxed">{r.desc}</p>
+                  <p className="text-sm text-[#A0B4D4] leading-relaxed">{locale === "en" ? r.descEn : r.descKo}</p>
                 </div>
               ))}
             </div>
@@ -266,12 +269,15 @@ export function ToolUseSection() {
                   <span className="text-[10px] font-mono text-white/30">{deferredSpec.alwaysLoaded.length} core tools</span>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mb-3">
-                  {deferredSpec.alwaysLoaded.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#34D399]/70 bg-[#34D399]/08 border border-[#34D399]/12">{t}</span>
+                  {deferredSpec.alwaysLoaded.map((tool) => (
+                    <span key={tool} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#34D399]/70 bg-[#34D399]/08 border border-[#34D399]/12">{tool}</span>
                   ))}
                 </div>
                 <p className="text-xs text-[#9BB0CC]">
-                  가장 빈번하게 사용되는 core 도구. defer 활성화 여부와 관계없이 항상 전체 스키마가 로딩됩니다.
+                  {t(locale,
+                    "가장 빈번하게 사용되는 core 도구. defer 활성화 여부와 관계없이 항상 전체 스키마가 로딩됩니다.",
+                    "Most frequently used core tools. Full schema always loaded regardless of defer activation."
+                  )}
                 </p>
               </div>
 
@@ -284,19 +290,31 @@ export function ToolUseSection() {
                 <div className="space-y-2 text-xs text-[#A0B4D4]">
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">1</span>
-                    <span>native(52) + MCP 합산이 {deferredSpec.threshold}개를 초과하면 deferred 모드 활성화</span>
+                    <span>{t(locale,
+                      `native(52) + MCP 합산이 ${deferredSpec.threshold}개를 초과하면 deferred 모드 활성화`,
+                      `Deferred mode activates when native(52) + MCP combined exceeds ${deferredSpec.threshold}`
+                    )}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">2</span>
-                    <span>나머지 도구는 <code className="text-[#C084FC]/60">defer_loading: true</code> 마킹. 이름만 LLM에 전달</span>
+                    <span>{locale === "ko"
+                      ? <>나머지 도구는 <code className="text-[#C084FC]/60">defer_loading: true</code> 마킹. 이름만 LLM에 전달</>
+                      : <>Remaining tools marked <code className="text-[#C084FC]/60">defer_loading: true</code>. Only names sent to LLM</>
+                    }</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">3</span>
-                    <span>LLM이 <code className="text-[#C084FC]/60">tool_search(query="...")</code>로 필요한 도구 검색</span>
+                    <span>{locale === "ko"
+                      ? <>LLM이 <code className="text-[#C084FC]/60">tool_search(query=&quot;...&quot;)</code>로 필요한 도구 검색</>
+                      : <>LLM searches for needed tools via <code className="text-[#C084FC]/60">tool_search(query=&quot;...&quot;)</code></>
+                    }</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">4</span>
-                    <span>매칭된 도구의 전체 스키마가 로딩되어 이후 턴에서도 유지</span>
+                    <span>{t(locale,
+                      "매칭된 도구의 전체 스키마가 로딩되어 이후 턴에서도 유지",
+                      "Full schema of matched tools is loaded and persists in subsequent turns"
+                    )}</span>
                   </div>
                 </div>
               </div>
@@ -305,8 +323,8 @@ export function ToolUseSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="rounded-lg border border-white/[0.04] px-4 py-3">
                   <div className="text-2xl font-bold text-[#4ECDC4]">{deferredSpec.saving}</div>
-                  <div className="text-[10px] font-mono text-white/30">Context Token 절감</div>
-                  <div className="text-[9px] font-mono text-white/15 mt-1">전체 스키마 대신 이름만 전달</div>
+                  <div className="text-[10px] font-mono text-white/30">{t(locale, "Context Token 절감", "Context Token Savings")}</div>
+                  <div className="text-[9px] font-mono text-white/15 mt-1">{t(locale, "전체 스키마 대신 이름만 전달", "Only names sent instead of full schema")}</div>
                 </div>
                 <div className="rounded-lg border border-white/[0.04] px-4 py-3">
                   <div className="text-sm font-mono font-bold text-[#C084FC] mb-1">Search Categories</div>
@@ -325,25 +343,25 @@ export function ToolUseSection() {
             <div>
               {/* Tier spectrum bar */}
               <div className="flex gap-1 mb-6 rounded-lg overflow-hidden">
-                {tiers.map((t) => (
-                  <div key={t.tier} className="flex-1 py-2 text-center" style={{ background: `${t.color}12` }}>
-                    <div className="text-[10px] font-mono font-bold" style={{ color: t.color }}>{t.tier}</div>
-                    <div className="text-[9px] font-mono text-white/30">{t.count}</div>
+                {tiers.map((ti) => (
+                  <div key={ti.tier} className="flex-1 py-2 text-center" style={{ background: `${ti.color}12` }}>
+                    <div className="text-[10px] font-mono font-bold" style={{ color: ti.color }}>{ti.tier}</div>
+                    <div className="text-[9px] font-mono text-white/30">{ti.count}</div>
                   </div>
                 ))}
               </div>
 
               <div className="space-y-2">
-                {tiers.map((t) => (
-                  <div key={t.tier} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${t.color}03` }}>
+                {tiers.map((ti) => (
+                  <div key={ti.tier} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${ti.color}03` }}>
                     <div className="flex items-center gap-3 mb-1.5">
-                      <span className="text-sm font-mono font-bold" style={{ color: t.color }}>{t.tier} {t.name}</span>
-                      <span className="text-[10px] font-mono text-white/30">{t.count} tools</span>
+                      <span className="text-sm font-mono font-bold" style={{ color: ti.color }}>{ti.tier} {ti.name}</span>
+                      <span className="text-[10px] font-mono text-white/30">{ti.count} tools</span>
                       <span className="ml-auto px-2 py-0.5 rounded text-[10px] font-mono"
-                        style={{ color: t.color, background: `${t.color}10` }}>{t.gate}</span>
+                        style={{ color: ti.color, background: `${ti.color}10` }}>{locale === "en" ? ti.gateEn : ti.gateKo}</span>
                     </div>
-                    <p className="text-xs text-[#A0B4D4] mb-1">{t.exec}</p>
-                    <code className="text-[10px] font-mono text-white/20">{t.examples}</code>
+                    <p className="text-xs text-[#A0B4D4] mb-1">{locale === "en" ? ti.execEn : ti.execKo}</p>
+                    <code className="text-[10px] font-mono text-white/20">{ti.examples}</code>
                   </div>
                 ))}
               </div>
@@ -352,8 +370,10 @@ export function ToolUseSection() {
               <div className="mt-4 rounded-lg border border-white/[0.04] px-4 py-3">
                 <div className="text-xs font-semibold text-white/50 mb-2">Session-Level Always Approval</div>
                 <p className="text-xs text-[#9BB0CC]">
-                  승인 프롬프트에서 <code className="text-[#4ECDC4]/50">A</code>(Always) 응답 시
-                  해당 카테고리(bash, write, cost, mcp:서버명) 전체가 세션 내 자동 승인.
+                  {locale === "ko"
+                    ? <>승인 프롬프트에서 <code className="text-[#4ECDC4]/50">A</code>(Always) 응답 시 해당 카테고리(bash, write, cost, mcp:서버명) 전체가 세션 내 자동 승인.</>
+                    : <>Responding <code className="text-[#4ECDC4]/50">A</code> (Always) at the approval prompt auto-approves the entire category (bash, write, cost, mcp:server) for the session.</>
+                  }
                 </p>
               </div>
             </div>

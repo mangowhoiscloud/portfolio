@@ -4,22 +4,23 @@ import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { TabBar } from "../ui/tab-bar";
+import { useLocale, t } from "../locale-context";
 
 /* ── Schedule Kinds ── */
 const kinds = [
-  { id: "AT",    color: "#E87080", label: "AT",    desc: "일회성 실행. 지정 시각에 한 번 실행 후 자동 삭제." },
-  { id: "EVERY", color: "#4ECDC4", label: "EVERY", desc: "고정 간격. Anchor 기반 drift 방지. 실행 지연이 다음 주기에 누적되지 않음." },
-  { id: "CRON",  color: "#818CF8", label: "CRON",  desc: "5-field cron 표현식. 분/시/일/월/요일. timezone-aware." },
+  { id: "AT",    color: "#E87080", label: "AT",    descKo: "일회성 실행. 지정 시각에 한 번 실행 후 자동 삭제.", descEn: "One-shot execution. Runs once at the specified time, then auto-deletes." },
+  { id: "EVERY", color: "#4ECDC4", label: "EVERY", descKo: "고정 간격. Anchor 기반 drift 방지. 실행 지연이 다음 주기에 누적되지 않음.", descEn: "Fixed interval. Anchor-based drift prevention. Execution delay does not accumulate into the next cycle." },
+  { id: "CRON",  color: "#818CF8", label: "CRON",  descKo: "5-field cron 표현식. 분/시/일/월/요일. timezone-aware.", descEn: "5-field cron expression. min/hr/day/month/weekday. Timezone-aware." },
 ];
 
 /* ── Lifecycle steps ── */
 const lifecycle = [
-  { step: "add_job()",         detail: "AT/EVERY/CRON + Active Hours + action 등록. jobs.json 영속화", color: "#818CF8" },
-  { step: "_loop(interval_s)", detail: "백그라운드 데몬 쓰레드. check_due_jobs() 주기 호출", color: "#60A5FA" },
-  { step: "check_due_jobs()",  detail: "Active Hours(TZ) 검증 → 듀 잡 필터 → next_run 갱신", color: "#4ECDC4" },
-  { step: "action_queue",      detail: "(job_id, action, isolated) 엔큐. REPL 메인 루프가 드레인", color: "#F5C542" },
-  { step: "IsolatedRunner",    detail: "isolated=true → 데몬 쓰레드 실행, MAX_CONCURRENT=5, 크래시 격리", color: "#C084FC" },
-  { step: "AgenticLoop.run()", detail: "isolated=false → 메인 세션 블로킹 실행. hitl_level 상속", color: "#4ECDC4" },
+  { step: "add_job()",         detailKo: "AT/EVERY/CRON + Active Hours + action 등록. jobs.json 영속화", detailEn: "Register AT/EVERY/CRON + Active Hours + action. Persist to jobs.json", color: "#818CF8" },
+  { step: "_loop(interval_s)", detailKo: "백그라운드 데몬 쓰레드. check_due_jobs() 주기 호출", detailEn: "Background daemon thread. Periodic check_due_jobs() calls", color: "#60A5FA" },
+  { step: "check_due_jobs()",  detailKo: "Active Hours(TZ) 검증 → 듀 잡 필터 → next_run 갱신", detailEn: "Verify Active Hours(TZ) → filter due jobs → update next_run", color: "#4ECDC4" },
+  { step: "action_queue",      detailKo: "(job_id, action, isolated) 엔큐. serve 메인 루프가 드레인", detailEn: "Enqueue (job_id, action, isolated). Drained by serve main loop", color: "#F5C542" },
+  { step: "IsolatedRunner",    detailKo: "isolated=true → 데몬 쓰레드 실행, MAX_CONCURRENT=5, 크래시 격리", detailEn: "isolated=true → daemon thread execution, MAX_CONCURRENT=5, crash isolation", color: "#C084FC" },
+  { step: "AgenticLoop.run()", detailKo: "isolated=false → 메인 세션 블로킹 실행. hitl_level 상속", detailEn: "isolated=false → main session blocking execution. Inherits hitl_level", color: "#4ECDC4" },
 ];
 
 /* ── Predefined templates ── */
@@ -35,6 +36,7 @@ const templates = [
 type Tab = "lifecycle" | "templates" | "nl-parser";
 
 export function SchedulerSection() {
+  const locale = useLocale();
   const [activeTab, setActiveTab] = useState<Tab>("lifecycle");
 
   return (
@@ -43,7 +45,10 @@ export function SchedulerSection() {
         <SectionHeader
           variant="minimal"
           title="SchedulerService"
-          description="시간 기반 자동화 엔진. AT(일회), EVERY(간격), CRON(표현식) 세 가지 스케줄로 잡을 등록하고, Active Hours와 타임존 검증을 거쳐 IsolatedRunner에서 격리 실행합니다."
+          description={t(locale,
+            "시간 기반 자동화 엔진. AT(일회), EVERY(간격), CRON(표현식) 세 가지 스케줄로 잡을 등록하고, Active Hours와 타임존 검증을 거쳐 IsolatedRunner에서 격리 실행합니다.",
+            "Time-based automation engine. Register jobs with three schedule types: AT (one-shot), EVERY (interval), CRON (expression). Validates Active Hours and timezone, then runs in IsolatedRunner."
+          )}
         />
 
         {/* ── Schedule Kinds ── */}
@@ -52,7 +57,7 @@ export function SchedulerSection() {
             {kinds.map((k) => (
               <div key={k.id} className="rounded-xl border border-white/[0.04] px-5 py-4" style={{ background: `${k.color}04` }}>
                 <div className="text-lg font-mono font-bold mb-1" style={{ color: k.color }}>{k.label}</div>
-                <div className="text-xs text-[#A0B4D4] leading-relaxed">{k.desc}</div>
+                <div className="text-xs text-[#A0B4D4] leading-relaxed">{locale === "en" ? k.descEn : k.descKo}</div>
               </div>
             ))}
           </div>
@@ -168,7 +173,7 @@ export function SchedulerSection() {
                   <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                     style={{ color: l.color, background: `${l.color}10` }}>{i + 1}</span>
                   <span className="text-sm font-medium text-white/70 w-[140px] sm:w-[160px] shrink-0 font-mono">{l.step}</span>
-                  <span className="text-sm text-[#9BB0CC]">{l.detail}</span>
+                  <span className="text-sm text-[#9BB0CC]">{locale === "en" ? l.detailEn : l.detailKo}</span>
                 </div>
               ))}
             </div>
@@ -198,10 +203,11 @@ export function SchedulerSection() {
           {activeTab === "nl-parser" && (
             <div className="rounded-xl border border-white/[0.04] px-5 py-4 space-y-4">
               <p className="text-sm text-[#A0B4D4] leading-relaxed">
-                LLM이 <code className="text-[#4ECDC4]/60">schedule_job</code> tool_use로 자동 호출하면,
-                내부 <code className="text-[#818CF8]/60">NLScheduleParser</code>가 순수 규칙 기반(regex)으로
-                AT/EVERY/CRON + Active Hours 조합으로 변환합니다.
-                슬래시 명령 <code className="text-white/30">/schedule create</code>도 동일 경로.
+                {locale === "ko" ? (
+                  <>LLM이 <code className="text-[#4ECDC4]/60">schedule_job</code> tool_use로 자동 호출하면, 내부 <code className="text-[#818CF8]/60">NLScheduleParser</code>가 순수 규칙 기반(regex)으로 AT/EVERY/CRON + Active Hours 조합으로 변환합니다. 슬래시 명령 <code className="text-white/30">/schedule create</code>도 동일 경로.</>
+                ) : (
+                  <>When the LLM auto-invokes <code className="text-[#4ECDC4]/60">schedule_job</code> via tool_use, the internal <code className="text-[#818CF8]/60">NLScheduleParser</code> converts it to AT/EVERY/CRON + Active Hours using pure rule-based regex. The slash command <code className="text-white/30">/schedule create</code> follows the same path.</>
+                )}
               </p>
               <div className="space-y-2">
                 {[
@@ -218,8 +224,11 @@ export function SchedulerSection() {
                 ))}
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {["Anchor Drift 방지", "자동 Prune (2MB)", "JSONL 실행 로그", "midnight wrap-around"].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded text-[10px] font-mono text-[#4ECDC4]/60 bg-[#4ECDC4]/06 border border-[#4ECDC4]/10">{t}</span>
+                {(locale === "en"
+                  ? ["Anchor Drift prevention", "Auto Prune (2MB)", "JSONL execution log", "midnight wrap-around"]
+                  : ["Anchor Drift 방지", "자동 Prune (2MB)", "JSONL 실행 로그", "midnight wrap-around"]
+                ).map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded text-[10px] font-mono text-[#4ECDC4]/60 bg-[#4ECDC4]/06 border border-[#4ECDC4]/10">{tag}</span>
                 ))}
               </div>
             </div>

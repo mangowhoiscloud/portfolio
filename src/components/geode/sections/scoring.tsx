@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
+import { useLocale, t } from "../locale-context";
 
 /* ── PSM 6-Weight Components ── */
 const weights = [
@@ -161,6 +162,7 @@ function RadarChart() {
 }
 
 export function ScoringSection() {
+  const locale = useLocale();
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,197,66,0.015)_0%,transparent_60%)] pointer-events-none" />
@@ -170,7 +172,10 @@ export function ScoringSection() {
           label="Scoring"
           labelColor="#F5C542"
           title="PSM 6-Weight Composite"
-          description="4명 Analyst(Clean Context) × 14축 독립 평가, 3명 Evaluator 교차 집계. 6-Weight 합산 + Confidence Multiplier. confidence < 0.7이면 최대 5회 loopback."
+          description={t(locale,
+            "4명 Analyst(Clean Context) × 14축 독립 평가, 3명 Evaluator 교차 집계. 6-Weight 합산 + Confidence Multiplier. confidence < 0.7이면 최대 5회 loopback.",
+            "4 Analysts (Clean Context) x 14-axis independent evaluation, 3 Evaluators cross-aggregated. 6-Weight sum + Confidence Multiplier. Loopback up to 5 times if confidence < 0.7."
+          )}
         />
 
         {/* ── Radar: expands from center to weight positions ── */}
@@ -210,7 +215,7 @@ export function ScoringSection() {
         {/* Fixture results */}
         <ScrollReveal delay={0.2}>
           <div className="mt-8 rounded-xl border border-white/[0.04] px-5 py-4">
-            <div className="text-sm font-semibold text-white/70 mb-3">Fixture 분석 결과</div>
+            <div className="text-sm font-semibold text-white/70 mb-3">{locale === "en" ? "Fixture Analysis Results" : "Fixture 분석 결과"}</div>
             <div className="space-y-2 font-mono text-sm">
               {[
                 { name: "Berserk", score: "81.2", tier: "S", color: "#F5C542" },

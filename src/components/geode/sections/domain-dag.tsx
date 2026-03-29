@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 import { DagRenderer } from "../dag-renderer";
 import type { DagNode, DagEdge } from "../dag-renderer";
+import { useLocale, t } from "../locale-context";
 
 
 /* ── GameIP Pipeline DAG (9-node, code-verified) ── */
@@ -256,6 +257,7 @@ function DagViewer() {
 }
 
 export function DomainDagSection() {
+  const locale = useLocale();
   return (
     <section className="relative py-32 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(192,132,252,0.02)_0%,transparent_70%)] pointer-events-none" />
@@ -272,9 +274,11 @@ export function DomainDagSection() {
             DomainPort Protocol
           </h2>
           <p className="text-[#A0B4D4] max-w-xl mb-4 leading-relaxed">
-            파이프라인은 <span className="text-white/70 font-medium">교체 가능한 플러그인</span>입니다.
-            DomainPort 프로토콜을 구현하기만 하면, 어떤 분석 도메인이든
-            GEODE Runtime 위에서 동일한 자율 실행 흐름을 탑니다.
+            {locale === "en" ? (
+              <>Pipelines are <span className="text-white/70 font-medium">swappable plugins</span>. Just implement the DomainPort protocol, and any analysis domain runs the same autonomous execution flow on the GEODE Runtime.</>
+            ) : (
+              <>파이프라인은 <span className="text-white/70 font-medium">교체 가능한 플러그인</span>입니다. DomainPort 프로토콜을 구현하기만 하면, 어떤 분석 도메인이든 GEODE Runtime 위에서 동일한 자율 실행 흐름을 탑니다.</>
+            )}
           </p>
         </ScrollReveal>
 
@@ -290,9 +294,10 @@ export function DomainDagSection() {
                 <span className="text-sm font-semibold text-white/80">GameIPDomain</span>
               </div>
               <p className="text-sm text-[#A0B4D4] leading-relaxed mb-4">
-                게임/IP 저평가 분석 파이프라인.
-                14축 루브릭 다면 평가 + PSM 인과추론 6종 원인 분류.
-                LangGraph StateGraph 기반 7-node DAG.
+                {t(locale,
+                  "게임/IP 저평가 분석 파이프라인. 14축 루브릭 다면 평가 + PSM 인과추론 6종 원인 분류. LangGraph StateGraph 기반 7-node DAG.",
+                  "Game/IP undervaluation analysis pipeline. 14-axis rubric multi-faceted evaluation + PSM causal inference with 6 cause categories. 7-node DAG based on LangGraph StateGraph."
+                )}
               </p>
               <div className="space-y-1.5 font-mono text-[11px]">
                 <div className="flex justify-between">
@@ -319,10 +324,10 @@ export function DomainDagSection() {
                 <span className="text-sm font-semibold text-white/80">REODE</span>
               </div>
               <p className="text-sm text-[#A0B4D4] leading-relaxed mb-4">
-                Java 1.8→22 + Spring 4.3→6.1 자동 마이그레이션.
-                5,523파일 엔터프라이즈 프로젝트 83/83 테스트 통과.
-                에러 4분류 라우팅 + Architect/Editor 분리.
-                5시간 30분, 1,153턴 자율 수행.
+                {t(locale,
+                  "Java 1.8→22 + Spring 4.3→6.1 자동 마이그레이션. 5,523파일 엔터프라이즈 프로젝트 83/83 테스트 통과. 에러 4분류 라우팅 + Architect/Editor 분리. 5시간 30분, 1,153턴 자율 수행.",
+                  "Java 1.8→22 + Spring 4.3→6.1 automated migration. 83/83 tests passing on a 5,523-file enterprise project. 4-class error routing + Architect/Editor separation. 5h 30m, 1,153 autonomous rounds."
+                )}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {["DomainPort", "4-Class Router", "Architect/Editor", "83/83 pass"].map((tag) => (
