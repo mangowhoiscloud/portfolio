@@ -75,12 +75,12 @@ function PipelineDag() {
         {/* Router */}
         <circle cx={xRouter} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xRouter} y={yMid - 2} textAnchor="middle" fill="#4ECDC4" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Router</text>
-        <text x={xRouter} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Memory</text>
+        <text x={xRouter} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">Memory</text>
 
         {/* Signals */}
         <circle cx={xSignals} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#F5C542" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSignals} y={yMid - 2} textAnchor="middle" fill="#F5C542" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Signals</text>
-        <text x={xSignals} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">MCP</text>
+        <text x={xSignals} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">MCP</text>
 
         {/* 4 Analysts */}
         {["Market", "Creative", "Audience", "Risk"].map((name, i) => (
@@ -93,22 +93,22 @@ function PipelineDag() {
         {/* Evaluators */}
         <circle cx={xEval} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xEval} y={yMid - 2} textAnchor="middle" fill="#818CF8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Eval ×3</text>
-        <text x={xEval} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Cross</text>
+        <text x={xEval} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">Cross</text>
 
         {/* Scoring */}
         <circle cx={xScoring} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#C084FC" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xScoring} y={yMid - 2} textAnchor="middle" fill="#C084FC" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Scoring</text>
-        <text x={xScoring} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">PSM</text>
+        <text x={xScoring} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">PSM</text>
 
         {/* Verification */}
         <circle cx={xVerify} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#34D399" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xVerify} y={yMid - 2} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Verify</text>
-        <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">6-Layer</text>
+        <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">6-Layer</text>
 
         {/* Synthesizer */}
         <circle cx={xSynth} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xSynth} y={yMid - 2} textAnchor="middle" fill="#F4B8C8" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Synth</text>
-        <text x={xSynth} y={yMid + 10} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">Report</text>
+        <text x={xSynth} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">Report</text>
       </svg>
     </div>
   );
@@ -271,7 +271,7 @@ export function DomainDagSection() {
           <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-3">
             DomainPort Protocol
           </h2>
-          <p className="text-[#8B9CC0] max-w-xl mb-4 leading-relaxed">
+          <p className="text-[#A0B4D4] max-w-xl mb-4 leading-relaxed">
             파이프라인은 <span className="text-white/70 font-medium">교체 가능한 플러그인</span>입니다.
             DomainPort 프로토콜을 구현하기만 하면, 어떤 분석 도메인이든
             GEODE Runtime 위에서 동일한 자율 실행 흐름을 탑니다.
@@ -289,7 +289,7 @@ export function DomainDagSection() {
                 </span>
                 <span className="text-sm font-semibold text-white/80">GameIPDomain</span>
               </div>
-              <p className="text-sm text-[#8B9CC0] leading-relaxed mb-4">
+              <p className="text-sm text-[#A0B4D4] leading-relaxed mb-4">
                 게임/IP 저평가 분석 파이프라인.
                 14축 루브릭 다면 평가 + PSM 인과추론 6종 원인 분류.
                 LangGraph StateGraph 기반 7-node DAG.
@@ -297,15 +297,15 @@ export function DomainDagSection() {
               <div className="space-y-1.5 font-mono text-[11px]">
                 <div className="flex justify-between">
                   <span className="text-white/50">Berserk</span>
-                  <span><span className="text-[#F5C542]">81.2</span> <span className="text-[#7A8CA8]">S</span></span>
+                  <span><span className="text-[#F5C542]">81.2</span> <span className="text-[#9BB0CC]">S</span></span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-white/50">Cowboy Bebop</span>
-                  <span><span className="text-[#818CF8]">68.4</span> <span className="text-[#7A8CA8]">A</span></span>
+                  <span><span className="text-[#818CF8]">68.4</span> <span className="text-[#9BB0CC]">A</span></span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-white/50">Ghost in the Shell</span>
-                  <span><span className="text-[#4ECDC4]">51.7</span> <span className="text-[#7A8CA8]">B</span></span>
+                  <span><span className="text-[#4ECDC4]">51.7</span> <span className="text-[#9BB0CC]">B</span></span>
                 </div>
               </div>
             </div>
@@ -318,7 +318,7 @@ export function DomainDagSection() {
                 </span>
                 <span className="text-sm font-semibold text-white/80">REODE</span>
               </div>
-              <p className="text-sm text-[#8B9CC0] leading-relaxed mb-4">
+              <p className="text-sm text-[#A0B4D4] leading-relaxed mb-4">
                 Java 1.8→22 + Spring 4.3→6.1 자동 마이그레이션.
                 5,523파일 엔터프라이즈 프로젝트 83/83 테스트 통과.
                 에러 4분류 라우팅 + Architect/Editor 분리.

@@ -33,7 +33,7 @@ export function MultiLlmSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
             LLM Resilience
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             파이프라인과 에이전트 루프에서 LLM을 다르게 운용합니다.
             Port/Adapter DI 패턴으로 런타임에 프로바이더를 교체하고,
             프로바이더 장애 시 자동 failover합니다.
@@ -145,10 +145,10 @@ export function MultiLlmSection() {
                 <table className="w-full text-xs font-mono border-collapse min-w-[400px]">
                   <thead>
                     <tr className="border-b border-white/[0.06]">
-                      <th className="text-left py-2 px-3 text-[#7A8CA8]">Model</th>
-                      <th className="text-left py-2 px-3 text-[#7A8CA8]">역할</th>
-                      <th className="text-right py-2 px-2 text-[#7A8CA8]">Input</th>
-                      <th className="text-right py-2 px-2 text-[#7A8CA8]">Output</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">Model</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">역할</th>
+                      <th className="text-right py-2 px-2 text-[#9BB0CC]">Input</th>
+                      <th className="text-right py-2 px-2 text-[#9BB0CC]">Output</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -246,10 +246,10 @@ export function MultiLlmSection() {
                 <table className="w-full text-xs font-mono border-collapse min-w-[400px]">
                   <thead>
                     <tr className="border-b border-white/[0.06]">
-                      <th className="text-left py-2 px-3 text-[#7A8CA8]">Model</th>
-                      <th className="text-left py-2 px-3 text-[#7A8CA8]">역할</th>
-                      <th className="text-right py-2 px-2 text-[#7A8CA8]">Input</th>
-                      <th className="text-right py-2 px-2 text-[#7A8CA8]">Output</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">Model</th>
+                      <th className="text-left py-2 px-3 text-[#9BB0CC]">역할</th>
+                      <th className="text-right py-2 px-2 text-[#9BB0CC]">Input</th>
+                      <th className="text-right py-2 px-2 text-[#9BB0CC]">Output</th>
                     </tr>
                   </thead>
                   <tbody>

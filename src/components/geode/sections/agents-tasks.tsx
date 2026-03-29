@@ -63,7 +63,7 @@ export function AgentsTasksSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
             SubAgent · TaskGraph · PlanMode
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             병렬 에이전트 위임(SubAgent), 의존성 기반 작업 DAG(TaskGraph),
             실행 전 계획 승인(PlanMode). 세 시스템이 연동하여 복잡한 작업을 분할·병렬·검증합니다.
           </p>
@@ -121,7 +121,7 @@ export function AgentsTasksSection() {
                     <g key={sa.label}>
                       <rect x={175} y={sa.y} width={90} height={40} rx={8} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.3} />
                       <text x={220} y={sa.y + 17} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{sa.label}</text>
-                      <text x={220} y={sa.y + 31} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">{sa.task}</text>
+                      <text x={220} y={sa.y + 31} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">{sa.task}</text>
                     </g>
                   ))}
 
@@ -139,7 +139,7 @@ export function AgentsTasksSection() {
                     <g key={`r-${i}`}>
                       <rect x={325} y={r.y} width={80} height={40} rx={8} fill="#0C1220" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.3} />
                       <text x={365} y={r.y + 17} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace">ok</text>
-                      <text x={365} y={r.y + 31} textAnchor="middle" fill="#7A8CA8" fontSize={8} fontFamily="ui-monospace, monospace">{r.score}</text>
+                      <text x={365} y={r.y + 31} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">{r.score}</text>
                     </g>
                   ))}
 
@@ -163,7 +163,7 @@ export function AgentsTasksSection() {
                 {subAgentSpecs.map((s) => (
                   <div key={s.label} className="text-center px-2 py-3 rounded-xl border border-white/[0.04]" style={{ background: `${s.color}04` }}>
                     <div className="text-lg sm:text-xl font-bold" style={{ color: s.color }}>{s.value}</div>
-                    <div className="text-[10px] sm:text-xs text-[#7A8CA8] font-mono mt-1">{s.label}</div>
+                    <div className="text-[10px] sm:text-xs text-[#9BB0CC] font-mono mt-1">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -176,7 +176,7 @@ export function AgentsTasksSection() {
                     <div className="shrink-0 w-1.5 h-full min-h-[28px] rounded-full mt-0.5" style={{ background: d.color, opacity: 0.35 }} />
                     <div>
                       <span className="text-sm font-semibold text-white/75">{d.title}</span>
-                      <p className="text-xs text-[#8B9CC0] leading-relaxed mt-0.5">{d.desc}</p>
+                      <p className="text-xs text-[#A0B4D4] leading-relaxed mt-0.5">{d.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -221,7 +221,7 @@ export function AgentsTasksSection() {
                   loopback={{ from: "verify", to: "signals", label: "confidence < 0.7 loopback", color: "#E87080" }}
                   nodeRadius={24}
                 />
-                <p className="text-sm text-[#8B9CC0] leading-relaxed mt-2">
+                <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
                   TaskGraphHookBridge가 NODE_ENTER/EXIT/ERROR를 수신하여 ~13개 Task 상태를 자동 갱신합니다. 실패 시 하류 Task를 자동 SKIP.
                 </p>
               </div>
@@ -251,7 +251,7 @@ export function AgentsTasksSection() {
                   loopback={{ from: "fix", to: "validate", label: "fix loop (4-class routing)", color: "#E87080" }}
                   nodeRadius={24}
                 />
-                <p className="text-sm text-[#8B9CC0] leading-relaxed mt-2">
+                <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
                   Java 1.8→22 자동 마이그레이션. 4분류 에러 라우팅(CONFIG/CODE/BEHAVIOR/ENV) + Architect/Editor 분리.
                 </p>
               </div>
@@ -311,7 +311,7 @@ export function AgentsTasksSection() {
                     <path d="M430,103 L430,117" stroke="white" strokeOpacity={0.2} strokeWidth={1} strokeDasharray="2 3" />
                   </svg>
                 </div>
-                <p className="text-sm text-[#8B9CC0] leading-relaxed mt-2">
+                <p className="text-sm text-[#A0B4D4] leading-relaxed mt-2">
                   GoalDecomposer가 복합 요청을 sub-goal로 분해하고, 세션별 ContextVar에 독립 TaskGraph를 생성합니다. CLI /tasks로 실시간 상태를 조회할 수 있습니다.
                 </p>
               </div>
@@ -375,7 +375,7 @@ export function AgentsTasksSection() {
                 </svg>
               </div>
 
-              <p className="text-sm text-[#8B9CC0] leading-relaxed">
+              <p className="text-sm text-[#A0B4D4] leading-relaxed">
                 Planner가 요청을 6개 Route(FULL_PIPELINE, PROSPECT, PARTIAL_RERUN 등)로 분류하고,
                 PlanMode가 DRAFT → PRESENTED → APPROVED(HITL) → EXECUTING → COMPLETED 생애주기를 관리합니다.
                 REJECTED되면 DRAFT로 복귀합니다.

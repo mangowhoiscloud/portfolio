@@ -213,7 +213,7 @@ export function VerificationSection() {
           <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-3">
             Dual Trust Model
           </h2>
-          <p className="text-[#8B9CC0] max-w-lg mb-8 leading-relaxed">
+          <p className="text-[#A0B4D4] max-w-lg mb-8 leading-relaxed">
             GEODE는 두 가지 신뢰 모델을 병행합니다.
             자율 에이전트는 <span className="text-[#4ECDC4]/80">실행 전 입력을 차단</span>하고,
             분석 파이프라인은 <span className="text-[#C084FC]/80">실행 후 출력을 검증</span>합니다.
@@ -302,7 +302,7 @@ export function VerificationSection() {
                       {active.title}
                     </span>
                   </div>
-                  <p className="text-sm text-[#8B9CC0] leading-relaxed mb-3">
+                  <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
                     {active.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5">
@@ -368,7 +368,7 @@ export function VerificationSection() {
                     <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                       style={{ color: s.color, background: `${s.color}10` }}>{s.id}</span>
                     <span className="text-sm font-medium text-white/70 w-[130px] sm:w-[150px] shrink-0">{s.name}</span>
-                    <span className="text-sm text-[#7A8CA8]">{s.desc}</span>
+                    <span className="text-sm text-[#9BB0CC]">{s.desc}</span>
                   </div>
                 ))}
               </div>
@@ -386,7 +386,7 @@ export function VerificationSection() {
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-[#7A8CA8] font-mono mt-3">
+                <p className="text-xs text-[#9BB0CC] font-mono mt-3">
                   CANNOT: lint/type/test 실패 상태로 커밋 금지. 플레이스홀더(XXXX) 금지. 측정값만 기록.
                 </p>
               </div>

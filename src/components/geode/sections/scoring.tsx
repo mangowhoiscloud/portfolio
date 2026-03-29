@@ -172,7 +172,7 @@ export function ScoringSection() {
             PSM 6-Weight Composite
           </h2>
           <p className="text-lg text-white/40 font-semibold mb-4">14축 루브릭 × 3 Evaluator</p>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
             4명의 Analyst가 Send API clean context(이전 분석 결과를 보지 않는 격리 환경)에서 14축을 독립 평가하고,
             3명의 Evaluator가 교차 집계합니다. 6개 가중치로 합산 후 Confidence Multiplier(0.7 + 0.3 × confidence/100)를 적용하여 Tier를 산출합니다.
             confidence &lt; 0.7이면 Gather 노드로 loopback하여 최대 5회 반복합니다.
@@ -187,7 +187,7 @@ export function ScoringSection() {
             {/* Formula + Tiers */}
             <div className="space-y-5">
               <div className="rounded-xl border border-white/[0.04] px-5 py-4">
-                <div className="text-xs font-mono text-[#7A8CA8] mb-2">Composite Formula</div>
+                <div className="text-xs font-mono text-[#9BB0CC] mb-2">Composite Formula</div>
                 <code className="text-sm text-white/70 leading-relaxed block">
                   Base = Σ(weight<sub>i</sub> × score<sub>i</sub>)<br />
                   Final = Base × (0.7 + 0.3 × confidence/100)
@@ -197,7 +197,7 @@ export function ScoringSection() {
                 {tiers.map((t) => (
                   <div key={t.tier} className="flex-1 text-center px-3 py-2.5 rounded-lg border border-white/[0.04]">
                     <div className="text-xl font-bold" style={{ color: t.color }}>{t.tier}</div>
-                    <div className="text-[11px] font-mono text-[#7A8CA8]">{t.threshold}</div>
+                    <div className="text-[11px] font-mono text-[#9BB0CC]">{t.threshold}</div>
                   </div>
                 ))}
               </div>
@@ -205,7 +205,7 @@ export function ScoringSection() {
                 {evaluators.map((e) => (
                   <div key={e.name} className="flex items-center gap-3 px-4 py-2 rounded-lg border border-white/[0.04]" style={{ background: `${e.color}03` }}>
                     <span className="text-sm font-semibold" style={{ color: e.color }}>{e.name}</span>
-                    <span className="text-xs text-[#7A8CA8]">{e.axes}축 ({e.labels})</span>
+                    <span className="text-xs text-[#9BB0CC]">{e.axes}축 ({e.labels})</span>
                   </div>
                 ))}
               </div>

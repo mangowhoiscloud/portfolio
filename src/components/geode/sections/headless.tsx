@@ -71,7 +71,7 @@ export function HeadlessSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
             Daemon Mode
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             <code className="text-[#818CF8]/70">geode serve --poll 3.0</code> 한 줄이면 데몬으로 상시 대기.
             Slack, Webhook, MCP 세 채널을 동시에 수신하며, 모든 요청은
             hitl_level=0 자율 모드로 실행합니다.
@@ -187,14 +187,14 @@ export function HeadlessSection() {
               background: `linear-gradient(135deg, ${ch.color}06, transparent 60%)`,
             }}
           >
-            <p className="text-sm text-[#8B9CC0] leading-relaxed mb-5">{ch.desc}</p>
+            <p className="text-sm text-[#A0B4D4] leading-relaxed mb-5">{ch.desc}</p>
             <div className="space-y-2 mb-4">
               {ch.flow.map((f, i) => (
                 <div key={f.step} className="flex items-center gap-3">
                   <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                     style={{ color: ch.color, background: `${ch.color}10` }}>{i + 1}</span>
                   <span className="text-sm font-medium text-white/70 w-[140px] sm:w-[180px] shrink-0 font-mono">{f.step}</span>
-                  <span className="text-sm text-[#7A8CA8]">{f.detail}</span>
+                  <span className="text-sm text-[#9BB0CC]">{f.detail}</span>
                 </div>
               ))}
             </div>

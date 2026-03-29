@@ -95,7 +95,7 @@ export function ContextTiersSection() {
           <p className="text-lg text-white/40 font-semibold mb-4">
             3-Tier 경로 + 5-Tier 런타임 메모리
           </p>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
             Claude Code의 <code className="text-[#818CF8]/70">~/.claude/</code> 패턴을 참조하여
             사용자 데이터와 프로젝트 데이터를 3계층으로 분리.
             config.toml은 Global → Project cascade 로딩으로 동작하며,
@@ -197,7 +197,7 @@ export function ContextTiersSection() {
                 {tier.label}
               </code>
             </div>
-            <p className="text-sm text-[#8B9CC0] leading-relaxed mb-4">
+            <p className="text-sm text-[#A0B4D4] leading-relaxed mb-4">
               {tier.desc}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -223,7 +223,7 @@ export function ContextTiersSection() {
                           </span>
                         )}
                       </div>
-                      <div className="text-xs text-[#8B9CC0] leading-relaxed mt-0.5">{d.purpose}</div>
+                      <div className="text-xs text-[#A0B4D4] leading-relaxed mt-0.5">{d.purpose}</div>
                     </div>
                   </div>
                 );
@@ -247,7 +247,7 @@ export function ContextTiersSection() {
                 <div key={m.tier} className="flex items-center gap-3 px-3 py-2 rounded-lg border border-white/[0.03]" style={{ background: `${m.color}03` }}>
                   <span className="shrink-0 w-8 text-center text-[10px] font-mono font-bold" style={{ color: m.color }}>{m.tier}</span>
                   <span className="text-sm font-medium text-white/70 w-[100px] shrink-0">{m.name}</span>
-                  <span className="text-sm text-[#7A8CA8]">{m.desc}</span>
+                  <span className="text-sm text-[#9BB0CC]">{m.desc}</span>
                 </div>
               ))}
             </div>
@@ -258,7 +258,7 @@ export function ContextTiersSection() {
         <ScrollReveal delay={0.25}>
           <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
             <div className="text-sm font-semibold text-white/70 mb-3">Context Compression (Provider-aware)</div>
-            <p className="text-xs text-[#7A8CA8] mb-4 leading-relaxed">
+            <p className="text-xs text-[#9BB0CC] mb-4 leading-relaxed">
               ContextMonitor가 매 라운드 토큰 사용률을 추정(4 chars/token)하고,
               CONTEXT_WARNING(80%) / CONTEXT_CRITICAL(95%) Hook을 발화.
               프로바이더별 전략이 분기하여 캐시 히트율 붕괴를 방지합니다.
@@ -267,7 +267,7 @@ export function ContextTiersSection() {
               {/* Anthropic */}
               <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#818CF804" }}>
                 <div className="text-xs font-mono font-bold text-[#818CF8] mb-2">Anthropic (Claude)</div>
-                <div className="space-y-1.5 text-xs text-[#8B9CC0]">
+                <div className="space-y-1.5 text-xs text-[#A0B4D4]">
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#34D399]">0-95%</span>
                     <span>서버사이드 처리. clear_tool_uses + compact_20260112 자동 적용</span>
@@ -281,7 +281,7 @@ export function ContextTiersSection() {
               {/* Non-Anthropic */}
               <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#F5C54204" }}>
                 <div className="text-xs font-mono font-bold text-[#F5C542] mb-2">OpenAI / GLM</div>
-                <div className="space-y-1.5 text-xs text-[#8B9CC0]">
+                <div className="space-y-1.5 text-xs text-[#A0B4D4]">
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">80%+</span>
                     <span>LLM 요약 compaction. 요약 + marker + recent 10개로 재구성</span>
@@ -304,7 +304,7 @@ export function ContextTiersSection() {
         {/* Project ID encoding */}
         <ScrollReveal delay={0.3}>
           <div className="rounded-lg border border-white/[0.06] px-5 py-3.5 font-mono text-sm">
-            <span className="text-[#7A8CA8]">Project ID 인코딩: </span>
+            <span className="text-[#9BB0CC]">Project ID 인코딩: </span>
             <span className="text-white/60">/Users/mango/workspace/geode</span>
             <span className="text-white/25 mx-2">→</span>
             <span style={{ color: "#4ECDC4" }}>-Users-mango-workspace-geode</span>

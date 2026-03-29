@@ -181,7 +181,7 @@ export function HooksSection() {
           <p className="text-lg sm:text-xl text-white/50 font-semibold mb-4">
             46 Events × 4 Maturity
           </p>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-10 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
             6개 이벤트 소스에서 발생한 46개 이벤트가 HookSystem을 거쳐
             우선순위 순으로 정렬된 핸들러 체인을 관통합니다.
             하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나가는 것이 리플 패턴입니다.
@@ -213,7 +213,7 @@ export function HooksSection() {
                     <span className="text-sm font-mono font-bold" style={{ color: lv.color }}>{lv.id}</span>
                     <span className="text-sm font-semibold text-white/80">{lv.name}</span>
                   </div>
-                  <div className="text-xs text-[#7A8CA8] mb-2">{lv.desc}</div>
+                  <div className="text-xs text-[#9BB0CC] mb-2">{lv.desc}</div>
                   <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded" style={{ color: st.color, background: `${st.color}15` }}>
                     {st.text}
                   </span>
@@ -228,7 +228,7 @@ export function HooksSection() {
               <div key={h.name} className="flex items-center gap-4 px-4 py-2.5 rounded-lg border border-white/[0.04]" style={{ background: `${levels[activeLevel].color}03` }}>
                 <span className="shrink-0 w-10 text-center text-[11px] font-mono font-bold" style={{ color: levels[activeLevel].color }}>{h.priority}</span>
                 <span className="text-sm font-medium text-white/80 w-[160px] shrink-0">{h.name}</span>
-                <span className="text-sm text-[#7A8CA8]">{h.events}</span>
+                <span className="text-sm text-[#9BB0CC]">{h.events}</span>
               </div>
             ))}
           </div>
@@ -239,7 +239,7 @@ export function HooksSection() {
           <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-4">
             Coverage Matrix
           </p>
-          <p className="text-sm text-[#7A8CA8] mb-5">
+          <p className="text-sm text-[#9BB0CC] mb-5">
             46개 이벤트 × 4 성숙도 레벨.
             L1 OBSERVE 90%+ 커버, L2 REACT frontier 확장 중, L3/L4 계획 단계.
           </p>
@@ -247,7 +247,7 @@ export function HooksSection() {
             <table className="w-full text-xs font-mono border-collapse min-w-[540px]">
               <thead>
                 <tr>
-                  <th className="text-left py-2 px-3 text-[#7A8CA8] font-semibold border-b border-white/[0.06]">이벤트 그룹</th>
+                  <th className="text-left py-2 px-3 text-[#9BB0CC] font-semibold border-b border-white/[0.06]">이벤트 그룹</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#60A5FA" }}>L1</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#4ECDC4" }}>L2</th>
                   <th className="text-center py-2 px-2 border-b border-white/[0.06]" style={{ color: "#F5C542" }}>L3</th>
@@ -291,7 +291,7 @@ export function HooksSection() {
             ].map((o) => (
               <div key={o.name} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${o.color}03` }}>
                 <div className="text-sm font-semibold mb-1" style={{ color: o.color }}>{o.name}</div>
-                <div className="text-xs text-[#8B9CC0] leading-relaxed">{o.desc}</div>
+                <div className="text-xs text-[#A0B4D4] leading-relaxed">{o.desc}</div>
               </div>
             ))}
           </div>

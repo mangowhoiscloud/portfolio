@@ -21,7 +21,7 @@ export function FeedbackSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
             5-Phase Self-Improvement
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             파이프라인 실행 결과를 수집, 분석, 개선, 검증, RLAIF 5단계로 순환하여
             스코어링 정확도를 자율적으로 개선합니다. 성공 시 ModelRegistry에 프로모션합니다.
           </p>
@@ -61,9 +61,9 @@ export function FeedbackSection() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-sm font-semibold text-white/80">{p.name}</span>
-                    <span className="text-[10px] font-mono text-[#7A8CA8]">{p.detail}</span>
+                    <span className="text-[10px] font-mono text-[#9BB0CC]">{p.detail}</span>
                   </div>
-                  <p className="text-sm text-[#8B9CC0] leading-relaxed">{p.desc}</p>
+                  <p className="text-sm text-[#A0B4D4] leading-relaxed">{p.desc}</p>
                 </div>
               </div>
             ))}
@@ -86,7 +86,7 @@ export function FeedbackSection() {
                     <span className="text-sm font-mono font-bold" style={{ color: t.color }}>{t.id}</span>
                     <span className="text-xs font-semibold text-white/70">{t.name}</span>
                   </div>
-                  <div className="text-xs text-[#7A8CA8] mb-1.5">{t.desc}</div>
+                  <div className="text-xs text-[#9BB0CC] mb-1.5">{t.desc}</div>
                   <code className="text-[10px] font-mono text-white/20">{t.dispatch}</code>
                 </div>
               ))}
@@ -108,13 +108,13 @@ export function FeedbackSection() {
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-2 h-2 rounded-full" style={{ background: z.color }} />
                     <span className="text-sm font-mono font-bold" style={{ color: z.color }}>{z.zone}</span>
-                    <span className="text-xs font-mono text-[#7A8CA8] ml-auto">{z.range}</span>
+                    <span className="text-xs font-mono text-[#9BB0CC] ml-auto">{z.range}</span>
                   </div>
-                  <div className="text-xs text-[#8B9CC0]">{z.desc}</div>
+                  <div className="text-xs text-[#A0B4D4]">{z.desc}</div>
                 </div>
               ))}
             </div>
-            <div className="text-xs text-[#7A8CA8] font-mono mb-4">
+            <div className="text-xs text-[#9BB0CC] font-mono mb-4">
               4 metrics: spearman_rho(0.50) · human_llm_alpha(0.80) · precision@10(0.60) · tier_accuracy(0.70)
             </div>
 
@@ -133,7 +133,7 @@ export function FeedbackSection() {
                     <span className="shrink-0 w-5 h-5 rounded flex items-center justify-center text-[9px] font-mono font-bold"
                       style={{ color: d.color, background: `${d.color}10` }}>{i + 1}</span>
                     <span className="text-xs font-medium text-white/60 w-[130px] shrink-0 font-mono">{d.step}</span>
-                    <span className="text-xs text-[#7A8CA8]">{d.detail}</span>
+                    <span className="text-xs text-[#9BB0CC]">{d.detail}</span>
                   </div>
                 ))}
               </div>

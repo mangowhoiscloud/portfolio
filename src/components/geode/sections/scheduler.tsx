@@ -45,7 +45,7 @@ export function SchedulerSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
             SchedulerService
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             시간 기반 자동화 엔진. AT(일회), EVERY(간격), CRON(표현식) 세 가지 스케줄로
             잡을 등록하고, Active Hours와 타임존 검증을 거쳐
             IsolatedRunner에서 격리 실행합니다.
@@ -58,7 +58,7 @@ export function SchedulerSection() {
             {kinds.map((k) => (
               <div key={k.id} className="rounded-xl border border-white/[0.04] px-5 py-4" style={{ background: `${k.color}04` }}>
                 <div className="text-lg font-mono font-bold mb-1" style={{ color: k.color }}>{k.label}</div>
-                <div className="text-xs text-[#8B9CC0] leading-relaxed">{k.desc}</div>
+                <div className="text-xs text-[#A0B4D4] leading-relaxed">{k.desc}</div>
               </div>
             ))}
           </div>
@@ -184,7 +184,7 @@ export function SchedulerSection() {
                   <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
                     style={{ color: l.color, background: `${l.color}10` }}>{i + 1}</span>
                   <span className="text-sm font-medium text-white/70 w-[140px] sm:w-[160px] shrink-0 font-mono">{l.step}</span>
-                  <span className="text-sm text-[#7A8CA8]">{l.detail}</span>
+                  <span className="text-sm text-[#9BB0CC]">{l.detail}</span>
                 </div>
               ))}
             </div>
@@ -200,11 +200,11 @@ export function SchedulerSection() {
                     <span className="shrink-0 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold"
                       style={{ color: t.color, background: `${t.color}12` }}>{t.kind}</span>
                     <span className="text-sm font-medium text-white/80 flex-1">{t.name}</span>
-                    <code className="text-xs font-mono text-[#7A8CA8] hidden sm:block">{t.schedule}</code>
+                    <code className="text-xs font-mono text-[#9BB0CC] hidden sm:block">{t.schedule}</code>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-[#7A8CA8] font-mono">
+              <p className="text-xs text-[#9BB0CC] font-mono">
                 CLI: /schedule create &quot;every 5m during 09:00-22:00&quot; · /schedule enable · /schedule run
               </p>
             </div>
@@ -213,7 +213,7 @@ export function SchedulerSection() {
           {/* ── NL Parser ── */}
           {activeTab === "nl-parser" && (
             <div className="rounded-xl border border-white/[0.04] px-5 py-4 space-y-4">
-              <p className="text-sm text-[#8B9CC0] leading-relaxed">
+              <p className="text-sm text-[#A0B4D4] leading-relaxed">
                 LLM이 <code className="text-[#4ECDC4]/60">schedule_job</code> tool_use로 자동 호출하면,
                 내부 <code className="text-[#818CF8]/60">NLScheduleParser</code>가 순수 규칙 기반(regex)으로
                 AT/EVERY/CRON + Active Hours 조합으로 변환합니다.

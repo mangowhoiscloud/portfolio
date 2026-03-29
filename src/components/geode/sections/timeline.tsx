@@ -56,7 +56,7 @@ export function TimelineSection() {
           <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-4">
             Domain → Autonomous
           </h2>
-          <p className="text-[#8B9CC0] max-w-lg mb-16">
+          <p className="text-[#A0B4D4] max-w-lg mb-16">
             과제 전형용 도메인 파이프라인에서 범용 자율 실행 하네스로.
             <br />
             <span className="text-white/40">35일 만에 피봇, 총 3개월, 현재 진행형.</span>
@@ -90,7 +90,7 @@ export function TimelineSection() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <span className="text-xs font-mono font-bold text-white/40">{p.phase}</span>
-                    <span className="text-[10px] font-mono text-[#7A8CA8]">{p.period}</span>
+                    <span className="text-[10px] font-mono text-[#9BB0CC]">{p.period}</span>
                     <span
                       className="px-1.5 py-0.5 rounded text-[11px] font-mono font-bold border"
                       style={{
@@ -104,7 +104,7 @@ export function TimelineSection() {
                   </div>
 
                   <h3 className="text-base font-semibold text-white/80 mb-1.5">{p.title}</h3>
-                  <p className="text-sm text-[#7A8CA8] leading-relaxed mb-3">{p.desc}</p>
+                  <p className="text-sm text-[#9BB0CC] leading-relaxed mb-3">{p.desc}</p>
 
                   <div className="flex flex-wrap gap-1.5">
                     {p.versions.map((v) => (
@@ -125,7 +125,7 @@ export function TimelineSection() {
         <ScrollReveal delay={0.4}>
           <div className="mt-20 flex items-center justify-center gap-4">
             <Image src="/portfolio/images/geode-idle.png" alt="Geodi" width={32} height={32} className="opacity-40" />
-            <Link href="/" className="text-xs font-mono text-[#7A8CA8] hover:text-[#8B9CC0] transition-colors">
+            <Link href="/" className="text-xs font-mono text-[#9BB0CC] hover:text-[#A0B4D4] transition-colors">
               ← Back to portfolio
             </Link>
           </div>

@@ -53,7 +53,7 @@ export function ToolUseSection() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
             5-Route Dispatch + 5-Tier Safety
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             LLM이 <code className="text-[#4ECDC4]/70">tool_use</code>를 반환하면
             ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다.
             6-Layer PolicyChain이 모든 호출을 게이트하고,
@@ -194,7 +194,7 @@ export function ToolUseSection() {
                     <div className="text-sm font-mono font-bold" style={{ color: r.color }}>{r.label}</div>
                     <div className="text-[9px] font-mono text-white/25 mt-0.5">{r.count}</div>
                   </div>
-                  <p className="text-sm text-[#8B9CC0] leading-relaxed">{r.desc}</p>
+                  <p className="text-sm text-[#A0B4D4] leading-relaxed">{r.desc}</p>
                 </div>
               ))}
             </div>
@@ -222,7 +222,7 @@ export function ToolUseSection() {
                       <span className="ml-auto px-2 py-0.5 rounded text-[10px] font-mono"
                         style={{ color: t.color, background: `${t.color}10` }}>{t.gate}</span>
                     </div>
-                    <p className="text-xs text-[#8B9CC0] mb-1">{t.exec}</p>
+                    <p className="text-xs text-[#A0B4D4] mb-1">{t.exec}</p>
                     <code className="text-[10px] font-mono text-white/20">{t.examples}</code>
                   </div>
                 ))}
@@ -231,7 +231,7 @@ export function ToolUseSection() {
               {/* Approval mechanism */}
               <div className="mt-4 rounded-lg border border-white/[0.04] px-4 py-3">
                 <div className="text-xs font-semibold text-white/50 mb-2">Session-Level Always Approval</div>
-                <p className="text-xs text-[#7A8CA8]">
+                <p className="text-xs text-[#9BB0CC]">
                   승인 프롬프트에서 <code className="text-[#4ECDC4]/50">A</code>(Always) 응답 시
                   해당 카테고리(bash, write, cost, mcp:서버명) 전체가 세션 내 자동 승인.
                 </p>
