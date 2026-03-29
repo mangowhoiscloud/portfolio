@@ -1,5 +1,6 @@
 import { GeodeNav } from "@/components/geode/sections/nav";
 import { HeroSection } from "@/components/geode/sections/hero";
+import { KanbanSection } from "@/components/geode/sections/kanban";
 import { ScaffoldSection } from "@/components/geode/sections/scaffold";
 import { LoopSection } from "@/components/geode/sections/loop";
 import { ReasoningSection } from "@/components/geode/sections/reasoning";
@@ -26,6 +27,7 @@ export default function GeodePage() {
     <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-abyss)_0%,var(--sea-deep)_15%,var(--sea-mid)_35%,var(--sea-upper)_60%,var(--sea-surface)_85%,#1E4470_100%)] text-[#F0F0FF] overflow-x-hidden">
       <GeodeNav />
       <div id="hero"><HeroSection /></div>
+      <div id="kanban"><KanbanSection /></div>
       <div id="scaffold"><ScaffoldSection /></div>
       <Divider />
       <div id="loop"><LoopSection /></div>
