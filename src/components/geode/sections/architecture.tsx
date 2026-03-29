@@ -3,54 +3,41 @@
 import { ScrollReveal, ScrollRevealGroup, revealChild } from "../scroll-reveal";
 import { motion } from "framer-motion";
 
+/* ── 4-Layer Architecture (v0.36.0) ── */
 const layers = [
   {
-    id: "L0",
-    name: "CLI & Agent",
-    detail: "AgenticLoop · SubAgent(max 5) · Batch · Slack Gateway",
-    color: "#4ECDC4",
-    modules: "core/agent, core/cli, core/gateway",
-  },
-  {
-    id: "L1",
-    name: "Infrastructure",
-    detail: "Claude · OpenAI · GLM Adapters, Port/Adapter DI, PromptAssembler",
-    color: "#60A5FA",
-    modules: "core/llm, core/runtime_wiring",
-  },
-  {
-    id: "L2",
-    name: "Memory",
-    detail: "5-Tier: GEODE.md → User Profile → Org → Project → Session",
-    color: "#F4B8C8",
-    modules: "core/memory",
-  },
-  {
-    id: "L3",
-    name: "Orchestration",
-    detail: "TaskGraph DAG · PlanMode · LaneQueue · CoalescingQueue",
+    id: "Model",
+    name: "Model",
+    detail: "ClaudeAdapter · OpenAIAdapter · GLMAdapter, 3-Provider Failover, CircuitBreaker",
     color: "#818CF8",
-    modules: "core/orchestration",
+    modules: "core/llm",
   },
   {
-    id: "L4",
-    name: "Extensibility",
-    detail: "52 Tools + 44 MCP · PolicyChain 6-Layer · Skills Progressive Disclosure",
+    id: "Runtime",
+    name: "Runtime",
+    detail: "ToolRegistry(52) + MCP(41) + Skills(Progressive Disclosure) + Memory(4-tier)",
+    color: "#4ECDC4",
+    modules: "core/tools, core/mcp, core/skills, core/memory",
+  },
+  {
+    id: "Harness",
+    name: "Harness",
+    detail: "SessionLane → Lane(\"global\", max=8) → PolicyChain 6-Layer → IsolatedRunner",
+    sub: "SessionMode(IPC / DAEMON / SCHEDULER) · _HEADLESS_DENIED_TOOLS",
     color: "#F5C542",
-    modules: "core/tools, core/skills, core/mcp",
+    modules: "core/orchestration, core/runtime_wiring",
   },
   {
-    id: "L5",
-    name: "Domain Plugins",
-    detail: "DomainPort Protocol, GameIP · REODE(Java Migration)",
-    color: "#C084FC",
-    modules: "core/domains, core/graph",
+    id: "Agent",
+    name: "Agent",
+    detail: "AgenticLoop(while tool_use) → SubAgentManager(depth=1, max=5)",
+    sub: "thin CLI → serve → CLIPoller / Gateway / Scheduler",
+    color: "#F4B8C8",
+    modules: "core/agent, core/cli, core/gateway",
   },
 ];
 
 export function ArchitectureSection() {
-  // Render L0 first in DOM → with flex-col-reverse, L0 appears at bottom
-  // Stagger animation plays L0 first, creating a bottom-up "stacking" effect
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-6xl mx-auto">
@@ -59,90 +46,125 @@ export function ArchitectureSection() {
             <div>
               <p className="text-xs font-mono font-bold text-[#818CF8]/80 uppercase tracking-[0.2em] mb-2">Architecture</p>
               <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white/95">
-                6-Layer Stack
+                4-Layer Stack
               </h2>
             </div>
-            <p className="text-sm text-[#A0B4D4] max-w-sm leading-relaxed mt-3 md:mt-0 md:pb-1">
-              188개 모듈. <code className="text-[#818CF8]/70">bootstrap_geode()</code> 한 번에 부팅.
+            <p className="text-sm text-[#A0B4D4] max-w-md leading-relaxed mt-3 md:mt-0 md:pb-1">
+              191개 모듈, 3,433+ 테스트. Model → Runtime → Harness → Agent 4계층.
+              <code className="text-[#818CF8]/70 ml-1">GeodeRuntime.create_session(mode)</code>로 부팅.
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Stack container */}
-        <div className="relative mt-14">
-          {/* HookSystem vertical bar — cross-cutting concern */}
-          <div className="absolute -right-2 md:right-4 top-0 bottom-0 z-10 flex flex-col items-center pointer-events-none">
-            <div className="flex-1 w-px border-l border-dashed border-[#4ECDC4]/20" />
-          </div>
+        {/* ── 4-Layer vertical SVG ── */}
+        <ScrollReveal delay={0.05}>
+          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
+            <svg viewBox="0 0 800 280" className="w-full min-w-[640px]" style={{ maxHeight: 310 }}>
+              {/* Bidirectional arrows between layers */}
+              {[0, 1, 2].map((i) => {
+                const y1 = 35 + i * 68;
+                const y2 = y1 + 68;
+                return (
+                  <g key={`arrow-${i}`}>
+                    <line x1={400} y1={y1 + 48} x2={400} y2={y2 + 4} stroke="white" strokeOpacity={0.12} strokeWidth={1} />
+                    <text x={408} y={y1 + 62} fill="white" fillOpacity={0.2} fontSize={10}>↕</text>
+                  </g>
+                );
+              })}
 
-          {/* Layers: rendered L0→L5 in DOM, flex-col-reverse for visual L5-top L0-bottom */}
-          <ScrollRevealGroup
-            className="flex flex-col-reverse gap-0 rounded-2xl overflow-hidden border border-white/[0.05]"
-            stagger={0.06}
-          >
-            {layers.map((layer) => (
-              <motion.div
-                key={layer.id}
-                variants={revealChild}
-                className="group relative flex items-center gap-4 px-5 border-b border-white/[0.05] first:border-b-0 cursor-default transition-all duration-300 hover:translate-x-1"
-                style={{
-                  paddingTop: `${10 + (5 - layers.indexOf(layer)) * 2}px`,
-                  paddingBottom: `${10 + (5 - layers.indexOf(layer)) * 2}px`,
-                  background: `linear-gradient(90deg, ${layer.color}0A, transparent 40%)`,
-                }}
+              {/* 4 layer bars */}
+              {layers.map((layer, i) => {
+                const y = 8 + i * 68;
+                const barWidth = 700 - i * 30;
+                const x = (800 - barWidth) / 2;
+                return (
+                  <g key={layer.id}>
+                    <rect x={x} y={y} width={barWidth} height={48} rx={10}
+                      fill="#0C1220" stroke={layer.color} strokeWidth={1} strokeOpacity={0.4} />
+                    {/* Layer name */}
+                    <text x={x + 20} y={y + 20} fill={layer.color}
+                      fontSize={12} fontFamily="ui-monospace, monospace" fontWeight={800}>
+                      {layer.name}
+                    </text>
+                    {/* Detail */}
+                    <text x={x + 20} y={y + 36} fill={layer.color} fillOpacity={0.45}
+                      fontSize={8} fontFamily="ui-monospace, monospace">
+                      {layer.detail.length > 85 ? layer.detail.slice(0, 82) + "..." : layer.detail}
+                    </text>
+                    {/* Sub detail (right-aligned) */}
+                    {layer.sub && (
+                      <text x={x + barWidth - 15} y={y + 20} textAnchor="end" fill={layer.color} fillOpacity={0.3}
+                        fontSize={7} fontFamily="ui-monospace, monospace">
+                        {layer.sub}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+
+              {/* HookSystem cross-cutting bar (right side) */}
+              <rect x={760} y={8} width={28} height={268} rx={6}
+                fill="none" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.2} strokeDasharray="4 3" />
+              <text x={774} y={145} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
+                fontSize={7} fontFamily="ui-monospace, monospace"
+                style={{ writingMode: "vertical-rl" } as React.CSSProperties}>
+                HOOKS · 40 EVENTS
+              </text>
+
+              {/* DomainPort cross-cutting bar (left side) */}
+              <rect x={12} y={76} width={28} height={200} rx={6}
+                fill="none" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.15} strokeDasharray="4 3" />
+              <text x={26} y={178} textAnchor="middle" fill="#C084FC" fillOpacity={0.25}
+                fontSize={7} fontFamily="ui-monospace, monospace"
+                style={{ writingMode: "vertical-rl" } as React.CSSProperties}>
+                DOMAIN PORT
+              </text>
+            </svg>
+          </div>
+        </ScrollReveal>
+
+        {/* ── Layer detail cards ── */}
+        <ScrollRevealGroup className="space-y-2" stagger={0.06}>
+          {layers.map((layer) => (
+            <motion.div
+              key={layer.id}
+              variants={revealChild}
+              className="group relative flex items-start gap-4 px-5 py-4 rounded-xl border border-white/[0.05] cursor-default transition-all duration-300 hover:translate-x-1"
+              style={{ background: `linear-gradient(90deg, ${layer.color}08, transparent 50%)` }}
+            >
+              <div
+                className="shrink-0 w-16 text-center text-[11px] font-mono font-bold py-1.5 rounded"
+                style={{ color: layer.color, background: `${layer.color}10` }}
               >
-                {/* Layer ID badge */}
-                <div
-                  className="shrink-0 w-10 text-center text-[10px] font-mono font-bold py-1 rounded"
-                  style={{ color: layer.color, background: `${layer.color}10` }}
-                >
-                  {layer.id}
-                </div>
+                {layer.id}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-semibold text-white/80 mb-0.5">{layer.detail}</div>
+                {layer.sub && (
+                  <div className="text-xs text-[#9BB0CC] mt-0.5">{layer.sub}</div>
+                )}
+              </div>
+              <div className="text-[10px] font-mono text-white/15 hidden lg:block shrink-0">{layer.modules}</div>
+            </motion.div>
+          ))}
+        </ScrollRevealGroup>
 
-                {/* Name */}
-                <div className="font-medium text-sm text-white/80 w-[110px] md:w-[130px] shrink-0">
-                  {layer.name}
-                </div>
-
-                {/* Detail — hidden on mobile */}
-                <div className="text-xs text-[#7A8CA8] hidden md:block flex-1 pr-12">
-                  {layer.detail}
-                </div>
-
-                {/* Modules path — very subtle */}
-                <div className="text-[11px] font-mono text-white/20 hidden lg:block absolute right-16 top-1/2 -translate-y-1/2">
-                  {layer.modules}
-                </div>
-
-                {/* Hover glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 40px ${layer.color}08, 0 0 20px ${layer.color}05` }}
-                />
-              </motion.div>
-            ))}
-          </ScrollRevealGroup>
-
-          {/* HookSystem label */}
-          <div
-            className="absolute -right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-            style={{ writingMode: "vertical-lr" }}
-          >
-            <span className="text-[10px] font-mono text-[#4ECDC4]/25 tracking-widest rotate-180 block">
-              HOOKS · 46 EVENTS
-            </span>
-          </div>
-        </div>
-
-        {/* Cross-cutting callout */}
-        <ScrollReveal delay={0.5}>
-          <div className="mt-6 flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-[#4ECDC4]/15 bg-[#4ECDC4]/[0.02]">
-            <span className="text-[#4ECDC4] text-lg">⟂</span>
-            <div>
-              <span className="text-sm font-medium text-[#4ECDC4]/70">HookSystem</span>
-              <span className="text-sm text-[#7A8CA8] ml-2">
-                46 events · 우선순위 기반 · 비차단 실행. L0~L5 전 레이어를 수직 관통하는 교차 관심사
-              </span>
+        {/* Cross-cutting concerns */}
+        <ScrollReveal delay={0.4}>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-[#4ECDC4]/15 bg-[#4ECDC4]/[0.02]">
+              <span className="text-[#4ECDC4] text-base">⟂</span>
+              <div>
+                <span className="text-sm font-medium text-[#4ECDC4]/70">HookSystem</span>
+                <span className="text-xs text-[#9BB0CC] ml-2">40 events, 4계층 수직 관통</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-[#C084FC]/15 bg-[#C084FC]/[0.02]">
+              <span className="text-[#C084FC] text-base">⟂</span>
+              <div>
+                <span className="text-sm font-medium text-[#C084FC]/70">DomainPort</span>
+                <span className="text-xs text-[#9BB0CC] ml-2">Protocol 직교. GameIP, REODE 교체 가능</span>
+              </div>
             </div>
           </div>
         </ScrollReveal>
