@@ -443,25 +443,22 @@ export function LoopSection() {
           {/* Right — Terminal replay + RECORD */}
           <ScrollReveal delay={0.15}>
             <TypingTerminal />
-            <div className="mt-4 rounded-xl border border-white/[0.06] bg-white/[0.01] px-5 py-3.5">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono font-bold text-[#E87080]/70 uppercase tracking-widest">RECORD</span>
-                <span className="text-[10px] font-mono text-white/25">REODE · Opus 4.6</span>
+            <div className="mt-3 rounded-lg border border-white/[0.06] bg-white/[0.01] px-4 py-2.5 flex items-center gap-5">
+              <span className="text-[9px] font-mono font-bold text-[#E87080]/60 uppercase tracking-widest shrink-0">REC</span>
+              {[
+                { value: "1,153", unit: "turns" },
+                { value: "5h 30m", unit: "dur" },
+                { value: "$388", unit: "cost" },
+              ].map((m) => (
+                <div key={m.unit} className="text-center">
+                  <div className="text-sm font-bold text-white/80">{m.value}</div>
+                  <div className="text-[8px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
+                </div>
+              ))}
+              <div className="flex-1 text-right">
+                <div className="text-[9px] font-mono text-white/30">REODE · Opus 4.6 · 5,133 files · Java 1.8→22</div>
+                <div className="text-[8px] font-mono text-[#34D399]/45 mt-0.5">83/83 Tests · Build · E2E 성공</div>
               </div>
-              <div className="flex items-center justify-center gap-6 mb-2">
-                {[
-                  { value: "1,153", unit: "turns" },
-                  { value: "5h 30m", unit: "duration" },
-                  { value: "$388", unit: "cost" },
-                ].map((m) => (
-                  <div key={m.unit} className="text-center">
-                    <div className="text-base font-bold text-white/85">{m.value}</div>
-                    <div className="text-[9px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="text-[10px] font-mono text-white/30 text-center">5,133 file migration · Java 1.8 → 22</div>
-              <div className="text-[9px] font-mono text-[#34D399]/50 text-center mt-0.5">83/83 Tests · Build · Service E2E 무중단 성공</div>
             </div>
           </ScrollReveal>
         </div>
