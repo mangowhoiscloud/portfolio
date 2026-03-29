@@ -318,10 +318,10 @@ function TypingTerminal() {
   return (
     <div
       ref={containerRef}
-      className="rounded-xl border border-white/[0.04] bg-[#060B14] overflow-hidden max-h-[460px]"
+      className="rounded-xl border border-white/[0.04] bg-[#060B14] overflow-hidden h-[420px] flex flex-col"
     >
       {/* Tab bar */}
-      <div className="flex items-center gap-0 border-b border-white/[0.04] px-3">
+      <div className="flex items-center gap-0 border-b border-white/[0.04] px-3 shrink-0">
         {scenarios.map((s, i) => (
           <button
             key={s.tab}
@@ -338,7 +338,7 @@ function TypingTerminal() {
       </div>
 
       {/* Terminal content */}
-      <div className="p-5 font-mono text-[12.5px] leading-[1.9]">
+      <div className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
         <div className="flex items-center gap-1.5 mb-4">
           <div className="w-2.5 h-2.5 rounded-full bg-[#E87080]/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#F5C542]/60" />
