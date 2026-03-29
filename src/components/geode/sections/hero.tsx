@@ -5,23 +5,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const stats = [
-  { value: "∞", label: "Autonomous Turns", sub: "while True + 8 Guards" },
-  { value: "98", label: "Tools", sub: "54 native + 44 MCP" },
-  { value: "8", label: "Safety Guards", sub: "convergence · budget · stuck" },
+  { value: "∞", label: "while True", sub: "" },
+  { value: "8", label: "Safety Guards", sub: "convergence · time budget · stuck · HITL" },
+  { value: "3", label: "Modes", sub: "REPL · Headless Daemon(Slack) · Scheduler" },
+  { value: "5", label: "Tool Routes", sub: "Bash · Tool · MCP · Skill · DAG" },
 ];
-
-const record = {
-  label: "RECORD",
-  project: "REODE",
-  model: "Opus 4.6",
-  detail: "5,133 file migration · Java 1.8 → 22",
-  sub: "83/83 Tests · Build · Service E2E 무중단 성공",
-  metrics: [
-    { value: "1,153", unit: "turns" },
-    { value: "5h 30m", unit: "duration" },
-    { value: "$388", unit: "cost" },
-  ],
-};
 
 export function HeroSection() {
   return (
@@ -99,30 +87,7 @@ export function HeroSection() {
           ))}
         </motion.div>
 
-        {/* RECORD */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.75 }}
-          className="mt-4 rounded-xl border border-white/[0.06] bg-white/[0.01] px-6 py-4 max-w-md w-full"
-        >
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[10px] font-mono font-bold text-[#E87080]/70 uppercase tracking-widest">{record.label}</span>
-            <span className="text-[10px] font-mono text-white/25">{record.project} · {record.model}</span>
-          </div>
-          <div className="flex items-center justify-center gap-6 mb-2">
-            {record.metrics.map((m) => (
-              <div key={m.unit} className="text-center">
-                <div className="text-lg font-bold text-white/85">{m.value}</div>
-                <div className="text-[9px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
-              </div>
-            ))}
-          </div>
-          <div className="text-[11px] font-mono text-white/30 text-center">{record.detail}</div>
-          <div className="text-[10px] font-mono text-[#34D399]/50 text-center mt-1">{record.sub}</div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="flex items-center gap-3 mt-4">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4">
           <Link
             href="https://github.com/mangowhoiscloud/geode"
             target="_blank"

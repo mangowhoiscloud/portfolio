@@ -378,7 +378,7 @@ export function LoopSection() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[0.8fr_1.4fr] gap-8 items-start">
           {/* Left — Orbital + Stats */}
           <ScrollReveal>
             <div className="space-y-6">
@@ -405,8 +405,32 @@ export function LoopSection() {
           </ScrollReveal>
         </div>
 
+        {/* ── RECORD ── */}
+        <ScrollReveal delay={0.18}>
+          <div className="mt-10 rounded-xl border border-white/[0.06] bg-white/[0.01] px-6 py-4 max-w-2xl mx-auto">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[10px] font-mono font-bold text-[#E87080]/70 uppercase tracking-widest">RECORD</span>
+              <span className="text-[10px] font-mono text-white/25">REODE · Opus 4.6</span>
+            </div>
+            <div className="flex items-center justify-center gap-8 mb-2">
+              {[
+                { value: "1,153", unit: "turns" },
+                { value: "5h 30m", unit: "duration" },
+                { value: "$388", unit: "cost" },
+              ].map((m) => (
+                <div key={m.unit} className="text-center">
+                  <div className="text-lg font-bold text-white/85">{m.value}</div>
+                  <div className="text-[9px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
+                </div>
+              ))}
+            </div>
+            <div className="text-[11px] font-mono text-white/30 text-center">5,133 file migration · Java 1.8 → 22</div>
+            <div className="text-[10px] font-mono text-[#34D399]/50 text-center mt-1">83/83 Tests · Build · Service E2E 무중단 성공</div>
+          </div>
+        </ScrollReveal>
+
         {/* ── 5 Safety Guards ── */}
-        <ScrollReveal delay={0.2}>
+        <ScrollReveal delay={0.22}>
           <div className="mt-10">
             <p className="text-sm font-mono font-bold text-[#E87080]/60 uppercase tracking-[0.25em] mb-4">
               Safety Guards
