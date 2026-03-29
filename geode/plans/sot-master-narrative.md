@@ -1,102 +1,151 @@
-# Master Narrative SOT — GEODE Portfolio
+# Master Narrative SOT v0.32.1
 
-> 이 문서는 슬라이드 제작의 최상위 SOT. 각 주제의 인과관계 서술 원본이며,
-> 슬라이드는 이 서술을 **시각화**하는 것이지 키워드를 박스에 채우는 것이 아님.
+최상위 서술 기준. 각 슬라이드는 이 내러티브의 인과관계를 시각화한다.
 
----
+## N1. AgenticLoop: while(tool_use)
 
-## N1. while(tool_use) 자율 실행 루프
+LLM이 tool_use를 반환하는 한 최대 50 라운드까지 루프를 계속한다.
+자연 종료(end_turn), 수렴 감지(동일 에러 3회), 강제 텍스트(잔여 2라운드),
+budget_stop(비용 상한), tool_repeat(5회 반복 감지)까지 5가지 경로로 종료한다.
+200-turn sliding window로 컨텍스트를 관리하고, 실측 평균 4.2 라운드.
 
-Claude Code의 while(tool_use) 패턴을 참고해 AgenticLoop를 설계했습니다. LLM이 tool_use를 반환하는 한 최대 50 라운드까지 루프를 계속하고, 자연 종료(end_turn), 수렴 감지(동일 에러 4회 반복), 강제 텍스트(잔여 2라운드)까지 5가지 경로로 종료합니다. 대화 컨텍스트는 200 turns sliding window로 관리하며, 30개 메시지 초과 시 최초 사용자 메시지를 보존한 채 중간을 잘라내고 bridge 메시지를 삽입합니다. 컨텍스트 윈도우 80%에서 compact, 95%에서 emergency prune을 발동하고, LLM 연속 2회 실패 시 Provider 내 모델 체인 → Cross-Provider Fallback으로 자동 에스컬레이션합니다.
+**v0.32.0 추가**: Autonomous Safety 3조건. budget_stop(TokenTracker), convergence 3회(모델 에스컬레이션), tool_repeat 5회(hint 자동 주입).
 
-**핵심 시각화**: 루프 흐름 + 5가지 종료 경로 + 컨텍스트 관리 3단계
+→ S10 agentic-loop
 
----
+## N2. 4-Route Tool Dispatch
 
-## N2. 4계층 도구 디스패치
+단일 진입점 ToolExecutor가 4경로로 분기한다.
+Bash(PolicyChain 3-layer 방어), Native(52 tools registry),
+MCP(45 catalog auto-discovery), LangGraph(analyze_ip 13-task StateGraph).
+5-Tier Safety: T0 SAFE(asyncio.gather 자동 실행) ~ T4 DANGEROUS(패턴 검사 + HITL).
 
-ToolExecutor가 단일 진입점에서 모든 도구를 디스패치합니다. 웹 검색이 필요하면 Native Tool Calling, 파일 작업이 필요하면 Bash, 외부 플랫폼 서비스가 필요하면 MCP를 트리거하고, LLM이 analyze_ip을 선택하면 LangGraph StateGraph DAG가 실행됩니다. LLM이 2개 이상 tool_use 블록을 반환하면 ToolCallProcessor가 5-Tier 안전 등급(SAFE, MCP auto-approved, EXPENSIVE, WRITE, DANGEROUS)으로 분류하여 TIER 0-1은 asyncio.gather로 병렬 실행, TIER 2는 비용 일괄 승인 후 병렬, TIER 3-4는 개별 승인 후 순차 실행합니다. 도구별 연속 2회 실패 시 Error Recovery Chain이 자동 복구를 시도합니다.
+→ S11 tool-dispatch
 
-**핵심 시각화**: 단일 진입점 → 4경로 분기 + 5-Tier 안전 등급 매트릭스
+## N3. Sub-Agent 컨텍스트 폭발 방지
 
----
+부모 AgenticLoop(200K context)에서 서브에이전트를 스폰하면 결과가 누적되어 컨텍스트가 폭발한다.
+독립 200K window + 부모 능력 상속(52 tools, 44 MCP, skills, memory) + 위험 도구 6개 샌드박스 차단.
+MAX_CONCURRENT=5, CoalescingQueue 250ms, depth limit=2.
 
-## N3. 서브에이전트 컨텍스트 폭발 방지
+**v0.32.1 추가**: 이중 주입(Double Injection) 제거. delegate_task(동기)에서 tool_result + announce가 같은 정보를 2회 주입하는 문제를 OpenClaw 패턴 참조로 해결. delegate(announce=False)로 동기 호출 시만 announce 비활성화. 비동기 경로는 기본값 True 유지. 2파일 4줄 변경.
 
-병렬 서브에이전트가 부모 컨텍스트에 결과를 반환할 때 토큰이 기하급수적으로 증가하는 문제가 발생했습니다. 부모의 tools/MCP/skills/memory를 전체 상속하되, 4096-token guard로 자식 출력을 구조화 요약으로 압축합니다. MAX_CONCURRENT=5 DAG scheduling과 CoalescingQueue 250ms dedup으로 동시성을 제어합니다.
+→ S13 subagent
 
-**핵심 시각화**: 부모-자식 토큰 흐름 + guard 압축 + 동시성 제어
+## N4. 5-Layer Verification (Pipeline)
 
----
+분석 결과의 품질을 5겹으로 검증한다.
+L1 Guardrails(G1 Schema, G2 Range, G3 Grounding, G4 Consistency, Haiku gate).
+L2 Confidence Gate(≥0.7, max 5 iterations, cortex loopback).
+L3 Rights Risk(CLEAR/RESTRICTED).
+L4 BiasBuster(6종 인지 편향: confirmation, recency, anchoring, position, verbosity, self_enhancement).
+L5 Cross-LLM(다중 모델 합의 α≥0.67, Krippendorff α≥0.80).
+L6 Calibration(Golden Set, per-axis ±0.5).
 
-## N4. 단일 평가자 편향에서 5-Layer 검증으로
+→ S20 security-gateway (Dual Trust Model의 Output 축)
 
-LLM 한 모델이 평가하면 Confirmation Bias와 Anchoring이 결과를 왜곡합니다. L1 Guardrails(스키마/범위/근거/일관성)로 형식을 잡고, L2 BiasBuster(arXiv:2403.00811)로 6종 편향을 탐지하며, L3에서 Claude×GPT 교차 검증(Krippendorff's α≥0.67)으로 합의도를 측정합니다. L4 Rights Risk와 L5 Ground Truth Calibration이 최종 신뢰도를 보정합니다.
+## N5. 3-Provider LLM Resilience
 
-**핵심 시각화**: 5-Layer 스택 (각 레이어가 어떤 문제를 차단하는지 명시)
+Anthropic(Opus, Sonnet, Haiku) Primary → OpenAI(GPT-5.4, 5.3, 4o) Secondary → ZhipuAI(GLM-5 80K) Last Resort.
+CircuitBreaker 상태머신: CLOSED(정상) → OPEN(5 fails, 60s 차단) → HALF-OPEN(probe) → CLOSED.
+세션 메모리가 모델에 종속되지 않으므로 Failover 시에도 학습 내용 유지.
 
----
+→ S14 llm-failover
 
-## N5. 3-Provider LLM 장애 복원력
+## N6. Context Compression + 4-Tier Memory
 
-단일 Provider에 의존하면 Rate Limit이나 장애 시 파이프라인 전체가 중단됩니다. Anthropic(Opus→Sonnet→Haiku), OpenAI(GPT-5.4→5.3→4o), GLM-5 세 Provider를 Port/Adapter로 추상화하고, Provider별 독립 Circuit Breaker(5회 연속 실패→60s OPEN→Half-Open 프로브)를 배치했습니다. Retryable 에러(Timeout, RateLimit, Connection)는 Exponential Backoff(±25% Jitter)로 재시도하고, 비복구 에러(잔액 부족)는 즉시 차단합니다. 메모리가 모델에 종속되지 않아 Failover 시에도 세션 학습 내용이 유지됩니다.
+장기 세션에서 컨텍스트 80% 도달은 시간 문제. 3-Phase로 대응한다.
+Phase 1(80% WARNING): tool_result >5% 블록 요약.
+Phase 2(95% CRITICAL): recent-first 70% budget 유지, 첫+마지막 2개 보존.
+Phase 3(EMERGENCY): 강제 pruning, bridge 메시지 삽입.
 
-**핵심 시각화**: 3-Provider 체인 + CircuitBreaker 상태 머신
+4-Tier Memory: T0 SOUL(GEODE.md, 10%), T1 Organization(CLAUDE.md, 25%), T2 Project(PROJECT.md 자동 축적, 25%), T3 Session(TTL 200 turns, 40%).
+Auto-learning: TURN_COMPLETE → P85 memory_write_back → PROJECT.md 자동 기록.
 
----
+**v0.32.0 추가**: Provider-aware Compaction. Anthropic(서버사이드 compact_20260112) vs OpenAI/GLM(클라이언트사이드 LLM 요약). 프로바이더별 캐시 규칙이 달라서 단일 전략은 캐시 히트율을 붕괴시킨다.
 
-## N6. Model Switching & 컨텍스트 압축
+→ S15 context-memory
 
-Confidence < 0.7이거나 Cross-LLM agreement가 낮으면 상위 모델로 에스컬레이션하고, 단순 작업에는 하위 모델로 디에스컬레이션하여 비용을 제어합니다. 서브에이전트는 부모와 독립된 200K 컨텍스트 윈도우를 갖기 때문에 깊이 3이면 유효 컨텍스트가 600K로 선형 확장됩니다. Lossy 요약 대신 LLM이 코드로 관련 청크만 선별하는 Lossless Selection을 적용해 정보 손실 없이 컨텍스트 비용을 0.03%로 절감했습니다.
+## N7. Hook System 46 Events
 
-**핵심 시각화**: 에스컬레이션/디에스컬레이션 흐름 + 깊이별 컨텍스트 선형 확장
+8카테고리 46이벤트가 모든 계층을 횡단한다.
+Pipeline, Node, Analysis, Automation, Memory, SubAgent, Context, Tool Recovery, Gateway.
+리플 패턴: PIPELINE_END 발화 → RunLog(P50) → Snapshot(P80) → MemoryWriteback(P85) 순차 실행.
+17 registered handlers, Priority P30-P90.
+4-Tier Maturity: L1 Observe(runs.jsonl, 46/46), L2 React(자동 대응, 28/46), L3 Decide(의사결정, 1/46), L4 Autonomy(자율 학습, 0/46).
 
----
+→ S12 hook-system
 
-## N7. Hook System 개편 (27→45 Events)
+## N8. PromptAssembler 6-Phase
 
-재귀 개선 루프와 자기 증강, 사용자 맞춤 개인화를 위해서는 DAG 내 노드 상태, 검증 결과, 드리프트는 물론 에이전틱 루프 계층의 MEMORY.md와 LEARNINGS.md를 증강하기 위한 실시간 추적이 필요했지만, 하드코딩된 콜백으로는 확장이 불가능했습니다. 이미 이벤트 기반 Hook 시스템을 갖추고 있었기에 Claude Code, Devin, OpenHands 등 프론티어 하네스를 리서치하고 GAP을 줄이는 방식으로 개편했습니다. 파이프라인 생명주기부터 노드 실행, 분석/검증 완료, 메모리 저장, 프롬프트 변경, 서브에이전트까지 8개 카테고리 27개 이벤트로 분류하고, Priority 기반 핸들러 실행으로 순서를 보장합니다. 핸들러 간 에러 격리를 적용했고, NODE_ENTER 후 120s 내 NODE_EXIT이 없으면 StuckDetector가 파이프라인을 중단합니다.
+P1 template → P2 override → P3 skill(21개) → P4 memory(4-Tier) → P5 bootstrap → P6 assemble.
+SHA-256 해시가 동일하면 재조립 스킵, cache_control ephemeral로 2회차부터 입력 비용 90% 절감.
 
-**핵심 시각화**: 카테고리별 이벤트 맵 + 핸들러 우선순위 체인 + StuckDetector 흐름
+→ S16 prompt-assembler
 
----
+## N9. MCP Ecosystem + Cost Tracking
 
-## N8. PromptAssembler 6-Phase 조립
+3계층(MCPRegistry 257줄 병목) → 2계층(Catalog 검색 + config.toml)으로 단순화. Proxy stub 9개 제거.
+45 catalog servers auto-discovery. 도구 추가 비용 대폭 감소.
+자체 TokenTracker로 /cost CLI 실시간 관측. 18-model price registry. budget 초과 시 자동 정지.
 
-프롬프트를 수동으로 편집하면 변경 추적이 불가능하고, 캐시 히트율이 떨어집니다. template→override→skill→memory→bootstrap 5단계로 동적 조립한 뒤 SHA-256 해시로 변경을 추적합니다. 7개 노드가 동일 시스템 프롬프트를 공유할 때 cache_control: ephemeral로 2회차부터 입력 비용이 10%로 감소합니다.
+→ S17 mcp-cost
 
-**핵심 시각화**: 6-Phase 파이프라인 + SHA-256 변경 추적 + 캐시 절감률
+## N10. Game IP Pipeline + Domain Portability
 
----
+9-Node DAG(Scraper → Analyzer → Scorer parallel) + 5-Layer 검증.
+PSM 6-Weight Scoring: Exposure 25%, Quality 20%, Momentum 20%, Recovery 18%, Growth 12%, Developer 5%.
+Clean Context: analyses:[] 전달로 앵커링 차단. Confidence Gate ≥0.7 loopback.
 
-## N9. 4-Tier Memory와 자동 학습
+DomainPort Protocol: 2-Protocol 직교(PipelineTemplate L1 + LanguageAdapter L2).
+GEODE(Game IP) → REODE(Java 8→22, Spring 4.3→6.1, 241 source, 103K LoC) 피봇 시 core 수정 0줄.
 
-분석 세션이 끝나면 인사이트가 휘발되는 문제를 해결하기 위해 Session(TTL) → Project(분석 이력) → Organization(불변 가이드라인) → Hybrid(Redis L1 + File L2) 4계층 메모리를 설계했습니다. PIPELINE_END 이벤트가 MEMORY.md에 인사이트를 자동 축적하여 다음 세션에 반영합니다.
+→ S18 game-ip, S19 domain-portability
 
-**핵심 시각화**: 4계층 피라미드 + 자동 학습 피드백 루프
+## N11. Agentic Safety (Input Gating)
 
----
+Bash 3-Layer: 9 blocking patterns + 자원 한도(CPU 30s, FSIZE 50MB, NPROC 64) + HITL 4-Tier.
+Secret Redaction 8 patterns(sk-ant, sk-proj, ghp_, gho_, xoxb, xoxp).
+PolicyChain AND-Logic: 모든 정책이 통과해야 실행. Org policy(priority=5) 최상위.
+Gateway: ChannelBinding(Slack/Discord/Telegram), session key format, geode serve(hitl_level=0).
 
-## N10. MCP 생태계와 안전성
+Dual Trust Model: Input Gating(N11) + Output Validation(N4)가 독립적으로 동작.
 
-초기에는 MCPRegistry, Catalog, Config 3계층으로 MCP 카탈로그를 구축했으나, 자율 수행 에이전트를 운영하면서 Registry가 LLM의 도구 탐색과 확장성을 막는 병목임을 인지했습니다. MCPRegistry(257줄)를 삭제하고 Catalog을 검색 전용으로 축소, config.toml [mcp.servers]로 설정을 통합하여 Proxy stub 9개를 제거했습니다. 현재 44개 MCP catalog 서버를 auto-discovery로 관리하고, 5개 signal 도구를 MCP-first + fixture fallback으로 전환해 라이브 데이터 수집과 오프라인 테스트를 양립합니다. 4-Tier HITL 권한 모델로 자율 실행 경계를 제어하며, API key 부재 시 dry-run 자동 전환을 적용했습니다.
+→ S20 security-gateway
 
-**핵심 시각화**: 3계층→2계층 단순화 스토리 + MCP-first/fixture fallback 흐름
+## N12. 4-Axis Harness Engineering (v0.32.0 신규)
 
----
+확률적 시스템(LLM)은 제어 없이 발산한다. 4축으로 수렴시킨다.
+축1 Context Control(PromptAssembler, SHA-256, 90% 절감).
+축2 Execution Loop(while(tool_use), 3-Brake Safety, 50R).
+축3 Verification(5-Layer, 69.4→99.8%).
+축4 Observability(46 Hook, TokenTracker, 18-model price).
+순환: Context → Loop → Observability → Verification → Context.
 
-## N11. LLM API 비용 관측과 자체 트레이싱
+→ S02 harness-4axis
 
-자율 수행 하네스는 while(tool_use) 루프 특성상 LLM API 턴이 많고, 스캐폴딩이 루프로 수렴한 이후에는 PR 단위 개발과 E2E 검증이 잦아 비용 소모가 컸습니다. LangSmith 트레이싱만으로는 모델별 비용 내역과 캐시 히트율을 추적하기 어려워 자체 TokenTracker를 구축했습니다. ContextVar 싱글톤으로 호출마다 모델, 입출력 토큰, cache_creation/cache_read를 기록하고 18개 모델의 가격 레지스트리로 실시간 비용을 산출합니다. UsageStore가 월별 JSONL로 영속 저장하고, ProjectJournal이 프로젝트별 실행 이력과 비용을 추적합니다. /cost CLI 대시보드로 세션/월간/일간 비용과 예산 소진율을 확인하며, 컨텍스트 윈도우 사용률 80% 경고, 95% 위험 시 adaptive pruning이 자동 발동합니다.
+## N13. Triple Loop + Scaffold (v0.32.0 신규)
 
-**핵심 시각화**: TokenTracker 흐름 + 비용 대시보드 모의 + 자동 발동 임계값
+META(Scaffold 진화): CLAUDE.md 425줄, 21 Skills, CANNOT 23-Rule.
+DEV(PR 단위): 8-Step + CI 5-Job + 3,216 Tests + Socratic Gate.
+RUNTIME(자동 실행): 52 Tools + while(tool_use) 50R + Safety Brake.
+46 Hook이 세 루프를 횡단하는 신경계 역할.
 
----
+→ S03 triple-loop, S04 mirror-table
 
-## 슬라이드 재설계 원칙
+## N14. Plan-first (v0.32.0 신규)
 
-1. **각 슬라이드 = 하나의 내러티브 시각화** — 문제→설계→결과를 시각 흐름으로
-2. **박스에 키워드 채우기 금지** — 화살표, 분기, 루프백이 있는 흐름도
-3. **구체적 숫자는 강조** — 50 rounds, 5가지 종료, 200 turns, 80%/95% 등
-4. **Trade-off는 before/after 대비** — "X였는데 Y로 바꿨더니 Z"
-5. **다이어그램은 DAG 수준** — 단순 박스 나열 아닌 의사결정 분기 포함
+복잡도 판별(3+ steps) → create_plan 자발 호출 → plan_id → HITL 승인 게이트.
+잘못된 방향으로 50R을 소모하기 전에 사람이 개입.
+plan_id로 수정, 재승인 가능. 거부 시 CREATE로 루프백.
+
+→ Appendix Box 20 (S10/S15 삽입 후보)
+
+## N15. Automation + Feedback (v0.32.0 신규)
+
+3종 스케줄(AT/EVERY/CRON) + 4종 트리거(MANUAL/SCHEDULED/EVENT/WEBHOOK).
+CUSUM Drift Detection: NONE(<2.5), WARNING(2.5-4.0), CRITICAL(≥4.0).
+DRIFT_DETECTED → P70 DriftTrigger → 자동 재분석.
+5-Phase Self-Improvement: Collection → Analysis → Improvement → Validation → RLAIF.
+
+→ Appendix Box 25(Automation), Box 26(Feedback), Box 29(CUSUM)

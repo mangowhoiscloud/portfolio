@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { TabBar } from "../ui/tab-bar";
 
 /* ── Pipeline Verification (GameIP Domain — Output Validation) ── */
 const pipelineLayers = [
@@ -222,44 +223,16 @@ export function VerificationSection() {
 
         {/* Mode switcher */}
         <ScrollReveal delay={0.05}>
-          <div className="flex gap-2 mb-10">
-            <button
-              onClick={() => switchMode("agentic")}
-              className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-              style={{
-                color: mode === "agentic" ? "#4ECDC4" : "#5A6A8A",
-                background: mode === "agentic" ? "rgba(78,205,196,0.08)" : "transparent",
-                border: `1px solid ${mode === "agentic" ? "rgba(78,205,196,0.2)" : "rgba(255,255,255,0.04)"}`,
-              }}
-            >
-              Agentic Safety
-              <span className="ml-2 text-[11px] opacity-50">Input Gating</span>
-            </button>
-            <button
-              onClick={() => switchMode("pipeline")}
-              className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-              style={{
-                color: mode === "pipeline" ? "#C084FC" : "#5A6A8A",
-                background: mode === "pipeline" ? "rgba(192,132,252,0.08)" : "transparent",
-                border: `1px solid ${mode === "pipeline" ? "rgba(192,132,252,0.2)" : "rgba(255,255,255,0.04)"}`,
-              }}
-            >
-              Pipeline Verification
-              <span className="ml-2 text-[11px] opacity-50">Output Validation</span>
-            </button>
-            <button
-              onClick={() => switchMode("ratchet")}
-              className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-              style={{
-                color: mode === "ratchet" ? "#F5C542" : "#5A6A8A",
-                background: mode === "ratchet" ? "rgba(245,197,66,0.08)" : "transparent",
-                border: `1px solid ${mode === "ratchet" ? "rgba(245,197,66,0.2)" : "rgba(255,255,255,0.04)"}`,
-              }}
-            >
-              Ratchet
-              <span className="ml-2 text-[11px] opacity-50">Dev Workflow</span>
-            </button>
-          </div>
+          <TabBar
+            variant="pill"
+            tabs={[
+              { id: "agentic", label: "Agentic Safety", color: "#4ECDC4" },
+              { id: "pipeline", label: "Pipeline Verification", color: "#C084FC" },
+              { id: "ratchet", label: "Ratchet", color: "#F5C542" },
+            ]}
+            activeId={mode}
+            onSelect={(id) => switchMode(id as "pipeline" | "agentic" | "ratchet")}
+          />
         </ScrollReveal>
 
         {mode !== "ratchet" ? (

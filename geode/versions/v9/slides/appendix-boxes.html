@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt;
+  margin: 0; padding: 20pt 36pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  gap: 14pt;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- APPENDIX BOXES — 각 슬라이드에 삽입할 수 있는 독립 박스들        -->
+<!-- 디자인 결: bg=#161B22, border=#21262D, border-left accent,     -->
+<!--           body 7-8pt, caption 6pt, padding 7-9pt              -->
+<!-- ============================================================ -->
+
+
+<!-- ============================================================ -->
+<!-- BOX 1: S05 Architecture — runtime.py 5-module 분해            -->
+<!-- 삽입 위치: S05 사이드바 하단 또는 별도 카드                      -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">runtime.py 5-Module 분해 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">1,476줄 단일 파일이 장기 운용에서 변경 충돌의 병목이 되므로, OpenClaw 플러그인 패턴으로 4개 모듈을 추출하여 517줄로 축소한다.</p>
+  <div style="display: flex; gap: 4pt; flex-wrap: wrap;">
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">bootstrap.py</p>
+      <p style="font-size: 6pt; color: #8B949E;">345줄 · hooks/memory/session</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">infra.py</p>
+      <p style="font-size: 6pt; color: #8B949E;">228줄 · policies/tools/LLM</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">automation.py</p>
+      <p style="font-size: 6pt; color: #8B949E;">261줄 · L4.5 components</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">adapters.py</p>
+      <p style="font-size: 6pt; color: #8B949E;">243줄 · MCP/gateway/calendar</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 2: S05 Architecture — ContextVar DI 정리                  -->
+<!-- 삽입 위치: S05 사이드바 또는 S21 Mirror Table                   -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">ContextVar DI 정리 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">단일 소비자이거나 동일 파일 내에서만 접근하는 ContextVar 8개를 module-level 변수로 교체하여 불필요한 간접 참조를 제거한다. set_*/get_* API는 유지하여 호출부 변경이 없다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 3: S05 Architecture — infrastructure/ 삭제 + Protocol co-locate -->
+<!-- 삽입 위치: S05 사이드바                                         -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">infrastructure/ 삭제 + Protocol co-locate (v0.30)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">8개 Protocol 포트를 주 소비자 모듈 옆으로 이동하고, infrastructure/ 디렉터리 자체를 삭제한다. 구현체가 하나뿐인 Protocol(ProjectMemoryPort, OrganizationMemoryPort, UserProfilePort)은 구체 타입 직접 참조로 전환한다. SessionStorePort는 다중 구현체가 있으므로 유지한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 4: S13 LLM Failover — OpenAI Responses API 전환           -->
+<!-- 삽입 위치: S13 Provider 체인 하단                               -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">OpenAI Responses API 전환 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">OpenAIAgenticAdapter를 Chat Completions에서 Responses API(client.responses.create)로 마이그레이션한다. 네이티브 web_search 호스티드 도구를 자동 주입하고, normalize_openai_responses() 정규화기로 Anthropic 포맷과 통일한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 5: S10 Tool Dispatch 또는 S17 MCP — 3사 네이티브 웹 검색   -->
+<!-- 삽입 위치: S10 하단 또는 S17 MCP 섹션                           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">3사 네이티브 웹 검색 Fallback (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">Brave Search MCP($200/월)를 제거하고, Anthropic(web_search_20260209) → OpenAI(Responses API web_search) → GLM(glm-5 네이티브) 순차 fallback으로 전환한다. 외부 API 키 의존이 제로가 된다.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">brave_adapter.py 삭제 · catalog에서 brave-search/twitter 항목 제거</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 6: S10 Tool Dispatch — 도구 수 54 (README 기준)            -->
+<!-- 삽입 위치: S10 상단 숫자 수정 또는 별도 배지                     -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">도구 체계 (v0.32 기준)</p>
+  <div style="display: flex; gap: 8pt;">
+    <div style="text-align: center;">
+      <p style="font-size: 16pt; font-weight: bold; color: #4ECDC4;">54</p>
+      <p style="font-size: 6pt; color: #8B949E;">Native Tools</p>
+    </div>
+    <div style="text-align: center;">
+      <p style="font-size: 16pt; font-weight: bold; color: #818CF8;">44</p>
+      <p style="font-size: 6pt; color: #8B949E;">MCP Catalog</p>
+    </div>
+    <div style="text-align: center;">
+      <p style="font-size: 16pt; font-weight: bold; color: #F5C542;">46</p>
+      <p style="font-size: 6pt; color: #8B949E;">Hook Events</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">README v0.32.0 기준. definitions.json 52개 + task tools 2개 = 54 native</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 7: 장기 실행 맥락 연결 — S10 Tool Dispatch용               -->
+<!-- 삽입 위치: S10 Trade-off 위 또는 서브타이틀                     -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #EF4444;">장기 실행 맥락:</strong> 50라운드 × 평균 3.2 도구 호출/턴 = 세션당 최대 160회 도구 실행. 5-Tier Safety 없이는 WRITE/DANGEROUS 도구가 자동 실행되어 시스템을 파괴할 수 있다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 8: 장기 실행 맥락 연결 — S11 Hook System용                 -->
+<!-- 삽입 위치: S11 서브타이틀 또는 Trade-off 위                     -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #F97316;">장기 실행 맥락:</strong> 장기 세션에서 모델 성능이 점진적으로 열화하는 것을 감지하는 것이 Hook의 존재 이유이다. DRIFT_DETECTED가 CUSUM 누적 편차를 포착하고, CONTEXT_WARNING/CRITICAL이 컨텍스트 포화를 조기 경보한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 9: 장기 실행 맥락 연결 — S14 Context Compression용         -->
+<!-- 삽입 위치: S14 서브타이틀                                       -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">장기 실행 맥락:</strong> 장기 세션에서 컨텍스트 80% 도달은 시간 문제이다. 30턴 이상 지속되면 tool_result 누적으로 1M 윈도우도 절반 이상 소비된다. Provider-aware Compaction이 프로바이더별 최적 전략을 자동 선택한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 10: 장기 실행 맥락 연결 — S12 Sub-Agent용                  -->
+<!-- 삽입 위치: S12 서브타이틀                                       -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">장기 실행 맥락:</strong> 장기 세션에서 서브에이전트가 반복 스폰되면 부모 컨텍스트에 결과가 기하급수적으로 누적된다. 4096-token guard 없이 5개 서브에이전트가 각 8K를 반환하면 40K 토큰이 즉시 유입되어 컨텍스트 40%를 소비한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 11: 장기 실행 맥락 연결 — S13 LLM Failover용               -->
+<!-- 삽입 위치: S13 서브타이틀                                       -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">장기 실행 맥락:</strong> 장기 세션에서 Provider Rate Limit이 누적 호출로 발동하는 빈도가 높아진다. CircuitBreaker가 장애 Provider를 60초간 차단하고, 세션 메모리가 모델에 종속되지 않으므로 Failover 시에도 학습 내용이 유지된다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 12: 장기 실행 맥락 연결 — S16 PromptAssembler용            -->
+<!-- 삽입 위치: S16 서브타이틀                                       -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #818CF8;">장기 실행 맥락:</strong> 장기 세션에서 프롬프트가 턴마다 재조립되면 비용이 선형 증가한다. SHA-256 해시가 동일하면 재조립을 스킵하고 cache_control: ephemeral로 2회차부터 입력 비용을 90% 절감한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 13: 장기 실행 맥락 연결 — S17 MCP+Cost용                   -->
+<!-- 삽입 위치: S17 서브타이틀                                       -->
+<!-- ============================================================ -->
+<div style="background: #1E293B; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 9pt; max-width: 640pt;">
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">장기 실행 맥락:</strong> while(tool_use) 루프 특성상 LLM API 턴이 누적되어 비용이 폭발한다. TokenTracker가 매 호출의 모델/토큰/비용을 ContextVar 싱글톤으로 추적하고, budget 초과 시 자동 정지가 장기 세션의 비용 안전망이 된다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 14: S05 Architecture — single-impl Protocol 제거           -->
+<!-- 삽입 위치: S05 또는 S21 Mirror Table                           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #C084FC; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #C084FC; margin-bottom: 4pt;">single-impl Protocol 제거 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">구현체가 하나뿐인 Protocol 3개(ProjectMemoryPort, OrganizationMemoryPort, UserProfilePort)를 삭제하고, 소비자가 구체 타입을 직접 참조하도록 전환한다. 인터페이스 유지 비용보다 직접 참조의 단순함이 장기 유지보수에 유리하다.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">SessionStorePort는 InMemorySessionStore + HybridSessionStore 다중 구현체가 있으므로 유지</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 15: S09 Scheduler — Scheduler action queue 상세            -->
+<!-- 삽입 위치: S09 Scheduler 섹션                                  -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Scheduler Action Queue (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">ScheduledJob.action 필드에 원문 텍스트를 그대로 저장한다(정규식 추출 제거). SchedulerService가 job 발화 시 action_queue에 삽입하고, REPL이 [scheduled-job:{id}] 프레이밍으로 AgenticLoop에 위임한다. LLM이 자체 판단으로 스케줄 의도를 분리하여 실행한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 16: S11 Hook — TURN_COMPLETE 자동 메모리                   -->
+<!-- 삽입 위치: S11 또는 S15 Memory                                 -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">TURN_COMPLETE 자동 메모리 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">AgenticLoop 매 턴 종료 시 TURN_COMPLETE 이벤트를 발화하고, user_input + tool_calls + result 데이터를 전달한다. turn_auto_memory 핸들러(P85)가 자동으로 project memory에 턴 요약을 기록한다. OpenClaw command:new 패턴을 참조한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 17: S11 Hook — LLM_CALL_START/END                         -->
+<!-- 삽입 위치: S11 Hook categories                                 -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">LLM_CALL_START / LLM_CALL_END (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">LLM 호출 전후에 발화하여 model-level latency/cost observability를 제공한다. call_llm(), call_llm_with_tools()를 계측하고, 10초 초과 시 slow call 경고를 로깅한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 18: S09 — Cron 세션 격리 상세                              -->
+<!-- 삽입 위치: S09 Scheduler 섹션                                  -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Cron 세션 격리 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">ScheduledJob.isolated 필드(기본값 True)를 추가한다. 스케줄 발화 시 fresh ConversationContext + AgenticLoop에서 독립 실행하여 메인 대화 오염을 방지한다. isolated=False(systemEvent)로 메인 세션 주입도 가능하다.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">OpenClaw agentTurn 패턴 참조</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- NEW BOXES: v9→v10 GAP 보충 (Box 19-32)                       -->
+<!-- 출처 A: v9 삭제 슬라이드 (Box 19-23)                          -->
+<!-- 출처 B: Next.js 미반영 섹션 (Box 24-28)                       -->
+<!-- 출처 C: v13-v56 커밋 미반영 (Box 29-32)                       -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+
+
+<!-- ============================================================ -->
+<!-- BOX 19: v9 s07 삭제 — 장기 자율 실행 3대 위험 + 자동 브레이크   -->
+<!-- 삽입 위치: S10 (agentic-loop)                                  -->
+<!-- 출처: v9 s07-long-running-safety.html                         -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">장기 자율 실행 3대 위험 + 자동 브레이크 (v9 S07 → S10)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 5pt;">50라운드 무인 실행 시 3가지 위험이 발생한다. 각 위험에 대응하는 자동 브레이크가 사람 없이 장기 실행을 가능하게 한다.</p>
+  <div style="display: flex; gap: 6pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">위험1: 비용 폭발</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">50R × $0.15 = $7.50/세션. TokenTracker budget 상한 도달 시 budget_stop → PIPELINE_END 강제 발화</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">위험2: 무한 루프</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">동일 에러 3회 감지 → 수렴 판정 → Haiku→Sonnet→Opus 모델 에스컬레이션</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">위험3: 탐색 고착</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">도구 반복 5회 감지 → Hook이 hint 자동 주입 → 다른 경로 탐색 유도</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">core/orchestration/safety.py · 임계값(budget·수렴 3회·반복 5회) 사용자 조정 가능</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 20: v9 s08 삭제 — Plan-first + Provider-aware Compaction   -->
+<!-- 삽입 위치: S10 (agentic-loop) 또는 S15 (context-memory)        -->
+<!-- 출처: v9 s08-plan-compaction.html                              -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Plan-first + Provider-aware Compaction (v9 S08 → S10/S15)</p>
+  <div style="display: flex; gap: 6pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">혁신1: Plan-first</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">복잡도 판별(3+ steps) → create_plan 자발 호출 → HITL 승인 게이트. 잘못된 방향으로 50R 소모를 사전 차단한다.</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">LLM.create_plan() → plan_id → user_approval_gate</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">혁신2: Provider-aware Compaction</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.4;">80% 포화 시 프로바이더별 분기. Anthropic: 서버사이드 compact_20260112(품질 최상). OpenAI/GLM: 클라이언트사이드 LLM 요약 압축(범용).</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">context_action.py → provider_strategy()</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 21: v9 s20 삭제 — Eco² → GEODE → REODE 패턴 진화          -->
+<!-- 삽입 위치: S19 (domain-portability)                            -->
+<!-- 출처: v9 s20-eco2-evolution.html                               -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Eco² → GEODE → REODE: 패턴 진화 증거 (v9 S20 → S19)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">Eco²에서 Swiss Cheese 3-Layer 평가를 설계하며 LLM 편향 제어의 핵심을 파악. 단순 복사가 아닌 분화와 재설계로 진화한다.</p>
+  <div style="display: flex; gap: 5pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">검증 레이어</p>
+      <p style="font-size: 6pt; color: #8B949E;">Eco² 3-Layer → GEODE 5-Layer (G1-G4 분화, BiasBuster, Cross-LLM α≥0.67) → REODE 5-Gate</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">이벤트 시스템</p>
+      <p style="font-size: 6pt; color: #8B949E;">Eco² EventBus(동기) → GEODE HookSystem 46E(비동기, Priority) → REODE 상속</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">LLM 추상화</p>
+      <p style="font-size: 6pt; color: #8B949E;">Eco² LLMClientPort → GEODE Port/Adapter DI + 3-Provider CB → REODE DomainPort(코어 0줄)</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">REODE 83/83 빌드 5h48m 달성. 재사용과 재설계를 구분한 결과</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 22: v9 s26 삭제 — CHANGELOG Evolution: 40 릴리스            -->
+<!-- 삽입 위치: S25 (timeline)                                      -->
+<!-- 출처: v9 s26-changelog.html                                    -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">CHANGELOG Evolution: 40 릴리스, 6 피봇 (v9 S26 → S25)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">36일간 40개 릴리스. 각 결정에는 Why가 있고, CHANGELOG는 기록이 아니라 다음 Frontier Mining의 입력이다.</p>
+  <div style="display: flex; gap: 4pt; flex-wrap: wrap;">
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">v0.6</p>
+      <p style="font-size: 5pt; color: #8B949E;">DomainPort 도입</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">v0.10</p>
+      <p style="font-size: 5pt; color: #8B949E;">Identity Pivot</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">v0.14</p>
+      <p style="font-size: 5pt; color: #8B949E;">TokenGuard→ContextVar</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">v0.18</p>
+      <p style="font-size: 5pt; color: #8B949E;">Hook 46E 독립</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">v0.24</p>
+      <p style="font-size: 5pt; color: #8B949E;">MCP 45 auto-discovery</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">v0.31</p>
+      <p style="font-size: 5pt; color: #8B949E;">Action Summary+Gateway</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">v0.32</p>
+      <p style="font-size: 5pt; color: #8B949E;">Long-Running Harness</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">40/40 무회귀 릴리스 · 누적 1,174 커밋 · WHY를 기록하는 비용이 같은 실수 반복을 방지</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 23: v9 s32 삭제 — Harness Discipline 4축 장기 진화          -->
+<!-- 삽입 위치: S23 (summary) 또는 S24 (closing)                    -->
+<!-- 출처: v9 s32-harness-discipline.html                           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Harness Discipline: 4축 장기 진화 (v9 S32 → S23/S24)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">4축을 한 릴리스라도 건너뛰면 회귀가 쌓이기 때문에, 도구가 아닌 매 PR 습관으로 실천한다. v0.6→v0.32 26버전의 실증.</p>
+  <div style="display: flex; gap: 5pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">축1 컨텍스트</p>
+      <p style="font-size: 6pt; color: #8B949E;">90% 비용 절감. 차기: RL 기반 프롬프트 자동 최적화</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">축2 실행 루프</p>
+      <p style="font-size: 6pt; color: #8B949E;">50R, 평균 4.2R. 차기: 멀티에이전트 DAG 협업</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">축3 검증</p>
+      <p style="font-size: 6pt; color: #8B949E;">α≥0.67 합의도. 차기: RLHF Phase 5 실가동</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">축4 관측</p>
+      <p style="font-size: 6pt; color: #8B949E;">46 Hook. 차기: L3 Decide 핸들러 5개+</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">40/40 무회귀가 디시플린 비용의 수익</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- 출처 B: Next.js 포트폴리오에만 있는 섹션 (Box 24-28)           -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+
+
+<!-- ============================================================ -->
+<!-- BOX 24: Reasoning — ReAct + GoalDecomposer + Plan-and-Execute  -->
+<!-- 삽입 위치: S03 (triple-loop) 또는 S10 (agentic-loop)           -->
+<!-- 출처: src/components/geode/sections/reasoning.tsx              -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Reasoning: ReAct + GoalDecomposer (Next.js → S03/S10)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">2계층 추론 모델. ReAct(L1-L2 내부)가 OBSERVE→ACT→REFLECT 사이클을 실행하고, Plan-and-Execute(L4 외부)가 복잡 요청을 분해한다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">ReAct Inner Loop</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">OBSERVE(LLM call + context) → ACT(tool execution) → REFLECT(result → context). 도구 분류: SAFE(auto) → STANDARD(auto) → WRITE(HITL) → DANGEROUS(gate)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">Plan-and-Execute Outer</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">3+ step 요청 시 활성화. Planner → CREATE(template) → APPROVE(HITL gate) → EXECUTE(TaskSystem) → DONE(scorecard). 비용 추정: full $1.50, prospect $0.80</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">GoalDecomposer가 복잡 요청을 sub-goals로 분해하여 system prompt에 주입. REJECTED plan은 CREATE로 루프백</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 25: Automation — TriggerManager + Schedule + Drift         -->
+<!-- 삽입 위치: S12 (hook-system)                                   -->
+<!-- 출처: src/components/geode/sections/automation.tsx             -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Automation: TriggerManager + Schedule (Next.js → S12)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">3종 스케줄(AT/EVERY/CRON)과 4종 트리거(F1-F4)가 Hook 이벤트 체인으로 연결되어, Drift 감지 시 자동 재분석을 실행한다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">3 Schedule Types</p>
+      <p style="font-size: 6pt; color: #8B949E;">AT(one-time) · EVERY(fixed interval, drift-resistant) · CRON(5-field)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">4 Trigger Types (F1-F4)</p>
+      <p style="font-size: 6pt; color: #8B949E;">MANUAL(fire_manual) → SCHEDULED(check_scheduled) → EVENT(make_event_handler) → WEBHOOK(handle_webhook)</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">Drift→Trigger 루프: CUSUM → DRIFT_DETECTED → P70 DriftTrigger(재분석) → P80 DriftSnapshot → P90 DriftLogger</p>
+  <p style="font-size: 6pt; color: #8B949E;">NL Schedule Parser: "every 5 minutes during 09:00-22:00" LLM 없이 파싱. ConfigWatcher .env/config.toml hot-reload</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 26: Feedback — 5-Phase Self-Improvement Cycle              -->
+<!-- 삽입 위치: S12 (hook-system) 또는 S18 (game-ip)                -->
+<!-- 출처: src/components/geode/sections/feedback.tsx               -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Feedback: 5-Phase Self-Improvement Cycle (Next.js → S12/S18)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">자동 수집 → 통계 분석 → 개선 → 검증 → RLAIF 합성 루프로 모델 성능을 지속 향상시킨다. 성공 시 ModelRegistry에 자동 프로모션.</p>
+  <div style="display: flex; gap: 4pt; flex-wrap: wrap;">
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">P1 Collection</p>
+      <p style="font-size: 5pt; color: #8B949E;">auto scores + human + expert (min n=10)</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">P2 Analysis</p>
+      <p style="font-size: 5pt; color: #8B949E;">Spearman + CUSUM drift (4 metrics)</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">P3 Improvement</p>
+      <p style="font-size: 5pt; color: #8B949E;">rho&lt;0.5 or drift → retune weights</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">P4 Validation</p>
+      <p style="font-size: 5pt; color: #8B949E;">expected vs actual metric delta</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">P5 RLAIF</p>
+      <p style="font-size: 5pt; color: #8B949E;">합성 쌍 + 4 constitutional checks</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">4 Constitutional Principles: accuracy, calibration consistency, fairness, transparency</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 27: Scoring — PSM 6-Weight + 14-Axis Rubric 상세           -->
+<!-- 삽입 위치: S18 (game-ip)                                       -->
+<!-- 출처: src/components/geode/sections/scoring.tsx                -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Scoring: PSM 6-Weight + 14-Axis Rubric (Next.js → S18)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">PSM 복합 스코어로 IP 가치를 정량화한다. 4 Analyst가 격리 컨텍스트(Send API clean context)에서 독립 평가하고, 3 Evaluator가 집계한다.</p>
+  <div style="display: flex; gap: 6pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">PSM 6-Weight</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">Exposure 25% · Quality 20% · Momentum 20% · Recovery 18% · Growth 12% · Developer 5%</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Final = Base × (0.7 + 0.3 × confidence/100)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">14-Axis Rubric (3 Evaluators)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">Quality Judge: 8축(A-C, B1, C1-C2, M, N). Hidden Value: 3축(D, E, F). Community: 3축(J, K, L)</p>
+      <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Tier: S≥80 · A≥60 · B≥40 · C&lt;40</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">Confidence Gate ≥0.7, max 5 iterations. Fixture: Berserk 81.2(S), Cowboy Bebop 68.4(A), Ghost in the Shell 51.7(B)</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 28: Verification — Dual Trust Model 11-Layer 전체          -->
+<!-- 삽입 위치: S20 (security-gateway)                              -->
+<!-- 출처: src/components/geode/sections/verification.tsx           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">Dual Trust Model: Pipeline 6-Layer + Agentic 5-Layer (Next.js → S20)</p>
+  <div style="display: flex; gap: 6pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">Pipeline Verification (Output)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L1 Per-Agent Guardrails(G1-G4, Haiku gate)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L2 Confidence Gate(≥0.7, max 5, cortex loopback)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L3 Rights Risk(CLEAR/RESTRICTED)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L4 BiasBuster(6 biases, CV&lt;0.05 anchoring flag)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L5 Cross-LLM(α≥0.67, Krippendorff α≥0.80)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L6 Calibration(Golden Set, per-axis ±0.5)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 5pt 7pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">Agentic Safety (Input)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L1 Tool Classification(4-tier + Action Summary)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L2 HITL Levels(0=auto, 1=WRITE, 2=all)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L3 Bash Safety(safe prefix vs dangerous pattern)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L4 Cost Gate(analyze_ip $1.50, batch $5.00)</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">L5 MCP Server Approval(per-server cache)</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">Input Gating(자율 실행 안전) + Output Validation(분석 품질) = 독립적으로 동작하는 이중 신뢰 모델</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- 출처 C: v13-v56 커밋에서 PPTX 미반영 콘텐츠 (Box 29-32)       -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+
+
+<!-- ============================================================ -->
+<!-- BOX 29: CUSUM Drift 3-Zone 시각화 (v23 커밋)                   -->
+<!-- 삽입 위치: S12 (hook-system) 또는 S18 (game-ip)                -->
+<!-- 출처: feat(geode): v23 — CUSUM Drift 3-Zone 시각화             -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">CUSUM Drift 3-Zone (v23 → S12/S18)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">4개 메트릭(Spearman, α, precision, tier)에 대해 CUSUM 누적 편차를 추적하여 모델 성능 열화를 조기 감지한다.</p>
+  <div style="display: flex; gap: 5pt;">
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt; text-align: center;">
+      <p style="font-size: 10pt; font-weight: bold; color: #34D399;">NONE</p>
+      <p style="font-size: 6pt; color: #8B949E;">&lt; 2.5 · 정상</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt; text-align: center;">
+      <p style="font-size: 10pt; font-weight: bold; color: #F5C542;">WARNING</p>
+      <p style="font-size: 6pt; color: #8B949E;">2.5-4.0 · PSI 0.10-0.25</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 4pt 7pt; text-align: center;">
+      <p style="font-size: 10pt; font-weight: bold; color: #EF4444;">CRITICAL</p>
+      <p style="font-size: 6pt; color: #8B949E;">≥ 4.0 · DRIFT_DETECTED</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">CRITICAL 시 DRIFT_DETECTED hook 발화 → P70 DriftTrigger → 자동 재분석</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 30: BiasBuster 6종 바이어스 + 4-Step 교정 (v24 커밋)       -->
+<!-- 삽입 위치: S18 (game-ip) 또는 S20 (security-gateway)           -->
+<!-- 출처: feat(geode): v24 — BiasBuster 6종 바이어스 상세           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">BiasBuster 6종 바이어스 (v24 → S18/S20)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">LLM 평가에서 발생하는 6가지 인지 편향을 구조적으로 감지하고 교정한다.</p>
+  <div style="display: flex; gap: 4pt; flex-wrap: wrap; margin-bottom: 4pt;">
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">confirmation</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">recency</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">anchoring</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">position</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">verbosity</p>
+    </div>
+    <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">self_enhancement</p>
+    </div>
+  </div>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">CV &lt; 0.05 (n≥4): anchoring flag. Fast path (CV ≥ 0.10, range ≥ 0.5): LLM skip.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">4-Step 교정: RECOGNIZE → EXPLAIN → ALTER → EVALUATE</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 31: Hook Coverage Matrix — 46E × 4 Maturity (v37 커밋)     -->
+<!-- 삽입 위치: S12 (hook-system)                                   -->
+<!-- 출처: feat(geode): v37 — Hooks 아키텍처 Coverage Matrix 요약   -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Hook Coverage Matrix (v37 → S12)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">46 Events × 4 Maturity Level 매트릭스. 빈 칸은 확장 가능 영역을 나타낸다.</p>
+  <div style="display: flex; gap: 5pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 7pt; font-weight: bold; color: #8B949E;">L1 Observe</p>
+      <p style="font-size: 6pt; color: #E2E8F0;">runs.jsonl 기록</p>
+      <p style="font-size: 6pt; color: #34D399;">46/46</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React</p>
+      <p style="font-size: 6pt; color: #E2E8F0;">자동 대응</p>
+      <p style="font-size: 6pt; color: #F5C542;">28/46</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">L3 Decide</p>
+      <p style="font-size: 6pt; color: #E2E8F0;">의사결정</p>
+      <p style="font-size: 6pt; color: #F97316;">1/46</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy</p>
+      <p style="font-size: 6pt; color: #E2E8F0;">자율 학습</p>
+      <p style="font-size: 6pt; color: #EF4444;">0/46</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">L3 Decide(1/46), L4 Autonomy(0/46)가 차기 확장 영역. L1은 전체 커버</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 32: ConfigWatcher hot-reload (v17 커밋)                    -->
+<!-- 삽입 위치: S12 (hook-system)                                   -->
+<!-- 출처: feat(geode): v17 — ConfigWatcher hot-reload              -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; max-width: 320pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">ConfigWatcher hot-reload (v17 → S12)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">.env와 config.toml 변경을 감시하여 재시작 없이 바인딩을 반영한다. Gateway webhook 포트(8765) 설정, TOOL_APPROVAL 3종 훅 등이 런타임 중 변경 가능하다. 장기 세션에서 설정 변경을 위해 세션을 중단할 필요가 없어진다.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">v0.31 신규. Action Summary Tier 1과 함께 도입</p>
+</div>
+
+
+</body>
+</html>

@@ -23,111 +23,146 @@ body {
 
   <!-- Title -->
   <div style="padding: 0 36pt 6pt 36pt;">
-    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Sub-Agent: 토큰 폭발 → 4096-token Guard</h1>
-    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">병렬 서브에이전트가 부모 컨텍스트에 결과를 반환할 때 토큰이 기하급수적으로 증가하는 문제</p>
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Sub-Agent: 이중 주입 제거 + 동기/비동기 분리</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">tool_result와 announce가 같은 정보를 2회 주입하는 문제. OpenClaw 패턴 참조, 2파일 4줄로 해결</p>
   </div>
 
   <!-- Main content -->
   <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
 
-    <!-- Left: Problem → Solution flow (60%) -->
-    <div style="flex: 0 0 408pt; display: flex; flex-direction: column; gap: 8pt;">
+    <!-- Left: Problem → Before/After (58%) -->
+    <div style="flex: 0 0 390pt; display: flex; flex-direction: column; gap: 7pt;">
 
       <!-- Problem narrative -->
-      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 10pt 12pt;">
-        <p style="font-size: 9pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">PROBLEM</p>
-        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
-          "Berserk vs Ghost in the Shell 비교"처럼 병렬 서브에이전트가 각자 전체 분석을
-          부모 컨텍스트에 반환하면 토큰이 기하급수적으로 증가합니다.
-          부모의 tools·MCP·skills·memory를 전체 상속하되 출력 제어가 필요했습니다.
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444; margin-bottom: 3pt;">PROBLEM: 이중 주입 (Double Injection)</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          OpenClaw의 Spawn+Announce 패턴을 도입할 때 <strong style="color: #F5C542;">동기/비동기 분리 조건을 누락</strong>했습니다.
+          delegate_task(동기)가 tool_result로 전체 데이터를 즉시 반환하는데, 다음 라운드에서 announce가 500자 요약을 다시 주입합니다.
+          서브에이전트 3개 위임 시 6건 메시지 중 50%가 중복입니다.
         </p>
       </div>
 
-      <!-- SPAWN + ANNOUNCE pattern -->
-      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
-        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">SPAWN + ANNOUNCE 패턴 (OpenClaw 참조)</p>
-
-        <!-- Parent box -->
-        <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 6pt 10pt; text-align: center; margin-bottom: 6pt;">
-          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">부모 AgenticLoop</p>
-          <p style="font-size: 5pt; color: #8B949E;">200K context · tools 52 · MCP 44</p>
-        </div>
-
-        <!-- Arrow + spawn -->
-        <div style="text-align: center; margin-bottom: 6pt;">
-          <p style="font-size: 8pt; color: #4ECDC4;">↓ delegate() — IsolatedRunner threads</p>
-        </div>
-
-        <!-- Children -->
-        <div style="display: flex; gap: 6pt; margin-bottom: 6pt;">
-          <div style="flex: 1; background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Sub-Agent A</p>
-            <p style="font-size: 5pt; color: #8B949E;">max_rounds=10</p>
-            <p style="font-size: 5pt; color: #4ECDC4;">AgentMemoryStore (24h TTL)</p>
+      <!-- Before / After -->
+      <div style="display: flex; gap: 7pt; flex: 1;">
+        <!-- Before -->
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">BEFORE</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; color: #8B949E; margin-bottom: 2pt;">Round 3</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">경로1 <strong style="color: #4ECDC4;">tool_result</strong></p>
+            <p style="font-size: 6pt; color: #8B949E;">delegate_task 동기 반환 (전체 데이터)</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Sub-Agent B</p>
-            <p style="font-size: 5pt; color: #8B949E;">max_rounds=10</p>
-            <p style="font-size: 5pt; color: #4ECDC4;">AgentMemoryStore (24h TTL)</p>
+          <div style="text-align: center;">
+            <p style="font-size: 7pt; color: #EF4444;">↓ 같은 정보 재주입</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
-            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">Sub-Agent C</p>
-            <p style="font-size: 5pt; color: #8B949E;">max_rounds=10</p>
-            <p style="font-size: 5pt; color: #4ECDC4;">AgentMemoryStore (24h TTL)</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; color: #8B949E; margin-bottom: 2pt;">Round 4</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">경로2 <strong style="color: #F97316;">announce</strong></p>
+            <p style="font-size: 6pt; color: #8B949E;">system_event로 500자 요약 재주입</p>
+          </div>
+          <div style="background: #EF444415; border-radius: 3pt; padding: 4pt 6pt; text-align: center; margin-top: auto;">
+            <p style="font-size: 7pt; color: #EF4444; font-weight: bold;">LLM이 같은 내용 2회 수신</p>
           </div>
         </div>
 
-        <!-- Guard -->
-        <div style="background: #1E293B; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 7pt 10pt; text-align: center;">
-          <p style="font-size: 8pt; color: #E2E8F0;">결과 반환 시 <strong style="color: #F5C542;">4096-token guard</strong> → 구조화 요약으로 압축</p>
-          <p style="font-size: 5pt; color: #8B949E;">_announce_queue (thread-safe) → 부모 drain_announced_results()</p>
+        <!-- After -->
+        <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; display: flex; flex-direction: column; gap: 5pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #34D399;">AFTER</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; color: #8B949E; margin-bottom: 2pt;">Round 3</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">경로1 <strong style="color: #4ECDC4;">tool_result</strong></p>
+            <p style="font-size: 6pt; color: #8B949E;">delegate_task 동기 반환 (전체 데이터)</p>
+          </div>
+          <div style="text-align: center;">
+            <p style="font-size: 7pt; color: #34D399;">↓ announce=False</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; color: #8B949E; margin-bottom: 2pt;">Round 4</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">announce queue <strong style="color: #34D399;">비어있음</strong></p>
+            <p style="font-size: 6pt; color: #8B949E;">0건 주입. 부모 polling은 유지</p>
+          </div>
+          <div style="background: #34D39915; border-radius: 3pt; padding: 4pt 6pt; text-align: center; margin-top: auto;">
+            <p style="font-size: 7pt; color: #34D399; font-weight: bold;">정보 1회만 수신. 50% 절감</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Right sidebar (40%) -->
-    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+    <!-- Right sidebar (42%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
 
-      <!-- Concurrency controls table -->
-      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt;">
-        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">동시성 제어</p>
-        <div style="display: flex; gap: 6pt; margin-bottom: 6pt;">
-          <div style="flex: 1; background: #4ECDC420; border-radius: 4pt; padding: 8pt; text-align: center;">
-            <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4;">5</p>
-            <p style="font-size: 5pt; color: #8B949E;">MAX_CONCURRENT</p>
+      <!-- Frontier comparison -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">3종 프론티어 비교</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 4pt;">
+            <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 5pt 7pt;">
+              <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Claude Code</p>
+              <p style="font-size: 6pt; color: #8B949E;">tool_result 단일 경로</p>
+              <p style="font-size: 6pt; color: #8B949E;">announce 없음</p>
+              <p style="font-size: 6pt; color: #34D399;">이중 주입 없음</p>
+            </div>
+            <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 5pt 7pt;">
+              <p style="font-size: 6pt; font-weight: bold; color: #F97316;">OpenClaw</p>
+              <p style="font-size: 6pt; color: #8B949E;">agentTurn(동기): 콜백 직접</p>
+              <p style="font-size: 6pt; color: #8B949E;">systemEvent(비동기): announce</p>
+              <p style="font-size: 6pt; color: #34D399;">동기 시 announce 미사용</p>
+            </div>
           </div>
-          <div style="flex: 1; background: #4ECDC420; border-radius: 4pt; padding: 8pt; text-align: center;">
-            <p style="font-size: 14pt; font-weight: bold; color: #4ECDC4;">250ms</p>
-            <p style="font-size: 5pt; color: #8B949E;">CoalescingQueue dedup</p>
+          <div style="display: flex; gap: 4pt;">
+            <div style="flex: 1; background: #0D1117; border-radius: 3pt; padding: 5pt 7pt;">
+              <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">autoresearch</p>
+              <p style="font-size: 6pt; color: #8B949E;">파일 저장 (컨텍스트 차단)</p>
+              <p style="font-size: 6pt; color: #8B949E;">L1-L3: 10K→10 토큰</p>
+              <p style="font-size: 6pt; color: #34D399;">이중 주입 없음</p>
+            </div>
+            <div style="flex: 1; background: #4ECDC410; border: 1pt solid #4ECDC430; border-radius: 3pt; padding: 5pt 7pt;">
+              <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">GEODE (After)</p>
+              <p style="font-size: 6pt; color: #8B949E;">동기: tool_result만</p>
+              <p style="font-size: 6pt; color: #8B949E;">비동기: announce 유지</p>
+              <p style="font-size: 6pt; color: #34D399;">OpenClaw 패턴 채택</p>
+            </div>
           </div>
         </div>
-        <div style="display: flex; gap: 6pt;">
-          <div style="flex: 1; background: #0D1117; border-radius: 4pt; padding: 8pt; text-align: center;">
-            <p style="font-size: 14pt; font-weight: bold; color: #E2E8F0;">15</p>
-            <p style="font-size: 5pt; color: #8B949E;">max_total / session</p>
+      </div>
+
+      <!-- Concurrency controls -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">동시성 제어</p>
+        <div style="display: flex; gap: 5pt;">
+          <div style="flex: 1; background: #4ECDC420; border-radius: 4pt; padding: 6pt; text-align: center;">
+            <p style="font-size: 16pt; font-weight: bold; color: #4ECDC4;">5</p>
+            <p style="font-size: 5pt; color: #8B949E;">MAX_CONCURRENT</p>
           </div>
-          <div style="flex: 1; background: #0D1117; border-radius: 4pt; padding: 8pt; text-align: center;">
-            <p style="font-size: 14pt; font-weight: bold; color: #E2E8F0;">depth 2</p>
-            <p style="font-size: 5pt; color: #8B949E;">재귀 깊이 제한</p>
+          <div style="flex: 1; background: #4ECDC420; border-radius: 4pt; padding: 6pt; text-align: center;">
+            <p style="font-size: 12pt; font-weight: bold; color: #4ECDC4;">250ms</p>
+            <p style="font-size: 5pt; color: #8B949E;">CoalescingQueue</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border-radius: 4pt; padding: 6pt; text-align: center;">
+            <p style="font-size: 12pt; font-weight: bold; color: #E2E8F0;">2</p>
+            <p style="font-size: 5pt; color: #8B949E;">depth limit</p>
           </div>
         </div>
       </div>
 
       <!-- Trade-off -->
-      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
-        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">Trade-off: 위임의 의미를 살린다</p>
-        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
-          서브에이전트는 부모와 동일한 52 tools·44 MCP·skills·memory를 상속합니다.
-          단, <strong style="color: #EF4444;">6개 위험 도구</strong>(set_api_key, manage_auth 등)는 샌드박스로 차단합니다.
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Trade-off: 동기/비동기 경로 분리</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          Claude Code처럼 announce를 완전히 제거하면 단순하지만 비동기 경로를 포기해야 합니다.
+          OpenClaw 방식을 채택하여 <strong style="color: #F5C542;">announce 기본값 True</strong>를 유지하고,
+          동기 호출(delegate_task)에서만 <strong style="color: #34D399;">announce=False</strong>로 비활성화합니다.
+          기존 비동기 경로(systemEvent)는 그대로 작동합니다.
         </p>
-        <p style="font-size: 5pt; color: #8B949E; margin-top: 6pt;">타임아웃·API에러 → 재시도 / 검증에러 → 즉시 중단</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">변경 규모: 2파일 4줄. Open-Closed 원칙 준수</p>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
   <div style="padding: 5pt 36pt 7pt 36pt; display: flex; justify-content: space-between; align-items: center;">
-    <p style="font-size: 5pt; color: #8B949E;">sub_agent.py (530L) · IsolatedRunner + ThreadPoolExecutor · error_category: timeout/api_error=retryable, validation=not retryable</p>
+    <p style="font-size: 5pt; color: #8B949E;">sub_agent.py · delegate(announce=False) 3중 조건: announce AND _announce_enabled AND _parent_session_key</p>
     <p style="font-size: 5pt; color: #8B949E;">13 / 24</p>
   </div>
 </body>

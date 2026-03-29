@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 30pt 36pt;
+  font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column; gap: 12pt; overflow: hidden; }
+</style></head><body>
+<div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+  <div style="background: #4ECDC420; border: 1px solid #4ECDC4; border-radius: 3pt; padding: 4pt 10pt;">
+    <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">BOX 14 → S05 Architecture / S21 Mirror</p>
+  </div>
+  <p style="font-size: 8pt; color: #8B949E;">이 박스를 아래 슬라이드에 삽입</p>
+</div>
+<!-- BOX 14: S05 Architecture — single-impl Protocol 제거           -->
+<!-- 삽입 위치: S05 또는 S21 Mirror Table                           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #C084FC; border-radius: 4pt; padding: 8pt 10pt; ">
+  <p style="font-size: 8pt; font-weight: bold; color: #C084FC; margin-bottom: 4pt;">single-impl Protocol 제거 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">구현체가 하나뿐인 Protocol 3개(ProjectMemoryPort, OrganizationMemoryPort, UserProfilePort)를 삭제하고, 소비자가 구체 타입을 직접 참조하도록 전환한다. 인터페이스 유지 비용보다 직접 참조의 단순함이 장기 유지보수에 유리하다.</p>
+  <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">SessionStorePort는 InMemorySessionStore + HybridSessionStore 다중 구현체가 있으므로 유지</p>
+</div>
+
+
+<!-- ============================================================ -->
+
+</body></html>

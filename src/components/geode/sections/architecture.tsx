@@ -53,19 +53,19 @@ export function ArchitectureSection() {
   // Stagger animation plays L0 first, creating a bottom-up "stacking" effect
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-3">
-            Architecture
-          </p>
-          <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-3">
-            6-Layer Stack
-          </h2>
-          <p className="text-[#8B9CC0] max-w-lg mb-4 leading-relaxed">
-            6개 레이어, 188개 모듈. 의존성 주입으로 결합된 전 계층이{" "}
-            <code className="text-[#818CF8]/70 text-[13px]">bootstrap_geode()</code> 한 번에
-            부팅됩니다.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end md:gap-12 mb-6">
+            <div>
+              <p className="text-xs font-mono font-bold text-[#818CF8]/80 uppercase tracking-[0.2em] mb-2">Architecture</p>
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white/95">
+                6-Layer Stack
+              </h2>
+            </div>
+            <p className="text-sm text-[#A0B4D4] max-w-sm leading-relaxed mt-3 md:mt-0 md:pb-1">
+              188개 모듈. <code className="text-[#818CF8]/70">bootstrap_geode()</code> 한 번에 부팅.
+            </p>
+          </div>
         </ScrollReveal>
 
         {/* Stack container */}
@@ -84,8 +84,10 @@ export function ArchitectureSection() {
               <motion.div
                 key={layer.id}
                 variants={revealChild}
-                className="group relative flex items-center gap-4 px-5 py-3.5 border-b border-white/[0.05] first:border-b-0 cursor-default transition-all duration-300 hover:translate-x-1"
+                className="group relative flex items-center gap-4 px-5 border-b border-white/[0.05] first:border-b-0 cursor-default transition-all duration-300 hover:translate-x-1"
                 style={{
+                  paddingTop: `${10 + (5 - layers.indexOf(layer)) * 2}px`,
+                  paddingBottom: `${10 + (5 - layers.indexOf(layer)) * 2}px`,
                   background: `linear-gradient(90deg, ${layer.color}0A, transparent 40%)`,
                 }}
               >

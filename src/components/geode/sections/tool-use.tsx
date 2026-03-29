@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { TabBar } from "../ui/tab-bar";
 
 /* ── 5-Route Dispatch ── */
 const routes = [
@@ -155,26 +156,16 @@ export function ToolUseSection() {
 
         {/* ── Tab bar ── */}
         <ScrollReveal delay={0.08}>
-          <div className="flex gap-2 mb-6 flex-wrap">
-            {([
-              { id: "routes" as Tab, label: "5-Route Dispatch", color: "#4ECDC4" },
-              { id: "safety" as Tab, label: "5-Tier Safety", color: "#E87080" },
-              { id: "inventory" as Tab, label: "52 Tools Inventory", color: "#818CF8" },
-            ]).map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setActiveTab(t.id)}
-                className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-                style={{
-                  color: activeTab === t.id ? t.color : "#5A6A8A",
-                  background: activeTab === t.id ? `${t.color}08` : "transparent",
-                  border: `1px solid ${activeTab === t.id ? `${t.color}20` : "rgba(255,255,255,0.04)"}`,
-                }}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+          <TabBar
+            variant="underline"
+            tabs={[
+              { id: "routes", label: "5-Route Dispatch", color: "#4ECDC4" },
+              { id: "safety", label: "5-Tier Safety", color: "#E87080" },
+              { id: "inventory", label: "52 Tools Inventory", color: "#818CF8" },
+            ]}
+            activeId={activeTab}
+            onSelect={(id) => setActiveTab(id as Tab)}
+          />
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>

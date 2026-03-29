@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
+import { TabBar } from "../ui/tab-bar";
 
 /* ── Schedule Kinds ── */
 const kinds = [
@@ -38,19 +40,11 @@ export function SchedulerSection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#F5C542]/60 uppercase tracking-[0.25em] mb-3">
-            Scheduler
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
-            SchedulerService
-          </h2>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            시간 기반 자동화 엔진. AT(일회), EVERY(간격), CRON(표현식) 세 가지 스케줄로
-            잡을 등록하고, Active Hours와 타임존 검증을 거쳐
-            IsolatedRunner에서 격리 실행합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="minimal"
+          title="SchedulerService"
+          description="시간 기반 자동화 엔진. AT(일회), EVERY(간격), CRON(표현식) 세 가지 스케줄로 잡을 등록하고, Active Hours와 타임존 검증을 거쳐 IsolatedRunner에서 격리 실행합니다."
+        />
 
         {/* ── Schedule Kinds ── */}
         <ScrollReveal delay={0.05}>
@@ -152,26 +146,16 @@ export function SchedulerSection() {
 
         {/* ── Tab bar ── */}
         <ScrollReveal delay={0.1}>
-          <div className="flex gap-2 mb-6 flex-wrap">
-            {([
-              { id: "lifecycle" as Tab, label: "Lifecycle", color: "#818CF8" },
-              { id: "templates" as Tab, label: "Predefined Templates", color: "#F5C542" },
-              { id: "nl-parser" as Tab, label: "NL Parser", color: "#4ECDC4" },
-            ]).map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setActiveTab(t.id)}
-                className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-                style={{
-                  color: activeTab === t.id ? t.color : "#5A6A8A",
-                  background: activeTab === t.id ? `${t.color}08` : "transparent",
-                  border: `1px solid ${activeTab === t.id ? `${t.color}20` : "rgba(255,255,255,0.04)"}`,
-                }}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+          <TabBar
+            variant="underline"
+            tabs={[
+              { id: "lifecycle", label: "Lifecycle", color: "#818CF8" },
+              { id: "templates", label: "Predefined Templates", color: "#F5C542" },
+              { id: "nl-parser", label: "NL Parser", color: "#4ECDC4" },
+            ]}
+            activeId={activeTab}
+            onSelect={(id) => setActiveTab(id as Tab)}
+          />
         </ScrollReveal>
 
         <ScrollReveal delay={0.12}>

@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
 
 const phases = [
   { id: 1, name: "Collection", color: "#60A5FA", desc: "자동 스코어, 휴먼 레이팅, 전문가 피드백 수집. 통계적 파워 분석(최소 n=10, 권장 n=30)으로 충분한 샘플 확보.", detail: "auto scores + human ratings + expert feedback" },
@@ -14,18 +15,11 @@ export function FeedbackSection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#F5C542]/60 uppercase tracking-[0.25em] mb-3">
-            Feedback Loop
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            5-Phase Self-Improvement
-          </h2>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            파이프라인 실행 결과를 수집, 분석, 개선, 검증, RLAIF 5단계로 순환하여
-            스코어링 정확도를 자율적으로 개선합니다. 성공 시 ModelRegistry에 프로모션합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="minimal"
+          title="5-Phase Self-Improvement"
+          description="파이프라인 실행 결과를 수집, 분석, 개선, 검증, RLAIF 5단계로 순환하여 스코어링 정확도를 자율적으로 개선합니다. 성공 시 ModelRegistry에 프로모션합니다."
+        />
 
         {/* 5-Phase SVG */}
         <ScrollReveal delay={0.1}>

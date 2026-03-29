@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
 
 /* ── Role badge colors ── */
 const roleMeta: Record<string, { label: string; bg: string }> = {
@@ -85,23 +86,13 @@ export function ContextTiersSection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#F5C542]/60 uppercase tracking-[0.25em] mb-3">
-            Context Hierarchy
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            Context Hierarchy
-          </h2>
-          <p className="text-lg text-white/40 font-semibold mb-4">
-            3-Tier 경로 + 5-Tier 런타임 메모리
-          </p>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
-            Claude Code의 <code className="text-[#818CF8]/70">~/.claude/</code> 패턴을 참조하여
-            사용자 데이터와 프로젝트 데이터를 3계층으로 분리.
-            config.toml은 Global → Project cascade 로딩으로 동작하며,
-            기존 경로에서 자동 fallback으로 backward-compat을 유지합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="quote"
+          labelColor="#F5C542"
+          title="Context Hierarchy"
+          subtitle="3-Tier 경로 + 5-Tier 런타임 메모리"
+          description="Claude Code의 ~/.claude/ 패턴을 참조하여 사용자 데이터와 프로젝트 데이터를 3계층으로 분리. config.toml은 Global > Project cascade 로딩으로 동작하며, 기존 경로에서 자동 fallback으로 backward-compat을 유지합니다."
+        />
 
         {/* ── Data flow SVG ── */}
         <ScrollReveal delay={0.1}>

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
+import { TabBar } from "../ui/tab-bar";
 
 /* ── Channel types ── */
 type Channel = "slack" | "webhook" | "mcp";
@@ -64,19 +66,12 @@ export function HeadlessSection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-3">
-            Headless Execution
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
-            Daemon Mode
-          </h2>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
-            <code className="text-[#818CF8]/70">geode serve --poll 3.0</code> 한 줄이면 데몬으로 상시 대기.
-            Slack, Webhook, MCP 세 채널을 동시에 수신하며, 모든 요청은
-            hitl_level=0 자율 모드로 실행합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="quote"
+          labelColor="#818CF8"
+          title="Daemon Mode"
+          description="geode serve --poll 3.0 한 줄이면 데몬으로 상시 대기. Slack, Webhook, MCP 세 채널을 동시에 수신하며, hitl_level=0 자율 모드로 실행합니다."
+        />
 
         {/* ── Serve architecture SVG ── */}
         <ScrollReveal delay={0.05}>
@@ -160,22 +155,12 @@ export function HeadlessSection() {
 
         {/* ── Channel selector ── */}
         <ScrollReveal delay={0.08}>
-          <div className="flex gap-2 mb-8 flex-wrap">
-            {channels.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setActive(c.id)}
-                className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-                style={{
-                  color: active === c.id ? c.color : "#5A6A8A",
-                  background: active === c.id ? `${c.color}08` : "transparent",
-                  border: `1px solid ${active === c.id ? `${c.color}20` : "rgba(255,255,255,0.04)"}`,
-                }}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
+          <TabBar
+            variant="pill"
+            tabs={channels.map((c) => ({ id: c.id, label: c.label, color: c.color }))}
+            activeId={active}
+            onSelect={(id) => setActive(id as Channel)}
+          />
         </ScrollReveal>
 
         {/* ── Channel detail ── */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
 
 /* ── PSM 6-Weight Components ── */
 const weights = [
@@ -164,20 +165,13 @@ export function ScoringSection() {
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,197,66,0.015)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#F5C542]/60 uppercase tracking-[0.25em] mb-3">
-            Scoring
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-2">
-            PSM 6-Weight Composite
-          </h2>
-          <p className="text-lg text-white/40 font-semibold mb-4">14축 루브릭 × 3 Evaluator</p>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
-            4명의 Analyst가 Send API clean context(이전 분석 결과를 보지 않는 격리 환경)에서 14축을 독립 평가하고,
-            3명의 Evaluator가 교차 집계합니다. 6개 가중치로 합산 후 Confidence Multiplier(0.7 + 0.3 × confidence/100)를 적용하여 Tier를 산출합니다.
-            confidence &lt; 0.7이면 Gather 노드로 loopback하여 최대 5회 반복합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="side"
+          label="Scoring"
+          labelColor="#F5C542"
+          title="PSM 6-Weight Composite"
+          description="4명 Analyst(Clean Context) × 14축 독립 평가, 3명 Evaluator 교차 집계. 6-Weight 합산 + Confidence Multiplier. confidence < 0.7이면 최대 5회 loopback."
+        />
 
         {/* ── Radar: expands from center to weight positions ── */}
         <ScrollReveal delay={0.1}>

@@ -1,0 +1,24 @@
+<!DOCTYPE html><html><head><style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 30pt 36pt;
+  font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column; gap: 12pt; overflow: hidden; }
+</style></head><body>
+<div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 4pt;">
+  <div style="background: #4ECDC420; border: 1px solid #4ECDC4; border-radius: 3pt; padding: 4pt 10pt;">
+    <p style="font-size: 10pt; font-weight: bold; color: #4ECDC4;">BOX 16 → S11 Hook / S15 Memory</p>
+  </div>
+  <p style="font-size: 8pt; color: #8B949E;">이 박스를 아래 슬라이드에 삽입</p>
+</div>
+<!-- BOX 16: S11 Hook — TURN_COMPLETE 자동 메모리                   -->
+<!-- 삽입 위치: S11 또는 S15 Memory                                 -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt; ">
+  <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">TURN_COMPLETE 자동 메모리 (v0.31)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">AgenticLoop 매 턴 종료 시 TURN_COMPLETE 이벤트를 발화하고, user_input + tool_calls + result 데이터를 전달한다. turn_auto_memory 핸들러(P85)가 자동으로 project memory에 턴 요약을 기록한다. OpenClaw command:new 패턴을 참조한다.</p>
+</div>
+
+
+<!-- ============================================================ -->
+
+</body></html>

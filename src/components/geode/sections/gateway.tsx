@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "../scroll-reveal";
+import { SectionHeader } from "../ui/section-header";
 
 /* ── 3 entry points ── */
 const entries = [
@@ -34,19 +35,13 @@ export function GatewaySection() {
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
-        <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#4ECDC4]/60 uppercase tracking-[0.25em] mb-3">
-            Gateway
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
-            3 Entry Points, 1 Core
-          </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
-            대화형 REPL, 데몬 모드 Headless, 시간 기반 Scheduler.
-            세 진입점 모두 <code className="text-[#818CF8]/70">bootstrap_geode()</code>로 초기화하고
-            <code className="text-[#4ECDC4]/70 ml-1">AgenticLoop.run()</code>으로 수렴합니다.
-          </p>
-        </ScrollReveal>
+        <SectionHeader
+          variant="side"
+          label="Gateway"
+          labelColor="#4ECDC4"
+          title="3 Entry Points, 1 Core"
+          description="대화형 REPL, 데몬 모드 Headless, 시간 기반 Scheduler. 세 진입점 모두 bootstrap_geode()로 초기화하고 AgenticLoop.run()으로 수렴합니다."
+        />
 
         {/* ── Convergence SVG ── */}
         <ScrollReveal delay={0.05}>
@@ -122,11 +117,11 @@ export function GatewaySection() {
 
         {/* ── Entry point cards ── */}
         <ScrollReveal delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {entries.map((e) => (
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            {entries.map((e, i) => (
               <div
                 key={e.id}
-                className="rounded-xl border px-5 py-5"
+                className={`rounded-xl border px-5 py-5 ${i === 0 ? "sm:col-span-2" : ""}`}
                 style={{
                   borderColor: `${e.color}15`,
                   background: `linear-gradient(160deg, ${e.color}06, transparent 70%)`,
