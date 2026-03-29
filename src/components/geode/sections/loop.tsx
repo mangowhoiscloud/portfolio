@@ -338,10 +338,10 @@ function TypingTerminal() {
 
 /* ── Stats ── */
 const loopStats = [
-  { value: "∞", label: "while True" },
-  { value: "54", label: "built-in tools" },
-  { value: "44", label: "MCP catalog" },
-  { value: "8", label: "safety guards" },
+  { value: "∞", label: "while True", sub: "" },
+  { value: "8", label: "Safety Guards", sub: "convergence · time budget · stuck · HITL" },
+  { value: "3", label: "Modes", sub: "REPL · Headless Daemon(Slack) · Scheduler" },
+  { value: "5", label: "Tool Routes", sub: "Bash · Tool · MCP · Skill · DAG" },
 ];
 
 /* ── 5+3 Safety Guards ── */
@@ -392,6 +392,7 @@ export function LoopSection() {
                   >
                     <div className="text-xl font-bold text-white/80">{s.value}</div>
                     <div className="text-[11px] font-mono text-[#7A8CA8] uppercase">{s.label}</div>
+                    {s.sub && <div className="text-[9px] font-mono text-[#4ECDC4]/50 mt-0.5">{s.sub}</div>}
                   </div>
                 ))}
               </div>

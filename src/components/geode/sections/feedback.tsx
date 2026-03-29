@@ -70,9 +70,33 @@ export function FeedbackSection() {
           </div>
         </ScrollReveal>
 
-        {/* CUSUM Drift Detection */}
+        {/* Trigger Types (F1-F4) */}
         <ScrollReveal delay={0.2}>
-          <div className="mt-8 rounded-xl border border-white/[0.04] px-5 py-4">
+          <div className="mt-8 rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
+            <div className="text-sm font-semibold text-white/70 mb-3">Trigger Types (F1-F4)</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+              {[
+                { id: "F1", name: "MANUAL",    color: "#60A5FA", desc: "사용자 직접 실행", dispatch: "fire_manual()" },
+                { id: "F2", name: "SCHEDULED",  color: "#818CF8", desc: "Cron 시간 기반",   dispatch: "check_scheduled()" },
+                { id: "F3", name: "EVENT",      color: "#4ECDC4", desc: "HookEvent 반응",   dispatch: "make_event_handler()" },
+                { id: "F4", name: "WEBHOOK",    color: "#F5C542", desc: "외부 HTTP POST",   dispatch: "handle_webhook()" },
+              ].map((t) => (
+                <div key={t.id} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${t.color}04` }}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-sm font-mono font-bold" style={{ color: t.color }}>{t.id}</span>
+                    <span className="text-xs font-semibold text-white/70">{t.name}</span>
+                  </div>
+                  <div className="text-xs text-[#7A8CA8] mb-1.5">{t.desc}</div>
+                  <code className="text-[10px] font-mono text-white/20">{t.dispatch}</code>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* CUSUM Drift Detection + Trigger Chain */}
+        <ScrollReveal delay={0.25}>
+          <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
             <div className="text-sm font-semibold text-white/70 mb-3">CUSUM Drift Detection</div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
               {[
@@ -90,8 +114,29 @@ export function FeedbackSection() {
                 </div>
               ))}
             </div>
-            <div className="text-xs text-[#7A8CA8] font-mono">
+            <div className="text-xs text-[#7A8CA8] font-mono mb-4">
               4 metrics: spearman_rho(0.50) · human_llm_alpha(0.80) · precision@10(0.60) · tier_accuracy(0.70)
+            </div>
+
+            {/* Drift → Trigger → Reanalysis chain */}
+            <div className="border-t border-white/[0.04] pt-4">
+              <div className="text-xs font-semibold text-white/50 mb-3">Drift → Trigger → Reanalysis</div>
+              <div className="space-y-1.5">
+                {[
+                  { step: "CUSUM Detector",  detail: "4 metrics 모니터링. 임계치 초과 감지",    color: "#E87080" },
+                  { step: "DRIFT_DETECTED",  detail: "HookEvent 발화 → TriggerManager 전달", color: "#F5C542" },
+                  { step: "P70 DriftTrigger", detail: "F3 EVENT trigger → 재분석 파이프라인", color: "#4ECDC4" },
+                  { step: "P80 DriftSnapshot", detail: "SnapshotManager → 상태 캡처 보존",    color: "#818CF8" },
+                  { step: "P90 DriftLogger",  detail: "구조화 로깅 → journal/errors.jsonl",   color: "#60A5FA" },
+                ].map((d, i) => (
+                  <div key={d.step} className="flex items-center gap-3">
+                    <span className="shrink-0 w-5 h-5 rounded flex items-center justify-center text-[9px] font-mono font-bold"
+                      style={{ color: d.color, background: `${d.color}10` }}>{i + 1}</span>
+                    <span className="text-xs font-medium text-white/60 w-[130px] shrink-0 font-mono">{d.step}</span>
+                    <span className="text-xs text-[#7A8CA8]">{d.detail}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </ScrollReveal>

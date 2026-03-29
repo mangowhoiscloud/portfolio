@@ -1,61 +1,36 @@
 "use client";
 
-import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 
-/* ── Gateway modes ── */
-type Mode = "slack" | "serve" | "mcp";
-
-const modes = [
+/* ── 3 entry points ── */
+const entries = [
   {
-    id: "slack" as Mode,
-    label: "Slack Gateway",
+    id: "repl",
+    label: "REPL",
+    sub: "Interactive CLI",
     color: "#4ECDC4",
-    desc: "Slack 채널에서 @geode 멘션으로 분석을 요청합니다. ChannelBinding 규칙에 따라 자동 응답하고, 쓰레드별로 멀티턴 대화를 유지합니다.",
-    flow: [
-      { step: "Slack 메시지", detail: "@geode Berserk 분석해줘" },
-      { step: "SlackPoller", detail: "MCP로 채널 히스토리 폴링" },
-      { step: "ChannelManager", detail: "바인딩 매칭 → 세션 키 생성" },
-      { step: "AgenticLoop", detail: "hitl_level=0, max_rounds=30" },
-      { step: "응답", detail: "SlackNotificationAdapter → 채널" },
-    ],
-    tags: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어", "binding hot-reload (v0.31)"],
+    desc: "Typer 기반 대화형 CLI. 슬래시 명령은 COMMAND_MAP 결정론적 디스패치, 자유 텍스트는 AgenticLoop로 직행. Rich Live Display가 파이프라인 진행을 실시간 렌더링.",
+    details: ["Typer + Rich Live", "17 Tools × 5 Category", "NL Router 자연어→CLI"],
   },
   {
-    id: "serve" as Mode,
-    label: "Headless Serve",
+    id: "headless",
+    label: "Headless",
+    sub: "geode serve",
     color: "#818CF8",
-    desc: "geode serve --poll 3.0 명령으로 REPL 없이 데몬 모드로 실행합니다. Slack/Discord/Telegram 폴러와 Webhook을 동시에 가동합니다.",
-    flow: [
-      { step: "bootstrap", detail: "domain, memory, MCP, skills 초기화" },
-      { step: "gateway 빌드", detail: "MCP startup + 바인딩 로드" },
-      { step: "폴러 시작", detail: "Slack/Discord/Telegram 병렬 쓰레드" },
-      { step: "webhook", detail: "HTTP POST :8765 (선택)" },
-      { step: "signal", detail: "SIGINT/SIGTERM → graceful shutdown" },
-    ],
-    tags: ["데몬 모드", "multi-poller", "Webhook :8765", "3-provider web search fallback"],
+    desc: "REPL 없이 데몬 모드 실행. ChannelManager가 Slack/Discord/Telegram 폴러와 Webhook을 동시 가동. hitl_level=0 자율 실행.",
+    details: ["ChannelBinding 라우팅", "FastMCP 6 Tools", "Webhook :8765"],
   },
   {
-    id: "mcp" as Mode,
-    label: "MCP Server",
+    id: "scheduler",
+    label: "Scheduler",
+    sub: "AT / EVERY / CRON",
     color: "#F5C542",
-    desc: "FastMCP 기반 6개 도구를 외부에 노출합니다. Gateway와 CLI 모두 이 MCP 서버를 통해 파이프라인에 접근합니다.",
-    flow: [
-      { step: "analyze_ip", detail: "전체 파이프라인 실행" },
-      { step: "quick_score", detail: "스코어링만 (dry-run)" },
-      { step: "get_ip_signals", detail: "커뮤니티 시그널 조회" },
-      { step: "query_memory", detail: "프로젝트 메모리 검색" },
-      { step: "list_fixtures", detail: "분석 가능 IP 목록" },
-      { step: "get_health", detail: "파이프라인 + 프로바이더 상태" },
-    ],
-    tags: ["FastMCP", "6 Tools", "2 Resources", "config.toml 단일 진실 소스"],
+    desc: "시간/간격/크론 기반 자동 실행. action_queue에 잡을 투입하고 IsolatedRunner가 데몬 쓰레드에서 크래시 격리 실행.",
+    details: ["NL Schedule Parser", "Active Hours (TZ)", "IsolatedRunner 격리"],
   },
 ];
 
 export function GatewaySection() {
-  const [activeMode, setActiveMode] = useState<Mode>("slack");
-  const mode = modes.find((m) => m.id === activeMode)!;
-
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -64,109 +39,114 @@ export function GatewaySection() {
             Gateway
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
-            Headless Execution
+            3 Entry Points, 1 Core
           </h2>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
-            CLI 없이도 Slack 멘션, HTTP Webhook, MCP 호출로 GEODE 파이프라인을 실행합니다.
-            <code className="text-[#818CF8]/70 ml-1">geode serve</code> 한 번이면 데몬 모드로 상시 대기합니다.
+            대화형 REPL, 데몬 모드 Headless, 시간 기반 Scheduler.
+            세 진입점 모두 <code className="text-[#818CF8]/70">bootstrap_geode()</code>로 초기화하고
+            <code className="text-[#4ECDC4]/70 ml-1">AgenticLoop.run()</code>으로 수렴합니다.
           </p>
         </ScrollReveal>
 
-        {/* ── Mode selector ── */}
+        {/* ── Convergence SVG ── */}
         <ScrollReveal delay={0.05}>
-          <div className="flex gap-2 mb-8 flex-wrap">
-            {modes.map((m) => (
-              <button
-                key={m.id}
-                onClick={() => setActiveMode(m.id)}
-                className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
-                style={{
-                  color: activeMode === m.id ? m.color : "#5A6A8A",
-                  background: activeMode === m.id ? `${m.color}08` : "transparent",
-                  border: `1px solid ${activeMode === m.id ? `${m.color}20` : "rgba(255,255,255,0.04)"}`,
-                }}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-        </ScrollReveal>
-
-        {/* ── Gateway Architecture SVG ── */}
-        <ScrollReveal delay={0.08}>
-          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-            <svg viewBox="0 0 760 170" className="w-full min-w-[560px]" style={{ maxHeight: 200 }}>
+          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-10">
+            <svg viewBox="0 0 760 150" className="w-full min-w-[560px]" style={{ maxHeight: 180 }}>
               {[
-                { label: "Slack", y: 30, color: "#4ECDC4" },
-                { label: "Webhook", y: 80, color: "#F5C542" },
-                { label: "MCP", y: 130, color: "#818CF8" },
+                { label: "REPL", y: 15, color: "#4ECDC4" },
+                { label: "Headless", y: 60, color: "#818CF8" },
+                { label: "Scheduler", y: 105, color: "#F5C542" },
               ].map((s) => (
                 <g key={s.label}>
-                  <rect x={20} y={s.y} width={80} height={36} rx={8} fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.35} />
-                  <text x={60} y={s.y + 22} textAnchor="middle" fill={s.color} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
-                  <path d={`M100,${s.y + 18} C120,${s.y + 18} 140,85 160,85`} stroke={s.color} strokeOpacity={0.28} strokeWidth={1} fill="none" />
+                  <rect x={20} y={s.y} width={90} height={32} rx={8}
+                    fill="#0A0F1A" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.4} />
+                  <text x={65} y={s.y + 20} textAnchor="middle" fill={s.color}
+                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                    {s.label}
+                  </text>
+                  <path d={`M110,${s.y + 16} C140,${s.y + 16} 160,76 185,76`}
+                    stroke={s.color} strokeOpacity={0.3} strokeWidth={1} fill="none" />
                 </g>
               ))}
-              <rect x={160} y={55} width={120} height={60} rx={10} fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={220} y={78} textAnchor="middle" fill="#F4B8C8" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>ChannelMgr</text>
-              <text x={220} y={95} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.35} fontSize={8} fontFamily="ui-monospace, monospace">binding match</text>
-              <path d="M280,85 C295,80 315,80 330,85" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
-              <rect x={330} y={55} width={100} height={60} rx={10} fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.35} />
-              <text x={380} y={78} textAnchor="middle" fill="#C084FC" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>SessionStore</text>
-              <text x={380} y={95} textAnchor="middle" fill="#C084FC" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">멀티턴</text>
-              <path d="M430,85 C445,80 465,80 480,85" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
-              <rect x={480} y={50} width={120} height={70} rx={10} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} />
-              <text x={540} y={78} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
-              <text x={540} y={95} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace">hitl=0, 30 rounds</text>
-              <path d="M600,85 C615,80 635,80 650,85" stroke="white" strokeOpacity={0.22} strokeWidth={1} fill="none" />
-              <rect x={650} y={60} width={90} height={50} rx={10} fill="#0C1220" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0.35} />
-              <text x={695} y={82} textAnchor="middle" fill="#34D399" fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>Response</text>
-              <text x={695} y={97} textAnchor="middle" fill="#34D399" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">→ channel</text>
-              <text x={380} y={22} textAnchor="middle" fill="white" fillOpacity={0.28} fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">INBOUND → ROUTE → SESSION → LOOP → RESPOND</text>
+
+              <rect x={185} y={46} width={130} height={60} rx={10}
+                fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />
+              <text x={250} y={70} textAnchor="middle" fill="#F4B8C8"
+                fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                bootstrap_geode()
+              </text>
+              <text x={250} y={88} textAnchor="middle" fill="#F4B8C8" fillOpacity={0.4}
+                fontSize={8} fontFamily="ui-monospace, monospace">
+                env + domain + MCP + skills
+              </text>
+
+              <path d="M315,76 C335,76 345,76 365,76" stroke="white" strokeOpacity={0.25} strokeWidth={1.2} fill="none" />
+              <text x={340} y={68} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={12}>→</text>
+
+              <rect x={365} y={41} width={140} height={70} rx={10}
+                fill="#0C1220" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.5} />
+              <text x={435} y={68} textAnchor="middle" fill="#4ECDC4"
+                fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                AgenticLoop
+              </text>
+              <text x={435} y={86} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
+                fontSize={8} fontFamily="ui-monospace, monospace">
+                while(tool_use) 50R
+              </text>
+              <text x={435} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
+                fontSize={7} fontFamily="ui-monospace, monospace">
+                5 termination paths
+              </text>
+
+              <path d="M505,76 C525,76 535,76 555,76" stroke="white" strokeOpacity={0.25} strokeWidth={1.2} fill="none" />
+              <text x={530} y={68} textAnchor="middle" fill="white" fillOpacity={0.3} fontSize={12}>→</text>
+
+              <rect x={555} y={46} width={120} height={60} rx={10}
+                fill="#0C1220" stroke="#C084FC" strokeWidth={0.8} strokeOpacity={0.35} />
+              <text x={615} y={70} textAnchor="middle" fill="#C084FC"
+                fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
+                52 Tools + MCP
+              </text>
+              <text x={615} y={88} textAnchor="middle" fill="#C084FC" fillOpacity={0.4}
+                fontSize={8} fontFamily="ui-monospace, monospace">
+                LangGraph Pipeline
+              </text>
+
+              <text x={380} y={12} textAnchor="middle" fill="white" fillOpacity={0.25}
+                fontSize={9} fontFamily="ui-monospace, monospace" letterSpacing="0.1em">
+                ENTRY → BOOTSTRAP → LOOP → EXECUTE
+              </text>
             </svg>
           </div>
         </ScrollReveal>
 
+        {/* ── Entry point cards ── */}
         <ScrollReveal delay={0.1}>
-          <div
-            className="rounded-xl border px-5 sm:px-6 py-5 transition-all duration-300 mb-8"
-            style={{
-              borderColor: `${mode.color}20`,
-              background: `linear-gradient(135deg, ${mode.color}06, transparent 60%)`,
-            }}
-          >
-            <p className="text-sm text-[#8B9CC0] leading-relaxed mb-5">
-              {mode.desc}
-            </p>
-
-            {/* Flow steps */}
-            <div className="space-y-2 mb-4">
-              {mode.flow.map((f, i) => (
-                <div key={f.step} className="flex items-center gap-3">
-                  <span
-                    className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
-                    style={{ color: mode.color, background: `${mode.color}10` }}
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="text-sm font-medium text-white/70 w-[120px] sm:w-[140px] shrink-0">{f.step}</span>
-                  <span className="text-sm text-[#7A8CA8]">{f.detail}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {entries.map((e) => (
+              <div
+                key={e.id}
+                className="rounded-xl border px-5 py-5"
+                style={{
+                  borderColor: `${e.color}15`,
+                  background: `linear-gradient(160deg, ${e.color}06, transparent 70%)`,
+                }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-base font-mono font-bold" style={{ color: e.color }}>{e.label}</span>
+                  <span className="text-[10px] font-mono text-white/30">{e.sub}</span>
                 </div>
-              ))}
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1.5">
-              {mode.tags.map((t) => (
-                <span
-                  key={t}
-                  className="px-2 py-0.5 rounded text-[11px] font-mono"
-                  style={{ color: `${mode.color}80`, background: `${mode.color}08`, border: `1px solid ${mode.color}15` }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+                <p className="text-xs text-[#8B9CC0] leading-relaxed mb-3">{e.desc}</p>
+                <div className="space-y-1">
+                  {e.details.map((d) => (
+                    <div key={d} className="flex items-center gap-2">
+                      <div className="w-1 h-1 rounded-full" style={{ background: e.color, opacity: 0.5 }} />
+                      <span className="text-[11px] font-mono text-white/40">{d}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </ScrollReveal>
       </div>

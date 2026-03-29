@@ -166,15 +166,35 @@ function OnionDiagram({
   );
 }
 
+/* ── Ratchet Workflow (Dev Quality) ── */
+const ratchetSteps = [
+  { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장." },
+  { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류." },
+  { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?" },
+  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,344+ pass)." },
+  { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입." },
+  { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증." },
+  { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함." },
+  { id: 7, name: "Rebuild",           color: "#E87080", desc: "geode serve 종료 → uv tool install → 버전 확인 → serve 재시작." },
+  { id: 8, name: "Board + Clear",     color: "#818CF8", desc: "In Progress → Done. 워크트리 정리. 컨텍스트 클리어." },
+];
+
+const qualityGates = [
+  { gate: "Lint",  cmd: "uv run ruff check core/ tests/", criteria: "0 errors",    color: "#34D399" },
+  { gate: "Type",  cmd: "uv run mypy core/",              criteria: "0 errors",    color: "#818CF8" },
+  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,344+ pass", color: "#4ECDC4" },
+  { gate: "E2E",   cmd: 'geode analyze "Cowboy Bebop" --dry-run', criteria: "A (68.4)", color: "#F5C542" },
+];
+
 /* ── Section ── */
 export function VerificationSection() {
-  const [mode, setMode] = useState<"pipeline" | "agentic">("pipeline");
+  const [mode, setMode] = useState<"pipeline" | "agentic" | "ratchet">("pipeline");
   const [activeLayer, setActiveLayer] = useState(0);
 
   const layers = mode === "pipeline" ? pipelineLayers : agenticLayers;
   const active = layers[activeLayer];
 
-  function switchMode(m: "pipeline" | "agentic") {
+  function switchMode(m: "pipeline" | "agentic" | "ratchet") {
     setMode(m);
     setActiveLayer(0);
   }
@@ -227,70 +247,152 @@ export function VerificationSection() {
               Pipeline Verification
               <span className="ml-2 text-[11px] opacity-50">Output Validation</span>
             </button>
+            <button
+              onClick={() => switchMode("ratchet")}
+              className="px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-300"
+              style={{
+                color: mode === "ratchet" ? "#F5C542" : "#5A6A8A",
+                background: mode === "ratchet" ? "rgba(245,197,66,0.08)" : "transparent",
+                border: `1px solid ${mode === "ratchet" ? "rgba(245,197,66,0.2)" : "rgba(255,255,255,0.04)"}`,
+              }}
+            >
+              Ratchet
+              <span className="ml-2 text-[11px] opacity-50">Dev Workflow</span>
+            </button>
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 items-center">
-            {/* Left — Onion diagram */}
-            <OnionDiagram layers={layers} activeLayer={activeLayer} onHover={setActiveLayer} />
+        {mode !== "ratchet" ? (
+          <ScrollReveal delay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 items-center">
+              {/* Left — Onion diagram */}
+              <OnionDiagram layers={layers} activeLayer={activeLayer} onHover={setActiveLayer} />
 
-            {/* Right — Active layer detail */}
-            <div className="space-y-4">
-              {/* Layer selector tabs */}
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {layers.map((layer, i) => (
-                  <button
-                    key={layer.tier}
-                    onMouseEnter={() => setActiveLayer(i)}
-                    onClick={() => setActiveLayer(i)}
-                    className="px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all duration-300"
-                    style={{
-                      color: activeLayer === i ? active.accent : "#5A6A8A",
-                      background: activeLayer === i ? `${layer.accent}10` : "transparent",
-                      border: `1px solid ${activeLayer === i ? `${layer.accent}25` : "transparent"}`,
-                    }}
-                  >
-                    L{layer.tier}
-                  </button>
-                ))}
-              </div>
-
-              {/* Detail card */}
-              <div
-                className="rounded-xl border px-5 py-4 transition-all duration-300"
-                style={{
-                  borderColor: `${active.accent}15`,
-                  background: `linear-gradient(135deg, ${active.accent}05, transparent 60%)`,
-                }}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-semibold text-sm" style={{ color: `${active.accent}D0` }}>
-                    {active.title}
-                  </span>
-                </div>
-                <p className="text-sm text-[#8B9CC0] leading-relaxed mb-3">
-                  {active.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {active.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono"
+              {/* Right — Active layer detail */}
+              <div className="space-y-4">
+                {/* Layer selector tabs */}
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {layers.map((layer, i) => (
+                    <button
+                      key={layer.tier}
+                      onMouseEnter={() => setActiveLayer(i)}
+                      onClick={() => setActiveLayer(i)}
+                      className="px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all duration-300"
                       style={{
-                        color: `${active.accent}80`,
-                        background: `${active.accent}08`,
-                        border: `1px solid ${active.accent}15`,
+                        color: activeLayer === i ? active.accent : "#5A6A8A",
+                        background: activeLayer === i ? `${layer.accent}10` : "transparent",
+                        border: `1px solid ${activeLayer === i ? `${layer.accent}25` : "transparent"}`,
                       }}
                     >
-                      {item}
-                    </span>
+                      L{layer.tier}
+                    </button>
                   ))}
+                </div>
+
+                {/* Detail card */}
+                <div
+                  className="rounded-xl border px-5 py-4 transition-all duration-300"
+                  style={{
+                    borderColor: `${active.accent}15`,
+                    background: `linear-gradient(135deg, ${active.accent}05, transparent 60%)`,
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-semibold text-sm" style={{ color: `${active.accent}D0` }}>
+                      {active.title}
+                    </span>
+                  </div>
+                  <p className="text-sm text-[#8B9CC0] leading-relaxed mb-3">
+                    {active.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {active.items.map((item) => (
+                      <span
+                        key={item}
+                        className="px-2 py-0.5 rounded text-[11px] font-mono"
+                        style={{
+                          color: `${active.accent}80`,
+                          background: `${active.accent}08`,
+                          border: `1px solid ${active.accent}15`,
+                        }}
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        ) : (
+          /* ── Ratchet Workflow ── */
+          <ScrollReveal delay={0.1}>
+            <div>
+              {/* Workflow pipeline SVG */}
+              <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
+                <svg viewBox="0 0 820 80" className="w-full min-w-[700px]" style={{ maxHeight: 100 }}>
+                  {ratchetSteps.map((s, i) => {
+                    const x = 5 + i * 90;
+                    return (
+                      <g key={s.id}>
+                        <rect x={x} y={18} width={78} height={38} rx={8}
+                          fill="#0C1220" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.45} />
+                        <text x={x + 39} y={34} textAnchor="middle" fill={s.color}
+                          fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                          {s.id}
+                        </text>
+                        <text x={x + 39} y={47} textAnchor="middle" fill={s.color} fillOpacity={0.6}
+                          fontSize={6.5} fontFamily="ui-monospace, monospace">
+                          {s.name.length > 12 ? s.name.split(" ").slice(0, 2).join(" ") : s.name}
+                        </text>
+                        {i < 8 && (
+                          <path d={`M${x + 78},37 L${x + 83},37`}
+                            stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
+                        )}
+                      </g>
+                    );
+                  })}
+                  {/* Loopback: 8 → 0 */}
+                  <path d="M815,56 C820,70 5,70 5,56" fill="none"
+                    stroke="#F5C542" strokeOpacity={0.2} strokeWidth={0.8} strokeDasharray="3 2" />
+                  <text x={410} y={75} textAnchor="middle" fill="#F5C542" fillOpacity={0.35}
+                    fontSize={6} fontFamily="ui-monospace, monospace">next iteration</text>
+                </svg>
+              </div>
+
+              {/* Step details */}
+              <div className="space-y-2 mb-8">
+                {ratchetSteps.map((s) => (
+                  <div key={s.id} className="flex items-start gap-3 px-4 py-2.5 rounded-lg border border-white/[0.04]"
+                    style={{ background: `${s.color}03` }}>
+                    <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
+                      style={{ color: s.color, background: `${s.color}10` }}>{s.id}</span>
+                    <span className="text-sm font-medium text-white/70 w-[130px] sm:w-[150px] shrink-0">{s.name}</span>
+                    <span className="text-sm text-[#7A8CA8]">{s.desc}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quality Gates */}
+              <div className="rounded-xl border border-white/[0.04] px-5 py-4">
+                <div className="text-sm font-semibold text-white/70 mb-3">Quality Gates (Step 3 반복)</div>
+                <div className="space-y-2">
+                  {qualityGates.map((g) => (
+                    <div key={g.gate} className="flex items-center gap-4 px-3 py-2 rounded-lg border border-white/[0.03]"
+                      style={{ background: `${g.color}03` }}>
+                      <span className="shrink-0 w-10 text-center text-xs font-mono font-bold" style={{ color: g.color }}>{g.gate}</span>
+                      <code className="text-xs font-mono text-white/40 flex-1">{g.cmd}</code>
+                      <span className="shrink-0 text-xs font-mono font-bold" style={{ color: g.color }}>{g.criteria}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-[#7A8CA8] font-mono mt-3">
+                  CANNOT: lint/type/test 실패 상태로 커밋 금지. 플레이스홀더(XXXX) 금지. 측정값만 기록.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

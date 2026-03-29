@@ -3,6 +3,23 @@
 import { useState } from "react";
 import { ScrollReveal } from "../scroll-reveal";
 
+/* ── Role badge colors ── */
+const roleMeta: Record<string, { label: string; bg: string }> = {
+  credential: { label: "credential", bg: "#E8708018" },
+  config:     { label: "config",     bg: "#818CF818" },
+  registry:   { label: "registry",   bg: "#C084FC18" },
+  profile:    { label: "profile",    bg: "#F4B8C818" },
+  log:        { label: "log",        bg: "#60A5FA18" },
+  audit:      { label: "audit",      bg: "#34D39918" },
+  cache:      { label: "cache",      bg: "#F5C54218" },
+  state:      { label: "state",      bg: "#4ECDC418" },
+  memory:     { label: "memory",     bg: "#F4B8C818" },
+  rule:       { label: "rule",       bg: "#E8708018" },
+  skill:      { label: "skill",      bg: "#818CF818" },
+  report:     { label: "report",     bg: "#C084FC18" },
+  index:      { label: "index",      bg: "#4ECDC418" },
+};
+
 /* ── 3-Tier structure with data flow ── */
 const tiers = [
   {
@@ -12,13 +29,18 @@ const tiers = [
     scope: "Global",
     desc: "사용자 전역 데이터. 프로젝트에 독립적인 자격증명, 모델 레지스트리, 사용량 추적. 모든 프로젝트가 공유하는 단일 진실 소스.",
     dirs: [
-      { name: "vault/", purpose: "API 키, 자격증명. 프로젝트 간 공유", color: "#E87080" },
-      { name: "models/", purpose: "모델 레지스트리. 버전 관리 + 프로모션 이력", color: "#C084FC" },
-      { name: "identity/", purpose: "사용자 프로필. 선호 설정, 언어, 타임존", color: "#F4B8C8" },
-      { name: "runs/", purpose: "전체 실행 이력. 크로스 프로젝트 통계", color: "#60A5FA" },
-      { name: "usage/", purpose: "API 사용량. per-model 토큰/비용 추적", color: "#F5C542" },
-      { name: "mcp/", purpose: "MCP 서버 설정. 글로벌 기본 서버 목록", color: "#4ECDC4" },
-      { name: "config.toml", purpose: "글로벌 기본값. cascade 베이스 레이어", color: "#818CF8" },
+      { name: ".env",               role: "credential", purpose: "API 키, 환경 변수. dotenv 로딩, vault/와 분리된 런타임 시크릿", color: "#E87080" },
+      { name: "vault/",             role: "credential", purpose: "아티팩트 저장소. profile/research/applications 자동 분류", color: "#E87080" },
+      { name: "config.toml",        role: "config",     purpose: "글로벌 기본값. cascade 베이스 레이어 (우선순위 4/4)", color: "#818CF8" },
+      { name: "identity/",          role: "profile",    purpose: "사용자 신원. 언어, 타임존", color: "#F4B8C8" },
+      { name: "user_profile/",      role: "profile",    purpose: "profile.md + career.toml + preferences.json + learned.md (100건 rotate)", color: "#F4B8C8" },
+      { name: "models/",            role: "registry",   purpose: "모델 레지스트리. 버전 관리 + 프로모션 이력", color: "#C084FC" },
+      { name: "mcp/",               role: "registry",   purpose: "MCP 서버 설정. 45 catalog auto-discovery", color: "#4ECDC4" },
+      { name: "runs/",              role: "log",        purpose: "RunLog JSONL. {session_key}.jsonl, 2MB/2000줄 auto-prune", color: "#60A5FA" },
+      { name: "usage/",             role: "log",        purpose: "API 사용량. per-model 토큰/비용 추적", color: "#F5C542" },
+      { name: "journal/transcripts/", role: "audit",    purpose: "세션 트랜스크립트. {slug}/{sid}.jsonl, 30일 TTL, 5MB 상한", color: "#34D399" },
+      { name: "scheduler/",         role: "state",      purpose: "jobs.json + logs/{job_id}.jsonl. 잡 정의와 실행 이력", color: "#34D399" },
+      { name: "workers/",           role: "state",      purpose: "IsolatedRunner 실행 레코드. MAX_CONCURRENT=5", color: "#60A5FA" },
     ],
     dataFlow: "읽기 전용 참조. 프로젝트별 오버라이드 가능",
   },
@@ -27,11 +49,12 @@ const tiers = [
     label: "~/.geode/projects/{id}/",
     color: "#4ECDC4",
     scope: "Per-Project",
-    desc: "프로젝트별 세션 데이터. 경로를 Claude Code 패턴으로 인코딩(/→-)하여 프로젝트 간 완전 격리. 기존 .geode/ 경로에서 자동 fallback으로 backward-compat 유지.",
+    desc: "프로젝트별 세션 데이터. 경로를 Claude Code 패턴으로 인코딩(/→-)하여 프로젝트 간 완전 격리. v0.33.0에서 session, snapshot, journal, result_cache를 workspace에서 이관. 기존 경로 자동 fallback으로 backward-compat 유지.",
     dirs: [
-      { name: "journal/", purpose: "세션 이벤트 로그. JSONL, 시간순 append-only", color: "#34D399" },
-      { name: "sessions/", purpose: "턴 히스토리. 멀티턴 대화 컨텍스트 복원용", color: "#60A5FA" },
-      { name: "snapshots/", purpose: "드리프트/디버그 캡처. 재현 가능한 상태 저장", color: "#F5C542" },
+      { name: "journal/",       role: "log",   purpose: "runs/costs/errors.jsonl + learned.md. append-only, Hook settlement 대상", color: "#34D399" },
+      { name: "sessions/",      role: "state", purpose: "체크포인트 JSON(state/messages/tools) + sessions.db SQLite WAL. 20msg trim, 72h cleanup", color: "#60A5FA" },
+      { name: "snapshots/",     role: "state", purpose: "snap-{uuid}.json. point-in-time 캡처, max 30 recent + weekly 보존", color: "#F5C542" },
+      { name: "result_cache/",  role: "cache", purpose: "IP별 분석 결과. LRU 8건, TTL 24h, content hash 검증", color: "#C084FC" },
     ],
     dataFlow: "쓰기 대상. 파이프라인/루프 실행 결과가 여기에 축적",
   },
@@ -40,15 +63,16 @@ const tiers = [
     label: "{workspace}/.geode/",
     color: "#F5C542",
     scope: "Workspace",
-    desc: "프로젝트 로컬 데이터. 코드 저장소와 함께 버전 관리. 프로젝트의 메모리, 규칙, 스킬을 담아 에이전트 행동을 프로젝트 맥락에 맞게 조율.",
+    desc: "프로젝트 로컬 데이터. 코드 저장소와 함께 버전 관리. 프로젝트의 메모리, 규칙, 스킬을 담아 에이전트 행동을 프로젝트 맥락에 맞게 조율. 세션 데이터는 v0.33.0에서 Per-Project로 이관.",
     dirs: [
-      { name: "memory/", purpose: "프로젝트 메모리. 규칙, 인사이트, 패턴 학습", color: "#F4B8C8" },
-      { name: "rules/", purpose: "커스텀 자동화 규칙. 도메인 특화 제약", color: "#E87080" },
-      { name: "skills/", purpose: "프로젝트 전용 스킬. YAML frontmatter + trigger", color: "#818CF8" },
-      { name: "reports/", purpose: "분석 리포트. IP 평가 결과 아카이브", color: "#C084FC" },
-      { name: "MEMORY.md", purpose: "메모리 인덱스. 에이전트가 매 세션 로드", color: "#4ECDC4" },
-      { name: "LEARNING.md", purpose: "학습 로그. 교정 이력, 실수 패턴 기록", color: "#34D399" },
-      { name: "config.toml", purpose: "프로젝트 오버라이드. cascade 최상위 레이어", color: "#F5C542" },
+      { name: "memory/",     role: "memory",     purpose: "PROJECT.md (200줄 context 로드) + 인사이트, 패턴 학습", color: "#F4B8C8" },
+      { name: "rules/",      role: "rule",       purpose: "도메인 규칙. YAML frontmatter glob 매칭 (anime-ip, dark-fantasy 등)", color: "#E87080" },
+      { name: "skills/",     role: "skill",      purpose: "프로젝트 전용 스킬. YAML frontmatter + trigger 패턴", color: "#818CF8" },
+      { name: "reports/",    role: "report",     purpose: "생성된 분석 리포트. IP 평가 결과 아카이브", color: "#C084FC" },
+      { name: "vault/",      role: "credential", purpose: "프로젝트 로컬 아티팩트. global vault override", color: "#E87080" },
+      { name: "MEMORY.md",   role: "index",      purpose: "메모리 인덱스. 에이전트가 매 세션 로드하는 진입점", color: "#4ECDC4" },
+      { name: "LEARNING.md", role: "memory",     purpose: "학습 로그. 교정 이력, 실수 패턴, 자동 축적", color: "#34D399" },
+      { name: "config.toml", role: "config",     purpose: "프로젝트 오버라이드. cascade 최상위 레이어 (우선순위 3/4)", color: "#F5C542" },
     ],
     dataFlow: "읽기 + 쓰기. 에이전트가 학습하며 축적",
   },
@@ -177,20 +201,33 @@ export function ContextTiersSection() {
               {tier.desc}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {tier.dirs.map((d) => (
-                <div key={d.name} className="flex items-start gap-3 px-3 py-2.5 rounded-lg border border-white/[0.04]"
-                  style={{ background: `${d.color}03` }}
-                >
-                  <div
-                    className="shrink-0 w-1.5 h-full min-h-[32px] rounded-full mt-0.5"
-                    style={{ background: d.color, opacity: 0.3 }}
-                  />
-                  <div>
-                    <code className="text-xs font-mono font-semibold text-white/70">{d.name}</code>
-                    <div className="text-xs text-[#8B9CC0] leading-relaxed mt-0.5">{d.purpose}</div>
+              {tier.dirs.map((d) => {
+                const meta = roleMeta[d.role];
+                return (
+                  <div key={d.name} className="flex items-start gap-3 px-3 py-2.5 rounded-lg border border-white/[0.04]"
+                    style={{ background: `${d.color}03` }}
+                  >
+                    <div
+                      className="shrink-0 w-1.5 h-full min-h-[32px] rounded-full mt-0.5"
+                      style={{ background: d.color, opacity: 0.3 }}
+                    />
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <code className="text-xs font-mono font-semibold text-white/70">{d.name}</code>
+                        {meta && (
+                          <span
+                            className="shrink-0 px-1.5 py-px rounded text-[9px] font-mono font-bold uppercase"
+                            style={{ color: d.color, background: meta.bg, opacity: 0.8 }}
+                          >
+                            {meta.label}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-[#8B9CC0] leading-relaxed mt-0.5">{d.purpose}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </ScrollReveal>
@@ -217,8 +254,55 @@ export function ContextTiersSection() {
           </div>
         </ScrollReveal>
 
-        {/* Project ID encoding */}
+        {/* Context Compression (Provider-aware) */}
         <ScrollReveal delay={0.25}>
+          <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
+            <div className="text-sm font-semibold text-white/70 mb-3">Context Compression (Provider-aware)</div>
+            <p className="text-xs text-[#7A8CA8] mb-4 leading-relaxed">
+              ContextMonitor가 매 라운드 토큰 사용률을 추정(4 chars/token)하고,
+              CONTEXT_WARNING(80%) / CONTEXT_CRITICAL(95%) Hook을 발화.
+              프로바이더별 전략이 분기하여 캐시 히트율 붕괴를 방지합니다.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Anthropic */}
+              <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#818CF804" }}>
+                <div className="text-xs font-mono font-bold text-[#818CF8] mb-2">Anthropic (Claude)</div>
+                <div className="space-y-1.5 text-xs text-[#8B9CC0]">
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#34D399]">0-95%</span>
+                    <span>서버사이드 처리. clear_tool_uses + compact_20260112 자동 적용</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#E87080]">95%+</span>
+                    <span>Emergency prune. first + bridge + recent N개만 보존 (클라이언트 안전망)</span>
+                  </div>
+                </div>
+              </div>
+              {/* Non-Anthropic */}
+              <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#F5C54204" }}>
+                <div className="text-xs font-mono font-bold text-[#F5C542] mb-2">OpenAI / GLM</div>
+                <div className="space-y-1.5 text-xs text-[#8B9CC0]">
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">80%+</span>
+                    <span>LLM 요약 compaction. 요약 + marker + recent 10개로 재구성</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="shrink-0 text-[10px] font-mono font-bold text-[#E87080]">95%+</span>
+                    <span>Emergency prune. adaptive_prune(budget 70%) 또는 keep_recent=5 (소형 모델)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-1.5 mt-3">
+              {["clear_tool_uses", "compact_20260112", "summarize_tool_results (>5%)", "adaptive_prune (budget 70%)", "COMPACTION_MARKER"].map((t) => (
+                <span key={t} className="px-2 py-0.5 rounded text-[10px] font-mono text-white/30 bg-white/[0.02] border border-white/[0.04]">{t}</span>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Project ID encoding */}
+        <ScrollReveal delay={0.3}>
           <div className="rounded-lg border border-white/[0.06] px-5 py-3.5 font-mono text-sm">
             <span className="text-[#7A8CA8]">Project ID 인코딩: </span>
             <span className="text-white/60">/Users/mango/workspace/geode</span>
