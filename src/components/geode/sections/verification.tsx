@@ -187,7 +187,7 @@ const ratchetSteps = [
   { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장.", descEn: "Backlog → In Progress. Allocate isolated env via git worktree. Session ownership via .owner file." },
   { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류.", descEn: "Remove already-implemented items by code inspection. Classify as Fully/Partially/Not Implemented." },
   { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?", descEn: "Socratic 5Q gate. Q1 Already exists? Q2 What breaks without it? Q3 Measurable? Q4 Minimum impl? Q5 Common in 3+ systems?" },
-  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,433+ pass).", descEn: "Code changes → repeat 3 Quality Gates. ruff (lint 0) + mypy (type 0) + pytest (3,433+ pass)." },
+  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,422+ pass).", descEn: "Code changes → repeat 3 Quality Gates. ruff (lint 0) + mypy (type 0) + pytest (3,422+ pass)." },
   { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입.", descEn: "Verify existing results unchanged via dry-run. Cowboy Bebop A (68.4). Deploy 4-persona verification team for major changes." },
   { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증.", descEn: "Sync CHANGELOG + versions across 4 files (CHANGELOG, CLAUDE.md, README, pyproject.toml). Re-verify metrics." },
   { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함.", descEn: "feature → develop → main. HEREDOC PR. CI 5/5 required. Include 'Why' rationale." },
@@ -198,7 +198,7 @@ const ratchetSteps = [
 const qualityGates = [
   { gate: "Lint",  cmd: "uv run ruff check core/ tests/", criteria: "0 errors",    color: "#34D399" },
   { gate: "Type",  cmd: "uv run mypy core/",              criteria: "0 errors",    color: "#818CF8" },
-  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,433+ pass", color: "#4ECDC4" },
+  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,422+ pass", color: "#4ECDC4" },
   { gate: "E2E",   cmd: 'geode analyze "Cowboy Bebop" --dry-run', criteria: "A (68.4)", color: "#F5C542" },
 ];
 

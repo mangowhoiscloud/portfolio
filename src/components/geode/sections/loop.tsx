@@ -15,7 +15,7 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "status", text: "● GEODE v0.35.0 — Long-running Autonomous Execution Harness" },
       { type: "prompt", text: "> 이 프로젝트의 테스트 현황 분석하고 실패 원인 찾아줘", input: true },
       { type: "tool", text: '  ⎿ ▸ run_bash(command="uv run pytest tests/ -q --tb=short")' },
-      { type: "exec", text: "  ⎿ ✓ run_bash → 3,433 passed, 2 failed · 18.7s" },
+      { type: "exec", text: "  ⎿ ✓ run_bash → 3,422 passed, 2 failed · 18.7s" },
       { type: "tool", text: '  ⎿ ▸ run_bash(command="uv run pytest tests/test_hooks.py -v")' },
       { type: "exec", text: "  ⎿ ✓ run_bash → FAILED: test_drift_handler (fixture missing)" },
       { type: "tool", text: '  ⎿ ▸ memory_search(query="drift handler fixture")' },
@@ -393,7 +393,7 @@ const guards = [
   { nameKo: "컨텍스트 80%", nameEn: "Context 80%", triggerKo: "Provider별 자동 압축 (Anthropic compact_20260112 / OpenAI client-side)", triggerEn: "Per-provider auto compaction (Anthropic compact_20260112 / OpenAI client-side)", effectKo: "요약 후 계속", effectEn: "Summarize, continue", color: "#818CF8" },
   { nameKo: "컨텍스트 95%", nameEn: "Context 95%", triggerKo: "긴급 프루닝 + UI 알림", triggerEn: "Emergency pruning + UI notification", effectKo: "최근 N개만 유지", effectEn: "Keep last N only", color: "#C084FC" },
   { nameKo: "StuckDetector", nameEn: "StuckDetector", triggerKo: "2시간 무응답", triggerEn: "2 hours unresponsive", effectKo: "세션 자동 해제", effectEn: "Auto-release session", color: "#4ECDC4" },
-  { nameKo: "비용 자동 정지", nameEn: "Auto Cost Stop", triggerKo: "세션당 비용 상한 초과", triggerEn: "Per-session cost cap exceeded", effectKo: "자동 정지 (v0.36)", effectEn: "Auto-stop (v0.36)", color: "#F4B8C8" },
+  { nameKo: "비용 자동 정지", nameEn: "Auto Cost Stop", triggerKo: "세션당 비용 상한 초과", triggerEn: "Per-session cost cap exceeded", effectKo: "자동 정지 (v0.37)", effectEn: "Auto-stop (v0.37)", color: "#F4B8C8" },
   { nameKo: "래칫 에러 감지", nameEn: "Ratchet Error Detection", triggerKo: "결과 악화 패턴 (Karpathy P4)", triggerEn: "Result degradation pattern (Karpathy P4)", effectKo: "롤백", effectEn: "Rollback", color: "#60A5FA" },
   { nameKo: "다양성 강제", nameEn: "Diversity Enforcement", triggerKo: "동일 도구 5회 연속 호출", triggerEn: "Same tool called 5 times consecutively", effectKo: "다른 경로 시도", effectEn: "Try different route", color: "#34D399" },
 ];

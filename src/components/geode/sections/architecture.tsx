@@ -9,7 +9,7 @@ import { useLocale, t } from "../locale-context";
 const layers = [
   { id: "Model",   color: "#818CF8", y: 10,  components: ["ClaudeAdapter", "OpenAIAdapter", "GLMAdapter"], highlight: { ipc: [0], daemon: [0], scheduler: [0] } },
   { id: "Runtime", color: "#4ECDC4", y: 78,  components: ["ToolRegistry(52)", "MCP(41)", "Skills", "Memory(4T)"], highlight: { ipc: [0, 1, 2, 3], daemon: [0, 1], scheduler: [0] } },
-  { id: "Harness", color: "#F5C542", y: 146, components: ["SessionLane", "Lane(global,8)", "PolicyChain", "HookSystem(46)"], highlight: { ipc: [0, 1, 2], daemon: [0, 1, 2, 3], scheduler: [0, 1, 2, 3] } },
+  { id: "Harness", color: "#F5C542", y: 146, components: ["SessionLane", "Lane(global,8)", "PolicyChain", "HookSystem(40)"], highlight: { ipc: [0, 1, 2], daemon: [0, 1, 2, 3], scheduler: [0, 1, 2, 3] } },
   { id: "Agent",   color: "#F4B8C8", y: 214, components: ["AgenticLoop", "SubAgent", "CLIPoller", "Gateway", "Scheduler"], highlight: { ipc: [0, 2], daemon: [0, 3], scheduler: [0, 4] } },
 ];
 
@@ -258,7 +258,7 @@ export function ArchitectureSection() {
               <span className="text-[#34D399] text-sm">⟂</span>
               <span className="text-xs text-[#9BB0CC]">
                 <span className="font-medium text-[#34D399]/70">HookSystem</span>
-                {" "}{t(locale, "46 events, 4계층 수직 관통", "46 events across all 4 layers")}
+                {" "}{t(locale, "40 events, 4계층 수직 관통", "40 events across all 4 layers")}
               </span>
             </div>
             <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-dashed border-[#C084FC]/15 bg-[#C084FC]/[0.02]">

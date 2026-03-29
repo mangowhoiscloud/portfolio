@@ -64,8 +64,8 @@ const migrationSequence = [
 /* ── Stats ── */
 const stats = [
   { label: "30+ Sessions", color: "#7A8CA8" },
-  { label: "191 Modules", color: "#818CF8" },
-  { label: "3,433+ Tests", color: "#F5C542" },
+  { label: "190 Modules", color: "#818CF8" },
+  { label: "3,422+ Tests", color: "#F5C542" },
   { label: "main-only ✓", color: "#34D399" },
 ];
 

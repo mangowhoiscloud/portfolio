@@ -34,7 +34,7 @@ export function HeroSection() {
           <div className="mt-3 flex items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#4ECDC4]/20 bg-[#4ECDC4]/5 text-xs font-mono text-[#4ECDC4]/80">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ECDC4] animate-pulse" />
-              v0.36
+              v0.37
             </span>
           </div>
         </motion.div>

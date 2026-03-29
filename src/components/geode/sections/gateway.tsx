@@ -4,7 +4,7 @@ import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { useLocale, t } from "../locale-context";
 
-/* ── 3 session modes (v0.36.0 thin-only architecture) ── */
+/* ── 3 session modes (v0.37.0 thin-only architecture) ── */
 const modes = [
   {
     id: "ipc",

@@ -13,7 +13,7 @@ const levels = [
     handlers: [
       { name: "TaskGraphBridge", priority: "P30", eventsKo: "NODE_ENTER/EXIT/ERROR", eventsEn: "NODE_ENTER/EXIT/ERROR" },
       { name: "StuckDetector", priority: "P40", eventsKo: "PIPELINE_START/END/ERROR", eventsEn: "PIPELINE_START/END/ERROR" },
-      { name: "RunLog", priority: "P50", eventsKo: "ALL 46 events → JSONL", eventsEn: "ALL 46 events → JSONL" },
+      { name: "RunLog", priority: "P50", eventsKo: "ALL 40 events → JSONL", eventsEn: "ALL 40 events → JSONL" },
       { name: "LLM Lifecycle", priority: "P55", eventsKo: "LLM_CALL_START/END", eventsEn: "LLM_CALL_START/END" },
       { name: "JournalHook", priority: "P60", eventsKo: "END/ERROR → runs.jsonl", eventsEn: "END/ERROR → runs.jsonl" },
       { name: "TableLoggers ×5", priority: "P90", eventsKo: "Automation events", eventsEn: "Automation events" },
@@ -56,7 +56,7 @@ const levels = [
   },
 ];
 
-/* ── Coverage Matrix (46 events × 4 levels) ── */
+/* ── Coverage Matrix (40 events × 4 levels) ── */
 const coverageRows = [
   { group: "Pipeline", count: 3, L1: "5 handlers", L2: "2 handlers", L3: "—", L4: "—" },
   { group: "Node", count: 4, L1: "2 handlers", L2: "—", L3: "—", L4: "—" },
@@ -190,7 +190,7 @@ export function HooksSection() {
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-10 leading-relaxed">
             {t(locale,
               "6개 이벤트 소스에서 발생한 46개 이벤트가 HookSystem을 거쳐 우선순위 순으로 정렬된 핸들러 체인을 관통합니다. 하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나가는 것이 리플 패턴입니다.",
-              "46 events from 6 event sources pass through HookSystem into a priority-sorted handler chain. A single event traversing both L1 (observe) and L2 (react) simultaneously is the ripple pattern."
+              "40 events from 6 event sources pass through HookSystem into a priority-sorted handler chain. A single event traversing both L1 (observe) and L2 (react) simultaneously is the ripple pattern."
             )}
           </p>
         </ScrollReveal>
@@ -249,7 +249,7 @@ export function HooksSection() {
           <p className="text-sm text-[#9BB0CC] mb-5">
             {t(locale,
               "46개 이벤트 × 4 성숙도 레벨. L1 OBSERVE 90%+ 커버, L2 REACT frontier 확장 중, L3/L4 계획 단계.",
-              "46 events × 4 maturity levels. L1 OBSERVE 90%+ coverage, L2 REACT frontier expanding, L3/L4 planned."
+              "40 events × 4 maturity levels. L1 OBSERVE 90%+ coverage, L2 REACT frontier expanding, L3/L4 planned."
             )}
           </p>
           <div className="overflow-x-auto -mx-4 px-4">
@@ -294,7 +294,7 @@ export function HooksSection() {
           {/* Observability stack */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
             {(locale === "en" ? [
-              { name: "RunLog", desc: "Full JSONL recording of all 46 events. Per-session append-only.", color: "#60A5FA" },
+              { name: "RunLog", desc: "Full JSONL recording of all 40 events. Per-session append-only.", color: "#60A5FA" },
               { name: "JournalHook", desc: "Structures pipeline completion/error/sub-agent results into runs.jsonl.", color: "#34D399" },
               { name: "LangSmith", desc: "Traces all nodes via @traceable decorator. Optionally enabled.", color: "#F5C542" },
             ] : [
