@@ -172,7 +172,7 @@ const ratchetSteps = [
   { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장." },
   { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류." },
   { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?" },
-  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,344+ pass)." },
+  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,433+ pass)." },
   { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입." },
   { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증." },
   { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함." },
@@ -183,7 +183,7 @@ const ratchetSteps = [
 const qualityGates = [
   { gate: "Lint",  cmd: "uv run ruff check core/ tests/", criteria: "0 errors",    color: "#34D399" },
   { gate: "Type",  cmd: "uv run mypy core/",              criteria: "0 errors",    color: "#818CF8" },
-  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,344+ pass", color: "#4ECDC4" },
+  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,433+ pass", color: "#4ECDC4" },
   { gate: "E2E",   cmd: 'geode analyze "Cowboy Bebop" --dry-run', criteria: "A (68.4)", color: "#F5C542" },
 ];
 

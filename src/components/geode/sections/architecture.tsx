@@ -108,7 +108,7 @@ export function ArchitectureSection() {
               <text x={774} y={145} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
                 fontSize={7} fontFamily="ui-monospace, monospace"
                 style={{ writingMode: "vertical-rl" } as React.CSSProperties}>
-                HOOKS · 40 EVENTS
+                HOOKS · 46 EVENTS
               </text>
 
               {/* DomainPort cross-cutting bar (left side) */}
@@ -156,7 +156,7 @@ export function ArchitectureSection() {
               <span className="text-[#4ECDC4] text-base">⟂</span>
               <div>
                 <span className="text-sm font-medium text-[#4ECDC4]/70">HookSystem</span>
-                <span className="text-xs text-[#9BB0CC] ml-2">40 events, 4계층 수직 관통</span>
+                <span className="text-xs text-[#9BB0CC] ml-2">46 events, 4계층 수직 관통</span>
               </div>
             </div>
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-[#C084FC]/15 bg-[#C084FC]/[0.02]">

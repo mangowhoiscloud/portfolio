@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { LocaleToggle } from "../ui/locale-toggle";
 
 /* ── Grouped navigation: 19 sections → 9 nav items ── */
 type NavItem = {
@@ -28,7 +29,7 @@ const navGroups: NavItem[] = [
   {
     id: "architecture", label: "Arch",
     children: [
-      { id: "architecture", label: "6-Layer Stack" },
+      { id: "architecture", label: "4-Layer Stack" },
       { id: "gateway", label: "Gateway" },
       { id: "headless", label: "Headless" },
       { id: "scheduler", label: "Scheduler" },
@@ -131,6 +132,7 @@ export function GeodeNav() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B1628]/85 backdrop-blur-md border-b border-white/[0.04]">
       <div className="max-w-5xl mx-auto px-4 py-2 flex items-center gap-0.5 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
         <span className="text-xs font-mono font-bold text-white/30 shrink-0 mr-3">GEODE</span>
+        <div className="flex-1 flex items-center gap-0.5">
         {navGroups.map((group) => {
           const isActive = activeGroup === group.id;
           const isOpen = openGroup === group.id;
@@ -183,6 +185,8 @@ export function GeodeNav() {
             </div>
           );
         })}
+        </div>
+        <LocaleToggle />
       </div>
     </nav>
   );

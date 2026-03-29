@@ -14,7 +14,7 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "status", text: "● GEODE v0.35.0 — Long-running Autonomous Execution Harness" },
       { type: "prompt", text: "> 이 프로젝트의 테스트 현황 분석하고 실패 원인 찾아줘", input: true },
       { type: "tool", text: '  ⎿ ▸ run_bash(command="uv run pytest tests/ -q --tb=short")' },
-      { type: "exec", text: "  ⎿ ✓ run_bash → 3,344 passed, 2 failed · 18.7s" },
+      { type: "exec", text: "  ⎿ ✓ run_bash → 3,433 passed, 2 failed · 18.7s" },
       { type: "tool", text: '  ⎿ ▸ run_bash(command="uv run pytest tests/test_hooks.py -v")' },
       { type: "exec", text: "  ⎿ ✓ run_bash → FAILED: test_drift_handler (fixture missing)" },
       { type: "tool", text: '  ⎿ ▸ memory_search(query="drift handler fixture")' },
@@ -75,12 +75,12 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "status", text: '  ● plan: "Java Migration" (6 phases)' },
       { type: "phase", text: "    Assess → Plan → Transform → Validate → Fix → Measure" },
       { type: "prompt", text: "  approve? [Y/n/A] > y", input: true },
-      { type: "tool", text: "  ⎿ ▸ delegate_task(5,133 files, 4-class error routing)" },
+      { type: "tool", text: "  ⎿ ▸ delegate_task(5,523 files, 4-class error routing)" },
       { type: "exec", text: "  ⎿ ▸ [1/1153] CONFIG: pom.xml java.version 1.8→22" },
       { type: "exec", text: "  ⎿ ▸ [847/1153] CODE: javax.* → jakarta.* 자동 변환" },
       { type: "exec", text: "  ⎿ ▸ [1153/1153] BEHAVIOR: 83/83 tests green" },
-      { type: "token", text: "  ⎿ ✢ claude-opus-4-6 · 1,153 turns · 5h 30m · $388" },
-      { type: "done", text: "  ✓ 5,133 files · 83/83 Tests · Build · Service E2E 성공" },
+      { type: "token", text: "  ⎿ ✢ claude-opus-4-6 · 1,133 turns · 5h 48m · $388" },
+      { type: "done", text: "  ✓ 5,523 files · 83/83 Tests · Build · Service E2E 성공" },
     ],
   },
 ];
@@ -381,7 +381,7 @@ function TypingTerminal() {
 const loopStats = [
   { value: "∞", label: "while True", sub: "" },
   { value: "8", label: "Safety Guards", sub: "convergence · time budget · stuck · HITL" },
-  { value: "3", label: "Modes", sub: "REPL · Headless Daemon(Slack) · Scheduler" },
+  { value: "3", label: "Modes", sub: "IPC(thin CLI) · Daemon(Slack) · Scheduler" },
   { value: "5", label: "Tool Routes", sub: "Bash · Tool · MCP · Skill · DAG" },
 ];
 
@@ -392,7 +392,7 @@ const guards = [
   { name: "컨텍스트 80%", trigger: "Provider별 자동 압축 (Anthropic compact_20260112 / OpenAI client-side)", effect: "요약 후 계속", color: "#818CF8" },
   { name: "컨텍스트 95%", trigger: "긴급 프루닝 + UI 알림", effect: "최근 N개만 유지", color: "#C084FC" },
   { name: "StuckDetector", trigger: "2시간 무응답", effect: "세션 자동 해제", color: "#4ECDC4" },
-  { name: "비용 자동 정지", trigger: "세션당 비용 상한 초과", effect: "자동 정지 (v0.32)", color: "#F4B8C8" },
+  { name: "비용 자동 정지", trigger: "세션당 비용 상한 초과", effect: "자동 정지 (v0.36)", color: "#F4B8C8" },
   { name: "래칫 에러 감지", trigger: "결과 악화 패턴 (Karpathy P4)", effect: "롤백", color: "#60A5FA" },
   { name: "다양성 강제", trigger: "동일 도구 5회 연속 호출", effect: "다른 경로 시도", color: "#34D399" },
 ];
@@ -446,8 +446,8 @@ export function LoopSection() {
             <div className="mt-3 rounded-lg border border-white/[0.06] bg-white/[0.01] px-4 py-2.5 flex items-center gap-5">
               <span className="text-[9px] font-mono font-bold text-[#E87080]/60 uppercase tracking-widest shrink-0">REC</span>
               {[
-                { value: "1,153", unit: "turns" },
-                { value: "5h 30m", unit: "dur" },
+                { value: "1,133", unit: "turns" },
+                { value: "5h 48m", unit: "dur" },
                 { value: "$388", unit: "cost" },
               ].map((m) => (
                 <div key={m.unit} className="text-center">
@@ -456,8 +456,8 @@ export function LoopSection() {
                 </div>
               ))}
               <div className="flex-1 text-right">
-                <div className="text-[9px] font-mono text-white/30">REODE · Opus 4.6 · 5,133 files · Java 1.8→22</div>
-                <div className="text-[8px] font-mono text-[#34D399]/45 mt-0.5">83/83 Tests · Build · E2E 성공</div>
+                <div className="text-[9px] font-mono text-white/30">REODE · Opus 4.6 · 5,523 files · Java 1.8→22 · Spring 4→6</div>
+                <div className="text-[8px] font-mono text-[#34D399]/50 mt-0.5">83/83 Tests · Build · FE/BE E2E 성공 · 전 기능 보존 · 고객 만족</div>
               </div>
             </div>
           </ScrollReveal>

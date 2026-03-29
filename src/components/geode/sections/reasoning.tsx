@@ -22,7 +22,7 @@ export function ReasoningSection() {
             안쪽 루프(L1-L2)는 ReAct로 매 턴마다 관측→추론→행동을 반복하고,
             바깥 레이어(L4)는 Plan-and-Execute로 복잡한 요청을 구조화된 계획으로 분할합니다.
             ReAct만으로는 장기 작업에서 도구 선택이 근시안적이 되고 비용이 예측 불가능해지기 때문에,
-            v0.32부터 복잡한 요청(3+ 단계, 고비용)은 자동으로 create_plan을 호출하여
+            v0.36부터 복잡한 요청(3+ 단계, 고비용)은 자동으로 create_plan을 호출하여
             비용을 사전 추정하고 HITL 승인을 거치는 Plan-first 패턴으로 전환했습니다.
           </p>
         </ScrollReveal>

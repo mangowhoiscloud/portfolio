@@ -7,7 +7,7 @@ import Link from "next/link";
 const stats = [
   { value: "∞", label: "while True", sub: "" },
   { value: "8", label: "Safety Guards", sub: "convergence · time budget · stuck · HITL" },
-  { value: "3", label: "Modes", sub: "REPL · Headless Daemon(Slack) · Scheduler" },
+  { value: "3", label: "Modes", sub: "IPC(thin CLI) · Daemon(Slack) · Scheduler" },
   { value: "5", label: "Tool Routes", sub: "Bash · Tool · MCP · Skill · DAG" },
 ];
 
@@ -32,7 +32,7 @@ export function HeroSection() {
           <div className="mt-3 flex items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#4ECDC4]/20 bg-[#4ECDC4]/5 text-xs font-mono text-[#4ECDC4]/80">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ECDC4] animate-pulse" />
-              v0.32
+              v0.36
             </span>
           </div>
         </motion.div>
@@ -61,7 +61,7 @@ export function HeroSection() {
         >
           <p className="text-lg text-[#8B9CC0]">Long-running Autonomous Execution Harness</p>
           <p className="text-sm text-white/45 mt-1.5 max-w-lg text-center leading-relaxed">
-            게임 IP 가치 추론부터 Java 1.8→22 자동 마이그레이션(83/83 테스트, 5h30m, 1,153턴)까지.
+            게임 IP 가치 추론부터 Java 1.8→22 + Spring 4→6 자동 마이그레이션(83/83 테스트, FE/BE E2E 성공, 1,133턴)까지.
             Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증하는 자율 실행 하네스.
           </p>
         </motion.div>
