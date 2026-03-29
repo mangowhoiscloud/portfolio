@@ -9,6 +9,7 @@ import { LoopSection } from "@/components/geode/sections/loop";
 import { ReasoningSection } from "@/components/geode/sections/reasoning";
 import { ArchitectureSection } from "@/components/geode/sections/architecture";
 import { GatewaySection } from "@/components/geode/sections/gateway";
+import { ConcurrencySection } from "@/components/geode/sections/concurrency";
 import { HeadlessSection } from "@/components/geode/sections/headless";
 import { SchedulerSection } from "@/components/geode/sections/scheduler";
 import { HooksSection } from "@/components/geode/sections/hooks";
@@ -39,6 +40,7 @@ export default function GeodePage() {
       <Divider />
       <div id="architecture"><ArchitectureSection /></div>
       <div id="gateway"><GatewaySection /></div>
+      <div id="concurrency"><ConcurrencySection /></div>
       <div id="headless"><HeadlessSection /></div>
       <div id="scheduler"><SchedulerSection /></div>
       <Divider />

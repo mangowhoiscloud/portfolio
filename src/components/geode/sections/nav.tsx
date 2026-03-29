@@ -31,6 +31,7 @@ const navGroups: NavItem[] = [
     children: [
       { id: "architecture", label: "4-Layer Stack" },
       { id: "gateway", label: "Gateway" },
+      { id: "concurrency", label: "Concurrency" },
       { id: "headless", label: "Headless" },
       { id: "scheduler", label: "Scheduler" },
     ],
