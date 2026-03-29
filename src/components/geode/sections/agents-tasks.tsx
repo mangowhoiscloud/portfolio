@@ -7,11 +7,27 @@ import { DagRenderer } from "../dag-renderer";
 /* ── SubAgent System ── */
 const subAgentSpecs = [
   { label: "Max Concurrent", value: "5", color: "#4ECDC4" },
-  { label: "Max Depth", value: "2", color: "#818CF8" },
+  { label: "Max Depth", value: "1", color: "#818CF8" },
   { label: "Max Total", value: "15", color: "#C084FC" },
   { label: "Timeout", value: "120s", color: "#F5C542" },
-  { label: "Max Rounds", value: "50", color: "#34D399" },
+  { label: "Max Rounds", value: "∞", color: "#34D399" },
   { label: "Max Tokens", value: "32K", color: "#60A5FA" },
+];
+
+/* ── SubAgent Architecture Details ── */
+const subAgentDetails = [
+  { title: "Memory Isolation", color: "#F4B8C8",
+    desc: "부모 메모리 read-only 스냅샷 상속. 자식은 task_id-scoped 버퍼(.geode/agent-memory/{task_id}/)에만 쓰기. 완료 후 부모가 summary만 병합. 두 에이전트가 동시에 공유 메모리에 쓰지 않음." },
+  { title: "Tool Inheritance + Sandbox", color: "#4ECDC4",
+    desc: "부모의 52 native + 44 MCP + skills 전체 상속. 6개 위험 도구(set_api_key, manage_auth, profile_update, calendar_create/sync, delegate_task) 샌드박스 차단. auto_approve=True(STANDARD만)." },
+  { title: "Context Explosion 방지", color: "#818CF8",
+    desc: "독립 200K context window. announce=False로 delegate_task 이중 주입(tool_result + announce) 제거. 동기 호출만 비활성화, 비동기 경로는 True 유지. 2파일 4줄 변경." },
+  { title: "CoalescingQueue 250ms", color: "#C084FC",
+    desc: "동일 task_id 250ms 이내 중복 제출 자동 병합. LLM이 같은 도구를 연속 호출해도 실제 실행은 1회." },
+  { title: "Error Classification", color: "#E87080",
+    desc: "TIMEOUT, API_ERROR는 retryable. VALIDATION, RESOURCE, DEPTH_EXCEEDED는 즉시 실패. 부모에게 error_category + retryable 플래그 반환." },
+  { title: "Subprocess Isolation", color: "#F5C542",
+    desc: "IsolatedRunner가 python -m core.agent.worker로 자식 프로세스 실행. 크래시 시 SIGKILL 보장. 쓰레드 모드 대비 완전 격리." },
 ];
 
 /* ── Task DAG nodes ── */
@@ -152,10 +168,17 @@ export function AgentsTasksSection() {
                 ))}
               </div>
 
-              {/* Inheritance detail */}
-              <div className="flex flex-wrap gap-1.5">
-                {["Full Inheritance", "Deny List (7 tools)", "Read-Only Memory", "Token Guard (P2-A)", "Spawn+Announce"].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded text-[11px] font-mono text-[#4ECDC4]/70 bg-[#4ECDC4]/06 border border-[#4ECDC4]/12">{t}</span>
+              {/* Architecture details */}
+              <div className="space-y-2">
+                {subAgentDetails.map((d) => (
+                  <div key={d.title} className="flex items-start gap-3 px-4 py-3 rounded-lg border border-white/[0.04]"
+                    style={{ background: `${d.color}03` }}>
+                    <div className="shrink-0 w-1.5 h-full min-h-[28px] rounded-full mt-0.5" style={{ background: d.color, opacity: 0.35 }} />
+                    <div>
+                      <span className="text-sm font-semibold text-white/75">{d.title}</span>
+                      <p className="text-xs text-[#8B9CC0] leading-relaxed mt-0.5">{d.desc}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

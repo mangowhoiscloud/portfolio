@@ -8,40 +8,45 @@ type Line = { type: string; text: string; input?: boolean };
 
 const scenarios: { tab: string; lines: Line[] }[] = [
   {
-    tab: "repl",
+    tab: "agentic",
     lines: [
       { type: "prompt", text: "$ uv run geode", input: true },
-      { type: "status", text: "● GEODE v0.32 Interactive REPL" },
+      { type: "status", text: "● GEODE v0.34 Interactive REPL" },
+      { type: "prompt", text: "> 이 프로젝트의 테스트 커버리지 분석해줘", input: true },
+      { type: "tool", text: "  ▸ run_bash: pytest --cov=core --cov-report=term" },
+      { type: "exec", text: "  ✓ 3,344 passed · coverage 78% · 12.3s" },
+      { type: "tool", text: "  ▸ memory_search: 이전 커버리지 기록" },
+      { type: "exec", text: "  ✓ 3건 발견 · 최근: 72% (3일 전)" },
+      { type: "done", text: "  커버리지 72% → 78% (+6%). core/hooks/ 미커버 모듈 3개 확인." },
+    ],
+  },
+  {
+    tab: "plan-mode",
+    lines: [
+      { type: "prompt", text: "> CHANGELOG 정리하고 v0.35.0 릴리즈 준비해", input: true },
+      { type: "status", text: '  ● plan: "v0.35.0 릴리즈" 생성 (3 steps)' },
+      { type: "phase", text: "  1. CHANGELOG [Unreleased] → [0.35.0] 정리" },
+      { type: "phase", text: "  2. pyproject.toml + CLAUDE.md 버전 동기화" },
+      { type: "phase", text: "  3. git tag v0.35.0 + PR 생성" },
+      { type: "prompt", text: "  approve? [y/n/edit] > y", input: true },
+      { type: "tool", text: "  ▸ run_bash: sed -i 's/Unreleased/0.35.0/' ..." },
+      { type: "tool", text: "  ▸ note_save: CHANGELOG.md 갱신" },
+      { type: "exec", text: "  ✓ 3/3 steps · PR #524 created" },
+    ],
+  },
+  {
+    tab: "game-ip",
+    lines: [
       { type: "prompt", text: '> Cowboy Bebop 분석해줘', input: true },
-      { type: "tool", text: '  → analyze "Cowboy Bebop" --mode full' },
+      { type: "tool", text: '  ▸ analyze_ip: "Cowboy Bebop" mode=full' },
       { type: "exec", text: "  ✓ score: 68.4 A · 14축 완료 · 4.1s" },
       { type: "prompt", text: "> Berserk 점수만 보여줘", input: true },
-      { type: "tool", text: '  → analyze "Berserk" --mode scoring' },
+      { type: "tool", text: '  ▸ analyze_ip: "Berserk" mode=scoring' },
       { type: "exec", text: "  ✓ score: 81.2 S · quick mode · 1.8s" },
-      { type: "prompt", text: '> Ghost in the Shell 평가해', input: true },
-      { type: "tool", text: '  → analyze "GitS" --mode evaluation' },
-      { type: "exec", text: "  ✓ score: 51.7 B · evaluation 완료 · 3.6s" },
-      { type: "prompt", text: "> exit", input: true },
-      { type: "done", text: "✓ session: 3 analyses · $0.087 · 9.5s" },
-    ],
-  },
-  {
-    tab: "agent-ux",
-    lines: [
-      { type: "prompt", text: '▸ tool_call: analyze_ip("Berserk")', input: true },
-      { type: "exec", text: '  ✓ result: {score: 81.2, tier: "S", cause: "conversion_failure"}' },
-      { type: "error", text: "  ✗ error: rate_limit_exceeded → retry 2/3 (10s backoff)" },
-      { type: "token", text: "  ✢ tokens: input=1,240 output=856 cost=$0.032" },
-      { type: "status", text: '  ● plan: "Berserk 분석 계획" → APPROVED → EXECUTING' },
-    ],
-  },
-  {
-    tab: "cli",
-    lines: [
-      { type: "prompt", text: '$ uv run geode analyze "Cowboy Bebop"', input: true },
-      { type: "prompt", text: '$ uv run geode analyze "Berserk" --dry-run', input: true },
-      { type: "prompt", text: "$ uv run geode analyze \"Berserk\" --verbose", input: true },
-      { type: "prompt", text: "$ uv run geode  # Interactive REPL", input: true },
+      { type: "prompt", text: '> 두 IP 비교해줘', input: true },
+      { type: "tool", text: '  ▸ compare_ips: ["Berserk", "Cowboy Bebop"]' },
+      { type: "exec", text: "  ✓ Berserk S(81.2) vs Cowboy Bebop A(68.4)" },
+      { type: "done", text: "✓ session: 3 calls · $3.12 · 9.5s" },
     ],
   },
 ];
@@ -59,9 +64,9 @@ const colorMap: Record<string, string> = {
 };
 
 const tabLabels: Record<string, string> = {
-  repl: "Interactive REPL",
-  "agent-ux": "Agent UX",
-  cli: "Typer CLI",
+  agentic: "Agentic Loop",
+  "plan-mode": "Plan Mode",
+  "game-ip": "Game IP",
 };
 
 /* ── Orbital Cycle ── */
@@ -399,38 +404,34 @@ export function LoopSection() {
             </div>
           </ScrollReveal>
 
-          {/* Right — Terminal replay */}
+          {/* Right — Terminal replay + RECORD */}
           <ScrollReveal delay={0.15}>
             <TypingTerminal />
+            <div className="mt-4 rounded-xl border border-white/[0.06] bg-white/[0.01] px-5 py-3.5">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono font-bold text-[#E87080]/70 uppercase tracking-widest">RECORD</span>
+                <span className="text-[10px] font-mono text-white/25">REODE · Opus 4.6</span>
+              </div>
+              <div className="flex items-center justify-center gap-6 mb-2">
+                {[
+                  { value: "1,153", unit: "turns" },
+                  { value: "5h 30m", unit: "duration" },
+                  { value: "$388", unit: "cost" },
+                ].map((m) => (
+                  <div key={m.unit} className="text-center">
+                    <div className="text-base font-bold text-white/85">{m.value}</div>
+                    <div className="text-[9px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-[10px] font-mono text-white/30 text-center">5,133 file migration · Java 1.8 → 22</div>
+              <div className="text-[9px] font-mono text-[#34D399]/50 text-center mt-0.5">83/83 Tests · Build · Service E2E 무중단 성공</div>
+            </div>
           </ScrollReveal>
         </div>
 
-        {/* ── RECORD ── */}
-        <ScrollReveal delay={0.18}>
-          <div className="mt-10 rounded-xl border border-white/[0.06] bg-white/[0.01] px-6 py-4 max-w-2xl mx-auto">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-mono font-bold text-[#E87080]/70 uppercase tracking-widest">RECORD</span>
-              <span className="text-[10px] font-mono text-white/25">REODE · Opus 4.6</span>
-            </div>
-            <div className="flex items-center justify-center gap-8 mb-2">
-              {[
-                { value: "1,153", unit: "turns" },
-                { value: "5h 30m", unit: "duration" },
-                { value: "$388", unit: "cost" },
-              ].map((m) => (
-                <div key={m.unit} className="text-center">
-                  <div className="text-lg font-bold text-white/85">{m.value}</div>
-                  <div className="text-[9px] font-mono text-[#7A8CA8] uppercase">{m.unit}</div>
-                </div>
-              ))}
-            </div>
-            <div className="text-[11px] font-mono text-white/30 text-center">5,133 file migration · Java 1.8 → 22</div>
-            <div className="text-[10px] font-mono text-[#34D399]/50 text-center mt-1">83/83 Tests · Build · Service E2E 무중단 성공</div>
-          </div>
-        </ScrollReveal>
-
         {/* ── 5 Safety Guards ── */}
-        <ScrollReveal delay={0.22}>
+        <ScrollReveal delay={0.2}>
           <div className="mt-10">
             <p className="text-sm font-mono font-bold text-[#E87080]/60 uppercase tracking-[0.25em] mb-4">
               Safety Guards
