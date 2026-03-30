@@ -1,159 +1,124 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { useLocale, t } from "../locale-context";
 
-/* ── Inner ring: 8 event categories ── */
-const categories = [
-  { name: "Pipeline", count: 3, color: "#E87080" },
-  { name: "Node", count: 4, color: "#F4B8C8" },
-  { name: "Analysis", count: 3, color: "#818CF8" },
-  { name: "Verification", count: 2, color: "#34D399" },
-  { name: "Automation", count: 6, color: "#F5C542" },
-  { name: "SubAgent", count: 3, color: "#C084FC" },
-  { name: "Ctx+Sess+LLM", count: 6, color: "#60A5FA" },
-  { name: "Tool+Memory", count: 7, color: "#4ECDC4" },
+/* ── Event data ── */
+const events = [
+  { id: "pipeline_end", label: "PIPELINE_END", color: "#4ECDC4",
+    handlers: ["RunLog", "Journal", "Snapshot", "MemWriteBack", "Notification"],
+    priorities: [50, 60, 80, 85, 200],
+    handlerColors: ["#60A5FA", "#34D399", "#4ECDC4", "#4ECDC4", "#F5C542"],
+    descKo: "파이프라인 완료 시 5 핸들러 연쇄", descEn: "5 handlers chain on pipeline completion" },
+  { id: "drift_detected", label: "DRIFT_DETECTED", color: "#F5C542",
+    handlers: ["DriftLogger", "AutoSnapshot", "PipelineTrigger", "Notification"],
+    priorities: [90, 80, 70, 200],
+    handlerColors: ["#F5C542", "#4ECDC4", "#4ECDC4", "#F5C542"],
+    descKo: "드리프트 감지 → 스냅샷 + 재분석 트리거", descEn: "Drift detected: snapshot + re-analysis trigger" },
+  { id: "context_overflow", label: "CONTEXT_OVERFLOW", color: "#E87080",
+    handlers: ["ContextAction"],
+    priorities: [50],
+    handlerColors: ["#E87080"],
+    descKo: "유일한 feedback hook. 압축 전략을 핸들러가 결정", descEn: "The only feedback hook. Handler decides compaction strategy",
+    isBoomerang: true },
+  { id: "subagent_completed", label: "SUBAGENT_COMPLETED", color: "#C084FC",
+    handlers: ["RunLog", "JournalSub"],
+    priorities: [50, 60],
+    handlerColors: ["#60A5FA", "#34D399"],
+    descKo: "서브에이전트 완료 → 저널 기록", descEn: "Sub-agent complete: journal recording" },
+  { id: "turn_complete", label: "TURN_COMPLETE", color: "#F4B8C8",
+    handlers: ["RunLog", "AutoMemory"],
+    priorities: [50, 85],
+    handlerColors: ["#60A5FA", "#4ECDC4"],
+    descKo: "매 턴 종료 → 자동 메모리 축적", descEn: "Each turn end: auto memory accumulation" },
 ];
 
-/* ── Outer ring: 8 handlers sorted by priority ── */
-const handlers = [
-  { name: "TaskBridge", p: 30, color: "#60A5FA" },
-  { name: "StuckDetect", p: 40, color: "#60A5FA" },
-  { name: "RunLog", p: 50, color: "#60A5FA" },
-  { name: "Journal", p: 60, color: "#34D399" },
-  { name: "DriftTrigger", p: 70, color: "#4ECDC4" },
-  { name: "Snapshot", p: 80, color: "#4ECDC4" },
-  { name: "MemWriteBack", p: 85, color: "#4ECDC4" },
-  { name: "Notification", p: 200, color: "#F5C542" },
+/* ── Version timeline data ── */
+const versions = [
+  { ver: "v0.10", count: 26, descKo: "L1 관측만. RunLog 단독", descEn: "L1 observe only. RunLog alone" },
+  { ver: "v0.31", count: 42, descKo: "L2 반응 추가. drift → 자동 재분석", descEn: "L2 react added. drift: auto-reanalysis" },
+  { ver: "v0.35", count: 40, descKo: "6개 orphan 제거. CRITICAL 미연결 수정", descEn: "6 orphans removed. Fixed CRITICAL None bug" },
+  { ver: "v0.37", count: 40, descKo: "Unified bootstrap. ONE HookSystem 보장", descEn: "Unified bootstrap. ONE HookSystem guaranteed" },
 ];
 
-/* Indices of handlers hit by PIPELINE_END ripple */
-const rippleTargets = [2, 3, 5, 6, 7]; // RunLog, Journal, Snapshot, MemWriteBack, Notification
+/* ── Design decisions data ── */
+const decisions = [
+  { title: "Sync, not Async", color: "#818CF8", ko: "LangGraph 호환. 디버깅 단순성 > 처리량", en: "LangGraph compatible. Debugging simplicity > throughput" },
+  { title: "Error Isolation", color: "#34D399", ko: "핸들러 하나가 죽어도 체인 계속. 우아한 저하", en: "One handler crash doesn't stop the chain. Graceful degradation" },
+  { title: "Plugin Architecture", color: "#C084FC", ko: ".geode/hooks/ YAML 자동 발견. 코어 수정 없이 확장", en: ".geode/hooks/ YAML auto-discovery. Extend without core changes" },
+  { title: "Priority Bands", color: "#F5C542", ko: "P40-50 인프라, P60-85 도메인, P200 알림. 암묵적 실행 순서", en: "P40-50 infra, P60-85 domain, P200 notifications. Implicit execution order" },
+];
 
-/* Polar helper */
-function polar(cx: number, cy: number, r: number, angleDeg: number) {
-  const rad = (angleDeg - 90) * (Math.PI / 180);
-  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+/* Priority to delay ms mapping */
+function priorityToDelay(p: number) {
+  if (p <= 50) return 200;
+  if (p <= 60) return 350;
+  if (p <= 70) return 500;
+  if (p <= 80) return 600;
+  if (p <= 85) return 650;
+  return 1100;
 }
-
-/* ── Concentric Ring SVG ── */
-function RippleRingSVG() {
-  const [ripple, setRipple] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const CX = 300, CY = 200, R_INNER = 100, R_OUTER = 170;
-
-  useEffect(() => {
-    const fire = () => { setRipple(true); setTimeout(() => setRipple(false), 2800); };
-    fire();
-    timerRef.current = setInterval(fire, 4000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, []);
-
-  /* Positions */
-  const catPos = categories.map((_, i) => polar(CX, CY, R_INNER, (360 / 8) * i));
-  const hdrPos = handlers.map((_, i) => polar(CX, CY, R_OUTER, (360 / 8) * i));
-  const pipelineIdx = 0; // Pipeline is first category
-  const src = catPos[pipelineIdx];
-
-  return (
-    <div className="w-full flex flex-col items-center mb-8">
-      <svg viewBox="0 0 600 400" className="w-full max-w-[560px]">
-        {/* Subtle dashed orbit rings */}
-        <circle cx={CX} cy={CY} r={R_INNER} fill="none" stroke="white" strokeOpacity={0.04} strokeDasharray="4 6" />
-        <circle cx={CX} cy={CY} r={R_OUTER} fill="none" stroke="white" strokeOpacity={0.04} strokeDasharray="4 6">
-          <animateTransform attributeName="transform" type="rotate" from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`} dur="1200s" repeatCount="indefinite" />
-        </circle>
-
-        {/* Center hub pulse */}
-        <circle cx={CX} cy={CY} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.8}>
-          <animate attributeName="r" values="0;38" dur="3s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.18;0" dur="3s" repeatCount="indefinite" />
-        </circle>
-        <circle cx={CX} cy={CY} r={22} fill="#0F1A2E" stroke="#4ECDC4" strokeWidth={1.2} strokeOpacity={0.5} />
-        <text x={CX} y={CY - 3} textAnchor="middle" fill="#4ECDC4" fontSize={7} fontFamily="ui-monospace,monospace" fontWeight={700}>Hook</text>
-        <text x={CX} y={CY + 7} textAnchor="middle" fill="#4ECDC4" fontSize={7} fontFamily="ui-monospace,monospace" fontWeight={700}>System</text>
-
-        {/* Inner ring: category dots */}
-        {categories.map((cat, i) => {
-          const p = catPos[i];
-          const r = 4 + cat.count * 1.2;
-          const isPipelinePulse = ripple && i === pipelineIdx;
-          return (
-            <g key={cat.name}>
-              <circle cx={p.x} cy={p.y} r={r} fill={cat.color} fillOpacity={isPipelinePulse ? 0.9 : 0.35}>
-                {isPipelinePulse && <animate attributeName="r" values={`${r};${r * 1.5};${r}`} dur="0.6s" fill="freeze" />}
-                {isPipelinePulse && <animate attributeName="fill-opacity" values="0.9;0.5;0.35" dur="0.6s" fill="freeze" />}
-              </circle>
-              <text x={p.x} y={p.y + r + 11} textAnchor="middle" fill={cat.color} fillOpacity={0.7} fontSize={7} fontFamily="ui-monospace,monospace">{cat.name}</text>
-              <text x={p.x} y={p.y + r + 19} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={6} fontFamily="ui-monospace,monospace">({cat.count})</text>
-            </g>
-          );
-        })}
-
-        {/* Outer ring: handler dots */}
-        {handlers.map((h, i) => {
-          const p = hdrPos[i];
-          const isTarget = ripple && rippleTargets.includes(i);
-          const delay = rippleTargets.indexOf(i) * 0.2;
-          return (
-            <g key={h.name}>
-              <circle cx={p.x} cy={p.y} r={6} fill={h.color} fillOpacity={isTarget ? 0.85 : 0.25}>
-                {isTarget && <animate attributeName="fill-opacity" values="0.25;0.85;0.25" dur="0.5s" begin={`${0.5 + delay}s`} fill="freeze" />}
-              </circle>
-              <text x={p.x} y={p.y - 10} textAnchor="middle" fill={h.color} fillOpacity={0.7} fontSize={7} fontFamily="ui-monospace,monospace">{h.name}</text>
-              <text x={p.x} y={p.y + 15} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={6} fontFamily="ui-monospace,monospace">P{h.p}</text>
-            </g>
-          );
-        })}
-
-        {/* Ripple arcs: Pipeline → hub → each target handler */}
-        {ripple && rippleTargets.map((ti, idx) => {
-          const dst = hdrPos[ti];
-          return (
-            <g key={`arc-${ti}`}>
-              <line x1={src.x} y1={src.y} x2={CX} y2={CY} stroke="#E87080" strokeWidth={1} opacity={0}>
-                <animate attributeName="opacity" values="0;0.4;0" dur="1.5s" begin={`${idx * 0.2}s`} fill="freeze" />
-              </line>
-              <line x1={CX} y1={CY} x2={dst.x} y2={dst.y} stroke={handlers[ti].color} strokeWidth={1} opacity={0}>
-                <animate attributeName="opacity" values="0;0.35;0" dur="1.5s" begin={`${0.3 + idx * 0.2}s`} fill="freeze" />
-              </line>
-            </g>
-          );
-        })}
-      </svg>
-      <p className="text-[11px] text-white/25 font-mono mt-1">40 events (inner) → HookSystem → 12 handlers (outer)</p>
-    </div>
-  );
-}
-
-/* ── Ripple Chain steps ── */
-const chainSteps = [
-  { p: 50, name: "RunLog", desc: "JSONL append" },
-  { p: 60, name: "Journal", desc: "runs.jsonl + learned" },
-  { p: 80, name: "Snapshot", desc: "state capture" },
-  { p: 85, name: "MemoryWriteBack", desc: "MEMORY.md" },
-  { p: 200, name: "Notification", desc: "Slack/Discord" },
-];
-
-/* ── Maturity tiers ── */
-const tiers = [
-  { id: "L1", name: "OBSERVE", color: "#60A5FA", status: "complete", desc: "All 40 events logged. RunLog JSONL." },
-  { id: "L2", name: "REACT", color: "#4ECDC4", status: "frontier", desc: "DRIFT: snapshot + reanalysis. PIPELINE_END: MEMORY.md." },
-  { id: "L3", name: "DECIDE", color: "#F5C542", status: "partial", desc: "CONTEXT_OVERFLOW: compaction strategy feedback." },
-  { id: "L4", name: "AUTONOMY", color: "#C084FC", status: "planned", desc: "HITL pattern: auto-approve rules. .geode/hooks/ plugins." },
-];
-
-const statusColors: Record<string, string> = {
-  complete: "#34D399", frontier: "#4ECDC4", partial: "#F5C542", planned: "#C084FC",
-};
 
 /* ── Main export ── */
 export function HooksSection() {
   const locale = useLocale();
-  const [showTiers, setShowTiers] = useState(false);
+  const [selected, setSelected] = useState(0);
+  const [ripplePhase, setRipplePhase] = useState(-1);
+  const [showBoomerang, setShowBoomerang] = useState(false);
+  const [hoveredHandler, setHoveredHandler] = useState<number | null>(null);
+  const [hoveredVersion, setHoveredVersion] = useState<number | null>(null);
+  const [showDecisions, setShowDecisions] = useState(false);
+  const [replayRot, setReplayRot] = useState(0);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const ev = events[selected];
+
+  /* Clear all timers */
+  const clearTimers = () => {
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+  };
+
+  /* Run ripple animation */
+  const runRipple = () => {
+    clearTimers();
+    setRipplePhase(-1);
+    setShowBoomerang(false);
+    const sorted = ev.priorities.map((p, i) => ({ p, i })).sort((a, b) => a.p - b.p);
+    sorted.forEach((item, seqIdx) => {
+      const delay = priorityToDelay(item.p);
+      const tid = setTimeout(() => setRipplePhase(seqIdx), delay);
+      timersRef.current.push(tid);
+    });
+    if (ev.isBoomerang) {
+      const tid = setTimeout(() => setShowBoomerang(true), priorityToDelay(ev.priorities[0]) + 400);
+      timersRef.current.push(tid);
+    }
+  };
+
+  /* On event change or mount, fire ripple */
+  useEffect(() => { runRipple(); return clearTimers; }, [selected]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /* Waterfall lane layout */
+  const svgW = 600, svgH = 220;
+  const dotCx = 30, dotCy = 110, railY = 110, colW = 70, colH = 140;
+  const sorted = ev.priorities.map((p, i) => ({ p, i, name: ev.handlers[i], color: ev.handlerColors[i] })).sort((a, b) => a.p - b.p);
+  const startX = 80;
+  const maxGap = 80;
+  const colPositions = sorted.map((item, idx) => {
+    if (idx === 0) return startX;
+    const gap = Math.min((item.p - sorted[idx - 1].p) * 0.6, maxGap);
+    return startX + sorted.slice(0, idx).reduce((acc, _, j) => {
+      const g = Math.min((sorted[j + 1]?.p - sorted[j].p) * 0.6, maxGap);
+      return acc + colW + (g < 8 ? 8 : g);
+    }, 0);
+  });
+  const particleCx = ripplePhase >= 0 && ripplePhase < sorted.length
+    ? colPositions[ripplePhase] + colW / 2
+    : dotCx;
 
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
@@ -165,77 +130,270 @@ export function HooksSection() {
           variant="quote"
           labelColor="#4ECDC4"
           title={t(locale, "이벤트 기반 리플 패턴", "Event-Driven Ripple Pattern")}
+          description={t(locale,
+            "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. 노드 간 직접 의존은 순환 참조를 만듭니다. Hook은 결합 없이 관측성과 반응성을 제공합니다.",
+            "Non-deterministic LLM systems cannot test every path. Direct node dependencies create circular references. Hooks provide observability and reactivity without coupling."
+          )}
         />
 
-        {/* 2. Problem statement */}
+        {/* 2. Problem Mini-Diagram */}
         <ScrollReveal>
-          <p className="text-sm sm:text-base text-[#A0B4D4] max-w-2xl mb-10 leading-relaxed">
-            {t(locale,
-              "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. Hook은 결합 없이 관측성과 반응성을 제공합니다.",
-              "Non-deterministic LLM systems cannot test every path. Hooks provide observability and reactivity without coupling."
-            )}
-          </p>
+          <div className="flex justify-center mb-10">
+            <svg viewBox="0 0 500 100" className="w-full max-w-[420px]">
+              <defs>
+                <radialGradient id="hk-red-bg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#E87080" stopOpacity={0.06} />
+                  <stop offset="100%" stopColor="transparent" stopOpacity={0} />
+                </radialGradient>
+              </defs>
+              <rect width="500" height="100" fill="url(#hk-red-bg)" rx={8} />
+              <rect x={100} y={25} width={90} height={30} rx={6} fill="#E8708018" stroke="#E87080" strokeWidth={1} />
+              <text x={145} y={44} textAnchor="middle" fill="#E87080" fontSize={10} fontFamily="ui-monospace,monospace">Scoring</text>
+              <rect x={290} y={25} width={100} height={30} rx={6} fill="#E8708018" stroke="#E87080" strokeWidth={1} />
+              <text x={340} y={44} textAnchor="middle" fill="#E87080" fontSize={10} fontFamily="ui-monospace,monospace">DriftDetect</text>
+              <path d="M 190 40 L 290 40" stroke="#E87080" strokeWidth={1.2} strokeDasharray="4 3" markerEnd="url(#hk-arrow)" />
+              <path d="M 340 55 Q 340 85 250 85 Q 145 85 145 55" stroke="#E87080" strokeWidth={1.2} strokeDasharray="4 3" fill="none" markerEnd="url(#hk-arrow)" />
+              <defs>
+                <marker id="hk-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6" fill="none" stroke="#E87080" strokeWidth={1} />
+                </marker>
+              </defs>
+              <text x={250} y={96} textAnchor="middle" fill="#E87080" fontSize={8} fontFamily="ui-monospace,monospace" fontWeight={700} fillOpacity={0.7}>CIRCULAR DEPENDENCY</text>
+            </svg>
+          </div>
         </ScrollReveal>
 
-        {/* 3. Concentric ring SVG */}
+        {/* 3. Main Area: Event Selector + Waterfall Lane */}
         <ScrollReveal delay={0.1}>
-          <RippleRingSVG />
-        </ScrollReveal>
-
-        {/* 4. Two cards */}
-        <ScrollReveal delay={0.15}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-            {/* Left: Ripple Chain */}
-            <div className="rounded-xl border px-5 py-4" style={{ borderColor: "#4ECDC420", background: "#4ECDC405" }}>
-              <p className="text-sm font-semibold text-[#4ECDC4] mb-3">Ripple Chain: PIPELINE_END</p>
-              <div className="space-y-2">
-                {chainSteps.map((s, i) => (
-                  <div key={s.name} className="flex items-center gap-2 text-xs">
-                    <span className="shrink-0 w-5 h-5 rounded-full bg-[#4ECDC4]/10 text-[#4ECDC4] flex items-center justify-center text-[10px] font-bold">{i + 1}</span>
-                    <span className="font-mono text-[10px] text-white/30 w-7">P{s.p}</span>
-                    <span className="font-medium text-white/70">{s.name}</span>
-                    <span className="text-white/30 ml-auto">{s.desc}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="flex flex-col md:flex-row gap-4 mb-10">
+            {/* Left: Event Selector */}
+            <div className="flex md:flex-col gap-2 md:w-[200px] overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 shrink-0">
+              {events.map((e, i) => (
+                <motion.button
+                  key={e.id}
+                  onClick={() => setSelected(i)}
+                  className="whitespace-nowrap rounded-lg border px-3 py-2 text-left text-xs font-mono font-bold transition-colors shrink-0"
+                  style={{
+                    borderColor: selected === i ? `${e.color}60` : "rgba(255,255,255,0.06)",
+                    background: selected === i ? `${e.color}12` : "transparent",
+                    color: selected === i ? e.color : "rgba(255,255,255,0.4)",
+                  }}
+                  animate={selected === i ? { scale: [1, 1.03, 1] } : { scale: 1 }}
+                  transition={selected === i ? { repeat: Infinity, duration: 2.5, ease: "easeInOut" } : {}}
+                >
+                  {e.label}
+                </motion.button>
+              ))}
             </div>
 
-            {/* Right: Trade-off */}
-            <div className="rounded-xl border px-5 py-4" style={{ borderColor: "#F5C54220", background: "#F5C54205" }}>
-              <p className="text-sm font-semibold text-[#F5C542] mb-3">Trade-off</p>
-              <p className="text-xs text-[#A0B4D4] leading-relaxed">
-                {t(locale,
-                  "39개 이벤트: fire-and-forget (성능 우선). 1개 이벤트(CONTEXT_OVERFLOW_ACTION): trigger_with_result (피드백 필수). Agent가 계속하기 전에 압축 전략이 필요하기 때문.",
-                  "39 events: fire-and-forget (performance first). 1 event (CONTEXT_OVERFLOW_ACTION): trigger_with_result (feedback required). Because the agent needs the compaction strategy before continuing."
-                )}
-              </p>
+            {/* Right: Waterfall Lane */}
+            <div className="flex-1 min-w-0">
+              <div className="relative">
+                {/* Replay button */}
+                <button
+                  className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-white/60 hover:border-white/20 transition-colors"
+                  onClick={() => { setReplayRot(r => r + 360); runRipple(); }}
+                >
+                  <motion.svg animate={{ rotate: replayRot }} transition={{ duration: 0.4 }} width={14} height={14} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                    <path d="M2 8a6 6 0 0 1 10.5-4M14 8a6 6 0 0 1-10.5 4" />
+                    <path d="M12.5 1v3h-3M3.5 15v-3h3" />
+                  </motion.svg>
+                </button>
+
+                {/* Event description */}
+                <p className="text-xs text-[#A0B4D4] mb-3 font-mono">{t(locale, ev.descKo, ev.descEn)}</p>
+
+                <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full rounded-xl" style={{ background: "#0C1220" }}>
+                  {/* Rail line */}
+                  <line x1={dotCx} y1={railY} x2={svgW - 20} y2={railY} stroke="white" strokeOpacity={0.06} strokeWidth={1} />
+
+                  {/* Event dot (pulsing) */}
+                  <circle cx={dotCx} cy={dotCy} r={12} fill={ev.color} fillOpacity={0.15} stroke={ev.color} strokeWidth={1.2} strokeOpacity={0.5}>
+                    <animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="stroke-opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                  <circle cx={dotCx} cy={dotCy} r={5} fill={ev.color} fillOpacity={0.8} />
+
+                  {/* Handler columns */}
+                  {sorted.map((item, idx) => {
+                    const cx = colPositions[idx];
+                    const isActive = ripplePhase >= idx;
+                    const colTop = railY - colH / 2;
+                    return (
+                      <g
+                        key={item.name}
+                        onMouseEnter={() => setHoveredHandler(idx)}
+                        onMouseLeave={() => setHoveredHandler(null)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {/* Background column */}
+                        <rect x={cx} y={colTop} width={colW} height={colH} rx={6} fill="white" fillOpacity={0.03} stroke="white" strokeOpacity={0.06} strokeWidth={0.5} />
+                        {/* Fill-up animation */}
+                        <motion.rect
+                          x={cx}
+                          y={colTop}
+                          width={colW}
+                          rx={6}
+                          fill={item.color}
+                          fillOpacity={0.2}
+                          initial={{ height: 0 }}
+                          animate={{ height: isActive ? colH : 0 }}
+                          transition={{ duration: 0.15, ease: "easeOut" }}
+                        />
+                        {/* Glow on activation */}
+                        <AnimatePresence>
+                          {isActive && ripplePhase === idx && (
+                            <motion.rect
+                              x={cx - 2}
+                              y={colTop - 2}
+                              width={colW + 4}
+                              height={colH + 4}
+                              rx={8}
+                              fill="none"
+                              stroke={item.color}
+                              strokeWidth={1.5}
+                              initial={{ opacity: 0.8 }}
+                              animate={{ opacity: 0 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.6 }}
+                            />
+                          )}
+                        </AnimatePresence>
+                        {/* Name label (top) */}
+                        <text x={cx + colW / 2} y={colTop - 6} textAnchor="middle" fill={item.color} fontSize={9} fontFamily="ui-monospace,monospace" fontWeight={600} fillOpacity={isActive ? 1 : 0.4}>{item.name}</text>
+                        {/* Priority badge (bottom) */}
+                        <text x={cx + colW / 2} y={colTop + colH + 14} textAnchor="middle" fill="white" fontSize={8} fontFamily="ui-monospace,monospace" fillOpacity={0.3}>P{item.p}</text>
+                      </g>
+                    );
+                  })}
+
+                  {/* Traveling particle */}
+                  <motion.circle
+                    cy={railY}
+                    r={4}
+                    fill={ev.color}
+                    animate={{ cx: particleCx }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  >
+                    <animate attributeName="opacity" values="1;0.6;1" dur="0.5s" repeatCount="indefinite" />
+                  </motion.circle>
+
+                  {/* Boomerang return path for CONTEXT_OVERFLOW */}
+                  {ev.isBoomerang && showBoomerang && (
+                    <g>
+                      <motion.path
+                        d={`M ${colPositions[0] + colW / 2} ${railY + colH / 2 + 8} Q ${(colPositions[0] + colW / 2 + dotCx) / 2} ${railY + colH / 2 + 30} ${dotCx} ${dotCy + 14}`}
+                        fill="none"
+                        stroke="#F5C542"
+                        strokeWidth={1.2}
+                        strokeDasharray="5 3"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 0.7 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                      <motion.text
+                        x={(colPositions[0] + colW / 2 + dotCx) / 2}
+                        y={railY + colH / 2 + 36}
+                        textAnchor="middle"
+                        fill="#F5C542"
+                        fontSize={8}
+                        fontFamily="ui-monospace,monospace"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.8 }}
+                        transition={{ delay: 0.3, duration: 0.4 }}
+                      >
+                        trigger_with_result()
+                      </motion.text>
+                    </g>
+                  )}
+                </svg>
+
+                {/* Handler hover tooltip */}
+                <AnimatePresence>
+                  {hoveredHandler !== null && sorted[hoveredHandler] && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="mt-2 px-3 py-2 rounded-lg border border-white/[0.08] bg-[#0A0F1A] text-xs font-mono"
+                    >
+                      <span style={{ color: sorted[hoveredHandler].color }} className="font-bold">{sorted[hoveredHandler].name}</span>
+                      <span className="text-white/30 ml-2">P{sorted[hoveredHandler].p}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 5. Maturity Tiers (collapsible) */}
+        {/* 4. Version Timeline */}
+        <ScrollReveal delay={0.15}>
+          <div className="flex justify-center mb-10">
+            <svg viewBox="0 0 520 70" className="w-full max-w-[500px]">
+              {versions.map((v, i) => {
+                const x = 40 + i * 140;
+                const nextX = i < versions.length - 1 ? 40 + (i + 1) * 140 : null;
+                return (
+                  <g key={v.ver} onMouseEnter={() => setHoveredVersion(i)} onMouseLeave={() => setHoveredVersion(null)} style={{ cursor: "pointer" }}>
+                    {/* Connecting arc */}
+                    {nextX && (
+                      <path d={`M ${x + 8} 30 Q ${(x + nextX) / 2} 18 ${nextX - 8} 30`} fill="none" stroke="white" strokeOpacity={0.08} strokeWidth={1} />
+                    )}
+                    {/* Dot */}
+                    <circle cx={x} cy={30} r={6} fill={hoveredVersion === i ? "#4ECDC4" : "#1E293B"} stroke="#4ECDC4" strokeWidth={1} strokeOpacity={hoveredVersion === i ? 0.8 : 0.3} />
+                    {/* Version label */}
+                    <text x={x} y={14} textAnchor="middle" fill="white" fillOpacity={0.5} fontSize={9} fontFamily="ui-monospace,monospace" fontWeight={600}>{v.ver}</text>
+                    {/* Count */}
+                    <text x={x} y={50} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={8} fontFamily="ui-monospace,monospace">({v.count})</text>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+          {/* Version hover annotation */}
+          <AnimatePresence>
+            {hoveredVersion !== null && versions[hoveredVersion] && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center text-xs text-[#A0B4D4] font-mono -mt-6 mb-6"
+              >
+                {t(locale, versions[hoveredVersion].descKo, versions[hoveredVersion].descEn)}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </ScrollReveal>
+
+        {/* 5. Design Decisions (collapsible) */}
         <ScrollReveal delay={0.2}>
           <button
-            onClick={() => setShowTiers(!showTiers)}
+            onClick={() => setShowDecisions(!showDecisions)}
             className="text-xs font-mono font-bold text-white/40 hover:text-white/60 border border-white/[0.06] rounded-lg px-4 py-2 mb-4 transition-colors"
           >
-            {showTiers ? "▾" : "▸"} {t(locale, "성숙도 단계 보기", "View Maturity Tiers")}
+            {showDecisions ? "▾" : "▸"} {t(locale, "설계 결정 보기", "View Design Decisions")}
           </button>
-
-          {showTiers && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="space-y-2 overflow-hidden">
-              {tiers.map((tier) => (
-                <div key={tier.id} className="flex items-center gap-3 rounded-lg border border-white/[0.04] px-4 py-2.5">
-                  <span className="text-xs font-mono font-bold w-6" style={{ color: tier.color }}>{tier.id}</span>
-                  <span className="text-xs font-semibold text-white/70 w-24">{tier.name}</span>
-                  <span className="text-xs text-[#A0B4D4] flex-1">{tier.desc}</span>
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded" style={{ color: statusColors[tier.status], background: `${statusColors[tier.status]}15` }}>
-                    {tier.status.toUpperCase()}
-                  </span>
+          <AnimatePresence>
+            {showDecisions && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {decisions.map((d) => (
+                    <div key={d.title} className="rounded-lg border px-4 py-3" style={{ borderColor: `${d.color}25`, background: `${d.color}06` }}>
+                      <p className="text-xs font-bold mb-1" style={{ color: d.color }}>{d.title}</p>
+                      <p className="text-[11px] text-[#A0B4D4] leading-relaxed">{t(locale, d.ko, d.en)}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </motion.div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </ScrollReveal>
       </div>
     </section>
