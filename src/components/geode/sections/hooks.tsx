@@ -163,7 +163,79 @@ export function HooksSection() {
           </div>
         </ScrollReveal>
 
-        {/* 3. Main Area: Event Selector + Waterfall Lane */}
+        {/* 3. Overview: Sources → HookSystem → Handlers */}
+        <ScrollReveal delay={0.05}>
+          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-10">
+            <svg viewBox="0 0 780 240" className="w-full min-w-[600px]" style={{ maxHeight: 270 }}>
+              {/* Column labels */}
+              <text x={80} y={16} textAnchor="middle" fill="white" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                {t(locale, "이벤트 소스", "Event Sources")}
+              </text>
+              <text x={350} y={16} textAnchor="middle" fill="white" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                HookSystem
+              </text>
+              <text x={640} y={16} textAnchor="middle" fill="white" fillOpacity={0.35} fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>
+                {t(locale, "핸들러 체인", "Handler Chain")}
+              </text>
+
+              {/* Event source categories (left) */}
+              {[
+                { label: "Pipeline", count: 3, color: "#E87080", y: 30 },
+                { label: "Node", count: 4, color: "#F4B8C8", y: 60 },
+                { label: "Analysis", count: 3, color: "#818CF8", y: 90 },
+                { label: "Automation", count: 6, color: "#F5C542", y: 120 },
+                { label: "SubAgent", count: 3, color: "#C084FC", y: 150 },
+                { label: "Context+LLM", count: 6, color: "#60A5FA", y: 180 },
+                { label: "Tool+HITL", count: 6, color: "#4ECDC4", y: 210 },
+              ].map((s) => (
+                <g key={s.label}>
+                  <rect x={10} y={s.y} width={140} height={24} rx={5} fill="#0C1220" stroke={s.color} strokeWidth={0.6} strokeOpacity={0.3} />
+                  <text x={24} y={s.y + 16} fill={s.color} fillOpacity={0.7} fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>{s.label}</text>
+                  <text x={136} y={s.y + 16} textAnchor="end" fill={s.color} fillOpacity={0.35} fontSize={7} fontFamily="ui-monospace, monospace">{s.count}</text>
+                  <path d={`M150,${s.y + 12} C200,${s.y + 12} 250,120 290,120`} stroke={s.color} strokeOpacity={0.12} strokeWidth={0.8} fill="none" />
+                </g>
+              ))}
+
+              {/* HookSystem hub (center) */}
+              <circle cx={350} cy={120} r={0} fill="none" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0}>
+                <animate attributeName="r" values="0;55" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="stroke-opacity" values="0.1;0" dur="3s" repeatCount="indefinite" />
+              </circle>
+              <rect x={300} y={88} width={100} height={64} rx={12} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.35} />
+              <text x={350} y={112} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
+              <text x={350} y={128} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">40 events</text>
+              <text x={350} y={142} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3} fontSize={7} fontFamily="ui-monospace, monospace">priority-sorted</text>
+
+              {/* Handler chain (right, sorted by priority) */}
+              {[
+                { label: "P40", name: "StuckDetect", color: "#60A5FA", y: 30 },
+                { label: "P50", name: "RunLog (ALL)", color: "#60A5FA", y: 55 },
+                { label: "P60", name: "Journal", color: "#34D399", y: 80 },
+                { label: "P65", name: "ApprovalTracker", color: "#4ECDC4", y: 105 },
+                { label: "P70", name: "DriftTrigger", color: "#4ECDC4", y: 130 },
+                { label: "P80", name: "Snapshot", color: "#4ECDC4", y: 155 },
+                { label: "P85", name: "MemoryWriteBack", color: "#818CF8", y: 180 },
+                { label: "P200", name: "Notification", color: "#F5C542", y: 215 },
+              ].map((h, i) => (
+                <g key={h.label}>
+                  <path d={`M400,120 C440,120 480,${h.y + 12} 540,${h.y + 12}`} stroke={h.color} strokeOpacity={0.12} strokeWidth={0.8} fill="none" />
+                  <rect x={540} y={h.y} width={150} height={22} rx={5} fill="#0C1220" stroke={h.color} strokeWidth={0.5} strokeOpacity={0.25} />
+                  <text x={556} y={h.y + 15} fill={h.color} fillOpacity={0.5} fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={700}>{h.label}</text>
+                  <text x={596} y={h.y + 15} fill="white" fillOpacity={0.45} fontSize={8} fontFamily="ui-monospace, monospace">{h.name}</text>
+                  {/* Priority gap indicator for P200 */}
+                  {i === 6 && <line x1={615} y1={h.y + 22 + 4} x2={615} y2={215 - 2} stroke="white" strokeOpacity={0.06} strokeWidth={1} strokeDasharray="2 4" />}
+                </g>
+              ))}
+
+              {/* Legend */}
+              <text x={615} y={236} textAnchor="middle" fill="white" fillOpacity={0.15} fontSize={7} fontFamily="ui-monospace, monospace">
+                {t(locale, "낮은 P = 먼저 실행", "Lower P = executes first")}
+              </text>
+            </svg>
+          </div>
+        </ScrollReveal>
+
+        {/* 4. Main Area: Event Selector + Waterfall Lane */}
         <ScrollReveal delay={0.1}>
           <div className="flex flex-col md:flex-row gap-4 mb-10">
             {/* Left: Event Selector */}
