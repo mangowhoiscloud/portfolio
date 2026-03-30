@@ -104,7 +104,7 @@ function PipelineDag() {
         {/* Verification */}
         <circle cx={xVerify} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#34D399" strokeWidth={1} strokeOpacity={0.4} />
         <text x={xVerify} y={yMid - 2} textAnchor="middle" fill="#34D399" fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>Verify</text>
-        <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">6-Layer</text>
+        <text x={xVerify} y={yMid + 10} textAnchor="middle" fill="#9BB0CC" fontSize={8} fontFamily="ui-monospace, monospace">5-Layer</text>
 
         {/* Synthesizer */}
         <circle cx={xSynth} cy={yMid} r={nR} fill="url(#nodeGrad)" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.4} />

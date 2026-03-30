@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">CONNECTION — CONSTRAINTS → RESULTS</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 8pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">CANNOT → Result: 제약이 품질을 보증합니다</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 4pt;">제약 없이 발산하는 LLM을 제어 가능한 결과로 수렴시키는 4가지 인과 경로</p>
+  </div>
+
+  <!-- 4 CANNOT→RESULT rows in 2 columns -->
+  <div style="flex: 1; padding: 0 36pt 8pt; display: flex; gap: 10pt;">
+
+    <!-- LEFT COLUMN -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Row 1 -->
+      <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
+        <div style="flex: 1; background: #EF444414; border: 1pt solid #EF444440; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">rm -rf / · sudo · curl|bash</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">bash_tool.py 9 regex + setrlimit — CPU 30s · FSIZE 50MB · NPROC 64</p>
+        </div>
+        <p style="font-size: 10pt; color: #34D399; align-self: center; padding: 0 4pt;">→</p>
+        <div style="flex: 1; background: #34D39914; border: 1pt solid #34D39940; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #34D399;">RESULT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">보안 사고 0건</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">9개 패턴이 실행 차단, 리소스 초과는 커널이 강제 종료</p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
+        <div style="flex: 1; background: #EF444414; border: 1pt solid #EF444440; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">API 키를 LLM 컨텍스트에 노출</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">redaction.py 8 regex — sk-ant-*, ghp_* 등 출력이 LLM에 도달하기 전 redact_secrets() 호출</p>
+        </div>
+        <p style="font-size: 10pt; color: #34D399; align-self: center; padding: 0 4pt;">→</p>
+        <div style="flex: 1; background: #34D39914; border: 1pt solid #34D39940; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #34D399;">RESULT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">키 누출 0건 — [REDACTED] 치환</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">8종 패턴 전수 검열, LLM 컨텍스트 경계에서 강제 치환</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Row 3 -->
+      <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
+        <div style="flex: 1; background: #EF444414; border: 1pt solid #EF444440; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">다른 애널리스트 점수를 보고 평가</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">Clean Context — Send 상태에 analyses: [] 삽입, 각 애널리스트는 빈 배열만 수신</p>
+        </div>
+        <p style="font-size: 10pt; color: #34D399; align-self: center; padding: 0 4pt;">→</p>
+        <div style="flex: 1; background: #34D39914; border: 1pt solid #34D39940; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #34D399;">RESULT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">앵커링 편향 구조적 차단</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">4 애널리스트 독립 병렬 → BiasBuster CV 검사로 2차 확인</p>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div style="display: flex; gap: 8pt; align-items: stretch; flex: 1;">
+        <div style="flex: 1; background: #EF444414; border: 1pt solid #EF444440; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">CANNOT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">신뢰도 미달 결과를 최종 출력</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">Confidence Gate ≥0.7 — 미달 시 gather 노드로 루프백, MAX 5회 반복 후 강제 진행</p>
+        </div>
+        <p style="font-size: 10pt; color: #34D399; align-self: center; padding: 0 4pt;">→</p>
+        <div style="flex: 1; background: #34D39914; border: 1pt solid #34D39940; border-radius: 6pt; padding: 10pt 12pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #34D399;">RESULT</p>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-top: 4pt;">자가 치유 루프 + 무한 루프 방지</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">MAX_ITERATIONS=5 하드캡 — weak_areas 기록으로 재실행 시 집중 영역 좁힘</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">제약 → 집행 코드 → 측정 가능한 결과 — 모든 CANNOT은 grep 검증된 코드 경로를 갖습니다</p>
+    <p style="font-size: 5pt; color: #8B949E;">21 / 24</p>
+  </div>
+
+</body>
+</html>

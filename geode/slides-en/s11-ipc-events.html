@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS CORE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">IPC Event Protocol: "아무것도 안 나와요"에서 30 Events까지</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">thin-only 전환 후 25개 slash 커맨드가 깨졌습니다. Raw Stream에서 Structured Events로 전환하여 client-side rendering을 구현했습니다.</p>
+  </div>
+
+  <!-- Main: Problem→Solution + Event taxonomy -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Story arc -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Problem -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #EF4444;">원인:</strong> console.print() 출력이 serve 프로세스의 stdout(/dev/null)으로 갔습니다.
+          thin client에는 아무것도 전달되지 않았습니다.
+          ContextVar가 스레드 간 전파되지 않는 것도 발견했습니다.
+        </p>
+      </div>
+
+      <!-- Evolution: 3 phases -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">프로토콜 진화</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="background: #EF444420; border-radius: 3pt; padding: 3pt 8pt; min-width: 50pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">v0.37.0</p>
+            </div>
+            <p style="font-size: 7pt; color: #8B949E;">Raw Console Stream. serve stdout passthrough.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="background: #F5C54220; border-radius: 3pt; padding: 3pt 8pt; min-width: 50pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">v0.37.1</p>
+            </div>
+            <p style="font-size: 7pt; color: #8B949E;">12 Structured Events. capture_output() + IPC 임베딩.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="background: #34D39920; border-radius: 3pt; padding: 3pt 8pt; min-width: 50pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #34D399;">v0.37.2</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #34D399;">30 Events</strong>. EventRenderer client-side. Pipeline milestones.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #161B22; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Trade-off: Structured Events vs Raw Stream</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">
+          Raw stream은 단순하지만 spinner, 병렬 tool 추적이 불가능했습니다.
+          Structured Events는 client가 자유롭게 렌더링하고 server는 상태만 관리합니다.
+        </p>
+      </div>
+
+      <!-- Result -->
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #34D399;">결과:</strong> 25개 커맨드 복원. 13개 zombie job 정리. 10 PR 머지. 3,422 테스트 유지.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Event taxonomy -->
+    <div style="width: 220pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">30 IPC EVENT TYPES</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">Session lifecycle</p>
+            <p style="font-size: 6pt; color: #8B949E;">stream, result, error</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">LLM interaction</p>
+            <p style="font-size: 6pt; color: #8B949E;">thinking, model_switched</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F97316;">Tool execution</p>
+            <p style="font-size: 6pt; color: #8B949E;">tool_start/end, approval</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">Termination</p>
+            <p style="font-size: 6pt; color: #8B949E;">escalation, cost, time, convergence</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Strategy</p>
+            <p style="font-size: 6pt; color: #8B949E;">goal_decomp, backpressure, diversity</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0; border-bottom: 1pt solid #21262D;">
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399;">Pipeline</p>
+            <p style="font-size: 6pt; color: #8B949E;">gather, analysis, eval, score, verify</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 2pt 0;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Control</p>
+            <p style="font-size: 6pt; color: #8B949E;">header, result, feedback, skip</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wire protocol -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Wire Protocol</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">Unix domain socket (~/.geode/cli.sock). Line-delimited JSON (NDJSON). chmod 0o600.</p>
+        <p style="font-size: 6pt; color: #F97316; font-family: 'Courier New', monospace; margin-top: 4pt;">listen(1) serial processing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.37.0-v0.38.0: 12&#8594;30 structured IPC events. EventRenderer client-side rendering. Session 49 UX 부활</p>
+    <p style="font-size: 5pt; color: #8B949E;">11 / 29</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUPPLEMENTARY: S23 SIMPLE DESIGN</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">삭제한 코드 인벤토리 + 삭제 전후 커버리지 증명</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <!-- Left: Deleted code inventory -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 6pt;">삭제된 코드 인벤토리 (835+ lines)</p>
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1pt solid #21262D; padding-bottom: 3pt;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">standalone REPL bootstrap</p>
+              <p style="font-size: 6pt; color: #8B949E;">core/cli/__init__.py 내 독립 실행 경로</p>
+            </div>
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">-487줄</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1pt solid #21262D; padding-bottom: 3pt;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">CoalescingQueue 클래스</p>
+              <p style="font-size: 6pt; color: #8B949E;">core/orchestration/coalescing_queue.py</p>
+            </div>
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">-148줄</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1pt solid #21262D; padding-bottom: 3pt;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">4 hardcoded lane 정의</p>
+              <p style="font-size: 6pt; color: #8B949E;">gateway_lane, scheduler_lane, global_lane 등</p>
+            </div>
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">-120줄</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1pt solid #21262D; padding-bottom: 3pt;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">6 orphan hook events</p>
+              <p style="font-size: 6pt; color: #8B949E;">GATEWAY_*, PROMPT_DRIFT 등 발화 0회 이벤트</p>
+            </div>
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">-40줄</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">duplicate bootstrap 로직</p>
+              <p style="font-size: 6pt; color: #8B949E;">bootstrap_geode() + GeodeRuntime.create() 중복</p>
+            </div>
+            <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">-40줄</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Before/After coverage proof -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 5pt;">삭제 전후 품질 지표</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1pt solid #21262D; padding-bottom: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">Metric</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">Before (v0.35)</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">After (v0.38)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Tests</p>
+            <p style="font-size: 7pt; color: #8B949E;">3,344</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">3,377 (+33)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Modules</p>
+            <p style="font-size: 7pt; color: #8B949E;">202</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">192 (-10)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">mypy errors</p>
+            <p style="font-size: 7pt; color: #8B949E;">0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">0</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">ruff violations</p>
+            <p style="font-size: 7pt; color: #8B949E;">0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">0</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Regressions</p>
+            <p style="font-size: 7pt; color: #8B949E;">0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">0</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Defects (C/H/M)</p>
+            <p style="font-size: 7pt; color: #EF4444;">11 open</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">0 open</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">삭제의 3가지 검증 기준</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt; margin-top: 3pt;">
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #34D399;">1.</strong> 삭제 후 테스트가 통과하는가? (CI 5/5)</p>
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #34D399;">2.</strong> 삭제된 코드가 실제로 실행된 적 있는가? (coverage + runtime log)</p>
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #34D399;">3.</strong> 5-Persona 중 누구도 반대하지 않는가?</p>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;"><strong style="color: #34D399;">핵심 원칙:</strong> "harm이 없으니 남겨두자"는 유지 근거가 아닙니다. 코드는 존재하는 것만으로 인지 부하, 의존성, 테스트 유지 비용을 발생시킵니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S23 보강: 835+ lines 삭제 인벤토리 5건. Tests +33, Modules -10, Defects 11→0. 삭제의 3 검증 기준</p>
+    <p style="font-size: 5pt; color: #8B949E;">07 / 12</p>
+  </div>
+</body>
+</html>

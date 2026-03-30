@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUPPLEMENTARY: S24 GATEWAY EVOLUTION</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">11개 구조적 결함 전수 해소 맵 (C1-C4, H1-H8, M1)</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; min-height: 0;">
+    <!-- 3-column defect map -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #EF444415; border: 1pt solid #EF444430; border-top: 3pt solid #EF4444; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">CRITICAL (4건)</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">C1: agentic_ref race</p>
+        <p style="font-size: 6pt; color: #8B949E;">mutable list → ContextVar 교체</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.0 #525</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">C2: TaskGraph unsync</p>
+        <p style="font-size: 6pt; color: #8B949E;">threading.Lock on state transitions</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.0 #525</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">C3: Dual scheduler race</p>
+        <p style="font-size: 6pt; color: #8B949E;">fcntl.flock on jobs.json</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.36.0 #531</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">C4: LaneQueue leak</p>
+        <p style="font-size: 6pt; color: #8B949E;">acquired/active 분리 추적</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.0 #525</p>
+      </div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #F9731615; border: 1pt solid #F9731630; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">HIGH (6건)</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H1: Zombie threads</p>
+        <p style="font-size: 6pt; color: #8B949E;">_active에서 timeout 시 제거</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.1 #526</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H2: Announce double-pub</p>
+        <p style="font-size: 6pt; color: #8B949E;">atomic check-and-set in lock</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.36.0 #531</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H4: HookSystem x2</p>
+        <p style="font-size: 6pt; color: #8B949E;">build_shared_services(hook=boot)</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.36.0 #530</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H5: Readiness race</p>
+        <p style="font-size: 6pt; color: #8B949E;">ContextVar + Event 동기화</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.36.0 #530</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H6: 6 orphan hooks</p>
+        <p style="font-size: 6pt; color: #8B949E;">발화 0회 이벤트 삭제 46→40</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.1 #526</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">H8: env whitelist</p>
+        <p style="font-size: 6pt; color: #8B949E;">subprocess에 10개 변수만 전달</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.35.1 #526</p>
+      </div>
+    </div>
+
+    <div style="flex: 0.7; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #F5C54215; border: 1pt solid #F5C54230; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">MEDIUM (1건)</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 6pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">M1: Config pollers</p>
+        <p style="font-size: 6pt; color: #8B949E;">동적 _POLLER_REGISTRY</p>
+        <p style="font-size: 5pt; color: #34D399;">v0.37.0 #535</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 5pt;">해소 타임라인</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">v0.35.0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">3건</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">v0.35.1</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">3건</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">v0.36.0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">4건</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">v0.37.0</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">1건</p>
+          </div>
+          <div style="border-top: 1pt solid #21262D; padding-top: 3pt; display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">잔여</p>
+            <p style="font-size: 12pt; font-weight: bold; color: #34D399;">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S24 보강: C4+H6+M1 = 11 defects. v0.35.0~v0.37.0 4개 버전에 걸쳐 전수 해소. 잔여 0건</p>
+    <p style="font-size: 5pt; color: #8B949E;">08 / 12</p>
+  </div>
+</body>
+</html>

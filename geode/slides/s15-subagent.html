@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS CORE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Sub-Agent: SessionLane + Queue Simplification</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">"이거 필요해?" 3중 게이트에서 2 Components로. 복잡함을 제거하자 동시성 결함도 함께 사라졌습니다.</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Queue simplification story -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Before: 5-gate queue -->
+      <div style="background: #161B22; border: 1pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">Before: 5 Sequential Gates</p>
+        <div style="display: flex; align-items: center; gap: 4pt; flex-wrap: wrap;">
+          <div style="background: #EF444415; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #EF4444;">CoalescingQueue</p>
+          </div>
+          <p style="font-size: 6pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #EF444415; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #EF4444;">SessionLane</p>
+          </div>
+          <p style="font-size: 6pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #EF444415; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #EF4444;">GlobalLane</p>
+          </div>
+          <p style="font-size: 6pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #EF444415; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #EF4444;">SchedulerLane</p>
+          </div>
+          <p style="font-size: 6pt; color: #8B949E;">&#8594;</p>
+          <div style="background: #EF444415; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #EF4444;">Semaphore</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">CoalescingQueue callback=no-op, dedup rate=0%. "프론티어에서 가져왔으니까"는 근거가 아닙니다.</p>
+      </div>
+
+      <!-- After: 2 components -->
+      <div style="background: #161B22; border: 1pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">After: 2 Components (OpenClaw Pattern)</p>
+        <div style="display: flex; gap: 8pt;">
+          <div style="flex: 1; background: #34D39910; border: 1pt solid #34D39940; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">SessionLane</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">per-key Semaphore(1). 같은 세션 키 = 직렬화. 다른 키 = 병렬.</p>
+          </div>
+          <div style="flex: 1; background: #34D39910; border: 1pt solid #34D39940; border-radius: 4pt; padding: 6pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Lane("global", max=8)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">전체 세션 동시 실행 상한. Thundering herd 방지.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #4ECDC4;">결과:</strong> CoalescingQueue(148줄) 삭제, 4 hardcoded lane 제거.
+          C3(scheduler race), H2(announce double-publish) 동시성 결함이 구조적으로 해소되었습니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Sub-Agent specs -->
+    <div style="width: 210pt; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Depth guard -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">SubAgent Safety</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">max_depth</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">1 (재귀 금지)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">MAX_CONCURRENT</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">5</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">timeout_s</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">300</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">Isolation</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Thread / Subprocess</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subprocess isolation -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Subprocess Isolation</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">WorkerRequest/Result JSON 프로토콜. 크래시가 부모에 전파되지 않습니다. env whitelist 10개만 전달.</p>
+      </div>
+
+      <!-- Double injection fix -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">이중 주입 제거</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">delegate(announce=False). 동기 모드에서 announce가 LLM 응답을 오염시키는 문제를 2파일 4줄로 해결했습니다.</p>
+        <p style="font-size: 6pt; color: #34D399; font-family: 'Courier New', monospace; margin-top: 4pt;">sub_agent.py:275 depth guard</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.38.0: CoalescingQueue 삭제, SessionLane(per-key) + Lane("global",8). C3+H2 해소. depth=1 재귀 금지</p>
+    <p style="font-size: 5pt; color: #8B949E;">15 / 29</p>
+  </div>
+</body>
+</html>

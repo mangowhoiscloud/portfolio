@@ -7,7 +7,7 @@ async function build() {
   const pptx = new pptxgen();
   pptx.layout = 'LAYOUT_16x9';
   pptx.author = 'mangowhoiscloud';
-  pptx.title = 'GEODE v0.30 — Autonomous Execution Harness';
+  pptx.title = 'GEODE v0.38 — Autonomous Execution Harness';
 
   const slidesDir = path.join(__dirname, 'slides');
   const tmpDir = path.join(__dirname, 'slides', 'tmp');
@@ -29,7 +29,7 @@ async function build() {
     }
   }
 
-  const outFile = path.join(__dirname, 'GEODE-Portfolio-v030.pptx');
+  const outFile = path.join(__dirname, 'GEODE-Portfolio-v10.pptx');
   await pptx.writeFile({ fileName: outFile });
   console.log(`\nSaved: ${outFile}`);
 }

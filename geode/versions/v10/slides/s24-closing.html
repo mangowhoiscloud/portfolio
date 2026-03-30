@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Background image -->
+  <img src="assets/bg-cover.png" style="position: absolute; width: 720pt; height: 405pt; top: 0; left: 0; opacity: 0.08; object-fit: cover;">
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt; position: relative;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">HARNESS ENGINEERING — CLOSING</p>
+  </div>
+
+  <!-- Main content: 2 columns -->
+  <div style="flex: 1; padding: 0 36pt 6pt; display: flex; gap: 10pt; position: relative;">
+
+    <!-- LEFT: thesis + triple loop + contact -->
+    <div style="flex: 1.1; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Opening thesis callback -->
+      <div style="background: #1E293B; border: 1pt solid #34D39940; border-left: 4pt solid #34D399; border-radius: 6pt; padding: 8pt 12pt;">
+        <p style="font-size: 14pt; color: #E2E8F0; line-height: 1.4;">확률적 시스템(LLM)은 제어 없이 발산합니다.</p>
+        <p style="font-size: 14pt; color: #34D399; font-weight: bold; line-height: 1.4; margin-top: 4pt;">발산을 루프와 가치로 수렴시키는 하네스를 만듭니다.</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">Harness Engineering은 기법이 아니라 규율(discipline)입니다 — 제약, 루프, 검증을 체계적으로 설계하는 방법론.</p>
+      </div>
+
+      <!-- Triple loop mini -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 6pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 2pt;">Triple Loop — 자기 증강 하네스</p>
+        <div style="display: flex; align-items: center; gap: 6pt;">
+          <div style="background: #818CF820; border: 1pt solid #818CF840; border-radius: 5pt; padding: 4pt 7pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">META</p>
+            <p style="font-size: 7pt; color: #8B949E;">설계 루프</p>
+          </div>
+          <p style="font-size: 9pt; color: #818CF8;">→</p>
+          <div style="background: #4ECDC420; border: 1pt solid #4ECDC440; border-radius: 5pt; padding: 4pt 7pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">DEV</p>
+            <p style="font-size: 7pt; color: #8B949E;">개발 루프</p>
+          </div>
+          <p style="font-size: 9pt; color: #4ECDC4;">→</p>
+          <div style="background: #34D39920; border: 1pt solid #34D39940; border-radius: 5pt; padding: 4pt 7pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">RUNTIME</p>
+            <p style="font-size: 7pt; color: #8B949E;">실행 루프</p>
+          </div>
+          <p style="font-size: 9pt; color: #34D399;">→</p>
+          <div style="background: #F9731620; border: 1pt solid #F9731640; border-radius: 5pt; padding: 4pt 7pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">HOOKS</p>
+            <p style="font-size: 7pt; color: #8B949E;">관측 루프</p>
+          </div>
+          <p style="font-size: 9pt; color: #F97316;">↺</p>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">META 루프가 DEV를 설계하고, RUNTIME이 실행하며, HOOKS가 관측하여 META로 피드백</p>
+      </div>
+
+      <!-- Contact -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 6pt 10pt; display: flex; gap: 8pt; align-items: center;">
+        <img src="assets/mascot.png" style="width: 40pt; height: 40pt; border-radius: 5pt; object-fit: contain;">
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Contact</p>
+          <p style="font-size: 7pt; color: #34D399; margin-top: 3pt;">github.com/mangowhoiscloud</p>
+          <p style="font-size: 7pt; color: #8B949E; margin-top: 2pt;">mangowhoiscloud@gmail.com</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: 3 value propositions -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt; justify-content: flex-start;">
+
+      <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">Harness Engineering 3가지 가치 명제</p>
+
+      <!-- Value 1 -->
+      <div style="background: #161B22; border: 1pt solid #818CF840; border-left: 3pt solid #818CF8; border-radius: 6pt; padding: 6pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">① Scaffold Design — 제약으로 품질 보증</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">CANNOT 규칙을 코드로 집행 — 9 Bash 차단 · 8 Secret 탐지 · 6-Layer PolicyChain · 40 Event Hooks</p>
+        <p style="font-size: 8pt; color: #E2E8F0; margin-top: 4pt; font-weight: bold;">결과: 보안 사고 0건 · 키 누출 0건 · 범위 외 호출 0건</p>
+      </div>
+
+      <!-- Value 2 -->
+      <div style="background: #161B22; border: 1pt solid #4ECDC440; border-left: 3pt solid #4ECDC4; border-radius: 6pt; padding: 6pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">② System Architecture — 6-Layer + DomainPort</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">L0 CLI → L5 Domain Plugins. DomainPort Protocol(15 methods) ContextVar DI.</p>
+        <p style="font-size: 8pt; color: #E2E8F0; margin-top: 4pt; font-weight: bold;">증명: GEODE → REODE — core/graph.py 변경 0줄</p>
+      </div>
+
+      <!-- Value 3 -->
+      <div style="background: #161B22; border: 1pt solid #F5C54240; border-left: 3pt solid #F5C542; border-radius: 6pt; padding: 6pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">③ Domain Reasoning — PSM + 5-Layer + CUSUM</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 4pt;">Swiss Cheese: G1-G4 · BiasBuster · Cross-LLM α≥0.67 · CUSUM 드리프트 관측</p>
+        <p style="font-size: 8pt; color: #E2E8F0; margin-top: 4pt; font-weight: bold;">결과: Calibration 80/100 · Berserk S-Tier(80-86) 재현 가능</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt; display: flex; justify-content: space-between; align-items: center; position: relative;">
+    <p style="font-size: 5pt; color: #8B949E;">GEODE v0.30 · Python ≥3.12 · LangGraph · 184 modules · 3,159 tests · 25 releases</p>
+    <p style="font-size: 5pt; color: #8B949E;">24 / 24</p>
+  </div>
+
+</body>
+</html>

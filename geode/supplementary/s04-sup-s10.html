@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">SUPPLEMENTARY: S10 THIN DAEMON</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">Auto-start Sequence + TOCTOU 방지 + IPC Wire Protocol</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">사용자가 geode를 실행하면 무엇이 일어나는가. 경합 조건 없이 안전하게 daemon을 기동하는 방법.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Auto-start sequence -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">geode 실행 시퀀스</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #4ECDC420; border-radius: 50%; width: 16pt; height: 16pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">1</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">~/.geode/cli.sock 존재 확인. 있으면 연결 시도.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #4ECDC420; border-radius: 50%; width: 16pt; height: 16pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">2</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">소켓 없거나 연결 실패 → <strong style="color: #F5C542;">pidfile lock 획득</strong> 시도.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #4ECDC420; border-radius: 50%; width: 16pt; height: 16pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">3</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">lock 획득 → shutil.which("geode") serve를 subprocess.Popen으로 기동.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #4ECDC420; border-radius: 50%; width: 16pt; height: 16pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">4</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">30초 timeout으로 소켓 연결 대기 (MCP 13-server 기동 ~20s).</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #34D39920; border-radius: 50%; width: 16pt; height: 16pt; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <p style="font-size: 7pt; font-weight: bold; color: #34D399;">5</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">연결 성공 → prompt 전송. 이후 structured events 수신 + 렌더링.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">TOCTOU 방지: pidfile lock</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          소켓 부재 확인 → 기동 사이에 다른 프로세스가 먼저 기동하는 TOCTOU 경합을 pidfile lock(fcntl.flock)으로 차단합니다. lock 획득 실패 시 대기만 합니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Wire protocol detail -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">IPC Wire Protocol (NDJSON)</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4; font-family: 'Courier New', monospace; font-weight: bold;">Client → Server</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace; margin-top: 2pt;">{"type":"prompt","text":"analyze Berserk"}</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">{"type":"command","cmd":"/model","args":"sonnet"}</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">{"type":"resume","session_id":"..."}</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 6pt; color: #F97316; font-family: 'Courier New', monospace; font-weight: bold;">Server → Client (30 event types)</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace; margin-top: 2pt;">{"type":"thinking","content":"..."}</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">{"type":"tool_start","name":"analyze_ip"}</p>
+            <p style="font-size: 6pt; color: #8B949E; font-family: 'Courier New', monospace;">{"type":"result","text":"...","rounds":3}</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 4pt;">보안 + 에러 처리</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #EF4444;">chmod 0o600</strong> 소켓 파일 소유자만 접근 가능</p>
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #F5C542;">listen(1)</strong> serial processing. 동시 연결 1개만 허용</p>
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #4ECDC4;">BrokenPipe</strong> 클라이언트 종료 시 세션 정리</p>
+          <p style="font-size: 7pt; color: #E2E8F0;"><strong style="color: #818CF8;">stale socket</strong> 서버 비정상 종료 시 소켓 파일 자동 정리</p>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">왜 gRPC/HTTP가 아닌가:</strong> 로컬 전용이므로 네트워크 스택 불필요. 외부 의존성 0. line-delimited JSON은 파싱 라이브러리 없이 readline()만으로 디코딩 가능합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S10 보강: 5-step auto-start + pidfile TOCTOU 방지 + NDJSON wire protocol + chmod 0o600 보안</p>
+    <p style="font-size: 5pt; color: #8B949E;">04 / 12</p>
+  </div>
+</body>
+</html>

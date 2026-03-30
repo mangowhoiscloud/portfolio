@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SYSTEM EVOLUTION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Gateway 3-Phase Evolution + Sync Loop</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">Bootstrap 통합(v0.36) &#8594; 경화(v0.36) &#8594; IPC(v0.37). 그리고 왜 프론티어 에이전트는 동기 루프를 선택하는가.</p>
+  </div>
+
+  <!-- Main -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: 3-Phase Gateway -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Phase 1 -->
+      <div style="background: #161B22; border: 1pt solid #818CF840; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+          <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Phase 1: v0.36 #530</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Bootstrap 통합</p>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">serve가 bootstrap_geode() + GeodeRuntime.create()를 이중 호출. HookSystem 2~3개 생성. build_shared_services(hook_system=boot.hook_system)으로 통합.</p>
+        <p style="font-size: 6pt; color: #818CF8; margin-top: 3pt;">C1, C2, H1, H4, H5 해소</p>
+      </div>
+
+      <!-- Phase 2 -->
+      <div style="background: #161B22; border: 1pt solid #F5C54240; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 7pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+          <div style="background: #F5C54220; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Phase 2: v0.36 #531</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Scheduler 경화</p>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">jobs.json 경합 &#8594; fcntl.flock. 비동기 핸드오프 &#8594; Lane.try_acquire()/manual_release(). DANGEROUS 도구 차단.</p>
+        <p style="font-size: 6pt; color: #F5C542; margin-top: 3pt;">C3, H2, M2 해소</p>
+      </div>
+
+      <!-- Phase 3 -->
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-top: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+          <div style="background: #34D39920; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399;">Phase 3: v0.37 #531-539</p>
+          </div>
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399;">CLIChannel IPC</p>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">REPL을 SharedServices 채널로 편입. Unix socket + thin client. serve 자동 기동. REPL Stuck 원천 해소.</p>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 3pt;">11개 구조적 결함 전수 해소</p>
+      </div>
+    </div>
+
+    <!-- Right: Sync Loop + SharedServices -->
+    <div style="width: 220pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Why Sync Loop -->
+      <div style="background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">왜 동기 루프인가?</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          Claude Code, Codex, Devin, autoresearch 모두 <strong style="color: #4ECDC4;">동기 루프</strong>를 사용합니다.
+          각 tool_call의 결과가 다음 LLM 호출의 입력이 됩니다.
+          인과적 의존 체인이므로 구조적으로 병렬화가 불가능합니다.
+        </p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 4pt;">I/O async ≠ Architecture async. OpenAI의 성능은 prompt caching이지 병렬화가 아닙니다.</p>
+      </div>
+
+      <!-- SharedServices -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">SharedServices Gateway</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">단일 팩토리. create_session(mode)가 (ToolExecutor, AgenticLoop) 쌍을 반환합니다. 모든 채널이 동일한 singleton을 공유합니다.</p>
+        <p style="font-size: 7pt; color: #F97316; font-family: 'Courier New', monospace; margin-top: 4pt;">GeodeRuntime.create() = 70줄</p>
+      </div>
+
+      <!-- Result banner -->
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 8pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">결과</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <p style="font-size: 7pt; color: #E2E8F0;">4 PRs (#528-531) + 6 PRs (#533-539)</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">11 structural defects &#8594; 0</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">Bootstrap 2 &#8594; 1 경로</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">HookSystem 2~3 &#8594; 1 인스턴스</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.36-v0.38: 3-Phase Gateway Runtime. 동기 루프 = 인과적 의존 체인. SharedServices 단일 팩토리</p>
+    <p style="font-size: 5pt; color: #8B949E;">24 / 29</p>
+  </div>
+</body>
+</html>

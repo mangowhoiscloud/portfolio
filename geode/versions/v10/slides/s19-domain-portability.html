@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">HE-2: DOMAIN</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">도메인 이식성: GEODE → REODE 실증</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">에이전트 코어 수정 0줄로 피봇. DomainPort Protocol이 도메인을 코어에서 분리합니다.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: GEODE column -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+      <div style="background: #161B22; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">GEODE v0.30</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-bottom: 7pt;">Game IP 저평가 분석 에이전트</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 5pt;">
+          <li><p style="font-size: 8pt; color: #E2E8F0;">202 모듈 · 3,344 테스트</p></li>
+          <li><p style="font-size: 8pt; color: #E2E8F0;">47 Tools + 44 MCP · 25 Skills</p></li>
+          <li><p style="font-size: 8pt; color: #E2E8F0;">42 릴리스 무회귀</p></li>
+          <li><p style="font-size: 8pt; color: #F5C542; font-weight: bold;">GameIPAdapter implements DomainPort</p></li>
+        </ul>
+      </div>
+
+      <!-- DomainPort detail -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 6pt;">DomainPort Protocol (15 메서드, 6 카테고리)</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 4pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0;">Identity (3) · Analyst Config (2) · Evaluator Config (3)</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">Scoring (4) · Classification (5) · Fixtures (2)</p></li>
+        </ul>
+        <div style="margin-top: 8pt; background: #060B14; border-radius: 4pt; padding: 7pt 10pt;">
+          <p style="font-size: 7pt; color: #F5C542; font-family: Courier New, monospace;">_domain_ctx: ContextVar[DomainPort]</p>
+          <p style="font-size: 7pt; color: #8B949E; font-family: Courier New, monospace;">set_domain() / get_domain_or_none()</p>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 6pt; line-height: 1.5;">@runtime_checkable Protocol — 상속 없이 15개 메서드 구현하면 즉시 호환. Pipeline 노드는 <span style="font-family: Courier New, monospace; color: #F5C542; font-size: 7pt;">get_domain_or_none()</span>으로 조회 후 fallback.</p>
+      </div>
+    </div>
+
+    <!-- Center: DomainPort Protocol Bridge -->
+    <div style="flex: 0.8; display: flex; flex-direction: column; gap: 8pt; align-items: center; justify-content: center;">
+
+      <div style="background: #1E293B; border: 2pt solid #F5C542; border-radius: 6pt; padding: 12pt; text-align: center; width: 100%;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 8pt;">DomainPort Protocol</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">2-Protocol 직교 설계</p>
+        <div style="margin-top: 8pt; display: flex; flex-direction: column; gap: 5pt;">
+          <div style="background: #0D2B1E; border-radius: 4pt; padding: 6pt 10pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">PipelineTemplate L1</p>
+            <p style="font-size: 5pt; color: #8B949E;">실행 흐름 정의</p>
+          </div>
+          <div style="background: #2B1A0D; border-radius: 4pt; padding: 6pt 10pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">LanguageAdapter L2</p>
+            <p style="font-size: 5pt; color: #8B949E;">언어·포맷 변환</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zero-code pivot badge -->
+      <div style="background: #F5C54215; border: 1pt solid #F5C542; border-radius: 4pt; padding: 10pt 12pt; text-align: center; width: 100%;">
+        <p style="font-size: 20pt; font-weight: bold; color: #F5C542; line-height: 1;">0줄</p>
+        <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt;">에이전트 코어 수정</p>
+        <p style="font-size: 5pt; color: #8B949E;">core/graph.py · core/verification/ 무변경</p>
+      </div>
+
+      <!-- Arrow indicators -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 3pt;">
+        <p style="font-size: 9pt; color: #F5C542;">&#8597;</p>
+        <p style="font-size: 7pt; color: #8B949E; text-align: center;">ContextVar 스왑으로<br>도메인 전환</p>
+      </div>
+    </div>
+
+    <!-- Right: REODE column -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+      <div style="background: #161B22; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">REODE v0.21</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-bottom: 7pt;">Java 코드 마이그레이션 에이전트</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 5pt;">
+          <li><p style="font-size: 8pt; color: #E2E8F0;">209 모듈 · 3,274 테스트 · 34 Tools</p></li>
+          <li><p style="font-size: 8pt; color: #E2E8F0;">3 Pipelines (Migration · Porting · Refactoring)</p></li>
+          <li><p style="font-size: 8pt; color: #4ECDC4; font-weight: bold;">5-Gate Migration Scorecard</p></li>
+        </ul>
+      </div>
+
+      <!-- REODE proof numbers -->
+      <div style="background: #0D1E2B; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 8pt;">실증 수치 — Java 마이그레이션</p>
+        <div style="display: flex; gap: 10pt; margin-bottom: 8pt;">
+          <div style="text-align: center; flex: 1;">
+            <p style="font-size: 24pt; font-weight: bold; color: #4ECDC4; line-height: 1;">241</p>
+            <p style="font-size: 7pt; color: #8B949E;">소스 파일</p>
+          </div>
+          <div style="text-align: center; flex: 1;">
+            <p style="font-size: 24pt; font-weight: bold; color: #4ECDC4; line-height: 1;">103K</p>
+            <p style="font-size: 7pt; color: #8B949E;">Lines of Code</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10pt; margin-bottom: 8pt;">
+          <div style="text-align: center; flex: 1;">
+            <p style="font-size: 24pt; font-weight: bold; color: #34D399; line-height: 1;">33</p>
+            <p style="font-size: 7pt; color: #8B949E;">세션</p>
+          </div>
+          <div style="text-align: center; flex: 1;">
+            <p style="font-size: 24pt; font-weight: bold; color: #34D399; line-height: 1;">1,133</p>
+            <p style="font-size: 7pt; color: #8B949E;">LLM 라운드</p>
+          </div>
+        </div>
+        <div style="background: #0D2B1E; border: 1pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt; text-align: center;">
+          <p style="font-size: 8pt; font-weight: bold; color: #34D399;">83/83 mvn compile+test 패스</p>
+          <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">5h 48m 자율 실행</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt 36pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">DomainPort 15 메서드 · ContextVar DI · core/graph.py 0줄 수정 · REODE: 241 소스 103K LoC · 33 세션 1,133 라운드 · 83/83 빌드 패스</p>
+    <p style="font-size: 5pt; color: #8B949E;">19 / 24</p>
+  </div>
+
+</body>
+</html>

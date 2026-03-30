@@ -64,7 +64,7 @@ export function ConcurrencySection() {
           <TabBar
             variant="underline"
             tabs={[
-              { id: "evolution", label: t(locale, "AS-IS → TO-BE", "AS-IS → TO-BE"), color: "#E87080" },
+              { id: "evolution", label: t(locale, "REPL + serve → 단일 Daemon", "REPL + serve → Unified Daemon"), color: "#E87080" },
               { id: "sessionlane", label: "SessionLane Deep Dive", color: "#818CF8" },
             ]}
             activeId={tab}

@@ -11,9 +11,9 @@ const bigNumbers = [
     color: "#F4B8C8",
   },
   {
-    value: "21",
+    value: "25",
     label: "Runtime Skills",
-    detail: "도메인별 전문 지식 런타임 주입",
+    detail: "Progressive Disclosure 3-tier 주입",
     color: "#F5C542",
   },
   {
@@ -34,7 +34,7 @@ const orchestrationItems = [
   { name: "TaskGraph DAG", detail: "의존성 기반 병렬/순차 스케줄링", color: "#818CF8" },
   { name: "PlanMode", detail: "전략 수립 → 사용자 승인 → 실행", color: "#818CF8" },
   { name: "LaneQueue", detail: "채널별 요청 직렬화 (Slack)", color: "#818CF8" },
-  { name: "CoalescingQueue", detail: "중복 요청 병합", color: "#818CF8" },
+  { name: "SessionLane", detail: "per-key 직렬 + global max=8 병렬", color: "#818CF8" },
 ];
 
 export function OrchestrationSection() {
@@ -45,7 +45,7 @@ export function OrchestrationSection() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-3">
-            Orchestration · L3
+            Orchestration
           </p>
           <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-14">
             Wired together

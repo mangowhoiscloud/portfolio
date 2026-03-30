@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS AGENT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Tool Dispatch: 단일 진입점 → 4경로 분기</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">ToolExecutor가 LLM tool_use를 받아 도구 유형과 안전 등급으로 라우팅합니다</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Decision Tree (62%) -->
+    <div style="flex: 0 0 418pt; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          LLM이 <span style="color: #4ECDC4; font-family: 'Courier New', monospace; font-size: 7pt;">tool_use</span> 블록을 반환하면 <strong>ToolCallProcessor</strong>가 도구 수를 먼저 판단합니다.
+          단일 도구는 바로 실행, 2개 이상이면 <strong>5-Tier 안전 등급</strong>으로 분류 후 Tier에 따라 병렬 또는 순차 실행합니다.
+        </p>
+      </div>
+
+      <!-- Decision tree flow -->
+      <div style="flex: 1; background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt; display: flex; flex-direction: column; gap: 8pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">DISPATCH DECISION TREE</p>
+
+        <!-- Entry point -->
+        <div style="background: #4ECDC420; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 6pt 10pt; text-align: center;">
+          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">ToolExecutor.execute()</p>
+          <p style="font-size: 5pt; color: #8B949E;">단일 진입점 — 모든 도구 디스패치</p>
+        </div>
+
+        <!-- 4-route branch -->
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #F9731640; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Bash Path</p>
+            <p style="font-size: 5pt; color: #E2E8F0;">run_bash?</p>
+            <p style="font-size: 5pt; color: #8B949E;">3-layer safety</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Native Tool</p>
+            <p style="font-size: 5pt; color: #E2E8F0;">registry 핸들러?</p>
+            <p style="font-size: 5pt; color: #8B949E;">47 native tools</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #818CF840; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">MCP Path</p>
+            <p style="font-size: 5pt; color: #E2E8F0;">MCP 서버?</p>
+            <p style="font-size: 5pt; color: #8B949E;">44 catalog</p>
+          </div>
+          <div style="flex: 1; background: #0D1117; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 7pt 8pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">LangGraph DAG</p>
+            <p style="font-size: 5pt; color: #E2E8F0;">analyze_ip?</p>
+            <p style="font-size: 5pt; color: #8B949E;">13-task graph</p>
+          </div>
+        </div>
+
+        <!-- 5-Tier safety label -->
+        <p style="font-size: 7pt; color: #4ECDC4; text-align: center;">↓ 2개 이상 tool_use 시 — 5-Tier 안전 등급 분류</p>
+
+        <!-- 5-Tier -->
+        <div style="display: flex; gap: 5pt;">
+          <div style="flex: 1; background: #34D39920; border: 1pt solid #34D39940; border-radius: 4pt; padding: 6pt 5pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">TIER 0</p>
+            <p style="font-size: 5pt; color: #34D399;">SAFE</p>
+            <p style="font-size: 5pt; color: #8B949E;">gather 병렬</p>
+          </div>
+          <div style="flex: 1; background: #4ECDC420; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 6pt 5pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">TIER 1</p>
+            <p style="font-size: 5pt; color: #4ECDC4;">MCP Auto</p>
+            <p style="font-size: 5pt; color: #8B949E;">서버당 1회</p>
+          </div>
+          <div style="flex: 1; background: #F5C54220; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 6pt 5pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">TIER 2</p>
+            <p style="font-size: 5pt; color: #F5C542;">EXPENSIVE</p>
+            <p style="font-size: 5pt; color: #8B949E;">일괄 승인</p>
+          </div>
+          <div style="flex: 1; background: #F9731620; border: 1pt solid #F9731640; border-radius: 4pt; padding: 6pt 5pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">TIER 3</p>
+            <p style="font-size: 5pt; color: #F97316;">WRITE</p>
+            <p style="font-size: 5pt; color: #8B949E;">개별 HITL</p>
+          </div>
+          <div style="flex: 1; background: #EF444420; border: 1pt solid #EF444440; border-radius: 4pt; padding: 6pt 5pt; text-align: center;">
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">TIER 4</p>
+            <p style="font-size: 5pt; color: #EF4444;">DANGEROUS</p>
+            <p style="font-size: 5pt; color: #8B949E;">차단 + HITL</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar (38%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 8pt;">
+
+      <!-- Error Recovery Chain -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444; margin-bottom: 8pt;">Error Recovery Chain</p>
+        <p style="font-size: 5pt; color: #8B949E; margin-bottom: 6pt;">연속 2회 실패 시 자동 복구 체인 실행</p>
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <div style="background: #34D39920; border-radius: 4pt; padding: 4pt 10pt; min-width: 64pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #34D399;">1 Retry</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">동일 도구 재시도 (1s backoff)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <div style="background: #4ECDC420; border-radius: 4pt; padding: 4pt 10pt; min-width: 64pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">2 Alt</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">동일 카테고리 대체 도구</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <div style="background: #F5C54220; border-radius: 4pt; padding: 4pt 10pt; min-width: 64pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">3 Fallback</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">더 저렴한 도구로 강등</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8pt;">
+            <div style="background: #EF444420; border-radius: 4pt; padding: 4pt 10pt; min-width: 64pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">4 Escalate</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">사용자에게 에스컬레이션</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trade-off callout -->
+      <div style="background: #1E293B; border-left: 4pt solid #F5C542; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F5C542; margin-bottom: 6pt;">Trade-off</p>
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          Tier 0-1은 <strong style="color: #4ECDC4;">asyncio.gather</strong>로 완전 병렬 실행하여 응답 속도를 극대화하고,
+          Tier 3-4는 순차+개별승인으로 안전성을 보장합니다.
+        </p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 6pt; font-family: 'Courier New', monospace;">MAX_CONSECUTIVE_FAILURES = 2 · max_recovery = 3</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 7pt 36pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">tool_executor.py (1179L) + policy.py (431L) + error_recovery.py (461L) · 47 native tools · 12 categories</p>
+    <p style="font-size: 5pt; color: #8B949E;">13 / 29</p>
+  </div>
+</body>
+</html>

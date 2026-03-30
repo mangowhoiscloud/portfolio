@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">APPENDIX B: ARCHITECTURE DEEP DIVE</p>
+    <div style="margin-left: auto; display: flex; gap: 4pt;">
+      <div style="background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #4ECDC4;">S12 보강</p>
+      </div>
+      <div style="background: #F9731615; border: 1pt solid #F9731640; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #F97316;">S14 보강</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">B1: AgenticLoop Budget + B2: Hook Emission Heatmap</h1>
+  </div>
+
+  <!-- 2-column -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- B1: AgenticLoop termination + budget (S12 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">B1. 종료 분포 + 모드별 Budget (S12 보강)</p>
+      </div>
+
+      <!-- Mode budget table -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">SessionMode별 실행 예산</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; border-bottom: 1pt solid #21262D; padding-bottom: 2pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; flex: 1;">Mode</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; width: 50pt; text-align: center;">time_budget</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; width: 30pt; text-align: center;">hitl</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; width: 30pt; text-align: center;">quiet</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">REPL</p>
+            <p style="font-size: 7pt; color: #4ECDC4; width: 50pt; text-align: center; font-weight: bold;">unlimited</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">2</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">no</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">IPC (thin CLI)</p>
+            <p style="font-size: 7pt; color: #4ECDC4; width: 50pt; text-align: center; font-weight: bold;">unlimited</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">0</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">yes</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">DAEMON (Slack)</p>
+            <p style="font-size: 7pt; color: #F5C542; width: 50pt; text-align: center; font-weight: bold;">120s</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">0</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">yes</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">SCHEDULER</p>
+            <p style="font-size: 7pt; color: #EF4444; width: 50pt; text-align: center; font-weight: bold;">300s</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">0</p>
+            <p style="font-size: 7pt; color: #E2E8F0; width: 30pt; text-align: center;">yes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Termination distribution -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">종료 경로 분포 (추정)</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 200pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #E2E8F0;"><strong>natural (end_turn)</strong> ~70%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 60pt; height: 10pt; background: #F5C542; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #E2E8F0;"><strong>forced (budget)</strong> ~15%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 30pt; height: 10pt; background: #818CF8; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #E2E8F0;"><strong>convergence</strong> ~8%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 15pt; height: 10pt; background: #EF4444; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #E2E8F0;"><strong>llm_error</strong> ~5%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 6pt; height: 10pt; background: #8B949E; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #E2E8F0;"><strong>cancelled</strong> ~2%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why this matters -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #4ECDC4;">의미:</strong> 70% natural 종료 = LLM이 작업 완료를 스스로 판단합니다. forced 15%는 DAEMON/SCHEDULER의 시간 예산 제한에 의한 것이지, 시스템 실패가 아닙니다.</p>
+      </div>
+    </div>
+
+    <!-- B2: Hook Emission Heatmap (S14 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #F9731640; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316;">B2. Hook Event Emission 분석 (S14 보강)</p>
+      </div>
+
+      <!-- High-frequency events -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">High-frequency (매 파이프라인 발화)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 3pt;">
+          <div style="background: #34D39915; border: 1pt solid #34D39930; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #34D399;">PIPELINE_START/END</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39930; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #34D399;">NODE_ENTER/EXIT</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39930; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #34D399;">LLM_CALL_START/END</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39930; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #34D399;">TURN_COMPLETE</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39930; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #34D399;">SESSION_START/END</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">RunLog에 전수 기록. 관측의 기반이 됩니다.</p>
+      </div>
+
+      <!-- Medium-frequency events -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Medium-frequency (조건부 발화)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 3pt;">
+          <div style="background: #F5C54215; border: 1pt solid #F5C54230; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #F5C542;">VERIFICATION_PASS/FAIL</p>
+          </div>
+          <div style="background: #F5C54215; border: 1pt solid #F5C54230; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #F5C542;">SCORING_COMPLETE</p>
+          </div>
+          <div style="background: #F5C54215; border: 1pt solid #F5C54230; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #F5C542;">TOOL_APPROVAL_*</p>
+          </div>
+          <div style="background: #F5C54215; border: 1pt solid #F5C54230; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #F5C542;">CONTEXT_CRITICAL</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">분석/검증 세션에서만 발화. L2 React 자동 반응 트리거.</p>
+      </div>
+
+      <!-- Rare but critical -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">Rare but critical (장애 시에만 발화)</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 3pt;">
+          <div style="background: #EF444415; border: 1pt solid #EF444430; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #EF4444;">PIPELINE_ERROR</p>
+          </div>
+          <div style="background: #EF444415; border: 1pt solid #EF444430; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #EF4444;">PIPELINE_TIMEOUT</p>
+          </div>
+          <div style="background: #EF444415; border: 1pt solid #EF444430; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #EF4444;">FALLBACK_CROSS_PROVIDER</p>
+          </div>
+          <div style="background: #EF444415; border: 1pt solid #EF444430; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #EF4444;">TOOL_RECOVERY_*</p>
+          </div>
+          <div style="background: #EF444415; border: 1pt solid #EF444430; border-radius: 3pt; padding: 2pt 6pt;">
+            <p style="font-size: 5pt; color: #EF4444;">SUBAGENT_FAILED</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">발화 빈도가 낮지만 삭제하면 장애 시 원인 추적이 불가능해집니다.</p>
+      </div>
+
+      <!-- Why all 42 matter -->
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #F97316;">왜 42개 전부 필요한가:</strong> v0.35.1에서 발화 0인 6개를 삭제했습니다. 남은 42개는 모두 1회 이상 실제 발화 이력이 있거나 장애 시 필수 관측 경로입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">Appendix B: S12 AgenticLoop(70% natural 종료, 4-mode budget) + S14 Hook(42 events: high/medium/rare 3-tier)</p>
+    <p style="font-size: 5pt; color: #8B949E;">A3 / 4</p>
+  </div>
+</body>
+</html>

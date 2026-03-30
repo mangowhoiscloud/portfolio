@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">HE-1: AUTONOMOUS CORE</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Thin-only Architecture: Unified Daemon</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">2개의 fat process에서 1 daemon + 1 thin client로. REPL Stuck과 리소스 불일치를 구조적으로 해소했습니다.</p>
+  </div>
+
+  <!-- Main: Before/After + GeodeRuntime -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Before/After -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Problem narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #EF4444;">문제 1:</strong> REPL에서 스케줄러를 호출하면 스케줄러가 REPL의 리소스와 UI를 침범하여 REPL이 멈췄습니다.
+        </p>
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5; margin-top: 4pt;">
+          <strong style="color: #EF4444;">문제 2:</strong> CLI, Slack, Scheduler가 각각 다른 리소스 인스턴스를 사용. HookSystem 2개, Scheduler 2개, ContextVar 미전파.
+        </p>
+      </div>
+
+      <!-- Before -->
+      <div style="background: #161B22; border: 1pt solid #EF444440; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">Before: 2 Fat Processes</p>
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 1; background: #EF444410; border: 1pt dashed #EF444430; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">geode (REPL)</p>
+            <p style="font-size: 6pt; color: #8B949E;">HookSystem(1), MCP(1), Skills(1), Scheduler(1)</p>
+          </div>
+          <div style="flex: 1; background: #EF444410; border: 1pt dashed #EF444430; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0;">geode serve</p>
+            <p style="font-size: 6pt; color: #8B949E;">HookSystem(2), MCP(2), Skills(2), Scheduler(2)</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #EF4444; margin-top: 4pt;">Bootstrap 경로 2개, 상태 불일치, jobs.json 경합</p>
+      </div>
+
+      <!-- After -->
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">After: 1 Daemon + 1 Thin Client</p>
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 2; background: #34D39910; border: 1pt solid #34D39930; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">geode serve (Unified Daemon)</p>
+            <p style="font-size: 6pt; color: #8B949E;">HookSystem(1), MCP(1), Skills(1), Scheduler(1), SessionStore(1)</p>
+          </div>
+          <div style="flex: 1; background: #4ECDC410; border: 1pt solid #4ECDC430; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">geode (Thin CLI)</p>
+            <p style="font-size: 6pt; color: #8B949E;">IPC via Unix socket. 상태 없음.</p>
+          </div>
+        </div>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 4pt;">Bootstrap 경로 1개, 모든 상태 GeodeRuntime 소유</p>
+      </div>
+    </div>
+
+    <!-- Right: GeodeRuntime ownership + channels -->
+    <div style="width: 220pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- GeodeRuntime -->
+      <div style="background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">GeodeRuntime (Single Owner)</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4;">HookSystem &#8594; 42 events</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4;">SchedulerService &#8594; 60s tick</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4;">SharedServices &#8594; create_session(mode)</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4;">LaneQueue &#8594; SessionLane + global</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 8pt;">
+            <p style="font-size: 6pt; color: #4ECDC4;">PolicyChain &#8594; 6-layer</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Channels -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 5pt;">3 Channels (create_session)</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">CLI (IPC)</p>
+            <p style="font-size: 6pt; color: #8B949E;">Unix socket, hitl=0</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">Gateway (Slack/Discord)</p>
+            <p style="font-size: 6pt; color: #8B949E;">Poller, hitl=0</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 7pt; color: #F97316; font-weight: bold;">Scheduler</p>
+            <p style="font-size: 6pt; color: #8B949E;">60s tick, time=300s</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trade-off -->
+      <div style="background: #1E293B; border-left: 4pt solid #F5C542; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Trade-off</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">IPC 레이턴시(~ms)를 수용합니다. LLM 호출(~s) 대비 무시 가능한 비용입니다. 대신 상태 일관성을 보장합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.38.0: standalone REPL 제거(~487 lines). geode serve = unified daemon. geode CLI = thin IPC client (auto-start)</p>
+    <p style="font-size: 5pt; color: #8B949E;">10 / 29</p>
+  </div>
+</body>
+</html>

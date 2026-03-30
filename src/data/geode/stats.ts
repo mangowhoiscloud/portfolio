@@ -7,7 +7,7 @@ export interface HeroStatData {
 
 export const geodeStats: HeroStatData[] = [
   {
-    value: "6",
+    value: "4",
     labelKo: "아키텍처 레이어",
     labelEn: "Architecture Layers",
   },

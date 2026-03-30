@@ -28,7 +28,7 @@ const channels: {
     flow: [
       { step: "SlackPoller", detailKo: "MCP로 채널 히스토리 폴링 (poll_interval=3s)", detailEn: "Polls channel history via MCP (poll_interval=3s)" },
       { step: "ChannelManager", detailKo: "바인딩 매칭 → 세션 키 생성 → LaneQueue", detailEn: "Binding match → session key creation → LaneQueue" },
-      { step: "AgenticLoop", detailKo: "hitl_level=0, max_rounds=30", detailEn: "hitl_level=0, max_rounds=30" },
+      { step: "AgenticLoop", detailKo: "hitl_level=0, time_budget_s=300", detailEn: "hitl_level=0, time_budget_s=300" },
       { step: "SlackNotificationAdapter", detailKo: "결과를 쓰레드에 응답", detailEn: "Replies result to thread" },
     ],
     tagsKo: ["ChannelBinding", "멀티턴 세션", "LaneQueue 동시성 제어", "binding hot-reload"],
@@ -151,7 +151,7 @@ export function HeadlessSection() {
               <text x={650} y={82} textAnchor="middle" fill="#4ECDC4"
                 fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>AgenticLoop</text>
               <text x={650} y={100} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
-                fontSize={8} fontFamily="ui-monospace, monospace">max_rounds=30</text>
+                fontSize={8} fontFamily="ui-monospace, monospace">time_budget_s=300</text>
 
               {/* Top label */}
               <text x={380} y={10} textAnchor="middle" fill="white" fillOpacity={0.2}

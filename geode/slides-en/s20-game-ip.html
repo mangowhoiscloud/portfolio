@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">HE-2: DOMAIN</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Game IP Pipeline: 9-Node DAG + 5-Layer 검증</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">단일 LLM 평가의 편향을 병렬 전문가 4명 + 교차 검증 + PSM으로 극복합니다.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: Pipeline DAG image + scoring formula -->
+    <div style="flex: 1.55; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- v028 Pipeline DAG -->
+      <img src="assets/v028-diagram-pipeline-dag.png" style="width: 450pt; height: 209pt; border-radius: 4pt; border: 1pt solid #21262D; object-fit: contain; background: #161B22;">
+
+      <!-- Scoring formula -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 12pt; display: flex; gap: 14pt; align-items: flex-start;">
+        <div style="flex: 1.2;">
+          <p style="font-size: 7pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">Scoring Formula (adapter.py:91-98)</p>
+          <p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace; line-height: 1.5;">base = 0.25·PSM + 0.20·Quality + 0.18·Recovery</p>
+          <p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace; line-height: 1.5;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 0.12·Growth + 0.20·Momentum + 0.05·Dev</p>
+          <p style="font-size: 5pt; color: #8B949E; font-family: Courier New, monospace; margin-top: 3pt;">final = base × (0.7 + 0.3·conf/100)</p>
+        </div>
+        <div style="flex: 0.8;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Tier 기준</p>
+          <p style="font-size: 7pt; color: #34D399;">S ≥ 80 · A ≥ 60 · B ≥ 40 · C &lt; 40</p>
+          <p style="font-size: 5pt; color: #8B949E; margin-top: 4pt;">D-E-F 축 코드 결정 트리 (LLM 아님)</p>
+        </div>
+      </div>
+
+      <!-- Clean Context trade-off -->
+      <div style="background: #0D1117; border: 1pt solid #F5C542; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">설계 결정 — Clean Context: 앵커링 편향 차단</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">"Analyst A의 S급 평가가 Analyst B를 편향시킵니다." 각 분석가에게 <span style="font-family: Courier New, monospace; color: #F5C542; font-size: 7pt;">analyses: []</span>로 전달 — 다른 분석가 점수 완전 차단. 7개 병렬 LLM 호출에서 독립 평가 보장.</p>
+      </div>
+
+    </div>
+
+    <!-- Right: Results -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 6pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Fixture Results — Golden Set 검증</p>
+
+      <div style="background: #161B22; border: 1pt solid #34D39950; border-radius: 4pt; padding: 8pt 10pt; display: flex; gap: 10pt; align-items: center;">
+        <div style="text-align: center; min-width: 24pt;">
+          <p style="font-size: 20pt; font-weight: bold; color: #34D399; line-height: 1;">S</p>
+          <p style="font-size: 7pt; color: #34D399; font-weight: bold;">81.2</p>
+        </div>
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Berserk</p>
+          <p style="font-size: 7pt; color: #34D399;">conf: 0.89 · bias: 0/6</p>
+          <p style="font-size: 5pt; color: #8B949E;">cause: conversion_failure → marketing_boost</p>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #4ECDC450; border-radius: 4pt; padding: 8pt 10pt; display: flex; gap: 10pt; align-items: center;">
+        <div style="text-align: center; min-width: 24pt;">
+          <p style="font-size: 20pt; font-weight: bold; color: #4ECDC4; line-height: 1;">A</p>
+          <p style="font-size: 7pt; color: #4ECDC4; font-weight: bold;">68.4</p>
+        </div>
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Cowboy Bebop</p>
+          <p style="font-size: 7pt; color: #4ECDC4;">conf: 0.85 · range: 63-75</p>
+          <p style="font-size: 5pt; color: #8B949E;">cause: undermarketed → community_activation</p>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #F5C54250; border-radius: 4pt; padding: 8pt 10pt; display: flex; gap: 10pt; align-items: center;">
+        <div style="text-align: center; min-width: 24pt;">
+          <p style="font-size: 20pt; font-weight: bold; color: #F5C542; line-height: 1;">B</p>
+          <p style="font-size: 7pt; color: #F5C542; font-weight: bold;">51.7</p>
+        </div>
+        <div>
+          <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Ghost in the Shell</p>
+          <p style="font-size: 7pt; color: #F5C542;">conf: 0.72 · range: 48-60</p>
+          <p style="font-size: 5pt; color: #8B949E;">cause: discovery_failure → platform_expansion</p>
+        </div>
+      </div>
+
+      <!-- 5-Layer summary -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 5pt;">5-Layer 검증 (N4)</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 4pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0;">L1 Guardrails — 스키마·범위·근거·일관성</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">L2 BiasBuster — 6종 편향 탐지 (arXiv:2403.00811)</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">L3 Cross-LLM — Claude×GPT α≥0.67</p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0;">L4 Rights Risk · L5 Calibration 80/100</p></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt 36pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">14 rubric axes (8+3+3) · 6 cause classes · PSM Rosenbaum Gamma · conf gate loopback ≥0.7 · max 5 iterations</p>
+    <p style="font-size: 5pt; color: #8B949E;">20 / 29</p>
+  </div>
+
+</body>
+</html>

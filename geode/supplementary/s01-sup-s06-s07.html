@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">SUPPLEMENTARY: S06 + S07</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">CI Ratchet 실측 + Frontier 채택 판단 기준</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- S06: CI Ratchet -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">S06 보강: CI 5-Job Ratchet 실측</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">Job별 실패 빈도 (550+ PR 기준)</p>
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 7pt; color: #E2E8F0; width: 70pt;">ruff format</p>
+            <div style="width: 180pt; height: 10pt; background: #EF4444; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">~38%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 7pt; color: #E2E8F0; width: 70pt;">mypy strict</p>
+            <div style="width: 120pt; height: 10pt; background: #F97316; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #F97316; font-weight: bold;">~25%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 7pt; color: #E2E8F0; width: 70pt;">pytest &#8805;2900</p>
+            <div style="width: 50pt; height: 10pt; background: #F5C542; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">~10%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 7pt; color: #E2E8F0; width: 70pt;">bandit security</p>
+            <div style="width: 25pt; height: 10pt; background: #818CF8; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">~5%</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 7pt; color: #E2E8F0; width: 70pt;">gate (종합)</p>
+            <div style="width: 10pt; height: 10pt; background: #34D399; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #34D399; font-weight: bold;">~2%</p>
+          </div>
+        </div>
+      </div>
+      <div style="background: #1E293B; border-left: 4pt solid #818CF8; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #818CF8;">인사이트:</strong> ruff format이 가장 빈번하게 차단합니다. 자동 포매팅이지만 "CI가 잡아줄 거야"라는 안일함을 방지합니다. mypy strict은 타입 안전성의 최후 방어선으로 25%를 차단합니다.</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #34D399;"><strong>래칫 추이:</strong> 2,900 → 3,377. 테스트 수는 단조 증가만 허용합니다. 감소하는 PR은 머지 불가.</p>
+      </div>
+    </div>
+
+    <!-- S07: Frontier adoption criteria -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">S07 보강: 채택/기각 판단 프레임워크</p>
+      </div>
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #F97316;">원칙:</strong> "프론티어에서 쓰니까"는 채택 근거가 아닙니다. 3개 이상의 독립 소스가 수렴하고, GEODE 맥락에서 문제를 해결하는 경우에만 채택합니다.</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">채택 vs 기각 실적</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="background: #34D39910; border: 1pt solid #34D39930; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">채택 (4건)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">while(tool_use) 동기 루프 (4/4 소스 수렴)</p>
+            <p style="font-size: 6pt; color: #8B949E;">depth=1 재귀 금지 (Claude Code + Codex)</p>
+            <p style="font-size: 6pt; color: #8B949E;">SessionLane per-key (OpenClaw)</p>
+            <p style="font-size: 6pt; color: #8B949E;">SOUL identity (Karpathy P7)</p>
+          </div>
+          <div style="background: #EF444410; border: 1pt solid #EF444430; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">기각 (3건)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">CoalescingQueue (1/4 소스. callback=no-op, dedup=0)</p>
+            <p style="font-size: 6pt; color: #8B949E;">async pipeline (1/4 소스. 인과 체인에 불필요)</p>
+            <p style="font-size: 6pt; color: #8B949E;">LLM 의도 라우팅 (0/4 소스. 비용+불확실성 추가)</p>
+          </div>
+        </div>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #F5C542;"><strong>기각률 43%.</strong> 채택한 것보다 버린 것이 시스템의 단순함을 만들었습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S06: CI ruff 38% 차단율. S07: Frontier 기각률 43%, "프론티어에서 쓰니까" ≠ 근거</p>
+    <p style="font-size: 5pt; color: #8B949E;">01 / 12</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">APPENDIX A: SCAFFOLD DEEP DIVE</p>
+    <div style="margin-left: auto; display: flex; gap: 4pt;">
+      <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #818CF8;">S04 보강</p>
+      </div>
+      <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #818CF8;">S05 보강</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">A1: 대칭 깨짐 실증 + A2: CANNOT Rule Effectiveness</h1>
+  </div>
+
+  <!-- 2-column layout -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- A1: Mirror Symmetry (S04 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">A1. 왜 대칭 구조인가? (S04 보강)</p>
+      </div>
+
+      <!-- Problem: Asymmetry caused failures -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">대칭이 깨졌을 때 발생한 장애</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          v0.34: serve와 REPL이 각각 bootstrap. HookSystem 2개, Scheduler 2개 생성.
+          jobs.json 경합(C3), ContextVar 미전파(C1), announce 중복 발행(H2).
+        </p>
+      </div>
+
+      <!-- Solution: Symmetry restored -->
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">대칭 복원 = GeodeRuntime single owner</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">SCAFFOLD(CLAUDE.md 규칙)와 RUNTIME(GeodeRuntime 소유) 1:1 대응.
+        규칙이 추가되면 자동으로 런타임에 반영되는 구조.</p>
+        <div style="display: flex; gap: 6pt; margin-top: 4pt;">
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #34D399;">Bootstrap 2→1</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #34D399;">HookSystem 2→1</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; color: #34D399;">C1+C3+H2 해소</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost of symmetry -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">대칭의 비용</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">IPC ~ms 레이턴시를 수용합니다. 하지만 LLM 호출 ~s 대비 0.1% 미만이며, 상태 불일치 장애를 구조적으로 제거합니다.</p>
+      </div>
+    </div>
+
+    <!-- A2: CANNOT Effectiveness (S05 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">A2. CANNOT Rule Effectiveness (S05 보강)</p>
+      </div>
+
+      <!-- Rule × Defect matrix -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">Rule이 차단한 결함 클래스</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1pt solid #21262D; padding-bottom: 2pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Rule Category</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">차단 결함</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 6pt; color: #E2E8F0;">Git (6 rules)</p>
+            <p style="font-size: 6pt; color: #8B949E;">force-push, 미검증 머지, 히스토리 손상</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 6pt; color: #E2E8F0;">Quality (4 rules)</p>
+            <p style="font-size: 6pt; color: #8B949E;">타입 안전 위반, 테스트 래칫 하락, lint 우회</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 6pt; color: #E2E8F0;">Docs/PR (6 rules)</p>
+            <p style="font-size: 6pt; color: #8B949E;">문서 드리프트, CHANGELOG 누락, PR 템플릿 이탈</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 6pt; color: #E2E8F0;">Design (1 rule)</p>
+            <p style="font-size: 6pt; color: #8B949E;">순환 의존, 레이어 위반</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evidence -->
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">실증 결과</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          550+ PR 중 CANNOT 위반으로 CI 거부된 비율: <strong style="color: #34D399;">~12%</strong>.
+          거부 후 수정 재제출 100%. hotfix bypass 0건. 이 12%가 없었다면 C1-C4급 결함이 main에 유입되었을 것입니다.
+        </p>
+      </div>
+
+      <!-- Top 3 rules -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">가장 많이 발동한 3개 룰</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt; margin-top: 3pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 12pt; font-weight: bold; color: #F5C542;">1</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">테스트 래칫 &#8805;2,900 (Quality)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 12pt; font-weight: bold; color: #F5C542;">2</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">ruff + mypy strict 통과 필수 (Quality)</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <p style="font-size: 12pt; font-weight: bold; color: #F5C542;">3</p>
+            <p style="font-size: 7pt; color: #E2E8F0;">CHANGELOG 동기화 (Docs/PR)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">Appendix A: S04 Mirror(대칭 깨짐 장애 3건) + S05 CANNOT(550+ PR 중 12% CI 거부, 0 bypass)</p>
+    <p style="font-size: 5pt; color: #8B949E;">A1 / 4</p>
+  </div>
+</body>
+</html>

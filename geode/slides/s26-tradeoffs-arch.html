@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">DESIGN DECISIONS (1/2)</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">설계 결정: 아키텍처 + 파이프라인</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">[채택] vs [기각]. 왜 이 선택인가를 1줄로 정당화합니다.</p>
+  </div>
+
+  <!-- 2-column layout -->
+  <div style="flex: 1; padding: 0 36pt 6pt; display: flex; gap: 10pt;">
+
+    <!-- Architecture -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">아키텍처</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">4-Layer (Model/Runtime/Harness/Agent)</span> vs 6-Layer</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">인위적 L1/L4 경계 제거. 호출 경로 단축. Domain은 직교축으로 분리.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Thin-only IPC (Unix socket)</span> vs Fat REPL + serve</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">상태 일관성 보장. IPC ~ms latency는 LLM ~s 대비 무시 가능.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Unix socket + NDJSON</span> vs gRPC / HTTP</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">로컬 전용, 의존성 0, chmod 0o600 보안. listen(1) serial processing 단순.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">동기 while(tool_use) 루프</span> vs asyncio 이벤트 루프</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">인과적 의존 체인(각 tool_result가 다음 LLM 입력). I/O async ≠ Architecture async.</p>
+      </div>
+    </div>
+
+    <!-- Pipeline & Domain -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">파이프라인 + 도메인</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Plan-and-Execute DAG</span> vs ReAct</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">결정론적 실행 순서 + 병렬 노드. 재귀 추론 루프 없이 구조화된 다단계 가능.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Clean Context (analyses: [])</span> vs 전체 공유</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">앵커링 편향 구조적 차단. 단일 설계 결정이 평가 품질에 가장 큰 영향.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">DomainPort Protocol + ContextVar DI</span> vs ABC 상속</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">구조적 타이핑. 상속 결합 없음. 스레드 안전 교체 가능. REODE 실증: 0 core changes.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Confidence Gate &#8805;0.7 루프백</span> vs 단일 패스</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">수동 개입 없는 자가 치유. MAX=5로 무한루프 차단.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">아키텍처 4 + 파이프라인 4. 채택 근거는 코드 경로와 측정 결과로 뒷받침 (2/2는 다음 슬라이드)</p>
+    <p style="font-size: 5pt; color: #8B949E;">26 / 29</p>
+  </div>
+</body>
+</html>

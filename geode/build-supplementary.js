@@ -1,0 +1,37 @@
+const pptxgen = require('/opt/homebrew/lib/node_modules/pptxgenjs');
+const html2pptx = require('/Users/mango/.claude/skills/pptx/scripts/html2pptx');
+const path = require('path');
+const fs = require('fs');
+
+async function build() {
+  const pptx = new pptxgen();
+  pptx.layout = 'LAYOUT_16x9';
+  pptx.author = 'mangowhoiscloud';
+  pptx.title = 'GEODE v0.38 — Supplementary Materials';
+
+  const slidesDir = path.join(__dirname, 'supplementary');
+  const tmpDir = path.join(slidesDir, 'tmp');
+  fs.mkdirSync(tmpDir, { recursive: true });
+
+  const slideFiles = fs.readdirSync(slidesDir)
+    .filter(f => f.endsWith('.html') && f.startsWith('s'))
+    .sort();
+
+  console.log(`Building ${slideFiles.length} supplementary slides...`);
+
+  for (const file of slideFiles) {
+    const htmlPath = path.join(slidesDir, file);
+    console.log(`  ${file}`);
+    try {
+      await html2pptx(htmlPath, pptx, { tmpDir });
+    } catch (e) {
+      console.error(`  ERROR in ${file}: ${e.message}`);
+    }
+  }
+
+  const outFile = path.join(__dirname, 'GEODE-Supplementary-v10.pptx');
+  await pptx.writeFile({ fileName: outFile });
+  console.log(`\nSaved: ${outFile}`);
+}
+
+build().catch(e => { console.error(e); process.exit(1); });

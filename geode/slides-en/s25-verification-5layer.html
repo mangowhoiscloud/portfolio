@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">VERIFICATION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Verification 5-Layer: Swiss Cheese Model</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">단일 LLM 평가의 69.4% 정확도를 99.8%로. 각 레이어는 다른 레이어가 놓치는 실패 모드를 잡습니다.</p>
+  </div>
+
+  <!-- Main: Pipeline flow + result -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 8pt; min-height: 0;">
+
+    <!-- Pipeline: 5 layers as horizontal flow -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+
+      <!-- Row 1: Per-sample checks (L1 → L2 → L3) -->
+      <div style="display: flex; gap: 5pt; align-items: stretch;">
+
+        <!-- L1: Guardrails - structural gate -->
+        <div style="flex: 1; background: #161B22; border: 1pt solid #34D39940; border-top: 3pt solid #34D399; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #34D399;">L1 Guardrails</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 3pt;">구조가 맞는가?</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">JSON 스키마 + axis 커버리지 + tier 매핑.</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 6pt; margin-top: 4pt;">
+            <p style="font-size: 5pt; color: #34D399; font-family: 'Courier New', monospace;">Haiku gate ~$0.01/call</p>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 10pt; color: #34D399;">&#8594;</p>
+        </div>
+
+        <!-- L2: Confidence Gate - self-healing loop -->
+        <div style="flex: 1.2; background: #161B22; border: 1pt solid #4ECDC440; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">L2 Confidence Gate</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 3pt;">확신할 수 있는가?</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">&#8805;0.7 통과. 미달 시 cortex 루프백.</p>
+          <div style="background: #4ECDC410; border: 1pt dashed #4ECDC440; border-radius: 3pt; padding: 3pt 6pt; margin-top: 4pt;">
+            <p style="font-size: 5pt; color: #4ECDC4;">&#8635; max 5 iterations (자가 치유)</p>
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 10pt; color: #4ECDC4;">&#8594;</p>
+        </div>
+
+        <!-- L3: BiasBuster - cognitive debiasing -->
+        <div style="flex: 1.3; background: #161B22; border: 1pt solid #F5C54240; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #F5C542;">L3 BiasBuster</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 3pt;">편향은 없는가?</p>
+          <div style="display: flex; gap: 3pt; margin-top: 3pt;">
+            <div style="background: #F5C54215; border-radius: 2pt; padding: 1pt 4pt;">
+              <p style="font-size: 5pt; color: #F5C542;">RECOGNIZE</p>
+            </div>
+            <div style="background: #F5C54215; border-radius: 2pt; padding: 1pt 4pt;">
+              <p style="font-size: 5pt; color: #F5C542;">EXPLAIN</p>
+            </div>
+            <div style="background: #F5C54215; border-radius: 2pt; padding: 1pt 4pt;">
+              <p style="font-size: 5pt; color: #F5C542;">ALTER</p>
+            </div>
+            <div style="background: #F5C54215; border-radius: 2pt; padding: 1pt 4pt;">
+              <p style="font-size: 5pt; color: #F5C542;">EVALUATE</p>
+            </div>
+          </div>
+          <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">확증, 최신, 앵커링, 위치, 장황, 자기강화 6종</p>
+        </div>
+      </div>
+
+      <!-- Row 2: Cross-comparison checks (L4 → L5) -->
+      <div style="display: flex; gap: 5pt; align-items: stretch;">
+
+        <!-- L4: Cross-LLM - multi-provider consensus -->
+        <div style="flex: 1; background: #161B22; border: 1pt solid #818CF840; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">L4 Cross-LLM Consensus</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 3pt;">다른 모델도 동의하는가?</p>
+          <div style="display: flex; gap: 4pt; margin-top: 4pt;">
+            <div style="background: #818CF815; border: 1pt solid #818CF830; border-radius: 3pt; padding: 3pt 6pt;">
+              <p style="font-size: 5pt; color: #818CF8;">Anthropic</p>
+            </div>
+            <p style="font-size: 6pt; color: #8B949E; align-self: center;">x</p>
+            <div style="background: #818CF815; border: 1pt solid #818CF830; border-radius: 3pt; padding: 3pt 6pt;">
+              <p style="font-size: 5pt; color: #818CF8;">OpenAI</p>
+            </div>
+            <p style="font-size: 6pt; color: #8B949E; align-self: center;">x</p>
+            <div style="background: #818CF815; border: 1pt solid #818CF830; border-radius: 3pt; padding: 3pt 6pt;">
+              <p style="font-size: 5pt; color: #818CF8;">ZhipuAI</p>
+            </div>
+          </div>
+          <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">Krippendorff &#945; &#8805; 0.67. 합의 실패 시 Anthropic 우선.</p>
+        </div>
+
+        <!-- Arrow -->
+        <div style="display: flex; align-items: center;">
+          <p style="font-size: 10pt; color: #818CF8;">&#8594;</p>
+        </div>
+
+        <!-- L5: Calibration - empirical ground truth -->
+        <div style="flex: 1; background: #161B22; border: 1pt solid #F9731640; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 6pt 8pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #F97316;">L5 Calibration</p>
+          <p style="font-size: 6pt; color: #E2E8F0; margin-top: 3pt;">실제 정답과 맞는가?</p>
+          <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Golden Set(전문가 라벨) 대비 비교. per-axis &#177;0.5 (1-5 스케일).</p>
+          <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 6pt; margin-top: 4pt;">
+            <p style="font-size: 5pt; color: #F97316; font-family: 'Courier New', monospace;">통과 기준 80% (가장 엄격)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swiss Cheese narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #F5C542; border-radius: 4pt; padding: 7pt 12pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #F5C542;">Swiss Cheese:</strong>
+          L1은 형식 오류를 잡지만 편향은 못 봅니다. L3은 편향을 잡지만 모델 간 불일치는 못 봅니다.
+          L5는 정답 대비 오차를 잡지만 구조 오류는 못 봅니다. 5개 레이어의 구멍이 동시에 정렬될 확률이 핵심입니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Result -->
+    <div style="width: 150pt; display: flex; flex-direction: column; gap: 6pt;">
+
+      <!-- Accuracy -->
+      <div style="background: #161B22; border: 1pt solid #F5C542; border-radius: 4pt; padding: 10pt 10pt; text-align: center;">
+        <p style="font-size: 7pt; color: #8B949E; margin-bottom: 3pt;">정확도</p>
+        <p style="font-size: 14pt; font-weight: bold; color: #8B949E; line-height: 1;">69.4%</p>
+        <p style="font-size: 8pt; color: #F5C542; margin-top: 2pt;">&#8595;</p>
+        <p style="font-size: 20pt; font-weight: bold; color: #F5C542; line-height: 1;">99.8%</p>
+      </div>
+
+      <!-- Layer summary -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">각 레이어가 잡는 것</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 4pt; align-items: center;">
+            <div style="width: 6pt; height: 6pt; background: #34D399; border-radius: 50%; flex-shrink: 0;"></div>
+            <p style="font-size: 6pt; color: #8B949E;">형식 오류</p>
+          </div>
+          <div style="display: flex; gap: 4pt; align-items: center;">
+            <div style="width: 6pt; height: 6pt; background: #4ECDC4; border-radius: 50%; flex-shrink: 0;"></div>
+            <p style="font-size: 6pt; color: #8B949E;">저신뢰 결과</p>
+          </div>
+          <div style="display: flex; gap: 4pt; align-items: center;">
+            <div style="width: 6pt; height: 6pt; background: #F5C542; border-radius: 50%; flex-shrink: 0;"></div>
+            <p style="font-size: 6pt; color: #8B949E;">인지 편향</p>
+          </div>
+          <div style="display: flex; gap: 4pt; align-items: center;">
+            <div style="width: 6pt; height: 6pt; background: #818CF8; border-radius: 50%; flex-shrink: 0;"></div>
+            <p style="font-size: 6pt; color: #8B949E;">모델 간 불일치</p>
+          </div>
+          <div style="display: flex; gap: 4pt; align-items: center;">
+            <div style="width: 6pt; height: 6pt; background: #F97316; border-radius: 50%; flex-shrink: 0;"></div>
+            <p style="font-size: 6pt; color: #8B949E;">정답 대비 오차</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">독립 실패 모드 AND-chain. L1 구조 &#8594; L2 자가치유 &#8594; L3 탈편향 &#8594; L4 교차검증 &#8594; L5 실증</p>
+    <p style="font-size: 5pt; color: #8B949E;">25 / 29</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">APPENDIX A: SCAFFOLD DEEP DIVE</p>
+    <div style="margin-left: auto; display: flex; gap: 4pt;">
+      <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #818CF8;">S06 보강</p>
+      </div>
+      <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #818CF8;">S07 보강</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">A3: Socratic Gate 실증 + A4: Frontier Mining Log</h1>
+  </div>
+
+  <!-- 2-column -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- A3: Socratic Gate case study (S06 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">A3. Socratic Gate 실증 (S06 보강)</p>
+      </div>
+
+      <!-- Case: Proposed async migration -->
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Case: "파이프라인 전체 async 전환" 제안</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          ADR-009로 async 전환이 제안되었습니다. Socratic 5Q가 이를 평가했습니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 4pt;">5Q 평가 결과</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Q1</p>
+            <p style="font-size: 6pt; color: #8B949E;">"이미 있나?" LangGraph는 동기. while(tool_use)도 동기. <span style="color: #F5C542;">기존 구조와 충돌.</span></p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Q2</p>
+            <p style="font-size: 6pt; color: #8B949E;">"안 하면 뭐가 깨지나?" 현재 파이프라인 정상 동작. <span style="color: #34D399;">깨지지 않음.</span></p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Q3</p>
+            <p style="font-size: 6pt; color: #8B949E;">"측정할 수 있나?" 3.9x 성능 목표. 하지만 LLM I/O가 병목이지 파이프라인이 아님.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Q4</p>
+            <p style="font-size: 6pt; color: #8B949E;">"되돌릴 수 있나?" async 전환은 전체 코드베이스 영향. <span style="color: #EF4444;">되돌리기 어려움.</span></p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Q5</p>
+            <p style="font-size: 6pt; color: #8B949E;">"더 단순한 방법?" prompt caching으로 90% 비용 절감 이미 달성.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 5pt 10pt;">
+        <p style="font-size: 7pt; color: #34D399; font-weight: bold;">결정: 보류 (Roadmap). 추정 절약: ~40시간 엔지니어링 + 전환 리스크 회피.</p>
+      </div>
+    </div>
+
+    <!-- A4: Frontier Mining Log (S07 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">A4. Frontier Mining Log (S07 보강)</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">Frontier &#8594; GEODE 채택 매핑</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Claude Code (OpenClaw)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">SessionLane per-key pattern, depth=1 재귀 금지, SOUL/Project memory 2-tier</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Codex (OpenAI)</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">prompt caching 전략, time_budget_s(max_rounds deprecated), thin client IPC</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">autoresearch</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">while(tool_use) 동기 루프, convergence detection (동일 에러 반복 감지)</p>
+          </div>
+          <div style="background: #0D1117; border-radius: 4pt; padding: 5pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Karpathy LLM Patterns</p>
+            <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">P6 4-char/token 보수 추정, P7 SOUL identity, P8 minimal context window</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona catch matrix -->
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">5-Persona가 잡은 결함 (v0.35-v0.38)</p>
+        <div style="display: flex; flex-direction: column; gap: 2pt; margin-top: 3pt;">
+          <p style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #4ECDC4;">Beck:</strong> CoalescingQueue dead code (Simple Design Rule 4)</p>
+          <p style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #818CF8;">Karpathy:</strong> 6L→4L 레이어 과잉 (정보 이론 관점)</p>
+          <p style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #F97316;">Steinberger:</strong> TOCTOU race in serve auto-start (운영 관점)</p>
+          <p style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #F5C542;">Cherny:</strong> SessionLane boundary leak 가능성 (격리 관점)</p>
+          <p style="font-size: 6pt; color: #E2E8F0;"><strong style="color: #EF4444;">GAP Detective:</strong> Prompt/Gateway 2개 카테고리 hook 미등록 발견</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">Appendix A: S06 Socratic Gate(async 보류 ~40h 절약) + S07 Frontier(4 소스 × 채택 패턴 + 5-Persona 결함 5건)</p>
+    <p style="font-size: 5pt; color: #8B949E;">A2 / 4</p>
+  </div>
+</body>
+</html>

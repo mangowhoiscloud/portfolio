@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">SUPPLEMENTARY: S15 SUBAGENT</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">CoalescingQueue가 구조적으로 불필요한 증명 + C3/H2 Race Trace</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <!-- Left: Structural impossibility proof -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">CoalescingQueue 250ms dedup이 발화할 수 없는 이유</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #E2E8F0; margin-bottom: 5pt;">while(tool_use) 동기 루프 타이밍</p>
+        <div style="display: flex; flex-direction: column; gap: 6pt;">
+          <div style="display: flex; align-items: center; gap: 4pt;">
+            <div style="background: #4ECDC420; border-radius: 3pt; padding: 3pt 6pt; width: 70pt; text-align: center;">
+              <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">LLM call</p>
+            </div>
+            <div style="flex: 1; height: 8pt; background: #4ECDC440; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">2-30s</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 4pt;">
+            <div style="background: #F5C54220; border-radius: 3pt; padding: 3pt 6pt; width: 70pt; text-align: center;">
+              <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">tool exec</p>
+            </div>
+            <div style="flex: 1; height: 8pt; background: #F5C54240; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #F5C542; font-weight: bold;">0.1-60s</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 4pt;">
+            <div style="background: #EF444420; border-radius: 3pt; padding: 3pt 6pt; width: 70pt; text-align: center;">
+              <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">dedup window</p>
+            </div>
+            <div style="width: 3pt; height: 8pt; background: #EF4444; border-radius: 2pt;"></div>
+            <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">0.25s</p>
+          </div>
+        </div>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 6pt; line-height: 1.4;">동기 루프에서 같은 키로 재제출하려면 LLM call(2s+) + tool exec(0.1s+) = 최소 2.1초가 필요합니다. 250ms 윈도우 안에 재제출이 도착하는 것은 <strong style="color: #EF4444;">구조적으로 불가능</strong>합니다.</p>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">실측 검증</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;">
+          CoalescingQueue의 dedup 콜백이 실제로 발화한 횟수: <strong style="color: #34D399;">0회</strong>. 전체 세션 이력에서 한 번도 dedup이 작동한 적이 없습니다. callback 자체도 <strong>lambda _k, _d: None</strong> (no-op).
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: C3/H2 race traces -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #EF444440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">C3 + H2 Race Condition Traces</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444440; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">C3: Scheduler jobs.json 경합</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #E2E8F0; font-family: 'Courier New', monospace;">T1: read(jobs.json) → job_list = [A, B]</p>
+          <p style="font-size: 6pt; color: #E2E8F0; font-family: 'Courier New', monospace;">T2: read(jobs.json) → job_list = [A, B]</p>
+          <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">T1: write([A, B, C])  # C 추가</p>
+          <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">T2: write([A, B, D])  # C 유실!</p>
+        </div>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 4pt;"><strong>해결:</strong> fcntl.flock(LOCK_EX). 파일 수준 배타 잠금.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444440; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">H2: announce 중복 발행</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt; margin-top: 4pt;">
+          <p style="font-size: 6pt; color: #E2E8F0; font-family: 'Courier New', monospace;">T1: check _active[key] → False</p>
+          <p style="font-size: 6pt; color: #E2E8F0; font-family: 'Courier New', monospace;">T2: check _active[key] → False</p>
+          <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">T1: set _active[key]=True, announce()</p>
+          <p style="font-size: 6pt; color: #EF4444; font-family: 'Courier New', monospace;">T2: set _active[key]=True, announce()  # 중복!</p>
+        </div>
+        <p style="font-size: 6pt; color: #34D399; margin-top: 4pt;"><strong>해결:</strong> Lane.try_acquire()/manual_release() atomic check-and-set.</p>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #34D399;">SessionLane이 두 결함을 동시에 해소하는 이유:</strong> per-key Semaphore(1)이 같은 키의 동시 접근을 원천 차단합니다. C3은 같은 jobs.json에, H2는 같은 session key에 대한 동시 접근이었습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S15 보강: dedup 발화 0회(구조적 불가능). C3 jobs.json race + H2 announce race → SessionLane per-key Sem(1) 해소</p>
+    <p style="font-size: 5pt; color: #8B949E;">06 / 12</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">SUPPLEMENTARY: S11 IPC EVENTS</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">30 IPC Events 상세 렌더링 맵 + ContextVar 전파 문제</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <!-- Left: Full event map -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">30 Events → EventRenderer 렌더링 매핑</p>
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399;">Session (3)</p>
+            <p style="font-size: 5pt; color: #8B949E;">stream → 텍스트 스트림</p>
+            <p style="font-size: 5pt; color: #8B949E;">result → 최종 결과 패널</p>
+            <p style="font-size: 5pt; color: #8B949E;">error → 에러 박스</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8; margin-top: 4pt;">LLM (3)</p>
+            <p style="font-size: 5pt; color: #8B949E;">thinking → 사고 spinner</p>
+            <p style="font-size: 5pt; color: #8B949E;">model_switched → 모델 배지</p>
+            <p style="font-size: 5pt; color: #8B949E;">checkpoint_saved → &#10003; 표시</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #F97316; margin-top: 4pt;">Tool (4)</p>
+            <p style="font-size: 5pt; color: #8B949E;">tool_start → 이름+spinner</p>
+            <p style="font-size: 5pt; color: #8B949E;">tool_end → &#10003;+duration_s</p>
+            <p style="font-size: 5pt; color: #8B949E;">tool_approval → HITL 프롬프트</p>
+            <p style="font-size: 5pt; color: #8B949E;">command_result → 커맨드 응답</p>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">Termination (4)</p>
+            <p style="font-size: 5pt; color: #8B949E;">model_escalation → 모델 승급 알림</p>
+            <p style="font-size: 5pt; color: #8B949E;">cost_budget_exceeded → 비용 경고</p>
+            <p style="font-size: 5pt; color: #8B949E;">time_budget_expired → 시간 초과</p>
+            <p style="font-size: 5pt; color: #8B949E;">convergence_detected → 수렴 알림</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542; margin-top: 4pt;">Strategy (3)</p>
+            <p style="font-size: 5pt; color: #8B949E;">goal_decomposition → 분해 트리</p>
+            <p style="font-size: 5pt; color: #8B949E;">tool_backpressure → 속도 제한</p>
+            <p style="font-size: 5pt; color: #8B949E;">tool_diversity_forced → 도구 교체</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399; margin-top: 4pt;">Pipeline (7)</p>
+            <p style="font-size: 5pt; color: #8B949E;">gather/analysis/eval/score/verify → 단계별 패널</p>
+            <p style="font-size: 5pt; color: #8B949E;">pipeline_header/result → 헤더+결과</p>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Control (4)</p>
+            <p style="font-size: 5pt; color: #8B949E;">feedback_loop → 루프백 표시</p>
+            <p style="font-size: 5pt; color: #8B949E;">node_skipped → skip 사유</p>
+            <p style="font-size: 5pt; color: #8B949E;">status → 상태 라인</p>
+            <p style="font-size: 5pt; color: #8B949E;">progress → 진행률 바</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8; margin-top: 4pt;">UI (2)</p>
+            <p style="font-size: 5pt; color: #8B949E;">activity_spinner → 작업 중 애니메이션</p>
+            <p style="font-size: 5pt; color: #8B949E;">cost_update → 실시간 비용</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: ContextVar issue -->
+    <div style="width: 210pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">발견: ContextVar 스레드 미전파</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          Python ContextVar는 asyncio Task에는 자동 전파되지만 threading.Thread에는 전파되지 않습니다.
+          CLIPoller가 daemon thread에서 실행되면서 AgenticLoop의 ContextVar를 읽지 못했습니다.
+        </p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">해결: copy_context()</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">스레드 생성 시 copy_context().run()으로 부모 컨텍스트를 명시적으로 복사합니다. 이 패턴은 SharedServices 전체에 적용되었습니다.</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">zombie job 정리</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">thin-only 전환 중 action 필드가 빈 스케줄러 잡 13개 발견. NL Parser가 생성했으나 action을 채우지 않은 잡입니다. 전수 삭제 후 create 시 action 필수 검증 추가.</p>
+      </div>
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">ColorSystem 문제</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">serve가 /dev/null로 리다이렉트되면 Rich가 ColorSystem=None으로 판단. ANSI 코드 미출력. IPC 모드에서 ColorSystem을 강제 설정하여 해결.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S11 보강: 30 events 전수 렌더링 맵 + ContextVar copy_context() + zombie 13건 + ColorSystem 강제</p>
+    <p style="font-size: 5pt; color: #8B949E;">05 / 12</p>
+  </div>
+</body>
+</html>

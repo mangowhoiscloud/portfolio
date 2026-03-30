@@ -46,10 +46,18 @@ const versions = [
 
 /* ── Design decisions data ── */
 const decisions = [
-  { title: "Sync, not Async", color: "#818CF8", ko: "LangGraph 호환. 디버깅 단순성 > 처리량", en: "LangGraph compatible. Debugging simplicity > throughput" },
-  { title: "Error Isolation", color: "#34D399", ko: "핸들러 하나가 죽어도 체인 계속. 우아한 저하", en: "One handler crash doesn't stop the chain. Graceful degradation" },
-  { title: "Plugin Architecture", color: "#C084FC", ko: ".geode/hooks/ YAML 자동 발견. 코어 수정 없이 확장", en: ".geode/hooks/ YAML auto-discovery. Extend without core changes" },
-  { title: "Priority Bands", color: "#F5C542", ko: "P40-50 인프라, P60-85 도메인, P200 알림. 암묵적 실행 순서", en: "P40-50 infra, P60-85 domain, P200 notifications. Implicit execution order" },
+  { title: "Sync, not Async", color: "#818CF8",
+    ko: "도구 실행은 asyncio.gather로 병렬화하지만, Hook은 동기 체인을 유지합니다. P50→P80→P85 순서가 깨지면 RunLog 없이 Snapshot이 먼저 실행되는 문제가 발생하기 때문입니다. 관측 핸들러는 ~ms 단위라 전체 레이턴시에 영향이 미미합니다.",
+    en: "Tool execution uses asyncio.gather for parallelism, but Hooks maintain a sync chain. If P50→P80→P85 ordering breaks, Snapshot could execute before RunLog. Observer handlers run in ~ms, so latency impact is negligible." },
+  { title: "Orphan Pruning", color: "#E87080",
+    ko: "v0.35.1에서 핸들러 0개인 6 이벤트를 제거했습니다(46→40). 등록 핸들러가 없으면 발화만 있고 수신이 없어 데드 코드와 동일합니다. 필요 시 다시 추가할 수 있으므로 코드 복잡성 감소를 우선했습니다.",
+    en: "In v0.35.1, removed 6 events with zero registered handlers (46→40). Fire-only events with no receivers are dead code. They can be re-added when needed, so we prioritized reducing code complexity." },
+  { title: "Unified Wiring", color: "#34D399",
+    ko: "v0.35.0 이전에는 serve/scheduler에서 HookSystem이 미연결되어, serve에서 발화한 이벤트를 REPL 핸들러가 수신하지 못했습니다. GeodeRuntime이 단일 HookSystem을 소유하도록 전환하여 전 모드 이벤트 전파를 보장합니다.",
+    en: "Before v0.35.0, HookSystem was not wired in serve/scheduler. Events fired in serve couldn't be received by REPL handlers. Switching to a single HookSystem owned by GeodeRuntime guarantees event propagation across all modes." },
+  { title: "Priority Bands", color: "#F5C542",
+    ko: "P40-50 인프라(RunLog, StuckDetect), P60-85 도메인(Journal, Snapshot, MemoryWriteBack), P200 알림(Notification). 숫자가 낮을수록 먼저 실행됩니다. P200은 의도적으로 큰 간격을 두어 인프라/도메인 핸들러 완료 후 알림을 보장합니다.",
+    en: "P40-50 infra (RunLog, StuckDetect), P60-85 domain (Journal, Snapshot, MemoryWriteBack), P200 notifications. Lower = executes first. P200's large gap ensures notifications fire only after all infra/domain handlers complete." },
 ];
 
 /* Priority to delay ms mapping */
@@ -70,7 +78,7 @@ export function HooksSection() {
   const [showBoomerang, setShowBoomerang] = useState(false);
   const [hoveredHandler, setHoveredHandler] = useState<number | null>(null);
   const [hoveredVersion, setHoveredVersion] = useState<number | null>(null);
-  const [showDecisions, setShowDecisions] = useState(false);
+  const [showDecisions, setShowDecisions] = useState(true);
   const [replayRot, setReplayRot] = useState(0);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -131,8 +139,8 @@ export function HooksSection() {
           labelColor="#4ECDC4"
           title={t(locale, "이벤트 기반 리플 패턴", "Event-Driven Ripple Pattern")}
           description={t(locale,
-            "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. 노드 간 직접 의존은 순환 참조를 만듭니다. Hook은 결합 없이 관측성과 반응성을 제공합니다.",
-            "Non-deterministic LLM systems cannot test every path. Direct node dependencies create circular references. Hooks provide observability and reactivity without coupling."
+            "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. 초기에는 노드 간 직접 콜백으로 관측했지만, 26개 파일에 의존성이 퍼지며 순환 참조가 발생했습니다. Hook 이벤트 버스로 전환하여 발화 측은 누가 듣는지 모르고, 핸들러는 누가 쏘는지 모르는 완전 분리를 달성했습니다. v0.10(26 events, 관측만) → v0.31(42, 반응 추가) → v0.35(40, orphan 정리) → v0.37(1 HookSystem 보장)로 성숙했습니다.",
+            "Non-deterministic LLM systems cannot test every path. Initially we observed via direct callbacks between nodes, but dependencies spread across 26 files, creating circular references. Switching to a Hook event bus achieved full decoupling: emitters don't know who listens, handlers don't know who fires. Matured from v0.10 (26 events, observe-only) → v0.31 (42, react added) → v0.35 (40, orphan cleanup) → v0.37 (single HookSystem guaranteed)."
           )}
         />
 
@@ -418,7 +426,7 @@ export function HooksSection() {
             onClick={() => setShowDecisions(!showDecisions)}
             className="text-xs font-mono font-bold text-white/40 hover:text-white/60 border border-white/[0.06] rounded-lg px-4 py-2 mb-4 transition-colors"
           >
-            {showDecisions ? "▾" : "▸"} {t(locale, "설계 결정 보기", "View Design Decisions")}
+            {showDecisions ? "▾" : "▸"} {t(locale, "설계 결정과 트레이드오프", "Design Decisions & Trade-offs")}
           </button>
           <AnimatePresence>
             {showDecisions && (

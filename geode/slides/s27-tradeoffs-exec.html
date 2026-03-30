@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 4pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">DESIGN DECISIONS (2/2)</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">설계 결정: 실행 + 보안 + 인프라</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">동시성 단순화부터 이식성 증명까지. 24가지 설계 결정 완료.</p>
+  </div>
+
+  <!-- 2-column layout -->
+  <div style="flex: 1; padding: 0 36pt 6pt; display: flex; gap: 10pt;">
+
+    <!-- Execution + Concurrency -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">실행 + 동시성</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">SessionLane per-key Sem(1)</span> vs 4 hardcoded lanes</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">같은 key 직렬, 다른 key 병렬. C3 scheduler race, H2 announce race 구조적 해소.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">CoalescingQueue 삭제</span> vs 유지 (no harm)</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">callback=no-op, dedup=0. 동기 루프 구조에서 250ms 재제출 자체가 불가능. Dead code 삭제.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Structured Events (30 types)</span> vs Raw Console Stream</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">Client-side 렌더링 = spinner, 병렬 tool 추적 가능. Server는 상태만 관리.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">time_budget_s</span> vs max_rounds</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">시간 기반 = 모드별 예산 차등 가능. DAEMON 120s, SCHEDULER 300s, IPC unlimited.</p>
+      </div>
+    </div>
+
+    <!-- Security + Infra -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #EF444440; padding-bottom: 3pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">보안 + 인프라</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">PolicyChain AND 6-layer</span> vs OR 허용</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">모든 정책 통과 필수. Org(priority=5)이 하위 규칙 오버라이드.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">Swiss Cheese 5-Layer</span> vs 단일 종합 검사</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">독립 실패 모드 AND-chain. 69.4%&#8594;99.8%. BiasBuster + Cross-LLM + Calibration.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399; font-weight: bold;">서버 사이드 점수 계산</span> vs LLM composite_score</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">(axes_sum-8)/32x100 투명 계산. LLM 수치는 비교 참고만.</p>
+      </div>
+
+      <!-- Portability proof -->
+      <div style="background: #34D39912; border: 1pt solid #34D39940; border-left: 3pt solid #34D399; border-radius: 6pt; padding: 5pt 8pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">이식성 증명: GEODE &#8594; REODE</p>
+        <p style="font-size: 7pt; color: #8B949E; margin-top: 1pt;">동일 4-Layer 코어. 도메인 플러그인만 교체. core 변경 0줄. 83/83 빌드 통과.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">실행 4 + 보안/인프라 4 = 총 24가지 설계 결정. 모든 채택 근거는 코드 경로와 측정 결과로 검증됨</p>
+    <p style="font-size: 5pt; color: #8B949E;">27 / 29</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">APPENDIX C: ASSEMBLY + ECOSYSTEM</p>
+    <div style="margin-left: auto; display: flex; gap: 4pt;">
+      <div style="background: #818CF815; border: 1pt solid #818CF840; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #818CF8;">S18 보강</p>
+      </div>
+      <div style="background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 3pt; padding: 2pt 6pt;">
+        <p style="font-size: 5pt; color: #4ECDC4;">S19 보강</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">C1: PromptAssembler Phase 순서 + C2: TokenTracker 비용 가시성</h1>
+  </div>
+
+  <!-- 2-column -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- C1: PromptAssembler phase order (S18 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #818CF840; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">C1. Phase 순서가 중요한 이유 (S18 보강)</p>
+      </div>
+
+      <!-- Why this order -->
+      <div style="background: #1E293B; border-left: 4pt solid #818CF8; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #818CF8;">문제:</strong> skill을 memory보다 먼저 주입하면 스킬의 context:fork가 오래된 메모리를 참조합니다. memory를 template보다 먼저 주입하면 메모리가 시스템 프롬프트를 오버라이드합니다.
+        </p>
+      </div>
+
+      <!-- Phase order with reasoning -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; flex: 1;">
+        <p style="font-size: 7pt; font-weight: bold; color: #818CF8; margin-bottom: 5pt;">6-Phase 순서 근거</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">1</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">template</p>
+              <p style="font-size: 6pt; color: #8B949E;">시스템 정체성. 다른 모든 것의 기반이 됩니다.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">2</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">override</p>
+              <p style="font-size: 6pt; color: #8B949E;">도메인별 설정. template 위에 얹어야 우선순위 명확.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">3</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">skill</p>
+              <p style="font-size: 6pt; color: #8B949E;">런타임 스킬 42개. 3-tier lazy loading. override 후에야 scope 결정 가능.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">4</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">memory</p>
+              <p style="font-size: 6pt; color: #8B949E;">5-Tier 메모리. skill 이후여야 스킬이 최신 메모리를 참조.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">5</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">bootstrap</p>
+              <p style="font-size: 6pt; color: #8B949E;">런타임 상태 주입. 모든 정적 설정 완료 후 동적 상태 합류.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: flex-start;">
+            <div style="background: #34D39920; border-radius: 3pt; padding: 2pt 6pt; min-width: 22pt; text-align: center;">
+              <p style="font-size: 7pt; font-weight: bold; color: #34D399;">6</p>
+            </div>
+            <div>
+              <p style="font-size: 7pt; color: #E2E8F0; font-weight: bold;">SHA-256 assemble</p>
+              <p style="font-size: 6pt; color: #8B949E;">최종 해시. 변경 부분만 해시가 달라져 cache hit rate 보존.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C2: TokenTracker cost visibility (S19 보강) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="border-bottom: 1pt solid #4ECDC440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">C2. TokenTracker 비용 가시성 (S19 보강)</p>
+      </div>
+
+      <!-- Problem: cost blind spot -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">Before: 비용 사각지대</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          v0.34까지 3-provider failover 시 어느 모델에 얼마가 소비되는지 추적 불가. 비용이 예상의 3x를 초과해도 인지하지 못했습니다.
+        </p>
+      </div>
+
+      <!-- Solution: TokenTracker -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">TokenTracker 아키텍처</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">18-model price registry</p>
+            <p style="font-size: 6pt; color: #8B949E;">input/output/cache 단가</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">LLM_CALL_START/END hook</p>
+            <p style="font-size: 6pt; color: #8B949E;">per-call 실시간 집계</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">/cost CLI command</p>
+            <p style="font-size: 6pt; color: #8B949E;">세션 누적, 모델별 분해</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">cost_budget_s (v0.38)</p>
+            <p style="font-size: 6pt; color: #8B949E;">80% 경고 + hard termination</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real example -->
+      <div style="background: #161B22; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">실측: REODE 마이그레이션 비용 추적</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">총 비용</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">~$388</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">세션 수</p>
+            <p style="font-size: 7pt; color: #8B949E;">33 sessions</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">LLM 라운드</p>
+            <p style="font-size: 7pt; color: #8B949E;">1,133 rounds</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">평균 단가</p>
+            <p style="font-size: 7pt; color: #8B949E;">~$0.34/round</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact -->
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;"><strong style="color: #34D399;">영향:</strong> v0.38 cost_budget_s로 80% 도달 시 proactive 경고. 예산 초과 전에 모델을 저비용으로 자동 전환합니다 (llm_max_fallback_cost_ratio).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">Appendix C: S18 PromptAssembler(6-Phase 의존 순서 = 캐시 보존) + S19 TokenTracker(REODE $388/1,133 rounds 실측)</p>
+    <p style="font-size: 5pt; color: #8B949E;">A4 / 4</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 8pt 36pt 3pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">STRUCTURAL ISOMORPHISM</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Harness Builds Harness</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">SCAFFOLD(빌더)와 GEODE(결과물)는 동일한 아키텍처를 공유합니다. 각 컴포넌트는 1:1 구조적 거울을 갖습니다.</p>
+  </div>
+
+  <!-- Mirror Table -->
+  <div style="flex: 1; padding: 0 36pt 4pt; display: flex; gap: 8pt; min-height: 0;">
+
+    <!-- Left: SCAFFOLD -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #818CF8; border-radius: 5pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <div style="background: #818CF820; border: 1px solid #818CF860; border-radius: 3pt; padding: 3pt 10pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #818CF8; letter-spacing: 0.4pt;">SCAFFOLD</p>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E;">Claude Code &#8212; GEODE를 빌드</p>
+      </div>
+
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #818CF8;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CLAUDE.md &#8212; 425줄, 17 CANNOT 규칙</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">5개 도메인: Git · Planning · Quality · Docs · PR · 개발자 에이전트 SOT</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #818CF8;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">25 Scaffold Skills (.claude/skills/)</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">geode-gitflow · kent-beck-review · karpathy-patterns · verification-team + 17개</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #818CF8;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CI 5-Job Ratchet</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Lint(ruff) · Type(mypy) · Test(pytest &#8805;2900) · Security(bandit) · Gate</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #818CF8;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">CANNOT/CAN (17 hard rules + 5 freedoms)</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">자연어 제약 — LLM이 읽고 내면화. CI에서 강제 가능한 hard rule만 포함.</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #818CF8;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">5-Persona Review</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Beck(설계) · Karpathy(제약) · Steinberger(운영) · Cherny(격리) · GAP Detective(누락·괴리)</p>
+      </div>
+    </div>
+
+    <!-- Center: Hook spine -->
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 52pt; gap: 0pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold; text-align: center;">Hook</p>
+      <p style="font-size: 14pt; color: #F97316; font-weight: bold; text-align: center; line-height: 1;">40</p>
+
+      <p style="font-size: 5pt; color: #8B949E; text-align: center;">events</p>
+      <div style="width: 2pt; height: 18pt; background: #F97316; margin: 5pt 0;"></div>
+      <div style="background: #161B22; border: 1px solid #F5C542; border-radius: 4pt; padding: 5pt 6pt;">
+        <p style="font-size: 6pt; font-weight: bold; color: #F5C542; text-align: center; font-family: 'Courier New', monospace; line-height: 1.5;">while</p>
+        <p style="font-size: 6pt; font-weight: bold; color: #F5C542; text-align: center; font-family: 'Courier New', monospace; line-height: 1.5;">(tool_use)</p>
+      </div>
+      <div style="width: 2pt; height: 18pt; background: #F97316; margin: 5pt 0;"></div>
+      <p style="font-size: 5pt; color: #8B949E; text-align: center;">Shared</p>
+      <p style="font-size: 5pt; color: #8B949E; text-align: center;">Primitive</p>
+    </div>
+
+    <!-- Right: GEODE Runtime -->
+    <div style="flex: 1; background: #161B22; border: 1px solid #4ECDC4; border-radius: 5pt; padding: 10pt; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="display: flex; align-items: center; gap: 6pt; margin-bottom: 3pt;">
+        <div style="background: #4ECDC420; border: 1px solid #4ECDC460; border-radius: 3pt; padding: 3pt 10pt;">
+          <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; letter-spacing: 0.4pt;">GEODE</p>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E;">Autonomous agent runtime</p>
+      </div>
+
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #4ECDC4;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">GEODE.md &#8212; 71줄, 4 CANNOT 규칙</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">SESSION_START 시 core/memory/organization.py를 통해 로드 · 런타임 에이전트 정체성</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #4ECDC4;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">Runtime Skills (.geode/skills/)</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">4개 분석가 템플릿: discovery · game-mechanics · growth-potential · player-experience</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #4ECDC4;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">5-Layer Verification (core/verification/)</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">G1-G4 Guardrails · BiasBuster · Cross-LLM(α≥0.67) · Confidence Gate 0.7 · Rights Risk</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #4ECDC4;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">PolicyChain 6-Layer (core/tools/policy.py)</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">Profile · Org · Mode · Agent(STANDARD/WRITE/DANGEROUS) · Node-scope · Sub-agent</p>
+      </div>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 6pt 8pt; border-left: 2pt solid #4ECDC4;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0;">BiasBuster &#8212; 6 유형 편향 제거</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 2pt;">confirmation · recency · anchoring · position · verbosity · self-enhancement</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 7pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E; font-style: italic;">하네스를 빌드하는 하네스는 자신의 구조를 공유합니다.</p>
+    <p style="font-size: 5pt; color: #8B949E;">04 / 24</p>
+  </div>
+</body>
+</html>

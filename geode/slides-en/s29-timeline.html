@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 16pt; background: #F5C542; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #F5C542;">GEODE EVOLUTION</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 5pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Timeline: 도메인 파이프라인 &#8594; 범용 하네스 &#8594; 의도적 단순화</h1>
+    <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">과제 전형 &#8594; 피봇 &#8594; 하네스 &#8594; 경화 &#8594; 단순화. 44 릴리스, 0 회귀.</p>
+  </div>
+
+  <!-- Timeline connector row -->
+  <div style="padding: 0 36pt; display: flex; align-items: center; gap: 0pt; margin-bottom: 5pt;">
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #F5C542; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #F5C54260;"></div>
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #F97316; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #F9731660;"></div>
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #4ECDC4; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #34D39960;"></div>
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #34D399; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #818CF860;"></div>
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #818CF8; flex-shrink: 0;"></div>
+    <div style="flex: 1; height: 2pt; background: #EF444460;"></div>
+    <div style="width: 7pt; height: 7pt; border-radius: 50%; background: #EF4444; flex-shrink: 0;"></div>
+  </div>
+
+  <!-- Phase cards row -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 5pt; min-height: 0;">
+
+    <!-- Phase 1 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #F5C54240; border-top: 3pt solid #F5C542; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #F5C54220; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #F5C542;">v0.1-0.7</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Jan-Feb</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Phase 1</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">Game IP DAG. 넥슨 네비게이터실 과제 전형.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #F5C542; font-family: 'Courier New', monospace;">LangGraph StateGraph</p>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #F9731640; border-top: 3pt solid #F97316; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #F9731620; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #F97316;">v0.8 PIVOT</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 초</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Phase 2</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">면접 탈락 &#8594; 자율 피봇. DomainPort Protocol.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #F97316; font-family: 'Courier New', monospace;">범용 설계 전환점</p>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #4ECDC440; border-top: 3pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #4ECDC420; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #4ECDC4;">v0.24-0.30</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 중후</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Phase 3</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">Scaffold &#8594; Runtime &#8594; Loop 하네스 완성.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #4ECDC4; font-family: 'Courier New', monospace;">while tool_use: loop()</p>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #34D39940; border-top: 3pt solid #34D399; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #34D39920; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #34D399;">v0.31-0.35</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 말</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Phase 4</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">프로덕션 경화. 20개 결함 수정. SharedServices.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #34D399; font-family: 'Courier New', monospace;">SessionMode + time_budget</p>
+      </div>
+    </div>
+
+    <!-- Phase 5: Simplification -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #818CF840; border-top: 3pt solid #818CF8; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #818CF8;">v0.36-0.38</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar 말</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Phase 5</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">의도적 단순화. 6L&#8594;4L. Thin-only IPC. 835줄 삭제.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #818CF8; font-family: 'Courier New', monospace;">"이거 필요해?" -10 modules</p>
+      </div>
+    </div>
+
+    <!-- Fork: REODE -->
+    <div style="flex: 1; background: #161B22; border: 1pt solid #EF444440; border-top: 3pt solid #EF4444; border-radius: 4pt; padding: 7pt 8pt; display: flex; flex-direction: column; gap: 3pt;">
+      <div style="display: flex; align-items: center; gap: 3pt;">
+        <div style="background: #EF444420; border-radius: 3pt; padding: 2pt 4pt;">
+          <p style="font-size: 5pt; font-weight: bold; color: #EF4444;">FORK</p>
+        </div>
+        <p style="font-size: 5pt; color: #8B949E;">Mar-May</p>
+      </div>
+      <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">REODE</p>
+      <p style="font-size: 6pt; color: #E2E8F0; line-height: 1.3;">Java 8&#8594;22, Spring 4&#8594;6. 103K LoC. 83/83.</p>
+      <div style="background: #0D1117; border-radius: 3pt; padding: 3pt 5pt; margin-top: auto;">
+        <p style="font-size: 5pt; color: #EF4444; font-family: 'Courier New', monospace;">DomainPort: 0 core changes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key message banner -->
+  <div style="margin: 5pt 36pt 0 36pt; background: #1E293B; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 5pt 12pt;">
+    <p style="font-size: 7pt; color: #F5C542; font-weight: bold; text-align: center;">도메인 파이프라인 &#8594; 범용 하네스 &#8594; 프로덕션 경화 &#8594; 의도적 단순화. 44 릴리스, 0 회귀.</p>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt 36pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.1 과제 합격 &#8594; v0.8 Pivot &#8594; v0.30 Harness &#8594; v0.35 Hardening &#8594; v0.38 Simplification &#8594; REODE fork</p>
+    <p style="font-size: 5pt; color: #8B949E;">29 / 29</p>
+  </div>
+</body>
+</html>

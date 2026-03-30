@@ -1,7 +1,7 @@
 # GEODE Portfolio PPTX — Build Harness
 
 ## 프로젝트
-GEODE v0.30 포트폴리오 PPTX. HTML → html2pptx.js → PptxGenJS 파이프라인.
+GEODE v0.38 포트폴리오 PPTX (v10). HTML → html2pptx.js → PptxGenJS 파이프라인.
 작업 디렉토리: `/Users/mango/workspace/portfolio/geode/`
 
 ## CAN — 서술 원칙

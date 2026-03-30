@@ -232,8 +232,8 @@ function RacingTrack({
 const components = [
   { label: "CLAUDE.md", sub: "CANNOT 23 / CAN 6", subEn: "CANNOT 23 / CAN 6", color: "#818CF8", badge: "SOT" },
   { label: "progress.md", sub: "5컬럼 칸반", subEn: "5-Column Kanban", color: "#F4B8C8", badge: "kanban" },
-  { label: "21 Skills", sub: "YAML trigger 주입", subEn: "YAML Trigger Injection", color: "#F5C542", badge: "inject" },
-  { label: "46 Hooks", sub: "4단계 성숙도", subEn: "4-Level Maturity", color: "#4ECDC4", badge: "event" },
+  { label: "25 Skills", sub: "Progressive Disclosure 3-tier", subEn: "Progressive Disclosure 3-tier", color: "#F5C542", badge: "inject" },
+  { label: "40 Hooks", sub: "15카테고리 이벤트 버스", subEn: "15-Category Event Bus", color: "#4ECDC4", badge: "event" },
   { label: "CI 5-Gate", sub: "Pre + Post 래칫", subEn: "Pre + Post Ratchet", color: "#34D399", badge: "gate" },
   { label: "Worktree", sub: "malloc / free", subEn: "malloc / free", color: "#C084FC", badge: "isolation" },
 ];

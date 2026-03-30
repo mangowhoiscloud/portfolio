@@ -43,7 +43,7 @@ export const agenticLoopNodes: Node[] = [
     data: {
       icon: "🔧",
       label: "SELECT",
-      description: "Pick from 46 tools",
+      description: "Pick from 47 tools",
       color: "pink",
       delay: 0.2,
     },

@@ -49,8 +49,8 @@ export function GatewaySection() {
           labelColor="#4ECDC4"
           title="Unified Daemon"
           description={t(locale,
-            "geode serve가 유일한 데몬. thin CLI, Slack, Scheduler 모두 serve에 접속하여 GeodeRuntime.create_session(mode)로 실행합니다. SessionLane이 동시성을 제어합니다.",
-            "geode serve is the single daemon. thin CLI, Slack, and Scheduler all connect to serve and run via GeodeRuntime.create_session(mode). SessionLane controls concurrency."
+            "REPL과 serve가 각각 HookSystem, Scheduler를 독자적으로 생성하여 이벤트 미수신, jobs.json 경합, 스케줄러의 터미널 침범이 발생했습니다. GeodeRuntime이 모든 상태를 단일 소유하도록 전환하고, CLI는 IPC thin client로 변경했습니다.",
+            "REPL and serve each created their own HookSystem and Scheduler, causing missed events, jobs.json contention, and scheduler terminal invasion. Resolved by having GeodeRuntime own all state, with CLI becoming an IPC thin client."
           )}
         />
 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">SUPPLEMENTARY: S08 VELOCITY</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">복리 성장 메커니즘: Phase 5 Simplification 상세</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">속도가 복리로 증가한 이유. 각 Phase가 다음 Phase의 기반이 되는 구조적 메커니즘.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Compound mechanism -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #1E293B; border-left: 4pt solid #F59E0B; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.5;">
+          <strong style="color: #F59E0B;">복리의 원리:</strong> Phase N에서 만든 도구가 Phase N+1의 생산성을 높입니다.
+          CANNOT 규칙이 실수를 차단하고, Skills가 반복 작업을 자동화하고, CI가 품질을 보장합니다. 이 3가지가 겹치면서 속도가 가속됩니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F59E0B; margin-bottom: 5pt;">Phase별 누적 도구</p>
+        <div style="display: flex; flex-direction: column; gap: 4pt;">
+          <div style="display: flex; gap: 6pt; align-items: center;">
+            <div style="background: #8B949E20; border-radius: 3pt; padding: 2pt 6pt; width: 40pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">Ph.0</p>
+            </div>
+            <p style="font-size: 7pt; color: #8B949E;">기반 셋업. 도구 없음. 수작업 100%.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: center;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; width: 40pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Ph.1-2</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">CANNOT 규칙 5개 + CI 3-Job. 기본 품질 가드레일 확보.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: center;">
+            <div style="background: #F59E0B20; border-radius: 3pt; padding: 2pt 6pt; width: 40pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #F59E0B;">Ph.3</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">DomainPort 분리 + Skills 9개 + 5-Persona. <strong style="color: #F59E0B;">16.7x 폭발.</strong></p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: center;">
+            <div style="background: #818CF820; border-radius: 3pt; padding: 2pt 6pt; width: 40pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #818CF8;">Ph.4</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">SharedServices + time_budget + 42 Skills. 자동화 비율 상승.</p>
+          </div>
+          <div style="display: flex; gap: 6pt; align-items: center;">
+            <div style="background: #34D39920; border-radius: 3pt; padding: 2pt 6pt; width: 40pt; text-align: center;">
+              <p style="font-size: 6pt; font-weight: bold; color: #34D399;">Ph.5</p>
+            </div>
+            <p style="font-size: 7pt; color: #E2E8F0;">Thin-only + SessionLane. <strong style="color: #34D399;">코드 삭제가 속도를 높임.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Phase 5 detail -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #34D399; border-top: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">Phase 5 (v0.36-0.38) 상세</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">PR 수</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">10 PRs (#528-558)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">커밋</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">67+</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">삭제 라인</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">-835+</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">추가 라인</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">+3,276</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">결함 해소</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">11건 → 0</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F5C542; margin-bottom: 4pt;">Phase 5 핵심 변환</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <p style="font-size: 7pt; color: #E2E8F0;">v0.36.0: Bootstrap 통합 + Scheduler 경화 (4 PRs)</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">v0.37.0: Thin-only + SessionLane + 4-Layer (6 PRs)</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">v0.37.1-2: IPC Events 12→30 + UX 부활</p>
+          <p style="font-size: 7pt; color: #E2E8F0;">v0.38.0: LLM Resilience 14항목 경화</p>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #34D399; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><strong style="color: #34D399;">역설:</strong> Phase 5에서 코드를 835줄 삭제했는데 기능은 30 IPC events + LLM Resilience 14항목이 추가되었습니다. 단순화가 새 기능의 공간을 만들었습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S08 보강: Phase 5 상세 (10 PRs, -835 lines, +3,276 lines, 11 defects→0). 삭제가 새 기능의 공간을 만듦</p>
+    <p style="font-size: 5pt; color: #8B949E;">02 / 12</p>
+  </div>
+</body>
+</html>

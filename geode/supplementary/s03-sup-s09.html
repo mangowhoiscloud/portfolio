@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #4ECDC4; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #4ECDC4;">SUPPLEMENTARY: S09 ARCHITECTURE</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">4-Layer 모듈 배분 + 의존성 규칙</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">192개 모듈이 4개 레이어에 어떻게 분배되는지, 그리고 레이어 간 의존 방향이 왜 단방향인지.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Module distribution -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 6pt;">4-Layer 모듈 배분 (192 total)</p>
+        <div style="display: flex; flex-direction: column; gap: 5pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 30pt; height: 24pt; background: #818CF8; border-radius: 3pt; display: flex; align-items: center; justify-content: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">L3</p>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between;">
+                <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">Model</p>
+                <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">10 modules</p>
+              </div>
+              <p style="font-size: 6pt; color: #8B949E;">llm/ (providers, router, errors, fallback) + adapters/ (claude, openai, glm)</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 30pt; height: 24pt; background: #4ECDC4; border-radius: 3pt; display: flex; align-items: center; justify-content: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">L2</p>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between;">
+                <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Runtime</p>
+                <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">62 modules</p>
+              </div>
+              <p style="font-size: 6pt; color: #8B949E;">gateway/(6) + memory/(14) + mcp/(18) + skills/(6) + runtime_wiring/(4) + config + auth</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 30pt; height: 24pt; background: #F5C542; border-radius: 3pt; display: flex; align-items: center; justify-content: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">L1</p>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between;">
+                <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">Harness</p>
+                <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">50 modules</p>
+              </div>
+              <p style="font-size: 6pt; color: #8B949E;">orchestration/(14) + tools/(13) + verification/(7) + automation/(13) + hooks/(5)</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="width: 30pt; height: 24pt; background: #34D399; border-radius: 3pt; display: flex; align-items: center; justify-content: center;">
+              <p style="font-size: 9pt; font-weight: bold; color: #FFFFFF;">L0</p>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between;">
+                <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Agent</p>
+                <p style="font-size: 7pt; font-weight: bold; color: #34D399;">30 modules</p>
+              </div>
+              <p style="font-size: 6pt; color: #8B949E;">agent/(9) + cli/(21, thin client + UI + commands)</p>
+            </div>
+          </div>
+        </div>
+        <div style="border-top: 1pt solid #21262D; padding-top: 4pt; margin-top: 4pt; display: flex; justify-content: space-between;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">Domain (직교축)</p>
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316;">40 modules</p>
+        </div>
+        <p style="font-size: 6pt; color: #8B949E;">domains/game_ip/(3 + nodes/7 + config + fixtures/30)</p>
+      </div>
+    </div>
+
+    <!-- Right: Dependency rules -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">의존성 방향 규칙</p>
+        <div style="display: flex; flex-direction: column; gap: 6pt;">
+          <div style="display: flex; align-items: center; gap: 6pt;">
+            <div style="background: #34D39920; border-radius: 3pt; padding: 3pt 8pt;">
+              <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L0 Agent</p>
+            </div>
+            <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+            <div style="background: #F5C54220; border-radius: 3pt; padding: 3pt 8pt;">
+              <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L1 Harness</p>
+            </div>
+            <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+            <div style="background: #4ECDC420; border-radius: 3pt; padding: 3pt 8pt;">
+              <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 Runtime</p>
+            </div>
+            <p style="font-size: 8pt; color: #4ECDC4;">&#8594;</p>
+            <div style="background: #818CF820; border-radius: 3pt; padding: 3pt 8pt;">
+              <p style="font-size: 7pt; font-weight: bold; color: #818CF8;">L3 Model</p>
+            </div>
+          </div>
+          <p style="font-size: 7pt; color: #8B949E;">상위→하위 단방향. 역방향 import 금지. Hook System만 예외(cross-cutting).</p>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">6-Layer에서 발생했던 의존성 문제</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          L1(Infra)과 L4(Tools)가 서로를 import. L2(Memory)가 L3(Orchestration)을 직접 참조.
+          순환 의존이 3곳에서 발생. mypy strict에서 순환 import 경고 12건.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">4-Layer 전환 후</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          순환 import 경고 12건 → <strong style="color: #34D399;">0건</strong>.
+          Infra/Gateway를 Runtime으로, Tools/MCP를 Harness로 통합하여 경계를 실제 의존성에 맞췄습니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #F9731640; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #F97316;"><strong>Domain 직교 규칙:</strong> Domain은 L1(Harness)에서 DomainPort Protocol(ContextVar)로 주입됩니다. Domain이 어떤 레이어도 import하지 않고, 어떤 레이어도 Domain을 직접 import하지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S09 보강: L3(10) + L2(62) + L1(50) + L0(30) + Domain(40) = 192. 순환 import 12→0. 단방향 의존</p>
+    <p style="font-size: 5pt; color: #8B949E;">03 / 12</p>
+  </div>
+</body>
+</html>

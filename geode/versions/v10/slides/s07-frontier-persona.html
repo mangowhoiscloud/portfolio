@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Frontier Mining + 5-Persona Review</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">3종 이상 프론티어에서 수렴한 패턴만 채택하고, 5인 페르소나가 단일 리뷰어가 놓치는 것을 병렬로 검수합니다.</p>
+  </div>
+
+  <!-- Frontier 4 sources -->
+  <div style="padding: 0 36pt 6pt; display: flex; gap: 6pt;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">autoresearch</p>
+      <p style="font-size: 7pt; color: #F59E0B; margin-top: 3pt;">Karpathy Autonomous Loop</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">P1→CANNOT 규칙. P4→CI ratchet. P6→컨텍스트 압축. P10→최소 구현.</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">OpenClaw</p>
+      <p style="font-size: 7pt; color: #F59E0B; margin-top: 3pt;">Steinberger / PSPDFKit</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">Gateway Session Key. Lane Queue 동시성. Atomic write for .env 보안.</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">Claude Code</p>
+      <p style="font-size: 7pt; color: #F59E0B; margin-top: 3pt;">Cherny / Anthropic</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">while(tool_use) AgenticLoop. HITL 3-tier SAFE/WRITE/DANGEROUS. Sliding-window context.</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+      <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">Codex CLI</p>
+      <p style="font-size: 7pt; color: #F59E0B; margin-top: 3pt;">OpenAI</p>
+      <p style="font-size: 7pt; color: #8B949E; margin-top: 5pt; line-height: 1.5;">Worktree 격리 + .owner 소유권. Bash resource limits. Secret redaction.</p>
+    </div>
+  </div>
+
+  <!-- 5 Personas -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 5pt; min-height: 0;">
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-top: 2pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 8pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4;">Beck</p>
+      <p style="font-size: 5pt; color: #8B949E;">설계</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.5;">가장 단순한 구현인가? 불필요한 추상화? Error paths 테스트됐는가?</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-top: 2pt solid #F59E0B; border-radius: 4pt; padding: 7pt 8pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #F59E0B;">Karpathy</p>
+      <p style="font-size: 5pt; color: #8B949E;">제약</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.5;">Token guard? Ratchet? 컨텍스트 윈도우 소비량은?</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-top: 2pt solid #F97316; border-radius: 4pt; padding: 7pt 8pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #F97316;">Steinberger</p>
+      <p style="font-size: 5pt; color: #8B949E;">운영</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.5;">Atomic write? 크래시 시 상태 파일 무결성 보장?</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-top: 2pt solid #818CF8; border-radius: 4pt; padding: 7pt 8pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #818CF8;">Cherny</p>
+      <p style="font-size: 5pt; color: #8B949E;">격리</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.5;">Tool definitions? HITL classification? while(tool_use) 정합성?</p>
+    </div>
+    <div style="flex: 1; background: #161B22; border: 1px solid #21262D; border-top: 2pt solid #EF4444; border-radius: 4pt; padding: 7pt 8pt;">
+      <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">GAP Detective</p>
+      <p style="font-size: 5pt; color: #8B949E;">누락·기망·괴리</p>
+      <p style="font-size: 7pt; color: #E2E8F0; margin-top: 4pt; line-height: 1.5;">계획과 구현이 일치하는가? 누락된 경로? 문서와 코드의 괴리?</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">25 scaffold skills encode patterns once, reused across all PRs — research time must not exceed implementation time</p>
+    <p style="font-size: 5pt; color: #8B949E;">07 / 24</p>
+  </div>
+</body>
+</html>

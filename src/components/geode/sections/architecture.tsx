@@ -9,7 +9,7 @@ import { useLocale, t } from "../locale-context";
 const ALL = [0, 1, 2, 3, 4]; // all components highlighted (shared resources)
 const layers = [
   { id: "Model",   color: "#818CF8", y: 10,  components: ["ClaudeAdapter", "OpenAIAdapter", "GLMAdapter"], highlight: { ipc: [0, 1, 2], daemon: [0, 1, 2], scheduler: [0, 1, 2] } },
-  { id: "Runtime", color: "#4ECDC4", y: 78,  components: ["ToolRegistry(52)", "MCP(41)", "Skills", "Memory(4T)"], highlight: { ipc: [0, 1, 2, 3], daemon: [0, 1, 2, 3], scheduler: [0, 1, 2, 3] } },
+  { id: "Runtime", color: "#4ECDC4", y: 78,  components: ["ToolRegistry(47)", "MCP(44)", "Skills(25)", "Memory(4T)"], highlight: { ipc: [0, 1, 2, 3], daemon: [0, 1, 2, 3], scheduler: [0, 1, 2, 3] } },
   { id: "Harness", color: "#F5C542", y: 146, components: ["SessionLane", "Lane(global,8)", "PolicyChain", "HookSystem(40)"], highlight: { ipc: [0, 1, 2, 3], daemon: [0, 1, 2, 3], scheduler: [0, 1, 2, 3] } },
   { id: "Agent",   color: "#F4B8C8", y: 214, components: ["AgenticLoop", "SubAgent", "CLIPoller", "Gateway", "Scheduler"], highlight: { ipc: [0, 1, 2], daemon: [0, 1, 3], scheduler: [0, 1, 4] } },
 ];
@@ -73,15 +73,15 @@ export function ArchitectureSection() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row md:items-end md:gap-12 mb-6">
             <div>
-              <p className="text-xs font-mono font-bold text-[#818CF8]/80 uppercase tracking-[0.2em] mb-2">Architecture</p>
-              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white/95">
+              <p className="text-sm font-mono font-bold text-[#818CF8]/60 uppercase tracking-[0.25em] mb-3">Architecture</p>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90">
                 4-Layer Stack
               </h2>
             </div>
             <p className="text-sm text-[#A0B4D4] max-w-md leading-relaxed mt-3 md:mt-0 md:pb-1">
               {t(locale,
-                "190개 모듈, 3,422+ 테스트. 요청이 Agent → Harness → Runtime → Model을 관통합니다.",
-                "190 modules, 3,422+ tests. Requests flow through Agent → Harness → Runtime → Model."
+                "기존 L0-L5 6-Layer는 경계가 모호하여 모듈 배치 논쟁이 반복되었습니다. Model(LLM 추상화), Runtime(도구+MCP+스킬), Harness(동시성+정책), Agent(실행 루프) 4계층으로 단순화하니 각 모듈의 소속이 명확해졌습니다.",
+                "The prior L0-L5 6-Layer had blurry boundaries, causing recurring module placement debates. Simplifying to 4 layers (Model, Runtime, Harness, Agent) made each module's ownership unambiguous."
               )}
             </p>
           </div>
@@ -209,7 +209,7 @@ export function ArchitectureSection() {
               <text x={757} y={140} textAnchor="middle" fill="#34D399" fillOpacity={0.25}
                 fontSize={7} fontFamily="ui-monospace, monospace"
                 style={{ writingMode: "vertical-rl" } as React.CSSProperties}>
-                HOOKS 46
+                HOOKS 40
               </text>
 
               {/* Cross-cutting: DomainPort */}

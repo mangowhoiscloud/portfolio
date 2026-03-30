@@ -412,13 +412,13 @@ export function LoopSection() {
             while True: Long-running Agent
           </h2>
           <p className="text-lg text-white/40 font-semibold mb-4">
-            for range(50) → while True + 5 Guards
+            for range(50) → while True + 8 Guards
           </p>
           <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-12 leading-relaxed">
             {locale === "ko" ? (
-              <>턴 제한이 아니라, 에이전트와 인프라가 함께 종료를 결정합니다. LLM이 <code className="text-[#4ECDC4]/70">tool_use</code>를 반환하는 한 궤도는 멈추지 않으며, 수렴 감지 · 시간 예산 · 컨텍스트 압축 · StuckDetector 5개 가드가 무한 루프를 방지합니다.</>
+              <>max_rounds=50이었던 실행 제약을 <code className="text-[#4ECDC4]/70">time_budget_s</code>로 교체했습니다. LLM 출력 분산이 높아 라운드 수로는 종료 시점을 예측할 수 없지만, wall-clock은 일관됩니다. 8개 가드(수렴 감지, 시간 예산, 컨텍스트 압축, StuckDetector, 비용 상한, 래칫, 다양성 강제)가 무한 루프를 방지합니다.</>
             ) : (
-              <>No turn limit. The agent and infrastructure decide termination together. The loop keeps running as long as the LLM returns <code className="text-[#4ECDC4]/70">tool_use</code>. Five guards (convergence detection, time budget, context compaction, StuckDetector) prevent infinite loops.</>
+              <>Replaced the old max_rounds=50 constraint with <code className="text-[#4ECDC4]/70">time_budget_s</code>. LLM output variance is too high for round-based prediction, but wall-clock time is consistent. Eight guards (convergence, time budget, context compaction, StuckDetector, cost cap, ratchet, diversity enforcement) prevent infinite loops.</>
             )}
           </p>
         </ScrollReveal>

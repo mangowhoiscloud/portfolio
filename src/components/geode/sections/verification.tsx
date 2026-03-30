@@ -64,8 +64,8 @@ const agenticLayers = [
     title: "Tool Classification",
     items: ["SAFE 13 (auto)", "STANDARD 25 (auto)", "WRITE 10 (gate)", "EXPENSIVE 3 ($)", "DANGEROUS 1 (bash)"],
     accent: "#4ECDC4",
-    description: "52개 도구를 5단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/EXPENSIVE/DANGEROUS는 사용자 승인. Action Summary로 도구별 결정적 요약을 제공합니다.",
-    descriptionEn: "Classifies 52 tools into 5 tiers. SAFE/STANDARD auto-execute, WRITE/EXPENSIVE/DANGEROUS require user approval. Action Summary provides deterministic per-tool summaries.",
+    description: "47개 도구를 5단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/EXPENSIVE/DANGEROUS는 사용자 승인. Action Summary로 도구별 결정적 요약을 제공합니다.",
+    descriptionEn: "Classifies 47 tools into 5 tiers. SAFE/STANDARD auto-execute, WRITE/EXPENSIVE/DANGEROUS require user approval. Action Summary provides deterministic per-tool summaries.",
   },
   {
     tier: 2,
@@ -109,10 +109,12 @@ function OnionDiagram({
   layers,
   activeLayer,
   onHover,
+  mode = "pipeline",
 }: {
   layers: typeof pipelineLayers;
   activeLayer: number;
   onHover: (i: number) => void;
+  mode?: string;
 }) {
   const SIZE = 300;
   const CX = SIZE / 2;
@@ -166,8 +168,8 @@ function OnionDiagram({
           })}
 
         {/* Center pulse */}
-        <circle cx={CX} cy={CY} r={0} fill="none" stroke="#34D399" strokeWidth={0.8} strokeOpacity={0}>
-          <animate attributeName="r" values="0;{radii[radii.length - 1]}" dur="4s" repeatCount="indefinite" />
+        <circle cx={CX} cy={CY} r={0} fill="none" stroke={mode === "agentic" ? "#4ECDC4" : "#34D399"} strokeWidth={0.8} strokeOpacity={0}>
+          <animate attributeName="r" values={`0;${radii[radii.length - 1]}`} dur="4s" repeatCount="indefinite" />
           <animate attributeName="stroke-opacity" values="0.15;0" dur="4s" repeatCount="indefinite" />
         </circle>
 
@@ -175,43 +177,24 @@ function OnionDiagram({
           Agent
         </text>
         <text x={CX} y={CY + 8} textAnchor="middle" fill="white" fillOpacity={0.25} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}>
-          Output
+          {mode === "agentic" ? "Input" : "Output"}
         </text>
       </svg>
     </div>
   );
 }
 
-/* ── Ratchet Workflow (Dev Quality) ── */
-const ratchetSteps = [
-  { id: 0, name: "Board + Worktree",  color: "#818CF8", desc: "Backlog → In Progress. git worktree로 격리 환경 할당. .owner 파일로 세션 소유권 보장.", descEn: "Backlog → In Progress. Allocate isolated env via git worktree. Session ownership via .owner file." },
-  { id: 1, name: "GAP Audit",         color: "#60A5FA", desc: "코드 실측으로 이미 구현된 항목 제거. Fully/Partially/Not Implemented 3분류.", descEn: "Remove already-implemented items by code inspection. Classify as Fully/Partially/Not Implemented." },
-  { id: 2, name: "Plan + Socratic",   color: "#4ECDC4", desc: "Socratic 5Q 게이트. Q1 이미 존재? Q2 안 하면 뭐가 깨져? Q3 측정 가능? Q4 최소 구현? Q5 3+ 시스템 공통?", descEn: "Socratic 5Q gate. Q1 Already exists? Q2 What breaks without it? Q3 Measurable? Q4 Minimum impl? Q5 Common in 3+ systems?" },
-  { id: 3, name: "Implement + Test",  color: "#34D399", desc: "코드 변경 → 3 Quality Gates 반복. ruff(lint 0) + mypy(type 0) + pytest(3,422+ pass).", descEn: "Code changes → repeat 3 Quality Gates. ruff (lint 0) + mypy (type 0) + pytest (3,422+ pass)." },
-  { id: 4, name: "E2E Verify",        color: "#F5C542", desc: "dry-run으로 기존 결과 불변 확인. Cowboy Bebop A(68.4). 대규모 변경 시 4-persona 검증팀 투입.", descEn: "Verify existing results unchanged via dry-run. Cowboy Bebop A (68.4). Deploy 4-persona verification team for major changes." },
-  { id: 5, name: "Docs-Sync",         color: "#C084FC", desc: "CHANGELOG + 4곳 버전 동기화(CHANGELOG, CLAUDE.md, README, pyproject.toml). 측정값 재검증.", descEn: "Sync CHANGELOG + versions across 4 files (CHANGELOG, CLAUDE.md, README, pyproject.toml). Re-verify metrics." },
-  { id: 6, name: "PR",                color: "#F4B8C8", desc: "feature → develop → main. HEREDOC PR. CI 5/5 필수. Why 근거 포함.", descEn: "feature → develop → main. HEREDOC PR. CI 5/5 required. Include 'Why' rationale." },
-  { id: 7, name: "Rebuild",           color: "#E87080", desc: "geode serve 종료 → uv tool install → 버전 확인 → serve 재시작.", descEn: "Stop geode serve → uv tool install → verify version → restart serve." },
-  { id: 8, name: "Board + Clear",     color: "#818CF8", desc: "In Progress → Done. 워크트리 정리. 컨텍스트 클리어.", descEn: "In Progress → Done. Clean up worktree. Clear context." },
-];
-
-const qualityGates = [
-  { gate: "Lint",  cmd: "uv run ruff check core/ tests/", criteria: "0 errors",    color: "#34D399" },
-  { gate: "Type",  cmd: "uv run mypy core/",              criteria: "0 errors",    color: "#818CF8" },
-  { gate: "Test",  cmd: 'uv run pytest tests/ -m "not live"', criteria: "3,422+ pass", color: "#4ECDC4" },
-  { gate: "E2E",   cmd: 'geode analyze "Cowboy Bebop" --dry-run', criteria: "A (68.4)", color: "#F5C542" },
-];
 
 /* ── Section ── */
 export function VerificationSection() {
   const locale = useLocale();
-  const [mode, setMode] = useState<"pipeline" | "agentic" | "ratchet">("pipeline");
+  const [mode, setMode] = useState<"pipeline" | "agentic">("pipeline");
   const [activeLayer, setActiveLayer] = useState(0);
 
   const layers = mode === "pipeline" ? pipelineLayers : agenticLayers;
-  const active = layers[activeLayer];
+  const active = layers[Math.min(activeLayer, layers.length - 1)];
 
-  function switchMode(m: "pipeline" | "agentic" | "ratchet") {
+  function switchMode(m: "pipeline" | "agentic") {
     setMode(m);
     setActiveLayer(0);
   }
@@ -228,13 +211,13 @@ export function VerificationSection() {
             Verification
           </p>
           <h2 className="text-4xl font-bold tracking-tight text-white/90 mb-3">
-            Dual Trust Model
+            Block & Verify
           </h2>
           <p className="text-[#A0B4D4] max-w-lg mb-8 leading-relaxed">
             {locale === "en" ? (
-              <>GEODE uses a dual trust model. Autonomous agents <span className="text-[#4ECDC4]/80">block inputs before execution</span>, while analysis pipelines <span className="text-[#C084FC]/80">verify outputs after execution</span>.</>
+              <>Autonomous agents <span className="text-[#4ECDC4]/80">block dangerous inputs before execution</span>, analysis pipelines <span className="text-[#C084FC]/80">verify outputs after execution</span>. Neither side trusts the other by default.</>
             ) : (
-              <>GEODE는 두 가지 신뢰 모델을 병행합니다. 자율 에이전트는 <span className="text-[#4ECDC4]/80">실행 전 입력을 차단</span>하고, 분석 파이프라인은 <span className="text-[#C084FC]/80">실행 후 출력을 검증</span>합니다.</>
+              <>자율 에이전트는 <span className="text-[#4ECDC4]/80">실행 전 위험 입력을 차단</span>하고, 분석 파이프라인은 <span className="text-[#C084FC]/80">실행 후 출력을 검증</span>합니다. 양쪽 모두 기본적으로 상대를 신뢰하지 않습니다.</>
             )}
           </p>
         </ScrollReveal>
@@ -246,146 +229,74 @@ export function VerificationSection() {
             tabs={[
               { id: "agentic", label: "Agentic Safety", color: "#4ECDC4" },
               { id: "pipeline", label: "Pipeline Verification", color: "#C084FC" },
-              { id: "ratchet", label: "Ratchet", color: "#F5C542" },
             ]}
             activeId={mode}
-            onSelect={(id) => switchMode(id as "pipeline" | "agentic" | "ratchet")}
+            onSelect={(id) => switchMode(id as "pipeline" | "agentic")}
           />
         </ScrollReveal>
 
-        {mode !== "ratchet" ? (
-          <ScrollReveal delay={0.1}>
-            <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 items-center">
-              {/* Left — Onion diagram */}
-              <OnionDiagram layers={layers} activeLayer={activeLayer} onHover={setActiveLayer} />
+        <ScrollReveal delay={0.1}>
+          <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 items-center">
+            {/* Left — Onion diagram */}
+            <OnionDiagram layers={layers} activeLayer={activeLayer} onHover={setActiveLayer} mode={mode as string} />
 
-              {/* Right — Active layer detail */}
-              <div className="space-y-4">
-                {/* Layer selector tabs */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {layers.map((layer, i) => (
-                    <button
-                      key={layer.tier}
-                      onMouseEnter={() => setActiveLayer(i)}
-                      onClick={() => setActiveLayer(i)}
-                      className="px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all duration-300"
-                      style={{
-                        color: activeLayer === i ? active.accent : "#5A6A8A",
-                        background: activeLayer === i ? `${layer.accent}10` : "transparent",
-                        border: `1px solid ${activeLayer === i ? `${layer.accent}25` : "transparent"}`,
-                      }}
-                    >
-                      L{layer.tier}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Detail card */}
-                <div
-                  className="rounded-xl border px-5 py-4 transition-all duration-300"
-                  style={{
-                    borderColor: `${active.accent}15`,
-                    background: `linear-gradient(135deg, ${active.accent}05, transparent 60%)`,
-                  }}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold text-sm" style={{ color: `${active.accent}D0` }}>
-                      {active.title}
-                    </span>
-                  </div>
-                  <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
-                    {locale === "en" && "descriptionEn" in active ? (active as { descriptionEn: string }).descriptionEn : active.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {(locale === "en" && "itemsEn" in active ? (active as { itemsEn: string[] }).itemsEn : active.items).map((item) => (
-                      <span
-                        key={item}
-                        className="px-2 py-0.5 rounded text-[11px] font-mono"
-                        style={{
-                          color: `${active.accent}80`,
-                          background: `${active.accent}08`,
-                          border: `1px solid ${active.accent}15`,
-                        }}
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        ) : (
-          /* ── Ratchet Workflow ── */
-          <ScrollReveal delay={0.1}>
-            <div>
-              {/* Workflow pipeline SVG */}
-              <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-                <svg viewBox="0 0 820 80" className="w-full min-w-[700px]" style={{ maxHeight: 100 }}>
-                  {ratchetSteps.map((s, i) => {
-                    const x = 5 + i * 90;
-                    return (
-                      <g key={s.id}>
-                        <rect x={x} y={18} width={78} height={38} rx={8}
-                          fill="#0C1220" stroke={s.color} strokeWidth={0.8} strokeOpacity={0.45} />
-                        <text x={x + 39} y={34} textAnchor="middle" fill={s.color}
-                          fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={700}>
-                          {s.id}
-                        </text>
-                        <text x={x + 39} y={47} textAnchor="middle" fill={s.color} fillOpacity={0.6}
-                          fontSize={6.5} fontFamily="ui-monospace, monospace">
-                          {s.name.length > 12 ? s.name.split(" ").slice(0, 2).join(" ") : s.name}
-                        </text>
-                        {i < 8 && (
-                          <path d={`M${x + 78},37 L${x + 83},37`}
-                            stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
-                        )}
-                      </g>
-                    );
-                  })}
-                  {/* Loopback: 8 → 0 */}
-                  <path d="M815,56 C820,70 5,70 5,56" fill="none"
-                    stroke="#F5C542" strokeOpacity={0.2} strokeWidth={0.8} strokeDasharray="3 2" />
-                  <text x={410} y={75} textAnchor="middle" fill="#F5C542" fillOpacity={0.35}
-                    fontSize={6} fontFamily="ui-monospace, monospace">next iteration</text>
-                </svg>
-              </div>
-
-              {/* Step details */}
-              <div className="space-y-2 mb-8">
-                {ratchetSteps.map((s) => (
-                  <div key={s.id} className="flex items-start gap-3 px-4 py-2.5 rounded-lg border border-white/[0.04]"
-                    style={{ background: `${s.color}03` }}>
-                    <span className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-[10px] font-mono font-bold"
-                      style={{ color: s.color, background: `${s.color}10` }}>{s.id}</span>
-                    <span className="text-sm font-medium text-white/70 w-[130px] sm:w-[150px] shrink-0">{s.name}</span>
-                    <span className="text-sm text-[#9BB0CC]">{locale === "en" ? s.descEn : s.desc}</span>
-                  </div>
+            {/* Right — Active layer detail */}
+            <div className="space-y-4">
+              {/* Layer selector tabs */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {layers.map((layer, i) => (
+                  <button
+                    key={layer.tier}
+                    onMouseEnter={() => setActiveLayer(i)}
+                    onClick={() => setActiveLayer(i)}
+                    className="px-2.5 py-1.5 rounded-lg text-[10px] font-mono font-bold transition-all duration-300"
+                    style={{
+                      color: activeLayer === i ? active.accent : "#5A6A8A",
+                      background: activeLayer === i ? `${layer.accent}10` : "transparent",
+                      border: `1px solid ${activeLayer === i ? `${layer.accent}25` : "transparent"}`,
+                    }}
+                  >
+                    L{layer.tier}
+                  </button>
                 ))}
               </div>
 
-              {/* Quality Gates */}
-              <div className="rounded-xl border border-white/[0.04] px-5 py-4">
-                <div className="text-sm font-semibold text-white/70 mb-3">{locale === "en" ? "Quality Gates (Step 3 Loop)" : "Quality Gates (Step 3 반복)"}</div>
-                <div className="space-y-2">
-                  {qualityGates.map((g) => (
-                    <div key={g.gate} className="flex items-center gap-4 px-3 py-2 rounded-lg border border-white/[0.03]"
-                      style={{ background: `${g.color}03` }}>
-                      <span className="shrink-0 w-10 text-center text-xs font-mono font-bold" style={{ color: g.color }}>{g.gate}</span>
-                      <code className="text-xs font-mono text-white/40 flex-1">{g.cmd}</code>
-                      <span className="shrink-0 text-xs font-mono font-bold" style={{ color: g.color }}>{g.criteria}</span>
-                    </div>
+              {/* Detail card */}
+              <div
+                className="rounded-xl border px-5 py-4 transition-all duration-300"
+                style={{
+                  borderColor: `${active.accent}15`,
+                  background: `linear-gradient(135deg, ${active.accent}05, transparent 60%)`,
+                }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-semibold text-sm" style={{ color: `${active.accent}D0` }}>
+                    {active.title}
+                  </span>
+                </div>
+                <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
+                  {locale === "en" && "descriptionEn" in active ? (active as { descriptionEn: string }).descriptionEn : active.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {(locale === "en" && "itemsEn" in active ? (active as { itemsEn: string[] }).itemsEn : active.items).map((item) => (
+                    <span
+                      key={item}
+                      className="px-2 py-0.5 rounded text-[11px] font-mono"
+                      style={{
+                        color: `${active.accent}80`,
+                        background: `${active.accent}08`,
+                        border: `1px solid ${active.accent}15`,
+                      }}
+                    >
+                      {item}
+                    </span>
                   ))}
                 </div>
-                <p className="text-xs text-[#9BB0CC] font-mono mt-3">
-                  {locale === "en"
-                    ? "CANNOT: No commits with failing lint/type/test. No placeholders (XXXX). Record measured values only."
-                    : "CANNOT: lint/type/test 실패 상태로 커밋 금지. 플레이스홀더(XXXX) 금지. 측정값만 기록."}
-                </p>
               </div>
+
             </div>
-          </ScrollReveal>
-        )}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

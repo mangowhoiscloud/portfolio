@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUPPLEMENTARY: S26 TRADEOFFS ARCHITECTURE</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">기각된 대안 상세: 왜 gRPC가 아닌지, 왜 ReAct가 아닌지</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #EF444440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">기각된 아키텍처 대안</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">gRPC / HTTP 서버</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> 로컬 전용 통신에 protobuf 컴파일, HTTP 서버 의존성 추가는 과잉입니다. grpcio(~40MB)는 ARM64에서 빌드 시간 3분 이상. Unix socket은 의존성 0, readline()만으로 디코딩 가능합니다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">의존성 0 vs grpcio 40MB. 선택은 명확합니다.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">asyncio 이벤트 루프</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> LangGraph StateGraph는 동기 API입니다. async wrapper를 씌우면 run_in_executor 호출이 모든 노드에 필요합니다. I/O async와 Architecture async를 혼동하면 안 됩니다. 인과적 의존 체인에서 async는 복잡도만 추가합니다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">Claude Code, Codex, Devin, autoresearch 모두 동기 루프를 선택한 이유와 동일합니다.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">6-Layer 유지</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> L1(Infra)과 L4(Tools)가 서로 import하는 순환 의존 12건. 6개 레이어 경계가 실제 코드 의존성과 불일치했습니다. 4-Layer로 통합하자 순환 import 0건.</p>
+      </div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="border-bottom: 1pt solid #EF444440; padding-bottom: 3pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444;">기각된 파이프라인 대안</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">ReAct (Reasoning + Acting)</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> 파이프라인 실행 순서가 비결정적입니다. 4 analyst x 3 evaluator를 ReAct로 실행하면 순서 재현이 불가능합니다. Plan-and-Execute DAG는 결정론적 순서 + 병렬 노드를 동시에 제공합니다.</p>
+        <p style="font-size: 6pt; color: #8B949E; margin-top: 3pt;">디버깅 불가능한 비결정적 파이프라인은 프로덕션에 부적합합니다.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">전체 컨텍스트 공유 (analyses: full)</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> 평가자가 이전 분석 결과를 보면 앵커링 편향이 발생합니다. Clean Context(analyses: [])로 각 평가자에게 빈 상태를 주면 독립적 판단이 보장됩니다. 이 단일 결정이 평가 품질에 가장 큰 영향을 미쳤습니다.</p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #EF444430; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444;">LLM 의도 라우팅</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;"><strong>기각 이유:</strong> 라우팅 자체에 LLM 호출 비용 + 레이턴시 + 불확실성이 추가됩니다. 정적 바인딩은 결정론적, 제로 레이턴시, 감사 가능합니다. 4개 프론티어 에이전트 중 0개가 LLM 라우팅을 사용합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S26 보강: 기각 7건 상세. gRPC(40MB), asyncio(인과 체인), ReAct(비결정), LLM 라우팅(0/4 소스)</p>
+    <p style="font-size: 5pt; color: #8B949E;">09 / 12</p>
+  </div>
+</body>
+</html>

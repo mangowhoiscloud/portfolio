@@ -639,5 +639,120 @@ body {
 </div>
 
 
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+<!-- 출처 D: v0.33-v0.35 코드베이스 변경 (Box 33-36)               -->
+<!-- ============================================================ -->
+<!-- ============================================================ -->
+
+
+<!-- ============================================================ -->
+<!-- BOX 33: Skill 2.0 (v0.33.0)                                   -->
+<!-- 삽입 위치: S16 (prompt-assembler) 인접                         -->
+<!-- 출처: v0.33.0 Skill 2.0 릴리스                                 -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #818CF8; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #818CF8; margin-bottom: 4pt;">Skill 2.0: Progressive Disclosure (v0.33.0 → S16)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">스킬 시스템이 단순 프롬프트 템플릿에서 3-tier lazy loading으로 진화했습니다. context:fork로 서브에이전트 격리 실행, $ARGUMENTS 치환, user_invocable 플래그를 지원합니다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">Tier 0 metadata</p>
+      <p style="font-size: 5pt; color: #8B949E;">이름, 트리거, user_invocable</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">Tier 1 body</p>
+      <p style="font-size: 5pt; color: #8B949E;">프롬프트 본문 (lazy load)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">Tier 2 resources</p>
+      <p style="font-size: 5pt; color: #8B949E;">외부 파일, context:fork</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">25 skills (9 runtime: deep-researcher, daily-briefing, job-hunter 등). 4-priority 탐색: project → user → scaffold → bundled</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 34: Subprocess Isolation (v0.34.0)                         -->
+<!-- 삽입 위치: S13 (subagent) 보충                                 -->
+<!-- 출처: v0.34.0 Sub-Agent Subprocess Isolation                   -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #4ECDC4; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 4pt;">Subprocess Isolation: WorkerRequest/WorkerResult (v0.34.0 → S13)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">서브에이전트가 스레드에서 서브프로세스로 격리됩니다. IsolatedRunner가 callable(thread)과 WorkerRequest(subprocess)를 자동 라우팅합니다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #4ECDC4; font-weight: bold;">스폰 방식</p>
+      <p style="font-size: 5pt; color: #8B949E;">python -m core.agent.worker</p>
+      <p style="font-size: 5pt; color: #8B949E;">stdin: WorkerRequest (JSON)</p>
+      <p style="font-size: 5pt; color: #8B949E;">stdout: WorkerResult (JSON)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">안전 장치</p>
+      <p style="font-size: 5pt; color: #8B949E;">SIGKILL timeout (crash isolation)</p>
+      <p style="font-size: 5pt; color: #8B949E;">max_depth=1 (재귀 금지)</p>
+      <p style="font-size: 5pt; color: #8B949E;">env whitelist: 10개 안전 변수만</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">Claude Code 패턴 참조. 자식 서브에이전트 스폰 금지로 runaway 방지</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 35: SessionMode 통합 (v0.35.0)                             -->
+<!-- 삽입 위치: S09 (architecture) 또는 신규 Entry Point 슬라이드    -->
+<!-- 출처: v0.35.0 SharedServices Gateway                           -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #34D399; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #34D399; margin-bottom: 4pt;">SessionMode 통합 팩토리 (v0.35.0 → S09/신규)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">REPL, serve, scheduler 세 진입점이 각각 부트스트랩하던 구조에서 GeodeRuntime 단일 팩토리로 통합했습니다. SessionMode enum으로 모드를 구분합니다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">REPL</p>
+      <p style="font-size: 5pt; color: #8B949E;">대화형, hitl_level=1</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">DAEMON</p>
+      <p style="font-size: 5pt; color: #8B949E;">Gateway pollers, hitl=0</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">SCHEDULER</p>
+      <p style="font-size: 5pt; color: #8B949E;">60s tick, isolated=True</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt; text-align: center;">
+      <p style="font-size: 6pt; color: #34D399; font-weight: bold;">FORK</p>
+      <p style="font-size: 5pt; color: #8B949E;">SubAgent 전용</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">time_budget_s가 유일한 실행 제약. max_rounds deprecated. ContextVar 전파로 thread-safe 보장</p>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- BOX 36: System Hardening 20 flaws (v0.35.1)                    -->
+<!-- 삽입 위치: Appendix 독립 또는 S09/S13 보충                     -->
+<!-- 출처: v0.35.1 System Hardening                                 -->
+<!-- ============================================================ -->
+<div style="background: #161B22; border: 1px solid #21262D; border-left: 3pt solid #EF4444; border-radius: 4pt; padding: 8pt 10pt; max-width: 640pt;">
+  <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">System Hardening: 20개 설계 결함 수정 (v0.35.1)</p>
+  <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">4-system audit(REPL, serve, scheduler, sub-agent)로 발견된 20개 결함을 일괄 수정했습니다.</p>
+  <div style="display: flex; gap: 5pt; margin-bottom: 4pt;">
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #F97316; font-weight: bold;">C-series (동시성 4건)</p>
+      <p style="font-size: 5pt; color: #8B949E;">agentic_ref 경합 → ContextVar. TaskGraph, IsolatedRunner, LaneQueue에 Lock 추가</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #EF4444; font-weight: bold;">H-series (SubAgent 8건)</p>
+      <p style="font-size: 5pt; color: #8B949E;">zombie cleanup, announce race, env whitelist(10). 6 orphan hook event 제거 (46→40)</p>
+    </div>
+    <div style="flex: 1; background: #1E293B; border-radius: 3pt; padding: 4pt 6pt;">
+      <p style="font-size: 6pt; color: #818CF8; font-weight: bold;">M-series (모델 1건)</p>
+      <p style="font-size: 5pt; color: #8B949E;">MODEL_SWITCHED 중복 등록 제거</p>
+    </div>
+  </div>
+  <p style="font-size: 6pt; color: #8B949E;">장애 원인: REPL에서 스케줄러 호출 시 UI Stuck + Slack/REPL/Scheduler 리소스 불일치</p>
+</div>
+
+
 </body>
 </html>

@@ -92,7 +92,7 @@ function LoopCoreNode({ data }: { data: Record<string, unknown> }) {
       </div>
       {/* Loop badge */}
       <div className="absolute -top-2 -right-2 px-1.5 py-0.5 bg-amber-500/90 rounded-full text-[7px] font-bold text-black">
-        max_rounds=50
+        time_budget_s
       </div>
     </motion.div>
   );
@@ -161,10 +161,10 @@ function StatsBar() {
       className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
     >
       {[
-        { value: "46", label: "Tools" },
-        { value: "43", label: "MCP" },
+        { value: "47", label: "Tools" },
+        { value: "44", label: "MCP" },
         { value: "3", label: "Providers" },
-        { value: "50", label: "max_rounds" },
+        { value: "∞", label: "time_budget_s" },
       ].map((stat) => (
         <div key={stat.label} className="flex items-center gap-1.5">
           <span className="text-white font-bold text-xs font-[family-name:var(--font-geist-mono)]">

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUPPLEMENTARY: S27 TRADEOFFS EXECUTION</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">v0.38 LLM Resilience: 14항목 경화 + Error Classification</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">v0.38.0에서 추가된 LLM 장애 복구 14항목. 실행 트레이드오프의 최신 진화입니다.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <!-- Left: 14 resilience items -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">LLM Resilience 14항목</p>
+        <div style="display: flex; gap: 6pt;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">Critical (3)</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">C1: Backoff jitter</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">C1b: Cross-provider failover</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">C2: Fallback cost ratio</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #F97316; margin-top: 4pt;">Budget (3)</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">A2: 80% proactive warning</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">A3: Checkpoint resume</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B2: Error propagation</p>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 3pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Pipeline (5)</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B1: Degraded fallback</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B3: Pipeline timeout 600s</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B4: Degraded scoring penalty</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B5: Verification enrichment</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B6: Evaluator partial retry</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #34D399; margin-top: 4pt;">Recovery (3)</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B7: History trimming(10)</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">B8: Gather retryable</p>
+            <p style="font-size: 6pt; color: #E2E8F0;">Aggressive context recovery</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Error classification + trade-off -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 4pt;">Error Classification (v0.38 신규)</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1pt solid #21262D; padding-bottom: 2pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">에러 타입</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E;">복구 전략</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">RateLimitError</p>
+            <p style="font-size: 6pt; color: #34D399;">jitter backoff + cross-provider</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">AuthenticationError</p>
+            <p style="font-size: 6pt; color: #EF4444;">즉시 실패 (복구 불가)</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">BillingError</p>
+            <p style="font-size: 6pt; color: #F5C542;">저비용 모델로 전환</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">ContextOverflow</p>
+            <p style="font-size: 6pt; color: #4ECDC4;">summarize + halved-keep prune</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">TimeoutError</p>
+            <p style="font-size: 6pt; color: #F97316;">retry(1) + fallback provider</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #1E293B; border-left: 4pt solid #4ECDC4; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">Degraded Fallback 트레이드오프</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          재시도 소진 시 크래시 대신 <strong style="color: #4ECDC4;">is_degraded=True</strong>를 반환합니다. 결과의 신뢰도는 낮지만 파이프라인이 중단되지 않습니다.
+          점수에는 비례적 신뢰도 감소(penalty)가 적용되어 degraded 소스의 영향력이 줄어듭니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">Aggressive Context Recovery</p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 3pt;">
+          Context exhaustion 시 기존: 루프 중단. v0.38: summarize(keep_recent 절반) 후 루프를 계속합니다. 정보 손실 대신 작업 완료를 우선합니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 6pt 10pt;">
+        <p style="font-size: 7pt; color: #F5C542;"><strong>Hook +2:</strong> FALLBACK_CROSS_PROVIDER, PIPELINE_TIMEOUT. 42 events 관측 체계로 resilience 경로도 추적합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S27 보강: v0.38 LLM Resilience 14항목 + Error Classification 5종 + Degraded Fallback + Hook 40→42</p>
+    <p style="font-size: 5pt; color: #8B949E;">10 / 12</p>
+  </div>
+</body>
+</html>

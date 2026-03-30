@@ -1,4 +1,4 @@
-# SOT-NUMBERS v0.32.1 (2026-03-29)
+# SOT-NUMBERS v0.38.0 (2026-03-30)
 
 단일 정합성 기준. 모든 슬라이드와 문서는 이 파일의 숫자를 참조한다.
 
@@ -6,51 +6,92 @@
 
 | 항목 | 값 | 소스 | 비고 |
 |------|-----|------|------|
-| Version | **v0.32.1** | pyproject.toml | v0.32.0 + SubAgent 이중 주입 수정 |
-| Commits | **1,174+** | git log | v0.32.0 기준, v0.32.1에서 소폭 증가 |
-| PRs | **500+** | progress.md | |
-| Releases | **40** | CHANGELOG.md | |
-| Modules | **187** | find core/ | |
-| Tests | **3,216** | grep def test_ | |
-| Hook Events | **46** | system.py HookEvent enum | v0.31에서 45→46 |
-| Tools | **52** | definitions.json | native tools (task tools 2개 별도 시 54) |
-| MCP Catalog | **45** | catalog.py | auto-discovery |
-| Skills | **21** | .claude/skills/ | |
-| CANNOT Rules | **23** | CLAUDE.md (GEODE 프로젝트) | 5카테고리: 타이포/레이아웃/html2pptx/다이어그램/내러티브 |
-| Duration | **36일** | Feb 21 ~ Mar 28, 2026 | |
-| PPTX Slides | **26** | slides/*.html | v9 36슬라이드에서 구조 개편 |
-| Appendix Boxes | **32** | appendix-boxes.html | 기존 18 + 신규 14 |
-| Architecture Layers | **6** | L0-L5 | |
-| Safety Tiers | **5** | T0-T4 | |
-| CI Jobs | **5** | Lint, TypeCheck, Test, Security, Gate |
-| Test Ratchet | **2,900** | CI Gate 최소 기준 | |
-| AgenticLoop Max | **50 rounds** | max_rounds | 평균 4.2R |
-| SubAgent Max | **10 rounds** | sub-agent max_rounds | |
-| SubAgent Depth | **2** | 재귀 깊이 제한 | |
-| MAX_CONCURRENT | **5** | 동시 서브에이전트 | |
-| CoalescingQueue | **250ms** | dedup 윈도우 | |
-| Context Window | **200K** | per agent | |
-| Compression Trigger | **80% / 95%** | WARNING / CRITICAL | |
-| Cross-LLM α | **≥ 0.67** | Krippendorff alpha | |
-| Confidence Gate | **≥ 0.7** | max 5 iterations | |
+| Version | **v0.38.0** | pyproject.toml | LLM Resilience Hardening |
+| Modules | **192** | find core/ | v0.35.1(202) 대비 -10 (의도적 단순화, 6L→4L) |
+| Tests | **3,377** | pytest | v0.35.1(3,344) 대비 +33 |
+| Hook Events | **42** | system.py HookEvent enum | v0.38.0에서 +2 (FALLBACK_CROSS_PROVIDER, PIPELINE_TIMEOUT) |
+| IPC Events | **30** | EventRenderer | 신규 카테고리 (v0.37.2) |
+| Tools | **47** | definitions.json | 변동 없음 |
+| MCP Catalog | **44** | catalog.py | 8 DEFAULT + 22 AUTO_DISCOVER |
+| Skills | **42** | .geode/skills/ + .claude/skills/ | 19 + 22 + 1 builtin |
+| Releases | **44+** | CHANGELOG.md | v0.35.1(42) +2 |
+| Duration | **38일+** | Feb 21 ~ Mar 30, 2026 | 계속 진행 중 |
+| PPTX Slides | **29** | slides/*.html | v9(26) +3 |
+| Architecture Layers | **4** | Model/Runtime/Harness/Agent | v0.37.0에서 6→4 단순화 |
+| Entry Points | **1** | geode serve (unified daemon) | CLI=thin IPC client |
+| SessionMode | **4** | REPL/IPC/DAEMON/SCHEDULER | v0.37.0에서 +IPC |
+| Safety Tiers | **5** | T0-T4 | 변동 없음 |
+| CI Jobs | **5** | Lint, TypeCheck, Test, Security, Gate | 변동 없음 |
+| Test Ratchet | **2,900** | CI Gate 최소 기준 | 변동 없음 |
+| SubAgent Depth | **1** | 재귀 금지 | 변동 없음 |
+| MAX_CONCURRENT | **5** | 동시 서브에이전트 | 변동 없음 |
+| Concurrency | **SessionLane** | per-key Sem(1) + Lane("global", 8) | CoalescingQueue 삭제 |
+| Context Window | **200K** | per agent | 변동 없음 |
+| Compression Trigger | **80% / 95%** | WARNING / CRITICAL | 변동 없음 |
+| Cross-LLM alpha | **≥ 0.67** | Krippendorff alpha | 변동 없음 |
+| Confidence Gate | **≥ 0.7** | max 5 iterations | 변동 없음 |
+| CANNOT Rules | **17** | GEODE CLAUDE.md | 변동 없음 |
+| Persona Review | **5인** | Beck/Karpathy/Steinberger/Cherny/GAP Detective | 변동 없음 |
+| Memory Tiers | **5** | SOUL/User/Org/Project/Session | v0.37.0에서 4→5 |
+| Structural Defects Resolved | **11** | C1-C4, H1-H8, M1 | v0.35.1+v0.36.0 |
 
-## v0.32.1 변경사항 (v0.32.0 대비)
+## 실행 제약
 
-1. **SubAgent 이중 주입 제거**: delegate_task 동기 호출에서 tool_result + announce 이중 주입 수정. `delegate(announce=False)`. 2파일 4줄 변경.
-2. **동기/비동기 분리**: OpenClaw 패턴 채택. 동기 시 announce 비활성화, 비동기는 기본값 True 유지.
+| 항목 | v0.35.1 | v0.37.2 | 비고 |
+|------|---------|---------|------|
+| 주 실행 제약 | time_budget_s | **time_budget_s** | 변동 없음 |
+| max_rounds | deprecated | deprecated | fallback만 |
+| 부트스트랩 | SessionMode 팩토리 | **GeodeRuntime.create()** | 70줄 (243→70) |
+| CLI 실행 | standalone REPL | **thin IPC client** | Unix socket |
+| Serve | Gateway daemon | **unified daemon** | 모든 상태 소유 |
+| 큐잉 | CoalescingQueue | **SessionLane** | per-key Sem(1) + global Lane(8) |
 
-## v0.32.0 주요 기능 (v0.31 대비)
+## v0.37.x 변경 이력
 
-1. Autonomous Safety 3조건 (budget_stop, convergence 3회, tool_repeat 5회)
-2. Plan-first + plan_id HITL UI
-3. Provider-aware Context Compaction (Anthropic 서버사이드 vs OpenAI/GLM 클라이언트사이드)
+### v0.37.2 Event Schema V2 + IPC UX
+- Event Schema V2: 12→30 structured IPC event types
+- EventRenderer V2: 30개 client-side handler
+- /model hot-swap (AgenticLoop 즉시 반영)
+- --continue/--resume IPC resume protocol
+- Persistent activity spinner + pipeline client-side rendering
+
+### v0.37.1 Thin-only Hotfixes
+- serve auto-start cwd/timeout 30s
+- SessionMode.IPC quiet=True
+- thin client UX: spinner, status line
+
+### v0.37.0 Thin-only + SessionLane + 4-Layer Stack
+- **Thin-only architecture**: standalone REPL 제거 (~487 lines)
+- **SessionLane**: per-key serialization (OpenClaw pattern)
+- **4-Layer Stack**: L0-L5 → Model/Runtime/Harness/Agent
+- CoalescingQueue 삭제 (dead code, 148 lines)
+- SessionMode +IPC (thin CLI용)
+- Unix domain socket IPC 프로토콜
+
+### v0.36.0 Gateway Runtime
+- Scheduler daemon in serve mode
+- Unified bootstrap: GeodeRuntime only
+- CLIChannel IPC 도입
+- 11개 구조적 결함 전수 해소
+
+### v0.35.1 System Hardening
+- C1-C4: 스레드 안전성 4건
+- H1-H8: SubAgent/Hook 안전성 8건
+- HookEvent 46→40 (6 orphan 제거)
+
+### v0.35.0 SharedServices Gateway
+- SessionMode enum (REPL/DAEMON/SCHEDULER/FORK)
+- ContextVar 마이그레이션
+- time_budget_s 도입
 
 ## 숫자 불일치 해결 이력
 
-| 항목 | 과거 혼동 | 확정값 | 근거 |
-|------|----------|--------|------|
-| Hook Events | 40, 45, 46 혼재 | **46** | system.py enum 실측 |
-| CANNOT Rules | 17, 23 혼재 | **23** | CLAUDE.md 실측 (5카테고리) |
-| Tools | 52, 54 혼재 | **52** (definitions.json), **54** (+ task tools 2) | README 기준 54 |
-| MCP | 41, 44, 45 혼재 | **45** | catalog.py 실측 |
-| Duration | 35일, 36일 혼재 | **36일** | Feb 21 ~ Mar 28 |
+| 항목 | 과거 혼동 | 확정값 (v0.37.2) | 근거 |
+|------|----------|-----------------|------|
+| Hook Events | 40, 45, 46 혼재 | **40** | v0.35.1 orphan 정리 후 안정 |
+| Tools | 47, 52, 54 혼재 | **47** | definitions.json 실측 |
+| Modules | 187-202 혼재 | **192** | find core/ v0.37.2 실측. 의도적 감소 |
+| MCP | 41, 44 혼재 | **44** | catalog.py 실측 |
+| Skills | 21-25 혼재 | **42** | .geode + .claude skills 합산 |
+| Architecture | 6-Layer | **4-Layer** | v0.37.0 단순화 |
+| IPC Events | 없음 | **30** | EventRenderer 실측 |

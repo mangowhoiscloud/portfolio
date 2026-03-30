@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 4pt;">
+    <div style="width: 4pt; height: 16pt; background: #F97316; border-radius: 2pt;"></div>
+    <p style="font-size: 7pt; font-weight: bold; color: #F97316;">HE-1: AUTONOMOUS AGENT</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Hook System: 하드코딩 콜백 → 40-Event Bus</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">v0.35.1에서 6개 orphan 정리. 15카테고리 40이벤트로 전 계층(L0-L5)을 횡단하는 관측 신경계</p>
+  </div>
+
+  <!-- Main content -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+
+    <!-- Left: Story + Events (55%) -->
+    <div style="flex: 0 0 384pt; display: flex; flex-direction: column; gap: 4pt;">
+
+      <!-- Why: narrative -->
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 8pt; color: #E2E8F0; line-height: 1.4;">
+          <strong style="color: #F97316;">문제:</strong> DAG 노드 상태·검증 결과·드리프트를 실시간 추적하려면
+          하드코딩 콜백으로는 확장이 불가능했습니다.
+          프론티어 하네스를 리서치하고 <strong>8개 카테고리 45개 이벤트</strong>로 개편했습니다.
+        </p>
+        <p style="font-size: 7pt; color: #8B949E; line-height: 1.4; margin-top: 6pt;">
+          <strong style="color: #F97316;">리플 패턴:</strong> 하나의 이벤트가 L1(관측)과 L2(반응)를 동시에 지나가는 것이 리플 패턴입니다.
+        </p>
+      </div>
+
+      <!-- 6 Key Event Categories (reduced from 8) -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">15 EVENT CATEGORIES (40 total)</p>
+        <div style="display: flex; gap: 3pt; flex-wrap: wrap;">
+          <div style="background: #0D1117; border: 1pt solid #F9731640; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F97316;">Pipeline</p>
+            <p style="font-size: 5pt; color: #8B949E;">3</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Node</p>
+            <p style="font-size: 5pt; color: #8B949E;">4</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Analysis</p>
+            <p style="font-size: 5pt; color: #8B949E;">3</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Verification</p>
+            <p style="font-size: 5pt; color: #8B949E;">2</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #F5C54240; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #F5C542;">Automation</p>
+            <p style="font-size: 5pt; color: #8B949E;">6</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Memory</p>
+            <p style="font-size: 5pt; color: #8B949E;">4</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Prompt</p>
+            <p style="font-size: 5pt; color: #8B949E;">2</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #4ECDC440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #4ECDC4;">SubAgent</p>
+            <p style="font-size: 5pt; color: #8B949E;">3</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">ToolRecovery</p>
+            <p style="font-size: 5pt; color: #8B949E;">3</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Gateway</p>
+            <p style="font-size: 5pt; color: #8B949E;">2</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Turn</p>
+            <p style="font-size: 5pt; color: #8B949E;">1</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #EF444440; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #EF4444;">Context</p>
+            <p style="font-size: 5pt; color: #8B949E;">3</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Session</p>
+            <p style="font-size: 5pt; color: #8B949E;">2</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">Model</p>
+            <p style="font-size: 5pt; color: #8B949E;">1</p>
+          </div>
+          <div style="background: #0D1117; border: 1pt solid #21262D; border-radius: 3pt; padding: 3pt 6pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #E2E8F0;">LLM Call</p>
+            <p style="font-size: 5pt; color: #8B949E;">2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar (45%) -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 4pt;">
+
+      <!-- Maturity model -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 12pt; flex: 1;">
+        <p style="font-size: 9pt; font-weight: bold; color: #F97316; margin-bottom: 3pt;">HOOK MATURITY MODEL</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="background: #F9731615; border: 1pt dashed #F9731640; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">L4 Autonomy — 백로그</p>
+            <p style="font-size: 7pt; color: #8B949E;">승인 이력 → 자동 승인 룰 학습</p>
+          </div>
+          <div style="background: #F5C54215; border: 1pt solid #F5C54240; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">L3 Decide — 현재 프론티어</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399;">✓</span> CONTEXT_OVERFLOW_ACTION 전략 위임</p>
+          </div>
+          <div style="background: #4ECDC415; border: 1pt solid #4ECDC440; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">L2 React — 자동 반응</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399;">✓</span> DRIFT → 스냅샷 · PIPELINE_END → MEMORY.md</p>
+          </div>
+          <div style="background: #34D39915; border: 1pt solid #34D39940; border-radius: 4pt; padding: 4pt 8pt;">
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">L1 Observe — 기록만</p>
+            <p style="font-size: 7pt; color: #E2E8F0;"><span style="color: #34D399;">✓</span> RunLog: ALL 40 events → runs.jsonl</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- StuckDetector -->
+      <div style="background: #1E293B; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 9pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">StuckDetector</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4;">
+          NODE_ENTER 후 <strong style="color: #EF4444;">120초</strong> 내 NODE_EXIT 없으면 파이프라인 강제 중단.
+          Priority 기반 핸들러 순서 보장 (P30→P50→P85).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 6pt 36pt; display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 5pt; color: #8B949E;">v0.35.1: 46→40 events (6 orphan 정리). core/hooks/ cross-cutting. REPL/serve/scheduler 전 모드 wiring</p>
+    <p style="font-size: 5pt; color: #8B949E;">12 / 24</p>
+  </div>
+</body>
+</html>

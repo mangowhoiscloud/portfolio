@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117;
+  color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt 36pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #EF4444; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #EF4444;">Error / Security</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt 36pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Security + Gateway: Swiss Cheese 방어</h1>
+    <p style="font-size: 5pt; color: #8B949E; margin-top: 3pt;">Bash 3-Layer + Secret Redaction 8패턴 + ChannelBinding 세션 격리로 자율 실행 경계를 제어합니다.</p>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; overflow: hidden;">
+
+    <!-- Left: PolicyChain diagram + Bash 3-Layer -->
+    <div style="flex: 1.3; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- PolicyChain diagram -->
+      <img src="assets/v028-diagram-policy-chain.png" style="width: 360pt; height: 167pt; border-radius: 4pt; border: 1pt solid #21262D; object-fit: contain; background: #161B22;">
+
+      <!-- Bash 3-Layer -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 12pt; display: flex; gap: 10pt;">
+        <div style="flex: 1; border-right: 1pt solid #21262D; padding-right: 10pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 5pt;">Layer 1 — 9 차단 패턴</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+            <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">rm -rf / · sudo · &gt;/etc/</p></li>
+            <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">curl|sh · wget|sh · mkfs.</p></li>
+            <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">dd if→/dev/ · chmod 777 /</p></li>
+            <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">fork bomb :(){:|:&amp;}</p></li>
+          </ul>
+        </div>
+        <div style="flex: 1; border-right: 1pt solid #21262D; padding-right: 10pt;">
+          <p style="font-size: 7pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">Layer 2 — Resource Limits</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+            <li><p style="font-size: 7pt; color: #E2E8F0;">CPU 30s 하드 캡</p></li>
+            <li><p style="font-size: 7pt; color: #E2E8F0;">파일 크기 50MB 상한</p></li>
+            <li><p style="font-size: 7pt; color: #E2E8F0;">자식 프로세스 64개 상한</p></li>
+            <li><p style="font-size: 5pt; color: #8B949E;">preexec_fn setrlimit 적용</p></li>
+          </ul>
+        </div>
+        <div style="flex: 1;">
+          <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4; margin-bottom: 5pt;">Layer 3 — HITL 4-Tier</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 3pt;">
+            <li><p style="font-size: 7pt; color: #34D399;">SAFE — 30 prefix 자동 승인</p></li>
+            <li><p style="font-size: 7pt; color: #F5C542;">WRITE — 개별 승인 필요</p></li>
+            <li><p style="font-size: 7pt; color: #F97316;">EXPENSIVE — 비용 일괄 승인</p></li>
+            <li><p style="font-size: 7pt; color: #EF4444;">DANGEROUS — 순차 승인</p></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Trade-off: safe-first vs pipe injection -->
+      <div style="background: #1A0A0A; border: 1pt solid #EF444450; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">Trade-off — safe-first 허용 시 파이프 주입 통과</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;"><span style="font-family: Courier New, monospace; color: #F5C542; font-size: 7pt;">cat file.txt | bash</span>는 <span style="font-family: Courier New, monospace; color: #34D399; font-size: 7pt;">cat</span> prefix로 SAFE 분류 → 파이프 주입이 통과됩니다. Layer 1의 curl/wget 차단이 원격 코드 실행을 방어합니다.</p>
+      </div>
+
+    </div>
+
+    <!-- Right: Secret Redaction + Gateway -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 7pt;">
+
+      <!-- Secret Redaction -->
+      <div style="background: #161B22; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 10pt 12pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #EF4444; margin-bottom: 6pt;">Secret Redaction — 8 패턴</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 4pt;">
+          <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">sk-ant-... <span style="color: #8B949E; font-family: Arial, sans-serif;">Anthropic API key</span></p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">sk-proj-... / sk-... <span style="color: #8B949E; font-family: Arial, sans-serif;">OpenAI</span></p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">ghp_... / gho_... <span style="color: #8B949E; font-family: Arial, sans-serif;">GitHub PAT/OAuth</span></p></li>
+          <li><p style="font-size: 7pt; color: #E2E8F0; font-family: Courier New, monospace;">xoxb-... / xoxp-... <span style="color: #8B949E; font-family: Arial, sans-serif;">Slack</span></p></li>
+        </ul>
+        <p style="font-size: 5pt; color: #8B949E; margin-top: 6pt;">BashTool.to_tool_result() 경계에서 적용 — LLM 컨텍스트 진입 전 차단</p>
+      </div>
+
+      <!-- Gateway brief -->
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 10pt 12pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #4ECDC4; margin-bottom: 7pt;">Gateway — 채널 세션 격리</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 6pt;">
+          <li>
+            <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 3pt;">ChannelBinding</p>
+            <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">Slack · Discord · Telegram 3채널, 정적 바인딩 규칙으로 결정론적 라우팅</p>
+          </li>
+          <li>
+            <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 3pt;">세션 격리</p>
+            <p style="font-size: 7pt; color: #8B949E; font-family: Courier New, monospace; line-height: 1.4;">gateway:{channel}:{id}[:{sender}][:{thread}]</p>
+            <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">스레드별 독립 컨텍스트 — 동시 대화 격리</p>
+          </li>
+          <li>
+            <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 3pt;">geode serve</p>
+            <p style="font-size: 7pt; color: #8B949E; line-height: 1.4;">hitl_level=0 완전 자율 · quiet=True · echo 2중 방어 (bot_message subtype + _last_ts)</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- PolicyChain AND-logic -->
+      <div style="background: #0D1117; border: 1pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">PolicyChain 설계 원칙 — AND-logic</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">도구는 <span style="color: #EF4444; font-weight: bold;">모든</span> 정책을 통과해야 실행됩니다. Org 정책(priority=5)이 최우선. 6개 레이어 중 하나라도 거부하면 차단. Swiss Cheese: 단일 실패를 다음 레이어가 차단합니다.</p>
+      </div>
+
+      <!-- Dual Trust Model -->
+      <div style="background: #1A0A1A; border: 1pt solid #EF444450; border-left: 4pt solid #EF4444; border-radius: 4pt; padding: 8pt 12pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #EF4444; margin-bottom: 4pt;">Dual Trust Model</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5;">GEODE는 두 가지 신뢰 모델을 병행합니다. 자율 에이전트는 실행 전 입력을 차단(<strong style="color: #F97316;">Input Gating</strong>)하고, 분석 파이프라인은 실행 후 출력을 검증(<strong style="color: #4ECDC4;">Output Validation</strong>)합니다.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 6pt 36pt 8pt 36pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">9 blocked patterns · CPU/FSIZE/NPROC limits · 8 secret patterns · 6-layer PolicyChain AND-logic · ChannelBinding 3 pollers · geode serve hitl=0</p>
+    <p style="font-size: 5pt; color: #8B949E;">22 / 29</p>
+  </div>
+
+</body>
+</html>

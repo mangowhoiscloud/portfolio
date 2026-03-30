@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 720pt; height: 405pt;
+  margin: 0; padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0D1117; color: #E2E8F0;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+  <!-- Header -->
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #818CF8; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #818CF8;">HE-0: SCAFFOLDING</p>
+  </div>
+
+  <!-- Title -->
+  <div style="padding: 0 36pt 6pt;">
+    <h1 style="font-size: 16pt; font-weight: bold; color: #FFFFFF;">Compound Iteration Velocity</h1>
+    <p style="font-size: 7pt; color: #8B949E; margin-top: 3pt;">36일+, 1,200+ 커밋, 42 releases — 엔지니어링 시스템이 완성될수록 속도는 복리로 증가했습니다.</p>
+  </div>
+
+  <!-- Main content: bar chart + story panel -->
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0; overflow: hidden;">
+
+    <!-- Bar chart area -->
+    <div style="flex: 3; display: flex; flex-direction: column; min-height: 0;">
+
+      <!-- Phase bars -->
+      <div style="flex: 1; display: flex; gap: 6pt; align-items: flex-end; padding-bottom: 4pt; min-height: 0;">
+
+        <!-- Phase 0 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #8B949E;">72</p>
+          <div style="width: 100%; height: 28pt; background: #818CF840; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+
+        <!-- Phase 1 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #818CF8;">119</p>
+          <div style="width: 100%; height: 46pt; background: #818CF855; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #818CF8;">181</p>
+          <div style="width: 100%; height: 70pt; background: #818CF870; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+
+        <!-- Phase 3 — Identity Pivot highlight -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #F59E0B;">278</p>
+          <div style="width: 100%; height: 107pt; background: #F59E0B; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #818CF8;">255</p>
+          <div style="width: 100%; height: 98pt; background: #818CF885; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4pt; justify-content: flex-end; height: 100%;">
+          <p style="font-size: 14pt; font-weight: bold; color: #34D399;">467</p>
+          <div style="width: 100%; height: 150pt; background: #34D399; border-radius: 3pt 3pt 0 0;"></div>
+        </div>
+      </div>
+
+      <!-- Phase labels -->
+      <div style="display: flex; gap: 6pt; padding-top: 3pt;">
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #8B949E; font-weight: bold;">Ph.0</p>
+          <p style="font-size: 5pt; color: #8B949E;">Foundation</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">Ph.1</p>
+          <p style="font-size: 5pt; color: #8B949E;">Capability</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">Ph.2</p>
+          <p style="font-size: 5pt; color: #8B949E;">Parallel</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #F59E0B; font-weight: bold;">Ph.3</p>
+          <p style="font-size: 5pt; color: #F59E0B;">Pivot</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #818CF8; font-weight: bold;">Ph.4</p>
+          <p style="font-size: 5pt; color: #8B949E;">Platform</p>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <p style="font-size: 7pt; color: #34D399; font-weight: bold;">Ph.5</p>
+          <p style="font-size: 5pt; color: #34D399;">Maturation</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Phase 3 Identity Pivot story panel -->
+    <div style="flex: 2; display: flex; flex-direction: column; gap: 8pt; min-height: 0;">
+
+      <div style="background: #161B22; border: 1px solid #F59E0B; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F59E0B; margin-bottom: 4pt;">Phase 3: Identity Pivot — 2일, 6 releases</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 3pt;">v0.13.0: "Undervalued IP" &#8594; 범용 에이전트. DomainPort Protocol로 도메인 분리.</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-bottom: 4pt;">v0.15.0: Token Guard 철폐 — 하드 캡 대신 압축. max_turns 20&#8594;200.</p>
+        <div style="background: #1E293B; border-radius: 3pt; padding: 3pt 8pt; display: flex; align-items: center; gap: 5pt;">
+          <p style="font-size: 6pt; color: #8B949E;">4/day &#8594; 67/day =</p>
+          <p style="font-size: 12pt; font-weight: bold; color: #F59E0B; line-height: 1;">16.7x</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding: 4pt 36pt 5pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">1,200+ commits · 500+ merged PRs · 42 releases · 0 hotfix bypasses · 0 regressions</p>
+    <p style="font-size: 5pt; color: #8B949E;">08 / 24</p>
+  </div>
+</body>
+</html>

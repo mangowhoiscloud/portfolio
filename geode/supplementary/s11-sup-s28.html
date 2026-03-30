@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background: #0D1117; color: #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
+</style>
+</head>
+<body>
+  <div style="display: flex; align-items: center; padding: 10pt 36pt 4pt; gap: 6pt;">
+    <div style="width: 4pt; height: 18pt; background: #34D399; border-radius: 2pt;"></div>
+    <p style="font-size: 9pt; font-weight: bold; color: #34D399;">SUPPLEMENTARY: S28 SUMMARY</p>
+  </div>
+  <div style="padding: 0 36pt 5pt;">
+    <h1 style="font-size: 14pt; font-weight: bold; color: #FFFFFF;">GEODE vs REODE 기술 스택 상세 비교 + 이식성 메커니즘</h1>
+  </div>
+
+  <div style="flex: 1; padding: 0 36pt; display: flex; gap: 10pt; min-height: 0;">
+    <!-- Left: Tech stack comparison -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt; flex: 1;">
+        <p style="font-size: 8pt; font-weight: bold; color: #E2E8F0; margin-bottom: 6pt;">기술 스택 비교</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; border-bottom: 1pt solid #21262D; padding-bottom: 2pt;">
+            <p style="font-size: 6pt; font-weight: bold; color: #8B949E; flex: 1;">Layer</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #818CF8; flex: 1;">GEODE</p>
+            <p style="font-size: 6pt; font-weight: bold; color: #F97316; flex: 1;">REODE</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">Language</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">Python 3.12+</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">Java 22</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">Framework</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">LangGraph + FastAPI</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">Spring 6.1 + Spring Boot 3</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">LLM SDK</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">Anthropic SDK</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">Anthropic Java SDK</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">State</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">SQLite + Redis</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">PostgreSQL + Redis</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">Type</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">mypy strict</p>
+            <p style="font-size: 6pt; color: #8B949E; flex: 1;">javac + IDE checks</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">Agent Loop</p>
+            <p style="font-size: 6pt; color: #4ECDC4; flex: 1;">while(tool_use)</p>
+            <p style="font-size: 6pt; color: #4ECDC4; flex: 1;">while(tool_use)</p>
+          </div>
+          <div style="display: flex;">
+            <p style="font-size: 7pt; color: #E2E8F0; flex: 1;">Domain Port</p>
+            <p style="font-size: 6pt; color: #4ECDC4; flex: 1;">DomainPort Protocol</p>
+            <p style="font-size: 6pt; color: #4ECDC4; flex: 1;">DomainPort Protocol</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Portability mechanism + REODE results -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 5pt;">
+      <div style="background: #1E293B; border-left: 4pt solid #F97316; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #F97316;">이식의 핵심: 무엇이 바뀌지 않았는가</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.5; margin-top: 3pt;">
+          while(tool_use) 루프, DomainPort Protocol, 5-Tier Safety, PolicyChain AND-logic, time_budget_s 실행 제약.
+          이 5가지가 동일하기 때문에 <strong style="color: #F97316;">core 변경 0줄</strong>로 도메인 교체가 가능했습니다.
+        </p>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #21262D; border-radius: 4pt; padding: 8pt 10pt;">
+        <p style="font-size: 8pt; font-weight: bold; color: #F97316; margin-bottom: 5pt;">REODE 마이그레이션 실측</p>
+        <div style="display: flex; flex-direction: column; gap: 3pt;">
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">소스 파일</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">241 Java + 355 JSP</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">코드 규모</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F97316;">103,983 LoC</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">마이그레이션 대상</p>
+            <p style="font-size: 7pt; color: #8B949E;">Java 1.8→22, Spring 4→6</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">실행 시간</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #4ECDC4;">5h 48m</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">LLM 라운드</p>
+            <p style="font-size: 7pt; color: #8B949E;">1,133 rounds / 33 sessions</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">비용</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #F5C542;">~$388</p>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <p style="font-size: 7pt; color: #E2E8F0;">빌드 결과</p>
+            <p style="font-size: 7pt; font-weight: bold; color: #34D399;">83/83 mvn pass</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #161B22; border: 1pt solid #34D39940; border-radius: 4pt; padding: 7pt 10pt;">
+        <p style="font-size: 7pt; font-weight: bold; color: #34D399;">인간 대비 비용 효율</p>
+        <p style="font-size: 7pt; color: #E2E8F0; line-height: 1.4; margin-top: 3pt;">
+          103K LoC Java 마이그레이션을 시니어 엔지니어가 수행하면 2-4주 예상. GEODE는 5h 48m, $388. 시간 80x, 비용 50x 이상 효율적입니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 5pt 36pt 6pt; display: flex; justify-content: space-between;">
+    <p style="font-size: 5pt; color: #8B949E;">S28 보강: 기술 스택 7-layer 비교. 5가지 공유 패턴 = core 0줄. REODE 103K LoC, 5h48m, $388, 83/83</p>
+    <p style="font-size: 5pt; color: #8B949E;">11 / 12</p>
+  </div>
+</body>
+</html>
