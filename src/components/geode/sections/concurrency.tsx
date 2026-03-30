@@ -209,7 +209,7 @@ export function ConcurrencySection() {
                     <button key={`sl-${p}`} onClick={() => setPhase(p)}
                       className="relative px-5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-colors duration-200"
                       style={{ color: phase === p ? "#fff" : "#7A8CA8", background: phase === p ? (p === "as-is" ? "rgba(232,112,128,0.25)" : "rgba(78,205,196,0.25)") : "transparent" }}>
-                      {p === "as-is" ? "Lane (before)" : "SessionLane (after)"}
+                      {p === "as-is" ? t(locale, "Single Sem: 전역 직렬화", "Single Sem: Global Serialization") : t(locale, "Per-Key Sem: 키별 병렬화", "Per-Key Sem: Per-Key Parallelism")}
                     </button>
                   ))}
                 </div>
