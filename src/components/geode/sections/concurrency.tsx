@@ -268,21 +268,16 @@ export function ConcurrencySection() {
               </div>
             </ScrollReveal>
 
-            {/* Usage patterns */}
+            {/* Usage patterns (compact single-line) */}
             <ScrollReveal delay={0.1}>
-              <div className="rounded-xl border border-white/[0.04] px-5 py-4 mb-6">
-                <div className="text-sm font-semibold text-white/70 mb-3">{t(locale, "실사용 패턴", "Real-World Patterns")}</div>
-                <div className="space-y-3">
-                  {usagePatterns.map((p) => (
-                    <div key={p.key} className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: `${p.color}03` }}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-mono font-bold" style={{ color: p.color }}>{locale === "en" ? p.nameEn : p.name}</span>
-                      </div>
-                      <code className="text-[10px] font-mono text-white/25 block mb-1.5">{p.key}</code>
-                      <p className="text-xs text-[#9BB0CC]">{locale === "en" ? p.descEn : p.descKo}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-1.5 mb-6">
+                {usagePatterns.map((p) => (
+                  <div key={p.key} className="flex items-center gap-3 px-4 py-2 rounded-lg border border-white/[0.04]" style={{ background: `${p.color}03` }}>
+                    <span className="shrink-0 text-xs font-mono font-bold w-[90px]" style={{ color: p.color }}>{locale === "en" ? p.nameEn : p.name}</span>
+                    <code className="shrink-0 text-[9px] font-mono text-white/20 w-[280px] hidden sm:block truncate">{p.key}</code>
+                    <span className="text-xs text-[#9BB0CC] flex-1">{locale === "en" ? p.descEn : p.descKo}</span>
+                  </div>
+                ))}
               </div>
             </ScrollReveal>
 
