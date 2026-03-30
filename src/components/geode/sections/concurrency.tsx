@@ -201,47 +201,125 @@ export function ConcurrencySection() {
         {/* ══════════ SESSIONLANE DEEP DIVE TAB ══════════ */}
         {tab === "sessionlane" && (
           <>
-            {/* Per-key vs Global comparison SVG */}
+            {/* AS-IS / TO-BE toggle for SessionLane */}
             <ScrollReveal delay={0.05}>
+              <div className="flex justify-center mb-6">
+                <div className="inline-flex rounded-full bg-[#0A0F1A] border border-white/[0.06] p-1">
+                  {(["as-is", "to-be"] as Phase[]).map((p) => (
+                    <button key={`sl-${p}`} onClick={() => setPhase(p)}
+                      className="relative px-5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-colors duration-200"
+                      style={{ color: phase === p ? "#fff" : "#7A8CA8", background: phase === p ? (p === "as-is" ? "rgba(232,112,128,0.25)" : "rgba(78,205,196,0.25)") : "transparent" }}>
+                      {p === "as-is" ? "Lane (before)" : "SessionLane (after)"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Single large animated SVG */}
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
-                <svg viewBox="0 0 750 200" className="w-full min-w-[560px]" style={{ maxHeight: 230 }}>
-                  {/* Left: Lane (global) */}
-                  <rect x={30} y={20} width={300} height={160} rx={12} fill="#0C1220" stroke="#E87080" strokeWidth={0.6} strokeOpacity={0.3} />
-                  <text x={180} y={45} textAnchor="middle" fill="#E87080" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>Lane (before)</text>
-                  <text x={180} y={62} textAnchor="middle" fill="#E87080" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">Single Semaphore(1)</text>
+                <svg viewBox="0 0 700 260" className="w-full min-w-[560px]" style={{ maxHeight: 300 }}>
+                  <defs>
+                    <radialGradient id="sl-glow-as" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#E87080" stopOpacity={0.04} /><stop offset="100%" stopColor="#E87080" stopOpacity={0} /></radialGradient>
+                    <radialGradient id="sl-glow-to" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#4ECDC4" stopOpacity={0.04} /><stop offset="100%" stopColor="#4ECDC4" stopOpacity={0} /></radialGradient>
+                  </defs>
 
-                  {/* Single semaphore */}
-                  <rect x={140} y={80} width={80} height={30} rx={6} fill="#E87080" fillOpacity={0.1} stroke="#E87080" strokeWidth={0.8} strokeOpacity={0.4} />
-                  <text x={180} y={100} textAnchor="middle" fill="#E87080" fillOpacity={0.7} fontSize={9} fontFamily="ui-monospace, monospace">Sem(1)</text>
+                  <motion.rect x={0} y={0} width={700} height={260} rx={14}
+                    animate={{ fill: isToBe ? "url(#sl-glow-to)" : "url(#sl-glow-as)" }} transition={fadeTx} />
 
-                  {/* Threads blocked */}
-                  {["Thread A: key_A", "Thread B: key_B", "Thread C: key_C"].map((label, i) => (
-                    <g key={label}>
-                      <text x={60} y={128 + i * 16} fill="#E87080" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">{label}</text>
-                      <text x={260} y={128 + i * 16} fill="#E87080" fillOpacity={0.5} fontSize={7} fontFamily="ui-monospace, monospace">{i === 0 ? "acquired" : "blocked"}</text>
-                    </g>
-                  ))}
+                  {/* Title */}
+                  <AnimatePresence mode="wait">
+                    <motion.text key={isToBe ? "sl-title-to" : "sl-title-as"}
+                      x={350} y={28} textAnchor="middle"
+                      fill={isToBe ? "#4ECDC4" : "#E87080"} fontSize={14} fontFamily="ui-monospace, monospace" fontWeight={800}
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={fadeTx}>
+                      {isToBe ? "SessionLane: Dict[str, Semaphore(1)]" : "Lane: Single Semaphore(1)"}
+                    </motion.text>
+                  </AnimatePresence>
 
-                  {/* Right: SessionLane (per-key) */}
-                  <rect x={420} y={20} width={300} height={160} rx={12} fill="#0C1220" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.3} />
-                  <text x={570} y={45} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>SessionLane (after)</text>
-                  <text x={570} y={62} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={8} fontFamily="ui-monospace, monospace">{"Dict[str, Semaphore(1)]"}</text>
-
-                  {/* Per-key semaphores */}
+                  {/* 3 threads/sessions */}
                   {[
-                    { key: "key_A → sem_A", y: 80, status: "acquired" },
-                    { key: "key_B → sem_B", y: 108, status: "acquired (parallel)" },
-                    { key: "key_C → sem_C", y: 136, status: "acquired (parallel)" },
-                  ].map((s) => (
-                    <g key={s.key}>
-                      <rect x={440} y={s.y} width={140} height={22} rx={5} fill="#4ECDC4" fillOpacity={0.06} stroke="#4ECDC4" strokeWidth={0.5} strokeOpacity={0.3} />
-                      <text x={510} y={s.y + 15} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.6} fontSize={7} fontFamily="ui-monospace, monospace">{s.key}</text>
-                      <text x={660} y={s.y + 15} textAnchor="middle" fill="#34D399" fillOpacity={0.6} fontSize={7} fontFamily="ui-monospace, monospace">{s.status}</text>
-                    </g>
-                  ))}
+                    { label: "Thread A", key: "key_A", y: 60 },
+                    { label: "Thread B", key: "key_B", y: 120 },
+                    { label: "Thread C", key: "key_C", y: 180 },
+                  ].map((th, i) => {
+                    const color = isToBe ? "#4ECDC4" : "#E87080";
+                    const isBlocked = !isToBe && i > 0;
+                    return (
+                      <g key={th.label}>
+                        {/* Thread box */}
+                        <rect x={30} y={th.y} width={120} height={42} rx={8}
+                          fill="#0A0F1A" stroke={color} strokeWidth={0.8} strokeOpacity={isBlocked ? 0.2 : 0.5} />
+                        <text x={90} y={th.y + 18} textAnchor="middle" fill={color} fillOpacity={isBlocked ? 0.3 : 0.8}
+                          fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}>{th.label}</text>
+                        <text x={90} y={th.y + 33} textAnchor="middle" fill={color} fillOpacity={isBlocked ? 0.2 : 0.5}
+                          fontSize={7} fontFamily="ui-monospace, monospace">{th.key}</text>
 
-                  {/* VS divider */}
-                  <text x={375} y={105} textAnchor="middle" fill="white" fillOpacity={0.2} fontSize={14} fontWeight={700}>→</text>
+                        {/* Arrow to semaphore */}
+                        <motion.path
+                          d={isToBe
+                            ? `M150,${th.y + 21} L280,${th.y + 21}`  /* each thread → own semaphore */
+                            : `M150,${th.y + 21} L280,131`            /* all threads → single semaphore */
+                          }
+                          stroke={color} strokeWidth={1} strokeOpacity={isBlocked ? 0.15 : 0.4} fill="none"
+                          animate={{ d: isToBe ? `M150,${th.y + 21} L280,${th.y + 21}` : `M150,${th.y + 21} L280,131` }}
+                          transition={posTx}
+                        />
+
+                        {/* Semaphore box (per-key in TO-BE, single in AS-IS) */}
+                        <motion.rect
+                          rx={7} fill={isToBe ? `${color}08` : (i === 0 ? `${color}08` : "transparent")}
+                          stroke={color} strokeWidth={isBlocked ? 0.4 : 0.8} strokeOpacity={isBlocked ? 0.15 : 0.4}
+                          animate={{
+                            x: 280, width: 140,
+                            y: isToBe ? th.y : 110,
+                            height: isToBe ? 42 : 42,
+                            opacity: isToBe ? 1 : (i === 0 ? 1 : 0),
+                          }}
+                          transition={posTx}
+                        />
+                        {isToBe && (
+                          <motion.text x={350} y={th.y + 18} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.7}
+                            fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={600}
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ...fadeTx, delay: 0.3 }}>
+                            sem_{th.key.split("_")[1]}
+                          </motion.text>
+                        )}
+
+                        {/* Status label */}
+                        <motion.text x={480} y={isToBe ? th.y + 25 : (i === 0 ? 135 : 135 + i * 16)}
+                          textAnchor="middle"
+                          fill={isToBe ? "#34D399" : (i === 0 ? "#34D399" : "#E87080")}
+                          fillOpacity={0.7} fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={600}
+                          animate={{ y: isToBe ? th.y + 25 : (i === 0 ? 125 : 125 + i * 18) }}
+                          transition={posTx}>
+                          {isToBe ? "acquired (parallel)" : (i === 0 ? "acquired" : "BLOCKED")}
+                        </motion.text>
+                      </g>
+                    );
+                  })}
+
+                  {/* AS-IS: single semaphore label */}
+                  <motion.text x={350} y={128} textAnchor="middle" fill="#E87080" fillOpacity={0.7}
+                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}
+                    animate={{ opacity: isToBe ? 0 : 1 }} transition={fadeTx}>
+                    Sem(1)
+                  </motion.text>
+                  <motion.text x={350} y={145} textAnchor="middle" fill="#E87080" fillOpacity={0.35}
+                    fontSize={8} fontFamily="ui-monospace, monospace"
+                    animate={{ opacity: isToBe ? 0 : 1 }} transition={fadeTx}>
+                    global serialization
+                  </motion.text>
+
+                  {/* Bottom summary */}
+                  <AnimatePresence mode="wait">
+                    <motion.text key={isToBe ? "sl-sum-to" : "sl-sum-as"}
+                      x={350} y={245} textAnchor="middle"
+                      fill={isToBe ? "#4ECDC4" : "#E87080"} fillOpacity={0.4}
+                      fontSize={9} fontFamily="ui-monospace, monospace"
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={fadeTx}>
+                      {isToBe ? "Same key = serial, Different key = parallel. max_sessions=256, idle cleanup 300s" : "All keys share one semaphore. B waits for A. C waits for B. Global bottleneck."}
+                    </motion.text>
+                  </AnimatePresence>
                 </svg>
               </div>
             </ScrollReveal>
