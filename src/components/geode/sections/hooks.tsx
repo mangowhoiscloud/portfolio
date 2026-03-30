@@ -71,7 +71,6 @@ export function HooksSection() {
   const [hoveredHandler, setHoveredHandler] = useState<number | null>(null);
   const [hoveredVersion, setHoveredVersion] = useState<number | null>(null);
   const [showDecisions, setShowDecisions] = useState(false);
-  const [hookView, setHookView] = useState<"before" | "after">("before");
   const [replayRot, setReplayRot] = useState(0);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -137,82 +136,7 @@ export function HooksSection() {
           )}
         />
 
-        {/* 2. Before/After: Direct Coupling → Event Decoupling */}
-        <ScrollReveal>
-          <div className="mb-10">
-            {/* Toggle */}
-            <div className="flex justify-center mb-4">
-              <div className="inline-flex rounded-full bg-[#0A0F1A] border border-white/[0.06] p-1">
-                <button onClick={() => setHookView("before")}
-                  className="px-4 py-1.5 rounded-full text-[11px] font-mono font-bold transition-colors duration-200"
-                  style={{ color: hookView === "before" ? "#fff" : "#7A8CA8", background: hookView === "before" ? "rgba(232,112,128,0.25)" : "transparent" }}>
-                  {t(locale, "직접 의존 (순환)", "Direct Coupling (Circular)")}
-                </button>
-                <button onClick={() => setHookView("after")}
-                  className="px-4 py-1.5 rounded-full text-[11px] font-mono font-bold transition-colors duration-200"
-                  style={{ color: hookView === "after" ? "#fff" : "#7A8CA8", background: hookView === "after" ? "rgba(78,205,196,0.25)" : "transparent" }}>
-                  {t(locale, "이벤트 분리 (Hook)", "Event Decoupling (Hook)")}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <svg viewBox="0 0 600 130" className="w-full max-w-[540px]">
-                <defs>
-                  <radialGradient id="hk-bg-before" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#E87080" stopOpacity={0.05} /><stop offset="100%" stopColor="transparent" /></radialGradient>
-                  <radialGradient id="hk-bg-after" cx="50%" cy="50%" r="50%"><stop offset="0%" stopColor="#4ECDC4" stopOpacity={0.05} /><stop offset="100%" stopColor="transparent" /></radialGradient>
-                  <marker id="hk-arr-r" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#E87080" strokeWidth={1} /></marker>
-                  <marker id="hk-arr-t" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#4ECDC4" strokeWidth={1} /></marker>
-                </defs>
-
-                {/* Background glow */}
-                <motion.rect width={600} height={130} rx={10}
-                  animate={{ fill: hookView === "before" ? "url(#hk-bg-before)" : "url(#hk-bg-after)" }}
-                  transition={{ duration: 0.3 }} />
-
-                {/* BEFORE: Scoring ↔ DriftDetect circular */}
-                <motion.g animate={{ opacity: hookView === "before" ? 1 : 0 }} transition={{ duration: 0.3 }}>
-                  <rect x={120} y={30} width={100} height={36} rx={7} fill="#E8708010" stroke="#E87080" strokeWidth={1} />
-                  <text x={170} y={52} textAnchor="middle" fill="#E87080" fontSize={10} fontFamily="ui-monospace,monospace" fontWeight={600}>Scoring</text>
-                  <rect x={370} y={30} width={110} height={36} rx={7} fill="#E8708010" stroke="#E87080" strokeWidth={1} />
-                  <text x={425} y={52} textAnchor="middle" fill="#E87080" fontSize={10} fontFamily="ui-monospace,monospace" fontWeight={600}>DriftDetect</text>
-                  <path d="M220,48 L370,48" stroke="#E87080" strokeWidth={1.2} strokeDasharray="4 3" markerEnd="url(#hk-arr-r)" />
-                  <path d="M425,66 Q425,100 300,100 Q170,100 170,66" stroke="#E87080" strokeWidth={1.2} strokeDasharray="4 3" fill="none" markerEnd="url(#hk-arr-r)" />
-                  <text x={300} y={120} textAnchor="middle" fill="#E87080" fontSize={9} fontFamily="ui-monospace,monospace" fontWeight={700} fillOpacity={0.6}>
-                    {t(locale, "순환 의존. scoring이 drift를 알아야 하고, drift가 scoring에 영향", "Circular. scoring needs drift, drift affects scoring")}
-                  </text>
-                </motion.g>
-
-                {/* AFTER: Scoring → emit(SCORING_COMPLETE) → HookSystem → DriftDetect handler */}
-                <motion.g animate={{ opacity: hookView === "after" ? 1 : 0 }} transition={{ duration: 0.3 }}>
-                  <rect x={30} y={30} width={100} height={36} rx={7} fill="#4ECDC410" stroke="#4ECDC4" strokeWidth={0.8} />
-                  <text x={80} y={52} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace,monospace" fontWeight={600}>Scoring</text>
-                  <text x={80} y={82} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.35} fontSize={7} fontFamily="ui-monospace,monospace">emit(SCORING_COMPLETE)</text>
-                  <path d="M130,48 L210,48" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} markerEnd="url(#hk-arr-t)" />
-
-                  <rect x={210} y={30} width={110} height={36} rx={7} fill="#4ECDC410" stroke="#4ECDC4" strokeWidth={1} />
-                  <text x={265} y={52} textAnchor="middle" fill="#4ECDC4" fontSize={10} fontFamily="ui-monospace,monospace" fontWeight={700}>HookSystem</text>
-
-                  <path d="M320,48 L400,48" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.4} markerEnd="url(#hk-arr-t)" />
-                  <path d="M320,48 L400,80" stroke="#818CF8" strokeWidth={1} strokeOpacity={0.3} markerEnd="url(#hk-arr-t)" />
-
-                  <rect x={400} y={30} width={110} height={36} rx={7} fill="#4ECDC410" stroke="#F5C542" strokeWidth={0.8} />
-                  <text x={455} y={47} textAnchor="middle" fill="#F5C542" fontSize={8} fontFamily="ui-monospace,monospace" fontWeight={600}>DriftDetect</text>
-                  <text x={455} y={60} textAnchor="middle" fill="#F5C542" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace,monospace">P70 handler</text>
-
-                  <rect x={400} y={72} width={110} height={28} rx={5} fill="#818CF810" stroke="#818CF8" strokeWidth={0.5} />
-                  <text x={455} y={90} textAnchor="middle" fill="#818CF8" fillOpacity={0.5} fontSize={8} fontFamily="ui-monospace,monospace">RunLog P50</text>
-
-                  <text x={300} y={120} textAnchor="middle" fill="#4ECDC4" fontSize={9} fontFamily="ui-monospace,monospace" fontWeight={600} fillOpacity={0.5}>
-                    {t(locale, "Scoring은 이벤트만 발행. 누가 구독하는지 모름. 결합 제거.", "Scoring only emits. Doesn't know subscribers. Coupling eliminated.")}
-                  </text>
-                </motion.g>
-              </svg>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        {/* 3. Overview: Sources → HookSystem → Handlers */}
+        {/* 2. Overview: Sources → HookSystem → Handlers */}
         <ScrollReveal delay={0.05}>
           <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-10">
             <svg viewBox="0 0 780 240" className="w-full min-w-[600px]" style={{ maxHeight: 270 }}>
