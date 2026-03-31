@@ -161,8 +161,8 @@ function StatsBar() {
       className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
     >
       {[
-        { value: "47", label: "Tools" },
-        { value: "44", label: "MCP" },
+        { value: "43", label: "Tools" },
+        { value: "MCP", label: "Catalog" },
         { value: "3", label: "Providers" },
         { value: "∞", label: "time_budget_s" },
       ].map((stat) => (

@@ -87,8 +87,8 @@ export const geodeCategories: CategoryData[] = [
     icon: "🎛️",
     title: "Orchestration",
     postsCount: 4,
-    statusKo: "40 Hook Events + TaskSystem + Bootstrap",
-    statusEn: "40 Hook Events + TaskSystem + Bootstrap",
+    statusKo: "46 Hook Events + TaskSystem + Bootstrap",
+    statusEn: "46 Hook Events + TaskSystem + Bootstrap",
     techBadges: ["11 Events", "CONTINUE/ABORT/MODIFY", "TaskSystem", "Bootstrap"],
     descriptionKo:
       "11개 Hook 이벤트(SESSION_START/END, PRE/POST_ANALYSIS, PRE/POST_TOOL_USE, TASK_START/COMPLETE/FAIL, ON_ERROR, ON_NOTIFICATION)로 파이프라인 라이프사이클을 관리합니다. Hook 결과는 CONTINUE/ABORT/MODIFY로 흐름을 제어합니다. TaskSystem으로 의존성 그래프 기반 분석 작업을 스케줄링합니다.",

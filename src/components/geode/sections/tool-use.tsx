@@ -8,7 +8,7 @@ import { useLocale, t } from "../locale-context";
 /* ── 5-Route Dispatch ── */
 const routes = [
   { id: "bash",   label: "Bash",  count: "38 safe prefixes", color: "#E87080", descKo: "PolicyChain 3-layer 방어. safe prefix(cat, ls, git...)는 자동 실행, 위험 패턴(rm -rf /, sudo)은 차단, 나머지는 HITL 승인.", descEn: "PolicyChain 3-layer defense. Safe prefixes (cat, ls, git...) auto-execute, dangerous patterns (rm -rf /, sudo) blocked, rest requires HITL approval." },
-  { id: "native", label: "Tool",  count: "47 native",        color: "#4ECDC4", descKo: "definitions.json에 등록된 47개 도구. 12개 카테고리(Analysis, Memory, Planning 등). 중복/불용 5개를 정리하여 52에서 축소. ToolExecutor가 handler dict에서 디스패치.", descEn: "47 tools registered in definitions.json. 12 categories (Analysis, Memory, Planning, etc.). Trimmed from 52 by removing duplicates/unused. ToolExecutor dispatches from handler dict." },
+  { id: "native", label: "Tool",  count: "43 native",        color: "#4ECDC4", descKo: "43개 고유 도구 클래스. 12개 카테고리(Analysis, Memory, Planning 등). 초기 52에서 중복/불용을 지속 정리. ToolExecutor가 handler dict에서 디스패치.", descEn: "43 unique tool classes. 12 categories (Analysis, Memory, Planning, etc.). Continuously trimmed from initial 52. ToolExecutor dispatches from handler dict." },
   { id: "mcp",    label: "MCP",   count: "44 catalog",       color: "#818CF8", descKo: "MCPServerManager auto-discovery. Anthropic format 자동 정규화. steam/arxiv/linkedin은 사전 승인, 나머지는 서버별 1회 승인. install_mcp_server로 NL 설치.", descEn: "MCPServerManager auto-discovery. Auto-normalizes to Anthropic format. steam/arxiv/linkedin pre-approved, rest requires one-time per-server approval. NL install via install_mcp_server." },
   { id: "skill",  label: "Skill", count: "3-tier disclosure", color: "#C084FC", descKo: "Progressive Disclosure: T1 메타데이터(system prompt) → T2 본문(lazy load) → T3 context:fork(격리 서브에이전트). 4 scope 우선순위.", descEn: "Progressive Disclosure: T1 metadata (system prompt) → T2 body (lazy load) → T3 context:fork (isolated sub-agent). 4-scope priority." },
   { id: "dag",    label: "DAG",   count: "13-node pipeline",  color: "#F5C542", descKo: "analyze_ip 호출 시 LangGraph StateGraph 13노드 파이프라인 실행. Router → Analyst×4(Send API) → Evaluator×3 → Scoring → Synthesizer.", descEn: "On analyze_ip call, runs LangGraph StateGraph 13-node pipeline. Router → Analyst×4 (Send API) → Evaluator×3 → Scoring → Synthesizer." },
@@ -66,8 +66,8 @@ export function ToolUseSection() {
           </h2>
           <p className="text-sm sm:text-base text-[#A0B4D4] max-w-xl mb-8 leading-relaxed">
             {t(locale,
-              "LLM이 도구를 선택하면 ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다. 47+ 도구 전체 스키마를 매 턴 전송하면 2-3K 토큰을 소모하므로, tool_search로 지연 로딩하여 85% 절감합니다. 5-Tier 안전 분류(T0 SAFE는 병렬, T4 DANGEROUS는 패턴+HITL)가 실행 전략을 결정합니다.",
-              "When the LLM selects a tool, ToolExecutor dispatches across 5 routes (Bash, Native, MCP, Skill, DAG). Sending full schemas for 47+ tools every turn costs 2-3K tokens, so deferred loading via tool_search saves 85%. 5-Tier safety classification (T0 SAFE = parallel, T4 DANGEROUS = pattern+HITL) determines execution strategy."
+              "LLM이 도구를 선택하면 ToolExecutor가 5개 경로(Bash, Native, MCP, Skill, DAG)로 디스패치합니다. 43+ 도구 전체 스키마를 매 턴 전송하면 2-3K 토큰을 소모하므로, tool_search로 지연 로딩하여 85% 절감합니다. 5-Tier 안전 분류(T0 SAFE는 병렬, T4 DANGEROUS는 패턴+HITL)가 실행 전략을 결정합니다.",
+              "When the LLM selects a tool, ToolExecutor dispatches across 5 routes (Bash, Native, MCP, Skill, DAG). Sending full schemas for 43+ tools every turn costs 2-3K tokens, so deferred loading via tool_search saves 85%. 5-Tier safety classification (T0 SAFE = parallel, T4 DANGEROUS = pattern+HITL) determines execution strategy."
             )}
           </p>
         </ScrollReveal>
@@ -212,7 +212,7 @@ export function ToolUseSection() {
                   <rect x={15} y={30} width={120} height={80} rx={10}
                     fill="#0C1220" stroke="#818CF8" strokeWidth={0.8} strokeOpacity={0.35} />
                   <text x={75} y={55} textAnchor="middle" fill="#818CF8"
-                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>47 + MCP</text>
+                    fontSize={10} fontFamily="ui-monospace, monospace" fontWeight={700}>43 + MCP</text>
                   <text x={75} y={72} textAnchor="middle" fill="#818CF8" fillOpacity={0.4}
                     fontSize={8} fontFamily="ui-monospace, monospace">combined &gt; 10</text>
                   <text x={75} y={88} textAnchor="middle" fill="#818CF8" fillOpacity={0.3}
@@ -291,8 +291,8 @@ export function ToolUseSection() {
                   <div className="flex items-start gap-2">
                     <span className="shrink-0 text-[10px] font-mono font-bold text-[#F5C542]">1</span>
                     <span>{t(locale,
-                      `native(47) + MCP 합산이 ${deferredSpec.threshold}개를 초과하면 deferred 모드 활성화`,
-                      `Deferred mode activates when native(47) + MCP combined exceeds ${deferredSpec.threshold}`
+                      `native(43) + MCP 합산이 ${deferredSpec.threshold}개를 초과하면 deferred 모드 활성화`,
+                      `Deferred mode activates when native(43) + MCP combined exceeds ${deferredSpec.threshold}`
                     )}</span>
                   </div>
                   <div className="flex items-start gap-2">
@@ -395,7 +395,7 @@ export function ToolUseSection() {
               {/* MCP + total summary */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="rounded-lg border border-white/[0.04] px-4 py-3" style={{ background: "#4ECDC404" }}>
-                  <div className="text-2xl font-bold text-[#4ECDC4]">47</div>
+                  <div className="text-2xl font-bold text-[#4ECDC4]">43</div>
                   <div className="text-[10px] font-mono text-white/30">Native Tools</div>
                   <div className="text-[9px] font-mono text-white/15 mt-1">12 categories</div>
                 </div>

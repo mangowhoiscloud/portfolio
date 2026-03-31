@@ -42,6 +42,7 @@ const versions = [
   { ver: "v0.31", count: 42, descKo: "L2 반응 추가. drift → 자동 재분석", descEn: "L2 react added. drift: auto-reanalysis" },
   { ver: "v0.35", count: 40, descKo: "6개 orphan 제거. CRITICAL 미연결 수정", descEn: "6 orphans removed. Fixed CRITICAL None bug" },
   { ver: "v0.37", count: 40, descKo: "Unified bootstrap. ONE HookSystem 보장", descEn: "Unified bootstrap. ONE HookSystem guaranteed" },
+  { ver: "v0.42", count: 46, descKo: "+4 운영 이벤트. SHUTDOWN, CONFIG_RELOADED, MCP 연결 추적", descEn: "+4 operational events. SHUTDOWN, CONFIG_RELOADED, MCP connection tracking" },
 ];
 
 /* ── Design decisions data ── */
@@ -49,9 +50,9 @@ const decisions = [
   { title: "Sync, not Async", color: "#818CF8",
     ko: "도구 실행은 asyncio.gather로 병렬화하지만, Hook은 동기 체인을 유지합니다. P50→P80→P85 순서가 깨지면 RunLog 없이 Snapshot이 먼저 실행되는 문제가 발생하기 때문입니다. 관측 핸들러는 ~ms 단위라 전체 레이턴시에 영향이 미미합니다.",
     en: "Tool execution uses asyncio.gather for parallelism, but Hooks maintain a sync chain. If P50→P80→P85 ordering breaks, Snapshot could execute before RunLog. Observer handlers run in ~ms, so latency impact is negligible." },
-  { title: "Orphan Pruning", color: "#E87080",
-    ko: "v0.35.1에서 핸들러 0개인 6 이벤트를 제거했습니다(46→40). 등록 핸들러가 없으면 발화만 있고 수신이 없어 데드 코드와 동일합니다. 필요 시 다시 추가할 수 있으므로 코드 복잡성 감소를 우선했습니다.",
-    en: "In v0.35.1, removed 6 events with zero registered handlers (46→40). Fire-only events with no receivers are dead code. They can be re-added when needed, so we prioritized reducing code complexity." },
+  { title: "Prune, then Restore", color: "#E87080",
+    ko: "v0.35.1에서 핸들러 0개인 6 이벤트를 제거했습니다(46→40). v0.42에서 운영 모니터링 필요로 4종을 재추가(SHUTDOWN_STARTED, CONFIG_RELOADED, MCP_SERVER_CONNECTED/FAILED)하여 46으로 복원. 필요할 때만 존재시키는 원칙을 검증했습니다.",
+    en: "In v0.35.1, removed 6 events with zero handlers (46→40). In v0.42, re-added 4 operational events (SHUTDOWN_STARTED, CONFIG_RELOADED, MCP_SERVER_CONNECTED/FAILED), restoring to 46. Validated the principle: events exist only when needed." },
   { title: "Unified Wiring", color: "#34D399",
     ko: "v0.35.0 이전에는 serve/scheduler에서 HookSystem이 미연결되어, serve에서 발화한 이벤트를 REPL 핸들러가 수신하지 못했습니다. GeodeRuntime이 단일 HookSystem을 소유하도록 전환하여 전 모드 이벤트 전파를 보장합니다.",
     en: "Before v0.35.0, HookSystem was not wired in serve/scheduler. Events fired in serve couldn't be received by REPL handlers. Switching to a single HookSystem owned by GeodeRuntime guarantees event propagation across all modes." },
@@ -139,8 +140,8 @@ export function HooksSection() {
           labelColor="#4ECDC4"
           title={t(locale, "이벤트 기반 리플 패턴", "Event-Driven Ripple Pattern")}
           description={t(locale,
-            "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. 초기에는 노드 간 직접 콜백으로 관측했지만, 26개 파일에 의존성이 퍼지며 순환 참조가 발생했습니다. Hook 이벤트 버스로 전환하여 발화 측은 누가 듣는지 모르고, 핸들러는 누가 쏘는지 모르는 완전 분리를 달성했습니다. v0.10(26 events, 관측만) → v0.31(42, 반응 추가) → v0.35(40, orphan 정리) → v0.37(1 HookSystem 보장)로 성숙했습니다.",
-            "Non-deterministic LLM systems cannot test every path. Initially we observed via direct callbacks between nodes, but dependencies spread across 26 files, creating circular references. Switching to a Hook event bus achieved full decoupling: emitters don't know who listens, handlers don't know who fires. Matured from v0.10 (26 events, observe-only) → v0.31 (42, react added) → v0.35 (40, orphan cleanup) → v0.37 (single HookSystem guaranteed)."
+            "비결정적 LLM 시스템은 모든 경로를 테스트할 수 없습니다. 초기에는 노드 간 직접 콜백으로 관측했지만, 26개 파일에 의존성이 퍼지며 순환 참조가 발생했습니다. Hook 이벤트 버스로 전환하여 발화 측은 누가 듣는지 모르고, 핸들러는 누가 쏘는지 모르는 완전 분리를 달성했습니다. v0.10(26) → v0.31(42, 반응) → v0.35(40, orphan 정리) → v0.37(통합) → v0.42(46, 운영 이벤트)로 성숙했습니다.",
+            "Non-deterministic LLM systems cannot test every path. Initially we observed via direct callbacks between nodes, but dependencies spread across 26 files, creating circular references. Switching to a Hook event bus achieved full decoupling: emitters don't know who listens, handlers don't know who fires. Matured from v0.10 (26) → v0.31 (42, react) → v0.35 (40, orphan cleanup) → v0.37 (unified) → v0.42 (46, operational events)."
           )}
         />
 
@@ -184,7 +185,7 @@ export function HooksSection() {
               </circle>
               <rect x={300} y={88} width={100} height={64} rx={12} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.35} />
               <text x={350} y={112} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
-              <text x={350} y={128} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">40 events</text>
+              <text x={350} y={128} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">46 events</text>
               <text x={350} y={142} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3} fontSize={7} fontFamily="ui-monospace, monospace">priority-sorted</text>
 
               {/* Handler chain (right, sorted by priority) */}

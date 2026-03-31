@@ -12,7 +12,7 @@ export function GeodeFooter() {
         <div className="flex items-center gap-3">
           <Image src="/portfolio/images/geode-idle.png" alt="Geodi" width={32} height={32} className="opacity-40" />
           <div>
-            <div className="text-sm font-semibold text-white/50">GEODE v0.37</div>
+            <div className="text-sm font-semibold text-white/50">GEODE v0.45</div>
             <div className="text-xs text-[#9BB0CC]">Long-running Autonomous Execution Harness</div>
           </div>
         </div>

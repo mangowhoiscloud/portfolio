@@ -64,8 +64,8 @@ const agenticLayers = [
     title: "Tool Classification",
     items: ["SAFE 13 (auto)", "STANDARD 25 (auto)", "WRITE 10 (gate)", "EXPENSIVE 3 ($)", "DANGEROUS 1 (bash)"],
     accent: "#4ECDC4",
-    description: "47개 도구를 5단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/EXPENSIVE/DANGEROUS는 사용자 승인. Action Summary로 도구별 결정적 요약을 제공합니다.",
-    descriptionEn: "Classifies 47 tools into 5 tiers. SAFE/STANDARD auto-execute, WRITE/EXPENSIVE/DANGEROUS require user approval. Action Summary provides deterministic per-tool summaries.",
+    description: "43개 도구를 5단계로 분류합니다. SAFE/STANDARD는 자동 실행, WRITE/EXPENSIVE/DANGEROUS는 사용자 승인. Action Summary로 도구별 결정적 요약을 제공합니다.",
+    descriptionEn: "Classifies 43 tools into 5 tiers. SAFE/STANDARD auto-execute, WRITE/EXPENSIVE/DANGEROUS require user approval. Action Summary provides deterministic per-tool summaries.",
   },
   {
     tier: 2,
