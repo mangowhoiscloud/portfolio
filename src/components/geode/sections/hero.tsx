@@ -14,13 +14,13 @@ const stats = [
 ];
 
 const videoTabs = [
-  { id: "intro", labelKo: "개발자 소개", labelEn: "Introduction", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Introduction" },
-  { id: "demo", labelKo: "에이전트 운용", labelEn: "Agent Demo", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Agent Demo" },
+  { id: "demo", labelKo: "에이전트 및 스케폴드(생산 체계) 시연", labelEn: "Agent & Scaffold Demo", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Agent Demo" },
+  { id: "intro", labelKo: "개발자 소개 / 구조 설명 / 발전사", labelEn: "Introduction / Architecture / History", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Introduction" },
 ];
 
 export function HeroSection() {
   const locale = useLocale();
-  const [activeVideo, setActiveVideo] = useState("intro");
+  const [activeVideo, setActiveVideo] = useState("demo");
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0 pointer-events-none">
