@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -12,8 +13,14 @@ const stats = [
   { value: "5", label: "Tool Routes", sub: "Bash · Tool · MCP · Skill · DAG" },
 ];
 
+const videoTabs = [
+  { id: "intro", labelKo: "개발자 소개", labelEn: "Introduction", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Introduction" },
+  { id: "demo", labelKo: "에이전트 운용", labelEn: "Agent Demo", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Agent Demo" },
+];
+
 export function HeroSection() {
   const locale = useLocale();
+  const [activeVideo, setActiveVideo] = useState("intro");
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0 pointer-events-none">
@@ -91,28 +98,41 @@ export function HeroSection() {
           ))}
         </motion.div>
 
-        {/* YouTube intro video */}
+        {/* YouTube videos (tabbed) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
           className="w-full max-w-2xl mt-8 mb-2"
         >
-          <div className="relative rounded-xl overflow-hidden border border-white/[0.06]" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/1IftYShGxak"
-              title="GEODE Introduction"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+          <div className="flex justify-center gap-1 mb-3">
+            {videoTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveVideo(tab.id)}
+                className="px-4 py-2 text-xs font-mono font-bold transition-all duration-300"
+                style={{
+                  color: activeVideo === tab.id ? "#4ECDC4" : "#5A6A8A",
+                  borderBottom: `2px solid ${activeVideo === tab.id ? "#4ECDC4" : "transparent"}`,
+                }}
+              >
+                {locale === "en" ? tab.labelEn : tab.labelKo}
+              </button>
+            ))}
           </div>
-          <p className="text-center text-xs text-[#7A8CA8] mt-3 font-mono">
-            {t(locale,
-              "개발자 소개, 에이전트 운용, 제작 과정 안내",
-              "Developer intro, agent operation, and development process"
-            )}
-          </p>
+          {videoTabs.map((tab) => (
+            <div key={tab.id} style={{ display: activeVideo === tab.id ? "block" : "none" }}>
+              <div className="relative rounded-xl overflow-hidden border border-white/[0.06]" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={tab.src}
+                  title={tab.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ))}
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4">
