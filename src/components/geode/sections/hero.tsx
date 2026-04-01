@@ -91,6 +91,30 @@ export function HeroSection() {
           ))}
         </motion.div>
 
+        {/* YouTube intro video */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="w-full max-w-2xl mt-8 mb-2"
+        >
+          <div className="relative rounded-xl overflow-hidden border border-white/[0.06]" style={{ paddingBottom: "56.25%" }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/1IftYShGxak"
+              title="GEODE Introduction"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <p className="text-center text-xs text-[#7A8CA8] mt-3 font-mono">
+            {t(locale,
+              "개발자 소개, 에이전트 운용, 제작 과정 안내",
+              "Developer intro, agent operation, and development process"
+            )}
+          </p>
+        </motion.div>
+
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4">
           <Link
             href="https://github.com/mangowhoiscloud/geode"
