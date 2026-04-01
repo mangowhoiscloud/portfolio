@@ -14,8 +14,8 @@ const stats = [
 ];
 
 const videoTabs = [
-  { id: "demo", labelKo: "에이전트 및 스케폴드(생산 체계) 시연", labelEn: "Agent & Scaffold Demo", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Agent Demo" },
-  { id: "intro", labelKo: "개발자 소개 / 구조 설명 / 발전사", labelEn: "Introduction / Architecture / History", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Introduction" },
+  { id: "demo", labelKo: "에이전트 및 스케폴드(생산 체계) 시연", labelEn: "Agent & Scaffold Demo", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Agent Demo" },
+  { id: "intro", labelKo: "개발자 소개 / 구조 설명 / 발전사", labelEn: "Introduction / Architecture / History", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Introduction" },
 ];
 
 export function HeroSection() {
