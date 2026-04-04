@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { DagRenderer } from "../dag-renderer";
 import { useLocale, t } from "../locale-context";
@@ -105,8 +106,17 @@ export function AgentsTasksSection() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
+          <div className="min-h-[520px]">
+          <AnimatePresence mode="wait">
           {/* ── SubAgent Tab ── */}
           {activeTab === "subagent" && (
+            <motion.div
+              key="subagent"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+            >
             <div>
               {/* Spawn → Execute → Announce flow diagram */}
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
@@ -192,10 +202,18 @@ export function AgentsTasksSection() {
                 ))}
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── TaskGraph Tab — Two separate visualizations ── */}
           {activeTab === "taskgraph" && (
+            <motion.div
+              key="taskgraph"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+            >
             <div className="space-y-8">
               {/* 1. Pipeline DAG (Game IP) — DagRenderer */}
               <div>
@@ -335,10 +353,18 @@ export function AgentsTasksSection() {
                 </p>
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── PlanMode Tab ── */}
           {activeTab === "planmode" && (
+            <motion.div
+              key="planmode"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+            >
             <div>
               {/* PlanMode lifecycle SVG */}
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
@@ -401,7 +427,10 @@ export function AgentsTasksSection() {
                 )}
               </p>
             </div>
+            </motion.div>
           )}
+          </AnimatePresence>
+          </div>
         </ScrollReveal>
       </div>
     </section>
