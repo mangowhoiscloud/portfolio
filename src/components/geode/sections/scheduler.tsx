@@ -19,8 +19,8 @@ const lifecycle = [
   { step: "_loop(interval_s)", detailKo: "백그라운드 데몬 쓰레드. check_due_jobs() 주기 호출", detailEn: "Background daemon thread. Periodic check_due_jobs() calls", color: "#60A5FA" },
   { step: "check_due_jobs()",  detailKo: "Active Hours(TZ) 검증 → 듀 잡 필터 → next_run 갱신", detailEn: "Verify Active Hours(TZ) → filter due jobs → update next_run", color: "#4ECDC4" },
   { step: "action_queue",      detailKo: "(job_id, action, isolated) 엔큐. serve 메인 루프가 드레인", detailEn: "Enqueue (job_id, action, isolated). Drained by serve main loop", color: "#F5C542" },
-  { step: "IsolatedRunner",    detailKo: "isolated=true → 데몬 쓰레드 실행, MAX_CONCURRENT=5, 크래시 격리", detailEn: "isolated=true → daemon thread execution, MAX_CONCURRENT=5, crash isolation", color: "#C084FC" },
-  { step: "AgenticLoop.run()", detailKo: "isolated=false → 메인 세션 블로킹 실행. hitl_level 상속", detailEn: "isolated=false → main session blocking execution. Inherits hitl_level", color: "#4ECDC4" },
+  { step: "IsolatedRunner",    detailKo: "격리 모드. 데몬 쓰레드 실행, MAX_CONCURRENT=5, 크래시 격리", detailEn: "Isolated mode. Daemon thread execution, MAX_CONCURRENT=5, crash isolation", color: "#C084FC" },
+  { step: "AgenticLoop.run()", detailKo: "공유 모드. 메인 세션 블로킹 실행. hitl_level 상속", detailEn: "Shared mode. Main session blocking execution. Inherits hitl_level", color: "#4ECDC4" },
 ];
 
 /* ── Predefined templates ── */
@@ -109,10 +109,14 @@ export function SchedulerSection() {
                 fontSize={7} fontFamily="ui-monospace, monospace">main session, blocking</text>
 
               {/* Fork labels */}
-              <text x={636} y={30} textAnchor="middle" fill="#C084FC" fillOpacity={0.5}
-                fontSize={8} fontFamily="ui-monospace, monospace">isolated=true</text>
-              <text x={636} y={140} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.5}
-                fontSize={8} fontFamily="ui-monospace, monospace">isolated=false</text>
+              <rect x={604} y={19} width={64} height={16} rx={4}
+                fill="#C084FC" fillOpacity={0.08} stroke="#C084FC" strokeWidth={0.5} strokeOpacity={0.25} />
+              <text x={636} y={30} textAnchor="middle" fill="#C084FC" fillOpacity={0.7}
+                fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={600}>isolated</text>
+              <rect x={604} y={129} width={64} height={16} rx={4}
+                fill="#4ECDC4" fillOpacity={0.08} stroke="#4ECDC4" strokeWidth={0.5} strokeOpacity={0.25} />
+              <text x={636} y={140} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.7}
+                fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={600}>shared</text>
 
               {/* Active Hours annotation */}
               <rect x={315} y={125} width={130} height={35} rx={7}
