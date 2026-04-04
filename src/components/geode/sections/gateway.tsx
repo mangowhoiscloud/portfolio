@@ -1,45 +1,66 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { useLocale, t } from "../locale-context";
 
-/* ── 3 session modes (v0.37.0 thin-only architecture) ── */
-const modes = [
-  {
-    id: "ipc",
-    label: "CLI (IPC)",
-    sub: "SessionMode.IPC",
-    color: "#4ECDC4",
+type Mode = "ipc" | "daemon" | "scheduler";
+
+const modes: Record<Mode, {
+  label: string; sub: string; color: string;
+  descKo: string; descEn: string;
+  detailsKo: string[]; detailsEn: string[];
+  source: string; poller: string;
+}> = {
+  ipc: {
+    label: "CLI (IPC)", sub: "SessionMode.IPC", color: "#4ECDC4",
     descKo: "thin CLI가 Unix socket(~/.geode/cli.sock)으로 serve에 접속. serve가 미실행이면 자동 시작(pidfile lock, TOCTOU 방지). line-delimited JSON 프로토콜. hitl=0, WRITE 허용, DANGEROUS 차단.",
     descEn: "thin CLI connects to serve via Unix socket (~/.geode/cli.sock). Auto-starts serve if not running (pidfile lock, TOCTOU prevention). Line-delimited JSON protocol. hitl=0, WRITE allowed, DANGEROUS blocked.",
     detailsKo: ["IPCClient + CLIPoller", "auto-start serve", "chmod 0o600 보안"],
     detailsEn: ["IPCClient + CLIPoller", "auto-start serve", "chmod 0o600 security"],
+    source: "Terminal", poller: "CLIPoller",
   },
-  {
-    id: "daemon",
-    label: "Daemon",
-    sub: "SessionMode.DAEMON",
-    color: "#818CF8",
+  daemon: {
+    label: "Daemon", sub: "SessionMode.DAEMON", color: "#818CF8",
     descKo: "Slack/Discord/Telegram 폴러가 외부 메시지를 수신. config.toml [gateway] pollers에서 동적 등록(_POLLER_REGISTRY). hitl=0, quiet 모드, DANGEROUS 차단.",
     descEn: "Slack/Discord/Telegram pollers receive external messages. Dynamically registered via config.toml [gateway] pollers (_POLLER_REGISTRY). hitl=0, quiet mode, DANGEROUS blocked.",
     detailsKo: ["Config-driven pollers", "ChannelBinding 라우팅", "SessionLane 동시성"],
     detailsEn: ["Config-driven pollers", "ChannelBinding routing", "SessionLane concurrency"],
+    source: "Slack / Discord", poller: "Gateway",
   },
-  {
-    id: "scheduler",
-    label: "Scheduler",
-    sub: "SessionMode.SCHEDULER",
-    color: "#F5C542",
+  scheduler: {
+    label: "Scheduler", sub: "SessionMode.SCHEDULER", color: "#F5C542",
     descKo: "serve 내부에서 SchedulerService가 AT/EVERY/CRON 잡을 실행. hitl=0, quiet, 300s 시간 제한. fcntl.flock으로 jobs.json 동시 접근 방지. stuck job 10분 탐지.",
     descEn: "SchedulerService runs AT/EVERY/CRON jobs inside serve. hitl=0, quiet, 300s time cap. fcntl.flock prevents concurrent jobs.json access. Stuck job detection at 10 min.",
     detailsKo: ["serve 내장 데몬", "300s time cap", "fcntl.flock 잡 잠금"],
     detailsEn: ["Built-in serve daemon", "300s time cap", "fcntl.flock job locking"],
+    source: "Cron / AT / EVERY", poller: "Scheduler",
   },
-];
+};
+
+const modeOrder: Mode[] = ["ipc", "daemon", "scheduler"];
+const fadeTx = { duration: 0.3 };
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export function GatewaySection() {
   const locale = useLocale();
+  const [active, setActive] = useState<Mode>("ipc");
+  const m = modes[active];
+
+  const pollers: { id: Mode; label: string; y: number; color: string }[] = [
+    { id: "ipc", label: "CLIPoller", y: 105, color: "#4ECDC4" },
+    { id: "daemon", label: "Gateway", y: 125, color: "#818CF8" },
+    { id: "scheduler", label: "Scheduler", y: 145, color: "#F5C542" },
+  ];
+
+  const sources: { id: Mode; label: string; y: number; color: string; pathD: string }[] = [
+    { id: "ipc", label: "Terminal", y: 20, color: "#4ECDC4", pathD: "M115,40 C140,40 155,40 175,40" },
+    { id: "daemon", label: "Slack / Discord", y: 70, color: "#818CF8", pathD: "M115,85 C145,85 155,130 200,130" },
+    { id: "scheduler", label: "Cron / AT / EVERY", y: 115, color: "#F5C542", pathD: "M115,130 C145,130 155,148 200,148" },
+  ];
+
   return (
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -54,24 +75,57 @@ export function GatewaySection() {
           )}
         />
 
-        {/* ── Thin-only architecture SVG ── */}
+        {/* Mode selector */}
+        <ScrollReveal delay={0.03}>
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex rounded-full bg-[#0A0F1A] border border-white/[0.06] p-1">
+              {modeOrder.map((id) => (
+                <button key={id} onClick={() => setActive(id)}
+                  className="relative px-5 py-1.5 rounded-full text-xs font-mono font-bold transition-colors duration-200"
+                  style={{
+                    color: active === id ? "#fff" : "#7A8CA8",
+                    background: active === id ? `${modes[id].color}25` : "transparent",
+                  }}>
+                  {modes[id].label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Architecture SVG with mode highlighting */}
         <ScrollReveal delay={0.05}>
-          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-10">
+          <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-8">
             <svg viewBox="0 0 800 180" className="w-full min-w-[640px]" style={{ maxHeight: 210 }}>
-              {/* thin CLI */}
-              <rect x={15} y={20} width={100} height={40} rx={8}
-                fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.8} strokeOpacity={0.4} />
-              <text x={65} y={37} textAnchor="middle" fill="#4ECDC4"
-                fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}>geode (thin)</text>
-              <text x={65} y={51} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4}
-                fontSize={7} fontFamily="ui-monospace, monospace">IPCClient</text>
+              {/* Source boxes (left) */}
+              {sources.map((s) => {
+                const isActive = s.id === active;
+                return (
+                  <g key={s.id}>
+                    <motion.rect x={15} y={s.y} width={100} height={35} rx={8}
+                      fill="#0A0F1A" stroke={s.color}
+                      animate={{ strokeWidth: isActive ? 1.5 : 0.6, strokeOpacity: isActive ? 0.6 : 0.15 }}
+                      transition={fadeTx} />
+                    <motion.text x={65} y={s.y + 15} textAnchor="middle" fill={s.color}
+                      fontSize={9} fontFamily="ui-monospace, monospace" fontWeight={700}
+                      animate={{ fillOpacity: isActive ? 0.9 : 0.25 }} transition={fadeTx}>
+                      {s.label}
+                    </motion.text>
+                    <motion.text x={65} y={s.y + 27} textAnchor="middle" fill={s.color}
+                      fontSize={6.5} fontFamily="ui-monospace, monospace"
+                      animate={{ fillOpacity: isActive ? 0.5 : 0.12 }} transition={fadeTx}>
+                      {s.id === "ipc" ? "cli.sock" : s.id === "daemon" ? "pollers" : "jobs.json"}
+                    </motion.text>
+                    {/* Arrow to serve */}
+                    <motion.path d={s.pathD} fill="none" stroke={s.color}
+                      strokeDasharray={s.id === "ipc" ? "4 3" : "none"}
+                      animate={{ strokeWidth: isActive ? 1.5 : 0.6, strokeOpacity: isActive ? 0.45 : 0.08 }}
+                      transition={fadeTx} />
+                  </g>
+                );
+              })}
 
-              {/* Unix socket arrow */}
-              <path d="M115,40 C140,40 155,40 175,40" stroke="#4ECDC4" strokeOpacity={0.3} strokeWidth={1} strokeDasharray="4 3" fill="none" />
-              <text x={145} y={32} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3}
-                fontSize={6} fontFamily="ui-monospace, monospace">cli.sock</text>
-
-              {/* geode serve (large central box) */}
+              {/* geode serve (central box) */}
               <rect x={175} y={10} width={420} height={155} rx={12}
                 fill="#0C1220" stroke="#F4B8C8" strokeWidth={1} strokeOpacity={0.3} />
               <text x={385} y={28} textAnchor="middle" fill="#F4B8C8"
@@ -79,7 +133,7 @@ export function GatewaySection() {
                 geode serve (GeodeRuntime)
               </text>
 
-              {/* Inside serve: SharedServices */}
+              {/* SharedServices */}
               <rect x={190} y={38} width={150} height={55} rx={8}
                 fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.25} />
               <text x={265} y={55} textAnchor="middle" fill="#818CF8" fillOpacity={0.7}
@@ -89,7 +143,7 @@ export function GatewaySection() {
               <text x={265} y={82} textAnchor="middle" fill="#818CF8" fillOpacity={0.25}
                 fontSize={6.5} fontFamily="ui-monospace, monospace">create_session(mode)</text>
 
-              {/* Inside serve: SessionLane + Lane */}
+              {/* SessionLane */}
               <rect x={355} y={38} width={115} height={55} rx={8}
                 fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.25} />
               <text x={412} y={55} textAnchor="middle" fill="#F5C542" fillOpacity={0.7}
@@ -99,7 +153,7 @@ export function GatewaySection() {
               <text x={412} y={82} textAnchor="middle" fill="#F5C542" fillOpacity={0.25}
                 fontSize={6.5} fontFamily="ui-monospace, monospace">Lane(global, 8)</text>
 
-              {/* Inside serve: AgenticLoop */}
+              {/* AgenticLoop */}
               <rect x={485} y={38} width={95} height={55} rx={8}
                 fill="#0A0F1A" stroke="#4ECDC4" strokeWidth={0.6} strokeOpacity={0.25} />
               <text x={532} y={55} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.7}
@@ -109,85 +163,94 @@ export function GatewaySection() {
               <text x={532} y={82} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.25}
                 fontSize={6.5} fontFamily="ui-monospace, monospace">time_budget_s</text>
 
-              {/* 3 pollers inside serve */}
-              {[
-                { label: "CLIPoller", y: 105, color: "#4ECDC4", mode: "IPC" },
-                { label: "Gateway", y: 125, color: "#818CF8", mode: "DAEMON" },
-                { label: "Scheduler", y: 145, color: "#F5C542", mode: "SCHEDULER" },
-              ].map((p) => (
-                <g key={p.label}>
-                  <rect x={200} y={p.y} width={80} height={18} rx={5}
-                    fill="#0A0F1A" stroke={p.color} strokeWidth={0.5} strokeOpacity={0.3} />
-                  <text x={240} y={p.y + 12} textAnchor="middle" fill={p.color} fillOpacity={0.6}
-                    fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={600}>{p.label}</text>
-                  <text x={295} y={p.y + 12} fill={p.color} fillOpacity={0.3}
-                    fontSize={6} fontFamily="ui-monospace, monospace">{p.mode}</text>
-                  {/* Arrow to SessionLane */}
-                  <path d={`M340,${p.y + 9} L355,${p.y + 9}`} stroke={p.color} strokeOpacity={0.2} strokeWidth={0.8} />
-                </g>
-              ))}
+              {/* 3 pollers */}
+              {pollers.map((p) => {
+                const isActive = p.id === active;
+                return (
+                  <g key={p.label}>
+                    <motion.rect x={200} y={p.y} width={80} height={18} rx={5}
+                      fill={isActive ? `${p.color}10` : "#0A0F1A"} stroke={p.color}
+                      animate={{ strokeWidth: isActive ? 1.2 : 0.5, strokeOpacity: isActive ? 0.6 : 0.15 }}
+                      transition={fadeTx} />
+                    <motion.text x={240} y={p.y + 12} textAnchor="middle" fill={p.color}
+                      fontSize={7} fontFamily="ui-monospace, monospace" fontWeight={600}
+                      animate={{ fillOpacity: isActive ? 0.9 : 0.3 }} transition={fadeTx}>
+                      {p.label}
+                    </motion.text>
+                    {/* Arrow poller → SessionLane */}
+                    <motion.path d={`M280,${p.y + 9} L355,${p.y + 9}`} fill="none" stroke={p.color}
+                      animate={{ strokeWidth: isActive ? 1.2 : 0.4, strokeOpacity: isActive ? 0.4 : 0.06 }}
+                      transition={fadeTx} />
+                  </g>
+                );
+              })}
 
-              {/* Arrows: SessionLane → AgenticLoop */}
+              {/* SessionLane → AgenticLoop */}
               <path d="M470,65 L485,65" stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
 
-              {/* External connections (left side) */}
-              <rect x={15} y={70} width={100} height={30} rx={7}
-                fill="#0A0F1A" stroke="#818CF8" strokeWidth={0.6} strokeOpacity={0.3} />
-              <text x={65} y={88} textAnchor="middle" fill="#818CF8" fillOpacity={0.5}
-                fontSize={8} fontFamily="ui-monospace, monospace">Slack / Discord</text>
-              <path d="M115,85 C145,85 155,130 175,130" stroke="#818CF8" strokeOpacity={0.2} strokeWidth={0.8} fill="none" />
-
-              <rect x={15} y={115} width={100} height={30} rx={7}
-                fill="#0A0F1A" stroke="#F5C542" strokeWidth={0.6} strokeOpacity={0.3} />
-              <text x={65} y={133} textAnchor="middle" fill="#F5C542" fillOpacity={0.5}
-                fontSize={8} fontFamily="ui-monospace, monospace">Cron / AT / EVERY</text>
-              <path d="M115,130 C145,130 155,148 175,148" stroke="#F5C542" strokeOpacity={0.2} strokeWidth={0.8} fill="none" />
-
-              {/* Top label */}
-              <text x={400} y={6} textAnchor="middle" fill="white" fillOpacity={0.2}
-                fontSize={7} fontFamily="ui-monospace, monospace" letterSpacing="0.08em">
-                ALL PATHS: acquire_all(key, [&quot;session&quot;, &quot;global&quot;]) → create_session(mode) → AgenticLoop
-              </text>
-
               {/* Result output */}
-              <rect x={620} y={45} width={95} height={40} rx={8}
-                fill="#0A0F1A" stroke="#34D399" strokeWidth={0.6} strokeOpacity={0.3} />
+              <motion.rect x={620} y={45} width={95} height={40} rx={8}
+                fill="#0A0F1A" stroke="#34D399"
+                animate={{ strokeWidth: 1, strokeOpacity: 0.3 }} transition={fadeTx} />
               <text x={667} y={62} textAnchor="middle" fill="#34D399" fillOpacity={0.6}
                 fontSize={8} fontFamily="ui-monospace, monospace" fontWeight={600}>Result</text>
               <text x={667} y={76} textAnchor="middle" fill="#34D399" fillOpacity={0.3}
                 fontSize={6.5} fontFamily="ui-monospace, monospace">→ channel</text>
               <path d="M580,65 L620,65" stroke="white" strokeOpacity={0.15} strokeWidth={0.8} />
+
+              {/* Active mode indicator */}
+              <AnimatePresence mode="wait">
+                <motion.text
+                  key={active}
+                  x={400} y={175} textAnchor="middle"
+                  fill={m.color} fillOpacity={0.4}
+                  fontSize={8} fontFamily="ui-monospace, monospace"
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  transition={fadeTx}>
+                  {m.source} → {m.poller} → acquire_all(key) → AgenticLoop → Result
+                </motion.text>
+              </AnimatePresence>
             </svg>
           </div>
         </ScrollReveal>
 
-        {/* ── Session mode cards ── */}
+        {/* Active mode detail card */}
         <ScrollReveal delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {modes.map((m) => (
-              <div
-                key={m.id}
-                className="rounded-xl border px-5 py-5"
+          <div className="min-h-[160px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25, ease }}
+                className="rounded-xl border px-6 py-5"
                 style={{
-                  borderColor: `${m.color}15`,
-                  background: `linear-gradient(160deg, ${m.color}06, transparent 70%)`,
+                  borderColor: `${m.color}20`,
+                  background: `linear-gradient(160deg, ${m.color}08, transparent 70%)`,
                 }}
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-base font-mono font-bold" style={{ color: m.color }}>{m.label}</span>
-                  <span className="text-[9px] font-mono text-white/25">{m.sub}</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-lg font-mono font-bold" style={{ color: m.color }}>{m.label}</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full"
+                    style={{ color: m.color, background: `${m.color}10`, border: `1px solid ${m.color}20` }}>
+                    {m.sub}
+                  </span>
                 </div>
-                <p className="text-xs text-[#A0B4D4] leading-relaxed mb-3">{locale === "en" ? m.descEn : m.descKo}</p>
-                <div className="space-y-1">
+                <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
+                  {locale === "en" ? m.descEn : m.descKo}
+                </p>
+                <div className="flex flex-wrap gap-2">
                   {(locale === "en" ? m.detailsEn : m.detailsKo).map((d) => (
-                    <div key={d} className="flex items-center gap-2">
-                      <div className="w-1 h-1 rounded-full" style={{ background: m.color, opacity: 0.5 }} />
-                      <span className="text-[11px] font-mono text-white/40">{d}</span>
-                    </div>
+                    <span key={d} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2 py-1 rounded-lg"
+                      style={{ color: `${m.color}`, background: `${m.color}08`, border: `1px solid ${m.color}12` }}>
+                      <span className="w-1 h-1 rounded-full" style={{ background: m.color, opacity: 0.6 }} />
+                      {d}
+                    </span>
                   ))}
                 </div>
-              </div>
-            ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </ScrollReveal>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { TabBar } from "../ui/tab-bar";
 import { useLocale, t } from "../locale-context";
@@ -262,14 +263,25 @@ export function VerificationSection() {
               </div>
 
               {/* Detail card */}
-              <div
-                className="rounded-xl border px-5 py-4 transition-all duration-300"
+              <div className="min-h-[160px]">
+              <AnimatePresence mode="wait">
+              <motion.div
+                key={`${mode}-${activeLayer}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="rounded-xl border px-5 py-4"
                 style={{
                   borderColor: `${active.accent}15`,
                   background: `linear-gradient(135deg, ${active.accent}05, transparent 60%)`,
                 }}
               >
                 <div className="flex items-center gap-2 mb-2">
+                  <span className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-mono font-black"
+                    style={{ background: `${active.accent}15`, color: active.accent }}>
+                    L{active.tier}
+                  </span>
                   <span className="font-semibold text-sm" style={{ color: `${active.accent}D0` }}>
                     {active.title}
                   </span>
@@ -292,6 +304,8 @@ export function VerificationSection() {
                     </span>
                   ))}
                 </div>
+              </motion.div>
+              </AnimatePresence>
               </div>
 
             </div>
