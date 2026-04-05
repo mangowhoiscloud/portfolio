@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { SectionHeader } from "../ui/section-header";
 import { TabBar } from "../ui/tab-bar";
@@ -168,8 +169,11 @@ export function SchedulerSection() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.12}>
+          <div className="min-h-[320px]">
+          <AnimatePresence mode="wait">
           {/* ── Lifecycle ── */}
           {activeTab === "lifecycle" && (
+            <motion.div key="lifecycle" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div className="space-y-2">
               {lifecycle.map((l, i) => (
                 <div key={l.step} className="flex items-center gap-3 px-4 py-3 rounded-lg border border-white/[0.04]"
@@ -181,10 +185,12 @@ export function SchedulerSection() {
                 </div>
               ))}
             </div>
+            </motion.div>
           )}
 
           {/* ── Templates ── */}
           {activeTab === "templates" && (
+            <motion.div key="templates" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               <div className="space-y-2 mb-4">
                 {templates.map((t) => (
@@ -201,10 +207,12 @@ export function SchedulerSection() {
                 CLI: /schedule create &quot;every 5m during 09:00-22:00&quot; · /schedule enable · /schedule run
               </p>
             </div>
+            </motion.div>
           )}
 
           {/* ── NL Parser ── */}
           {activeTab === "nl-parser" && (
+            <motion.div key="nl-parser" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div className="rounded-xl border border-white/[0.04] px-5 py-4 space-y-4">
               <p className="text-sm text-[#A0B4D4] leading-relaxed">
                 {locale === "ko" ? (
@@ -236,7 +244,10 @@ export function SchedulerSection() {
                 ))}
               </div>
             </div>
+            </motion.div>
           )}
+          </AnimatePresence>
+          </div>
         </ScrollReveal>
       </div>
     </section>

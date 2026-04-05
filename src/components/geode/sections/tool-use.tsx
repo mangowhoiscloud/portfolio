@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { TabBar } from "../ui/tab-bar";
 import { useLocale, t } from "../locale-context";
@@ -180,8 +181,11 @@ export function ToolUseSection() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
+          <div className="min-h-[420px]">
+          <AnimatePresence mode="wait">
           {/* ── 5-Route Dispatch ── */}
           {activeTab === "routes" && (
+            <motion.div key="routes" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div className="space-y-2">
               {routes.map((r, i) => (
                 <div key={r.id}
@@ -200,10 +204,12 @@ export function ToolUseSection() {
                 </div>
               ))}
             </div>
+            </motion.div>
           )}
 
           {/* ── Deferred Loading ── */}
           {activeTab === "deferred" && (
+            <motion.div key="deferred" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               {/* How it works SVG */}
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
@@ -336,10 +342,12 @@ export function ToolUseSection() {
                 </div>
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── 5-Tier Safety ── */}
           {activeTab === "safety" && (
+            <motion.div key="safety" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               {/* Tier spectrum bar */}
               <div className="flex gap-1 mb-6 rounded-lg overflow-hidden">
@@ -377,10 +385,12 @@ export function ToolUseSection() {
                 </p>
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── 47 Tools Inventory ── */}
           {activeTab === "inventory" && (
+            <motion.div key="inventory" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-4">
                 {categories.map((c) => (
@@ -411,7 +421,10 @@ export function ToolUseSection() {
                 </div>
               </div>
             </div>
+            </motion.div>
           )}
+          </AnimatePresence>
+          </div>
         </ScrollReveal>
       </div>
     </section>

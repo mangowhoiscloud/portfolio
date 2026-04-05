@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { DagRenderer } from "../dag-renderer";
 import type { DagNode, DagEdge } from "../dag-renderer";
@@ -143,8 +144,11 @@ function ReodeDag() {
         ))}
       </div>
 
+      <div className="min-h-[200px]">
+      <AnimatePresence mode="wait">
       {/* Spring Migration — 7-node (DagRenderer) */}
       {pipe === "spring" && (
+        <motion.div key="spring" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
         <DagRenderer
           nodes={[
             { id: "assess", label: "Assess", sub: "Spring", color: "#60A5FA", column: 0 },
@@ -169,10 +173,12 @@ function ReodeDag() {
             { x: 450, y: 10, text: "4-Class Error Routing: CONFIG · CODE · BEHAVIOR · ENV" },
           ]}
         />
+        </motion.div>
       )}
 
       {/* Migration — 6-node (DagRenderer) */}
       {pipe === "migration" && (
+        <motion.div key="migration" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
         <DagRenderer
           nodes={[
             { id: "assess", label: "Assess", color: "#60A5FA", column: 0 },
@@ -191,10 +197,12 @@ function ReodeDag() {
           ]}
           loopback={{ from: "fix", to: "validate", label: "fix loop", color: "#E87080" }}
         />
+        </motion.div>
       )}
 
       {/* Porting — 4-node (DagRenderer) */}
       {pipe === "porting" && (
+        <motion.div key="porting" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
         <DagRenderer
           nodes={[
             { id: "analyze", label: "Analyze", color: "#60A5FA", column: 0 },
@@ -212,7 +220,10 @@ function ReodeDag() {
             { x: 280, y: 10, text: "Language Porting: Java ↔ Go ↔ Python" },
           ]}
         />
+        </motion.div>
       )}
+      </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -250,8 +261,20 @@ function DagViewer() {
         </button>
       </div>
 
-      {activeDag === "gameip" && <PipelineDag />}
-      {activeDag === "reode" && <ReodeDag />}
+      <div className="min-h-[300px]">
+      <AnimatePresence mode="wait">
+        {activeDag === "gameip" && (
+          <motion.div key="gameip" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
+            <PipelineDag />
+          </motion.div>
+        )}
+        {activeDag === "reode" && (
+          <motion.div key="reode" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
+            <ReodeDag />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      </div>
     </ScrollReveal>
   );
 }

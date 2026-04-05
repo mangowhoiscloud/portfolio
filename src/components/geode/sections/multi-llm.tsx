@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "../scroll-reveal";
 import { TabBar } from "../ui/tab-bar";
 import { useLocale, t } from "../locale-context";
@@ -109,8 +110,11 @@ export function MultiLlmSection() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
+          <div className="min-h-[480px]">
+          <AnimatePresence mode="wait">
           {/* ── Pipeline: LLM-as-Judge ── */}
           {mode === "pipeline" && (
+            <motion.div key="pipeline" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 760 280" className="w-full min-w-[580px]" style={{ maxHeight: 320 }}>
@@ -172,10 +176,12 @@ export function MultiLlmSection() {
                 </table>
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── Agentic Loop: Resilient Failover ── */}
           {mode === "agentic" && (
+            <motion.div key="agentic" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               <div className="overflow-x-auto -mx-4 px-4 pb-2 mb-6">
                 <svg viewBox="0 0 760 260" className="w-full min-w-[580px]" style={{ maxHeight: 300 }}>
@@ -235,10 +241,12 @@ export function MultiLlmSection() {
                 ))}
               </div>
             </div>
+            </motion.div>
           )}
 
           {/* ── Safeguards: Recovery Chain ── */}
           {mode === "safeguards" && (
+            <motion.div key="safeguards" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.25 }}>
             <div>
               {/* Headline metric */}
               <div className="flex items-center gap-4 px-5 py-3.5 rounded-xl border border-[#34D399]/15 mb-8" style={{ background: "rgba(52,211,153,0.03)" }}>
@@ -317,7 +325,10 @@ export function MultiLlmSection() {
                 </div>
               </div>
             </div>
+            </motion.div>
           )}
+          </AnimatePresence>
+          </div>
         </ScrollReveal>
       </div>
     </section>
