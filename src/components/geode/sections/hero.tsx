@@ -15,6 +15,7 @@ const stats = [
 
 const videoTabs = [
   { id: "demo", labelKo: "에이전트 및 스케폴드(생산 체계) 시연", labelEn: "Agent & Scaffold Demo", src: "https://www.youtube.com/embed/1IftYShGxak", title: "GEODE Agent Demo" },
+  { id: "compute-use", labelKo: "Compute-use 시연 / 탐색적 작업 / 일정 관리", labelEn: "Compute-use Demo / Exploratory Tasks / Scheduling", src: "https://www.youtube.com/embed/BKg3D6pXwss", title: "GEODE Compute-use Demo" },
   { id: "intro", labelKo: "개발자 소개 / 구조 설명 / 발전사", labelEn: "Introduction / Architecture / History", src: "https://www.youtube.com/embed/Qt3jsR5zOcQ", title: "GEODE Introduction" },
 ];
 
