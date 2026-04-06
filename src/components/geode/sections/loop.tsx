@@ -17,7 +17,7 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "dots", text: "                       claude-opus-4-6 · autonomous execution agent", rich: <span style={{color:"#d4a0a0",opacity:0.5}}>{`                       claude-opus-4-6 · autonomous execution agent`}</span> },
       { type: "dots", text: "                       /Users/mango/workspace/resume", rich: <span style={{opacity:0.35}}>{`                       /Users/mango/workspace/resume`}</span> },
       { type: "dots", text: "" },
-      { type: "dots", text: "  harness: Claude Code, GEODE", rich: <>{`  `}<span style={{opacity:0.35}}>harness:</span>{` `}<span style={{color:"#5f9ea0"}}>Claude Code</span>{`, `}<span style={{color:"#5f9ea0"}}>GEODE</span></> },
+      { type: "dots", text: "  harness: GEODE", rich: <>{`  `}<span style={{opacity:0.35}}>harness:</span>{` `}<span style={{color:"#5f9ea0"}}>GEODE</span></> },
       { type: "dots", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile`}</> },
       { type: "dots", text: "  ✓ Dry-Run Analysis  ✓ IP Search", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</> },
       { type: "dots", text: "" },
