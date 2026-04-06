@@ -249,14 +249,14 @@ export function GatewaySection() {
                       <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]/80" />
                       <span className="ml-2 text-[10px] text-white/20">geode</span>
                     </div>
-                    <pre className="text-white/50 whitespace-pre"><span className="text-white/70">{`  ╲╲( ◕ ᵕ ◕ )╱╱`}</span>{`  GEODE v0.45.0`}</pre>
-                    <pre className="text-white/30 whitespace-pre">{`                       gpt-5.4 · autonomous execution agent`}</pre>
+                    <pre className="text-white/40 whitespace-pre">{`  `}<span style={{color:"#9775c4"}}>╲╲</span><span className="text-white/80">{`( ◕ ᵕ ◕ )`}</span><span style={{color:"#9775c4"}}>╱╱</span>{`  `}<span style={{color:"#5f9ea0",fontWeight:700}}>GEODE</span>{` v0.45.0`}</pre>
+                    <pre className="text-white/25 whitespace-pre">{`                       gpt-5.4 · autonomous execution agent`}</pre>
                     <pre className="text-white/20 whitespace-pre">{`                       /Users/mango/workspace/resume`}</pre>
-                    <pre className="text-white/30 whitespace-pre mt-2">{`  harness: `}<span className="text-[#4ECDC4]/60">Claude Code, GEODE</span></pre>
-                    <pre className="text-[#34D399]/50 whitespace-pre">{`  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search`}</pre>
-                    <pre className="text-white/25 whitespace-pre mt-2">{`  /help for commands  ·  type naturally`}</pre>
-                    <pre className="text-white/30 whitespace-pre mt-2">{`  Connected to `}<span className="text-[#818CF8]/60">serve</span>{` via `}<span className="text-[#4ECDC4]/60">IPC</span></pre>
-                    <pre className="text-white/20 whitespace-pre">{`  Session: cli-6b55b450`}</pre>
+                    <pre className="text-white/25 whitespace-pre mt-2">{`  `}<span className="text-white/30">harness:</span>{` Claude Code, GEODE`}</pre>
+                    <pre className="text-white/40 whitespace-pre">{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</pre>
+                    <pre className="text-white/20 whitespace-pre mt-2">{`  /help for commands  ·  type naturally`}</pre>
+                    <pre className="text-white/25 whitespace-pre mt-2">{`  Connected to serve via IPC`}</pre>
+                    <pre className="whitespace-pre" style={{color:"#22c55e",fontWeight:700}}>{`  Session: cli-6b55b450`}</pre>
                   </div>
                 )}
 

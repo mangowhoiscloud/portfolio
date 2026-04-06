@@ -5,25 +5,25 @@ import { ScrollReveal } from "../scroll-reveal";
 import { useLocale, t } from "../locale-context";
 
 /* ── Terminal scenarios (geode.html 실제 출력 기반) ── */
-type Line = { type: string; text: string; input?: boolean };
+type Line = { type: string; text: string; input?: boolean; rich?: React.ReactNode };
 
 const scenarios: { tab: string; lines: Line[] }[] = [
   {
     tab: "agentic",
     lines: [
       { type: "prompt", text: "mango@mangoui-MacBookAir resume % geode", input: true },
-      { type: "dots", text: "" },
-      { type: "dots", text: '  ╲╲( ◕ ᵕ ◕ )╱╱  GEODE v0.45.0' },
+      { type: "dots", text: "", rich: <><br/></> },
+      { type: "dots", text: '  ╲╲( ◕ ᵕ ◕ )╱╱  GEODE v0.45.0', rich: <>{`  `}<span style={{color:"#9775c4"}}>╲╲</span><span style={{color:"#fff"}}>{`( ◕ ᵕ ◕ )`}</span><span style={{color:"#9775c4"}}>╱╱</span>{`  `}<span style={{color:"#5f9ea0",fontWeight:700}}>GEODE</span>{` v0.45.0`}</> },
       { type: "dots", text: "                       gpt-5.4 · autonomous execution agent" },
       { type: "dots", text: "                       /Users/mango/workspace/resume" },
       { type: "dots", text: "" },
-      { type: "dots", text: "  harness: Claude Code, GEODE" },
-      { type: "exec", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search" },
+      { type: "dots", text: "  harness: Claude Code, GEODE", rich: <>{`  `}<span style={{opacity:0.4}}>harness:</span>{` Claude Code, GEODE`}</> },
+      { type: "dots", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</> },
       { type: "dots", text: "" },
       { type: "dots", text: "  /help for commands  ·  type naturally" },
       { type: "dots", text: "" },
-      { type: "status", text: "  Connected to serve via IPC" },
-      { type: "dots", text: "  Session: cli-6b55b450" },
+      { type: "dots", text: "  Connected to serve via IPC" },
+      { type: "dots", text: "  Session: cli-6b55b450", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>Session: cli-6b55b450</span></> },
       { type: "dots", text: "" },
       { type: "prompt", text: "> 이 프로젝트의 테스트 현황 분석하고 실패 원인 찾아줘", input: true },
       { type: "tool", text: '  ⎿ ▸ run_bash(command="uv run pytest tests/ -q --tb=short")' },
@@ -379,7 +379,7 @@ function TypingTerminal() {
           if (i < visibleLines) {
             return (
               <div key={`${activeTab}-${i}`} className={`${colorMap[line.type] || "text-white/50"} whitespace-pre`}>
-                {line.text}
+                {line.rich || line.text}
               </div>
             );
           }
