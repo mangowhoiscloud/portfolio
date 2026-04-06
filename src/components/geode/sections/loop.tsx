@@ -18,7 +18,8 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "dots", text: "                       /Users/mango/workspace/resume", rich: <span style={{opacity:0.35}}>{`                       /Users/mango/workspace/resume`}</span> },
       { type: "dots", text: "" },
       { type: "dots", text: "  harness: Claude Code, GEODE", rich: <>{`  `}<span style={{opacity:0.35}}>harness:</span>{` `}<span style={{color:"#5f9ea0"}}>Claude Code</span>{`, `}<span style={{color:"#5f9ea0"}}>GEODE</span></> },
-      { type: "dots", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</> },
+      { type: "dots", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile`}</> },
+      { type: "dots", text: "  ✓ Dry-Run Analysis  ✓ IP Search", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</> },
       { type: "dots", text: "" },
       { type: "dots", text: "  /help for commands  ·  type naturally", rich: <span style={{opacity:0.35}}>{`  /help for commands  ·  type naturally`}</span> },
       { type: "dots", text: "" },
@@ -373,7 +374,7 @@ function TypingTerminal() {
       </div>
 
       {/* Terminal content */}
-      <div ref={scrollRef} className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-scroll [&::-webkit-scrollbar]:!w-0" style={{ scrollbarWidth: "none" }}>
+      <div ref={scrollRef} className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-scroll overflow-x-hidden [&::-webkit-scrollbar]:!w-0" style={{ scrollbarWidth: "none" }}>
         <div className="flex items-center gap-1.5 mb-4">
           <div className="w-2.5 h-2.5 rounded-full bg-[#E87080]/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#F5C542]/60" />
