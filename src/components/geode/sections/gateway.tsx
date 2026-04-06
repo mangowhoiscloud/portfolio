@@ -240,6 +240,26 @@ export function GatewaySection() {
                 <p className="text-sm text-[#A0B4D4] leading-relaxed mb-3">
                   {locale === "en" ? m.descEn : m.descKo}
                 </p>
+                {/* CLI startup terminal mockup (IPC only) */}
+                {active === "ipc" && (
+                  <div className="rounded-lg bg-[#060B14] px-5 py-4 font-mono text-xs leading-relaxed border border-white/[0.03] mb-3 overflow-x-auto">
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]/80" />
+                      <span className="ml-2 text-[10px] text-white/20">geode</span>
+                    </div>
+                    <pre className="text-white/50 whitespace-pre"><span className="text-white/70">{`  ╲╲( ◕ ᵕ ◕ )╱╱`}</span>{`  GEODE v0.45.0`}</pre>
+                    <pre className="text-white/30 whitespace-pre">{`                       gpt-5.4 · autonomous execution agent`}</pre>
+                    <pre className="text-white/20 whitespace-pre">{`                       /Users/mango/workspace/resume`}</pre>
+                    <pre className="text-white/30 whitespace-pre mt-2">{`  harness: `}<span className="text-[#4ECDC4]/60">Claude Code, GEODE</span></pre>
+                    <pre className="text-[#34D399]/50 whitespace-pre">{`  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search`}</pre>
+                    <pre className="text-white/25 whitespace-pre mt-2">{`  /help for commands  ·  type naturally`}</pre>
+                    <pre className="text-white/30 whitespace-pre mt-2">{`  Connected to `}<span className="text-[#818CF8]/60">serve</span>{` via `}<span className="text-[#4ECDC4]/60">IPC</span></pre>
+                    <pre className="text-white/20 whitespace-pre">{`  Session: cli-6b55b450`}</pre>
+                  </div>
+                )}
+
                 <div className="flex flex-wrap gap-2">
                   {(locale === "en" ? m.detailsEn : m.detailsKo).map((d) => (
                     <span key={d} className="inline-flex items-center gap-1.5 text-[11px] font-mono px-2 py-1 rounded-lg"
