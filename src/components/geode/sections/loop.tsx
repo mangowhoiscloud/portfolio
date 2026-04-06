@@ -14,15 +14,15 @@ const scenarios: { tab: string; lines: Line[] }[] = [
       { type: "prompt", text: "mango@mangoui-MacBookAir resume % geode", input: true },
       { type: "dots", text: "", rich: <><br/></> },
       { type: "dots", text: '  ╲╲( ◕ ᵕ ◕ )╱╱  GEODE v0.45.0', rich: <>{`  `}<span style={{color:"#9775c4"}}>╲╲</span><span style={{color:"#fff"}}>{`( ◕ ᵕ ◕ )`}</span><span style={{color:"#9775c4"}}>╱╱</span>{`  `}<span style={{color:"#5f9ea0",fontWeight:700}}>GEODE</span>{` v0.45.0`}</> },
-      { type: "dots", text: "                       gpt-5.4 · autonomous execution agent" },
-      { type: "dots", text: "                       /Users/mango/workspace/resume" },
+      { type: "dots", text: "                       gpt-5.4 · autonomous execution agent", rich: <span style={{color:"#d4a0a0",opacity:0.5}}>{`                       gpt-5.4 · autonomous execution agent`}</span> },
+      { type: "dots", text: "                       /Users/mango/workspace/resume", rich: <span style={{opacity:0.35}}>{`                       /Users/mango/workspace/resume`}</span> },
       { type: "dots", text: "" },
-      { type: "dots", text: "  harness: Claude Code, GEODE", rich: <>{`  `}<span style={{opacity:0.4}}>harness:</span>{` Claude Code, GEODE`}</> },
+      { type: "dots", text: "  harness: Claude Code, GEODE", rich: <>{`  `}<span style={{opacity:0.35}}>harness:</span>{` `}<span style={{color:"#5f9ea0"}}>Claude Code</span>{`, `}<span style={{color:"#5f9ea0"}}>GEODE</span></> },
       { type: "dots", text: "  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile  ✓ Dry-Run Analysis  ✓ IP Search", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` LLM Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Project Memory  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` User Profile  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` Dry-Run Analysis  `}<span style={{color:"#22c55e",fontWeight:700}}>✓</span>{` IP Search`}</> },
       { type: "dots", text: "" },
-      { type: "dots", text: "  /help for commands  ·  type naturally" },
+      { type: "dots", text: "  /help for commands  ·  type naturally", rich: <span style={{opacity:0.35}}>{`  /help for commands  ·  type naturally`}</span> },
       { type: "dots", text: "" },
-      { type: "dots", text: "  Connected to serve via IPC" },
+      { type: "dots", text: "  Connected to serve via IPC", rich: <>{`  Connected to `}<span style={{color:"#5f9ea0"}}>serve</span>{` via `}<span style={{color:"#e0b040"}}>IPC</span></> },
       { type: "dots", text: "  Session: cli-6b55b450", rich: <>{`  `}<span style={{color:"#22c55e",fontWeight:700}}>Session: cli-6b55b450</span></> },
       { type: "dots", text: "" },
       { type: "prompt", text: "> 이 프로젝트의 테스트 현황 분석하고 실패 원인 찾아줘", input: true },
@@ -251,11 +251,18 @@ function TypingTerminal() {
   const [currentChars, setCurrentChars] = useState(0);
   const [typingDone, setTypingDone] = useState(false); // true = current line fully revealed
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startedRef = useRef(false);
 
   const lines = scenarios[activeTab].lines;
+
+  // Auto-scroll to bottom as new lines appear
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [visibleLines, currentChars]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -352,7 +359,7 @@ function TypingTerminal() {
       </div>
 
       {/* Terminal content */}
-      <div className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+      <div ref={scrollRef} className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
         <div className="flex items-center gap-1.5 mb-4">
           <div className="w-2.5 h-2.5 rounded-full bg-[#E87080]/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#F5C542]/60" />
