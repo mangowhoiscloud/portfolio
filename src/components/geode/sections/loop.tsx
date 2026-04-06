@@ -373,7 +373,7 @@ function TypingTerminal() {
       </div>
 
       {/* Terminal content */}
-      <div ref={scrollRef} className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+      <div ref={scrollRef} className="p-5 font-mono text-[12.5px] leading-[1.9] flex-1 overflow-y-scroll [&::-webkit-scrollbar]:!w-0" style={{ scrollbarWidth: "none" }}>
         <div className="flex items-center gap-1.5 mb-4">
           <div className="w-2.5 h-2.5 rounded-full bg-[#E87080]/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#F5C542]/60" />
