@@ -106,12 +106,12 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="w-full max-w-2xl mt-8 mb-2"
         >
-          <div className="flex justify-center gap-1 mb-3">
+          <div className="flex flex-wrap justify-center gap-x-1 gap-y-0 mb-3">
             {videoTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveVideo(tab.id)}
-                className="px-4 py-2 text-xs font-mono font-bold transition-all duration-300"
+                className="px-3 sm:px-4 py-2 text-[10px] sm:text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap"
                 style={{
                   color: activeVideo === tab.id ? "#4ECDC4" : "#5A6A8A",
                   borderBottom: `2px solid ${activeVideo === tab.id ? "#4ECDC4" : "transparent"}`,
@@ -136,7 +136,7 @@ export function HeroSection() {
           ))}
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4 mb-16">
           <Link
             href="https://github.com/mangowhoiscloud/geode"
             target="_blank"
