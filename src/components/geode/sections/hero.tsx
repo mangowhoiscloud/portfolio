@@ -72,8 +72,8 @@ export function HeroSection() {
           <p className="text-lg text-[#8B9CC0]">Long-running Autonomous Execution Harness</p>
           <p className="text-sm text-white/45 mt-1.5 max-w-lg text-center leading-relaxed">
             {t(locale,
-              "게임 IP 가치 추론부터 Java 1.8→22 + Spring 4→6 자동 마이그레이션(83/83 테스트, FE/BE E2E 성공, 1,133턴)까지. Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증하는 자율 실행 하네스.",
-              "From game IP valuation to automated Java 1.8→22 + Spring 4→6 migration (83/83 tests, FE/BE E2E pass, 1,133 turns). Scaffold constrains, Loop executes, Runtime verifies."
+              "Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증합니다. 게임 IP 가치 추론, Java 1.8→22 자동 마이그레이션(1,133턴, 83/83 테스트 통과), Computer-use 탐색까지 수행하는 범용 자율 실행 하네스.",
+              "Scaffold constrains, Loop executes, Runtime verifies. A general-purpose autonomous harness handling game IP valuation, Java 1.8→22 migration (1,133 turns, 83/83 tests), and Computer-use exploration."
             )}
           </p>
         </motion.div>
@@ -106,12 +106,12 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="w-full max-w-2xl mt-8 mb-2"
         >
-          <div className="flex flex-wrap justify-center gap-x-1 gap-y-0 mb-3">
+          <div className="flex justify-center gap-1 mb-3 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
             {videoTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveVideo(tab.id)}
-                className="px-3 sm:px-4 py-2 text-[10px] sm:text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap"
+                className="px-4 py-2 text-xs font-mono font-bold transition-all duration-300 whitespace-nowrap shrink-0"
                 style={{
                   color: activeVideo === tab.id ? "#4ECDC4" : "#5A6A8A",
                   borderBottom: `2px solid ${activeVideo === tab.id ? "#4ECDC4" : "transparent"}`,
@@ -136,11 +136,11 @@ export function HeroSection() {
           ))}
         </motion.div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center gap-3 mt-4 mb-16">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="flex items-center justify-center gap-3 mt-4 mb-16">
           <Link
             href="https://github.com/mangowhoiscloud/geode"
             target="_blank"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/[0.06] text-xs font-mono text-[#7A8CA8] hover:text-[#8B9CC0] hover:border-white/[0.12] transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 w-[120px] py-2 rounded-lg border border-white/[0.06] text-xs font-mono text-[#7A8CA8] hover:text-[#8B9CC0] hover:border-white/[0.12] transition-all duration-300"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
             Source
@@ -148,7 +148,7 @@ export function HeroSection() {
           <Link
             href="https://rooftopsnow.tistory.com/category/Harness"
             target="_blank"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/[0.06] text-xs font-mono text-[#7A8CA8] hover:text-[#8B9CC0] hover:border-white/[0.12] transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 w-[120px] py-2 rounded-lg border border-white/[0.06] text-xs font-mono text-[#7A8CA8] hover:text-[#8B9CC0] hover:border-white/[0.12] transition-all duration-300"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
             Dev Blog
