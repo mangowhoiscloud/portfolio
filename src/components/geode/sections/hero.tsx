@@ -104,9 +104,9 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="w-full max-w-2xl mt-8 mb-2"
+          className="w-full max-w-4xl mt-8 mb-2"
         >
-          <div className="flex justify-center gap-1 mb-3 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+          <div className="flex justify-center gap-2 mb-3 flex-wrap">
             {videoTabs.map((tab) => (
               <button
                 key={tab.id}
@@ -122,7 +122,7 @@ export function HeroSection() {
             ))}
           </div>
           {videoTabs.map((tab) => (
-            <div key={tab.id} style={{ display: activeVideo === tab.id ? "block" : "none" }}>
+            <div key={tab.id} className="max-w-2xl mx-auto" style={{ display: activeVideo === tab.id ? "block" : "none" }}>
               <div className="relative rounded-xl overflow-hidden border border-white/[0.06]" style={{ paddingBottom: "56.25%" }}>
                 <iframe
                   className="absolute inset-0 w-full h-full"
