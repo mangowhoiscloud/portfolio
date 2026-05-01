@@ -7,7 +7,7 @@ export default function Page() {
     <DocsShell
       slug="runtime/tools/protocol"
       title="Tool Protocol"
-      summary="Tool protocol, registry, deferred loading. 56 tools (24 always-on + 32 deferred), single JSON SOT."
+      summary="Tool protocol, registry, deferred loading. 57 tools (6 always-loaded + 51 deferred), single JSON SOT at core/tools/definitions.json."
     >
       <h2>The protocol</h2>
       <p>
@@ -37,10 +37,16 @@ export default function Page() {
       <table>
         <thead><tr><th>Tier</th><th>Count</th><th>Behaviour</th></tr></thead>
         <tbody>
-          <tr><td>Always-on</td><td>24</td><td>Sent on every LLM call (Read, Write, Edit, Bash, Grep, Glob, etc.)</td></tr>
-          <tr><td>Deferred</td><td>32</td><td>Discoverable via <code>tool_search</code>, loaded on demand</td></tr>
+          <tr><td>Always-loaded</td><td>6</td><td>Sent on every LLM call: <code>list_ips</code>, <code>search_ips</code>, <code>analyze_ip</code>, <code>memory_search</code>, <code>show_help</code>, <code>general_web_search</code></td></tr>
+          <tr><td>Deferred</td><td>51</td><td>Discoverable via <code>tool_search</code>, loaded on demand. Activates when total tools exceed <code>defer_threshold</code> (default 10).</td></tr>
         </tbody>
       </table>
+      <p>
+        Total tool count: <strong>57</strong> (verified via{" "}
+        <code>core/tools/definitions.json</code>). The frozenset of
+        always-loaded tools lives at <code>core/tools/registry.py:209-218</code>{" "}
+        as <code>ALWAYS_LOADED_TOOLS</code>.
+      </p>
       <p>
         The pattern is borrowed from Claude Code&apos;s tool deferred-loading
         design.

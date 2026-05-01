@@ -17,7 +17,7 @@ export default function Page() {
           <tr><td>Recency</td><td>Most recent signal weighted &gt; 50% of the score</td></tr>
           <tr><td>Anchoring</td><td>CV (coefficient of variation) &lt; 0.05 across 4+ analysts</td></tr>
           <tr><td>Position</td><td>First/last evaluator score deviates &gt; 1 std from the rest</td></tr>
-          <tr><td>Verbosity</td><td>Score correlates with evidence-paragraph length (Pearson r &gt; 0.7)</td></tr>
+          <tr><td>Verbosity</td><td>Score correlates with evidence-paragraph length (threshold tunable per domain)</td></tr>
           <tr><td>Self-enhancement</td><td>Evaluator scores its own previous output favourably</td></tr>
         </tbody>
       </table>

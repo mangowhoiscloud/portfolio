@@ -1,24 +1,45 @@
+"use client";
+
 import Link from "next/link";
-import { DocsShell } from "@/components/geode-docs/docs-shell";
+import { DocsShell, Bi } from "@/components/geode-docs/docs-shell";
 import { DOCS_SITEMAP } from "@/lib/geode-docs/sitemap";
+import { useLocale, t } from "@/components/geode/locale-context";
 
 export default function DocsIndex() {
+  const locale = useLocale();
   return (
     <DocsShell
       slug=""
       title="GEODE Documentation"
-      summary="A general-purpose autonomous execution agent built on LangGraph. v0.64.0, Python 3.12+, 223 core + 13 plugins, 4360+ tests, 58 hooks, 56 tools."
+      titleKo="GEODE 문서"
+      summary="A general-purpose autonomous execution agent built on LangGraph. v0.64.0, Python 3.12+, 223 core + 13 plugins, 4379 tests, 58 hooks, 57 tools."
+      summaryKo="LangGraph 기반 범용 자율 실행 에이전트. v0.64.0, Python 3.12+, core 223 + plugins 13, 4379 테스트, 58 훅, 57 도구."
     >
-      <h2>What you&apos;ll find here</h2>
-      <p>
-        This site documents GEODE&apos;s architecture, runtime, harness, and plugin
-        ecosystem. It is generated from the codebase and the wiki at
-        {" "}
-        <code>mango-wiki/projects/geode</code>, and reflects the current
-        production version.
-      </p>
+      <Bi
+        ko={
+          <>
+            <h2>이 문서에서 다루는 것</h2>
+            <p>
+              본 사이트는 GEODE 의 아키텍처, 런타임, 하네스, 플러그인 생태계를
+              다룹니다. 코드베이스와 wiki(<code>mango-wiki/projects/geode</code>)
+              에서 추출되어 현재 프로덕션 버전을 반영합니다.
+            </p>
+          </>
+        }
+        en={
+          <>
+            <h2>What you&apos;ll find here</h2>
+            <p>
+              This site documents GEODE&apos;s architecture, runtime, harness,
+              and plugin ecosystem. It is generated from the codebase and the
+              wiki at <code>mango-wiki/projects/geode</code>, and reflects the
+              current production version.
+            </p>
+          </>
+        }
+      />
 
-      <h2>Sections</h2>
+      <h2>{t(locale, "섹션", "Sections")}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 not-prose">
         {DOCS_SITEMAP.filter((s) => s.id !== "intro").map((section) => (
           <Link
@@ -30,15 +51,20 @@ export default function DocsIndex() {
               {section.id}
             </div>
             <div className="text-[#F0F0FF] font-display font-semibold text-lg group-hover:text-white">
-              {section.title}
+              {t(locale, section.titleKo, section.title)}
             </div>
             <div className="mt-1 text-sm text-white/60">
-              {section.pages.length} page{section.pages.length === 1 ? "" : "s"}
+              {section.pages.length}{" "}
+              {t(
+                locale,
+                section.pages.length === 1 ? "페이지" : "페이지",
+                section.pages.length === 1 ? "page" : "pages"
+              )}
               {" — "}
               {section.pages.slice(0, 3).map((p, i) => (
                 <span key={p.slug}>
                   {i > 0 && ", "}
-                  {p.title}
+                  {t(locale, p.titleKo, p.title)}
                 </span>
               ))}
               {section.pages.length > 3 && ", …"}
@@ -47,18 +73,40 @@ export default function DocsIndex() {
         ))}
       </div>
 
-      <h2>Status</h2>
-      <p>
-        All sections are content-complete as of the date in the footer.
-        Pages are hand-curated narrative — no auto-generated API reference.
-      </p>
+      <Bi
+        ko={
+          <>
+            <h2>상태</h2>
+            <p>
+              모든 섹션은 푸터의 날짜 기준 콘텐츠 완료 상태입니다. 페이지는
+              자동 생성된 API 레퍼런스가 아니라 사람이 큐레이팅한 내러티브입니다.
+            </p>
 
-      <h2>Out of scope</h2>
-      <ul>
-        <li>API reference auto-generation (this site is hand-curated narrative)</li>
-        <li>Search index (the sidebar is the navigation surface)</li>
-        <li>Versioned docs (the site reflects the current main branch)</li>
-      </ul>
+            <h2>이 문서가 다루지 않는 것</h2>
+            <ul>
+              <li>API 레퍼런스 자동 생성 (이 사이트는 사람이 작성한 내러티브)</li>
+              <li>검색 인덱스 (사이드바가 네비게이션 표면)</li>
+              <li>버전별 문서 (현재 main 브랜치만 반영)</li>
+            </ul>
+          </>
+        }
+        en={
+          <>
+            <h2>Status</h2>
+            <p>
+              All sections are content-complete as of the date in the footer.
+              Pages are hand-curated narrative — no auto-generated API reference.
+            </p>
+
+            <h2>Out of scope</h2>
+            <ul>
+              <li>API reference auto-generation (this site is hand-curated narrative)</li>
+              <li>Search index (the sidebar is the navigation surface)</li>
+              <li>Versioned docs (the site reflects the current main branch)</li>
+            </ul>
+          </>
+        }
+      />
     </DocsShell>
   );
 }

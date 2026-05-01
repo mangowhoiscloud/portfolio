@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LocaleProvider } from "@/components/geode/locale-context";
 import "./docs.css";
 
 export const metadata: Metadata = {
@@ -12,5 +13,5 @@ export default function DocsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <LocaleProvider>{children}</LocaleProvider>;
 }

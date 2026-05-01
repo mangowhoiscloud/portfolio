@@ -41,7 +41,13 @@ export default function Page() {
           <tr><td>turn</td><td>1</td><td>TURN_COMPLETE</td></tr>
         </tbody>
       </table>
-      <p>Total: 12 groups, 58 events (some omitted from the table).</p>
+      <p>
+        Total: 14 groups, 58 events (table summarises the major ones). The
+        <code>core/hooks/system.py</code> source comments group events into
+        finer sub-sections (subagent lifecycle, agentic turn, session,
+        LLM call, tool approval, serve lifecycle, MCP server) — the table
+        rolls related sub-sections together.
+      </p>
 
       <h2>Registration</h2>
       <pre>{`from core.hooks.system import HookSystem, HookEvent

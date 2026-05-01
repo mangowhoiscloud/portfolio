@@ -31,7 +31,7 @@ export default function Page() {
 
       <h2>How the adapter splits</h2>
       <p>
-        <code>core/llm/providers/anthropic.py:411-433</code> in the agentic
+        <code>core/llm/providers/anthropic.py:476-495</code> in the agentic
         adapter:
       </p>
       <pre>{`from core.agent.system_prompt import PROMPT_CACHE_BOUNDARY
@@ -85,7 +85,7 @@ else:
           </tr>
           <tr>
             <td>Anthropic <code>messages</code> array</td>
-            <td>No (no rolling cache breakpoints yet — see GAP)</td>
+            <td>Yes — last 3 non-system messages (PR #864, helper at <code>anthropic.py:175</code>, call at <code>:501</code>)</td>
           </tr>
           <tr>
             <td>OpenAI / Codex system prompt</td>
@@ -98,18 +98,27 @@ else:
         </tbody>
       </table>
 
-      <h2>Open GAP — messages history caching</h2>
+      <h2>Messages history caching (PR #864)</h2>
       <p>
-        Anthropic allows up to four cache breakpoints per request. GEODE
-        currently uses one or two (system block, optionally split). The
-        <code>messages</code> array — which can grow large in long-horizon
-        agentic loops — is not cached. Hermes&apos;s{" "}
-        <code>system_and_3</code> strategy applies <code>cache_control</code>{" "}
-        to the last three non-system messages and would close this gap.
+        Anthropic allows up to four cache breakpoints per request. The
+        adapter applies <code>apply_messages_cache_control(messages)</code>{" "}
+        right before <code>messages.create</code>, attaching{" "}
+        <code>cache_control: ephemeral</code> to the last three non-system
+        messages&apos; final content block. Combined with the system block
+        above, that fills all four slots and caches the rolling history.
       </p>
+      <pre>{`# core/llm/providers/anthropic.py:175 (helper) and :501 (call site)
+cached_messages = apply_messages_cache_control(messages)
+create_kwargs = {
+    "system": sys_blocks,
+    "messages": cached_messages,
+    ...
+}`}</pre>
       <p>
-        See the wiki note <em>geode-prompt-evolution §2</em> for the proposed
-        implementation.
+        Helper is non-mutating (returns a new list with shallow copies),
+        handles <code>str</code> and <code>list[block]</code> content, and
+        skips empty-list content silently. Tested in{" "}
+        <code>tests/test_anthropic_messages_cache.py</code> (19 cases).
       </p>
 
       <h2>Cache invalidation</h2>

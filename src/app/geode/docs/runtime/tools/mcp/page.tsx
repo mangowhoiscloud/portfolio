@@ -19,7 +19,7 @@ export default function Page() {
 
       <h2>The manager</h2>
       <p>
-        <code>core/mcp/service.py</code> holds <code>MCPManager</code>, which
+        <code>core/mcp/manager.py</code> holds <code>MCPManager</code>, which
         owns server processes, routes tool calls, and enforces guards. The
         public API:
       </p>

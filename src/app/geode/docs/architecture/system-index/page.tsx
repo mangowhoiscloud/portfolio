@@ -43,7 +43,7 @@ $ find tests/ -name "test_*.py" | wc -l  # ~229`}</pre>
           <tr><td>llm/prompts</td><td><code>core/llm/prompts/</code></td><td>2 + .md</td><td><code>__init__.py</code></td></tr>
           <tr><td>llm/providers</td><td><code>core/llm/providers/</code></td><td>5</td><td><code>anthropic.py</code></td></tr>
           <tr><td>tools</td><td><code>core/tools/</code></td><td>16</td><td><code>base.py:35 Tool</code></td></tr>
-          <tr><td>mcp</td><td><code>core/mcp/</code></td><td>20</td><td><code>service.py MCPManager</code></td></tr>
+          <tr><td>mcp</td><td><code>core/mcp/</code></td><td>20</td><td><code>manager.py MCPManager</code></td></tr>
           <tr><td>memory</td><td><code>core/memory/</code></td><td>14</td><td><code>context.py:46</code></td></tr>
           <tr><td>skills</td><td><code>core/skills/</code></td><td>6</td><td><code>skill_registry.py</code></td></tr>
           <tr><td>verification</td><td><code>core/verification/</code></td><td>7</td><td><code>guardrails.py</code></td></tr>
@@ -75,7 +75,7 @@ $ find tests/ -name "test_*.py" | wc -l  # ~229`}</pre>
           <tr><th>Plugin modules</th><td>13</td></tr>
           <tr><th>Tests</th><td>~229 files (memory 83, llm 62, tools 59, hooks 31, agent 30)</td></tr>
           <tr><th>Hook events</th><td>58 (12 groups)</td></tr>
-          <tr><th>Tools</th><td>56 (24 always-on + 32 deferred)</td></tr>
+          <tr><th>Tools</th><td>57 (6 always-loaded + 51 deferred via <code>tool_search</code>)</td></tr>
           <tr><th>MCP servers</th><td>16</td></tr>
           <tr><th>Slash commands</th><td>15+</td></tr>
           <tr><th>Prompt templates pinned</th><td>20 (17 .md + 3 axes)</td></tr>
