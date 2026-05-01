@@ -3,6 +3,12 @@
 import { LocaleProvider } from "@/components/geode/locale-context";
 import { GeodeNav } from "@/components/geode/sections/nav";
 import { HeroSection } from "@/components/geode/sections/hero";
+import { OsThesisSection } from "@/components/geode/sections/os-thesis";
+import { OsPrimitivesMapSection } from "@/components/geode/sections/os-primitives-map";
+import { RecursionSection } from "@/components/geode/sections/recursion";
+import { ComputeAbiSection } from "@/components/geode/sections/compute-abi";
+import { RoutingIqSection } from "@/components/geode/sections/routing-iq";
+import { TwoAppsSection } from "@/components/geode/sections/two-apps";
 import { KanbanSection } from "@/components/geode/sections/kanban";
 import { ScaffoldSection } from "@/components/geode/sections/scaffold";
 import { LoopSection } from "@/components/geode/sections/loop";
@@ -32,6 +38,15 @@ export default function GeodePage() {
     <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-abyss)_0%,var(--sea-deep)_15%,var(--sea-mid)_35%,var(--sea-upper)_60%,var(--sea-surface)_85%,#0F2240_100%)] text-[#F0F0FF] overflow-x-hidden">
       <GeodeNav />
       <div id="hero"><HeroSection /></div>
+      <div id="thesis"><OsThesisSection /></div>
+      <div id="primitives"><OsPrimitivesMapSection /></div>
+      <div id="recursion"><RecursionSection /></div>
+      <Divider />
+      <div id="compute-abi"><ComputeAbiSection /></div>
+      <div id="routing-iq"><RoutingIqSection /></div>
+      <Divider />
+      <div id="two-apps"><TwoAppsSection /></div>
+      <Divider />
       <div id="scaffold"><ScaffoldSection /></div>
       <div id="kanban"><KanbanSection /></div>
       <Divider />

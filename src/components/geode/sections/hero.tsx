@@ -42,7 +42,7 @@ export function HeroSection() {
           <div className="mt-3 flex items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#4ECDC4]/20 bg-[#4ECDC4]/5 text-xs font-mono text-[#4ECDC4]/80">
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ECDC4] animate-pulse" />
-              v0.45
+              v0.65.0
             </span>
           </div>
         </motion.div>
@@ -69,11 +69,11 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center max-w-lg"
         >
-          <p className="text-lg text-[#8B9CC0]">Long-running Autonomous Execution Harness</p>
-          <p className="text-sm text-white/45 mt-1.5 max-w-lg text-center leading-relaxed">
+          <p className="text-lg text-[#8B9CC0]">LLM is the new compute. The agent is its OS.</p>
+          <p className="text-sm text-white/45 mt-1.5 max-w-xl text-center leading-relaxed">
             {t(locale,
-              "Scaffold가 제약하고, Loop가 실행하고, Runtime이 검증합니다. 게임 IP 가치 추론, Java 1.8→22 자동 마이그레이션(1,133턴, 83/83 테스트 통과), Computer-use 탐색까지 수행하는 범용 자율 실행 하네스.",
-              "Scaffold constrains, Loop executes, Runtime verifies. A general-purpose autonomous harness handling game IP valuation, Java 1.8→22 migration (1,133 turns, 83/83 tests), and Computer-use exploration."
+              "GEODE v0.65.0 — 자기 자신의 스캐폴드로 만들어진 에이전틱 OS. 두 도메인이 동일 하네스 위에서 검증 완료: 게임 IP 가치 추론(Game IP plugin), Java 1.8→22 자동 마이그레이션 (5,523 files / 83-83 builds / 5h48m / $388). Andrej Karpathy의 LLM OS 다이어그램(Intro to LLMs, 2023) 의 한 가지 구현.",
+              "GEODE v0.65.0 — an agentic OS, built by its own scaffold. Two domains proven on the same harness: Game IP valuation (in-tree plugin) and Java 1.8→22 migration (5,523 files / 83-83 builds / 5h48m / $388). One implementation of Karpathy's LLM OS sketch (Intro to LLMs, 2023)."
             )}
           </p>
         </motion.div>
