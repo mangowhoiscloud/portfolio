@@ -94,16 +94,19 @@ export default function Eco2Page() {
             Eco²
           </h1>
           <p className="mt-4 font-display text-[clamp(1.2rem,2.4vw,1.55rem)] text-[var(--ink-1)] leading-snug">
-            멀티에이전트 재활용 분류 챗봇 백엔드. MVP 5인 팀 → 단독 고도화.
+            Cursor 스캐폴드로 LLM을 생산·개발 체계로 처음 운용한 프로젝트.
+            Chat 도메인에서 Agent의 사용성을 끌어올리는 데 집중했습니다.
           </p>
 
           <div className="mt-8 space-y-4 text-[15.5px] text-[var(--ink-2)] leading-[1.75]">
             <p>
-              사진 한 장으로 재활용품을 분류하고, 분리수거 방법과 인근 수거 장소를 안내하는 LLM 챗봇입니다.
-              MVP는 5인 팀에서 백엔드와 인프라를 단독으로 맡았고, 본선 우수상 이후 약 3개월 동안은 혼자 운영하면서 LLM × 2 파이프라인의 부하 한계를 4단계에 걸쳐 풀었습니다.
+              5인 팀 MVP에서 백엔드와 인프라를 단독으로 맡으면서, Cursor 기반 스캐폴드를 운용해 LLM을 단순 호출이 아닌 “생산과 개발의 체계”로 처음 다뤄본 작업입니다.
+              스캐폴드 위에서 ADR, 장애 로그, 도메인 규칙을 자체 RAG로 축적하고 27개 커스텀 Skill을 Sub-agent에 주입하면서 “설계 → 구현 → 테스트 → 관측 → 검증” 피드백 루프를 돌렸습니다.
+              이 경험이 GEODE의 직접적인 발판이 됐습니다.
             </p>
             <p>
-              Multi-Agent · Event Bus · Swiss Cheese Evaluation · Offloading · 4-Pillar Observability — 다섯 축을 세우고, 모든 변환의 근거는 Grafana 메트릭과 EFK 로그였습니다.
+              본선 우수상 이후 약 3개월 동안은 혼자 운영하면서 Chat 도메인을 LangGraph 멀티 에이전트로 재구성해 사용자 입장에서의 Agent 사용성을 끌어올렸고, LLM × 2 + Rule-based 파이프라인의 부하 한계를 4단계에 걸쳐 풀어 VU 1,000에서 97.8% 완료율까지 가져갔습니다.
+              Multi-Agent · Event Bus · Swiss Cheese Evaluation · Offloading · 4-Pillar Observability — 다섯 축을 세우고, 모든 전환의 근거는 Grafana 메트릭과 EFK 로그였습니다.
             </p>
           </div>
 

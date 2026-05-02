@@ -2,13 +2,15 @@ import Link from "next/link";
 
 type Entry = {
   id: string;
-  href: string;
+  href?: string;
   external?: boolean;
+  clickable?: boolean;
   range: string;
   status: string;
   titleKo: string;
   taglineKo: string;
-  bodyKo: string;
+  bodyKo?: string;
+  bulletsKo?: string[];
   chips: string[];
   accent: string;
 };
@@ -34,12 +36,13 @@ const personal: Entry[] = [
     titleKo: "Eco²",
     taglineKo: "멀티에이전트 재활용 챗봇 백엔드",
     bodyKo:
-      "MVP 5인 팀에서 백엔드와 인프라를 단독으로 맡아 14-node Kubernetes 클러스터에 7개 도메인을 올렸습니다. 본선 우수상 이후 약 3개월 동안 단독 운영하면서 LLM × 2 + Rule-based 파이프라인을 VU 1,000 / 97.8% / 373 RPM까지 끌어올렸습니다. Chat 도메인을 LangGraph 멀티 에이전트로 재구성하고 EFK · Prometheus · Grafana · Jaeger 4-pillar 관측 스택을 직접 세웠습니다.",
+      "5인 팀 MVP에서 백엔드와 인프라를 단독으로 맡으면서, Cursor 기반 스캐폴드로 LLM을 “생산과 개발의 체계”로 처음 운용해 본 프로젝트입니다. 본선 우수상 이후 약 3개월간 단독으로 고도화하면서 Chat 도메인을 LangGraph 멀티 에이전트로 재구성해 사용자 입장에서의 Agent 사용성을 끌어올렸고, LLM × 2 + Rule-based 파이프라인을 VU 1,000 / 97.8% / 373 RPM까지 스케일업했습니다. EFK · Prometheus · Grafana · Jaeger 4-pillar 관측 스택은 직접 세웠습니다. GEODE의 직접적인 발판이 된 작업입니다.",
     chips: [
+      "Cursor + Scaffold (LLM as dev system)",
+      "Chat Agent UX",
       "LangGraph multi-agent",
       "Event Bus 3-Tier",
-      "Swiss Cheese eval 99.8/100",
-      "Auth offload 35×",
+      "Swiss Cheese eval 99.8 / 100",
       "K8s 14 → 24",
     ],
     accent: "var(--acc-line)",
@@ -49,22 +52,50 @@ const personal: Entry[] = [
 const freelance: Entry[] = [
   {
     id: "reode",
-    href: "/reode",
+    clickable: false,
     range: "2026.03 → 2026.05 (@ pinxlab)",
     status: "GEODE v0.12 fork · case study",
     titleKo: "REODE",
     taglineKo: "자율 코드 마이그레이션 에이전트",
-    bodyKo:
-      "GEODE v0.12에서 분기해서 Java 1.8 → 22, Spring 4.3 → 6.1 마이그레이션을 자율 수행했습니다. 5,523 파일 엔터프라이즈 프로젝트에서 83/83 모듈 빌드를 통과시켰고, 에러 4분류 라우팅(CONFIG / CODE / BEHAVIOR / ENV)과 Architect / Editor 분리 위에 5시간 48분, 1,133턴 자율 수행, $388에 마쳤습니다. OpenRewrite 70 % + LLM 30 % 하이브리드 구조입니다.",
+    bulletsKo: [
+      "GEODE v0.12에서 분기해 Java 1.8 → 22, Spring 4.3 → 6.1 마이그레이션을 자율 수행했습니다.",
+      "5,523 파일 엔터프라이즈 프로젝트에서 83 / 83 모듈 빌드를 통과시켰습니다.",
+      "에러 4분류 라우팅(CONFIG / CODE / BEHAVIOR / ENV)과 Architect / Editor 분리 구조 위에서 OpenRewrite 70 % + LLM 30 % 하이브리드로 동작합니다.",
+      "5시간 48분, 1,133턴 자율 수행, 누적 비용 $388에 마쳤습니다.",
+    ],
     chips: ["Java 1.8 → 22", "Spring 4.3 → 6.1", "83 / 83 modules", "5h 48m · $388", "OpenRewrite + LLM"],
     accent: "var(--acc-artifact)",
+  },
+  {
+    id: "kiki",
+    clickable: false,
+    range: "2026.04 → 진행 중 (@ pinxlab)",
+    status: "Paperclip plugin · 184 commits · 60 PRs",
+    titleKo: "Kiki",
+    taglineKo: "Slack 행동 관측 기반 멀티 에이전트 거버넌스",
+    bulletsKo: [
+      "Slack 채널 관측에서 시작해 행동 시그널을 추출하고, Profile Merge → Directive Generation → Paperclip Company Skills API PATCH로 이어지는 파이프라인으로 에이전트 시스템 프롬프트에 직접 주입합니다. 원문은 수집하지 않고 시그널만 보관합니다.",
+      "Confidence scoring + temporal decay 기반 4축 프로파일 모델, C1–C21 워크플로우 가드레일, Per-agent / company-wide circuit breaker로 운영 안전선을 구성합니다.",
+      "12개 런타임 에이전트(Engineering 9 + Finance 3) + 16 Skill + 24 event handler + 9개 Slack intent command + Hub-Spoke(CTO 라우터 → PO·Planner → Lead·Dev·QA) 구조입니다.",
+      "자매 코드베이스 kiki-appmaker로 install / lifecycle / 17-agent provisioning을 분리해서, kiki는 정체성·플러그인·MCP·스킬을, AppMaker는 부트스트랩·OAuth 회전·대시보드·PIN 데모를 담당합니다.",
+      "v0.3.0 Jira-style 칸반 대시보드 운영 중. 184 commits · 60 PRs · 46 TS modules(12,623 LOC) 누적.",
+    ],
+    chips: [
+      "Slack signal → directive",
+      "Hub-Spoke 12 agents",
+      "C1–C21 가드레일",
+      "Circuit breaker",
+      "Paperclip Skills API",
+      "Sister: kiki-appmaker",
+    ],
+    accent: "var(--acc-line)",
   },
 ];
 
 const now = [
-  { date: "2026-05-03", body: "포트폴리오에 Eco² (SeSACTHON 2025 Excellence) 합류. 개인 / 프리랜서 작업을 분리해 정리." },
+  { date: "2026-05-03", body: "포트폴리오에 Eco² (SeSACTHON 2025 Excellence)와 Kiki(@ pinxlab) 합류. 개인 / 프리랜서 작업을 분리해 정리." },
   { date: "2026-05-02", body: "GEODE v0.65.0 messages cache_control 도입. CHANGELOG 64 릴리스를 7챕터 타임라인으로 재구성." },
-  { date: "2026-05-01", body: "Editorial 디자인 언어 정립. amethyst × citrine 광물 정체성, 합니다체 voice." },
+  { date: "2026-05-01", body: "베이글코드 과제 전형으로 Claude Code · Codex · Gemini CLI 기반 멀티 에이전트 시스템 Crumb 개발 중. 동시에 Editorial 디자인 언어 정립 — amethyst × citrine 광물 정체성, 합니다체 voice." },
 ];
 
 const recognition = [
@@ -73,8 +104,12 @@ const recognition = [
     detail: "Eco² · 181팀 중 4위 · MVP 백엔드/인프라 단독 + 본선 이후 단독 고도화 (2025.10 → 2026.02)",
   },
   {
-    label: "Nexon AI Engineer 코딩 과제 합격",
-    detail: "GEODE의 시작점. 면접 탈락 후 자율 실행 하네스로 전환",
+    label: "Furiosa AI · SWE, Agent System 면접 진출",
+    detail: "서류 합격, 면접 탈락",
+  },
+  {
+    label: "Nexon AI Engineer 면접 진출",
+    detail: "코딩 과제 합격, 면접 탈락 — GEODE의 시작점이 된 전형",
   },
   {
     label: "기술 블로그 361편 / YouTube 213 subs",
@@ -116,9 +151,23 @@ function ProjectEntry({ e }: { e: Entry }) {
             — {e.taglineKo}
           </span>
         </h3>
-        <p className="text-[14px] text-[var(--ink-2)] leading-[1.75] mb-3 max-w-2xl">
-          {e.bodyKo}
-        </p>
+        {e.bodyKo && (
+          <p className="text-[14px] text-[var(--ink-2)] leading-[1.75] mb-3 max-w-2xl">
+            {e.bodyKo}
+          </p>
+        )}
+        {e.bulletsKo && (
+          <ul className="text-[14px] text-[var(--ink-2)] leading-[1.7] mb-3 max-w-2xl space-y-1.5">
+            {e.bulletsKo.map((b, i) => (
+              <li key={i} className="flex gap-2.5">
+                <span className="shrink-0 text-[var(--ink-3)] font-mono pt-0.5" style={{ color: e.accent }}>
+                  ·
+                </span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="flex flex-wrap gap-1.5">
           {e.chips.map((c) => (
             <span
@@ -132,12 +181,28 @@ function ProjectEntry({ e }: { e: Entry }) {
       </div>
     </div>
   );
-  return e.external ? (
-    <a href={e.href} target="_blank" rel="noreferrer" className="group block border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--paper-2)]/40 transition-colors">
-      {inner}
-    </a>
-  ) : (
-    <Link href={e.href} className="group block border-b border-[var(--rule)] last:border-b-0 hover:bg-[var(--paper-2)]/40 transition-colors">
+
+  const wrapBase = "block border-b border-[var(--rule)] last:border-b-0";
+  if (e.clickable === false || !e.href) {
+    return <div className={wrapBase}>{inner}</div>;
+  }
+  if (e.external) {
+    return (
+      <a
+        href={e.href}
+        target="_blank"
+        rel="noreferrer"
+        className={`${wrapBase} group hover:bg-[var(--paper-2)]/40 transition-colors`}
+      >
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link
+      href={e.href}
+      className={`${wrapBase} group hover:bg-[var(--paper-2)]/40 transition-colors`}
+    >
       {inner}
     </Link>
   );
