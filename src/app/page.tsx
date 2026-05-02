@@ -117,9 +117,9 @@ const freelance: Entry[] = [
 ];
 
 const now = [
-  { date: "2026-05-03", body: "포트폴리오에 Eco² (SeSACTHON 2025 Excellence)와 Kiki(@ pinxlab) 합류. 개인 / 프리랜서 작업을 분리해 정리." },
-  { date: "2026-05-02", body: "GEODE v0.65.0 messages cache_control 도입. CHANGELOG 64 릴리스를 7챕터 타임라인으로 재구성." },
-  { date: "2026-05-01", body: "베이글코드 과제 전형으로 Claude Code · Codex · Gemini CLI 기반 멀티 에이전트 시스템 Crumb 개발 중." },
+  { date: "2026-05-03", body: "포트폴리오 재구성. Eco² (SeSACTHON 2025 Excellence) · Kiki (TTree 레거시 유지보수) · Kiki AppMaker (공장형 PDCA) 세 작업물 합류, 개인 / pinxlab 프리랜서 분리." },
+  { date: "2026-05-02", body: "Crumb 최종 설계 lock — 4-actor(Coord / Planner Lead / Engineering Lead / Builder.fallback) + Engineering Lead 내부 CourtEval(Grader · Critic · Defender · Re-grader, ACL 2025) + 28 kind transcript JSONL + OpenTelemetry GenAI alias. GEODE v0.65.0 messages cache_control 머지, CHANGELOG 64 릴리스를 7챕터 타임라인으로 재구성." },
+  { date: "2026-05-01", body: "Bagelcode 신작팀 과제 전형 Crumb 착수(마감 2026-05-03 23:59 KST). PDCA chain 토폴로지를 ICML 2025 §F(Resilience, chain 10.5% 저하) 근거로 폐기하고 Hub-Ledger-Spoke로 재정렬. Phaser 3.80 single-file ≤ 60KB game.html(LLM 첫시도 성공률 94%)로 게임 스택 lock. Frontier 사료 80+종(orchestration · caching · XML · production · mobile-game · observability)으로 의사결정을 학술 grounding." },
 ];
 
 const recognition = [
@@ -369,26 +369,41 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="pt-8 border-t border-[var(--rule)] text-[11px] font-mono text-[var(--ink-3)] flex flex-wrap gap-x-6 gap-y-2">
-          <span>github.com/mangowhoiscloud</span>
-          <span>last updated 2026-05-03</span>
-          <Link href="/geode" className="hover:text-[var(--acc-artifact)] transition-colors">
-            → /geode
-          </Link>
-          <Link href="/eco2" className="hover:text-[var(--acc-line)] transition-colors">
-            → /eco2
-          </Link>
-          <Link href="/geode/docs" className="hover:text-[var(--acc-artifact)] transition-colors">
-            → /geode/docs
-          </Link>
-          <a
-            href="https://rooftopsnow.tistory.com/category/Harness"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-[var(--acc-artifact)] transition-colors"
-          >
-            → dev blog
-          </a>
+        <footer className="pt-8 border-t border-[var(--rule)] flex flex-col gap-5">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-mono text-[var(--ink-3)]">
+            <Link href="/geode" className="hover:text-[var(--acc-artifact)] transition-colors">
+              → /geode
+            </Link>
+            <Link href="/eco2" className="hover:text-[var(--acc-line)] transition-colors">
+              → /eco2
+            </Link>
+            <Link href="/geode/docs" className="hover:text-[var(--acc-artifact)] transition-colors">
+              → /geode/docs
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: "GitHub",   href: "https://github.com/mangowhoiscloud" },
+              { label: "Blog",     href: "https://rooftopsnow.tistory.com/category/Harness" },
+              { label: "YouTube",  href: "https://youtube.com/@mango_fr" },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/jihwan-ryu-b6b04a202/" },
+            ].map((b) => (
+              <a
+                key={b.label}
+                href={b.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center px-2.5 py-1 rounded border border-[var(--rule)] bg-[var(--paper-2)] font-mono text-[11px] text-[var(--ink-2)] hover:border-[var(--acc-artifact)] hover:text-[var(--acc-artifact)] transition-colors"
+              >
+                {b.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="text-[11px] font-mono text-[var(--ink-3)]">
+            last updated 2026-05-03 · github.com/mangowhoiscloud
+          </div>
         </footer>
       </div>
     </main>
