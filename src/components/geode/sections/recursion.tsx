@@ -105,8 +105,8 @@ export function RecursionSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "왼쪽은 GEODE 가 출시되는 OS — 자율 에이전트의 안전을 위한 출력 측 디시플린. 오른쪽은 GEODE 를 만드는 라인 — 그 시스템을 만드는 작업의 안전을 위한 행동 측 디시플린. 둘은 같은 패턴, 다른 스코프. Karpathy autoresearch 의 ratchet 디시플린 lineage.",
-              "Left column: the OS that ships — output discipline for the autonomous agent. Right column: the line that builds it — process discipline for the work of building. Same pattern, different scope. Karpathy autoresearch's ratchet discipline lineage."
+              "왼쪽 열은 출시되는 운영체제다. 자율 에이전트가 잘못된 출력을 내지 않도록 막는, 출력 쪽 디시플린이다. 오른쪽 열은 그 운영체제를 만드는 라인이다. 작업 자체가 어긋나지 않도록 막는, 과정 쪽 디시플린이다. 두 열은 같은 패턴을 다른 스코프에서 풀어낸 결과다. 카르파시의 autoresearch가 보여 준 ratchet 디시플린의 직계 후손이다.",
+              "The left column is the operating system that ships — output-side discipline that keeps the agent from going wrong. The right column is the line that builds it — process-side discipline that keeps the build itself from drifting. Two columns, one pattern, two scopes. A direct descendant of the ratchet discipline in Karpathy's autoresearch."
             )}
           </p>
         </div>
@@ -159,8 +159,8 @@ export function RecursionSection() {
         <p className="mt-6 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[14px]">
           {t(
             locale,
-            "9 행 모두 — 한쪽이 출력의 안전, 다른 쪽이 과정의 안전. GEODE 가 자기 일관성을 유지하는 시스템이라는 것의 한 장 증거. frontier 어디에도 자기 적용성을 이렇게 명시적으로 노출한 사례는 없다.",
-            "All 9 rows — one side is output safety, the other is process safety. One page of evidence that GEODE is a self-consistent system. No frontier system surfaces its self-applicability this explicitly."
+            "아홉 행 모두 같은 모양으로 떨어진다. 한쪽이 출력의 안전을 보고, 다른 한쪽이 과정의 안전을 본다. GEODE가 자기 일관성을 유지하는 시스템이라는 사실을, 표 한 장에 압축한 것이다. 프론티어의 다른 시스템들은 이런 자기 적용성을 이렇게까지 명시적으로 노출하지 않는다.",
+            "All nine rows fall into the same shape — one side watches output safety, the other watches process safety. One page that compresses the claim that GEODE is a self-consistent system. No other frontier surfaces its own self-applicability this explicitly."
           )}
         </p>
       </div>

@@ -15,26 +15,26 @@ h1, h2 {
 }
 
 :root {
-  /* GEODE Editorial — warm dark substrate (Anthropic, inverted) */
-  --paper:        #1B1A18;   /* warm near-black, slight brown undertone */
-  --paper-2:      #252320;   /* card / sidebar elevation */
-  --paper-deep:   #0F0E0C;   /* deepest code block */
+  /* GEODE Editorial — warm dark substrate, Anthropic-tuned */
+  --paper:        #1A1815;   /* warm near-black, very slight brown */
+  --paper-2:      #26221E;   /* card / sidebar elevation, +6% lighter */
+  --paper-deep:   #100E0B;   /* deepest code block */
 
-  --ink:          #F0EBE0;   /* primary text — warm cream, not pure white */
-  --ink-1:        #D8D2C2;   /* headings */
-  --ink-2:        #A89F8D;   /* body secondary */
-  --ink-3:        #7A7165;   /* tertiary, captions */
+  --ink:          #EFE9DD;   /* primary text, warm cream */
+  --ink-1:        #D2CBBA;   /* headings */
+  --ink-2:        #A39A86;   /* body secondary */
+  --ink-3:        #75695C;   /* tertiary, captions */
 
-  --rule:         #3A3530;   /* warm dark border */
-  --rule-soft:    #2C2924;   /* softer divider */
+  --rule:         #322D26;   /* warm dark hairline */
+  --rule-soft:    #28231D;   /* softer divider */
 
-  --acc-artifact: #D4895A;   /* amber-terracotta — OS / artifact content */
-  --acc-line:     #9AA3AE;   /* graphite-blue — scaffold / line content */
-  --acc-soft:     #E8B5A0;   /* hover for artifact accent */
+  --acc-artifact: #DA8B5C;   /* Anthropic-tuned terracotta — artifact */
+  --acc-line:     #97A1AE;   /* graphite-blue — scaffold / process */
+  --acc-soft:     #E8B59B;   /* hover state */
 
-  --code-bg:      #0F0E0C;
-  --code-text:    #E0D5C0;
-  --code-string:  #D4895A;
+  --code-bg:      #100E0B;
+  --code-text:    #DDD2BC;
+  --code-string:  #DA8B5C;
 
   /* Legacy Deep Sea palette — retained for inner sections not yet migrated.
      New work targets the GEODE Editorial tokens above. */

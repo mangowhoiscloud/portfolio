@@ -17,8 +17,8 @@ export function TwoAppsSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "OS 라는 주장은 그 위에서 다른 도메인이 돌아갈 때 검증된다. GEODE 의 Layer 2-3 (Runtime + Harness) 은 두 앱 사이에서 무수정 이전됐다. 도메인 코드만 다르다.",
-              "The OS claim is validated when different domains run on top. GEODE's Layer 2-3 (Runtime + Harness) transferred unchanged between two apps. Only the domain code differs."
+              "운영체제라는 주장은, 그 위에서 다른 도메인이 무수정으로 돌 때 비로소 검증된다. GEODE의 Layer 2와 3 — Runtime과 Harness — 은 두 앱 사이에서 한 줄도 바뀌지 않은 채 옮겨졌다. 다른 것은 도메인 어댑터 한 장이었다.",
+              "The OS claim is only validated when a second domain runs on top without modification. GEODE's Layer 2 and 3 — runtime and harness — moved between the two apps without a line of change. The only thing that differed was the domain adapter."
             )}
           </p>
         </div>
@@ -89,8 +89,8 @@ export function TwoAppsSection() {
         <p className="mt-8 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[14px]">
           {t(
             locale,
-            "두 앱이 만드는 결론: 도메인 어댑터는 swap-able 이고, 그 위의 모든 layer (LLM 라우터, 도구 레지스트리, MCP, 메모리, 검증, hooks) 는 unchanged. \"The harness generalizes, the domain is just a plugin.\" 이 thesis 의 두 데이터포인트.",
-            "What the two apps prove: the domain adapter is swappable, every layer above it (LLM router, tool registry, MCP, memory, verification, hooks) stays unchanged. \"The harness generalizes, the domain is just a plugin.\" Two data points for that thesis."
+            "두 앱이 같은 결론을 가리킨다. 도메인 어댑터는 갈아끼울 수 있고, 그 위의 모든 계층 — LLM 라우터, 도구 레지스트리, MCP, 메모리, 검증, hooks — 은 손대지 않은 채로 남았다. “하네스는 일반화된다, 도메인은 한 장의 플러그인이다.” 이 한 문장의 데이터 포인트가 둘 생긴 셈이다.",
+            "Both apps point to the same conclusion. The domain adapter is interchangeable; every layer above it — the LLM router, the tool registry, MCP, memory, verification, hooks — was left untouched. “The harness generalizes; the domain is just a plugin.” Two data points for that one sentence."
           )}
         </p>
       </div>

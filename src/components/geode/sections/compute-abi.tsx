@@ -56,8 +56,8 @@ export function ComputeAbiSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "v0.55 ~ v0.62 동안 9-cycle reasoning depth audit (R1~R9). 4 프로바이더의 reasoning wire kwargs 를 정렬해서 모델별 thinking 깊이가 일관되게 노출되도록 했다. R6 (v0.57) 는 thinking summary 를 IPC 로 흘려서 \"thinking…\" 이 사용자에게 보이게 한다. R9 (v0.62) 는 라이브 와이어 테스트로 검증.",
-              "From v0.55 through v0.62, a 9-cycle reasoning depth audit (R1~R9) aligned reasoning wire kwargs across 4 providers so that thinking depth is uniformly exposed across models. R6 (v0.57) surfaces thinking summaries via IPC to the user. R9 (v0.62) validates with live wire tests."
+              "v0.55부터 v0.62 사이, 아홉 사이클의 reasoning depth audit이 진행됐다. 네 프로바이더가 reasoning을 와이어에 실어 보내는 방식이 제각각이라서, 같은 모델이 어디에 붙느냐에 따라 사용자에게 보이는 사고 깊이가 달랐다. R1부터 R9까지의 사이클이 그 차이를 메웠다. R6은 모델이 사고하는 동안 요약을 IPC로 흘려 사용자가 ‘thinking…’을 실시간으로 보게 했고, R9은 그 모든 변경을 라이브 와이어 테스트로 한 번 더 묶었다.",
+              "Between v0.55 and v0.62, nine cycles of a reasoning-depth audit shipped. The four providers carry reasoning differently on the wire, and the same model exposed unequal thinking depth depending on which adapter it sat behind. The R1 → R9 cycles closed those gaps. R6 streams a thinking summary over IPC so the user sees a live ‘thinking…’ band; R9 binds the whole sequence under live wire tests."
             )}
           </p>
         </div>
@@ -106,8 +106,8 @@ export function ComputeAbiSection() {
         <p className="mt-6 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[14px]">
           {t(
             locale,
-            "GLM 의 thinking 필드 활성화는 frontier 어디에도 없다. Hermes 는 GLM 을 generic chat_completions 로 라우팅, OpenClaw 는 GLM 플러그인 부재, Claude Code 는 Anthropic 전용. R2 (v0.58.0) 는 이 차원에서 GEODE 가 leader.",
-            "GLM thinking field activation is absent across the frontier. Hermes routes GLM through generic chat_completions; OpenClaw has no GLM plugin; Claude Code is Anthropic-only. On this dimension, R2 (v0.58.0) makes GEODE the leader."
+            "GLM의 thinking 필드를 켜 둔 시스템은 프론티어 어디에도 없다. Hermes는 GLM을 일반 chat_completions로 흘려보내고, OpenClaw는 GLM 플러그인을 가지고 있지 않으며, Claude Code는 Anthropic만을 본다. 이 한 줄짜리 차원에서, v0.58.0의 R2가 GEODE를 앞에 세운다.",
+            "No frontier system actually turns GLM's thinking field on. Hermes routes GLM through a generic chat_completions transport; OpenClaw has no GLM plugin; Claude Code is Anthropic-only. On this single dimension, v0.58.0's R2 puts GEODE in front."
           )}
         </p>
       </div>

@@ -81,8 +81,8 @@ function ScaffoldHero() {
         <p className="mt-4 text-[var(--ink-2)] max-w-2xl text-[16px] leading-relaxed">
           {t(
             locale,
-            "GEODE 가 출시되는 OS 라면, 스캐폴드는 그 OS 가 매주 출시되는 라인이다. 8-Step 워크플로, CANNOT/CAN 22 룰, MD 칸반, 5 종 Karpathy 래칫. 한 사람이 64+ 릴리스를 무회귀로 운영하는 디시플린.",
-            "If GEODE is the OS that ships, the scaffold is the line that ships it weekly. 8-Step workflow, 22 CANNOT/CAN rules, MD kanban, 5 Karpathy ratchets. The discipline behind one person running 64+ releases without regression."
+            "GEODE가 출시되는 운영체제라면, 스캐폴드는 그것을 매주 세상에 내보내는 라인이다. 여덟 단계의 워크플로, 스물두 개의 절대 금지(CANNOT/CAN), 마크다운 칸반, 다섯 개의 카르파시 ratchet. 한 사람이 예순네 차례의 릴리스를 무회귀로 끌어 온 디시플린이 여기서 산다.",
+            "If GEODE is the operating system that ships, the scaffold is the line that ships it. Eight-step workflow, twenty-two CANNOT/CAN rules, a markdown kanban, five Karpathy ratchets. The discipline that carried one person through sixty-four releases without regression lives here."
           )}
         </p>
         <p className="mt-3 text-[var(--ink-3)] max-w-2xl text-[13px] font-mono">
@@ -106,8 +106,8 @@ function EightStep() {
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "각 단계는 다음 단계의 입력을 만든다. 스킵 불가. 단계마다 게이트가 있고, 게이트가 닫혀 있으면 PR 자체가 막힌다. 단순한 to-do 리스트가 아니라 라인의 conveyor belt.",
-          "Each step produces input for the next. No skipping. Each step has a gate; if a gate is closed, the PR is blocked. Not a to-do list — a line's conveyor belt."
+          "각 단계는 다음 단계의 입력을 만든다. 건너뛰는 길은 없다. 단계마다 게이트가 있고, 게이트가 닫혀 있으면 PR 자체가 진행되지 않는다. to-do 리스트가 아니라, 라인의 컨베이어 벨트에 가깝다.",
+          "Each step produces what the next one needs. There is no path that skips a stage. Every stage has a gate; if a gate is closed, the PR will not move. This is less a to-do list and more a line's conveyor belt."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -142,8 +142,8 @@ function CannotCan() {
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "OpenClaw Policy Chain + Codex Sandbox + Karpathy P1 의 직접 차용. CANNOT 가 먼저 — 자유는 나중에. 제약이 품질을 보장.",
-          "Direct adoption of OpenClaw's Policy Chain + Codex Sandbox + Karpathy P1. CANNOT first, freedom later. Constraints guarantee quality."
+          "OpenClaw의 Policy Chain, Codex의 Sandbox, 카르파시의 P1 — 세 갈래에서 직접 가져왔다. 자유보다 금지가 먼저다. 제약이 먼저 자리를 잡아야 그 위에서 만들어지는 결과물의 품질이 보장된다.",
+          "Borrowed directly from three lineages — OpenClaw's policy chain, Codex's sandbox, and Karpathy's P1. Prohibitions come before freedoms. Constraints sit down first, and only then is the quality of what gets built above them preserved."
         )}
       </p>
       <div className="rounded-lg border border-[var(--rule)] overflow-hidden">
@@ -198,8 +198,8 @@ function Ratchets() {
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "Karpathy autoresearch 의 ratchet 디시플린 직접 차용. 한 번 통과한 품질 게이트는 그 아래로 내려가지 못하게 만든다. 모든 ratchet 은 CI 가 강제.",
-          "Direct adoption of Karpathy's autoresearch ratchet discipline. A quality gate, once passed, cannot regress below itself. All ratchets enforced by CI."
+          "카르파시의 autoresearch가 보여 준 ratchet 디시플린을 그대로 옮겼다. 한 번 통과한 품질 게이트는 그 아래로 내려가지 않는다는 원칙이다. 다섯 개의 ratchet은 모두 CI가 강제한다.",
+          "Lifted from the ratchet discipline in Karpathy's autoresearch. The principle: once a quality gate is passed, the line cannot fall back below it. CI enforces every one of the five."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -232,8 +232,8 @@ function WorkingExample() {
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-6">
         {t(
           locale,
-          "OS-grade 시스템의 첫 시그널은 PATH에 살아있는 단일 명령이다. 한 번 설치하면 어느 디렉토리에서든 geode가 부팅한다. 프로젝트 종속이 아니라 컴퓨팅 substrate에 종속.",
-          "The first signal of an OS-grade system is a single command living on PATH. Install once, and geode boots from any directory. It belongs to the compute substrate, not to a project."
+          "운영체제 등급의 시스템이라는 신호는 의외로 단순하다. PATH 위에 살고 있는 한 줄 명령. 한 번 설치하면, 어느 디렉토리에 들어가 있든 ‘geode’ 한 단어로 부팅한다. 프로젝트에 묶여 있는 도구가 아니라, 컴퓨팅 substrate 자체에 묶여 있는 도구다.",
+          "The signal that something is operating-system-grade is simpler than it sounds — a single command living on PATH. Install it once, and the word ‘geode’ boots from any directory. The tool is not bound to a project; it is bound to the compute substrate itself."
         )}
       </p>
 
@@ -325,8 +325,8 @@ function SkillCatalog() {
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          ".claude/skills/ 의 frontmatter + Markdown 파일들. 각 스킬은 한 가지 디시플린 (예: kent-beck-review) 또는 한 가지 도메인 작업 (예: geode-changelog) 의 절차서. 디스커버리는 5계층 (bundled → user → project) 우선순위로 작동.",
-          "Frontmatter + Markdown files in .claude/skills/. Each skill is a procedure for one discipline (e.g. kent-beck-review) or one domain task (e.g. geode-changelog). Discovery walks a 5-tier priority (bundled → user → project)."
+          "스킬은 .claude/skills/ 안의 frontmatter + 마크다운 파일이다. 한 스킬은 한 가지 디시플린(이를테면 kent-beck-review) 혹은 한 가지 도메인 작업(이를테면 geode-changelog)을 정리한 절차서에 가깝다. 디스커버리는 다섯 계층 — 번들 → 사용자 → 프로젝트 — 의 우선순위로 걸어 올라온다.",
+          "Each skill is a frontmatter-plus-Markdown file under .claude/skills/. A single skill captures one discipline (e.g. kent-beck-review) or one domain procedure (e.g. geode-changelog). Discovery walks a five-tier priority — bundled, then user, then project."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -349,11 +349,11 @@ function SkillCatalog() {
           </div>
         ))}
       </div>
-      <p className="mt-6 text-[12px] font-mono text-[var(--ink-3)]">
+      <p className="mt-6 text-[12px] text-[var(--ink-3)] leading-relaxed">
         {t(
           locale,
-          "총 23 스킬. CLAUDE.md 의 8단계 워크플로 안에서 적절한 단계가 자동으로 해당 스킬을 발화한다. 예: GAP audit 단계 → explore-reason-act, PR 단계 → geode-gitflow.",
-          "23 skills total. The CLAUDE.md 8-step workflow auto-invokes the appropriate skill per stage. E.g. GAP audit → explore-reason-act; PR → geode-gitflow."
+          "총 23개. CLAUDE.md의 여덟 단계 워크플로가 적절한 단계에 적절한 스킬을 자동으로 불러온다. 예컨대 GAP audit 단계에서는 explore-reason-act가, PR 단계에서는 geode-gitflow가 발화한다.",
+          "Twenty-three skills in total. The eight-step workflow in CLAUDE.md pulls in the right skill at the right stage — explore-reason-act fires during GAP audit; geode-gitflow fires at PR time."
         )}
       </p>
     </section>

@@ -60,8 +60,8 @@ export function RoutingIqSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "fallback chain 위에 가는 결정 — 어느 프로바이더에 어느 플랜으로 보낼지, 거부됐을 때 무엇을 사용자에게 보일지, 멀티턴에서 토큰 비용을 어디서 줄일지. frontier 는 단순 retry, GEODE 는 OS-grade scheduler.",
-              "Decisions above the fallback chain — which provider with which plan, what to show the user when rejected, where to cut token cost across multi-turn. Frontier does simple retry; GEODE does OS-grade scheduling."
+              "fallback chain은 시작이지 끝이 아니다. 어느 프로바이더의 어느 플랜으로 호출을 보낼지, 거부됐을 때 사용자에게 어떤 선택지를 보일지, 멀티턴이 길어졌을 때 토큰 비용을 어디서 자를지. 이 결정들이 chain 위에 한 층 더 쌓인다. 프론티어 시스템들은 대체로 retry에서 멈추지만, GEODE는 운영체제급 스케줄러로 다룬다.",
+              "The fallback chain is a starting point, not the end. Which provider with which plan, what to show the user on rejection, where to trim tokens when a turn runs long — these decisions stack on top of the chain. Most frontier systems stop at retry; GEODE treats it as OS-grade scheduling."
             )}
           </p>
         </div>

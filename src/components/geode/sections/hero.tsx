@@ -31,22 +31,28 @@ export function HeroSection() {
         </h1>
         <p className="mt-4 font-display text-[clamp(1.25rem,2.5vw,1.6rem)] text-[var(--ink-1)] leading-snug">
           {t(locale,
-            "LLM은 새로운 컴퓨트, 자율 에이전트는 그것의 OS.",
-            "LLM is the new compute. The agent is its OS."
+            "LLM이 새 컴퓨트라면, 그 위의 운영체제는 자율 에이전트다.",
+            "If the LLM is the new compute, the autonomous agent is its operating system."
           )}
         </p>
 
         <div className="mt-10 space-y-5 text-[var(--ink-2)] leading-[1.75] text-[16px]">
           <p>
             {t(locale,
-              "GEODE는 자율 에이전트를 컴퓨팅의 OS로 본다. 4계층 스택 — 모델, 런타임, 하네스, 에이전트 — 위에서 두 도메인이 동일 하네스로 동작한다. Game IP 가치 추론은 in-tree 플러그인으로, Java 1.8→22 마이그레이션은 fork로. 도메인은 플러그인이다.",
-              "GEODE treats the autonomous agent as the OS for an LLM-driven compute substrate. Two domains run on the same harness across a four-layer stack — Game IP valuation as an in-tree plugin, Java 1.8 → 22 migration as a fork. The domain is a plugin."
+              "GEODE는 그 운영체제를 프로덕션 코드로 옮겨 놓은 결과물이다. 모델이 커널을, 런타임이 시스템콜과 드라이버를, 하네스가 셸과 init을, 에이전트가 항상 도는 루프를 맡는다. 책임이 네 층으로 갈라져 있어서 위 계층은 아래의 변경을 신경 쓸 일이 없다.",
+              "GEODE is one attempt to move that operating system into production code. The model takes the kernel, the runtime takes syscalls and drivers, the harness takes the shell and init, and the agent takes the always-running loop. The four layers keep their concerns separate, so a change one floor down does not ripple up."
             )}
           </p>
           <p>
             {t(locale,
-              "Andrej Karpathy가 2023년 “Intro to Large Language Models”에서 LLM OS 다이어그램을 그렸다. GEODE는 그 다이어그램을 프로덕션 코드로 만든 한 가지 구현이다. 자기 자신의 스캐폴드로 부팅되고, 자기 자신의 디시플린으로 출시된다.",
-              "Andrej Karpathy sketched the LLM OS in his 2023 talk “Intro to Large Language Models”. GEODE is one production-grade implementation of that diagram — booted by its own scaffold, shipped by its own discipline."
+              "같은 하네스 위에서 두 도메인이 검증을 마쳤다. 게임 IP의 가치를 추론하는 플러그인이 트리 안에 산다. Java 1.8을 22로 끌어올린 마이그레이션 에이전트는 fork 한 번으로 갈라져 나갔다. 5,523개 파일을 5시간 48분에 처리했고, 빌드는 83/83 통과했다. 도메인을 갈아끼우는 일에는 어댑터 한 장이면 충분했다.",
+              "Two domains have shipped on the same harness. A game-IP valuation plugin lives in-tree. A Java 1.8→22 migration agent was carved out as a fork and ran on its own; it touched 5,523 files in five hours and forty-eight minutes, and the build came back 83 of 83. Swapping the domain took a single adapter."
+            )}
+          </p>
+          <p>
+            {t(locale,
+              "이 운영체제는 자기 자신의 스캐폴드로 만들어졌다. 카르파시의 P4 ratchet이 한쪽에서는 프롬프트 해시 20개를 잠그고, 다른 쪽에서는 CI 5단계를 잠근다. 같은 패턴이 두 스코프에서 나란히 작동한다. 안드레이 카르파시가 2023년 “Intro to Large Language Models”에서 그린 LLM OS의 윤곽 — 그 그림을 코드로 옮긴 하나의 구현이다.",
+              "The operating system was built by its own scaffold. The P4 ratchet from Karpathy's playbook locks twenty prompt hashes on one side and the five CI jobs on the other. The same pattern runs in two scopes at once. Andrej Karpathy sketched the LLM-OS in his 2023 talk; this is one attempt to render that sketch as code."
             )}
           </p>
         </div>
@@ -57,7 +63,7 @@ export function HeroSection() {
         </div>
 
         <p className="mt-6 font-mono text-[12px] text-[var(--ink-3)]">
-          v0.65.0 · 236 modules · 4380+ tests · 64+ releases · 20 pinned prompts · solo
+          GEODE v0.65.0 · 236 모듈 · 4380 테스트 · 64회 릴리스 · 핀 고정 프롬프트 20개 · 단독 운영
         </p>
 
         <div className="mt-10 flex items-center gap-3">

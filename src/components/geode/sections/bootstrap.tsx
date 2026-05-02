@@ -47,8 +47,8 @@ export function BootstrapSection() {
           </h2>
           <p className="text-sm sm:text-base text-[var(--ink-2)] max-w-2xl mb-8 leading-relaxed">
             {t(locale,
-              "GEODE는 7단계 순차 초기화로 부팅한다. 각 단계는 이전 단계의 결과를 의존성으로 받아 조립한다. 한 단계라도 실패하면 graceful degradation으로 선택적 부팅 — 가용한 표면만 활성화되고 나머지는 비활성, geode doctor가 정확한 실패 지점을 표시한다.",
-              "GEODE boots in seven sequential stages. Each stage takes the prior stage's result as a dependency and composes upward. If any stage fails, graceful degradation kicks in — usable surfaces stay active, the rest is disabled, and geode doctor reports the exact failure point."
+              "GEODE는 일곱 단계를 차례로 거쳐 올라온다. 단계마다 그 위 단계가 필요로 하는 결과를 만든다. 어느 한 단계가 무너지면 그 위는 그대로 멈추는 대신, 가용한 표면만 살리고 나머지를 끄는 부분 부팅으로 떨어진다. geode doctor가 정확히 어디서 무너졌는지 짚어 준다.",
+              "GEODE comes up through seven sequential stages. Each one produces what the next one needs. If any stage breaks, the build does not freeze; it falls into a partial boot, keeping the usable surfaces alive and disabling the rest. geode doctor reports the exact stage that gave way."
             )}
           </p>
         </ScrollReveal>

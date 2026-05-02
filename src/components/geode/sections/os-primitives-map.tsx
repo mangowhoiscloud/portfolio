@@ -80,8 +80,8 @@ export function OsPrimitivesMapSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "Karpathy 의 2023-11 다이어그램 (Intro to LLMs) 의 각 부품이 GEODE 의 어디에 살고 있는지. 이 매핑이 거의 1:1 이라는 것이 GEODE 가 OS-grade 시스템이라는 주장의 직접 증거. 13 primitive 가 모두 코드베이스에 실재.",
-              "Where each component of Karpathy's November 2023 diagram (Intro to LLMs) lives in GEODE. The near-1:1 mapping is the direct evidence for the OS-grade claim. All 13 primitives exist in the codebase."
+              "카르파시가 2023년 11월에 그린 LLM-OS 다이어그램의 각 부품이, GEODE의 어느 모듈에서 실제로 살아 움직이는가. 매핑이 거의 일대일로 떨어진다는 사실이, GEODE가 운영체제 등급의 시스템이라는 주장의 가장 직접적인 근거다. 다이어그램의 부품 13개가 모두 코드베이스에 실재한다.",
+              "Where each component of Karpathy's November 2023 diagram lives in GEODE. The near one-to-one mapping is the most direct evidence for the OS-grade claim — every one of the thirteen primitives exists in the codebase."
             )}
           </p>
         </div>
@@ -120,8 +120,8 @@ export function OsPrimitivesMapSection() {
         <p className="mt-4 text-[12px] text-[var(--ink-3)] italic">
           {t(
             locale,
-            "출처: Andrej Karpathy, \"[1hr Talk] Intro to Large Language Models\" (2023-11). 다이어그램 부품을 GEODE 4-Layer Stack 의 실제 모듈에 매핑.",
-            "Source: Andrej Karpathy, \"[1hr Talk] Intro to Large Language Models\" (Nov 2023). Diagram components mapped to actual modules in GEODE's 4-Layer Stack."
+            "출처: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (2023-11). 다이어그램의 각 부품을 GEODE 4-Layer Stack의 실제 모듈로 매핑.",
+            "Source: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (Nov 2023). Diagram components mapped to actual modules in GEODE's 4-Layer Stack."
           )}
         </p>
       </div>

@@ -62,19 +62,19 @@ export function OsThesisSection() {
           <p className="mt-4 text-[var(--ink-2)] max-w-2xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "Andrej Karpathy가 2023-11 'Intro to Large Language Models' 강연에서 LLM OS 다이어그램을 그렸다. GEODE 는 그 다이어그램을 프로덕션 코드로 만든 한 가지 구현이다. 4-Layer agentic OS — LLM 이 커널, 런타임이 syscall + driver 계층, 하네스가 shell + init, 에이전트가 항상 도는 루프.",
-              "In November 2023, Andrej Karpathy sketched the LLM OS in his 'Intro to Large Language Models' talk. GEODE is one implementation of that diagram in production code. A 4-Layer agentic OS — LLM as kernel, runtime as syscall + driver layer, harness as shell + init, agent as the always-on loop."
+              "2023년 11월, 안드레이 카르파시가 ‘Intro to Large Language Models’에서 LLM OS의 윤곽을 그렸다. LLM이 가운데 있고 그 주위로 도구와 파일시스템과 다른 LLM과 임베딩 공간이 둘러싼 그림이었다. GEODE는 그 그림을 실제 코드로 옮긴 하나의 결과물이다. LLM이 커널 자리에 들어가고, 런타임이 시스템콜과 드라이버를, 하네스가 셸과 init을, 에이전트가 항상 도는 루프를 맡는다.",
+              "In November 2023, Andrej Karpathy sketched the outline of an LLM-OS — the model in the middle, with tools, a filesystem, other LLMs, and embedding spaces gathered around it. GEODE is one attempt to render that sketch as code. The model takes the kernel slot, the runtime takes syscalls and drivers, the harness takes the shell and init, and the agent takes the always-running loop."
             )}
           </p>
           <p className="mt-3 text-[var(--ink-2)] max-w-2xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "그 OS 는 자기 자신의 스캐폴드로 만들어졌다. 동일한 Karpathy 래칫 디시플린이 두 스케일에 적용됐다. GEODE 의 프롬프트에는 P4 해시 래칫이, 스캐폴드에는 P4 CI 래칫이. 같은 패턴, 다른 스코프.",
-              "The OS was built by its own scaffold — the same Karpathy ratchet discipline applied at two scales. GEODE's prompts have a P4 hash ratchet; the scaffold has a P4 CI ratchet. Same pattern, different scope."
+              "이 운영체제는 자기 자신의 스캐폴드로 만들어졌다. 카르파시의 P4 ratchet이 한쪽에서는 프롬프트 해시 20개를 잠그고, 다른 쪽에서는 CI 5단계를 잠근다. 같은 패턴이 두 스코프에서 나란히 작동한다.",
+              "The system was built by its own scaffold. The P4 ratchet locks twenty prompt hashes on one side and the five CI jobs on the other — the same pattern at work in two scopes."
             )}
           </p>
           <p className="mt-3 text-[var(--ink-3)] max-w-2xl leading-relaxed text-[13px] font-mono">
-            GEODE v0.65.0 · 236 modules · 4380+ tests · 64+ releases · 20 pinned prompts · solo
+            GEODE v0.65.0 · 236 모듈 · 4380 테스트 · 64회 릴리스 · 핀 고정 프롬프트 20개 · 단독 운영
           </p>
         </div>
 

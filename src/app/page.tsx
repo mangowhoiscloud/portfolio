@@ -48,9 +48,9 @@ export default function Home() {
             Backend · Agentic AI · Harness Engineering
           </p>
           <p className="mt-6 max-w-2xl text-[16px] leading-[1.75] text-[var(--ink-2)]">
-            LLM은 새로운 컴퓨트, 자율 에이전트는 그것의 OS. 세 개의 전시가 그
-            한 가지 thesis 를 받친다 — 출시되는 OS, 그것을 매주 출시하는 라인,
-            그리고 그 라인이 만든 앱 한 가지.
+            LLM이 새 컴퓨트라면, 그 위의 운영체제는 자율 에이전트다. 아래의
+            세 전시가 그 한 문장을 받친다. 출시되는 운영체제 자체, 매주 그것을
+            세상에 내보내는 생산 라인, 그리고 그 라인이 만들어 낸 앱 하나.
           </p>
         </div>
 
