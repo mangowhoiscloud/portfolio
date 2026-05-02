@@ -76,6 +76,10 @@ export function HeroSection() {
               "GEODE v0.65.0 — an agentic OS, built by its own scaffold. Two domains proven on the same harness: Game IP valuation (in-tree plugin) and Java 1.8→22 migration (5,523 files / 83-83 builds / 5h48m / $388). One implementation of Karpathy's LLM OS sketch (Intro to LLMs, 2023)."
             )}
           </p>
+          <pre className="mt-4 inline-block text-left rounded-lg border border-white/[0.06] bg-[#060D1B] px-4 py-3 font-mono text-[12px] leading-relaxed text-[#C8D8F0]">
+            <span className="text-white/40">$</span>{" "}<span className="text-[#4ECDC4]">uv run geode</span>{" "}<span className="text-[#FFD8A8]/80">analyze &quot;Cowboy Bebop&quot; --dry-run</span>{"\n"}
+            <span className="text-white/35">→</span>{" "}<span className="text-white/75">A · 68.4 · undermarketed</span>
+          </pre>
         </motion.div>
 
         <motion.div

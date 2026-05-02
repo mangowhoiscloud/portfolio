@@ -44,6 +44,8 @@ const versions = [
   { ver: "v0.37", count: 40, descKo: "Unified bootstrap. ONE HookSystem 보장", descEn: "Unified bootstrap. ONE HookSystem guaranteed" },
   { ver: "v0.42", count: 46, descKo: "+4 운영 이벤트. SHUTDOWN, CONFIG_RELOADED, MCP 연결 추적", descEn: "+4 operational events. SHUTDOWN, CONFIG_RELOADED, MCP connection tracking" },
   { ver: "v0.45", count: 48, descKo: "+2 관측 이벤트. SessionMetrics, LLM resilience 지원", descEn: "+2 observability events. SessionMetrics, LLM resilience support" },
+  { ver: "v0.48", count: 55, descKo: "+6 hook interceptor. block/modify chain", descEn: "+6 interceptor pattern. block/modify chain" },
+  { ver: "v0.65", count: 58, descKo: "+3 prompt + lifecycle. PROMPT_ASSEMBLED 추가", descEn: "+3 prompt + lifecycle. PROMPT_ASSEMBLED added" },
 ];
 
 /* ── Design decisions data ── */
@@ -186,7 +188,7 @@ export function HooksSection() {
               </circle>
               <rect x={300} y={88} width={100} height={64} rx={12} fill="#0C1220" stroke="#4ECDC4" strokeWidth={1} strokeOpacity={0.35} />
               <text x={350} y={112} textAnchor="middle" fill="#4ECDC4" fontSize={11} fontFamily="ui-monospace, monospace" fontWeight={700}>HookSystem</text>
-              <text x={350} y={128} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">48 events</text>
+              <text x={350} y={128} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.4} fontSize={7} fontFamily="ui-monospace, monospace">58 events</text>
               <text x={350} y={142} textAnchor="middle" fill="#4ECDC4" fillOpacity={0.3} fontSize={7} fontFamily="ui-monospace, monospace">priority-sorted</text>
 
               {/* Handler chain (right, sorted by priority) */}

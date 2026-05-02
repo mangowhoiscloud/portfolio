@@ -27,6 +27,9 @@ import { DomainDagSection } from "@/components/geode/sections/domain-dag";
 import { ScoringSection } from "@/components/geode/sections/scoring";
 import { FeedbackSection } from "@/components/geode/sections/feedback";
 import { VerificationSection } from "@/components/geode/sections/verification";
+import { OrchestrationSection } from "@/components/geode/sections/orchestration";
+import { AutomationSection } from "@/components/geode/sections/automation";
+import { BootstrapSection } from "@/components/geode/sections/bootstrap";
 import { TimelineSection } from "@/components/geode/sections/timeline";
 import { GeodeFooter } from "@/components/geode/sections/footer";
 
@@ -67,10 +70,13 @@ export default function GeodePage() {
       <div id="llm"><MultiLlmSection /></div>
       <Divider />
       <div id="domain"><DomainDagSection /></div>
+      <div id="orchestration"><OrchestrationSection /></div>
       <div id="scoring"><ScoringSection /></div>
       <div id="feedback"><FeedbackSection /></div>
+      <div id="automation"><AutomationSection /></div>
       <Divider />
       <div id="verify"><VerificationSection /></div>
+      <div id="bootstrap"><BootstrapSection /></div>
       <div id="timeline"><TimelineSection /></div>
       <GeodeFooter />
     </main>
