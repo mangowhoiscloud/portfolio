@@ -54,27 +54,27 @@ export function OsThesisSection() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-            {t(locale, "§ 1. THESIS", "§ 1. THESIS")}
+            {t(locale, "§ 1. 출발점", "§ 1. THESIS")}
           </div>
           <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
-            {t(locale, "에이전틱 OS, 자기 자신의 스캐폴드로 만들어진.", "An agentic OS, built by its own scaffold.")}
+            {t(locale, "에이전트를 운영체제로 본다는 것.", "Treating the agent as an operating system.")}
           </h2>
           <p className="mt-4 text-[var(--ink-2)] max-w-2xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "2023년 11월, 안드레이 카르파시가 ‘Intro to Large Language Models’에서 LLM OS의 윤곽을 그렸다. LLM이 가운데 있고 그 주위로 도구와 파일시스템과 다른 LLM과 임베딩 공간이 둘러싼 그림이었다. GEODE는 그 그림을 실제 코드로 옮긴 하나의 결과물이다. LLM이 커널 자리에 들어가고, 런타임이 시스템콜과 드라이버를, 하네스가 셸과 init을, 에이전트가 항상 도는 루프를 맡는다.",
-              "In November 2023, Andrej Karpathy sketched the outline of an LLM-OS — the model in the middle, with tools, a filesystem, other LLMs, and embedding spaces gathered around it. GEODE is one attempt to render that sketch as code. The model takes the kernel slot, the runtime takes syscalls and drivers, the harness takes the shell and init, and the agent takes the always-running loop."
+              "2023년 11월 안드레이 카르파시는 ‘Intro to Large Language Models’ 강연에서 LLM-OS 다이어그램을 제시했습니다. 가운데에 LLM이 위치하고, 주위에 도구·파일시스템·다른 LLM·임베딩 공간이 배치된 구조였습니다. GEODE는 그 다이어그램을 실제 코드로 구현한 사례입니다. LLM은 커널을, 런타임은 시스템콜과 드라이버를, 하네스는 셸과 init을, 에이전트는 항상 동작하는 실행 루프를 담당합니다.",
+              "In November 2023, Andrej Karpathy presented an LLM-OS diagram in his talk “Intro to Large Language Models.” The model sits at the center, with tools, a filesystem, other LLMs, and embedding spaces arranged around it. GEODE implements that diagram in production code. The LLM takes the kernel role, the runtime handles syscalls and drivers, the harness handles the shell and init, and the agent runs the always-on execution loop."
             )}
           </p>
           <p className="mt-3 text-[var(--ink-2)] max-w-2xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "이 운영체제는 자기 자신의 스캐폴드로 만들어졌다. 카르파시의 P4 ratchet이 한쪽에서는 프롬프트 해시 20개를 잠그고, 다른 쪽에서는 CI 5단계를 잠근다. 같은 패턴이 두 스코프에서 나란히 작동한다.",
-              "The system was built by its own scaffold. The P4 ratchet locks twenty prompt hashes on one side and the five CI jobs on the other — the same pattern at work in two scopes."
+              "운영체제를 빌드하는 라인도 동일한 디시플린을 사용합니다. 카르파시 P4 ratchet은 한쪽에서 프롬프트 해시 20개를 잠그고, 다른 쪽에서 CI 5단계를 잠급니다. 출력 안정성을 보장하는 디시플린과 빌드 과정 안정성을 보장하는 디시플린이 같은 형태로 동작합니다.",
+              "The pipeline that builds the system uses the same discipline. The Karpathy P4 ratchet locks 20 prompt hashes on one side and 5 CI stages on the other. The discipline that ensures output correctness has the same shape as the discipline that ensures build correctness."
             )}
           </p>
           <p className="mt-3 text-[var(--ink-3)] max-w-2xl leading-relaxed text-[13px] font-mono">
-            GEODE v0.65.0 · 236 모듈 · 4380 테스트 · 64회 릴리스 · 핀 고정 프롬프트 20개 · 단독 운영
+            GEODE v0.65.0 · 236 모듈 · 4,380 테스트 · 64회 릴리스 · 핀 고정 프롬프트 20개 · 단독 개발
           </p>
         </div>
 

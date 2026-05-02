@@ -48,16 +48,16 @@ export function ComputeAbiSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-10">
           <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-            {t(locale, "§ 4A. COMPUTE ABI — R1~R9 REASONING WIRE", "§ 4A. COMPUTE ABI — R1~R9 REASONING WIRE")}
+            {t(locale, "§ 4A. 추론 ABI", "§ 4A. REASONING ABI")}
           </div>
           <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
-            {t(locale, "네 개의 CPU. 한 ABI.", "Four CPUs. One ABI.")}
+            {t(locale, "프로바이더 4종을 단일 ABI로 정렬.", "Aligning four providers under a single ABI.")}
           </h2>
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "v0.55부터 v0.62 사이, 아홉 사이클의 reasoning depth audit이 진행됐다. 네 프로바이더가 reasoning을 와이어에 실어 보내는 방식이 제각각이라서, 같은 모델이 어디에 붙느냐에 따라 사용자에게 보이는 사고 깊이가 달랐다. R1부터 R9까지의 사이클이 그 차이를 메웠다. R6은 모델이 사고하는 동안 요약을 IPC로 흘려 사용자가 ‘thinking…’을 실시간으로 보게 했고, R9은 그 모든 변경을 라이브 와이어 테스트로 한 번 더 묶었다.",
-              "Between v0.55 and v0.62, nine cycles of a reasoning-depth audit shipped. The four providers carry reasoning differently on the wire, and the same model exposed unequal thinking depth depending on which adapter it sat behind. The R1 → R9 cycles closed those gaps. R6 streams a thinking summary over IPC so the user sees a live ‘thinking…’ band; R9 binds the whole sequence under live wire tests."
+              "v0.55부터 v0.62까지 9차례 reasoning depth audit을 진행했습니다. 네 프로바이더가 reasoning 정보를 와이어에 싣는 방식이 서로 달라, 같은 모델도 어댑터에 따라 노출되는 사고 깊이가 일관되지 않았습니다. R1부터 R9까지 9차례 사이클로 이 차이를 정렬했습니다. R6에서는 사고 요약을 IPC 이벤트로 스트리밍해 ‘thinking…’ 상태를 사용자에게 실시간으로 표시하도록 했고, R9에서는 라이브 와이어 테스트로 전체 변경을 회귀 검증했습니다.",
+              "From v0.55 to v0.62, 9 reasoning depth audit cycles were shipped. The four providers carry reasoning data on the wire differently, and the same model showed inconsistent reasoning depth depending on the adapter. R1 to R9 aligned these differences. R6 streams reasoning summaries over IPC events, surfacing the “thinking…” state to the user in real time. R9 covers all changes with live wire regression tests."
             )}
           </p>
         </div>
@@ -106,8 +106,8 @@ export function ComputeAbiSection() {
         <p className="mt-6 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[14px]">
           {t(
             locale,
-            "GLM의 thinking 필드를 켜 둔 시스템은 프론티어 어디에도 없다. Hermes는 GLM을 일반 chat_completions로 흘려보내고, OpenClaw는 GLM 플러그인을 가지고 있지 않으며, Claude Code는 Anthropic만을 본다. 이 한 줄짜리 차원에서, v0.58.0의 R2가 GEODE를 앞에 세운다.",
-            "No frontier system actually turns GLM's thinking field on. Hermes routes GLM through a generic chat_completions transport; OpenClaw has no GLM plugin; Claude Code is Anthropic-only. On this single dimension, v0.58.0's R2 puts GEODE in front."
+            "GLM의 thinking 필드를 활성화한 사례는 다른 프론티어 시스템에서 확인되지 않았습니다. Hermes는 GLM을 일반 chat_completions 경로로 라우팅하고, OpenClaw는 GLM 플러그인이 없으며, Claude Code는 Anthropic만 지원합니다. v0.58.0의 R2 사이클에서 GEODE가 이 기능을 도입했습니다.",
+            "No other frontier system was found activating GLM's thinking field. Hermes routes GLM through a generic chat_completions path, OpenClaw has no GLM plugin, and Claude Code only supports Anthropic. GEODE introduced this in the R2 cycle (v0.58.0)."
           )}
         </p>
       </div>

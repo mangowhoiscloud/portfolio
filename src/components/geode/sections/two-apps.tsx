@@ -9,16 +9,16 @@ export function TwoAppsSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-10">
           <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-            {t(locale, "§ 5. APPS ON THE OS", "§ 5. APPS ON THE OS")}
+            {t(locale, "§ 5. 적용 사례", "§ 5. APPLICATIONS")}
           </div>
           <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
-            {t(locale, "두 앱. 한 하네스. 재작성 없음.", "Two apps. One harness. Zero rewrite.")}
+            {t(locale, "동일 하네스로 검증한 두 도메인.", "Two domains validated on the same harness.")}
           </h2>
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "운영체제라는 주장은, 그 위에서 다른 도메인이 무수정으로 돌 때 비로소 검증된다. GEODE의 Layer 2와 3 — Runtime과 Harness — 은 두 앱 사이에서 한 줄도 바뀌지 않은 채 옮겨졌다. 다른 것은 도메인 어댑터 한 장이었다.",
-              "The OS claim is only validated when a second domain runs on top without modification. GEODE's Layer 2 and 3 — runtime and harness — moved between the two apps without a line of change. The only thing that differed was the domain adapter."
+              "운영체제 등급의 시스템이라는 주장은 다른 도메인을 위에 올려 검증할 수 있을 때 의미가 있습니다. GEODE의 Layer 2(Runtime)와 Layer 3(Harness)는 두 앱 사이에서 코드 수정 없이 이전되었습니다. 변경한 부분은 도메인 어댑터뿐입니다.",
+              "An OS-grade claim has meaning only when it can be validated by running a different domain on top. GEODE's Layer 2 (Runtime) and Layer 3 (Harness) were transferred between two apps without code modification. Only the domain adapter changed."
             )}
           </p>
         </div>
@@ -89,8 +89,8 @@ export function TwoAppsSection() {
         <p className="mt-8 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[14px]">
           {t(
             locale,
-            "두 앱이 같은 결론을 가리킨다. 도메인 어댑터는 갈아끼울 수 있고, 그 위의 모든 계층 — LLM 라우터, 도구 레지스트리, MCP, 메모리, 검증, hooks — 은 손대지 않은 채로 남았다. “하네스는 일반화된다, 도메인은 한 장의 플러그인이다.” 이 한 문장의 데이터 포인트가 둘 생긴 셈이다.",
-            "Both apps point to the same conclusion. The domain adapter is interchangeable; every layer above it — the LLM router, the tool registry, MCP, memory, verification, hooks — was left untouched. “The harness generalizes; the domain is just a plugin.” Two data points for that one sentence."
+            "두 사례는 같은 결론을 가리킵니다. 도메인 어댑터는 교체 가능하며, 그 위의 모든 계층(LLM 라우터, 도구 레지스트리, MCP, 메모리, 검증, hook)은 변경되지 않았습니다. 하네스 일반화 + 도메인 플러그인화라는 설계 가설을 두 데이터 포인트로 검증했습니다.",
+            "Both cases reach the same conclusion. The domain adapter is interchangeable, while every layer above it — LLM router, tool registry, MCP, memory, verification, and hooks — was left unchanged. This validates the design hypothesis of harness generalization plus domain pluggability with two data points."
           )}
         </p>
       </div>

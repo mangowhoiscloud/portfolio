@@ -72,16 +72,16 @@ export function OsPrimitivesMapSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-10">
           <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-            {t(locale, "§ 2. ARTIFACT — KARPATHY LLM OS → GEODE 4-LAYER", "§ 2. ARTIFACT — KARPATHY LLM OS → GEODE 4-LAYER")}
+            {t(locale, "§ 2. 구성요소 매핑", "§ 2. PRIMITIVES MAPPING")}
           </div>
           <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
-            {t(locale, "LLM OS, 코드로 매핑하기.", "The LLM OS, mapped to code.")}
+            {t(locale, "LLM-OS 다이어그램을 코드로 매핑.", "Mapping the LLM-OS diagram to code.")}
           </h2>
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "카르파시가 2023년 11월에 그린 LLM-OS 다이어그램의 각 부품이, GEODE의 어느 모듈에서 실제로 살아 움직이는가. 매핑이 거의 일대일로 떨어진다는 사실이, GEODE가 운영체제 등급의 시스템이라는 주장의 가장 직접적인 근거다. 다이어그램의 부품 13개가 모두 코드베이스에 실재한다.",
-              "Where each component of Karpathy's November 2023 diagram lives in GEODE. The near one-to-one mapping is the most direct evidence for the OS-grade claim — every one of the thirteen primitives exists in the codebase."
+              "카르파시가 제시한 LLM-OS 다이어그램의 각 구성요소를 GEODE의 실제 모듈에 매핑한 결과입니다. 13개 구성요소가 모두 코드베이스에 존재하며, 거의 일대일 대응 관계를 보입니다. 운영체제 등급의 시스템이라는 표현이 비유로 끝나지 않는 근거입니다.",
+              "Each component from Karpathy's LLM-OS diagram is mapped here to an actual module in GEODE. All 13 components exist in the codebase with near one-to-one correspondence. This is the basis for treating “OS-grade system” as more than a metaphor."
             )}
           </p>
         </div>
@@ -117,11 +117,11 @@ export function OsPrimitivesMapSection() {
           </table>
         </div>
 
-        <p className="mt-4 text-[12px] text-[var(--ink-3)] italic">
+        <p className="mt-4 text-[12px] text-[var(--ink-3)]">
           {t(
             locale,
-            "출처: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (2023-11). 다이어그램의 각 부품을 GEODE 4-Layer Stack의 실제 모듈로 매핑.",
-            "Source: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (Nov 2023). Diagram components mapped to actual modules in GEODE's 4-Layer Stack."
+            "참고: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (2023년 11월).",
+            "Reference: Andrej Karpathy, “[1hr Talk] Intro to Large Language Models” (November 2023)."
           )}
         </p>
       </div>

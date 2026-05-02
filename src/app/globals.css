@@ -15,26 +15,32 @@ h1, h2 {
 }
 
 :root {
-  /* GEODE Editorial — warm dark substrate, Anthropic-tuned */
-  --paper:        #1A1815;   /* warm near-black, very slight brown */
-  --paper-2:      #26221E;   /* card / sidebar elevation, +6% lighter */
-  --paper-deep:   #100E0B;   /* deepest code block */
+  /* GEODE Editorial — geode mineral palette
+     Identity: amethyst (artifact accent) + citrine (line accent),
+     the two minerals most often found inside an actual geode cavity.
+     Deliberately distinct from Anthropic terracotta and from the
+     cyan/pink/indigo/gold/green/purple/coral palette already in use
+     by the DAG SVGs of inner sections. */
 
-  --ink:          #EFE9DD;   /* primary text, warm cream */
-  --ink-1:        #D2CBBA;   /* headings */
-  --ink-2:        #A39A86;   /* body secondary */
-  --ink-3:        #75695C;   /* tertiary, captions */
+  --paper:        #181816;   /* warm dark stone surface */
+  --paper-2:      #23211F;   /* elevated card, more visible than before */
+  --paper-deep:   #0E0E0C;   /* deepest code block */
 
-  --rule:         #322D26;   /* warm dark hairline */
-  --rule-soft:    #28231D;   /* softer divider */
+  --ink:          #EDE7DA;   /* primary text — bumped for legibility */
+  --ink-1:        #DDD3BE;   /* headings */
+  --ink-2:        #B5AC97;   /* body — brighter so prose does not fade */
+  --ink-3:        #807665;   /* captions, metadata */
 
-  --acc-artifact: #DA8B5C;   /* Anthropic-tuned terracotta — artifact */
-  --acc-line:     #97A1AE;   /* graphite-blue — scaffold / process */
-  --acc-soft:     #E8B59B;   /* hover state */
+  --rule:         #3A342D;   /* hairline, slightly more visible */
+  --rule-soft:    #2A2520;
 
-  --code-bg:      #100E0B;
-  --code-text:    #DDD2BC;
-  --code-string:  #DA8B5C;
+  --acc-artifact: #A573E8;   /* AMETHYST — OS / artifact / runtime / model */
+  --acc-line:     #D5B27A;   /* CITRINE — scaffold / line / process / CI */
+  --acc-soft:     #C9A4F0;   /* amethyst hover */
+
+  --code-bg:      #0E0E0C;
+  --code-text:    #DDD3BE;
+  --code-string:  #D5B27A;   /* citrine for strings, kindred to line accent */
 
   /* Legacy Deep Sea palette — retained for inner sections not yet migrated.
      New work targets the GEODE Editorial tokens above. */

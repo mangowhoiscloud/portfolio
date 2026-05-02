@@ -52,16 +52,16 @@ export function RoutingIqSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-10">
           <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-            {t(locale, "§ 4B. COMPUTE SCHEDULER — ROUTING IQ", "§ 4B. COMPUTE SCHEDULER — ROUTING IQ")}
+            {t(locale, "§ 4B. 라우팅", "§ 4B. ROUTING")}
           </div>
           <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
-            {t(locale, "라우팅은 retry 가 아니다.", "Routing is not retry.")}
+            {t(locale, "fallback chain 위의 의사결정 계층.", "A decision layer on top of the fallback chain.")}
           </h2>
           <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
-              "fallback chain은 시작이지 끝이 아니다. 어느 프로바이더의 어느 플랜으로 호출을 보낼지, 거부됐을 때 사용자에게 어떤 선택지를 보일지, 멀티턴이 길어졌을 때 토큰 비용을 어디서 자를지. 이 결정들이 chain 위에 한 층 더 쌓인다. 프론티어 시스템들은 대체로 retry에서 멈추지만, GEODE는 운영체제급 스케줄러로 다룬다.",
-              "The fallback chain is a starting point, not the end. Which provider with which plan, what to show the user on rejection, where to trim tokens when a turn runs long — these decisions stack on top of the chain. Most frontier systems stop at retry; GEODE treats it as OS-grade scheduling."
+              "fallback chain만으로는 멀티 프로바이더 환경의 의사결정을 다룰 수 없습니다. 어느 프로바이더의 어느 플랜으로 호출을 보낼지, 거부 응답이 돌아왔을 때 사용자에게 어떤 옵션을 제시할지, 긴 멀티턴 세션에서 토큰 비용을 어떻게 절감할지 결정해야 합니다. GEODE는 chain 위에 별도의 의사결정 계층을 두어 이 문제를 다룹니다.",
+              "A fallback chain alone is not enough to handle decisions in a multi-provider environment. The system has to decide which provider and which plan to call, what options to surface when a request is rejected, and how to control token cost in long multi-turn sessions. GEODE adds a dedicated decision layer on top of the chain to handle this."
             )}
           </p>
         </div>

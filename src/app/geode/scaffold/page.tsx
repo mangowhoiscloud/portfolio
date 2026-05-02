@@ -81,12 +81,12 @@ function ScaffoldHero() {
         <p className="mt-4 text-[var(--ink-2)] max-w-2xl text-[16px] leading-relaxed">
           {t(
             locale,
-            "GEODE가 출시되는 운영체제라면, 스캐폴드는 그것을 매주 세상에 내보내는 라인이다. 여덟 단계의 워크플로, 스물두 개의 절대 금지(CANNOT/CAN), 마크다운 칸반, 다섯 개의 카르파시 ratchet. 한 사람이 예순네 차례의 릴리스를 무회귀로 끌어 온 디시플린이 여기서 산다.",
-            "If GEODE is the operating system that ships, the scaffold is the line that ships it. Eight-step workflow, twenty-two CANNOT/CAN rules, a markdown kanban, five Karpathy ratchets. The discipline that carried one person through sixty-four releases without regression lives here."
+            "GEODE가 출시되는 운영체제라면, 스캐폴드는 그것을 빌드하는 라인입니다. 8단계 워크플로, CANNOT/CAN 22개 규칙, 마크다운 기반 칸반, Karpathy P4 ratchet 5종으로 구성되어 있습니다. 단독 개발자가 64회 릴리스를 회귀 없이 운영해 온 디시플린이 여기에 정의되어 있습니다.",
+            "If GEODE is the operating system that ships, the scaffold is the line that builds it. It consists of an 8-step workflow, 22 CANNOT/CAN rules, a markdown-based kanban, and 5 Karpathy P4 ratchets. The discipline that allowed a single developer to ship 64 releases without regression is defined here."
           )}
         </p>
         <p className="mt-3 text-[var(--ink-3)] max-w-2xl text-[13px] font-mono">
-          GEODE v0.65.0 · 64+ releases · 4380+ tests · solo · 236 modules
+          GEODE v0.65.0 · 64회 릴리스 · 4,380 테스트 · 단독 개발 · 236 모듈
         </p>
       </div>
     </section>
@@ -98,16 +98,16 @@ function EightStep() {
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
       <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-        {t(locale, "§ 1. 8-STEP WORKFLOW", "§ 1. 8-STEP WORKFLOW")}
+        {t(locale, "§ 1. 8단계 워크플로", "§ 1. 8-STEP WORKFLOW")}
       </div>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
-        {t(locale, "보드에서 시작해서 보드로 끝난다.", "Board to board.")}
+        {t(locale, "보드에서 시작해 보드로 종료되는 사이클.", "A cycle that starts and ends at the board.")}
       </h2>
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "각 단계는 다음 단계의 입력을 만든다. 건너뛰는 길은 없다. 단계마다 게이트가 있고, 게이트가 닫혀 있으면 PR 자체가 진행되지 않는다. to-do 리스트가 아니라, 라인의 컨베이어 벨트에 가깝다.",
-          "Each step produces what the next one needs. There is no path that skips a stage. Every stage has a gate; if a gate is closed, the PR will not move. This is less a to-do list and more a line's conveyor belt."
+          "각 단계는 다음 단계의 입력을 생성합니다. 단계를 건너뛰는 경로는 없으며, 단계마다 게이트가 설정되어 있어 게이트를 통과하지 못한 PR은 다음 단계로 진입할 수 없습니다. 단순한 to-do 리스트가 아니라 컨베이어 벨트 형태의 파이프라인입니다.",
+          "Each stage produces input for the next. There is no path that skips a stage. Every stage has a gate, and a PR that fails a gate cannot proceed to the next stage. This is not a simple to-do list but a conveyor belt-style pipeline."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -137,13 +137,13 @@ function CannotCan() {
         {t(locale, "§ 2. CANNOT / CAN", "§ 2. CANNOT / CAN")}
       </div>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
-        {t(locale, "20 절대 금지 + 5 자유.", "22 absolute prohibitions + 5 freedoms.")}
+        {t(locale, "절대 금지 22개와 허용 5개.", "22 absolute prohibitions, 5 freedoms.")}
       </h2>
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "OpenClaw의 Policy Chain, Codex의 Sandbox, 카르파시의 P1 — 세 갈래에서 직접 가져왔다. 자유보다 금지가 먼저다. 제약이 먼저 자리를 잡아야 그 위에서 만들어지는 결과물의 품질이 보장된다.",
-          "Borrowed directly from three lineages — OpenClaw's policy chain, Codex's sandbox, and Karpathy's P1. Prohibitions come before freedoms. Constraints sit down first, and only then is the quality of what gets built above them preserved."
+          "OpenClaw의 Policy Chain, Codex의 Sandbox, 카르파시 P1을 참고해 도입한 규칙입니다. 자유보다 금지를 먼저 정의했습니다. 제약 조건이 먼저 확정되어야 그 위에서 작성되는 코드의 품질을 보장할 수 있다는 판단입니다.",
+          "These rules were adopted with reference to OpenClaw's Policy Chain, Codex's Sandbox, and Karpathy P1. Prohibitions are defined before freedoms. The reasoning is that constraints must be established first to ensure the quality of code written within them."
         )}
       </p>
       <div className="rounded-lg border border-[var(--rule)] overflow-hidden">
@@ -190,16 +190,16 @@ function Ratchets() {
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
       <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-        {t(locale, "§ 3. KARPATHY P4 RATCHETS", "§ 3. KARPATHY P4 RATCHETS")}
+        {t(locale, "§ 3. KARPATHY P4 RATCHET", "§ 3. KARPATHY P4 RATCHETS")}
       </div>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
-        {t(locale, "단방향 게이트 5종.", "Five one-way gates.")}
+        {t(locale, "단방향 품질 게이트 5종.", "Five one-way quality gates.")}
       </h2>
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "카르파시의 autoresearch가 보여 준 ratchet 디시플린을 그대로 옮겼다. 한 번 통과한 품질 게이트는 그 아래로 내려가지 않는다는 원칙이다. 다섯 개의 ratchet은 모두 CI가 강제한다.",
-          "Lifted from the ratchet discipline in Karpathy's autoresearch. The principle: once a quality gate is passed, the line cannot fall back below it. CI enforces every one of the five."
+          "카르파시 autoresearch에서 제시한 ratchet 디시플린을 도입했습니다. 한 번 통과한 품질 게이트는 그 아래로 회귀하지 않는다는 원칙입니다. 5개 ratchet은 모두 CI에서 강제됩니다.",
+          "The ratchet discipline from Karpathy's autoresearch was adopted. The principle: once a quality gate is passed, the line cannot regress below it. All 5 ratchets are enforced by CI."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -224,16 +224,16 @@ function WorkingExample() {
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
       <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-        {t(locale, "§ 4. WORKING EXAMPLE", "§ 4. WORKING EXAMPLE")}
+        {t(locale, "§ 4. 실행 예시", "§ 4. WORKING EXAMPLE")}
       </div>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
-        {t(locale, "어디서든 geode를 친다.", "Type geode anywhere.")}
+        {t(locale, "어느 디렉토리에서든 geode 한 줄로 시작.", "Start with one geode command from any directory.")}
       </h2>
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-6">
         {t(
           locale,
-          "운영체제 등급의 시스템이라는 신호는 의외로 단순하다. PATH 위에 살고 있는 한 줄 명령. 한 번 설치하면, 어느 디렉토리에 들어가 있든 ‘geode’ 한 단어로 부팅한다. 프로젝트에 묶여 있는 도구가 아니라, 컴퓨팅 substrate 자체에 묶여 있는 도구다.",
-          "The signal that something is operating-system-grade is simpler than it sounds — a single command living on PATH. Install it once, and the word ‘geode’ boots from any directory. The tool is not bound to a project; it is bound to the compute substrate itself."
+          "운영체제 등급 시스템의 첫 신호는 PATH 위에 등록된 단일 명령입니다. 한 번 설치하면 어느 디렉토리에서든 geode 명령으로 부팅됩니다. 특정 프로젝트에 종속된 도구가 아니라 사용자 환경 전역에 설치되는 도구입니다.",
+          "The first signal of an OS-grade system is a single command registered on PATH. Once installed, the geode command boots from any directory. It is not a tool bound to a specific project — it is installed globally in the user environment."
         )}
       </p>
 
@@ -317,16 +317,16 @@ function SkillCatalog() {
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
       <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
-        {t(locale, "§ 5. SKILL CATALOG", "§ 5. SKILL CATALOG")}
+        {t(locale, "§ 5. 스킬 카탈로그", "§ 5. SKILL CATALOG")}
       </div>
       <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
-        {t(locale, "23 스캐폴드 스킬, 5 그룹.", "23 scaffold skills, 5 groups.")}
+        {t(locale, "스캐폴드 스킬 23개, 5개 그룹.", "23 scaffold skills in 5 groups.")}
       </h2>
       <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
-          "스킬은 .claude/skills/ 안의 frontmatter + 마크다운 파일이다. 한 스킬은 한 가지 디시플린(이를테면 kent-beck-review) 혹은 한 가지 도메인 작업(이를테면 geode-changelog)을 정리한 절차서에 가깝다. 디스커버리는 다섯 계층 — 번들 → 사용자 → 프로젝트 — 의 우선순위로 걸어 올라온다.",
-          "Each skill is a frontmatter-plus-Markdown file under .claude/skills/. A single skill captures one discipline (e.g. kent-beck-review) or one domain procedure (e.g. geode-changelog). Discovery walks a five-tier priority — bundled, then user, then project."
+          "스킬은 .claude/skills/ 디렉토리 내의 frontmatter + 마크다운 파일입니다. 각 스킬은 하나의 디시플린(예: kent-beck-review) 또는 하나의 도메인 작업(예: geode-changelog)에 대한 절차서입니다. 스킬 디스커버리는 5계층(번들 → 사용자 → 프로젝트) 우선순위로 동작합니다.",
+          "Skills are frontmatter + markdown files in the .claude/skills/ directory. Each skill is a procedure for one discipline (e.g. kent-beck-review) or one domain task (e.g. geode-changelog). Skill discovery operates on a 5-tier priority (bundled → user → project)."
         )}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -352,8 +352,8 @@ function SkillCatalog() {
       <p className="mt-6 text-[12px] text-[var(--ink-3)] leading-relaxed">
         {t(
           locale,
-          "총 23개. CLAUDE.md의 여덟 단계 워크플로가 적절한 단계에 적절한 스킬을 자동으로 불러온다. 예컨대 GAP audit 단계에서는 explore-reason-act가, PR 단계에서는 geode-gitflow가 발화한다.",
-          "Twenty-three skills in total. The eight-step workflow in CLAUDE.md pulls in the right skill at the right stage — explore-reason-act fires during GAP audit; geode-gitflow fires at PR time."
+          "총 23개 스킬이 등록되어 있습니다. CLAUDE.md에 정의된 8단계 워크플로가 각 단계에 필요한 스킬을 자동으로 호출합니다. 예: GAP audit 단계는 explore-reason-act 스킬, PR 단계는 geode-gitflow 스킬을 사용합니다.",
+          "23 skills are registered. The 8-step workflow defined in CLAUDE.md automatically invokes the necessary skill at each stage — for example, the GAP audit stage uses the explore-reason-act skill, and the PR stage uses the geode-gitflow skill."
         )}
       </p>
     </section>

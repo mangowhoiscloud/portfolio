@@ -40,15 +40,15 @@ export function BootstrapSection() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
           <p className="text-sm font-mono font-bold text-[var(--ink-3)] uppercase tracking-[0.25em] mb-3">
-            Bootstrap
+            § 3.5 부팅 시퀀스
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--ink-1)] mb-3">
-            {t(locale, "초기화 시퀀스", "Initialization Sequence")}
+            {t(locale, "7단계로 구성된 부팅 시퀀스.", "A seven-stage boot sequence.")}
           </h2>
           <p className="text-sm sm:text-base text-[var(--ink-2)] max-w-2xl mb-8 leading-relaxed">
             {t(locale,
-              "GEODE는 일곱 단계를 차례로 거쳐 올라온다. 단계마다 그 위 단계가 필요로 하는 결과를 만든다. 어느 한 단계가 무너지면 그 위는 그대로 멈추는 대신, 가용한 표면만 살리고 나머지를 끄는 부분 부팅으로 떨어진다. geode doctor가 정확히 어디서 무너졌는지 짚어 준다.",
-              "GEODE comes up through seven sequential stages. Each one produces what the next one needs. If any stage breaks, the build does not freeze; it falls into a partial boot, keeping the usable surfaces alive and disabling the rest. geode doctor reports the exact stage that gave way."
+              "GEODE는 7단계를 순차적으로 거쳐 부팅합니다. 각 단계는 다음 단계가 필요로 하는 결과물을 생성합니다. 어느 한 단계에서 실패가 발생하면 전체 부팅이 중단되지 않고 부분 부팅으로 전환됩니다. 사용 가능한 표면만 활성화하고 나머지는 비활성화하며, geode doctor 명령으로 실패 지점을 확인할 수 있습니다.",
+              "GEODE boots through 7 sequential stages. Each stage produces output that the next stage requires. If any stage fails, the boot transitions to partial boot mode rather than halting entirely — usable surfaces remain active while the rest are disabled, and the failed stage can be inspected via the geode doctor command."
             )}
           </p>
         </ScrollReveal>
