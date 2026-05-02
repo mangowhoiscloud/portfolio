@@ -12,8 +12,8 @@ export default function DocsIndex() {
       slug=""
       title="GEODE Documentation"
       titleKo="GEODE 문서"
-      summary="A general-purpose autonomous execution agent built on LangGraph. v0.64.0, Python 3.12+, 223 core + 13 plugins, 4379 tests, 58 hooks, 57 tools."
-      summaryKo="LangGraph 기반 범용 자율 실행 에이전트. v0.64.0, Python 3.12+, core 223 + plugins 13, 4379 테스트, 58 훅, 57 도구."
+      summary="A general-purpose autonomous execution agent built on LangGraph. v0.65.0, Python 3.12+, 223 core + 13 plugins, 4380 tests, 58 hooks, 57 tools."
+      summaryKo="LangGraph 기반 범용 자율 실행 에이전트. v0.65.0, Python 3.12+, core 223 + plugins 13, 4380 테스트, 58 훅, 57 도구."
     >
       <Bi
         ko={
