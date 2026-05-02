@@ -93,12 +93,6 @@ export function HeroSection() {
           >
             Docs
           </Link>
-          <Link
-            href="/geode/scaffold"
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[var(--rule)] hover:border-[var(--acc-line)] text-[13px] font-mono text-[var(--ink-1)] hover:text-[var(--acc-line)] transition-colors"
-          >
-            Scaffold
-          </Link>
         </div>
       </div>
 

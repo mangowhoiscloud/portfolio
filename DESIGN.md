@@ -22,21 +22,30 @@
 
 | Role | Hex | Usage |
 |---|---|---|
-| `--paper` | `#1B1A18` | App background. Warm near-black, slight brown undertone. |
-| `--paper-2` | `#252320` | Card / elevated surface (sidebar, callout, hover). |
-| `--paper-deep` | `#0F0E0C` | Code block (deepest). |
-| `--ink` | `#F0EBE0` | Primary text. Warm cream, not pure white. |
-| `--ink-1` | `#D8D2C2` | Headings (slightly muted from primary). |
-| `--ink-2` | `#A89F8D` | Body secondary, captions. |
-| `--ink-3` | `#7A7165` | Tertiary, metadata, low-emphasis. |
-| `--rule` | `#3A3530` | Hairline borders. Warm dark, never pure black. |
-| `--rule-soft` | `#2C2924` | Softer divider, between sections. |
-| `--acc-artifact` | `#D4895A` | **Amber-terracotta** — OS / artifact content. Links, key emphasis on artifact pages. |
-| `--acc-line` | `#9AA3AE` | **Graphite-blue** — scaffold / line / process content. |
-| `--acc-soft` | `#E8B5A0` | Hover / elevated state for artifact accent. |
-| `--code-bg` | `#0F0E0C` | Code block background. |
-| `--code-text` | `#E0D5C0` | Code block text. Warmer than body cream. |
-| `--code-string` | `#D4895A` | Code string (matches artifact accent). |
+| `--paper` | `#181816` | App background. Warm dark stone surface. |
+| `--paper-2` | `#23211F` | Card / elevated surface (sidebar, callout, hover). |
+| `--paper-deep` | `#0E0E0C` | Code block (deepest). |
+| `--ink` | `#EDE7DA` | Primary text. Warm cream, bumped for legibility. |
+| `--ink-1` | `#DDD3BE` | Headings. |
+| `--ink-2` | `#B5AC97` | Body — bright enough to keep prose from fading. |
+| `--ink-3` | `#807665` | Captions, metadata. |
+| `--rule` | `#3A342D` | Hairline borders. Slightly more visible than substrate. |
+| `--rule-soft` | `#2A2520` | Softer divider, between sections. |
+| `--acc-artifact` | `#A573E8` | **AMETHYST** — OS / artifact / runtime / model. Distinct from existing DAG-SVG hue space. |
+| `--acc-line` | `#D5B27A` | **CITRINE** — scaffold / line / process / CI. Warm complement to amethyst. |
+| `--acc-soft` | `#C9A4F0` | Hover / elevated state for the amethyst accent. |
+| `--code-bg` | `#0E0E0C` | Code block background. |
+| `--code-text` | `#DDD3BE` | Code block text. Same as `--ink-1`. |
+| `--code-string` | `#D5B27A` | Code strings (citrine, kindred to line accent). |
+
+**Identity rationale.** Amethyst and citrine are the two crystals
+most often found inside an actual geode cavity — the system's name
+is a literal reference. The accent pair maps cleanly to GEODE's
+two-mode discipline: artifact (the OS itself) gets amethyst, line
+(the scaffold that builds it) gets citrine. This puts GEODE's color
+identity outside the cyan / pink / indigo / gold / green / purple /
+coral / blue palette already occupied by the inner DAG SVGs, so
+section accents and DAG visualizations do not fight each other.
 
 **Single substrate.** Every page is dark by design. There is no light mode. There is no dark-panel-on-light-page pattern. Mascot PNGs and SVG diagrams that were authored for dark mediums sit naturally on this substrate.
 
@@ -192,6 +201,102 @@ When asked to build or modify UI in this portfolio repo:
 - The legacy `--sea-*`, `--glow-*` palette references in new code. Existing references will migrate over time.
 
 **Reference DESIGN.md examples for similar aesthetic**: VoltAgent/awesome-design-md → Anthropic (dark variant inferred), Cursor, Linear (dark mode). Do not borrow gradient or neon patterns from any of them.
+
+---
+
+## 10. Portfolio Patterns (researched)
+
+The hub at `/portfolio/` and the project pages adopt patterns proven on
+high-attention developer portfolios and on top-starred Claude Code tool
+READMEs. This section names the patterns and their sources, so future
+edits stay anchored to the right reference instead of drifting into
+generic SaaS-marketing layouts.
+
+### Adopted patterns
+
+| Pattern | Source / Precedent | Why we adopt it |
+|---|---|---|
+| **Single dated header** ("Portfolio · 2026-05-03") | leerob.io, paco.me | Shows the site is alive, makes the operator accountable to its currency. |
+| **§ Now section** (current focus, dated entries) | nownownow.com convention, derek sivers | Recruiters read this first. Three lines that fit on one screen, freshest at top. |
+| **§ Selected Work, not full CV** | brittanychiang.com, leerob.io | Two or three exhibits with concrete numbers beats a chronological resume. |
+| **§ Recognition** (awards, talks, blog/yt counts) | senior-eng portfolios across industry | Outside validation in three lines max. No badges, no logos. |
+| **§ Influences** (named people / projects + one-line note) | rauchg.com, paco.me's "things I like" | Signals intellectual lineage. Lifts the portfolio above task lists. |
+| **Honest "currently looking for X" only when applicable** | (deliberately omitted today) | Adds friction when not actively job-seeking; remove if false. |
+| **Code blocks in landing** | Cursor docs, Vercel docs landing | Shows the operator works in code, not slides. |
+| **Mono `file:line` citations** | Anthropic docs, Linear changelog | Citations as content, not footnotes. |
+| **Footer = nav, not legalese** | brittanychiang.com, leerob.io | One row of arrows to deeper pages. No copyright line. |
+
+### Researched references — top-starred Claude Code tools
+
+Their READMEs and landings consistently:
+
+- Open with one-sentence purpose ("X for Y").
+- Show install in three lines max.
+- List concrete capabilities, not adjectives.
+- Hide setup notes / troubleshooting in deeper sections.
+- Use `code blocks` instead of marketing prose where possible.
+
+Examples to study (publicly available repositories):
+
+- `claude-code-action` — GitHub action; README is install + ready-to-paste YAML.
+- `ccmanager` — CLI; README is install + commands + screenshots.
+- `claude-flow` — orchestration; README is concept diagram + mode list.
+- `awesome-claude-code` — curated list; sectioned by use case, no editorial fluff.
+
+### Anti-patterns we avoid
+
+- Generic "About me" paragraphs that read as cover-letter prose.
+- Logos of past employers as visual proof.
+- Skill bars / radar charts.
+- Quote callouts from press / "What people say".
+- Animated counters of GitHub stars / downloads.
+- "Let's chat" CTA buttons. Contact lives in the footer as plain text.
+- Theme switcher. We have one substrate.
+- Light mode of any kind.
+
+### Hub structure (canonical)
+
+```
+[Header]                  Name + role + bio paragraph (≤2 sentences)
+[§ Now]                   3 dated entries, freshest at top
+[§ Selected Work]         2–3 cards, each with concrete numbers
+[§ Recognition]           ≤4 lines, label + detail
+[§ Influences]            3–5 named references with one-line notes
+[Footer]                  Plain mono arrows to deeper pages
+```
+
+Mobile collapses the three-column header to a single column; everything
+else is already single-column.
+
+### Voice guideline
+
+Korean prose follows 합니다체 — the formal register that Korean tech
+blogs (토스, 우아한형제들, 네이버 D2) use for engineering content.
+Avoid 한다체 (literary), 해요체 (casual), 평어체 (academic). Numbers
+stay Arabic in metric strips; in body prose they remain Arabic too
+(64회, 5,523개) — this matches Korean tech-blog convention more than
+prose convention (예순넷, 오천오백이십삼).
+
+English prose stays declarative and concrete. Avoid em-dash chains
+beyond two per paragraph. No "let's", "we'll", "exciting", "powerful",
+"revolutionary". Past tense for shipped work, present tense for what
+the system does today.
+
+### Anti-LLM-smell checklist for new copy
+
+Before merging copy changes, verify the prose does not exhibit any of:
+
+- [ ] Slogan-as-equation ("X = Y. Y = Z.") — break into sentences.
+- [ ] Em-dash heaped lists — convert to clauses.
+- [ ] Unspecific verbs ("수행한다", "처리한다", "활용한다") — replace
+      with concrete action verbs.
+- [ ] "Frontier 어디에도 없다" or other unverifiable superlatives.
+- [ ] Quotes around English terms purely for emphasis.
+- [ ] Korean morphology of large numbers (예순네, 다섯, 아홉) outside
+      narrative prose.
+- [ ] Marketing-flavored adjectives (powerful, robust, seamless,
+      elegant, beautiful).
+- [ ] Sentences that translate cleanly back to "we built X to solve Y."
 
 ---
 
