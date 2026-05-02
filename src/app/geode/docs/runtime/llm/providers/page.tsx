@@ -72,6 +72,37 @@ GLM_FALLBACK_CHAIN       = ["glm-4.6-plus", "glm-4.5-plus"]`}</pre>
         keys only. OpenAI Codex Plus subscription auth is available; see{" "}
         <em>Operations · OAuth</em> when filled.
       </p>
+
+      <h2>Quick activation per provider</h2>
+      <p>
+        <code>resolve_routing</code> walks an equivalence-class fallback —
+        SUBSCRIPTION → OAUTH_BORROWED → CLOUD → PAYG within the same model
+        family. Registering more than one means free quota first, paid
+        second.
+      </p>
+      <pre>{`# OpenAI Codex (ChatGPT Plus subscription)
+geode /login oauth openai      # device-code flow, JWT chatgpt_plan_type extracted
+
+# OpenAI PAYG fallback
+geode /login set-key openai sk-xxxx
+# or: export OPENAI_API_KEY=sk-xxxx
+
+# Anthropic API key (PAYG only — OAuth disabled per ToS)
+geode /login set-key anthropic sk-ant-xxxx
+# or: export ANTHROPIC_API_KEY=sk-ant-xxxx
+
+# Zhipu GLM Coding tier (Lite ~$3/mo, ~80% cheaper than gpt-5)
+geode /login set-key glm-coding-lite zai-xxxxxxxx
+
+# Inspect routing
+geode /login                  # dashboard: Plans / Profiles / Routing`}</pre>
+      <p>
+        The <code>manage_login</code> agentic tool exposes the same flow to
+        the LLM — the agent self-diagnoses auth failures and asks the user
+        to remediate. See{" "}
+        <a href="/geode/docs/harness/cli">CLI &amp; Slash Commands</a> for
+        the v0.65.0 verdict-shadowing fix.
+      </p>
     </DocsShell>
   );
 }

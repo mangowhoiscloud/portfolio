@@ -52,6 +52,34 @@ export default function Page() {
         <li><code>core/llm/providers/anthropic.py</code> — <code>_COMPUTER_USE_TOOL</code> definition + injection</li>
         <li><code>core/llm/providers/openai.py</code> — OpenAI beta path</li>
       </ul>
+
+      <h2>Quick start</h2>
+      <p>
+        Computer use is a <strong>DANGEROUS</strong> tool — every invocation
+        triggers <code>ApprovalWorkflow</code> regardless of streak.
+      </p>
+      <pre>{`# 1. Dependencies (already in pyproject — uv sync)
+#    pyautogui + Pillow
+
+# 2. macOS only — grant accessibility:
+#    System Settings → Privacy & Security
+#      Accessibility:    add your terminal / IDE
+#      Screen Recording: same
+
+# 3. Try it
+geode "open Safari and search for 'GEODE LangGraph'"
+# → LLM emits computer tool_use → ApprovalWorkflow prompt
+# → 'y' to approve
+
+# 4. To disable entirely:
+#    .geode/profile_policy.toml
+[deny]
+tools = ["computer"]`}</pre>
+      <p>
+        Headless environments (no display) are not supported. The harness
+        targets 1280×800; coordinates are auto-scaled to the actual screen
+        size on macOS / Linux.
+      </p>
     </DocsShell>
   );
 }
