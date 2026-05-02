@@ -95,7 +95,7 @@ const freelance: Entry[] = [
 const now = [
   { date: "2026-05-03", body: "포트폴리오에 Eco² (SeSACTHON 2025 Excellence)와 Kiki(@ pinxlab) 합류. 개인 / 프리랜서 작업을 분리해 정리." },
   { date: "2026-05-02", body: "GEODE v0.65.0 messages cache_control 도입. CHANGELOG 64 릴리스를 7챕터 타임라인으로 재구성." },
-  { date: "2026-05-01", body: "베이글코드 과제 전형으로 Claude Code · Codex · Gemini CLI 기반 멀티 에이전트 시스템 Crumb 개발 중. 동시에 Editorial 디자인 언어 정립 — amethyst × citrine 광물 정체성, 합니다체 voice." },
+  { date: "2026-05-01", body: "베이글코드 과제 전형으로 Claude Code · Codex · Gemini CLI 기반 멀티 에이전트 시스템 Crumb 개발 중." },
 ];
 
 const recognition = [
