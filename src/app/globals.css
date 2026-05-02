@@ -150,3 +150,32 @@ body {
   stop:first-child { stop-color: #0F1525; }
   stop:last-child { stop-color: #080E1A; }
 }
+
+/* ============================================================
+   Dark-panel utility — section-level inset bands within the warm
+   paper page. Use for sections whose inner SVGs / terminals were
+   authored against a dark substrate (white strokes, neon accents).
+   The page outside stays warm linen; the panel is its own night.
+   ============================================================ */
+
+.dark-panel {
+  background: var(--sea-deep);
+  color: var(--text-primary);
+}
+
+.dark-panel a {
+  color: var(--glow-teal);
+}
+
+.dark-panel a:hover {
+  color: var(--glow-pink);
+}
+
+/* Mascot inset — a small dark card hosting the Geodi PNG, which
+   was authored with neon glow effects intended for a dark medium. */
+.mascot-inset {
+  background: var(--sea-deep);
+  border: 1px solid var(--rule);
+  color: var(--text-secondary);
+  border-radius: 8px;
+}

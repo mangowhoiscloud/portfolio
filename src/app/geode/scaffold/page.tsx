@@ -219,6 +219,147 @@ function Ratchets() {
   );
 }
 
+function WorkingExample() {
+  const locale = useLocale();
+  return (
+    <section className="px-6 py-16 max-w-5xl mx-auto">
+      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
+        {t(locale, "§ 4. WORKING EXAMPLE", "§ 4. WORKING EXAMPLE")}
+      </div>
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
+        {t(locale, "어디서든 geode를 친다.", "Type geode anywhere.")}
+      </h2>
+      <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-6">
+        {t(
+          locale,
+          "OS-grade 시스템의 첫 시그널은 PATH에 살아있는 단일 명령이다. 한 번 설치하면 어느 디렉토리에서든 geode가 부팅한다. 프로젝트 종속이 아니라 컴퓨팅 substrate에 종속.",
+          "The first signal of an OS-grade system is a single command living on PATH. Install once, and geode boots from any directory. It belongs to the compute substrate, not to a project."
+        )}
+      </p>
+
+      <div className="rounded-lg overflow-hidden border border-[var(--rule)] mb-6">
+        <div className="bg-[var(--code-bg)] px-5 py-4 font-mono text-[12.5px] leading-[1.7] text-[var(--code-text)]">
+          <div className="text-[var(--ink-3)] mb-2">{`# 1. 한 번 설치 (uv tool — PATH 에 등록)`}</div>
+          <div><span className="text-[var(--code-string)]">$</span> uv tool install -e .</div>
+          <div><span className="text-[var(--code-string)]">$</span> which geode</div>
+          <div className="text-[var(--ink-2)]">~/.local/bin/geode</div>
+          <div className="mt-4 text-[var(--ink-3)]">{`# 2. 어느 디렉토리에서든`}</div>
+          <div><span className="text-[var(--code-string)]">$</span> cd ~/projects/anywhere</div>
+          <div><span className="text-[var(--code-string)]">$</span> geode</div>
+          <div className="mt-1 text-[var(--ink-2)]">{`  ╲╲( ◕ ᵕ ◕ )╱╱  GEODE v0.65.0`}</div>
+          <div className="text-[var(--ink-2)]">{`                       claude-opus-4-7 · autonomous execution agent`}</div>
+          <div className="text-[var(--ink-2)]">{`                       /Users/mango/projects/anywhere`}</div>
+          <div className="mt-2 text-[var(--ink-2)]">{`  harness: GEODE`}</div>
+          <div className="text-[var(--ink-2)]">{`  ✓ LLM Analysis  ✓ Project Memory  ✓ User Profile`}</div>
+          <div className="text-[var(--ink-2)]">{`  ✓ Connected to serve via IPC  ✓ Session: cli-2f985c53`}</div>
+          <div className="mt-2"><span className="text-[var(--code-string)]">{`>`}</span> _</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="rounded-lg border border-[var(--rule)] p-4">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--acc-line)] mb-2">
+            {t(locale, "PATH-installed", "PATH-installed")}
+          </div>
+          <p className="text-[13px] text-[var(--ink-2)] leading-relaxed">
+            {t(
+              locale,
+              "geode 는 단일 entrypoint (geode.cli:app). uv tool install -e . 로 ~/.local/bin/geode 에 심볼릭 링크 등록. python 모듈 호출이 아니라 unix 명령.",
+              "geode is a single entrypoint (geode.cli:app). uv tool install -e . links it into ~/.local/bin/geode. Not a python module invocation — a unix command."
+            )}
+          </p>
+        </div>
+        <div className="rounded-lg border border-[var(--rule)] p-4">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--acc-line)] mb-2">
+            {t(locale, "Auto-spawn serve", "Auto-spawn serve")}
+          </div>
+          <p className="text-[13px] text-[var(--ink-2)] leading-relaxed">
+            {t(
+              locale,
+              "thin CLI 가 첫 호출에서 daemon (geode serve) 미실행을 감지하면 spawn 후 IPC 연결. 사용자는 \"geode\" 한 줄로 시작, daemon 라이프사이클은 투명.",
+              "If the daemon is not running on first call, the thin CLI spawns it and connects over IPC. Users start with a single \"geode\"; daemon lifecycle is invisible."
+            )}
+          </p>
+        </div>
+        <div className="rounded-lg border border-[var(--rule)] p-4">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--acc-line)] mb-2">
+            {t(locale, "Project-aware, not bound", "Project-aware, not bound")}
+          </div>
+          <p className="text-[13px] text-[var(--ink-2)] leading-relaxed">
+            {t(
+              locale,
+              "현재 디렉토리는 working context — .geode/MEMORY.md, project rules, vault 모두 cwd 기준. 그러나 binary 자체는 한 곳에 설치되고 cwd 가 컨텍스트 셀렉터로 동작.",
+              "The current directory becomes the working context — .geode/MEMORY.md, project rules, and the vault all key off cwd. The binary lives in one place; cwd selects the context."
+            )}
+          </p>
+        </div>
+      </div>
+
+      <p className="mt-6 text-[12px] font-mono text-[var(--ink-3)]">
+        Source: <span className="text-[var(--acc-line)]">pyproject.toml</span> [project.scripts] geode = &quot;geode.cli:app&quot;
+        <br />
+        IPC bootstrap: <span className="text-[var(--acc-line)]">core/cli/__init__.py</span> +{" "}
+        <span className="text-[var(--acc-line)]">core/server/</span>
+      </p>
+    </section>
+  );
+}
+
+function SkillCatalog() {
+  const locale = useLocale();
+  const skills = [
+    { group: "Karpathy / frontier", groupKo: "Karpathy / 프론티어", items: ["karpathy-patterns", "openclaw-patterns", "frontier-harness-research"] },
+    { group: "Code review", groupKo: "코드 리뷰", items: ["kent-beck-review", "code-review-quality", "dependency-review", "anti-deception-checklist", "verification-team"] },
+    { group: "Implementation", groupKo: "구현", items: ["explore-reason-act", "architecture-patterns", "agent-ops-debugging", "codebase-audit"] },
+    { group: "GEODE-specific", groupKo: "GEODE 전용", items: ["geode-pipeline", "geode-scoring", "geode-analysis", "geode-verification", "geode-e2e", "geode-gitflow", "geode-changelog", "geode-serve"] },
+    { group: "Operations", groupKo: "운영", items: ["model-onboarding", "tech-blog-writer", "workflow-orchestrator"] },
+  ];
+  return (
+    <section className="px-6 py-16 max-w-5xl mx-auto">
+      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
+        {t(locale, "§ 5. SKILL CATALOG", "§ 5. SKILL CATALOG")}
+      </div>
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
+        {t(locale, "23 스캐폴드 스킬, 5 그룹.", "23 scaffold skills, 5 groups.")}
+      </h2>
+      <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
+        {t(
+          locale,
+          ".claude/skills/ 의 frontmatter + Markdown 파일들. 각 스킬은 한 가지 디시플린 (예: kent-beck-review) 또는 한 가지 도메인 작업 (예: geode-changelog) 의 절차서. 디스커버리는 5계층 (bundled → user → project) 우선순위로 작동.",
+          "Frontmatter + Markdown files in .claude/skills/. Each skill is a procedure for one discipline (e.g. kent-beck-review) or one domain task (e.g. geode-changelog). Discovery walks a 5-tier priority (bundled → user → project)."
+        )}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {skills.map((g) => (
+          <div key={g.group} className="rounded-lg border border-[var(--rule)] p-5">
+            <h3 className="font-display font-semibold text-[var(--ink-1)] text-[15px] mb-3">
+              {locale === "ko" ? g.groupKo : g.group}
+              <span className="ml-2 font-mono text-[11px] text-[var(--ink-3)]">
+                {g.items.length}
+              </span>
+            </h3>
+            <ul className="space-y-1.5">
+              {g.items.map((s) => (
+                <li key={s} className="font-mono text-[12px] text-[var(--ink-2)]">
+                  <span className="text-[var(--acc-line)]">.claude/skills/</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className="mt-6 text-[12px] font-mono text-[var(--ink-3)]">
+        {t(
+          locale,
+          "총 23 스킬. CLAUDE.md 의 8단계 워크플로 안에서 적절한 단계가 자동으로 해당 스킬을 발화한다. 예: GAP audit 단계 → explore-reason-act, PR 단계 → geode-gitflow.",
+          "23 skills total. The CLAUDE.md 8-step workflow auto-invokes the appropriate skill per stage. E.g. GAP audit → explore-reason-act; PR → geode-gitflow."
+        )}
+      </p>
+    </section>
+  );
+}
+
 function Footer() {
   const locale = useLocale();
   return (
@@ -251,6 +392,10 @@ export default function ScaffoldPage() {
         <CannotCan />
         <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
         <Ratchets />
+        <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
+        <WorkingExample />
+        <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
+        <SkillCatalog />
         <Footer />
       </main>
     </LocaleProvider>

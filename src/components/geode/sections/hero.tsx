@@ -122,18 +122,20 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* mascot demoted: small, static, low-key */}
-      <div className="max-w-3xl mx-auto mt-20 flex items-center gap-3 text-[var(--ink-3)]">
-        <Image
-          src="/portfolio/images/geode-idle.png"
-          alt="Geodi"
-          width={36}
-          height={36}
-          className="opacity-60"
-        />
-        <span className="font-mono text-[11px]">
-          {t(locale, "Geodi — GEODE 의 마스코트", "Geodi — GEODE's mascot")}
-        </span>
+      {/* mascot demoted: dark inset card — image was authored for dark medium */}
+      <div className="max-w-3xl mx-auto mt-20">
+        <div className="mascot-inset inline-flex items-center gap-3 px-4 py-3">
+          <Image
+            src="/portfolio/images/geode-idle.png"
+            alt="Geodi"
+            width={36}
+            height={36}
+            className="opacity-90"
+          />
+          <span className="font-mono text-[11px]">
+            {t(locale, "Geodi — GEODE 의 마스코트", "Geodi — GEODE's mascot")}
+          </span>
+        </div>
       </div>
     </section>
   );
