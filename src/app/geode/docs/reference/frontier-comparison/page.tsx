@@ -7,8 +7,145 @@ export default function Page() {
     <DocsShell
       slug="reference/frontier-comparison"
       title="Frontier Comparison"
-      summary="GEODE side-by-side with Hermes Agent, OpenClaw, and Claude Code on six axes: definition, assembly, hashing, caching, observability, and security."
+      summary="GEODE side-by-side with five frontier harnesses — Hermes, OpenClaw, Claude Code, Codex CLI, and Karpathy autoresearch — first at the architectural level, then drilling into prompt-system internals."
     >
+      <h2>System-level positioning</h2>
+      <p>
+        Top-level differences across six harnesses. GEODE is the synthesis —
+        each row borrows from at least one frontier system. Patterns specifically
+        cited in source: Claude Code <code>while(tool_use)</code>, Codex CLI
+        sandbox-default, OpenClaw <code>Policy Chain</code> + <code>Lane Queue</code>,
+        Karpathy P1-P10.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Axis</th>
+            <th>Claude Code</th>
+            <th>Codex CLI</th>
+            <th>OpenClaw</th>
+            <th>Hermes</th>
+            <th>autoresearch</th>
+            <th>GEODE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purpose</td>
+            <td>Coding assist</td>
+            <td>Code automation</td>
+            <td>Multi-channel gateway</td>
+            <td>Self-learning agent</td>
+            <td>Autonomous ML loop</td>
+            <td><strong>Long-running autonomous execution</strong></td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>code</td>
+            <td>code</td>
+            <td>chat routing</td>
+            <td>open-domain</td>
+            <td>ML loop</td>
+            <td>game IP (today), generalisable via DomainPort</td>
+          </tr>
+          <tr>
+            <td>Main primitive</td>
+            <td><code>while(tool_use)</code></td>
+            <td>sandbox + approve</td>
+            <td>gateway + lane</td>
+            <td>skill loop</td>
+            <td>branchless dumb platform</td>
+            <td>StateGraph + agentic loop</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>bash session + <code>~/.claude</code></td>
+            <td>—</td>
+            <td>per-channel store</td>
+            <td>persistent + skill catalog</td>
+            <td><code>program.md</code></td>
+            <td>5-tier (Org / Project / Session / Vault / Breadcrumb)</td>
+          </tr>
+          <tr>
+            <td>Verification</td>
+            <td>—</td>
+            <td>sandbox</td>
+            <td>policy chain</td>
+            <td>—</td>
+            <td>ratchet</td>
+            <td><strong>G1-G4 + BiasBuster + Cross-LLM</strong></td>
+          </tr>
+          <tr>
+            <td>Automation trigger</td>
+            <td>hooks (manual)</td>
+            <td>—</td>
+            <td>cron + standing orders</td>
+            <td>skill auto-generate</td>
+            <td>overnight loop</td>
+            <td>58 events + scheduler</td>
+          </tr>
+          <tr>
+            <td>Multi-LLM</td>
+            <td>Anthropic only</td>
+            <td>OpenAI only</td>
+            <td>8+ providers</td>
+            <td>Anthropic-centric</td>
+            <td>(single)</td>
+            <td>4 providers (Anthropic + Codex + PAYG + GLM)</td>
+          </tr>
+          <tr>
+            <td>Sub-agent</td>
+            <td>Task tool</td>
+            <td>—</td>
+            <td>plugin</td>
+            <td>spawn + announce</td>
+            <td>—</td>
+            <td>Borrowed (Task tool + OpenClaw Spawn+Announce)</td>
+          </tr>
+          <tr>
+            <td>Sandbox</td>
+            <td>—</td>
+            <td>OS-level</td>
+            <td>gateway isolation</td>
+            <td>—</td>
+            <td>constraint loop</td>
+            <td>6-layer Policy Chain</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>What GEODE has that none of the others do</h3>
+      <ul>
+        <li>
+          <strong>BiasBuster</strong> — confirmation / recency / anchoring /
+          position / verbosity / self-enhancement bias detection in{" "}
+          <code>core/verification/biasbuster.py</code>. Statistical fast path
+          (CV-based) plus LLM fallback.
+        </li>
+        <li>
+          <strong>Cause-Action decision tree</strong> — 6 causes →
+          5 actions in <code>plugins/game_ip/nodes/synthesizer.py</code>.
+          Domain-pluggable.
+        </li>
+        <li>
+          <strong>Calibration via Golden Set</strong> —
+          <code>core/verification/calibration.py</code>, fixture comparison
+          PASS threshold 80.0.
+        </li>
+        <li>
+          <strong>Equivalence-class fallback</strong> — provider variants
+          (e.g. <code>openai-codex</code> ↔ <code>openai</code> PAYG) auto-tried
+          in subscription-priority order via{" "}
+          <code>core/auth/plan_registry.py:resolve_routing</code>.
+        </li>
+        <li>
+          <strong>ChatGPT Plus JWT verification</strong> — auth claim{" "}
+          <code>chatgpt_plan_type</code> extracted at OAuth time and embedded in
+          the Plan record (<code>core/auth/oauth_login.py:331</code>); no
+          separate API call needed for entitlement check.
+        </li>
+      </ul>
+
       <h2>Definition layer</h2>
       <table>
         <thead><tr><th>Axis</th><th>GEODE</th><th>Hermes</th><th>OpenClaw</th><th>Claude Code</th></tr></thead>
