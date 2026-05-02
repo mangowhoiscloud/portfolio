@@ -6,12 +6,12 @@ import { ScrollReveal } from "../scroll-reveal";
 import { useLocale, t } from "../locale-context";
 
 const steps = [
-  { id: 1, name: "Hooks", detailKo: "HookSystem + 17 handlers (P30→P200)", detailEn: "HookSystem + 17 handlers (P30���P200)", subKo: "전 모듈이 의존하는 이벤트 버스 가장 먼저 초기화", subEn: "Event bus all modules depend on, initialized first", color: "#4ECDC4" },
+  { id: 1, name: "Hooks", detailKo: "HookSystem 58 events (P30→P200)", detailEn: "HookSystem 58 events (P30→P200)", subKo: "전 모듈이 의존하는 이벤트 버스. 가장 먼저 기동되어 이후 단계의 발화를 수신할 준비를 마친다", subEn: "Event bus that every module depends on. Brought up first so all subsequent stages can fire into a wired bus", color: "#4ECDC4" },
   { id: 2, name: "Session", detailKo: "InMemory / Hybrid SessionStore", detailEn: "InMemory / Hybrid SessionStore", subKo: "SessionMode(REPL/IPC/DAEMON)에 따라 스토어 분기", subEn: "Store branches by SessionMode (REPL/IPC/DAEMON)", color: "#60A5FA" },
   { id: 3, name: "Memory", detailKo: "ProjectMemory + MonoLake + UserProfile + Journal", detailEn: "ProjectMemory + MonoLake + UserProfile + Journal", subKo: "5-Tier 메모리 계층 마운트. Session 스토어에 의존", subEn: "Mount 5-tier memory hierarchy. Depends on session store", color: "#F4B8C8" },
   { id: 4, name: "Config", detailKo: ".env hot-reload + constraint validation", detailEn: ".env hot-reload + constraint validation", subKo: "ConfigWatcher 시작. Hook으로 CONFIG_RELOADED 발화", subEn: "Start ConfigWatcher. Fires CONFIG_RELOADED via Hook", color: "#F5C542" },
   { id: 5, name: "TaskGraph", detailKo: "create_geode_task_graph() + HookBridge", detailEn: "create_geode_task_graph() + HookBridge", subKo: "Hook 이벤트와 Task 상태를 브릿지 연결", subEn: "Bridge Hook events to Task state transitions", color: "#818CF8" },
-  { id: 6, name: "Prompt", detailKo: "SkillRegistry discover + PromptAssembler", detailEn: "SkillRegistry discover + PromptAssembler", subKo: "18 Skills 탐색 + 시스템 프롬프트 조��", subEn: "Discover 18 skills + assemble system prompt", color: "#C084FC" },
+  { id: 6, name: "Prompt", detailKo: "SkillRegistry discover + PromptAssembler", detailEn: "SkillRegistry discover + PromptAssembler", subKo: "41 스캐폴드 스킬을 5계층 디렉토리에서 디스커버하고 시스템 프롬프트를 조립한다. 결과는 frozen=True 의 AssembledPrompt", subEn: "Discover 41 scaffold skills across 5-tier directories and assemble the system prompt. Result is a frozen AssembledPrompt", color: "#C084FC" },
   { id: 7, name: "Graph", detailKo: "StateGraph compile + checkpoint setup", detailEn: "StateGraph compile + checkpoint setup", subKo: "LangGraph 파이프라인 컴파일. 부트스트랩 완료", subEn: "Compile LangGraph pipeline. Bootstrap complete", color: "#34D399" },
 ];
 
@@ -39,16 +39,16 @@ export function BootstrapSection() {
     <section className="relative py-28 sm:py-32 px-4 sm:px-6">
       <div className="relative z-10 max-w-5xl mx-auto">
         <ScrollReveal>
-          <p className="text-sm font-mono font-bold text-[#34D399]/60 uppercase tracking-[0.25em] mb-3">
+          <p className="text-sm font-mono font-bold text-[var(--ink-3)] uppercase tracking-[0.25em] mb-3">
             Bootstrap
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white/90 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--ink-1)] mb-3">
             {t(locale, "초기화 시퀀스", "Initialization Sequence")}
           </h2>
-          <p className="text-sm sm:text-base text-[#8B9CC0] max-w-xl mb-8 leading-relaxed">
+          <p className="text-sm sm:text-base text-[var(--ink-2)] max-w-2xl mb-8 leading-relaxed">
             {t(locale,
-              "7단계 순차 초기화. 각 단계가 이전 단��의 결과를 의존성으로 받아 조립됩니다. 한 단계라도 실패하면 graceful degradation으로 선택적 부팅합��다.",
-              "7-step sequential initialization. Each step receives the previous step's result as a dependency. On failure, graceful degradation enables selective boot."
+              "GEODE는 7단계 순차 초기화로 부팅한다. 각 단계는 이전 단계의 결과를 의존성으로 받아 조립한다. 한 단계라도 실패하면 graceful degradation으로 선택적 부팅 — 가용한 표면만 활성화되고 나머지는 비활성, geode doctor가 정확한 실패 지점을 표시한다.",
+              "GEODE boots in seven sequential stages. Each stage takes the prior stage's result as a dependency and composes upward. If any stage fails, graceful degradation kicks in — usable surfaces stay active, the rest is disabled, and geode doctor reports the exact failure point."
             )}
           </p>
         </ScrollReveal>
@@ -85,7 +85,7 @@ export function BootstrapSection() {
                     {/* Node circle */}
                     <motion.circle
                       cx={x} cy={52} r={18}
-                      fill={isDone ? `${s.color}15` : isActive ? `${s.color}20` : "#0A0F1A"}
+                      fill={isDone ? `${s.color}15` : isActive ? `${s.color}20` : "var(--paper-2)"}
                       stroke={s.color}
                       strokeWidth={isActive ? 2 : isDone ? 1.2 : 0.6}
                       animate={{
@@ -105,7 +105,7 @@ export function BootstrapSection() {
                       animate={{ fillOpacity: isPending ? 0.2 : isActive ? 1 : 0.7 }}
                       transition={{ duration: 0.3 }}
                     >
-                      {isDone ? "��" : s.id}
+                      {isDone ? "✓" : s.id}
                     </motion.text>
 
                     {/* Name label */}
@@ -179,13 +179,13 @@ export function BootstrapSection() {
                     style={{ background: `${steps[active].color}15`, color: steps[active].color }}>
                     {active + 1}
                   </span>
-                  <span className="text-lg font-bold text-white/85">{steps[active].name}</span>
+                  <span className="text-lg font-bold text-[var(--ink-1)]">{steps[active].name}</span>
                   <span className="text-xs font-mono px-2 py-0.5 rounded-full"
                     style={{ color: steps[active].color, background: `${steps[active].color}10`, border: `1px solid ${steps[active].color}20` }}>
                     {locale === "en" ? steps[active].detailEn : steps[active].detailKo}
                   </span>
                 </div>
-                <p className="text-sm text-[#9BB0CC] leading-relaxed pl-11">
+                <p className="text-sm text-[var(--ink-2)] leading-relaxed pl-11">
                   {locale === "en" ? steps[active].subEn : steps[active].subKo}
                 </p>
               </motion.div>

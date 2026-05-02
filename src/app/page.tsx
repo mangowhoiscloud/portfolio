@@ -5,83 +5,92 @@ const projects = [
     id: "geode",
     title: "GEODE",
     subtitle: "Agentic OS, built by its own scaffold.",
-    description: "v0.65.0 · 236 modules · 4380+ tests · 64+ releases · 20 pinned prompts. Two apps proven on the same harness: Game IP (plugin) and Migration / REODE (fork).",
+    description:
+      "v0.65.0 · 236 modules · 4380+ tests · 64+ releases · 20 pinned prompts. Two apps proven on the same harness — Game IP (plugin) and Migration / REODE (fork).",
     status: "v0.65.0",
-    color: "#7BD2FF",
     badge: "Main thesis",
+    accent: "var(--acc-artifact)",
   },
   {
     id: "geode/scaffold",
     title: "Scaffold",
     subtitle: "The line that ships GEODE.",
-    description: "8-Step workflow + CANNOT/CAN 22 rules + 5 Karpathy P4 ratchets + MD kanban. The discipline behind one person running 64+ releases without regression.",
+    description:
+      "8-Step workflow + CANNOT/CAN 22 rules + 5 Karpathy P4 ratchets + MD kanban. The discipline behind one person running 64+ releases without regression.",
     status: "deep-dive",
-    color: "#F4B8C8",
     badge: "Production line",
+    accent: "var(--acc-line)",
   },
   {
     id: "reode",
     title: "REODE",
     subtitle: "Migration / autonomous code transformation.",
-    description: "GEODE v0.12 fork → Java 1.8→22, Spring 4.3→6.1. 5,523 files · 83/83 tests · 5h48m · $388. OpenRewrite (70%) + LLM (30%) hybrid.",
+    description:
+      "GEODE v0.12 fork → Java 1.8→22, Spring 4.3→6.1. 5,523 files · 83/83 tests · 5h48m · $388. OpenRewrite (70%) + LLM (30%) hybrid.",
     status: "case study",
-    color: "#34D399",
     badge: "App on the OS",
+    accent: "var(--acc-artifact)",
   },
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-16 px-6 py-16">
-      <div className="text-center space-y-3">
-        <h1 className="text-5xl font-extrabold tracking-tight font-[family-name:var(--font-inter)]">
-          Jihwan Ryu
-        </h1>
-        <p className="text-lg text-white/55 font-[family-name:var(--font-fira-code)]">
-          Backend · Agentic AI · Harness Engineering
-        </p>
-        <p className="text-[13px] text-white/35 max-w-xl mx-auto leading-relaxed">
-          LLM is the new compute. The agent is its OS. Three exhibits below — one
-          OS, one production line, one app proven on the line.
-        </p>
-      </div>
+    <main className="min-h-screen bg-[var(--paper)] text-[var(--ink)] px-6 py-24">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-20">
+          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--ink-3)]">
+            Portfolio · 2026-05-02
+          </span>
+          <h1 className="mt-6 font-display tracking-tight text-[clamp(3rem,7vw,4.5rem)] leading-[1.05] font-semibold text-[var(--ink)]">
+            Jihwan Ryu
+          </h1>
+          <p className="mt-3 font-display text-[clamp(1.1rem,2vw,1.4rem)] text-[var(--ink-1)]">
+            Backend · Agentic AI · Harness Engineering
+          </p>
+          <p className="mt-6 max-w-2xl text-[16px] leading-[1.75] text-[var(--ink-2)]">
+            LLM은 새로운 컴퓨트, 자율 에이전트는 그것의 OS. 세 개의 전시가 그
+            한 가지 thesis 를 받친다 — 출시되는 OS, 그것을 매주 출시하는 라인,
+            그리고 그 라인이 만든 앱 한 가지.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl w-full">
-        {projects.map((p) => (
-          <Link
-            key={p.id}
-            href={`/${p.id}`}
-            className="group block rounded-2xl border border-white/[0.06] bg-white/[0.02] p-7 transition-all duration-300 hover:border-white/[0.14] hover:bg-white/[0.04] hover:-translate-y-1"
-          >
-            <div className="flex items-center justify-between mb-3">
-              <span
-                className="text-[10px] font-mono font-bold uppercase tracking-widest opacity-70"
-                style={{ color: p.color }}
-              >
-                {p.badge}
-              </span>
-              <span className="text-[10px] font-mono text-white/35">
-                {p.status}
-              </span>
-            </div>
-            <h2
-              className="text-2xl font-bold mb-1 tracking-tight"
-              style={{ color: p.color }}
+        <div className="space-y-3">
+          {projects.map((p) => (
+            <Link
+              key={p.id}
+              href={`/${p.id}`}
+              className="group block rounded border border-[var(--rule)] bg-[var(--paper-2)] px-6 py-6 transition-colors hover:border-[var(--ink-3)]"
             >
-              {p.title}
-            </h2>
-            <p className="text-sm text-white/55 font-mono mb-3 leading-snug">
-              {p.subtitle}
-            </p>
-            <p className="text-[13px] text-white/55 leading-relaxed">
-              {p.description}
-            </p>
-          </Link>
-        ))}
-      </div>
+              <div className="flex items-baseline justify-between mb-2">
+                <span
+                  className="font-mono text-[10px] tracking-widest uppercase"
+                  style={{ color: p.accent }}
+                >
+                  {p.badge}
+                </span>
+                <span className="font-mono text-[10px] text-[var(--ink-3)]">
+                  {p.status}
+                </span>
+              </div>
+              <h2
+                className="font-display text-2xl font-semibold mb-1 tracking-tight"
+                style={{ color: p.accent }}
+              >
+                {p.title}
+              </h2>
+              <p className="text-[14px] text-[var(--ink-1)] mb-3 leading-snug">
+                {p.subtitle}
+              </p>
+              <p className="text-[13px] text-[var(--ink-2)] leading-relaxed">
+                {p.description}
+              </p>
+            </Link>
+          ))}
+        </div>
 
-      <div className="text-[11px] text-white/30 font-mono text-center">
-        github.com/mangowhoiscloud · Last updated 2026-05-02
+        <div className="mt-20 text-[11px] font-mono text-[var(--ink-3)]">
+          github.com/mangowhoiscloud · Last updated 2026-05-02
+        </div>
       </div>
     </main>
   );

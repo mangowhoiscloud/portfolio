@@ -51,24 +51,6 @@ fire_at = nominal + offset * period`}</pre>
         <li><code>SCHEDULE_REGISTERED</code> — when a new schedule is parsed</li>
       </ul>
 
-      <h2>Quick activation</h2>
-      <pre>{`# 1. Natural-language registration via REPL
-geode "schedule '집 나갈 시간' at 2026-05-03 09:00"
-geode "every 1 hour check email inbox during 9am-6pm KST weekdays"
-geode "cron '0 9 * * 1' weekly retrospective"
-
-# 2. List / cancel
-geode /task list
-geode /task cancel <job-id>
-
-# 3. Direct registration without LLM
-geode /task add at 'tomorrow 9am' 'morning standup'`}</pre>
-      <p>
-        Each job is atomic-written to <code>~/.geode/scheduler/schedules.json</code>{" "}
-        with active-hours quiet windows applied. <code>recovery_policy</code>{" "}
-        defaults to <code>fire_now</code> — missed firings during daemon
-        downtime fire on next start.
-      </p>
     </DocsShell>
   );
 }

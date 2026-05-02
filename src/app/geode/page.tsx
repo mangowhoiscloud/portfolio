@@ -33,17 +33,18 @@ import { BootstrapSection } from "@/components/geode/sections/bootstrap";
 import { TimelineSection } from "@/components/geode/sections/timeline";
 import { GeodeFooter } from "@/components/geode/sections/footer";
 
-const Divider = () => <div className="max-w-3xl mx-auto border-t border-white/[0.03]" />;
+const Divider = () => <div className="max-w-3xl mx-auto border-t border-[var(--rule)]" />;
 
 export default function GeodePage() {
   return (
     <LocaleProvider>
-    <main className="min-h-screen bg-[linear-gradient(180deg,var(--sea-abyss)_0%,var(--sea-deep)_15%,var(--sea-mid)_35%,var(--sea-upper)_60%,var(--sea-surface)_85%,#0F2240_100%)] text-[#F0F0FF] overflow-x-hidden">
+    <main className="min-h-screen bg-[var(--paper)] text-[var(--ink)] overflow-x-hidden">
       <GeodeNav />
       <div id="hero"><HeroSection /></div>
       <div id="thesis"><OsThesisSection /></div>
       <div id="primitives"><OsPrimitivesMapSection /></div>
       <div id="recursion"><RecursionSection /></div>
+      <div id="bootstrap"><BootstrapSection /></div>
       <Divider />
       <div id="compute-abi"><ComputeAbiSection /></div>
       <div id="routing-iq"><RoutingIqSection /></div>
@@ -76,7 +77,6 @@ export default function GeodePage() {
       <div id="automation"><AutomationSection /></div>
       <Divider />
       <div id="verify"><VerificationSection /></div>
-      <div id="bootstrap"><BootstrapSection /></div>
       <div id="timeline"><TimelineSection /></div>
       <GeodeFooter />
     </main>

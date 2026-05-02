@@ -51,13 +51,13 @@ export function RoutingIqSection() {
     <section className="relative py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-10">
-          <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8CA8] mb-3">
+          <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
             {t(locale, "§ 4B. COMPUTE SCHEDULER — ROUTING IQ", "§ 4B. COMPUTE SCHEDULER — ROUTING IQ")}
           </div>
-          <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-white/90 leading-tight">
+          <h2 className="font-display font-bold tracking-tight text-3xl md:text-4xl text-[var(--ink-1)] leading-tight">
             {t(locale, "라우팅은 retry 가 아니다.", "Routing is not retry.")}
           </h2>
-          <p className="mt-4 text-white/55 max-w-3xl leading-relaxed text-[15px]">
+          <p className="mt-4 text-[var(--ink-2)] max-w-3xl leading-relaxed text-[15px]">
             {t(
               locale,
               "fallback chain 위에 가는 결정 — 어느 프로바이더에 어느 플랜으로 보낼지, 거부됐을 때 무엇을 사용자에게 보일지, 멀티턴에서 토큰 비용을 어디서 줄일지. frontier 는 단순 retry, GEODE 는 OS-grade scheduler.",
@@ -70,20 +70,20 @@ export function RoutingIqSection() {
           {features.map((f, i) => (
             <div
               key={i}
-              className="rounded-lg border border-white/[0.06] hover:border-white/[0.12] p-5 transition-colors"
+              className="rounded-lg border border-[var(--rule)] hover:border-[var(--ink-3)] p-5 transition-colors"
             >
               <div className="flex items-baseline justify-between gap-3 mb-2">
-                <h3 className="font-display font-semibold text-[#F0F0FF] text-[17px] leading-tight">
+                <h3 className="font-display font-semibold text-[var(--ink-1)] text-[17px] leading-tight">
                   {locale === "ko" ? f.titleKo : f.title}
                 </h3>
-                <span className="text-[10px] font-mono text-[#4ECDC4]/80 whitespace-nowrap">
+                <span className="text-[10px] font-mono text-[var(--acc-artifact)] whitespace-nowrap">
                   {f.since}
                 </span>
               </div>
-              <p className="text-[13px] text-white/55 leading-relaxed mb-3">
+              <p className="text-[13px] text-[var(--ink-2)] leading-relaxed mb-3">
                 {locale === "ko" ? f.bodyKo : f.body}
               </p>
-              <div className="font-mono text-[11px] text-[#FFD8A8]/70">
+              <div className="font-mono text-[11px] text-[var(--acc-artifact)]/85">
                 {f.file}
               </div>
             </div>

@@ -67,25 +67,25 @@ function ScaffoldHero() {
     <section className="px-6 py-24 max-w-5xl mx-auto">
       <Link
         href="/geode"
-        className="text-sm text-white/55 hover:text-white transition-colors"
+        className="text-sm text-[var(--ink-2)] hover:text-white transition-colors"
       >
         ← /geode
       </Link>
       <div className="mt-8">
-        <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8CA8] mb-3">
+        <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
           {t(locale, "GEODE — DEEP DIVE", "GEODE — DEEP DIVE")}
         </div>
-        <h1 className="font-display font-black tracking-tight text-4xl md:text-6xl text-white/95 leading-[1.05]">
+        <h1 className="font-display font-black tracking-tight text-4xl md:text-6xl text-[var(--ink)] leading-[1.05]">
           {t(locale, "라인.", "The line.")}
         </h1>
-        <p className="mt-4 text-white/60 max-w-2xl text-[16px] leading-relaxed">
+        <p className="mt-4 text-[var(--ink-2)] max-w-2xl text-[16px] leading-relaxed">
           {t(
             locale,
             "GEODE 가 출시되는 OS 라면, 스캐폴드는 그 OS 가 매주 출시되는 라인이다. 8-Step 워크플로, CANNOT/CAN 22 룰, MD 칸반, 5 종 Karpathy 래칫. 한 사람이 64+ 릴리스를 무회귀로 운영하는 디시플린.",
             "If GEODE is the OS that ships, the scaffold is the line that ships it weekly. 8-Step workflow, 22 CANNOT/CAN rules, MD kanban, 5 Karpathy ratchets. The discipline behind one person running 64+ releases without regression."
           )}
         </p>
-        <p className="mt-3 text-white/40 max-w-2xl text-[13px] font-mono">
+        <p className="mt-3 text-[var(--ink-3)] max-w-2xl text-[13px] font-mono">
           GEODE v0.65.0 · 64+ releases · 4380+ tests · solo · 236 modules
         </p>
       </div>
@@ -97,13 +97,13 @@ function EightStep() {
   const locale = useLocale();
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
-      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8CA8] mb-3">
+      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
         {t(locale, "§ 1. 8-STEP WORKFLOW", "§ 1. 8-STEP WORKFLOW")}
       </div>
-      <h2 className="font-display font-bold text-2xl md:text-3xl text-white/90 mb-3">
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
         {t(locale, "보드에서 시작해서 보드로 끝난다.", "Board to board.")}
       </h2>
-      <p className="text-white/55 text-[14px] leading-relaxed max-w-3xl mb-8">
+      <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
           "각 단계는 다음 단계의 입력을 만든다. 스킵 불가. 단계마다 게이트가 있고, 게이트가 닫혀 있으면 PR 자체가 막힌다. 단순한 to-do 리스트가 아니라 라인의 conveyor belt.",
@@ -112,17 +112,17 @@ function EightStep() {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {eightSteps.map((s) => (
-          <div key={s.n} className="rounded-lg border border-white/[0.06] p-4 hover:border-white/[0.12] transition-colors">
+          <div key={s.n} className="rounded-lg border border-[var(--rule)] p-4 hover:border-[var(--ink-3)] transition-colors">
             <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[11px] text-[#4ECDC4]">step {s.n}</span>
-              <span className="font-display font-medium text-[#F0F0FF]">
+              <span className="font-mono text-[11px] text-[var(--acc-line)]">step {s.n}</span>
+              <span className="font-display font-medium text-[var(--ink)]">
                 {locale === "ko" ? s.labelKo : s.label}
               </span>
             </div>
           </div>
         ))}
       </div>
-      <p className="mt-6 text-[12px] font-mono text-white/40">
+      <p className="mt-6 text-[12px] font-mono text-[var(--ink-3)]">
         Source: CLAUDE.md (Implementation Workflow § Workflow Steps)
       </p>
     </section>
@@ -133,40 +133,40 @@ function CannotCan() {
   const locale = useLocale();
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
-      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8CA8] mb-3">
+      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
         {t(locale, "§ 2. CANNOT / CAN", "§ 2. CANNOT / CAN")}
       </div>
-      <h2 className="font-display font-bold text-2xl md:text-3xl text-white/90 mb-3">
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
         {t(locale, "20 절대 금지 + 5 자유.", "22 absolute prohibitions + 5 freedoms.")}
       </h2>
-      <p className="text-white/55 text-[14px] leading-relaxed max-w-3xl mb-8">
+      <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
           "OpenClaw Policy Chain + Codex Sandbox + Karpathy P1 의 직접 차용. CANNOT 가 먼저 — 자유는 나중에. 제약이 품질을 보장.",
           "Direct adoption of OpenClaw's Policy Chain + Codex Sandbox + Karpathy P1. CANNOT first, freedom later. Constraints guarantee quality."
         )}
       </p>
-      <div className="rounded-lg border border-white/[0.06] overflow-hidden">
+      <div className="rounded-lg border border-[var(--rule)] overflow-hidden">
         <table className="w-full text-[14px]">
           <thead>
-            <tr className="border-b border-white/[0.08] bg-white/[0.02]">
-              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-white/45 w-[40%]">
+            <tr className="border-b border-[var(--rule)] bg-[var(--paper-2)]">
+              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-[var(--ink-2)] w-[40%]">
                 {t(locale, "영역", "Area")}
               </th>
-              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-white/45 w-[20%]">
+              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-[var(--ink-2)] w-[20%]">
                 {t(locale, "룰 수", "Rules")}
               </th>
-              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-white/45 w-[40%]">
+              <th className="text-left p-3 font-mono uppercase tracking-wider text-[10px] text-[var(--ink-2)] w-[40%]">
                 {t(locale, "예시", "Examples")}
               </th>
             </tr>
           </thead>
           <tbody>
             {cannots.map((c) => (
-              <tr key={c.area} className="border-b border-white/[0.04]">
-                <td className="p-3 text-[#F0F0FF] font-medium">{c.area}</td>
-                <td className="p-3 font-mono text-[#7BD2FF]/85">{c.count}</td>
-                <td className="p-3 text-white/55 text-[13px]">
+              <tr key={c.area} className="border-b border-[var(--rule-soft)]">
+                <td className="p-3 text-[var(--ink)] font-medium">{c.area}</td>
+                <td className="p-3 font-mono text-[var(--acc-line)]">{c.count}</td>
+                <td className="p-3 text-[var(--ink-2)] text-[13px]">
                   {c.area === "Git" && t(locale, "워크트리 없는 코드 작업 금지, main 직접 push 금지", "no work without worktree, no direct push to main")}
                   {c.area === "Planning" && t(locale, "Socratic Gate 없는 구현 시작 금지", "no implementation without Socratic Gate")}
                   {c.area === "Quality" && t(locale, "lint/type/test 실패 커밋 금지, # type: ignore 남발 금지", "no commit on lint/type/test fail, no excessive type:ignore")}
@@ -178,7 +178,7 @@ function CannotCan() {
           </tbody>
         </table>
       </div>
-      <p className="mt-6 text-[12px] font-mono text-white/40">
+      <p className="mt-6 text-[12px] font-mono text-[var(--ink-3)]">
         Source: CLAUDE.md (Implementation Workflow § CANNOT)
       </p>
     </section>
@@ -189,13 +189,13 @@ function Ratchets() {
   const locale = useLocale();
   return (
     <section className="px-6 py-16 max-w-5xl mx-auto">
-      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#7A8CA8] mb-3">
+      <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--ink-3)] mb-3">
         {t(locale, "§ 3. KARPATHY P4 RATCHETS", "§ 3. KARPATHY P4 RATCHETS")}
       </div>
-      <h2 className="font-display font-bold text-2xl md:text-3xl text-white/90 mb-3">
+      <h2 className="font-display font-bold text-2xl md:text-3xl text-[var(--ink-1)] mb-3">
         {t(locale, "단방향 게이트 5종.", "Five one-way gates.")}
       </h2>
-      <p className="text-white/55 text-[14px] leading-relaxed max-w-3xl mb-8">
+      <p className="text-[var(--ink-2)] text-[14px] leading-relaxed max-w-3xl mb-8">
         {t(
           locale,
           "Karpathy autoresearch 의 ratchet 디시플린 직접 차용. 한 번 통과한 품질 게이트는 그 아래로 내려가지 못하게 만든다. 모든 ratchet 은 CI 가 강제.",
@@ -204,14 +204,14 @@ function Ratchets() {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {ratchets.map((r, i) => (
-          <div key={i} className="rounded-lg border border-white/[0.06] p-5 hover:border-white/[0.12] transition-colors">
-            <h3 className="font-display font-semibold text-[#F0F0FF] text-[16px] mb-2">
+          <div key={i} className="rounded-lg border border-[var(--rule)] p-5 hover:border-[var(--ink-3)] transition-colors">
+            <h3 className="font-display font-semibold text-[var(--ink)] text-[16px] mb-2">
               {locale === "ko" ? r.nameKo : r.name}
             </h3>
-            <p className="text-white/55 text-[13px] leading-relaxed mb-3">
+            <p className="text-[var(--ink-2)] text-[13px] leading-relaxed mb-3">
               {locale === "ko" ? r.bodyKo : r.body}
             </p>
-            <div className="font-mono text-[11px] text-[#FFD8A8]/70">{r.file}</div>
+            <div className="font-mono text-[11px] text-[var(--acc-line)]/85">{r.file}</div>
           </div>
         ))}
       </div>
@@ -222,7 +222,7 @@ function Ratchets() {
 function Footer() {
   const locale = useLocale();
   return (
-    <footer className="px-6 py-12 max-w-5xl mx-auto text-[12px] text-white/40 border-t border-white/[0.06] mt-12">
+    <footer className="px-6 py-12 max-w-5xl mx-auto text-[12px] text-[var(--ink-3)] border-t border-[var(--rule)] mt-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="font-mono">
           GEODE v0.65.0 · scaffold deep-dive · 2026-05-02
@@ -243,13 +243,13 @@ function Footer() {
 export default function ScaffoldPage() {
   return (
     <LocaleProvider>
-      <main className="min-h-screen bg-[#0B1628] text-[#F0F0FF]">
+      <main className="min-h-screen bg-[var(--paper)] text-[var(--ink)]">
         <ScaffoldHero />
-        <div className="max-w-5xl mx-auto border-t border-white/[0.04]" />
+        <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
         <EightStep />
-        <div className="max-w-5xl mx-auto border-t border-white/[0.04]" />
+        <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
         <CannotCan />
-        <div className="max-w-5xl mx-auto border-t border-white/[0.04]" />
+        <div className="max-w-5xl mx-auto border-t border-[var(--rule-soft)]" />
         <Ratchets />
         <Footer />
       </main>

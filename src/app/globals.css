@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ===== GEODE Deep Sea Discovery ===== */
+/* ===== GEODE Editorial — warm paper, restrained type, layer-aware ===== */
 
 @theme inline {
   --font-sans: var(--font-inter);
@@ -9,13 +9,35 @@
   --radius-lg: 0.75rem;
 }
 
-/* Display font for headings */
+/* Display font for headings — kept; new pages override at the section level */
 h1, h2 {
   font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
 }
 
-/* Deep Sea Palette */
 :root {
+  /* GEODE Editorial — warm paper substrate */
+  --paper:        #F5F1E8;   /* warm linen */
+  --paper-2:      #FBF9F4;   /* card / sidebar elevation */
+  --paper-deep:   #1B1A18;   /* inverted code block */
+
+  --ink:          #1B1A18;
+  --ink-1:        #3A3530;
+  --ink-2:        #54514B;
+  --ink-3:        #8C887F;
+
+  --rule:         #D9D2C2;
+  --rule-soft:    #E5E0D5;
+
+  --acc-artifact: #A04D2E;   /* terracotta — OS / artifact content */
+  --acc-line:     #3F4A55;   /* graphite — scaffold / line content */
+  --acc-soft:     #E8B5A0;
+
+  --code-bg:      #1B1A18;
+  --code-text:    #E8E0D0;
+  --code-string:  #C09060;
+
+  /* Legacy Deep Sea palette — retained for inner sections not yet migrated.
+     New work targets the GEODE Editorial tokens above. */
   --sea-abyss: #040810;
   --sea-deep: #0B1628;
   --sea-mid: #0F1F3A;

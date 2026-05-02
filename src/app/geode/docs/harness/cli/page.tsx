@@ -63,36 +63,10 @@ geode skill list / skill view / skill manage`}</pre>
 
       <h2><code>manage_login</code> agentic tool</h2>
       <p>
-        The LLM-agentic counterpart of <code>/login</code>. Wired in{" "}
-        <code>core/cli/tool_handlers.py:882-955</code>. Subcommands mirror the
-        slash command (<code>status</code>, <code>add</code>, <code>oauth</code>,{" "}
-        <code>set-key</code>, <code>use</code>, <code>route</code>,{" "}
-        <code>remove</code>, <code>quota</code>). Returns a structured snapshot
-        — <code>plans</code>, <code>profiles</code>, <code>routing</code> —
-        so the agent can self-diagnose auth state and remediate without a
-        round trip to the user.
-      </p>
-
-      <h3>v0.65.0 fix — verdict shadowing (PR #866)</h3>
-      <p>
-        Pre-v0.65.0 the verdict-aggregation loop in{" "}
-        <code>handle_manage_login</code> keyed{" "}
-        <code>verdict_index[(name, profile.provider)]</code> while iterating{" "}
-        <code>evaluate_eligibility(prov)</code> once per unique provider in
-        the store. Because each iteration evaluates <em>every</em> profile
-        and emits <code>PROVIDER_MISMATCH</code> for non-matching providers,
-        those mismatch verdicts share the dict key with the real verdict and
-        the last set-iteration <em>shadows</em> it. With Python set
-        iteration order being hash-dependent, healthy PAYG / OAuth profiles
-        surfaced as <code>eligible: false / reason: provider_mismatch</code>{" "}
-        in the LLM tool result and the dashboard — even though{" "}
-        <code>resolve_routing</code> would still use them via equivalence-class
-        fallback. Fix: skip cross-provider iterations
-        (<code>if v.reason is ProfileRejectReason.PROVIDER_MISMATCH: continue</code>),
-        mirroring the same filter that{" "}
-        <code>core/auth/credential_breadcrumb.format</code> has applied since
-        v0.51.0. Regression test:{" "}
-        <code>tests/test_manage_login_tool.py::TestVerdictPerOwnProvider</code>.
+        The agentic counterpart of <code>/login</code>. Subcommands mirror the slash command, and
+        the return is a structured snapshot — <code>plans</code>, <code>profiles</code>,
+        <code>routing</code> — so the agent can self-diagnose auth state and surface remediation
+        steps without a round trip to the user.
       </p>
 
       <h2>Files</h2>

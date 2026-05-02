@@ -9,37 +9,18 @@ export default function Page() {
       title="Changelog"
       summary="Selected version highlights. The authoritative changelog is CHANGELOG.md in the repository."
     >
-      <h2>Unreleased</h2>
-      <p style={{opacity: 0.6}}>(empty)</p>
-
       <h2>v0.65.0 — 2026-05-02</h2>
       <ul>
         <li>
-          <strong>fix(login)</strong> <code>manage_login</code> verdict
-          shadowing — healthy PAYG / OAuth profiles were reported as{" "}
-          <code>eligible: false / reason: provider_mismatch</code> in the
-          tool result and the <code>/login</code> dashboard, even though{" "}
-          <code>resolve_routing</code> still used them via equivalence-class
-          fallback. The verdict-aggregation loop in{" "}
-          <code>core/cli/tool_handlers.py:handle_manage_login</code> keyed{" "}
-          <code>verdict_index[(name, profile.provider)]</code> while
-          iterating <code>evaluate_eligibility(prov)</code> once per unique
-          provider; mismatch verdicts shadowed the real verdict via dict-key
-          collision. Set iteration order is hash-dependent, so the visible
-          symptom was non-deterministic. Fix: skip cross-provider iterations,
-          mirroring the same filter applied in{" "}
-          <code>credential_breadcrumb.format</code> since v0.51.0. Regression
-          test:{" "}
-          <code>tests/test_manage_login_tool.py::TestVerdictPerOwnProvider</code>.
-          See <a href="/geode/docs/harness/cli">CLI &amp; Slash Commands</a>{" "}
-          for the full story. (PR #866)
+          Anthropic 4-breakpoint prompt cache. <code>apply_messages_cache_control()</code> rolls
+          ephemeral markers across the last three non-system messages, complementing the existing
+          system block split (Hermes <code>system_and_3</code> parity).
         </li>
         <li>
-          <strong>feat(llm)</strong> Anthropic <code>apply_messages_cache_control()</code>{" "}
-          — Hermes <code>system_and_3</code> parity. Fills the remaining
-          breakpoint slots so that messages-array history is also cached.
-          New <code>MAX_MESSAGE_CACHE_BREAKPOINTS = 3</code> constant; 19 new
-          test cases. (PR #864)
+          <code>manage_login</code> verdict shadowing fix. Healthy PAYG / OAuth profiles no longer
+          appear as <code>provider_mismatch</code> in the dashboard; verdict aggregation now skips
+          cross-provider iterations, matching the filter <code>credential_breadcrumb</code> has
+          applied since v0.51.0.
         </li>
       </ul>
 
