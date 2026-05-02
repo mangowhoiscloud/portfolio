@@ -370,18 +370,6 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="pt-8 border-t border-[var(--rule)] flex flex-col gap-5">
-          <div className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] font-mono text-[var(--ink-3)]">
-            <Link href="/geode" className="hover:text-[var(--acc-artifact)] transition-colors">
-              → /geode
-            </Link>
-            <Link href="/eco2" className="hover:text-[var(--acc-line)] transition-colors">
-              → /eco2
-            </Link>
-            <Link href="/geode/docs" className="hover:text-[var(--acc-artifact)] transition-colors">
-              → /geode/docs
-            </Link>
-          </div>
-
           <div className="flex flex-wrap gap-2">
             {[
               { label: "GitHub",   href: "https://github.com/mangowhoiscloud" },
