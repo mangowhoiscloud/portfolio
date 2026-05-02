@@ -15,26 +15,26 @@ h1, h2 {
 }
 
 :root {
-  /* GEODE Editorial — warm paper substrate */
-  --paper:        #F5F1E8;   /* warm linen */
-  --paper-2:      #FBF9F4;   /* card / sidebar elevation */
-  --paper-deep:   #1B1A18;   /* inverted code block */
+  /* GEODE Editorial — warm dark substrate (Anthropic, inverted) */
+  --paper:        #1B1A18;   /* warm near-black, slight brown undertone */
+  --paper-2:      #252320;   /* card / sidebar elevation */
+  --paper-deep:   #0F0E0C;   /* deepest code block */
 
-  --ink:          #1B1A18;
-  --ink-1:        #3A3530;
-  --ink-2:        #54514B;
-  --ink-3:        #8C887F;
+  --ink:          #F0EBE0;   /* primary text — warm cream, not pure white */
+  --ink-1:        #D8D2C2;   /* headings */
+  --ink-2:        #A89F8D;   /* body secondary */
+  --ink-3:        #7A7165;   /* tertiary, captions */
 
-  --rule:         #D9D2C2;
-  --rule-soft:    #E5E0D5;
+  --rule:         #3A3530;   /* warm dark border */
+  --rule-soft:    #2C2924;   /* softer divider */
 
-  --acc-artifact: #A04D2E;   /* terracotta — OS / artifact content */
-  --acc-line:     #3F4A55;   /* graphite — scaffold / line content */
-  --acc-soft:     #E8B5A0;
+  --acc-artifact: #D4895A;   /* amber-terracotta — OS / artifact content */
+  --acc-line:     #9AA3AE;   /* graphite-blue — scaffold / line content */
+  --acc-soft:     #E8B5A0;   /* hover for artifact accent */
 
-  --code-bg:      #1B1A18;
-  --code-text:    #E8E0D0;
-  --code-string:  #C09060;
+  --code-bg:      #0F0E0C;
+  --code-text:    #E0D5C0;
+  --code-string:  #D4895A;
 
   /* Legacy Deep Sea palette — retained for inner sections not yet migrated.
      New work targets the GEODE Editorial tokens above. */
@@ -151,31 +151,5 @@ body {
   stop:last-child { stop-color: #080E1A; }
 }
 
-/* ============================================================
-   Dark-panel utility — section-level inset bands within the warm
-   paper page. Use for sections whose inner SVGs / terminals were
-   authored against a dark substrate (white strokes, neon accents).
-   The page outside stays warm linen; the panel is its own night.
-   ============================================================ */
-
-.dark-panel {
-  background: var(--sea-deep);
-  color: var(--text-primary);
-}
-
-.dark-panel a {
-  color: var(--glow-teal);
-}
-
-.dark-panel a:hover {
-  color: var(--glow-pink);
-}
-
-/* Mascot inset — a small dark card hosting the Geodi PNG, which
-   was authored with neon glow effects intended for a dark medium. */
-.mascot-inset {
-  background: var(--sea-deep);
-  border: 1px solid var(--rule);
-  color: var(--text-secondary);
-  border-radius: 8px;
-}
+/* (Removed: .dark-panel, .mascot-inset — transitional utilities for the
+   warm-paper substrate. Single warm-dark substrate replaces them.) */

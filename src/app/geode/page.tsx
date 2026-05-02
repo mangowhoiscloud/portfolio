@@ -44,36 +44,36 @@ export default function GeodePage() {
       <div id="thesis"><OsThesisSection /></div>
       <div id="primitives"><OsPrimitivesMapSection /></div>
       <div id="recursion"><RecursionSection /></div>
-      <div id="bootstrap" className="dark-panel"><BootstrapSection /></div>
+      <div id="bootstrap"><BootstrapSection /></div>
       <Divider />
       <div id="compute-abi"><ComputeAbiSection /></div>
       <div id="routing-iq"><RoutingIqSection /></div>
       <Divider />
       <div id="two-apps"><TwoAppsSection /></div>
       <Divider />
-      <div id="scaffold" className="dark-panel"><ScaffoldSection /></div>
-      <div id="kanban" className="dark-panel"><KanbanSection /></div>
+      <div id="scaffold"><ScaffoldSection /></div>
+      <div id="kanban"><KanbanSection /></div>
       <Divider />
-      <div id="loop" className="dark-panel"><LoopSection /></div>
-      <div id="reasoning" className="dark-panel"><ReasoningSection /></div>
+      <div id="loop"><LoopSection /></div>
+      <div id="reasoning"><ReasoningSection /></div>
       <Divider />
-      <div id="architecture" className="dark-panel"><ArchitectureSection /></div>
-      <div id="gateway" className="dark-panel"><GatewaySection /></div>
-      <div id="concurrency" className="dark-panel"><ConcurrencySection /></div>
-      <div id="headless" className="dark-panel"><HeadlessSection /></div>
-      <div id="scheduler" className="dark-panel"><SchedulerSection /></div>
+      <div id="architecture"><ArchitectureSection /></div>
+      <div id="gateway"><GatewaySection /></div>
+      <div id="concurrency"><ConcurrencySection /></div>
+      <div id="headless"><HeadlessSection /></div>
+      <div id="scheduler"><SchedulerSection /></div>
       <Divider />
-      <div id="hooks" className="dark-panel"><HooksSection /></div>
-      <div id="agents" className="dark-panel"><AgentsTasksSection /></div>
+      <div id="hooks"><HooksSection /></div>
+      <div id="agents"><AgentsTasksSection /></div>
       <div id="tools"><ToolUseSection /></div>
       <Divider />
-      <div id="context" className="dark-panel"><ContextTiersSection /></div>
-      <div id="llm" className="dark-panel"><MultiLlmSection /></div>
+      <div id="context"><ContextTiersSection /></div>
+      <div id="llm"><MultiLlmSection /></div>
       <Divider />
-      <div id="domain" className="dark-panel"><DomainDagSection /></div>
+      <div id="domain"><DomainDagSection /></div>
       <div id="orchestration"><OrchestrationSection /></div>
       <div id="scoring"><ScoringSection /></div>
-      <div id="feedback" className="dark-panel"><FeedbackSection /></div>
+      <div id="feedback"><FeedbackSection /></div>
       <div id="automation"><AutomationSection /></div>
       <Divider />
       <div id="verify"><VerificationSection /></div>
